@@ -19,10 +19,13 @@
     "divega@microsoft.com"
   ],
   "branches_to_filter": [
-    "live-sxs",
-    "master-sxs"
+    "live",
+    "master"
   ],
   "continue_with_document_error": true,
+  "contribution_branch_mappings": {
+    "live-sxs": "live"
+  }
   "skip_source_output_uploading": false,
   "need_preview_pull_request": true,
   "dependent_repositories": [
