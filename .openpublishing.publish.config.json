@@ -19,7 +19,7 @@
     "divega@microsoft.com"
   ],
   "branches_to_filter": [
-    "live-sxs",
+    "live",
     "master"
   ],
   "continue_with_document_error": true,
