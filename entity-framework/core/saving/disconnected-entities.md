@@ -6,11 +6,11 @@ ms.date: 10/27/2016
 ms.assetid: 2533b195-d357-4056-b0e0-8698971bc3b0
 ms.technology: entity-framework-core
 uid: core/saving/disconnected-entities
-ms.openlocfilehash: b9d9662ce277e4f7b3d6f997a5117a0592f59fa3
-ms.sourcegitcommit: c72d85805db0aa95f980514a18381fdc5e17c786
+ms.openlocfilehash: 0ea02876b9594d54c971a7b70fcf7ce591e56ba0
+ms.sourcegitcommit: ced2637bf8cc5964c6daa6c7fcfce501bf9ef6e8
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 12/01/2017
+ms.lasthandoff: 12/22/2017
 ---
 # <a name="disconnected-entities"></a>Entidades desconectadas
 
@@ -19,7 +19,7 @@ Una instancia de DbContext realizará automáticamente el seguimiento entidades 
 Sin embargo, en ocasiones, las entidades se consultan utilizando una instancia de contexto y, a continuación, se guarda con una instancia diferente. Esto suele ocurrir en escenarios "desconectados" como una aplicación web, donde las entidades se consultar, envía al cliente, modificar, envía al servidor en una solicitud y, a continuación, se guarda. En este caso, el contexto de la segundo instancia debe saber si las entidades son nuevo (debe insertarse) o existente (deben actualizarse).
 
 > [!TIP]  
-> Puede ver este artículo [ejemplo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/Disconnected/) en GitHub.
+> Puede ver un [ejemplo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/Disconnected/) de este artículo en GitHub.
 
 ## <a name="identifying-new-entities"></a>Identificar nuevas entidades
 
@@ -46,7 +46,7 @@ Sin embargo, EF también tiene un medio integrado para hacer esto para cualquier
 
 ### <a name="with-other-keys"></a>Con otras teclas
 
-Algún otro mecanismo es necesario para las nuevas entidades de identidad cuando los valores de clave no se generan automáticamente. Hay dos enfoques generales para esto:
+Algún otro mecanismo es necesario para identificar entidades nuevas cuando los valores de clave no se generan automáticamente. Hay dos enfoques generales para esto:
  * Consulta para la entidad
  * Pase un indicador desde el cliente
 

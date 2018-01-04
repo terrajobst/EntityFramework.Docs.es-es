@@ -6,18 +6,18 @@ ms.date: 10/27/2016
 ms.assetid: 70aae9b5-8743-4557-9c5d-239f688bf418
 ms.technology: entity-framework-core
 uid: core/querying/raw-sql
-ms.openlocfilehash: ddf3a841800684688d50dcf9323f4d83c851222f
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: 79894c7b9fd9e40cdf14460abf5d872ee2f4b9f0
+ms.sourcegitcommit: ced2637bf8cc5964c6daa6c7fcfce501bf9ef6e8
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/27/2017
+ms.lasthandoff: 12/22/2017
 ---
 # <a name="raw-sql-queries"></a>Consultas SQL sin formato
 
 Entity Framework Core permite desplegable a consultas SQL sin formato cuando se trabaja con una base de datos relacional. Esto puede ser útil si la consulta que desea realizar no se puede expresar utilizando LINQ, o si ineficaz SQL que se envían a la base de datos mediante una consulta LINQ es lo que permite.
 
 > [!TIP]  
-> Puede ver este artículo [ejemplo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying) en GitHub.
+> Puede ver un [ejemplo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying) de este artículo en GitHub.
 
 ## <a name="limitations"></a>Limitaciones
 
@@ -29,6 +29,13 @@ Hay un par de limitaciones a tener en cuenta al utilizar sin procesar consultas 
 * Los nombres de columna del conjunto de resultados deben coincidir con los nombres de columna que se asignan a las propiedades. Tenga en cuenta que esto es diferente de EF6 donde se omitió la asignación de propiedad o columna para las consultas SQL sin formato y nombres tenían que coinciden con los nombres de propiedad de columna del conjunto de resultados.
 
 * La consulta SQL no puede contener datos relacionados. Sin embargo, en muchos casos se puede componer encima de la consulta con la `Include` operador que se va a devolver datos relacionados (consulte [incluidos los datos relacionados](#including-related-data)).
+
+* `SELECT`instrucciones pasadas a este método deben estar admite composición: Core EF si es necesario evaluar los operadores de consulta adicionales en el servidor (por ejemplo, para traducir los operadores LINQ que se aplican después de `FromSql`), SQL proporcionado se tratará como una subconsulta. Esto significa que la instrucción SQL que se pasó no debe contener los caracteres o las opciones que no son válidos en una subconsulta, como:
+  * un punto y coma final
+  * En SQL Server, un nivel de consulta finales sugerencia, p. ej.`OPTION (HASH JOIN)`
+  * En SQL Server, un `ORDER BY` cláusula que no va acompañada de `TOP 100 PERCENT` en el `SELECT` cláusula
+
+* Instrucciones SQL distinto `SELECT` se reconocen automáticamente como no admite composición. En consecuencia, los resultados completos de los procedimientos almacenados siempre se devuelven al cliente y los operadores LINQ se aplican después `FromSql` evaluada en memoria. 
 
 ## <a name="basic-raw-sql-queries"></a>Consultas básicas de SQL sin formato
 
