@@ -40,7 +40,7 @@
 #### [Tokens de simultaneidad](core/modeling/concurrency.md)
 #### [Propiedades paralelas](core/modeling/shadow-properties.md)
 #### [Relaciones](core/modeling/relationships.md)
-#### [Índices](core/modeling/indexes.md)
+#### [índices](core/modeling/indexes.md)
 #### [Claves alternativas](core/modeling/alternate-keys.md)
 #### [Herencia](core/modeling/inheritance.md)
 #### [Campos de respaldo](core/modeling/backing-field.md)
@@ -54,8 +54,8 @@
 ##### [Columnas calculadas](core/modeling/relational/computed-columns.md)
 ##### [Secuencias](core/modeling/relational/sequences.md)
 ##### [Valores predeterminados](core/modeling/relational/default-values.md)
-##### [Índices](core/modeling/relational/indexes.md)
-##### [Foreign Key Constraints](core/modeling/relational/fk-constraints.md)
+##### [índices](core/modeling/relational/indexes.md)
+##### [Restricciones de clave externa](core/modeling/relational/fk-constraints.md)
 ##### [Claves alternativas (restricciones únicas)](core/modeling/relational/unique-constraints.md)
 ##### [Herencia (base de datos relacional)](core/modeling/relational/inheritance.md)
 
@@ -83,7 +83,7 @@
 
 ### [Proveedores de bases de datos](core/providers/index.md)
 #### [Microsoft SQL Server](core/providers/sql-server/index.md)
-##### [Memory-Optimized Tables](core/providers/sql-server/memory-optimized-tables.md)
+##### [Tablas optimizadas para memoria](core/providers/sql-server/memory-optimized-tables.md)
 #### [SQLite](core/providers/sqlite/index.md)
 ##### [Limitaciones de SQLite](core/providers/sqlite/limitations.md)
 #### [PostgreSQL (Npgsql)](core/providers/npgsql/index.md)
@@ -129,6 +129,7 @@
 #### [Microsoft.EntityFrameworkCore.AutoHistory](core/extensions/autohistory.md)
 #### [Microsoft.EntityFrameworkCore.DynamicLinq](core/extensions/dynamiclinq.md)
 #### [Microsoft.EntityFrameworkCore.UnitOfWork](core/extensions/unitofwork.md)
+#### [NeinLinq.EntityFrameworkCore](core/extensions/neinlinq.md)
 
 ### Varios
 #### [Cadenas de conexión](core/miscellaneous/connection-strings.md)
