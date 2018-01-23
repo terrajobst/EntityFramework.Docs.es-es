@@ -8,7 +8,7 @@ ms.technology: entity-framework-core
 uid: core/saving/cascade-delete
 ms.openlocfilehash: a9481fe851cc264ab3eaecad052c2e683ae57a44
 ms.sourcegitcommit: 5367516f063cb42804ec92c31cdf76322554f2b5
-ms.translationtype: MT
+ms.translationtype: HT
 ms.contentlocale: es-ES
 ms.lasthandoff: 11/08/2017
 ---
@@ -16,7 +16,7 @@ ms.lasthandoff: 11/08/2017
 
 La eliminación en cascada se utiliza normalmente en la terminología de base de datos para describir una característica que permite la eliminación de una fila para desencadenar automáticamente la eliminación de filas relacionadas. Un concepto estrechamente relacionado también cubierto por comportamientos de eliminación de EF principal es la eliminación automática de una entidad secundaria cuando se trata de relación en un elemento primario se ha roto--este i que se conoce como "eliminar huérfanos".
 
-Núcleo EF implementa varios comportamientos de eliminación diferente y permite la configuración de los comportamientos de eliminación de relaciones individuales. Núcleo EF también implementa convenciones que configurar automáticamente los comportamientos de eliminación de predeterminados útiles para cada relación según la [requiredness de la relación] (.. /Modeling/Relationships.MD#Required-and-Optional-Relationships).
+Núcleo EF implementa varios comportamientos de eliminación diferente y permite la configuración de los comportamientos de eliminación de relaciones individuales. Núcleo EF también implementa convenciones que configurar automáticamente los comportamientos de eliminación de predeterminados útiles para cada relación según la [requiredness de la relación] (../modeling/relationships.md#required-and-optional-relationships).
 
 ## <a name="delete-behaviors"></a>Eliminar comportamientos
 Eliminar comportamientos se definen en el *DeleteBehavior* enumerador tipo y puede pasarse a la *OnDelete* API fluida para controlar si la eliminación de una entidad principal/primaria o el desactivar de la relación con las entidades dependientes/secundarias debe tener un efecto secundario en las entidades dependientes/secundario.
