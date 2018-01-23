@@ -6,11 +6,11 @@ ms.date: 10/27/2016
 ms.assetid: ee8e14ec-2158-4c9c-96b5-118715e2ed9e
 ms.technology: entity-framework-core
 uid: core/saving/cascade-delete
-ms.openlocfilehash: a9481fe851cc264ab3eaecad052c2e683ae57a44
-ms.sourcegitcommit: 5367516f063cb42804ec92c31cdf76322554f2b5
-ms.translationtype: HT
+ms.openlocfilehash: e1cb194d7c7472af59eb44fe2a084fa16c40c186
+ms.sourcegitcommit: 3b21a7fdeddc7b3c70d9b7777b72bef61f59216c
+ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/08/2017
+ms.lasthandoff: 01/22/2018
 ---
 # <a name="cascade-delete"></a>Eliminación en cascada
 
@@ -35,10 +35,10 @@ Hay cuatro eliminar comportamientos, como se muestra en las tablas siguientes. P
 
 | Nombre de comportamiento | Efecto en dependientes/elemento secundario en la memoria | Efecto en dependientes/elemento secundario en la base de datos
 |-|-|-
-| **En cascada** | Se eliminan las entidades | Se eliminan las entidades
+| **Cascade** | Se eliminan las entidades | Se eliminan las entidades
 | **ClientSetNull** (predeterminado) | Propiedades de clave externa se establecen en null | Ninguna
 | **SetNull** | Propiedades de clave externa se establecen en null | Propiedades de clave externa se establecen en null
-| **Restringir** | Ninguna | Ninguna
+| **Restrict** | Ninguna | Ninguna
 
 Para las relaciones necesarias (clave externa no acepta valores NULL) es _no_ pueden guardar un null valor de clave externa, lo que resulta en los siguientes efectos:
 
@@ -47,7 +47,7 @@ Para las relaciones necesarias (clave externa no acepta valores NULL) es _no_ pu
 | **CASCADE** (predeterminado) | Se eliminan las entidades | Se eliminan las entidades
 | **ClientSetNull** | SaveChanges produce | Ninguna
 | **SetNull** | SaveChanges produce | SaveChanges produce
-| **Restringir** | Ninguna | Ninguna
+| **Restrict** | Ninguna | Ninguna
 
 En las tablas anteriores, *ninguno* puede dar lugar a una infracción de restricción. Por ejemplo, si se elimina una entidad principal o secundaria, pero no se realiza ninguna acción para cambiar la clave externa de un elemento dependiente/secundario, a continuación, la base de datos probablemente producirá en SaveChanges debido a una infracción de restricción externa.
 
@@ -67,7 +67,7 @@ En un nivel superior:
 
 ## <a name="entity-deletion-examples"></a>Ejemplos de eliminación de entidad
 
-El código siguiente forma parte de un [ejemplo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/CascadeDelete/) que se puede descargar una ejecución. El ejemplo muestra lo que sucede para cada comportamiento de eliminación de relaciones obligatorios y opcionales cuando se elimina una entidad primaria.
+El código siguiente forma parte de un [ejemplo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/CascadeDelete/) que puede descargarse y ejecutarse. El ejemplo muestra lo que sucede para cada comportamiento de eliminación de relaciones obligatorios y opcionales cuando se elimina una entidad primaria.
 
 [!code-csharp[Main](../../../samples/core/Saving/Saving/CascadeDelete/Sample.cs#DeleteBehaviorVariations)]
 

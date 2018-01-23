@@ -6,11 +6,11 @@ ms.date: 10/27/2016
 ms.assetid: f9fb64e2-6699-4d70-a773-592918c04c19
 ms.technology: entity-framework-core
 uid: core/querying/related-data
-ms.openlocfilehash: cd26bd2e6f85083f73d97b1356d0ba38f53e0b8f
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: ec69bb128890a1e0b72fe77014f37747585bb5a5
+ms.sourcegitcommit: 3b21a7fdeddc7b3c70d9b7777b72bef61f59216c
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/27/2017
+ms.lasthandoff: 01/22/2018
 ---
 # <a name="loading-related-data"></a>Cargar datos relacionados
 
@@ -20,7 +20,7 @@ Entity Framework Core le permite usar las propiedades de navegación en el model
 * **Carga diferida** significa que los datos relacionados se cargan transparente desde la base de datos cuando se tiene acceso a la propiedad de navegación. Carga diferida aún no es posible con EF principales.
 
 > [!TIP]  
-> Puede ver este artículo [ejemplo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying) en GitHub.
+> Puede ver un [ejemplo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying) de este artículo en GitHub.
 
 ## <a name="eager-loading"></a>Carga diligente
 
@@ -41,6 +41,9 @@ Puede incluir datos relacionados de varias relaciones en una sola consulta.
 Puede explorar en profundidad a través de relaciones para incluir varios niveles de datos relacionados con el `ThenInclude` método. En el ejemplo siguiente se cargan todos los blogs, sus entradas relacionadas y el autor de cada publicación.
 
 [!code-csharp[Main](../../../samples/core/Querying/Querying/RelatedData/Sample.cs#SingleThenInclude)]
+
+> [!NOTE]  
+> Las versiones actuales de Visual Studio ofrecen opciones de finalización de código incorrecto y puede causar expresiones correctas se marque con errores de sintaxis cuando se usa el `ThenInclude` método después de una propiedad de navegación de la colección. Esto es un síntoma de un error de IntelliSense que realiza el seguimiento en https://github.com/dotnet/roslyn/issues/8237. Es seguro omitir estos errores de sintaxis falsos siempre que el código es correcto y puede compilarse correctamente. 
 
 Se pueden encadenar varias llamadas a `ThenInclude` para continuar incluso más niveles de los datos relacionados.
 
