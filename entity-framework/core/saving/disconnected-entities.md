@@ -6,11 +6,11 @@ ms.date: 10/27/2016
 ms.assetid: 2533b195-d357-4056-b0e0-8698971bc3b0
 ms.technology: entity-framework-core
 uid: core/saving/disconnected-entities
-ms.openlocfilehash: 0ea02876b9594d54c971a7b70fcf7ce591e56ba0
-ms.sourcegitcommit: ced2637bf8cc5964c6daa6c7fcfce501bf9ef6e8
+ms.openlocfilehash: 0b145217d40027c4b8e4746e9c5651652a28c9eb
+ms.sourcegitcommit: d2434edbfa6fbcee7287e33b4915033b796e417e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 12/22/2017
+ms.lasthandoff: 02/12/2018
 ---
 # <a name="disconnected-entities"></a>Entidades desconectadas
 
@@ -20,6 +20,9 @@ Sin embargo, en ocasiones, las entidades se consultan utilizando una instancia d
 
 > [!TIP]  
 > Puede ver un [ejemplo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/Disconnected/) de este artículo en GitHub.
+
+> [!TIP]
+> EF Core solo puede realizar un seguimiento de una instancia de cualquier entidad con un determinado valor de clave principal. La mejor manera de evitar este un problema consiste en usar un contexto de corta duración para cada unidad de trabajo de forma que el contexto se inicia vacío, tiene entidades asociadas a él, guarda las entidades y, a continuación, en el contexto se elimina y se descarta.
 
 ## <a name="identifying-new-entities"></a>Identificar nuevas entidades
 
@@ -85,6 +88,10 @@ Son los siguientes pasos:
 > SetValues sólo se marcará como modificar las propiedades que tienen valores diferentes a los de la entidad que realiza un seguimiento. Esto significa que cuando se envía la actualización, se actualizarán sólo aquellas columnas que han cambiado realmente. (Y si no ha cambiado nada, se enviará ninguna actualización en absoluto).
 
 ## <a name="working-with-graphs"></a>Trabajar con gráficos
+
+### <a name="identity-resolution"></a>Resolución de identidades
+
+Como se mencionó anteriormente, EF Core solo puede realizar un seguimiento una instancia de cualquier entidad con un determinado valor de clave principal. Al trabajar con gráficos lo ideal es que se debe crear el gráfico de forma que se mantiene esta condición invariable, y se debe usar el contexto para solo una unidad de trabajo. Si el gráfico contiene duplicados, será necesario procesar el gráfico antes de enviarlo a EF consolidar varias instancias en una. Esto puede no ser trivial donde instancias tienen valores en conflicto y relaciones, por lo que deben hacerlo tan pronto como sea posible consolidar duplicados en la canalización de aplicación para evitar la resolución de conflictos.
 
 ### <a name="all-newall-existing-entities"></a>Todos los nuevos o todas las entidades existentes
 

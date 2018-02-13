@@ -6,11 +6,11 @@ ms.date: 10/27/2016
 ms.assetid: d7a22b5a-4c5b-4e3b-9897-4d7320fcd13f
 ms.technology: entity-framework-core
 uid: core/miscellaneous/configuring-dbcontext
-ms.openlocfilehash: de26e3b28851d4dc4e50f0490093dd05ad489b31
-ms.sourcegitcommit: ced2637bf8cc5964c6daa6c7fcfce501bf9ef6e8
+ms.openlocfilehash: 6980acd53b0a74055af7a1e04b476f4625c327c9
+ms.sourcegitcommit: d2434edbfa6fbcee7287e33b4915033b796e417e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 12/22/2017
+ms.lasthandoff: 02/12/2018
 ---
 # <a name="configuring-a-dbcontext"></a>Configurar un DbContext
 
@@ -24,9 +24,9 @@ Mientras cualquier patrón que proporciona la información de configuración nec
 
 ## <a name="configuring-dbcontextoptions"></a>Configurar DbContextOptions
 
-`DbContext`debe tener una instancia de `DbContextOptions` para realizar cualquier trabajo. El `DbContextOptions` instancia lleva información de configuración como:
+`DbContext` debe tener una instancia de `DbContextOptions` para realizar cualquier trabajo. El `DbContextOptions` instancia lleva información de configuración como:
 
-- El proveedor de base de datos que se utiliza normalmente selecciona invocando un método como `UseSqlServer` o`UseSqlite`
+- El proveedor de base de datos que se utiliza normalmente selecciona invocando un método como `UseSqlServer` o `UseSqlite`
 - Cualquier cadena de conexión necesaria o el identificador de la instancia de base de datos, pasa normalmente como un argumento para el método de selección de proveedor mencionado anteriormente
 - Los selectores de comportamiento opcional de nivel del proveedor, normalmente también encadenados dentro de la llamada al método de selección de proveedor
 - Los selectores de comportamiento EF Core generales normalmente encadenados después o antes del método de selector de proveedor
@@ -108,7 +108,7 @@ using (var context = new BloggingContext())
 
 Núcleo EF admite el uso de `DbContext` con un contenedor de inyección de dependencia. El tipo de DbContext se puede agregar al contenedor de servicios mediante la `AddDbContext<TContext>` método.
 
-`AddDbContext<TContext>`hará que tanto el tipo de DbContext, `TContext`y la correspondiente `DbContextOptions<TContext>` disponibles para la inyección del contenedor de servicios.
+`AddDbContext<TContext>` hará que tanto el tipo de DbContext, `TContext`y la correspondiente `DbContextOptions<TContext>` disponibles para la inyección del contenedor de servicios.
 
 Vea [leer más](#more-reading) a continuación para obtener más información sobre la inserción de dependencias.
 
