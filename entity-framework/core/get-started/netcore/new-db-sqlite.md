@@ -9,11 +9,11 @@ ms.date: 04/05/2017
 ms.assetid: 099d179e-dd7b-4755-8f3c-fcde914bf50b
 ms.technology: entity-framework-core
 uid: core/get-started/netcore/new-db-sqlite
-ms.openlocfilehash: 22fc0446dee71dd0d2402b47d76cc8b7307fbe5f
-ms.sourcegitcommit: 5e2d97e731f975cf3405ff3deab2a3c75ad1b969
+ms.openlocfilehash: 3becf75e7a513a3aa18c3c2daf628b65327365b0
+ms.sourcegitcommit: 0858f157b806f4a881b94ddbeecf1ece1d53e1e0
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/15/2017
+ms.lasthandoff: 02/21/2018
 ---
 # <a name="getting-started-with-ef-core-on-net-core-console-app-with-a-new-database"></a>Introducción a EF Core en la aplicación de consola de .NET Core con una base de datos nueva
 
@@ -60,8 +60,6 @@ dotnet add package Microsoft.EntityFrameworkCore.Design
   </ItemGroup>
   ```
 
- Nota: Una versión futura de `dotnet` admitirá DotNetCliToolReferences a través de `dotnet add tool`
-
 `ConsoleApp.SQLite.csproj` ahora debe contener lo siguiente:
 
 [!code[Main](../../../../samples/core/GetStarted/NetCore/ConsoleApp.SQLite/ConsoleApp.SQLite.csproj)]
@@ -80,7 +78,7 @@ Defina un contexto y clases de entidad que constituirán el modelo.
 
 Sugerencia: En una aplicación real, colocaría cada clase en un archivo independiente y la cadena de conexión en un archivo de configuración. Para la simplicidad del tutorial, colocaremos todos estos elementos en un solo archivo.
 
-## <a name="create-the-database"></a>Crear la base de datos
+## <a name="create-the-database"></a>Creación de la base de datos
 
 Una vez que ya tiene un modelo, puede usar las [migraciones](https://docs.microsoft.com/aspnet/core/data/ef-mvc/migrations#introduction-to-migrations) para crear una base de datos.
 
