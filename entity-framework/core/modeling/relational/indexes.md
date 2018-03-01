@@ -6,16 +6,16 @@ ms.date: 10/27/2016
 ms.assetid: 4581e7ba-5e7f-452c-9937-0aaf790ba10a
 ms.technology: entity-framework-core
 uid: core/modeling/relational/indexes
-ms.openlocfilehash: 683b580bb155e0416f13c5d63e3280078fbcee21
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: f577fccfefc6908edf2ac47ae630323d7a9f5f2b
+ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/27/2017
+ms.lasthandoff: 02/28/2018
 ---
 # <a name="indexes"></a>Índices
 
 > [!NOTE]  
-> La configuración de esta sección es aplicable a bases de datos relacionales en general. Los métodos de extensión que se muestra a continuación pasará a estar disponibles cuando se instala un proveedor de base de datos relacional (porque el recurso compartido *Microsoft.EntityFrameworkCore.Relational* paquete).
+> La configuración de esta sección se aplica a bases de datos relacionales en general. Los métodos de extensión que se muestran a continuación estarán disponibles cuando instale un proveedor de base de datos relacional (debido al paquete compartido *Microsoft.EntityFrameworkCore.Relational*).
 
 Un índice en una base de datos relacional se asigna para el mismo concepto que un índice en el núcleo de Entity Framework.
 
@@ -31,23 +31,12 @@ Los índices no pueden configurarse mediante las anotaciones de datos.
 
 Puede usar la API fluida para configurar el nombre de un índice.
 
-<!-- [!code-csharp[Main](samples/core/relational/Modeling/FluentAPI/Samples/Relational/IndexName.cs?highlight=9)] -->
-``` csharp
-class MyContext : DbContext
-{
-    public DbSet<Blog> Blogs { get; set; }
+[!code-csharp[Main](../../../../samples/core/Modeling/FluentAPI/Samples/Relational/IndexName.cs?name=Model&highlight=9)]
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.Entity<Blog>()
-            .HasIndex(b => b.Url)
-            .HasName("Index_Url");
-    }
-}
+También puede especificar un filtro.
 
-public class Blog
-{
-    public int BlogId { get; set; }
-    public string Url { get; set; }
-}
-```
+[!code-csharp[Main](../../../../samples/core/Modeling/FluentAPI/Samples/Relational/IndexFilter.cs?name=Model&highlight=9)]
+
+Cuando utiliza el proveedor SQL Server EF agrega un 'es NOT NULL' filtrar para todas las columnas que aceptan valores null que forman parte de un índice único. Para reemplazar esta convención puede proporcionar un `null` valor.
+
+[!code-csharp[Main](../../../../samples/core/Modeling/FluentAPI/Samples/Relational/IndexNoFilter.cs?name=Model&highlight=10)]

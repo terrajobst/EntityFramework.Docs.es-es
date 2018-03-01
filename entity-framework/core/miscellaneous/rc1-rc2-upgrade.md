@@ -6,11 +6,11 @@ ms.date: 10/27/2016
 ms.assetid: 6d75b229-cc79-4d08-88cd-3a1c1b24d88f
 ms.technology: entity-framework-core
 uid: core/miscellaneous/rc1-rc2-upgrade
-ms.openlocfilehash: ae5077c30642e3f40f51adee429821978f194460
-ms.sourcegitcommit: 5e2d97e731f975cf3405ff3deab2a3c75ad1b969
+ms.openlocfilehash: e76886729248101ccac024568cf9abcd945fca33
+ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/15/2017
+ms.lasthandoff: 02/28/2018
 ---
 # <a name="upgrading-from-ef-core-10-rc1-to-10-rc2"></a>Actualización de EF Core 1.0 RC1 a 1.0 RC2
 
@@ -20,19 +20,19 @@ En este artículo se proporciona instrucciones para mover una aplicación compil
 
 Entre RC1 y RC2, se cambia de "Entity Framework 7" a "Entity Framework Core". Puede obtener más información sobre los motivos para que el cambio en [esta entrada de Scott Hanselman](http://www.hanselman.com/blog/ASPNET5IsDeadIntroducingASPNETCore10AndNETCore10.aspx). Debido a este cambio, cambia los nombres de nuestro paquete de `EntityFramework.*` a `Microsoft.EntityFrameworkCore.*` y las versiones de `7.0.0-rc1-final` a `1.0.0-rc2-final` (o `1.0.0-preview1-final` para herramientas).
 
-**Debe quitar completamente los paquetes de RC1 y, a continuación, instalar el RC2 los.** Esta es la asignación de algunos paquetes comunes.
+**Debe quitar completamente los paquetes RC1 y, a continuación, instale el RC2 unos.** Esta es la asignación de algunos paquetes comunes.
 
 | Paquete de RC1                                               | Equivalente de RC2                                                       |
-| --------------------------------------------------------- | -------------------------------------------------------------------- |
-| EntityFramework.MicrosoftSqlServer 7.0.0-rc1-final | Microsoft.EntityFrameworkCore.SqlServer 1.0.0-rc2-final      |
-| EntityFramework.SQLite 7.0.0-rc1-final | Microsoft.EntityFrameworkCore.Sqlite 1.0.0-rc2-final      |
-| EntityFramework7.Npgsql 3.1.0-rc1-3     | NpgSql.EntityFrameworkCore.Postgres<to be advised>      |
-| EntityFramework.SqlServerCompact35 7.0.0-rc1-final | EntityFrameworkCore.SqlServerCompact35 1.0.0-rc2-final      |
-| EntityFramework.SqlServerCompact40 7.0.0-rc1-final | EntityFrameworkCore.SqlServerCompact40 1.0.0-rc2-final      |
-| EntityFramework.InMemory 7.0.0-rc1-final | Microsoft.EntityFrameworkCore.InMemory 1.0.0-rc2-final      |
-| EntityFramework.IBMDataServer 7.0.0-beta1     | No está disponible todavía para RC2                                            |
-| EntityFramework.Commands 7.0.0-rc1-final | Microsoft.EntityFrameworkCore.Tools 1.0.0-preview1-final |
-| EntityFramework.MicrosoftSqlServer.Design 7.0.0-rc1-final | Microsoft.EntityFrameworkCore.SqlServer.Design 1.0.0-rc2-final      |
+|:----------------------------------------------------------|:---------------------------------------------------------------------|
+| EntityFramework.MicrosoftSqlServer        7.0.0-rc1-final | Microsoft.EntityFrameworkCore.SqlServer         1.0.0-rc2-final      |
+| EntityFramework.SQLite                    7.0.0-rc1-final | Microsoft.EntityFrameworkCore.Sqlite            1.0.0-rc2-final      |
+| EntityFramework7.Npgsql                   3.1.0-rc1-3     | NpgSql.EntityFrameworkCore.Postgres             <to be advised>      |
+| EntityFramework.SqlServerCompact35        7.0.0-rc1-final | EntityFrameworkCore.SqlServerCompact35          1.0.0-rc2-final      |
+| EntityFramework.SqlServerCompact40        7.0.0-rc1-final | EntityFrameworkCore.SqlServerCompact40          1.0.0-rc2-final      |
+| EntityFramework.InMemory                  7.0.0-rc1-final | Microsoft.EntityFrameworkCore.InMemory          1.0.0-rc2-final      |
+| EntityFramework.IBMDataServer             7.0.0-beta1     | No está disponible todavía para RC2                                            |
+| EntityFramework.Commands                  7.0.0-rc1-final | Microsoft.EntityFrameworkCore.Tools             1.0.0-preview1-final |
+| EntityFramework.MicrosoftSqlServer.Design 7.0.0-rc1-final | Microsoft.EntityFrameworkCore.SqlServer.Design  1.0.0-rc2-final      |
 
 ## <a name="namespaces"></a>Espacios de nombres
 

@@ -6,11 +6,11 @@ ms.date: 8/13/2017
 ms.assetid: 8BD43C8C-63D9-4F3A-B954-7BC518A1B7DB
 ms.technology: entity-framework-core
 uid: core/miscellaneous/1x-2x-upgrade
-ms.openlocfilehash: 380f27c9f00943a2909ec7b876e151572a67dc37
-ms.sourcegitcommit: ced2637bf8cc5964c6daa6c7fcfce501bf9ef6e8
+ms.openlocfilehash: 30f4de794d42b1385145286e77c2e7c67987fea6
+ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 12/22/2017
+ms.lasthandoff: 02/28/2018
 ---
 # <a name="upgrading-applications-from-previous-versions-to-ef-core-20"></a>Actualizar aplicaciones de versiones anteriores a EF Core 2.0
 
@@ -82,11 +82,11 @@ Para la versión 2.0 de la versión de la `IDbContextFactory<TContext>` todavía
 
 Debido a los cambios de núcleo de ASP.NET 2.0 se ha descrito anteriormente, descubrimos que `DbContextFactoryOptions` ya no se necesita en el nuevo `IDesignTimeDbContextFactory<TContext>` interfaz. Estas son las alternativas que se debe usar en su lugar.
 
-DbContextFactoryOptions | Alternativa
---- | ---
-ApplicationBasePath | AppContext.BaseDirectory
-ContentRootPath | Directory.GetCurrentDirectory()
-EnvironmentName | Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")
+| DbContextFactoryOptions | Alternativa                                                  |
+|:------------------------|:-------------------------------------------------------------|
+| ApplicationBasePath     | AppContext.BaseDirectory                                     |
+| ContentRootPath         | Directory.GetCurrentDirectory()                              |
+| EnvironmentName         | Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") |
 
 ### <a name="design-time-working-directory-changed"></a>Cambiar el directorio de trabajo de tiempo de diseño
 
@@ -106,7 +106,7 @@ Los identificadores de evento para los mensajes enviados a un [ILogger](https://
 
 Las categorías de registrador también han cambiado. Ahora hay un conjunto conocido de categorías a las que se accede a través de [DbLoggerCategory](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/DbLoggerCategory.cs).
 
-[DiagnosticSource](https://github.com/dotnet/corefx/blob/master/src/System.Diagnostics.DiagnosticSource/src/DiagnosticSourceUsersGuide.md) eventos ahora utilizan los mismos nombres de Id. de evento como el correspondiente `ILogger` mensajes. Las cargas del evento son todos los tipos nominales derivados [EventData](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Diagnostics/EventData.cs).
+[DiagnosticSource](https://github.com/dotnet/corefx/blob/master/src/System.Diagnostics.DiagnosticSource/src/DiagnosticSourceUsersGuide.md) eventos ahora utilizan los mismos nombres de ID de evento como el correspondiente `ILogger` mensajes. Las cargas del evento son todos los tipos nominales derivados [EventData](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Diagnostics/EventData.cs).
 
 Id. de evento, tipos de carga y categorías se documentan en el [CoreEventId](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Diagnostics/CoreEventId.cs) y [RelationalEventId](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore.Relational/Diagnostics/RelationalEventId.cs) clases.
 
@@ -153,13 +153,13 @@ Esto crea y usa una base de datos con el nombre "MyDatabase". Si `UseInMemoryDat
 
 ### <a name="read-only-api-changes"></a>Cambios en la API de solo lectura
 
-`IsReadOnlyBeforeSave`, `IsReadOnlyAferSave`, y `IsStoreGeneratedAlways` se han obsoleta y se ha reemplazado por [BeforeSaveBehavior](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/IProperty.cs#L39) y [AfterSaveBehavior](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/IProperty.cs#L55). Estos comportamientos se aplican a cualquier propiedad (no sólo las propiedades generadas por el almacenamiento) y determinar cómo se debe usar el valor de la propiedad al insertar en una fila de la base de datos (`BeforeSaveBehavior`) o al actualizar a otra base de datos fila (`AfterSaveBehavior`).
+`IsReadOnlyBeforeSave`, `IsReadOnlyAferSave`, y `IsStoreGeneratedAlways` han sido obsoletos y reemplazado por [BeforeSaveBehavior](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/IProperty.cs#L39) y [AfterSaveBehavior](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/IProperty.cs#L55). Estos comportamientos se aplican a cualquier propiedad (no sólo las propiedades generadas por el almacenamiento) y determinar cómo se debe usar el valor de la propiedad al insertar en una fila de la base de datos (`BeforeSaveBehavior`) o al actualizar a otra base de datos fila (`AfterSaveBehavior`).
 
 Propiedades marcadas como [ValueGenerated.OnAddOrUpdate](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/ValueGenerated.cs) (por ejemplo, para las columnas calculadas) predeterminada omitirá cualquier valor establecido actualmente en la propiedad. Esto significa que un valor generado por el almacén se obtendrán siempre, independientemente de si se ha establecido o modificado en la entidad de seguimiento cualquier valor. Esto se puede cambiar estableciendo otro `Before\AfterSaveBehavior`.
 
 ### <a name="new-clientsetnull-delete-behavior"></a>Nuevo comportamiento de eliminación de ClientSetNull
 
-En versiones anteriores, [DeleteBehavior.Restrict](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/DeleteBehavior.cs) tenía un comportamiento de entidades hace un seguimiento mediante el contexto que más cerrado coincidente `SetNull` semántica. En EF Core 2.0, un nuevo `ClientSetNull` comportamiento se ha introducido como el valor predeterminado para las relaciones opcionales. Este comportamiento tiene `SetNull` semántica para entidades sometidas a seguimiento y `Restrict` comportamiento para bases de datos creadas mediante el uso EF Core. En nuestra experiencia, estos son los comportamientos más espera/útiles para entidades sometidas a seguimiento y la base de datos. `DeleteBehavior.Restrict`Ahora se admite para las entidades de seguimiento cuando se establece por relaciones opcionales.
+En versiones anteriores, [DeleteBehavior.Restrict](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/DeleteBehavior.cs) tenía un comportamiento de entidades hace un seguimiento mediante el contexto que más cerrado coincidente `SetNull` semántica. En EF Core 2.0, un nuevo `ClientSetNull` comportamiento se ha introducido como el valor predeterminado para las relaciones opcionales. Este comportamiento tiene `SetNull` semántica para entidades sometidas a seguimiento y `Restrict` comportamiento para bases de datos creadas mediante el uso EF Core. En nuestra experiencia, estos son los comportamientos más espera/útiles para entidades sometidas a seguimiento y la base de datos. `DeleteBehavior.Restrict` Ahora es un honor para entidades con seguimiento cuando se establece relaciones opcionales.
 
 ### <a name="provider-design-time-packages-removed"></a>Paquetes de tiempo de diseño de proveedor quitados
 

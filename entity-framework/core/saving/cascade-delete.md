@@ -6,11 +6,11 @@ ms.date: 10/27/2016
 ms.assetid: ee8e14ec-2158-4c9c-96b5-118715e2ed9e
 ms.technology: entity-framework-core
 uid: core/saving/cascade-delete
-ms.openlocfilehash: e1cb194d7c7472af59eb44fe2a084fa16c40c186
-ms.sourcegitcommit: 3b21a7fdeddc7b3c70d9b7777b72bef61f59216c
+ms.openlocfilehash: 1ab9d114e27aac0bec972df631a426c8ce87a518
+ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 01/22/2018
+ms.lasthandoff: 02/28/2018
 ---
 # <a name="cascade-delete"></a>Eliminación en cascada
 
@@ -33,28 +33,28 @@ La segunda acción, establecer un valor de clave externa como null no es válido
 
 Hay cuatro eliminar comportamientos, como se muestra en las tablas siguientes. Para las relaciones opcionales (clave externa que aceptan valores NULL), _es_ pueden guardar un null valor de clave externa, lo que resulta en los siguientes efectos:
 
-| Nombre de comportamiento | Efecto en dependientes/elemento secundario en la memoria | Efecto en dependientes/elemento secundario en la base de datos
-|-|-|-
-| **Cascade** | Se eliminan las entidades | Se eliminan las entidades
-| **ClientSetNull** (predeterminado) | Propiedades de clave externa se establecen en null | Ninguna
-| **SetNull** | Propiedades de clave externa se establecen en null | Propiedades de clave externa se establecen en null
-| **Restrict** | Ninguna | Ninguna
+| Nombre de comportamiento               | Efecto en dependientes/elemento secundario en la memoria    | Efecto en dependientes/elemento secundario en la base de datos  |
+|:----------------------------|:---------------------------------------|:---------------------------------------|
+| **Cascade**                 | Se eliminan las entidades                   | Se eliminan las entidades                   |
+| **ClientSetNull** (predeterminado) | Propiedades de clave externa se establecen en null | Ninguna                                   |
+| **SetNull**                 | Propiedades de clave externa se establecen en null | Propiedades de clave externa se establecen en null |
+| **Restrict**                | Ninguna                                   | Ninguna                                   |
 
 Para las relaciones necesarias (clave externa no acepta valores NULL) es _no_ pueden guardar un null valor de clave externa, lo que resulta en los siguientes efectos:
 
-| Nombre de comportamiento | Efecto en dependientes/elemento secundario en la memoria | Efecto en dependientes/elemento secundario en la base de datos
-|-|-|-
-| **CASCADE** (predeterminado) | Se eliminan las entidades | Se eliminan las entidades
-| **ClientSetNull** | SaveChanges produce | Ninguna
-| **SetNull** | SaveChanges produce | SaveChanges produce
-| **Restrict** | Ninguna | Ninguna
+| Nombre de comportamiento         | Efecto en dependientes/elemento secundario en la memoria | Efecto en dependientes/elemento secundario en la base de datos |
+|:----------------------|:------------------------------------|:--------------------------------------|
+| **Cascada** (predeterminado) | Se eliminan las entidades                | Se eliminan las entidades                  |
+| **ClientSetNull**     | SaveChanges produce                  | Ninguna                                  |
+| **SetNull**           | SaveChanges produce                  | SaveChanges produce                    |
+| **Restrict**          | Ninguna                                | Ninguna                                  |
 
 En las tablas anteriores, *ninguno* puede dar lugar a una infracción de restricción. Por ejemplo, si se elimina una entidad principal o secundaria, pero no se realiza ninguna acción para cambiar la clave externa de un elemento dependiente/secundario, a continuación, la base de datos probablemente producirá en SaveChanges debido a una infracción de restricción externa.
 
 En un nivel superior:
 * Si tiene entidades que no pueden existir sin un elemento primario, y desea EF tener en cuenta para eliminar automáticamente los elementos secundarios y luego use *Cascade*.
   * Las entidades que no pueden existir sin un elemento primario normalmente se realizan uso de relaciones necesarias, para el que *Cascade* es el valor predeterminado.
-* Si tiene entidades que pueden tienen o no un elemento primario, y desea EF a cargo de anular automáticamente la clave externa y luego use *ClientSetNull*
+* Si tiene entidades que pueden o no tener un elemento primario, y que desea EF encargarse de anular la clave externa para usted, luego utilice *ClientSetNull*
   * Entidades que pueden existir sin normalmente se realizan en un elemento primario usa de relaciones opcionales, para que *ClientSetNull* es el valor predeterminado.
   * Si desea que la base de datos para intentar propagar los valores null para las claves externas secundarios incluso cuando la entidad secundaria no está cargada, a continuación, use *SetNull*. Sin embargo, tenga en cuenta que la base de datos debe admitir esto, y configurar la base de datos similar al siguiente puede dar lugar a otras restricciones, lo que en la práctica a menudo hace poco práctico si esta opción. Se trata de por qué *SetNull* no es el valor predeterminado.
 * Si no desea que EF Core para eliminar una entidad automáticamente o null automáticamente a la clave externa, use alguna vez *restringir*. Tenga en cuenta que esto requiere que el código mantener sus valores de clave externas y las entidades secundarias sincronizadas manualmente en caso contrario, las excepciones de restricción se producirá.
@@ -63,7 +63,7 @@ En un nivel superior:
 > En el núcleo de EF, a diferencia de EF6, efectos en cascada no realizan inmediatamente, pero en su lugar sólo cuando se llama a SaveChanges.
 
 > [!NOTE]  
-> **Cambios en EF Core 2.0:** en versiones anteriores, *restringir* causaría opcionales propiedades de clave externa en entidades dependientes sometidas a seguimiento se establezca en null, mientras que fue el comportamiento para las relaciones opcionales al eliminar el valor predeterminado. En EF Core 2.0, el *ClientSetNull* se introdujo para representar ese comportamiento y se ha convertido el valor predeterminado para las relaciones opcionales. El comportamiento de *restringir* se ajustó para nunca tienen efectos secundarios en entidades dependientes.
+> **Cambios en EF Core 2.0:** en versiones anteriores, *Restrict* haría que las propiedades de clave externa opcionales marcas entidades dependientes se establece en null y era el valor predeterminado comportamiento de eliminación para relaciones opcionales. En EF Core 2.0, el *ClientSetNull* se introdujo para representar ese comportamiento y se ha convertido el valor predeterminado para las relaciones opcionales. El comportamiento de *restringir* se ajustó para nunca tienen efectos secundarios en entidades dependientes.
 
 ## <a name="entity-deletion-examples"></a>Ejemplos de eliminación de entidad
 
