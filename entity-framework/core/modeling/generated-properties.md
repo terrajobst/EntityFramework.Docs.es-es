@@ -6,11 +6,11 @@ ms.date: 10/27/2016
 ms.assetid: eb082011-11a1-41b4-a108-15daafa03e80
 ms.technology: entity-framework-core
 uid: core/modeling/generated-properties
-ms.openlocfilehash: 2d79bf1339ebe522c39fe8971d908c30e1f4dca0
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: 892494461bcf49ee10d05c972da0ba19ca003c35
+ms.sourcegitcommit: 4b7d3d3e258b0d9cb778bb45a9f4a33c0792e38e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/27/2017
+ms.lasthandoff: 02/28/2018
 ---
 # <a name="generated-values"></a>Valores generados
 
@@ -50,7 +50,7 @@ Al igual que `value generated on add`, si especifica un valor para la propiedad 
 
 ## <a name="conventions"></a>Convenciones
 
-Por convención, las claves principales que son de un entero o un tipo de datos GUID será el programa de instalación tiene valores generados en Agregar. Todas las demás propiedades se configurará con la generación de ningún valor.
+Por convención, las claves principales de no compuestas de tipo short, int, long o Guid será el programa de instalación tiene valores generados en Agregar. Todas las demás propiedades se configurará con la generación de ningún valor.
 
 ## <a name="data-annotations"></a>Anotaciones de datos
 
@@ -85,7 +85,7 @@ Puede usar la API fluida para cambiar el modelo de generación de valor para una
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/ValueGeneratedOnAdd.cs#Sample)]
 
 > [!WARNING]  
-> `ValueGeneratedOnAdd()`solo permite EF saber que los valores se generan para entidades agregadas, no garantiza que EF configurará el mecanismo real para generar valores.  Vea [agregar valor generado en](#value-generated-on-add) sección para obtener más detalles.
+> `ValueGeneratedOnAdd()` solo permite EF saber que los valores se generan para entidades agregadas, no garantiza que EF configurará el mecanismo real para generar valores.  Vea [agregar valor generado en](#value-generated-on-add) sección para obtener más detalles.
 
 ### <a name="value-generated-on-add-or-update-fluent-api"></a>Valor generado en Agregar o actualización (API fluida)
 
