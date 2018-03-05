@@ -2,35 +2,22 @@
 title: Tokens de simultaneidad - Core EF
 author: rowanmiller
 ms.author: divega
-ms.date: 10/27/2016
+ms.date: 03/03/2018
 ms.assetid: bc8b1cb0-befe-4b67-8004-26e6c5f69385
 ms.technology: entity-framework-core
 uid: core/modeling/concurrency
-ms.openlocfilehash: 6574a9098d38c4aa525ffb4896adb01082420b5f
-ms.sourcegitcommit: 860ec5d047342fbc4063a0de881c9861cc1f8813
+ms.openlocfilehash: f3cf28d5c54e63aa76058e9fe1d9f3de5b37d579
+ms.sourcegitcommit: 8f3be0a2a394253efb653388ec66bda964e5ee1b
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/05/2017
+ms.lasthandoff: 03/05/2018
 ---
 # <a name="concurrency-tokens"></a>Tokens de simultaneidad
 
-Si una propiedad está configurada como un token de simultaneidad EF comprobará que ningún otro usuario modificó ese valor en la base de datos al guardar los cambios a ese registro. EF usa un modelo de simultaneidad optimista, lo que significa que se suponen que no ha cambiado el valor e intente guardar los datos, pero producir si encuentra que el valor ha cambiado.
-
-Por ejemplo que podríamos desear configurar `LastName` en `Person` un token de simultaneidad. Esto significa que si un usuario intenta guardar los cambios a un `Person`, pero otro usuario ha cambiado el `LastName` , a continuación, se producirá una excepción. Esto puede ser deseable para que la aplicación puede solicitar al usuario para asegurarse de que este registro representa siguen la misma persona real antes de guardar sus cambios.
-
 > [!NOTE]
-> Esta página documenta cómo configurar los tokens de simultaneidad. Vea [control de simultaneidad](../saving/concurrency.md) para obtener ejemplos de cómo usar simultaneidad optimista en la aplicación.
+> Esta página documenta cómo configurar los tokens de simultaneidad. Vea [controlar los conflictos de simultaneidad](../saving/concurrency.md) para obtener una explicación detallada de cómo funciona el control de simultaneidad en EF Core y ejemplos de cómo tratar los conflictos de simultaneidad en la aplicación.
 
-## <a name="how-concurrency-tokens-work-in-ef"></a>Cómo funcionan los tokens de simultaneidad en EF
-
-Almacenes de datos pueden exigir tokens de simultaneidad mediante la comprobación de que todos los registros que se va a actualizar o eliminar aún tiene el mismo valor para el token de simultaneidad que se asignó cuando el contexto de carga originalmente los datos de la base de datos.
-
-Por ejemplo, bases de datos relacionales para ello, incluido el token de simultaneidad en el `WHERE` cláusula de cualquier `UPDATE` o `DELETE` comandos y comprobando el número de filas afectadas. Si el token de simultaneidad sigue coincidiendo con una fila se actualizará. Si ha cambiado el valor de la base de datos, no se actualiza ninguna fila.
-
-```sql
-UPDATE [Person] SET [FirstName] = @p1
-WHERE [PersonId] = @p0 AND [LastName] = @p2;
-```
+Propiedades configuradas como tokens de simultaneidad se usan para implementar el control de simultaneidad optimista.
 
 ## <a name="conventions"></a>Convenciones
 

@@ -1,33 +1,61 @@
 ---
-title: Controlar la simultaneidad - Core EF
+title: Controlar los conflictos de simultaneidad - Core EF
 author: rowanmiller
 ms.author: divega
-ms.date: 10/27/2016
-ms.assetid: bce0539d-b0cd-457d-be71-f7ca16f3baea
+ms.date: 03/03/2018
 ms.technology: entity-framework-core
 uid: core/saving/concurrency
-ms.openlocfilehash: bbd3e154c1b27b16c7d8f8fbf9ed51df0849795c
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: 288d9c6fced5ebbaa2c366248c68547502c3698e
+ms.sourcegitcommit: 8f3be0a2a394253efb653388ec66bda964e5ee1b
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/27/2017
+ms.lasthandoff: 03/05/2018
 ---
-# <a name="handling-concurrency"></a>Administrar la simultaneidad
+# <a name="handling-concurrency-conflicts"></a>Administrar los conflictos de simultaneidad
 
-Si una propiedad está configurada como un token de simultaneidad EF comprobará que ningún otro usuario modificó ese valor en la base de datos al guardar los cambios a ese registro.
+> [!NOTE]
+> Esta página documenta cómo funciona la simultaneidad en EF Core y cómo tratar los conflictos de simultaneidad en la aplicación. Vea [Tokens de simultaneidad](xref:core/modeling/concurrency) para obtener más información sobre cómo configurar los tokens de simultaneidad en el modelo.
 
-> [!TIP]  
-> Puede ver este artículo [ejemplo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/Concurrency/) en GitHub.
+> [!TIP]
+> Puede ver un [ejemplo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/Concurrency/) de este artículo en GitHub.
 
-## <a name="how-concurrency-handling-works-in-ef-core"></a>Cómo funciona el control de simultaneidad en EF Core
+_Simultaneidad de base de datos_ hace referencia a situaciones en las que varios procesos o a los usuarios tener acceso o cambiar los mismos datos en una base de datos al mismo tiempo. _Control de simultaneidad_ hace referencia a mecanismos específicos utilizados para garantizar la coherencia de datos en presencia de cambios simultáneos.
 
-Para obtener una descripción detallada de cómo funciona el control de simultaneidad en Entity Framework Core, vea [Tokens de simultaneidad](../modeling/concurrency.md).
+Núcleo EF implementa _control de simultaneidad optimista_, lo que significa que permitirá a varios procesos o los usuarios realizar cambios de forma independiente sin la sobrecarga de sincronización o de bloqueo. En la situación ideal, estos cambios no interfieran entre sí y, por tanto, se podrán realizar correctamente. En el peor de los caso, dos o más procesos intentará realizar cambios en conflicto y solo uno de ellos debe ejecutarse correctamente.
+
+## <a name="how-concurrency-control-works-in-ef-core"></a>Cómo funciona el control de simultaneidad en EF Core
+
+Propiedades configuradas como tokens de simultaneidad se usan para implementar el control de simultaneidad optimista: cada vez que se realiza una operación update o delete durante `SaveChanges`, el valor del token de simultaneidad en la base de datos se compara con la versión original valor leído por núcleo de EF.
+
+- Si los valores coinciden, puede completar la operación.
+- Si los valores no coinciden, se da por supuesto en EF Core que otro usuario ha realizado una operación en conflicto y anula la transacción actual.
+
+La situación cuando otro usuario ha realizado una operación que entra en conflicto con la operación actual se conoce como _conflicto de simultaneidad_.
+
+Proveedores de base de datos son responsables de implementar la comparación de valores de token de simultaneidad.
+
+En bases de datos relacionales EF Core incluye una comprobación para el valor del token de simultaneidad en el `WHERE` cláusula de cualquier `UPDATE` o `DELETE` las instrucciones. Después de ejecutar las instrucciones, Core EF lee el número de filas afectadas.
+
+Si ninguna fila afectada, se detecta un conflicto de simultaneidad y produce EF Core `DbUpdateConcurrencyException`.
+
+Por ejemplo, queremos podemos configurar `LastName` en `Person` un token de simultaneidad. Cualquier operación de actualización en persona incluirá la comprobación de simultaneidad en el `WHERE` cláusula:
+
+``` sql
+UPDATE [Person] SET [FirstName] = @p1
+WHERE [PersonId] = @p0 AND [LastName] = @p2;
+```
 
 ## <a name="resolving-concurrency-conflicts"></a>Resolver conflictos de simultaneidad
 
-Resolver un conflicto de simultaneidad implica el uso de un algoritmo para combinar los cambios pendientes del usuario actual con los cambios realizados en la base de datos. El método exacto varía en función de la aplicación, pero un enfoque común consiste en mostrar los valores para el usuario y hacer que decida los valores correctos que se almacenará en la base de datos.
+Siguiendo con el ejemplo anterior, si un usuario intenta guardar los cambios a un `Person`, pero otro usuario ya ha cambiado el `LastName` el se producirá una excepción.
 
-**Hay tres conjuntos de valores disponibles para ayudar a resolver un conflicto de simultaneidad.**
+En este punto, la aplicación simplemente podría informar al usuario que la actualización no tuvo éxito debido a cambios en conflicto y mover. Pero puede ser deseable para pedir al usuario para asegurarse de que este registro representa siguen la misma persona real y vuelva a intentar la operación.
+
+Este proceso es un ejemplo de _resolver un conflicto de simultaneidad_.
+
+Resolver un conflicto de simultaneidad implica combinar los cambios pendientes actual `DbContext` con los valores de la base de datos. Combinarán los valores que varía en función de la aplicación y puede ser dirigido por proporcionados por el usuario.
+
+**Hay tres conjuntos de valores disponibles para ayudar a resolver un conflicto de simultaneidad:**
 
 * **Valores actuales** son los valores que la aplicación estaba intentando escribir en la base de datos.
 
@@ -35,106 +63,13 @@ Resolver un conflicto de simultaneidad implica el uso de un algoritmo para combi
 
 * **Valores de la base de datos** son los valores almacenados actualmente en la base de datos.
 
-Para controlar un conflicto de simultaneidad, detectar un `DbUpdateConcurrencyException` durante `SaveChanges()`, use `DbUpdateConcurrencyException.Entries` para preparar un nuevo conjunto de cambios para las entidades afectadas y, a continuación, vuelva a intentar la `SaveChanges()` operación.
+Es el enfoque general para controlar los conflictos de simultaneidad:
 
-En el ejemplo siguiente, `Person.FirstName` y `Person.LastName` están configurados como token de simultaneidad. Hay un `// TODO:` comentario en la ubicación donde debe incluir lógica específica de aplicación para elegir el valor que se van a guardar en la base de datos.
+1. Detectar `DbUpdateConcurrencyException` durante `SaveChanges`.
+2. Use `DbUpdateConcurrencyException.Entries` para preparar un nuevo conjunto de cambios para las entidades afectadas.
+3. Actualice los valores originales de lo token de simultaneidad para reflejar los valores actuales de la base de datos.
+4. Vuelva a intentar el proceso hasta que no se produzca ningún conflicto.
 
-<!-- [!code-csharp[Main](samples/core/Saving/Saving/Concurrency/Sample.cs?highlight=53,54)] -->
-``` csharp
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
+En el ejemplo siguiente, `Person.FirstName` y `Person.LastName` están configurados como tokens de simultaneidad. Hay un `// TODO:` comentario en la ubicación donde se incluye lógica específica de aplicación para elegir el valor que se guarde.
 
-namespace EFSaving.Concurrency
-{
-    public class Sample
-    {
-        public static void Run()
-        {
-            // Ensure database is created and has a person in it
-            using (var context = new PersonContext())
-            {
-                context.Database.EnsureDeleted();
-                context.Database.EnsureCreated();
-
-                context.People.Add(new Person { FirstName = "John", LastName = "Doe" });
-                context.SaveChanges();
-            }
-
-            using (var context = new PersonContext())
-            {
-                // Fetch a person from database and change phone number
-                var person = context.People.Single(p => p.PersonId == 1);
-                person.PhoneNumber = "555-555-5555";
-
-                // Change the persons name in the database (will cause a concurrency conflict)
-                context.Database.ExecuteSqlCommand("UPDATE dbo.People SET FirstName = 'Jane' WHERE PersonId = 1");
-
-                try
-                {
-                    // Attempt to save changes to the database
-                    context.SaveChanges();
-                }
-                catch (DbUpdateConcurrencyException ex)
-                {
-                    foreach (var entry in ex.Entries)
-                    {
-                        if (entry.Entity is Person)
-                        {
-                            // Using a NoTracking query means we get the entity but it is not tracked by the context
-                            // and will not be merged with existing entities in the context.
-                            var databaseEntity = context.People.AsNoTracking().Single(p => p.PersonId == ((Person)entry.Entity).PersonId);
-                            var databaseEntry = context.Entry(databaseEntity);
-
-                            foreach (var property in entry.Metadata.GetProperties())
-                            {
-                                var proposedValue = entry.Property(property.Name).CurrentValue;
-                                var originalValue = entry.Property(property.Name).OriginalValue;
-                                var databaseValue = databaseEntry.Property(property.Name).CurrentValue;
-
-                                // TODO: Logic to decide which value should be written to database
-                                // entry.Property(property.Name).CurrentValue = <value to be saved>;
-
-                                // Update original values to
-                                entry.Property(property.Name).OriginalValue = databaseEntry.Property(property.Name).CurrentValue;
-                            }
-                        }
-                        else
-                        {
-                            throw new NotSupportedException("Don't know how to handle concurrency conflicts for " + entry.Metadata.Name);
-                        }
-                    }
-
-                    // Retry the save operation
-                    context.SaveChanges();
-                }
-            }
-        }
-
-        public class PersonContext : DbContext
-        {
-            public DbSet<Person> People { get; set; }
-
-            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            {
-                optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=EFSaving.Concurrency;Trusted_Connection=True;");
-            }
-        }
-
-        public class Person
-        {
-            public int PersonId { get; set; }
-
-            [ConcurrencyCheck]
-            public string FirstName { get; set; }
-
-            [ConcurrencyCheck]
-            public string LastName { get; set; }
-
-            public string PhoneNumber { get; set; }
-        }
-
-    }
-}
-```
+[!code-csharp[Main](../../../samples/core/Saving/Saving/Concurrency/Sample.cs?name=ConcurrencyHandlingCode&highlight=34-35)]
