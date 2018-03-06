@@ -7,10 +7,10 @@ ms.assetid: aad70a75-d04d-4d63-a489-7f9062a3c73d
 ms.technology: entity-framework-core
 uid: core/providers/devart/index
 ms.openlocfilehash: 04de917b3327a6f544292781bca42a1170c199ad
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.sourcegitcommit: 6ed04bb05a3d05c367f0f55616807af2bf4037ae
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/27/2017
+ms.lasthandoff: 02/27/2018
 ---
 # <a name="devart-ef-core-database-providers"></a>Proveedores de bases de datos Devart para EF Core
 
@@ -23,7 +23,7 @@ Devart es un escritor de proveedores de terceros que ofrece proveedores de bases
 
 Devart dotConnect es un proveedor comercial de terceros. La compatibilidad con Entity Framework solo está disponible en las versiones de pago de dotConnect.
 
-## <a name="install"></a>Install
+## <a name="install"></a>Instalar
 
 Vea la [documentación de Devart dotConnect](https://www.devart.com/dotconnect/) para obtener instrucciones de instalación.
 

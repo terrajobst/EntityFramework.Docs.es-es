@@ -7,10 +7,10 @@ ms.assetid: d0168c04-d30d-4219-98f8-a54690cea3c6
 ms.technology: entity-framework-core
 uid: core/providers/firebird-community/index
 ms.openlocfilehash: 682988a91ef04dbd552588a537f53124b931f17d
-ms.sourcegitcommit: 1cbd3d3cd92bdaf8223b8821c58200bcfed10ede
+ms.sourcegitcommit: 6ed04bb05a3d05c367f0f55616807af2bf4037ae
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/23/2017
+ms.lasthandoff: 02/27/2018
 ---
 # <a name="firebird-ef-core-database-provider"></a>Proveedor de base de datos Firebird para EF Core
 
@@ -20,7 +20,7 @@ Este proveedor de base de datos permite usar Entity Framework Core con FirebirdS
 >
 > Este proveedor no se mantiene como parte del proyecto Entity Framework Core. Al considerar un proveedor de terceros, evalúe la calidad, las licencias, el soporte técnico, etc. a fin de asegurarse de que satisface los requisitos.
 
-## <a name="install"></a>Install
+## <a name="install"></a>Instalar
 
 Instale el [paquete NuGet EntityFrameworkCore.FirebirdSQL](https://www.nuget.org/packages/EntityFrameworkCore.FirebirdSQL).
 

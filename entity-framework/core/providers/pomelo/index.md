@@ -7,10 +7,10 @@ ms.assetid: d0198c04-d30d-4419-98f8-a54690cea3c8
 ms.technology: entity-framework-core
 uid: core/providers/pomelo/index
 ms.openlocfilehash: 9ddcda1ae7b058c01937867817e2666b97e7f37a
-ms.sourcegitcommit: 5e2d97e731f975cf3405ff3deab2a3c75ad1b969
+ms.sourcegitcommit: 6ed04bb05a3d05c367f0f55616807af2bf4037ae
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/15/2017
+ms.lasthandoff: 02/27/2018
 ---
 # <a name="pomelo-ef-core-database-provider-for-mysql"></a>Proveedor de base de datos MySQL de Pomelo para EF Core
 
@@ -20,7 +20,7 @@ Este proveedor de base de datos permite usar Entity Framework Core con MySQL. El
 >
 > Este proveedor no se mantiene como parte del proyecto Entity Framework Core. Al considerar un proveedor de terceros, evalúe la calidad, las licencias, el soporte técnico, etc. a fin de asegurarse de que satisface los requisitos.
 
-## <a name="install"></a>Install
+## <a name="install"></a>Instalar
 
 Instale el [paquete NuGet Pomelo.EntityFrameworkCore.MySql](https://www.nuget.org/packages/Pomelo.EntityFrameworkCore.MySql).
 

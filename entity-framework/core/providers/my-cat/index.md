@@ -7,10 +7,10 @@ ms.assetid: ad798f02-a7a4-45c1-b0a9-8e92f5dc6ff0
 ms.technology: entity-framework-core
 uid: core/providers/my-cat/index
 ms.openlocfilehash: e13da3ab47e56d1b869e445f2398eda6ea84a79f
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.sourcegitcommit: 6ed04bb05a3d05c367f0f55616807af2bf4037ae
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/27/2017
+ms.lasthandoff: 02/27/2018
 ---
 # <a name="pomelo-mycat-ef-core-database-provider"></a>Proveedor de base de datos MyCat de Pomelo para EF Core
 
@@ -19,7 +19,7 @@ Este proveedor de base de datos permite usar Entity Framework Core con [MyCat](h
 > [!NOTE]  
 > Este proveedor no se mantiene como parte del proyecto Entity Framework Core. Al considerar un proveedor de terceros, evalúe la calidad, las licencias, el soporte técnico, etc. a fin de asegurarse de que satisface los requisitos.
 
-## <a name="install"></a>Install
+## <a name="install"></a>Instalar
 
 Descargue y ejecute [la versión más reciente desde el sitio del proyecto](https://github.com/PomeloFoundation/Entity-Framework-Core-MyCat-Proxy/releases).
 

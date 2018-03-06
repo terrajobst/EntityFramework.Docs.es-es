@@ -1,0 +1,151 @@
+---
+title: Novedades de EF Core 2.1 - EF Core
+author: divega
+ms.author: divega
+ms.date: 2/20/2018
+ms.assetid: 585F90A3-4D5A-4DD1-92D8-5243B14E0FEC
+ms.technology: entity-framework-core
+uid: core/what-is-new/ef-core-2.1
+ms.openlocfilehash: 1e5e9839bae1e5da4082d90c02d098bb3b2b43bd
+ms.sourcegitcommit: 4b7d3d3e258b0d9cb778bb45a9f4a33c0792e38e
+ms.translationtype: HT
+ms.contentlocale: es-ES
+ms.lasthandoff: 02/28/2018
+---
+# <a name="new-features-in-ef-core-21"></a>Novedades de EF Core 2.1
+> [!NOTE]  
+> Esta versión aún está en versión preliminar.
+
+Además de numerosas pequeñas mejoras y más de cien correcciones de errores del producto, EF Core 2.1 incluye varias características nuevas:
+
+## <a name="lazy-loading"></a>Carga diferida
+EF Core contiene ahora los bloques de creación necesarios para quienes quieran crear clases de entidad que puedan cargar las propiedades de navegación a petición. También hemos creado otro paquete, Microsoft.EntityFrameworkCore.Proxies, que aprovecha los bloques de creación para generar clases proxy de carga diferida basadas en clases de entidad apenas modificadas (por ejemplo, clases con propiedades de navegación virtual).
+
+Consulte la [sección sobre cargas diferidas](xref:core/querying/related-data#lazy-loading) para obtener más información sobre el tema.
+
+## <a name="parameters-in-entity-constructors"></a>Parámetros en constructores de entidad
+Como uno de los bloques de creación necesarios para la carga diferida, se habilita la creación de entidades que aceptan parámetros en sus constructores. Puede usar parámetros para insertar valores de propiedad, delegados de carga diferida y servicios.
+
+Consulte la [sección sobre constructores de entidad con parámetros](xref:core/modeling/constructors) para obtener más información sobre el tema.
+
+## <a name="value-conversions"></a>Conversiones de valores
+Hasta ahora, EF Core solo podía asignar propiedades de tipos admitidas de forma nativa por el proveedor de bases de datos subyacente. Los valores se copiaban de un lado a otro entre las columnas y las propiedades sin ninguna transformación. A partir de EF Core 2.1, pueden aplicarse conversiones de valores para transformar los valores obtenidos en las columnas antes de que se apliquen a las propiedades, y viceversa. Tenemos varias conversiones que pueden aplicarse por convención según sea necesario, así como una API de configuración explícita que permite registrar conversiones personalizadas entre columnas y propiedades. Algunas de las aplicaciones de esta característica son:
+
+- Almacenamiento de enumeraciones como cadenas
+- Asignación de enteros sin signo con SQL Server
+- Cifrado y descifrado automáticos de valores de propiedad
+
+Consulte la [sección sobre conversiones de valores](xref:core/modeling/value-conversions) para obtener más información sobre el tema.  
+
+## <a name="linq-groupby-translation"></a>Traslación de GroupBy de LINQ
+Antes de la versión 2.1, el operador GroupBy de LINQ en EF Core siempre se evaluaba en la memoria. Ahora se admite su traslación a la cláusula GROUP BY de SQL en los casos más comunes.
+
+En este ejemplo se muestra una consulta con GroupBy utilizada para calcular diversas funciones de agregado:
+
+``` csharp
+var query = context.Orders
+    .GroupBy(o => new { o.CustomerId, o.EmployeeId })
+    .Select(g => new
+        {
+          g.Key.CustomerId,
+          g.Key.EmployeeId,
+          Sum = g.Sum(o => o.Amount),
+          Min = g.Min(o => o.Amount),
+          Max = g.Max(o => o.Amount),
+          Avg = g.Average(o => Amount)
+        });
+```
+
+La traslación correspondiente a SQL tiene este aspecto:
+
+``` SQL
+SELECT [o].[CustomerId], [o].[EmployeeId],
+    SUM([o].[Amount]), MIN([o].[Amount]), MAX([o].[Amount]), AVG([o].[Amount])
+FROM [Orders] AS [o]
+GROUP BY [o].[CustomerId], [o].[EmployeeId];
+```
+
+## <a name="data-seeding"></a>Propagación de datos
+Con la nueva versión, será posible proporcionar datos iniciales para rellenar una base de datos. A diferencia de en EF6, la propagación de datos está asociada a un tipo de entidad como parte de la configuración del modelo. Las migraciones de EF Core pueden luego calcular automáticamente las operaciones de inserción, actualización y eliminación que hay que aplicar al actualizar la base de datos a una nueva versión del modelo.
+
+Por ejemplo, esto se puede usar para configurar los datos de inicialización de un método POST en `OnModelCreating`:
+
+``` csharp
+modelBuilder.Entity<Post>().SeedData(new Post{ Id = 1, Text = "Hello World!" });
+```
+
+Consulte la [sección sobre propagación de datos](xref:core/modeling/data-seeding) para obtener más información sobre el tema.  
+
+## <a name="query-types"></a>Tipos de consulta
+Un modelo de EF Core ahora puede incluir tipos de consulta. A diferencia de los tipos de entidad, los tipos de consulta no tienen claves definidas en ellos y no se pueden insertar, eliminar ni actualizar (es decir, son de solo lectura), pero se pueden devolver directamente en las consultas. Algunos de los escenarios de uso para los tipos de consulta son:
+
+- Asignar a vistas sin claves principales
+- Asignar a tablas sin claves principales
+- Asignar a consultas definidas en el modelo
+- Actuar como tipo de valor devuelto en consultas `FromSql()`
+
+Consulte la [sección sobre tipos de consulta](xref:core/modeling/query-types) para obtener más información sobre el tema.
+
+## <a name="include-for-derived-types"></a>Include en tipos derivados
+Ahora será posible especificar propiedades de navegación definidas solo en tipos derivados al escribir expresiones para el método `Include`. Para la versión fuertemente tipada de `Include`, se admite el uso de una conversión explícita o el operador `as`. Ahora también se admite hacer referencia a los nombres de propiedad de navegación definidos en tipos derivados en la versión de cadena de `Include`:
+
+``` csharp
+var option1 = context.People.Include(p => ((Student)p).School);
+var option2 = context.People.Include(p => (p as Student).School);
+var option3 = context.People.Include("School");
+```
+
+Consulte la [sección sobre Include con tipos derivados](xref:core/querying/related-data#include-on-derived-types) para obtener más información sobre el tema.
+
+## <a name="systemtransactions-support"></a>System.Transactions
+Se ha agregado la posibilidad de trabajar con características de System.Transactions tales como TransactionScope. Esto funcionará en .NET Framework y en .NET Core cuando se usen proveedores de bases de datos que lo admitan.
+
+Consulte la [sección sobre System.Transactions](xref:core/saving/transactions#using-systemtransactions) para obtener más información sobre el tema.
+
+## <a name="better-column-ordering-in-initial-migration"></a>Mejor ordenación de columnas en la migración inicial
+En función de los comentarios de clientes, hemos actualizado las migraciones para que las columnas de tablas se generen inicialmente en el mismo orden en que se declaran las propiedades en clases. Tenga en cuenta que EF Core no puede cambiar el orden cuando se agregan nuevos miembros después de la creación de la tabla inicial.
+
+## <a name="optimization-of-correlated-subqueries"></a>Optimización de subconsultas correlacionadas
+Se ha mejorado la traslación de consultas para evitar la ejecución de "N + 1" consultas SQL en muchos escenarios comunes en los que el uso de una propiedad de navegación en la proyección conduce a unir los datos de la consulta raíz con los datos de una subconsulta correlacionada. La optimización requiere el almacenamiento en búfer de los resultados de la subconsulta, y hay que modificar la consulta para que participe en el nuevo comportamiento.
+
+Por ejemplo, la siguiente consulta normalmente se traslada a una consulta para clientes, más N consultas separadas para pedidos (donde "N" corresponde al número de clientes devueltos):
+
+``` csharp
+var query = context.Customers.Select(
+    c => c.Orders.Where(o => o.Amount  > 100).Select(o => o.Amount));
+```
+
+Al incluir `ToList()` en el lugar correcto, se indica que el almacenamiento en búfer es adecuado para los pedidos, lo que permite la optimización:
+
+``` csharp
+var query = context.Customers.Select(
+    c => c.Orders.Where(o => o.Amount  > 100).Select(o => o.Amount).ToList());
+```
+
+Tenga en cuenta que esta consulta solo se trasladará a dos consultas SQL: una para clientes y la siguiente para pedidos.
+
+### <a name="ownedattribute"></a>OwnedAttribute
+
+Ahora es posible configurar [tipos de entidad en propiedad](xref:core/modeling/owned-entities) anotando simplemente el tipo con `[Owned]` y asegurándose luego de que la entidad de propietario se agrega al modelo:
+
+``` csharp
+[Owned]
+public class StreetAddress
+{
+    public string Street { get; set; }
+    public string City { get; set; }
+}
+
+public class Order
+{
+    public int Id { get; set; }
+    public StreetAddress ShippingAddress { get; set; }
+}
+```
+
+## <a name="database-provider-compatibility"></a>Compatibilidad del proveedor de bases de datos
+
+EF Core 2.1 se diseñó para ser compatible con proveedores de bases de datos creados para EF Core 2.0. Aunque algunas de las características que se han descrito anteriormente (por ejemplo, las conversiones de valores) requieren un proveedor actualizado, otras (por ejemplo, la carga diferida) funcionarán con los proveedores existentes.
+
+> [!TIP]
+> Si encuentra alguna incompatibilidad inesperada o algún problema en las nuevas características o si tiene comentarios sobre ellas, notifíquelos mediante [nuestro rastreador de problemas](https://github.com/aspnet/EntityFrameworkCore/issues/new).

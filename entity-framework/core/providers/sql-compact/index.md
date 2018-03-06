@@ -7,10 +7,10 @@ ms.assetid: 073f0004-3eb5-4618-ab93-0674910e1819
 ms.technology: entity-framework-core
 uid: core/providers/sql-compact/index
 ms.openlocfilehash: d8b73621bdd363efec5bb7728886e0a0f6bdcf76
-ms.sourcegitcommit: 5e2d97e731f975cf3405ff3deab2a3c75ad1b969
+ms.sourcegitcommit: 6ed04bb05a3d05c367f0f55616807af2bf4037ae
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/15/2017
+ms.lasthandoff: 02/27/2018
 ---
 # <a name="microsoft-sql-server-compact-edition-ef-core-database-provider"></a>Proveedor de base de datos de Microsoft SQL Server Compact Edition para EF Core
 
@@ -19,7 +19,7 @@ Este proveedor de base de datos permite usar Entity Framework Core con SQL Serve
 > [!NOTE]  
 > Este proveedor no se mantiene como parte del proyecto Entity Framework Core. Al considerar un proveedor de terceros, evalúe la calidad, las licencias, el soporte técnico, etc. a fin de asegurarse de que satisface los requisitos.
 
-## <a name="install"></a>Install
+## <a name="install"></a>Instalar
 
 Para trabajar con SQL Server Compact Edition 4.0, instale el [paquete NuGet EntityFrameworkCore.SqlServerCompact40](https://www.nuget.org/packages/EntityFrameworkCore.SqlServerCompact40).
 

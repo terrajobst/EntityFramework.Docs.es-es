@@ -7,10 +7,10 @@ ms.assetid: 825e5332-5aa3-4600-9efb-ab71aaff59ec
 ms.technology: entity-framework-core
 uid: core/providers/ibm/index
 ms.openlocfilehash: a9caa8df63850d4f6b5f2164dad7ac5af7504076
-ms.sourcegitcommit: 5e2d97e731f975cf3405ff3deab2a3c75ad1b969
+ms.sourcegitcommit: 6ed04bb05a3d05c367f0f55616807af2bf4037ae
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/15/2017
+ms.lasthandoff: 02/27/2018
 ---
 # <a name="ibm-data-server-db2-ef-core-database-providers"></a>Proveedor de base de datos de IBM Data Server (DB2) para EF Core
 
@@ -19,7 +19,7 @@ Este proveedor de base de datos permite usar Entity Framework Core con IBM Data 
 > [!NOTE]  
 > Este proveedor no se mantiene como parte del proyecto Entity Framework Core. Al considerar un proveedor de terceros, evalúe la calidad, las licencias, el soporte técnico, etc. a fin de asegurarse de que satisface los requisitos.
 
-## <a name="install"></a>Install
+## <a name="install"></a>Instalar
 
 Para trabajar con IBM Data Server en Windows, instale el [paquete NuGet IBM.EntityFrameworkCore](https://www.nuget.org/packages/IBM.EntityFrameworkCore).
 
