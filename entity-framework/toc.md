@@ -113,21 +113,6 @@
 #### [Servicios en tiempo de diseño](core/miscellaneous/cli/services.md)
 
 ### [Herramientas y extensiones](core/extensions/index.md)
-#### [LLBLGen Pro](core/extensions/llbl-gen-pro.md)
-#### [Devart Entity Developer](core/extensions/devart-entity-developer.md)
-#### [EFSecondLevelCache.Core](core/extensions/efsecondlevelcache-core.md)
-#### [Geco (generador de modelos inverso)](core/extensions/geco.md)
-#### [EntityFrameworkCore.Detached](core/extensions/entityframeworkcore-detached.md)
-#### [EntityFrameworkCore.Triggers](core/extensions/entityframeworkcore-triggers.md)
-#### [EntityFrameworkCore.Rx](core/extensions/entityframeworkcore-rx.md)
-#### [EntityFrameworkCore.PrimaryKey](core/extensions/entityframeworkcore-primarykey.md)
-#### [EntityFrameworkCore.TypedOriginalValues](core/extensions/entityframeworkcore-typedoriginalvalues.md)
-#### [EFCore.Practices](core/extensions/efcore-practices.md)
-#### [LinqKit.Microsoft.EntityFrameworkCore](core/extensions/linqkit.md)
-#### [Microsoft.EntityFrameworkCore.AutoHistory](core/extensions/autohistory.md)
-#### [Microsoft.EntityFrameworkCore.DynamicLinq](core/extensions/dynamiclinq.md)
-#### [Microsoft.EntityFrameworkCore.UnitOfWork](core/extensions/unitofwork.md)
-#### [NeinLinq.EntityFrameworkCore](core/extensions/neinlinq.md)
 
 ### Varios
 #### [Cadenas de conexión](core/miscellaneous/connection-strings.md)
