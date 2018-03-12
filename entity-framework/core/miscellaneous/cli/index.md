@@ -4,11 +4,11 @@ author: bricelam
 ms.author: bricelam
 ms.date: 11/6/2017
 ms.technology: entity-framework-core
-ms.openlocfilehash: 076e9251850ba10df323cd25922aa8b95b3a5491
-ms.sourcegitcommit: 5e2d97e731f975cf3405ff3deab2a3c75ad1b969
+ms.openlocfilehash: db25ed55e3724ee71743e563f39a6e4b16c17589
+ms.sourcegitcommit: fc68321c211aca38f7b9dc3a75677c6ca1b2524b
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/15/2017
+ms.lasthandoff: 03/08/2018
 ---
 <a name="entity-framework-core-tools"></a>Herramientas de Entity Framework Core
 ===========================
@@ -24,15 +24,9 @@ Ambas herramientas exponen la misma funcionalidad. Si está desarrollando en Vis
 ----------
 Las herramientas admiten proyectos para .NET Framework o .NET Core.
 
-Si el proyecto tiene como destino otro marco de trabajo (por ejemplo, Universal Windows o Xamarin), se recomienda crear un proyecto independiente de .NET Standard y hacer que uno de los marcos admitidos sea multiplataforma.
+Si quiere usar una biblioteca de clases, considere la posibilidad de usar una biblioteca de clases de .NET Core o .NET Framework si es posible. De este modo se reducirán al mínimo los problemas relacionados con las herramientas de .NET. Si en su lugar quiere usar una biblioteca de clases de .NET Standard, tendrá que usar un proyecto de inicio que tenga como destino .NET Framework o .NET Core, de modo que las herramientas dispongan de una plataforma de destino concreta en la que puedan cargar la biblioteca de clases. Este proyecto de inicio puede ser un proyecto ficticio sin código real, ya que solo es necesario para proporcionar un destino para las herramientas.
 
-Para hacer a .NET Core multiplataforma, por ejemplo, haga clic con el botón derecho en el proyecto y seleccione **Editar \*.csproj**. Actualice la propiedad `TargetFramework` como se indica a continuación. (Tenga en cuenta que el nombre de la propiedad se convierte en plural).
-
-``` xml
-<TargetFrameworks>netcoreapp2.0;netstandard2.0</TargetFrameworks>
-```
-
-Si usa una biblioteca de clases .NET Standard, no es necesario convertir en multiplataforma si el proyecto de inicio tiene como destino .NET Framework o .NET Core.
+Si el proyecto tiene como destino otro marco de trabajo (por ejemplo, Windows universal o Xamarin), deberá crear una biblioteca de clases de .NET Standard independiente. En este caso, siga las instrucciones anteriores para crear un proyecto de inicio que puedan usar las herramientas.
 
 <a name="startup-and-target-projects"></a>Proyectos de inicio y destino
 ---------------------------

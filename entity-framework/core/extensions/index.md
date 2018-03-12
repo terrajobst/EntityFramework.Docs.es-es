@@ -1,19 +1,132 @@
 ---
 title: Herramientas y extensiones - EF Core
-author: rowanmiller
+author: ErikEJ
 ms.author: divega
-ms.date: 10/27/2016
-ms.assetid: 97c1ba7d-29a5-46de-a87d-912b52ac242e
+ms.date: 7/3/2018
+ms.assetid: 14fffb6c-a687-4881-a094-af4a1359a296
 ms.technology: entity-framework-core
 uid: core/extensions/index
-ms.openlocfilehash: 2c9b87b376d8da6e9c715227cec243509c8178c6
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: 6c8cb3e0d8552f274118e4020b7e2e8009af7e11
+ms.sourcegitcommit: fc68321c211aca38f7b9dc3a75677c6ca1b2524b
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/27/2017
+ms.lasthandoff: 03/08/2018
 ---
 # <a name="ef-core-tools--extensions"></a>Herramientas y extensiones de EF Core
 
 Las herramientas y extensiones proporcionan funcionalidad adicional para Entity Framework Core.
 
-Las extensiones se componen de una serie de orígenes. No todas las extensiones se mantienen como parte del proyecto Entity Framework Core. Al considerar una extensión de terceros, evalúe la calidad, las licencias, el soporte técnico, etc. a fin de asegurarse de que satisface los requisitos.
+> [!IMPORTANT]  
+> Las extensiones se compilan a partir de diversos orígenes y no se mantienen como parte del proyecto Entity Framework Core. Al considerar una extensión de terceros, evalúe la calidad, las licencias, la compatibilidad, el soporte técnico, etc., a fin de asegurarse de que cumple sus requisitos.
+
+## <a name="tools"></a>Herramientas
+
+### <a name="llblgen-pro"></a>LLBLGen Pro
+
+LLBLGen Pro es una solución de modelado de entidad compatible con Entity Framework y Entity Framework Core. Permite definir fácilmente el modelo de entidad y asignarlo a la base de datos mediante Database First o Model First, de modo que pueda empezar a escribir consultas de inmediato.
+
+[Sitio web](https://www.llblgen.com/)
+
+### <a name="devart-entity-developer"></a>Devart Entity Developer
+
+Entity Developer es un potente diseñador ORM para ADO.NET Entity Framework, NHibernate, LinqConnect, Telerik Data Access y LINQ to SQL. Puede usar los enfoques Database First y Model First para diseñar el modelo ORM y generar el código de C# o Visual Basic .NET para él. Introduce nuevos enfoques para diseñar modelos ORM, aumenta la productividad y facilita el desarrollo de aplicaciones de base de datos.
+
+[Sitio web](https://www.devart.com/entitydeveloper/)
+
+### <a name="ef-core-power-tools"></a>EF Core Power Tools
+
+Extensión de Visual Studio 2017+. Puede usar técnicas de ingeniería inversa de DbContext y clases POCO de una base de datos existente o un proyecto de SQL Server Database, y visualizar e inspeccionar DbContext de varias maneras.
+
+[Wiki de GitHub](https://github.com/ErikEJ/SqlCeToolbox/wiki/EF-Core-Power-Tools)
+
+## <a name="extensions"></a>Extensiones
+
+### <a name="microsoftentityframeworkcoreautohistory"></a>Microsoft.EntityFrameworkCore.AutoHistory
+
+Complemento de Microsoft.EntityFrameworkCore para admitir automáticamente el registro del historial de cambios de datos.
+
+[Repositorio de GitHub](https://github.com/Arch/AutoHistory/)
+
+### <a name="microsoftentityframeworkcoredynamiclinq"></a>Microsoft.EntityFrameworkCore.DynamicLinq
+
+Extensiones de LINQ dinámicas para Microsoft.EntityFrameworkCore que agrega compatibilidad asincrónica.
+
+ [Repositorio de GitHub](https://github.com/StefH/System.Linq.Dynamic.Core/)
+
+### <a name="efcorepractices"></a>EFCore.Practices
+
+Intento de capturar algunos procedimientos recomendados en una API que admite las pruebas, incluido un pequeño marco de trabajo para buscar consultas de N+1.
+
+[Repositorio de GitHub](https://github.com/riezebosch/efcore-practices/tree/master/src/EFCore.Practices/)
+
+### <a name="efsecondlevelcachecore"></a>EFSecondLevelCache.Core
+
+Biblioteca de almacenamiento en caché de segundo nivel. El almacenamiento en caché de segundo nivel es una caché de consulta. Los resultados de los comandos de EF se almacenarán en la memoria caché, para que los mismos comandos de EF recuperen los datos de la memoria caché en lugar de ejecutarlos de nuevo en la base de datos.
+
+[Repositorio de GitHub](https://github.com/VahidN/EFSecondLevelCache.Core/)
+
+### <a name="detachedentityframework"></a>Detached.EntityFramework
+
+Carga y guarda los gráficos de toda la entidad desasociada (la entidad con sus listas y entidades secundarias). Se inspira en [GraphDiff](https://github.com/refactorthis/GraphDiff/). La idea es agregar también algunos complementos para simplificar ciertas tareas repetitivas, como la auditoría y la paginación.
+
+[Repositorio de GitHub](https://github.com/leonardoporro/Detached/)
+
+### <a name="entityframeworkcoreprimarykey"></a>EntityFrameworkCore.PrimaryKey
+
+Recupera la clave principal (incluidas las claves compuestas) de cualquier entidad como un diccionario.
+
+[Repositorio de GitHub](https://github.com/NickStrupat/EntityFramework.PrimaryKey/)
+
+### <a name="entityframeworkcorerx"></a>EntityFrameworkCore.Rx
+
+Contenedores de extensión reactiva para observables activos de entidades de Entity Framework.
+
+[Repositorio de GitHub](https://github.com/NickStrupat/EntityFramework.Rx/)
+
+### <a name="entityframeworkcoretriggers"></a>EntityFrameworkCore.Triggers
+
+Agrega desencadenadores a las entidades con eventos de inserción, actualización y eliminación. Hay tres eventos para cada uno: antes, después y en caso de error.
+
+[Repositorio de GitHub](https://github.com/NickStrupat/EntityFramework.Triggers/)
+
+### <a name="entityframeworkcoretypedoriginalvalues"></a>EntityFrameworkCore.TypedOriginalValues
+
+Obtiene acceso con tipo al valor OriginalValue de las propiedades de la entidad. Se admiten las propiedades simples y complejas, pero no la navegación ni las colecciones.
+
+[Repositorio de GitHub](https://github.com/NickStrupat/EntityFramework.TypedOriginalValues/)
+
+### <a name="geco"></a>Geco
+
+Geco proporciona un generador de modelos inversos compatible con la pluralización/singularización y plantillas editables basadas en cadenas interpoladas de C# 6.0 que se ejecutan en .NET Core. También proporciona un generador de scripts de inicialización con scripts de mezcla de SQL y un ejecutor de scripts.
+
+[Repositorio de GitHub](https://github.com/iQuarc/Geco)
+
+### <a name="linqkitmicrosoftentityframeworkcore"></a>LinqKit.Microsoft.EntityFrameworkCore
+
+LinqKit.Microsoft.EntityFrameworkCore es un conjunto gratuito de extensiones para usuarios avanzados de LINQ to SQL y EntityFrameworkCore. Es compatible con Include(...) e IDbAsync.
+
+[Repositorio de GitHub](https://github.com/scottksmith95/LINQKit/)
+
+### <a name="neinlinqentityframeworkcore"></a>NeinLinq.EntityFrameworkCore
+
+NeinLinq.EntityFrameworkCore proporciona extensiones útiles para usar proveedores LINQ como Entity Framework que solo admiten un subconjunto pequeño de funciones de .NET, reutilizar funciones, reescribir consultas (e incluso convertirlas en null-safe) y compilar consultas dinámicas mediante el uso de selectores y predicados traducibles.
+
+[Repositorio de GitHub](https://github.com/axelheer/nein-linq/)
+
+### <a name="microsoftentityframeworkcoreunitofwork"></a>Microsoft.EntityFrameworkCore.UnitOfWork
+
+Complemento de Microsoft.EntityFrameworkCore para admitir el repositorio, el patrón de unidades de trabajo y varias base de datos con compatibilidad con transacciones distribuidas.
+
+[Repositorio de GitHub](https://github.com/Arch/UnitOfWork/)
+
+### <a name="entityframeworklazyloading"></a>EntityFramework.LazyLoading
+
+Carga diferida para EF Core 1.1.
+
+[Repositorio de GitHub](https://github.com/darxis/EntityFramework.LazyLoading)
+
+### <a name="efcorebulkextensions"></a>EFCore.BulkExtensions
+
+Extensiones de EntityFrameworkCore para operaciones masivas (Insert, Update y Delete).
+
+[Repositorio de GitHub](https://github.com/borisdj/EFCore.BulkExtensions)
