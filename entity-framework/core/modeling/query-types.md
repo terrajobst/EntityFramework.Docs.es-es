@@ -6,11 +6,11 @@ ms.date: 2/26/2018
 ms.assetid: 9F4450C5-1A3F-4BB6-AC19-9FAC64292AAD
 ms.technology: entity-framework-core
 uid: core/modeling/query-types
-ms.openlocfilehash: 19a371c65da33e8209cc1ab3423a67c34ddae61e
-ms.sourcegitcommit: fc68321c211aca38f7b9dc3a75677c6ca1b2524b
+ms.openlocfilehash: dfd08cd1c30debddc79740bbf05c39c22e973855
+ms.sourcegitcommit: 01b5cf3b7c983bcced91e7cc4c78391ced2d2caa
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/08/2018
+ms.lasthandoff: 03/17/2018
 ---
 # <a name="query-types"></a>Tipos de consulta
 > [!NOTE]
@@ -20,7 +20,7 @@ Tipos de consultas son los tipos de resultado de consulta de sólo lectura que s
 
 Son conceptualmente similares a los tipos de entidad en la:
 
-- Son tipos POCO C# que se agregan al modelo, en ```OnModelCreating``` con el ```ModelBuilder.Query``` método, o a través de una propiedad DbContext "set" (para los tipos de consulta de este tipo de propiedad es de tipo ```DbQuery<T>``` sino que ```DbSet<T>```).
+- Son tipos POCO C# que se agregan al modelo, ya sea en ```OnModelCreating``` mediante la ```ModelBuilder.Query``` método, o a través de una propiedad DbContext "set" (para tipos de consulta de este tipo de propiedad se escribe como ```DbQuery<T>``` en lugar de ```DbSet<T>```).
 - Soportan la mayor parte de las mismas capacidades de asignación como tipos de entidad regulares. Por ejemplo, la asignación de herencia, navegaciones (vea limitiations más abajo) y, en almacenes relacionales, la capacidad para configurar los objetos de esquema de base de datos de destino a través de ```ToTable```, ```HasColumn``` api fluida métodos (o las anotaciones de datos).
 
 Tipos de consulta son diferentes de entidad tipos en los que:
