@@ -1,16 +1,16 @@
 ---
-title: "Actualización de EF principales 1.0 RC2 a RTM - Core EF"
+title: Actualización de EF principales 1.0 RC2 a RTM - Core EF
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: c3c1940b-136d-45d8-aa4f-cb5040f8980a
 ms.technology: entity-framework-core
 uid: core/miscellaneous/rc2-rtm-upgrade
-ms.openlocfilehash: 7a1d85949a5f9e1ad7efdbf585a608d815e8ce63
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: 4bb4c5736708413f6581cad250b089b7bc22a559
+ms.sourcegitcommit: 90139dbd6f485473afda0788a5a314c9aa601ea0
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/27/2017
+ms.lasthandoff: 03/23/2018
 ---
 # <a name="upgrading-from-ef-core-10-rc2-to-rtm"></a>Actualización de EF Core 1.0 RC2 a RTM
 
@@ -38,7 +38,7 @@ Este cambio afecta a proyectos que usan ASP.NET Identity y se crearon a partir u
 
 *  **AspNetRoles**
 
-    * Nombre
+    * nombre
 
     * NormalizedName
 
@@ -69,6 +69,9 @@ Si se establece como destino .NET Core con RC2, había que agregar `imports` a p
   }
 }
 ```
+
+> [!NOTE]  
+> A partir de la versión 1.0 RTM, la [.NET Core SDK](https://www.microsoft.com/net/download/core) ya no es compatible con `project.json` o desarrollar aplicaciones de .NET Core con Visual Studio 2015. Se recomienda [migrar de project.json a csproj](https://docs.microsoft.com/dotnet/articles/core/migration/). Si se utiliza Visual Studio, se recomienda actualizar a [2017 de Visual Studio](https://www.visualstudio.com/downloads/).
 
 ## <a name="uwp-add-binding-redirects"></a>UWP: Agregar redirecciones de enlace
 
