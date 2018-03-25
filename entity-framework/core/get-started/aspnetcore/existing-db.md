@@ -1,21 +1,18 @@
 ---
-title: "Introducción a ASP.NET Core: base de datos existente - EF Core"
+title: 'Introducción a ASP.NET Core: base de datos existente - EF Core'
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: 2bc68bea-ff77-4860-bf0b-cf00db6712a0
 ms.technology: entity-framework-core
 uid: core/get-started/aspnetcore/existing-db
-ms.openlocfilehash: afd99d68d2ba25ce58a21dc48d2c7ce27f208807
-ms.sourcegitcommit: 5e2d97e731f975cf3405ff3deab2a3c75ad1b969
+ms.openlocfilehash: db2469d0badd428734425c1f568667f00bef2f4f
+ms.sourcegitcommit: 90139dbd6f485473afda0788a5a314c9aa601ea0
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/15/2017
+ms.lasthandoff: 03/23/2018
 ---
 # <a name="getting-started-with-ef-core-on-aspnet-core-with-an-existing-database"></a>Introducción a EF Core en ASP.NET Core con una base de datos existente
-
-> [!IMPORTANT]  
-> El [SDK de .NET Core](https://www.microsoft.com/net/download/core) ya no es compatible con `project.json` ni con Visual Studio 2015. Se recomienda que todos quienes desarrollan en .NET Core [migren de project.json a csproj](https://docs.microsoft.com/dotnet/articles/core/migration/) y [Visual Studio 2017](https://www.visualstudio.com/downloads/).
 
 En este tutorial, compilará una aplicación de MVC de ASP.NET Core que realiza el acceso a datos básicos mediante Entity Framework. Usará técnicas de ingeniería inversa para crear un modelo de Entity Framework en función de una base de datos existente.
 
@@ -60,7 +57,7 @@ En este tutorial se usa una base de datos para **blogs** en la instancia de Loca
 * Escriba **EFGetStarted.AspNetCore.ExistingDb** como el nombre y haga clic en **Aceptar**
 * Espere que aparezca el cuadro de diálogo **Nueva aplicación web de ASP.NET Core**
 * En **ASP.NET Core Templates 2.0** (Plantillas 2.0 de ASP.NET Core), seleccione la **Aplicación web (Model-View-Controller)**
-* Asegúrese de que la **autenticación** esté establecida en **Sin autenticación**
+* Asegúrese de que la **autenticación** esté establecida en **Sin autenticación**.
 * Haga clic en **Aceptar**.
 
 ## <a name="install-entity-framework"></a>Instalación de Entity Framework
@@ -93,7 +90,7 @@ Scaffold-DbContext "Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Conn
 Si recibe un error que indica `The term 'Scaffold-DbContext' is not recognized as the name of a cmdlet`, cierre Visual Studio y vuelva a abrirlo.
 
 > [!TIP]  
-> Para especificar las tablas para las cuales desea generar entidades, agregue el argumento `-Tables` al comando anterior. Por ejemplo: `-Tables Blog,Post`.
+> Para especificar las tablas para las cuales desea generar entidades, agregue el argumento `-Tables` al comando anterior. P. ej., `-Tables Blog,Post`.
 
 El proceso de ingeniería inversa creó clases de entidad (`Blog.cs` & `Post.cs`) y un contexto derivado (`BloggingContext.cs`) en función del esquema de la base de datos existente.
 
