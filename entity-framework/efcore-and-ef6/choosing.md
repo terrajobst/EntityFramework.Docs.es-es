@@ -1,15 +1,15 @@
 ---
-title: "EF Core y EF6: la opción adecuada para usted"
+title: 'EF Core y EF6: la opción adecuada para usted'
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: 288f825b-b3e6-4096-971b-d0a1cb96770e
 uid: efcore-and-ef6/choosing
-ms.openlocfilehash: 9a113e0965fa75a03510199fb75165f6e9be0bbd
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: f0a632902384a65ea3cddf752ad262c7a2e89e2e
+ms.sourcegitcommit: 2ef0a4a90b01edd22b9206f8729b8de459ef8cab
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/27/2017
+ms.lasthandoff: 03/20/2018
 ---
 # <a name="ef-core-and-ef6-which-one-is-right-for-you"></a>EF Core y EF6: la opción adecuada para usted
 
@@ -17,13 +17,11 @@ La información siguiente le permitirá elegir entre Entity Framework Core y Ent
 
 ## <a name="guidance-for-new-applications"></a>Guía para las aplicaciones nuevas
 
-Como EF Core es un producto nuevo y todavía carece de algunas características O/RM fundamentales, EF6 seguirá siendo la opción más adecuada para muchas aplicaciones.
+Es recomendable usar EF Core para nuevas aplicaciones si quiere aprovechar todas las funcionalidades de EF Core y si su aplicación no requiere ninguna característica que todavía no se haya implementado en EF Core.
 
-**Estos son los tipos de aplicaciones para las que recomendaríamos usar EF Core:**
+EF6 requiere .NET Framework 4.0 (o una versión posterior) y solo se admite en Windows (es decir, que no se ejecuta en .NET Core y no se admite en otros sistemas operativos), pero sigue siendo una opción viable para las aplicaciones nuevas siempre que pueda cumplir con esas restricciones y si la aplicación no requiere características nuevas de EF Core que no estén disponibles en EF6.
 
-* Aplicaciones nuevas que no necesiten características que todavía no estén implementadas en EF Core. Revise la [comparación de características](features.md) para ver si EF Core puede ser una opción correcta para su aplicación.
-
-* Aplicaciones que tienen como destino .NET Core, como Plataforma universal de Windows (UWP) y aplicaciones de ASP.NET Core. Estas aplicaciones no pueden usar EF6 porque requiere .NET Framework (es decir, .NET Framework 4.5).
+Revise la [comparación de características](features.md) para ver si EF Core puede ser una opción correcta para su aplicación.
 
 ## <a name="guidance-for-existing-ef6-applications"></a>Guía para las aplicaciones existentes de EF6
 
