@@ -4,11 +4,11 @@ author: bricelam
 ms.author: bricelam
 ms.date: 11/6/2017
 ms.technology: entity-framework-core
-ms.openlocfilehash: aacf8c8564a3966db6202c9ff1c1c02a19a10814
-ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
+ms.openlocfilehash: a53455a78db4bc504c45abafdacf9a15381f608e
+ms.sourcegitcommit: 4997314356118d0d97b04ad82e433e49bb9420a2
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 02/28/2018
+ms.lasthandoff: 04/16/2018
 ---
 <a name="ef-core-package-manager-console-tools"></a>Herramientas de la consola de administrador de paquetes de EF Core
 =====================================
@@ -100,11 +100,11 @@ Quita la última migración.
 
 Parámetros:
 
-|        |                                                                       |
-|:-------|:----------------------------------------------------------------------|
-| -Force | No se comprueban para ver si se ha aplicado la migración a la base de datos. |
+|        |                                                              |
+|:-------|:-------------------------------------------------------------|
+| -Force | Revertir la migración si se ha aplicado a la base de datos. |
 
-### <a name="scaffold-dbcontext"></a>Scaffold-DbContext
+### <a name="scaffold-dbcontext"></a>Scaffold DbContext
 
 Scaffolds un tipos de entidad y DbContext para una base de datos.
 
@@ -113,8 +113,9 @@ Parámetros:
 |                                          |                                                                                                  |
 |:-----------------------------------------|:-------------------------------------------------------------------------------------------------|
 | <nobr>***-Conexión*** \<cadena ></nobr> | La cadena de conexión a la base de datos.                                                           |
-| ***-Proveedor*** \<cadena >                | El proveedor debe usar. (P. ej. Microsoft.EntityFrameworkCore.SqlServer)                              |
+| ***-Proveedor*** \<cadena >                | El proveedor debe usar. (P. ej., Microsoft.EntityFrameworkCore.SqlServer)                              |
 | -OutputDir \<cadena >                     | El directorio para colocar archivos. Las rutas de acceso son relativas al directorio de proyecto.                      |
+| -ContextDir \<cadena >                    | El directorio para colocar el archivo de DbContext en. Las rutas de acceso son relativas al directorio de proyecto.             |
 | -Context \<cadena >                       | El nombre de DbContext para generar.                                                           |
 | -Esquemas \<String [] >                     | Los esquemas de tablas para generar tipos de entidad para.                                              |
 | -Tablas \<String [] >                      | Las tablas para generar tipos de entidad para.                                                         |

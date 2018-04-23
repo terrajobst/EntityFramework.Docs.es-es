@@ -6,18 +6,18 @@ ms.date: 10/27/2016
 ms.assetid: 07b6680f-ffcf-412c-9857-f997486b386c
 ms.technology: entity-framework-core
 uid: core/saving/related-data
-ms.openlocfilehash: 078879163002cb66e0f0f439415789963181ec15
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: b0ed25267c85e82db18d8a89693b6040db7e4b34
+ms.sourcegitcommit: 4997314356118d0d97b04ad82e433e49bb9420a2
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/27/2017
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="saving-related-data"></a>Guardar datos relacionados
 
 Además de las entidades aisladas, también puede hacer que el uso de las relaciones definidas en el modelo.
 
 > [!TIP]  
-> Puede ver este artículo [ejemplo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/RelatedData/) en GitHub.
+> Puede ver un [ejemplo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/RelatedData/) de este artículo en GitHub.
 
 ## <a name="adding-a-graph-of-new-entities"></a>Adición de un gráfico de nuevas entidades
 
@@ -26,6 +26,9 @@ Si crea varias nuevas entidades relacionadas, agregar uno de ellos en el context
 En el ejemplo siguiente, el blog y tres entradas relacionadas se todos insertan en la base de datos. Se encontró y se agregan, porque son accesibles a través de las entradas de la `Blog.Posts` propiedad de navegación.
 
 [!code-csharp[Main](../../../samples/core/Saving/Saving/RelatedData/Sample.cs#AddingGraphOfEntities)]
+
+> [!TIP]  
+> Use la propiedad EntityEntry.State para establecer el estado de solo una única entidad. Por ejemplo: `context.Entry(blog).State = EntityState.Modified`.
 
 ## <a name="adding-a-related-entity"></a>Agregar una entidad relacionada
 
