@@ -4,11 +4,11 @@ author: bricelam
 ms.author: bricelam
 ms.date: 11/6/2017
 ms.technology: entity-framework-core
-ms.openlocfilehash: 8a52cb8259bb381729a33a8161aec4b73f69f45d
-ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
+ms.openlocfilehash: 396d31c9d0c0f47d299f49e82e557ed29b8420e7
+ms.sourcegitcommit: 4997314356118d0d97b04ad82e433e49bb9420a2
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 02/28/2018
+ms.lasthandoff: 04/16/2018
 ---
 <a name="ef-core-net-command-line-tools"></a>Herramientas de línea de comandos de EF Core .NET
 ===============================
@@ -65,6 +65,9 @@ El proyecto de destino es donde se agregan los archivos (o en algunos casos se q
 
 El proyecto de inicio es el que emulan las herramientas cuando se ejecuta el código del proyecto. También tiene como valor predeterminado para el proyecto en el directorio actual pero se puede cambiar mediante la **: proyecto de inicio** opción.
 
+> [!NOTE]
+> Por ejemplo, actualizar la base de datos de la aplicación web que tiene instalado en un proyecto diferente de núcleo de EF sería similar al siguiente: `dotnet ef database update --project {project-path}` (desde el directorio de aplicación web)
+
 Opciones comunes:
 
 |    |                                  |                             |
@@ -78,7 +81,7 @@ Opciones comunes:
 |    | --en tiempo de ejecución \<identificador >          | El runtime que se va a usar.         |
 | -h | --Ayuda                           | Mostrar información de ayuda.      |
 | -v | --detallado                        | Mostrar resultados detallados.        |
-|    | --no-color                       | No colorear la salida.      |
+|    | --Sin color                       | No colorear la salida.      |
 |    | --salida de prefijo                  | Prefijo con el nivel de salida.   |
 
 
@@ -107,7 +110,7 @@ Argumentos:
 
 |              |                                                                                              |
 |:-------------|:---------------------------------------------------------------------------------------------|
-| \<MIGRACIÓN > | La migración de destino. Si es 0, se revertirán todas las migraciones. De forma predeterminada a la última migración. |
+| \<MIGRACIÓN &GT; | La migración de destino. Si es 0, se revertirán todas las migraciones. De forma predeterminada a la última migración. |
 
 ### <a name="dotnet-ef-dbcontext-info"></a>información de dbcontext ef dotnet.
 
@@ -125,18 +128,19 @@ Argumentos:
 
 |               |                                                                     |
 |:--------------|:--------------------------------------------------------------------|
-| \<CONEXIÓN > | La cadena de conexión a la base de datos.                              |
-| \<PROVEEDOR >   | El proveedor debe usar. (P. ej. Microsoft.EntityFrameworkCore.SqlServer) |
+| \<CONEXIÓN &GT; | La cadena de conexión a la base de datos.                              |
+| \<PROVEEDOR &GT;   | El proveedor debe usar. (P. ej., Microsoft.EntityFrameworkCore.SqlServer) |
 
 Opciones:
 
 |                 |                                         |                                                                                                  |
 |:----------------|:----------------------------------------|:-------------------------------------------------------------------------------------------------|
-| <nobr>-d</nobr> | --data-annotations                      | Usar atributos para configurar el modelo (siempre que sea posible). Si se omite, se usa solo la API fluida. |
+| <nobr>-d</nobr> | --las anotaciones de datos                      | Usar atributos para configurar el modelo (siempre que sea posible). Si se omite, se usa solo la API fluida. |
 | -c              | --contexto \<nombre >                       | El nombre de DbContext.                                                                       |
+|                 | --contexto-dir \<ruta de acceso >                   | El directorio para colocar el archivo de DbContext en. Las rutas de acceso son relativas al directorio de proyecto.             |
 | -f              | --forzar                                 | Sobrescribir archivos existentes.                                                                        |
 | -o              | --salida-dir \<ruta de acceso >                    | El directorio para colocar archivos. Las rutas de acceso son relativas al directorio de proyecto.                      |
-|                 | <nobr>--schema \<SCHEMA_NAME>...</nobr> | Los esquemas de tablas para generar tipos de entidad para.                                              |
+|                 | <nobr>--esquema \<SCHEMA_NAME >...</nobr> | Los esquemas de tablas para generar tipos de entidad para.                                              |
 | -t              | --tabla \<nombre_tabla >...                | Las tablas para generar tipos de entidad para.                                                         |
 |                 | --utilizar nombres de base de datos                    | Usar nombres de tabla y columna directamente desde la base de datos.                                           |
 
@@ -148,7 +152,7 @@ Argumentos:
 
 |         |                            |
 |:--------|:---------------------------|
-| \<NOMBRE > | El nombre de la migración. |
+| \<NOMBRE &GT; | El nombre de la migración. |
 
 Opciones:
 
@@ -168,7 +172,7 @@ Opciones:
 
 |    |         |                                                                       |
 |:---|:--------|:----------------------------------------------------------------------|
-| -f | --forzar | No se comprueban para ver si se ha aplicado la migración a la base de datos. |
+| -f | --forzar | Revertir la migración si se ha aplicado a la base de datos. |
 
 ### <a name="dotnet-ef-migrations-script"></a>script de migraciones de ef dotnet.
 
@@ -178,8 +182,8 @@ Argumentos:
 
 |         |                                                               |
 |:--------|:--------------------------------------------------------------|
-| \<FROM> | La migración inicial. El valor predeterminado es 0 (la base de datos inicial). |
-| \<TO>   | La migración final. De forma predeterminada a la última migración.         |
+| \<DE &GT; | La migración inicial. El valor predeterminado es 0 (la base de datos inicial). |
+| \<PARA &GT;   | La migración final. De forma predeterminada a la última migración.         |
 
 Opciones:
 

@@ -6,11 +6,11 @@ ms.date: 2/23/2018
 ms.assetid: 14fffb6c-a687-4881-a094-af4a1359a296
 ms.technology: entity-framework-core
 uid: core/providers/index
-ms.openlocfilehash: d7313451f324a5e26ae327478996861e31364e7d
-ms.sourcegitcommit: 89edee21606083d01154766e0c4249cec38957f7
+ms.openlocfilehash: 6e39ded6e45f616e2080a23efff939e74de133cf
+ms.sourcegitcommit: 4aaf6049521019c13594076fcd776feb8cd879c6
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/22/2018
+ms.lasthandoff: 04/09/2018
 ---
 # <a name="database-providers"></a>Proveedores de bases de datos
 
@@ -25,7 +25,7 @@ Entity Framework Core puede tener acceso a muchas bases de datos diferentes a tr
 | [Microsoft.EntityFrameworkCore.SqlServer](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer)    | De SQL Server 2008 en adelante    | [Proyecto EF Core](https://github.com/aspnet/EntityFrameworkCore/) (Microsoft) |                                  | [Documentación](xref:core/providers/sql-server/index)                                                                                                                                                       |
 | [Microsoft.EntityFrameworkCore.Sqlite](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Sqlite)          | De SQLite 3.7 en adelante         | [Proyecto EF Core](https://github.com/aspnet/EntityFrameworkCore/) (Microsoft) |                                  | [Documentación](xref:core/providers/sqlite/index)                                                                                                                                                           |
 | [Microsoft.EntityFrameworkCore.InMemory](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.InMemory)      | Base de datos en memoria de EF Core | [Proyecto EF Core](https://github.com/aspnet/EntityFrameworkCore/) (Microsoft) | Solo para pruebas                 | [Documentación](xref:core/providers/in-memory/index)                                                                                                                                                        |
-| [Npgsql.EntityFrameworkCore.PostgreSQL](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer)      | PostgreSQL                 | [Equipo de desarrollo de Npgsql](https://github.com/npgsql)                          |                                  | [Documentación](http://www.npgsql.org/efcore/index.html)                                                                                                                                                    |
+| [Npgsql.EntityFrameworkCore.PostgreSQL](https://www.nuget.org/packages/Npgsql.EntityFrameworkCore.PostgreSQL)      | PostgreSQL                 | [Equipo de desarrollo de Npgsql](https://github.com/npgsql)                          |                                  | [Documentación](http://www.npgsql.org/efcore/index.html)                                                                                                                                                    |
 | [Pomelo.EntityFrameworkCore.MySql](https://www.nuget.org/packages/Pomelo.EntityFrameworkCore.MySql)                  | MySQL, MariaDB             | [Proyecto Pomelo Foundation](https://github.com/PomeloFoundation)              |                                  | [Archivo Léame](https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.MySql/blob/master/README.md)                                                                                               |
 | [Pomelo.EntityFrameworkCore.MyCat](https://www.nuget.org/packages/Pomelo.EntityFrameworkCore.MyCat)                  | Servidor MyCAT               | [Proyecto Pomelo Foundation](https://github.com/PomeloFoundation)              | Versión preliminar, hasta EF Core 1.1   | [Archivo Léame](https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.MyCat/blob/master/README.md)                                                                                               |
 | [EntityFrameworkCore.SqlServerCompact40](https://www.nuget.org/packages/EntityFrameworkCore.SqlServerCompact40)      | SQL Server Compact 4.0     | [Erik Ejlskov Jensen](https://github.com/ErikEJ/)                             | .NET Framework                   | [Wiki](https://github.com/ErikEJ/EntityFramework.SqlServerCompact/wiki/Using-EF-Core-with-SQL-Server-Compact-in-Traditional-.NET-Applications)                                                     |

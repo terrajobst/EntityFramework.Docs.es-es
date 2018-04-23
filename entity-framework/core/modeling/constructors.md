@@ -6,11 +6,11 @@ ms.date: 02/23/2018
 ms.assetid: 420AFFE7-B709-4A68-9149-F06F8746FB33
 ms.technology: entity-framework-core
 uid: core/modeling/constructors
-ms.openlocfilehash: 38ab0c1c3cd8c490875abf30b8478c99bc58630f
-ms.sourcegitcommit: 60b831318c4f5ec99061e8af6a7c9e7c03b3469c
+ms.openlocfilehash: 3f861d54c5bff637ae28f38b08da7aff7d0ea5c0
+ms.sourcegitcommit: 4997314356118d0d97b04ad82e433e49bb9420a2
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/02/2018
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="entity-types-with-constructors"></a>Tipos de entidad con constructores
 
@@ -254,7 +254,7 @@ public class Post
 }
 ```
 Algunas cosas a tener en cuenta acerca de esto:
-* El constructor es privado, ya que sólo es nunca llamar al núcleo del EF y hay otro constructor público para uso general.
+* El constructor es privado, ya que siempre se llama por núcleo de EF y no hay otro constructor público para uso general.
 * El código que utiliza el servicio insertado (es decir, el contexto) es defensivo contra él está `null` para controlar los casos donde Core EF no está creando la instancia.
 * Porque el servicio se almacena en una propiedad de lectura y escritura se restablecerán cuando se asocia la entidad a una nueva instancia de contexto.
 

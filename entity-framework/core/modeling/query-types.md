@@ -6,40 +6,43 @@ ms.date: 2/26/2018
 ms.assetid: 9F4450C5-1A3F-4BB6-AC19-9FAC64292AAD
 ms.technology: entity-framework-core
 uid: core/modeling/query-types
-ms.openlocfilehash: dfd08cd1c30debddc79740bbf05c39c22e973855
-ms.sourcegitcommit: 01b5cf3b7c983bcced91e7cc4c78391ced2d2caa
+ms.openlocfilehash: 4e02f106e086d243b23a60c02838f32555be210e
+ms.sourcegitcommit: 26f33758c47399ae933f22fec8e1d19fa7d2c0b7
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/17/2018
+ms.lasthandoff: 04/19/2018
 ---
 # <a name="query-types"></a>Tipos de consulta
 > [!NOTE]
 > Esta función es nueva en EF Core 2.1
 
-Tipos de consultas son los tipos de resultado de consulta de sólo lectura que se pueden agregar al modelo EF central. Tipos de consulta habilitar las consultas ad-hoc (como tipos anónimos), pero son más flexibles, ya que pueden tener configuración de asignación especificada.
+Además de los tipos de entidad, puede contener un modelo básico de EF _consultar tipos_, que puede utilizarse para llevar a cabo consultas de base de datos con datos que no está asignados a tipos de entidad.
 
-Son conceptualmente similares a los tipos de entidad en la:
+Los tipos de consulta tienen muchas similitudes con tipos de entidad:
 
-- Son tipos POCO C# que se agregan al modelo, ya sea en ```OnModelCreating``` mediante la ```ModelBuilder.Query``` método, o a través de una propiedad DbContext "set" (para tipos de consulta de este tipo de propiedad se escribe como ```DbQuery<T>``` en lugar de ```DbSet<T>```).
-- Soportan la mayor parte de las mismas capacidades de asignación como tipos de entidad regulares. Por ejemplo, la asignación de herencia, navegaciones (vea limitiations más abajo) y, en almacenes relacionales, la capacidad para configurar los objetos de esquema de base de datos de destino a través de ```ToTable```, ```HasColumn``` api fluida métodos (o las anotaciones de datos).
+- Se puede también agregar al modelo o bien en `OnModelCreating`, o a través de una propiedad "set" en un derivada _DbContext_.
+- Admiten muchas de las mismas capacidades de asignación, como la herencia de propiedades de navegación (vea las limitaciones más adelante), de asignación y, en almacenes relacional, la capacidad de configurar los objetos de base de datos de destino y las columnas a través de métodos de la API fluidas o las anotaciones de datos.
 
-Tipos de consulta son diferentes de entidad tipos en los que:
+Sin embargo son diferentes de entidad tipos en el que:
 
 - No requieren una clave de definirse.
-- Nunca realiza el seguimiento al seguimiento de cambios.
+- Nunca un seguimiento de cambios para la _DbContext_ y, por tanto, se nunca insertan, actualizan o eliminan en la base de datos.
 - Nunca se descubren por convención.
 - Sólo son compatibles con un subconjunto de funciones de asignación de exploración - específicamente, nunca pueden actuar como el fin principal de una relación.
-- Se pueden asignar a un _definición de consulta_ -una definición de consulta es una consulta secundaria que actúa un origen de datos para un tipo de consulta.
+- Se tratan en la _ModelBuilder_ mediante la `Query` método en lugar de la `Entity` método.
+- Se asignan en el _DbContext_ a través de propiedades de tipo `DbQuery<T>` en lugar de `DbSet<T>`
+- Se asignan a objetos de base de datos mediante la `ToView` método, en lugar de `ToTable`.
+- Se pueden asignar a un _definir consulta_ : una definición de consulta es una consulta secundaria declarada en el modelo que actúa un origen de datos para un tipo de consulta.
 
 Algunos de los escenarios principales de uso de tipos de consulta son:
 
+- Que actúa como el tipo devuelto para ad hoc `FromSql()` consultas.
 - Asignación de vistas de base de datos.
 - Asignación de tablas que no tienen definida una clave principal.
-- Que actúa como el tipo devuelto para ad hoc ```FromSql()``` consultas.
 - Asignación de las consultas definidas en el modelo.
 
 > [!TIP]
-> Asignación de un tipo de consulta a una vista de base de datos se logra utilizando la ```ToTable``` API fluida.
+> Asignar un tipo de consulta a un objeto de base de datos se logra mediante la `ToView` API fluida. Desde la perspectiva del núcleo de EF, el objeto de base de datos especificado en este método es un _vista_, lo que significa que se trata como un origen de consultas de solo lectura y no puede ser el destino de la actualización, insertar o eliminar operaciones. Sin embargo, esto no significa que el objeto de base de datos es realmente necesario para que sea una vista de base de datos, o bien puede ser una tabla de base de datos que se tratará como de solo lectura. Por el contrario, para los tipos de entidad, EF Core se supone que un objeto de base de datos especificado en el `ToTable` método puede tratarse como un _tabla_, lo que significa que puede usarse como un origen de la consulta pero también el objetivo de actualizar, eliminar e insertar operaciones. De hecho, puede especificar el nombre de una vista de base de datos en `ToTable` y todo debería funcionar bien siempre y cuando la vista está configurada para poder actualizar la base de datos.
 
 ## <a name="example"></a>Ejemplo
 
@@ -60,7 +63,7 @@ A continuación, se define una clase que contenga el resultado de la vista de ba
 
 [!code-csharp[Main](../../../efcore-dev/samples/QueryTypes/Program.cs#QueryType)]
 
-A continuación, configuramos el tipo de consulta en _OnModelCreating_ con el ```modelBuilder.Query<T>``` API.
+A continuación, configuramos el tipo de consulta en _OnModelCreating_ con el `modelBuilder.Query<T>` API.
 Configuración estándar fluent API se utiliza para configurar la asignación para el tipo de consulta:
 
 [!code-csharp[Main](../../../efcore-dev/samples/QueryTypes/Program.cs#Configuration)]

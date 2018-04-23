@@ -6,11 +6,11 @@ ms.date: 02/19/2018
 ms.assetid: 3154BF3C-1749-4C60-8D51-AE86773AA116
 ms.technology: entity-framework-core
 uid: core/modeling/value-conversions
-ms.openlocfilehash: 50acba39cdec16caa9300fcaf47ab6242a4f69fb
-ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
+ms.openlocfilehash: 329d2757059462468ca30772d37789343c03ba7b
+ms.sourcegitcommit: 4997314356118d0d97b04ad82e433e49bb9420a2
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 02/28/2018
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="value-conversions"></a>Conversiones de valor
 
@@ -137,6 +137,6 @@ A continuación, se guardarán los valores de enumeración como cadenas en la ba
 
 Existen algunas limitaciones actuales conocidas del sistema de conversión de valor:
 * Como se mencionó anteriormente, `null` no se puede convertir.
-* Actualmente no hay ninguna manera de difundir una conversión de una propiedad a multuple columnas o viceversa.
+* Actualmente no hay ninguna manera para distribuir una conversión de una propiedad a varias columnas o viceversa.
 * Uso de conversiones de valor puede afectar a la capacidad del núcleo EF para traducir expresiones de SQL. En tales casos, se registrará una advertencia.
 Eliminación de estas limitaciones se está considerando para una futura versión.

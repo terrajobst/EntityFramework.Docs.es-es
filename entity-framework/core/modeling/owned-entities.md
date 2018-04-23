@@ -6,11 +6,11 @@ ms.date: 2/26/2018
 ms.assetid: 2B0BADCE-E23E-4B28-B8EE-537883E16DF3
 ms.technology: entity-framework-core
 uid: core/modeling/owned-entities
-ms.openlocfilehash: a6823377eb626ca92263c31351e1aef61db5a787
-ms.sourcegitcommit: 4b7d3d3e258b0d9cb778bb45a9f4a33c0792e38e
+ms.openlocfilehash: f2f05499a3e3494f420d916df2db19667a6f1e29
+ms.sourcegitcommit: 26f33758c47399ae933f22fec8e1d19fa7d2c0b7
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 02/28/2018
+ms.lasthandoff: 04/19/2018
 ---
 # <a name="owned-entity-types"></a>Tipos de entidad en propiedad
 
@@ -21,7 +21,7 @@ Núcleo EF permite a tipos de entidad del modelo que sólo pueden aparecer en la
 
 ## <a name="explicit-configuration"></a>Configuración explícita
 
-Propiedad de entidad tipos nunca se incluyen por núcleo de EF en el modelo por convención. Puede utilizar el `OwnsOne` método `OnModelCreating` o anotar el tipo con `OwnedAttrbibute` (nuevo en EF Core 2.1) para configurar el tipo como un tipo de propiedad.
+Propiedad de entidad tipos nunca se incluyen por núcleo de EF en el modelo por convención. Puede utilizar el `OwnsOne` método `OnModelCreating` o anotar el tipo con `OwnedAttribute` (nuevo en EF Core 2.1) para configurar el tipo como un tipo de propiedad.
 
 En este ejemplo, StreetAddress es un tipo con ninguna propiedad de identidad. Se usa como propiedad del tipo Order para especificar la dirección de envío de un pedido en concreto. En `OnModelCreating`, usamos el `OwnsOne` para especificar que la propiedad ShippingAddress es una entidad de propiedad del tipo de orden.
 
