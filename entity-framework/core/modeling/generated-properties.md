@@ -6,11 +6,11 @@ ms.date: 10/27/2016
 ms.assetid: eb082011-11a1-41b4-a108-15daafa03e80
 ms.technology: entity-framework-core
 uid: core/modeling/generated-properties
-ms.openlocfilehash: 892494461bcf49ee10d05c972da0ba19ca003c35
-ms.sourcegitcommit: 4b7d3d3e258b0d9cb778bb45a9f4a33c0792e38e
+ms.openlocfilehash: 88ccc2da3c2b6cbba8920d7113c82e769b459897
+ms.sourcegitcommit: 507a40ed050fee957bcf8cf05f6e0ec8a3b1a363
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 02/28/2018
+ms.lasthandoff: 04/26/2018
 ---
 # <a name="generated-values"></a>Valores generados
 
@@ -28,7 +28,7 @@ Valor generado en complemento significa que se genera un valor para las nuevas e
 
 Dependiendo del proveedor de base de datos que se va a utilizar, los valores pueden ser generado cliente EF o en la base de datos. Si el valor se genera la base de datos, EF puede asignar un valor temporal cuando se agrega la entidad al contexto. Este valor temporal, a continuación, se reemplazará por el valor de la base de datos generada durante la `SaveChanges()`.
 
-Si agrega una entidad en el contexto que tiene un valor asignado a la propiedad, EF intentará insertar ese valor en lugar de generar uno nuevo. Una propiedad se considera que tiene un valor asignado si no se asigna el valor predeterminado CLR (`null` para `string`, `0` para `int`, `Guid.Empty` para `Guid`, etcetera.). Para obtener más información, consulte [valores explícitos para propiedades generadas](..\saving\explicit-values-generated-properties.md).
+Si agrega una entidad en el contexto que tiene un valor asignado a la propiedad, EF intentará insertar ese valor en lugar de generar uno nuevo. Una propiedad se considera que tiene un valor asignado si no se asigna el valor predeterminado CLR (`null` para `string`, `0` para `int`, `Guid.Empty` para `Guid`, etcetera.). Para obtener más información, consulte [valores explícitos para propiedades generadas](../saving/explicit-values-generated-properties.md).
 
 > [!WARNING]  
 > Cómo se genera el valor para entidades agregadas dependerá del proveedor de base de datos que se está usando. Proveedores de base de datos pueden automáticamente el programa de instalación generar valores para algunos tipos de propiedad, pero otros pueden requerir que el programa de instalación manualmente cómo se genera el valor.
@@ -39,13 +39,13 @@ Si agrega una entidad en el contexto que tiene un valor asignado a la propiedad,
 
 Valor generado en Agregar o actualizar significa que se genera un nuevo valor cada vez que se guarda el registro (insert o update).
 
-Al igual que `value generated on add`, si especifica un valor para la propiedad en una instancia recién agregada de una entidad, que se insertará el valor en lugar de un valor que se está generando. También es posible establecer un valor explícito al actualizar. Para obtener más información, consulte [valores explícitos para propiedades generadas](..\saving\explicit-values-generated-properties.md).
+Al igual que `value generated on add`, si especifica un valor para la propiedad en una instancia recién agregada de una entidad, que se insertará el valor en lugar de un valor que se está generando. También es posible establecer un valor explícito al actualizar. Para obtener más información, consulte [valores explícitos para propiedades generadas](../saving/explicit-values-generated-properties.md).
 
-> [!WARNING]  
+> [!WARNING]
 > Cómo se genera el valor para las entidades agregadas y actualizadas dependerá del proveedor de base de datos que se está usando. Proveedores de base de datos pueden automáticamente el programa de instalación generar valores para algunos tipos de propiedades, mientras que otros usuarios, deberá configurar manualmente cómo se genera el valor.
->
+> 
 > Por ejemplo, cuando se usa SQL Server, `byte[]` propiedades que se establecen como generadas en Agregar o actualizar y marcados como tokens de simultaneidad, se configurará con la `rowversion` de tipo de datos - para que se generarán valores en la base de datos. Sin embargo, si especifica que un `DateTime` generar propiedad en Agregar o actualizar, a continuación, debe configurar una manera para que los valores que se genere. Una manera de hacer esto, consiste en configurar un valor predeterminado de `GETDATE()` (consulte [valores predeterminados](relational/default-values.md)) para generar valores para las nuevas filas. A continuación, podría utilizar un desencadenador de base de datos para generar valores durante las actualizaciones (por ejemplo, el siguiente desencadenador de ejemplo).
->
+> 
 > [!code-sql[Main](../../../samples/core/Modeling/FluentAPI/Samples/ValueGeneratedOnAddOrUpdate.sql)]
 
 ## <a name="conventions"></a>Convenciones

@@ -1,22 +1,22 @@
 ---
-title: "Eliminación - Core EF en cascada"
+title: Eliminación - Core EF en cascada
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: ee8e14ec-2158-4c9c-96b5-118715e2ed9e
 ms.technology: entity-framework-core
 uid: core/saving/cascade-delete
-ms.openlocfilehash: 1ab9d114e27aac0bec972df631a426c8ce87a518
-ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
+ms.openlocfilehash: 0fc8929c56d4c657b7fb1e3c8e4b1a71659220c9
+ms.sourcegitcommit: 507a40ed050fee957bcf8cf05f6e0ec8a3b1a363
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 02/28/2018
+ms.lasthandoff: 04/26/2018
 ---
 # <a name="cascade-delete"></a>Eliminación en cascada
 
-La eliminación en cascada se utiliza normalmente en la terminología de base de datos para describir una característica que permite la eliminación de una fila para desencadenar automáticamente la eliminación de filas relacionadas. Un concepto estrechamente relacionado también cubierto por comportamientos de eliminación de EF principal es la eliminación automática de una entidad secundaria cuando se trata de relación en un elemento primario se ha roto--este i que se conoce como "eliminar huérfanos".
+La eliminación en cascada se utiliza normalmente en la terminología de base de datos para describir una característica que permite la eliminación de una fila para desencadenar automáticamente la eliminación de filas relacionadas. Un concepto estrechamente relacionado también cubierto por comportamientos de eliminación de EF principal es la eliminación automática de una entidad secundaria cuando su relación con un elemento primario se ha roto: Esto se conoce como "eliminar huérfanos".
 
-Núcleo EF implementa varios comportamientos de eliminación diferente y permite la configuración de los comportamientos de eliminación de relaciones individuales. Núcleo EF también implementa convenciones que configurar automáticamente los comportamientos de eliminación de predeterminados útiles para cada relación según la [requiredness de la relación] (../modeling/relationships.md#required-and-optional-relationships).
+Núcleo EF implementa varios comportamientos de eliminación diferente y permite la configuración de los comportamientos de eliminación de relaciones individuales. Núcleo EF también implementa convenciones que configurar automáticamente los comportamientos de eliminación de predeterminados útiles para cada relación según la [requiredness de la relación](../modeling/relationships.md#required-and-optional-relationships).
 
 ## <a name="delete-behaviors"></a>Eliminar comportamientos
 Eliminar comportamientos se definen en el *DeleteBehavior* enumerador tipo y puede pasarse a la *OnDelete* API fluida para controlar si la eliminación de una entidad principal/primaria o el desactivar de la relación con las entidades dependientes/secundarias debe tener un efecto secundario en las entidades dependientes/secundario.
@@ -35,10 +35,10 @@ Hay cuatro eliminar comportamientos, como se muestra en las tablas siguientes. P
 
 | Nombre de comportamiento               | Efecto en dependientes/elemento secundario en la memoria    | Efecto en dependientes/elemento secundario en la base de datos  |
 |:----------------------------|:---------------------------------------|:---------------------------------------|
-| **Cascade**                 | Se eliminan las entidades                   | Se eliminan las entidades                   |
+| **En cascada**                 | Se eliminan las entidades                   | Se eliminan las entidades                   |
 | **ClientSetNull** (predeterminado) | Propiedades de clave externa se establecen en null | Ninguna                                   |
-| **SetNull**                 | Propiedades de clave externa se establecen en null | Propiedades de clave externa se establecen en null |
-| **Restrict**                | Ninguna                                   | Ninguna                                   |
+| **setNull**                 | Propiedades de clave externa se establecen en null | Propiedades de clave externa se establecen en null |
+| **Restringir**                | Ninguna                                   | Ninguna                                   |
 
 Para las relaciones necesarias (clave externa no acepta valores NULL) es _no_ pueden guardar un null valor de clave externa, lo que resulta en los siguientes efectos:
 
@@ -46,8 +46,8 @@ Para las relaciones necesarias (clave externa no acepta valores NULL) es _no_ pu
 |:----------------------|:------------------------------------|:--------------------------------------|
 | **Cascada** (predeterminado) | Se eliminan las entidades                | Se eliminan las entidades                  |
 | **ClientSetNull**     | SaveChanges produce                  | Ninguna                                  |
-| **SetNull**           | SaveChanges produce                  | SaveChanges produce                    |
-| **Restrict**          | Ninguna                                | Ninguna                                  |
+| **setNull**           | SaveChanges produce                  | SaveChanges produce                    |
+| **Restringir**          | Ninguna                                | Ninguna                                  |
 
 En las tablas anteriores, *ninguno* puede dar lugar a una infracción de restricción. Por ejemplo, si se elimina una entidad principal o secundaria, pero no se realiza ninguna acción para cambiar la clave externa de un elemento dependiente/secundario, a continuación, la base de datos probablemente producirá en SaveChanges debido a una infracción de restricción externa.
 
