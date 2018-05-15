@@ -4,11 +4,11 @@ author: bricelam
 ms.author: bricelam
 ms.date: 11/6/2017
 ms.technology: entity-framework-core
-ms.openlocfilehash: 396d31c9d0c0f47d299f49e82e557ed29b8420e7
-ms.sourcegitcommit: 4997314356118d0d97b04ad82e433e49bb9420a2
+ms.openlocfilehash: d053d53bd50d2e7d16223c5b4e4009c9bb2298bb
+ms.sourcegitcommit: 038acd91ce2f5a28d76dcd2eab72eeba225e366d
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 04/16/2018
+ms.lasthandoff: 05/14/2018
 ---
 <a name="ef-core-net-command-line-tools"></a>Herramientas de línea de comandos de EF Core .NET
 ===============================
@@ -19,14 +19,18 @@ Las herramientas de línea de comandos de .NET de Entity Framework Core son una 
 
 <a name="installing-the-tools"></a>Instalación de las herramientas
 --------------------
-Instalar las herramientas de línea de comandos de .NET de EF Core siguiendo estos pasos:
+> [!NOTE]
+> .NET Core SDK versión 2.1.300 e incluye más reciente **dotnet ef** comandos que son compatibles con EF Core 2.0 y versiones posteriores. Por lo tanto, si está utilizando las versiones recientes de .NET Core SDK y el tiempo de ejecución de EF Core, se requiere ninguna instalación y puede omitir el resto de esta sección.
+>
+> Por otro lado, el **dotnet ef** herramienta independiente en la versión de .NET Core SDK 2.1.300 y versiones más reciente no es compatible con la versión de EF Core 1.0 y 1.1. Antes de que puede trabajar con un proyecto que usa estas versiones anteriores de EF principal en un equipo que tenga .NET Core SDK 2.1.300 o posterior instalado, también debe instalar la versión 2.1.200 o anterior del SDK y configurar la aplicación para utilizar esa versión anterior mediante la modificación de su  [global.json](https://docs.microsoft.com/en-us/dotnet/core/tools/global-json) archivo. Este archivo normalmente se incluye en el directorio de la solución (uno por encima del proyecto). A continuación, puede continuar con la siguiente instrucción de instalación.
+
+Para versiones anteriores de .NET Core SDK, puede instalar las herramientas de línea de comandos de .NET de EF Core siguiendo estos pasos:
 
 1. Edite el archivo de proyecto y agregar Microsoft.EntityFrameworkCore.Tools.DotNet como un elemento de DotNetCliToolReference (ver abajo)
 2. Ejecute los comandos siguientes:
 
        dotnet add package Microsoft.EntityFrameworkCore.Design
        dotnet restore
-
 
 El proyecto resultante debe tener un aspecto similar al siguiente:
 

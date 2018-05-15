@@ -6,11 +6,11 @@ ms.date: 2/26/2018
 ms.assetid: 9F4450C5-1A3F-4BB6-AC19-9FAC64292AAD
 ms.technology: entity-framework-core
 uid: core/modeling/query-types
-ms.openlocfilehash: 4e02f106e086d243b23a60c02838f32555be210e
-ms.sourcegitcommit: 26f33758c47399ae933f22fec8e1d19fa7d2c0b7
+ms.openlocfilehash: f16e3a130f3a4f92b2bf6014f2df0ca4eec56a25
+ms.sourcegitcommit: 038acd91ce2f5a28d76dcd2eab72eeba225e366d
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 04/19/2018
+ms.lasthandoff: 05/14/2018
 ---
 # <a name="query-types"></a>Tipos de consulta
 > [!NOTE]
@@ -28,7 +28,10 @@ Sin embargo son diferentes de entidad tipos en el que:
 - No requieren una clave de definirse.
 - Nunca un seguimiento de cambios para la _DbContext_ y, por tanto, se nunca insertan, actualizan o eliminan en la base de datos.
 - Nunca se descubren por convención.
-- Sólo son compatibles con un subconjunto de funciones de asignación de exploración - específicamente, nunca pueden actuar como el fin principal de una relación.
+- Solo se admite un subconjunto de funciones de asignación de navegación - específicamente:
+  - Nunca pueden actuar como el extremo principal de una relación.
+  - Solo pueden contener propiedades de navegación de referencia que apunta a las entidades.
+  - Entidades no pueden contener propiedades de navegación a los tipos de consulta.
 - Se tratan en la _ModelBuilder_ mediante la `Query` método en lugar de la `Entity` método.
 - Se asignan en el _DbContext_ a través de propiedades de tipo `DbQuery<T>` en lugar de `DbSet<T>`
 - Se asignan a objetos de base de datos mediante la `ToView` método, en lugar de `ToTable`.

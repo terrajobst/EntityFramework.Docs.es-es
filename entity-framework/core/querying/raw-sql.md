@@ -6,11 +6,11 @@ ms.date: 10/27/2016
 ms.assetid: 70aae9b5-8743-4557-9c5d-239f688bf418
 ms.technology: entity-framework-core
 uid: core/querying/raw-sql
-ms.openlocfilehash: 79894c7b9fd9e40cdf14460abf5d872ee2f4b9f0
-ms.sourcegitcommit: ced2637bf8cc5964c6daa6c7fcfce501bf9ef6e8
+ms.openlocfilehash: 29b7e20e875bf791a88a92636c1df4bc4e31656b
+ms.sourcegitcommit: 038acd91ce2f5a28d76dcd2eab72eeba225e366d
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 12/22/2017
+ms.lasthandoff: 05/14/2018
 ---
 # <a name="raw-sql-queries"></a>Consultas SQL sin formato
 
@@ -21,18 +21,18 @@ Entity Framework Core permite desplegable a consultas SQL sin formato cuando se 
 
 ## <a name="limitations"></a>Limitaciones
 
-Hay un par de limitaciones a tener en cuenta al utilizar sin procesar consultas SQL:
+Existen algunas limitaciones a tener en cuenta cuando se usan sin procesar consultas SQL:
 * Las consultas SQL solo se utilizan para devolver tipos de entidades que forman parte del modelo. Hay una mejora en nuestro trabajo pendiente a [permiten devolver tipos de ad-hoc desde consultas SQL sin formato](https://github.com/aspnet/EntityFramework/issues/1862).
 
-* La consulta SQL debe devolver datos para todas las propiedades del tipo de entidad.
+* La consulta SQL debe devolver datos para todas las propiedades del tipo de entidad o consulta.
 
 * Los nombres de columna del conjunto de resultados deben coincidir con los nombres de columna que se asignan a las propiedades. Tenga en cuenta que esto es diferente de EF6 donde se omitió la asignación de propiedad o columna para las consultas SQL sin formato y nombres tenían que coinciden con los nombres de propiedad de columna del conjunto de resultados.
 
 * La consulta SQL no puede contener datos relacionados. Sin embargo, en muchos casos se puede componer encima de la consulta con la `Include` operador que se va a devolver datos relacionados (consulte [incluidos los datos relacionados](#including-related-data)).
 
-* `SELECT`instrucciones pasadas a este método deben estar admite composición: Core EF si es necesario evaluar los operadores de consulta adicionales en el servidor (por ejemplo, para traducir los operadores LINQ que se aplican después de `FromSql`), SQL proporcionado se tratará como una subconsulta. Esto significa que la instrucción SQL que se pasó no debe contener los caracteres o las opciones que no son válidos en una subconsulta, como:
+* `SELECT` instrucciones pasadas a este método deben estar admite composición: Core EF si es necesario evaluar los operadores de consulta adicionales en el servidor (por ejemplo, para traducir los operadores LINQ que se aplican después de `FromSql`), SQL proporcionado se tratará como una subconsulta. Esto significa que la instrucción SQL que se pasó no debe contener los caracteres o las opciones que no son válidos en una subconsulta, como:
   * un punto y coma final
-  * En SQL Server, un nivel de consulta finales sugerencia, p. ej.`OPTION (HASH JOIN)`
+  * En SQL Server, un nivel de consulta finales sugerencia, p. ej. `OPTION (HASH JOIN)`
   * En SQL Server, un `ORDER BY` cláusula que no va acompañada de `TOP 100 PERCENT` en el `SELECT` cláusula
 
 * Instrucciones SQL distinto `SELECT` se reconocen automáticamente como no admite composición. En consecuencia, los resultados completos de los procedimientos almacenados siempre se devuelven al cliente y los operadores LINQ se aplican después `FromSql` evaluada en memoria. 
