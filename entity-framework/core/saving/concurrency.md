@@ -1,5 +1,5 @@
 ---
-title: Controlar los conflictos de simultaneidad - Core EF
+title: 'Administración de los conflictos de simultaneidad: EF Core'
 author: rowanmiller
 ms.author: divega
 ms.date: 03/03/2018
@@ -7,69 +7,70 @@ ms.technology: entity-framework-core
 uid: core/saving/concurrency
 ms.openlocfilehash: 288d9c6fced5ebbaa2c366248c68547502c3698e
 ms.sourcegitcommit: 8f3be0a2a394253efb653388ec66bda964e5ee1b
-ms.translationtype: MT
+ms.translationtype: HT
 ms.contentlocale: es-ES
 ms.lasthandoff: 03/05/2018
+ms.locfileid: "29745495"
 ---
 # <a name="handling-concurrency-conflicts"></a>Administrar los conflictos de simultaneidad
 
 > [!NOTE]
-> Esta página documenta cómo funciona la simultaneidad en EF Core y cómo tratar los conflictos de simultaneidad en la aplicación. Vea [Tokens de simultaneidad](xref:core/modeling/concurrency) para obtener más información sobre cómo configurar los tokens de simultaneidad en el modelo.
+> En esta página se documenta cómo funciona la simultaneidad en EF Core y cómo administrar los conflictos de simultaneidad en la aplicación. Consulte [Concurrency Tokens](xref:core/modeling/concurrency) (Tokens de simultaneidad) para detalles sobre cómo configurar los tokens de simultaneidad en el modelo.
 
 > [!TIP]
 > Puede ver un [ejemplo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/Concurrency/) de este artículo en GitHub.
 
-_Simultaneidad de base de datos_ hace referencia a situaciones en las que varios procesos o a los usuarios tener acceso o cambiar los mismos datos en una base de datos al mismo tiempo. _Control de simultaneidad_ hace referencia a mecanismos específicos utilizados para garantizar la coherencia de datos en presencia de cambios simultáneos.
+La _simultaneidad de base de datos_ se refiere a las situaciones en las que varios procesos o usuarios acceden o cambian los mismos datos de una base de datos al mismo tiempo. El _control de simultaneidad_ se refiere a los mecanismos específicos que se usan para garantizar la coherencia de los datos en presencia de cambios simultáneos.
 
-Núcleo EF implementa _control de simultaneidad optimista_, lo que significa que permitirá a varios procesos o los usuarios realizar cambios de forma independiente sin la sobrecarga de sincronización o de bloqueo. En la situación ideal, estos cambios no interfieran entre sí y, por tanto, se podrán realizar correctamente. En el peor de los caso, dos o más procesos intentará realizar cambios en conflicto y solo uno de ellos debe ejecutarse correctamente.
+EF Core implementa el _control de simultaneidad optimista_, lo que significa que permitirá que varios procesos o usuarios hagan cambios de manera independiente sin la sobrecarga que implica la sincronización o el bloqueo. En la situación ideal, estos cambios no interferirán entre sí y, por tanto, se realizarán correctamente. En el peor escenario, dos o más procesos intentarán hacer cambios conflictivos y solo uno de ellos se completará correctamente.
 
-## <a name="how-concurrency-control-works-in-ef-core"></a>Cómo funciona el control de simultaneidad en EF Core
+## <a name="how-concurrency-control-works-in-ef-core"></a>Funcionamiento del control de simultaneidad en EF Core
 
-Propiedades configuradas como tokens de simultaneidad se usan para implementar el control de simultaneidad optimista: cada vez que se realiza una operación update o delete durante `SaveChanges`, el valor del token de simultaneidad en la base de datos se compara con la versión original valor leído por núcleo de EF.
+Las propiedades configuradas como tokens de simultaneidad se usan para implementar el control de simultaneidad optimista: cada vez que se realiza una operación de actualización o eliminación durante `SaveChanges`, el valor del token de simultaneidad en la base de datos se compara con el valor original leído por EF Core.
 
-- Si los valores coinciden, puede completar la operación.
-- Si los valores no coinciden, se da por supuesto en EF Core que otro usuario ha realizado una operación en conflicto y anula la transacción actual.
+- Si los valores coinciden, la operación se puede completar.
+- Si no coinciden, EF Core supone que otro usuario realizó una operación en conflicto y anula la transacción actual.
 
-La situación cuando otro usuario ha realizado una operación que entra en conflicto con la operación actual se conoce como _conflicto de simultaneidad_.
+La situación en que otro usuario realizó una operación que entra en conflicto con la operación actual se conoce como _conflicto de simultaneidad_.
 
-Proveedores de base de datos son responsables de implementar la comparación de valores de token de simultaneidad.
+Los proveedores de base de datos son responsable de implementar la comparación de los valores de los tokens de simultaneidad.
 
-En bases de datos relacionales EF Core incluye una comprobación para el valor del token de simultaneidad en el `WHERE` cláusula de cualquier `UPDATE` o `DELETE` las instrucciones. Después de ejecutar las instrucciones, Core EF lee el número de filas afectadas.
+En las bases de datos relacionales, EF Core incluye una comprobación del valor del token de simultaneidad en la cláusula `WHERE` de cualquier instrucción `UPDATE` o `DELETE`. Después de ejecutar las instrucciones, EF Core lee el número de filas que se vieron afectadas.
 
-Si ninguna fila afectada, se detecta un conflicto de simultaneidad y produce EF Core `DbUpdateConcurrencyException`.
+Si no se afectó ninguna fila, se detecta un conflicto de simultaneidad y EF Core genera la excepción `DbUpdateConcurrencyException`.
 
-Por ejemplo, queremos podemos configurar `LastName` en `Person` un token de simultaneidad. Cualquier operación de actualización en persona incluirá la comprobación de simultaneidad en el `WHERE` cláusula:
+Por ejemplo, queremos configurar `LastName` en `Person` como token de simultaneidad. Luego, toda operación de actualización en Person incluirá la comprobación de la simultaneidad en la cláusula `WHERE`:
 
 ``` sql
 UPDATE [Person] SET [FirstName] = @p1
 WHERE [PersonId] = @p0 AND [LastName] = @p2;
 ```
 
-## <a name="resolving-concurrency-conflicts"></a>Resolver conflictos de simultaneidad
+## <a name="resolving-concurrency-conflicts"></a>Resolución de los conflictos de simultaneidad
 
-Siguiendo con el ejemplo anterior, si un usuario intenta guardar los cambios a un `Person`, pero otro usuario ya ha cambiado el `LastName` el se producirá una excepción.
+Siguiendo con el ejemplo anterior, si un usuario intenta guardar algunos cambios en una `Person` pero otro usuario ya cambió `LastName`, se generará una excepción.
 
-En este punto, la aplicación simplemente podría informar al usuario que la actualización no tuvo éxito debido a cambios en conflicto y mover. Pero puede ser deseable para pedir al usuario para asegurarse de que este registro representa siguen la misma persona real y vuelva a intentar la operación.
+En este punto, la aplicación simplemente podría informar al usuario que la actualización no se realizó correctamente debido a cambios en conflicto y siguió adelante. Pero podría ser conveniente pedirle al usuario que se asegure de que este registro sigue representando a la misma persona real y que reintente la operación.
 
-Este proceso es un ejemplo de _resolver un conflicto de simultaneidad_.
+Este proceso es un ejemplo de cómo _resolver un conflicto de simultaneidad_.
 
-Resolver un conflicto de simultaneidad implica combinar los cambios pendientes actual `DbContext` con los valores de la base de datos. Combinarán los valores que varía en función de la aplicación y puede ser dirigido por proporcionados por el usuario.
+Resolver un conflicto de simultaneidad implica combinar los cambios pendientes del `DbContext` actual con los valores de la base de datos. Los valores que se van a combinar variarán en función de la aplicación y los puede dirigir el mismo usuario.
 
-**Hay tres conjuntos de valores disponibles para ayudar a resolver un conflicto de simultaneidad:**
+**Existen tres conjuntos de valores disponibles para ayudar a resolver un conflicto de simultaneidad:**
 
-* **Valores actuales** son los valores que la aplicación estaba intentando escribir en la base de datos.
+* Los **valores actuales** son los valores que la aplicación intentó escribir en la base de datos.
 
-* **Valores originales** son los valores que se recuperaron originalmente desde la base de datos antes de que se realizaron las modificaciones.
+* Los **valores originales** son los valores que se recuperaron originalmente de la base de datos, antes de realizar cualquier edición.
 
-* **Valores de la base de datos** son los valores almacenados actualmente en la base de datos.
+* Los **valores de base de datos** son los valores actualmente almacenados en la base de datos.
 
-Es el enfoque general para controlar los conflictos de simultaneidad:
+El enfoque general para controlar un conflicto de simultaneidad es:
 
-1. Detectar `DbUpdateConcurrencyException` durante `SaveChanges`.
+1. Detecte `DbUpdateConcurrencyException` durante `SaveChanges`.
 2. Use `DbUpdateConcurrencyException.Entries` para preparar un nuevo conjunto de cambios para las entidades afectadas.
-3. Actualice los valores originales de lo token de simultaneidad para reflejar los valores actuales de la base de datos.
-4. Vuelva a intentar el proceso hasta que no se produzca ningún conflicto.
+3. Actualice los valores originales del token de simultaneidad para reflejar los valores actuales en la base de datos.
+4. Reintente el proceso hasta que no haya ningún conflicto.
 
-En el ejemplo siguiente, `Person.FirstName` y `Person.LastName` están configurados como tokens de simultaneidad. Hay un `// TODO:` comentario en la ubicación donde se incluye lógica específica de aplicación para elegir el valor que se guarde.
+En el ejemplo siguiente, `Person.FirstName` y `Person.LastName` están configurados como tokens de simultaneidad. Hay un comentario `// TODO:` en la ubicación donde se incluye la lógica específica de la aplicación para elegir el valor que se guardará.
 
 [!code-csharp[Main](../../../samples/core/Saving/Saving/Concurrency/Sample.cs?name=ConcurrencyHandlingCode&highlight=34-35)]

@@ -1,5 +1,5 @@
 ---
-title: "Consultas básicas - Core EF"
+title: 'Consultas básicas: EF Core'
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -8,22 +8,23 @@ ms.technology: entity-framework-core
 uid: core/querying/basic
 ms.openlocfilehash: 5070faf2aeeffad680e24e7de5a0ffa03a8f0064
 ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
-ms.translationtype: MT
+ms.translationtype: HT
 ms.contentlocale: es-ES
 ms.lasthandoff: 10/27/2017
+ms.locfileid: "26052555"
 ---
 # <a name="basic-queries"></a>Consultas básicas
 
-Obtenga información acerca de cómo cargar las entidades de la base de datos utilizando Language integrar Query (LINQ).
+Obtenga información sobre cómo cargar entidades de la base de datos mediante Language Integrate Query (LINQ).
 
 > [!TIP]  
-> Puede ver este artículo [ejemplo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying) en GitHub.
+> Puede ver un [ejemplo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying) de este artículo en GitHub.
 
 ## <a name="101-linq-samples"></a>101 ejemplos de LINQ
 
-Esta página muestra algunos ejemplos para lograr las tareas comunes con Entity Framework Core. Para un amplio conjunto de ejemplos que muestran lo que es posible con LINQ, vea [101 ejemplos de LINQ](https://code.msdn.microsoft.com/101-LINQ-Samples-3fb9811b).
+En esta página se muestran algunos ejemplos para realizar las tareas comunes con Entity Framework Core. Para un amplio conjunto de ejemplos que muestran qué se puede hacer con LINQ, consulte [101 LINQ Samples](https://code.msdn.microsoft.com/101-LINQ-Samples-3fb9811b) (101 ejemplos de LINQ).
 
-## <a name="loading-all-data"></a>Cargar todos los datos
+## <a name="loading-all-data"></a>Carga de todos los datos
 
 <!-- [!code-csharp[Main](samples/core/Querying/Querying/Basics/Sample.cs)] -->
 ``` csharp
@@ -33,7 +34,7 @@ using (var context = new BloggingContext())
 }
 ```
 
-## <a name="loading-a-single-entity"></a>Cargar una sola entidad
+## <a name="loading-a-single-entity"></a>Carga de una sola entidad
 
 <!-- [!code-csharp[Main](samples/core/Querying/Querying/Basics/Sample.cs)] -->
 ``` csharp

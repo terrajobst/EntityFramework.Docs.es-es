@@ -1,5 +1,5 @@
 ---
-title: Frente a seguimiento. Consultas de seguimiento no - Core EF
+title: 'Consultas de seguimiento frente a consultas de no seguimiento: EF Core'
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -8,22 +8,23 @@ ms.technology: entity-framework-core
 uid: core/querying/tracking
 ms.openlocfilehash: 9a22c893f3b1e9991560e25e0252287a2844b39e
 ms.sourcegitcommit: 3b6159db8a6c0653f13c7b528367b4e69ac3d51e
-ms.translationtype: MT
+ms.translationtype: HT
 ms.contentlocale: es-ES
 ms.lasthandoff: 11/28/2017
+ms.locfileid: "26053965"
 ---
-# <a name="tracking-vs-no-tracking-queries"></a>Frente a seguimiento. Consultas de seguimiento no
+# <a name="tracking-vs-no-tracking-queries"></a>Consultas de seguimiento frente a consultas de no seguimiento
 
-Controles de comportamiento de seguimiento o no Entity Framework Core guardará la información acerca de una instancia de entidad en su herramienta de seguimiento de cambios. Si se realiza el seguimiento de una entidad, se conservará cualquier cambio detectado en la entidad en la base de datos durante la `SaveChanges()`. Propiedades de navegación también revisión de seguridad de entidad Framework Core will entre entidades que se obtienen de una consulta de seguimiento y las entidades que se cargaron previamente en la instancia de DbContext.
+El comportamiento de seguimiento controla si Entity Framework Core guardará o no información sobre una instancia de entidad en la herramienta de seguimiento de cambios. Si se hace seguimiento de una entidad, cualquier cambio detectado en ella persistirá hasta la base de datos durante `SaveChanges()`. Entity Framework Core también corregirá las propiedades de navegación entre las entidades que se obtienen de una consulta de seguimiento y las entidades que se cargaron previamente en la instancia de DbContext.
 
 > [!TIP]  
-> Puede ver este artículo [ejemplo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying) en GitHub.
+> Puede ver un [ejemplo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying) de este artículo en GitHub.
 
 ## <a name="tracking-queries"></a>Consultas de seguimiento
 
-De forma predeterminada, las consultas que devuelven tipos de entidad están realizando el seguimiento. Esto significa que puede realizar cambios a las instancias de entidad y han guardado los cambios por `SaveChanges()`.
+De manera predeterminada, las consultas que devuelven tipos de entidad son consultas de seguimiento. Esto significa que puede hacer cambios en esas instancias de entidad y que esos cambios persisten por `SaveChanges()`.
 
-En el ejemplo siguiente, se detectarán y guardado en la base de datos durante el cambio a la clasificación de blogs `SaveChanges()`.
+En el ejemplo siguiente, se detectará el cambio en la clasificación de los blogs y persistirá hasta la base de datos durante `SaveChanges()`.
 
 <!-- [!code-csharp[Main](samples/core/Querying/Querying/Tracking/Sample.cs)] -->
 ``` csharp
@@ -35,11 +36,11 @@ using (var context = new BloggingContext())
 }
 ```
 
-## <a name="no-tracking-queries"></a>Consultas de seguimiento no
+## <a name="no-tracking-queries"></a>Consultas de no seguimiento
 
-No hay consultas de seguimiento son útiles cuando se usan los resultados en un escenario de solo lectura. Son más rápidas ejecutar porque no hay ninguna necesidad de información de seguimiento de cambios de configuración.
+Las consultas de no seguimiento son útiles cuando los resultados se usan en un escenario de solo lectura. Su ejecución es más rápida porque no es necesario configurar información de seguimiento de cambios.
 
-Puede intercambiar una consulta individual a seguimiento de no ser:
+Puede cambiar una consulta individual para que sea una consulta de no seguimiento:
 
 <!-- [!code-csharp[Main](samples/core/Querying/Querying/Tracking/Sample.cs?highlight=4)] -->
 ``` csharp
@@ -51,7 +52,7 @@ using (var context = new BloggingContext())
 }
 ```
 
-También puede cambiar el comportamiento en el nivel de instancia de contexto de seguimiento predeterminado:
+También puede cambiar el comportamiento de seguimiento predeterminado en el nivel de instancia de contexto:
 
 <!-- [!code-csharp[Main](samples/core/Querying/Querying/Tracking/Sample.cs?highlight=3)] -->
 ``` csharp
@@ -64,11 +65,11 @@ using (var context = new BloggingContext())
 ```
 
 > [!NOTE]  
-> No hay consultas de seguimiento seguir realizan la resolución de identidad en la consulta de ejecutar. Si el conjunto de resultados contiene la misma entidad varias veces, se devolverá la misma instancia de la clase de entidad para cada repetición del conjunto de resultados. Sin embargo, las referencias débiles sirven para realizar un seguimiento de las entidades que ya se han devuelto. Si un resultado anterior con la misma identidad queda fuera del ámbito y se ejecuta la recolección de elementos no utilizados, obtendrá una nueva instancia de entidad. Para obtener más información, consulte [funcionamiento de la consulta](overview.md).
+> Las consultas de no seguimiento siguen realizando la resolución de identidad dentro de la consulta en ejecución. Si el conjunto de resultados contiene varias veces la misma entidad, se devolverá la misma instancia de la clase de entidad para cada repetición en el conjunto de resultados. Sin embargo, se usan referencias parciales para llevar un seguimiento de las entidades que ya se devolvieron. Si un resultado anterior con la misma identidad queda fuera del ámbito y se ejecuta la recolección de elementos no utilizados, puede obtener una instancia de entidad nueva. Para más información, consulte el artículo sobre el [funcionamiento de una consulta ](overview.md).
 
-## <a name="tracking-and-projections"></a>Seguimiento y proyecciones
+## <a name="tracking-and-projections"></a>Seguimientos y proyecciones
 
-Incluso si el tipo de resultado de la consulta no es un tipo de entidad, si el resultado contiene tipos de entidad sigue realizará el seguimiento de forma predeterminada. En la siguiente consulta, que devuelve un tipo anónimo, las instancias de `Blog` en el resultado de conjunto se efectuará un seguimiento.
+Incluso si el tipo de resultado de la consulta no es un tipo de entidad, si el resultado contiene tipos de entidad, de todos modos se hará seguimiento de estos de manera predeterminada. En la consulta siguiente, que devuelve un tipo anónimo, se hará seguimiento de las instancias de `Blog` en el conjunto de resultados.
 
 <!-- [!code-csharp[Main](samples/core/Querying/Querying/Tracking/Sample.cs?highlight=7)] -->
 ``` csharp
@@ -84,7 +85,7 @@ using (var context = new BloggingContext())
 }
 ```
 
-Si el conjunto de resultados no contiene ningún tipo de entidad, no se realiza ningún seguimiento. En la siguiente consulta, que devuelve un tipo anónimo con algunos de los valores de la entidad (pero ninguna instancia del tipo de entidad real), no hay ningún seguimiento realizado.
+Si el conjunto de resultados no contiene ningún tipo de entidad, no se realiza ningún seguimiento. En la consulta siguiente, que devuelve un tipo anónimo con algunos de los valores de la entidad (pero no instancias del tipo de entidad real), no se realiza ningún seguimiento.
 
 <!-- [!code-csharp[Main](samples/core/Querying/Querying/Tracking/Sample.cs)] -->
 ``` csharp

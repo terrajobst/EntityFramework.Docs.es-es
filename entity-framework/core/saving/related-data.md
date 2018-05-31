@@ -1,5 +1,5 @@
 ---
-title: Guardar los datos - Core EF relacionados
+title: 'Guardado de datos relacionados: EF Core'
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -8,56 +8,57 @@ ms.technology: entity-framework-core
 uid: core/saving/related-data
 ms.openlocfilehash: b0ed25267c85e82db18d8a89693b6040db7e4b34
 ms.sourcegitcommit: 4997314356118d0d97b04ad82e433e49bb9420a2
-ms.translationtype: MT
+ms.translationtype: HT
 ms.contentlocale: es-ES
 ms.lasthandoff: 04/16/2018
+ms.locfileid: "31006655"
 ---
-# <a name="saving-related-data"></a>Guardar datos relacionados
+# <a name="saving-related-data"></a>Guardado de datos relacionados
 
-Además de las entidades aisladas, también puede hacer que el uso de las relaciones definidas en el modelo.
+Además de las entidades aisladas, también puede usar las relaciones definidas en el modelo.
 
 > [!TIP]  
 > Puede ver un [ejemplo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/RelatedData/) de este artículo en GitHub.
 
-## <a name="adding-a-graph-of-new-entities"></a>Adición de un gráfico de nuevas entidades
+## <a name="adding-a-graph-of-new-entities"></a>Incorporación de un grafo de entidades nuevas
 
-Si crea varias nuevas entidades relacionadas, agregar uno de ellos en el contexto hará que los demás agregarse demasiado.
+Si crea varias entidades relacionadas, agregar una de ellas al contexto hará que las otras también se agreguen.
 
-En el ejemplo siguiente, el blog y tres entradas relacionadas se todos insertan en la base de datos. Se encontró y se agregan, porque son accesibles a través de las entradas de la `Blog.Posts` propiedad de navegación.
+En el ejemplo siguiente, el blog y tres entradas relacionadas se insertan en la base de datos. Las entradas se buscan y agregan, porque son accesibles a través de la propiedad de navegación `Blog.Posts`.
 
 [!code-csharp[Main](../../../samples/core/Saving/Saving/RelatedData/Sample.cs#AddingGraphOfEntities)]
 
 > [!TIP]  
-> Use la propiedad EntityEntry.State para establecer el estado de solo una única entidad. Por ejemplo: `context.Entry(blog).State = EntityState.Modified`.
+> Use la propiedad EntityEntry.State para establecer el estado de una sola unidad. Por ejemplo: `context.Entry(blog).State = EntityState.Modified`.
 
-## <a name="adding-a-related-entity"></a>Agregar una entidad relacionada
+## <a name="adding-a-related-entity"></a>Incorporación de una entidad relacionada
 
-Si hace referencia a una nueva entidad de la propiedad de navegación de una entidad que ya está registrada por el contexto, la entidad se detectará y se insertan en la base de datos.
+Si hace referencia a una entidad nueva desde la propiedad de navegación de una entidad a la que el contexto ya hace seguimiento, se detectará la entidad y se insertará en la base de datos.
 
-En el ejemplo siguiente, la `post` se inserta la entidad porque se agrega a la `Posts` propiedad de la `blog` entidad que se capturó desde la base de datos.
+En el ejemplo siguiente, la entidad `post` se inserta porque se agrega a la propiedad `Posts` de la entidad `blog` que se capturó de la base de datos.
 
 [!code-csharp[Main](../../../samples/core/Saving/Saving/RelatedData/Sample.cs#AddingRelatedEntity)]
 
-## <a name="changing-relationships"></a>Cambiar las relaciones
+## <a name="changing-relationships"></a>Cambio de las relaciones
 
-Si cambia la propiedad de navegación de una entidad, se realizarán los cambios correspondientes a la columna de clave externa en la base de datos.
+Si cambia la propiedad de navegación de una entidad, los cambios correspondientes se harán en la columna de clave externa de la base de datos.
 
-En el ejemplo siguiente, la `post` entidad se actualiza para que pertenezcan a la nueva `blog` entidad porque su `Blog` se establece la propiedad de navegación para que apunte a `blog`. Tenga en cuenta que `blog` también se pueden insertar en la base de datos es una nueva entidad que hace referencia la propiedad de navegación de una entidad que ya está registrada por el contexto (`post`).
+En el ejemplo siguiente, la entidad `post` se actualiza para que pertenezca a la entidad `blog` nueva, porque su propiedad de navegación `Blog` está establecida para que apunte a `blog`. Tenga en cuenta que `blog` también se insertará en la base de datos porque se trata de una entidad nueva a la que hace referencia la propiedad de navegación de una entidad de la que el contexto (`post`) ya hace seguimiento.
 
 [!code-csharp[Main](../../../samples/core/Saving/Saving/RelatedData/Sample.cs#ChangingRelationships)]
 
-## <a name="removing-relationships"></a>Quitar relaciones
+## <a name="removing-relationships"></a>Eliminación de relaciones
 
-Puede quitar una relación estableciendo una navegación de referencia en `null`, o quitar la entidad relacionada de navegación de la colección.
+Para quitar una relación, establezca una navegación de referencia en `null` o quite la entidad relacionada de una navegación de colección.
 
-Para eliminar una relación puede tener efectos secundarios en la entidad dependiente, según la cascada eliminar el comportamiento configurado en la relación.
+Quitar una relación puede tener efectos secundarios en la entidad dependiente, según el comportamiento de eliminación en cascada que esté configurado en la relación.
 
-De forma predeterminada, para las relaciones necesarias, se configura un comportamiento de eliminación en cascada y la entidad secundaria/dependientes se eliminarán de la base de datos. Para las relaciones opcionales, la eliminación en cascada no está configurada de forma predeterminada, pero se establecerá la propiedad de clave externa como null.
+De manera predeterminada, en el caso de las relaciones obligatorias, hay configurado un comportamiento de eliminación en cascada y la entidad secundaria o dependiente se eliminará de la base de datos. En el caso de las relaciones opcionales, no hay configurada una eliminación en cascada de manera predeterminada, pero la propiedad de clave externa se establecerá en NULL.
 
-Vea [relaciones obligatorios y opcionales](../modeling/relationships.md#required-and-optional-relationships) para obtener información sobre cómo se puede configurar el requiredness de relaciones.
+Consulte la sección sobre las [relaciones obligatorias y opcionales](../modeling/relationships.md#required-and-optional-relationships) para más información sobre cómo se puede configurar la obligatoriedad de las relaciones.
 
-Vea [eliminación en cascada](cascade-delete.md) para obtener más detalles sobre la eliminación en cascada comportamientos funciona, cómo se puede configurar explícitamente y cómo se seleccionan por convención.
+Consulte el artículo sobre la [eliminación en cascada](cascade-delete.md) para más detalles sobre el funcionamiento de los comportamientos de eliminación en cascada, cómo se pueden configurar de manera explícita y cómo se seleccionan por convención.
 
-En el ejemplo siguiente, se configura una eliminación en cascada en la relación entre `Blog` y `Post`, por lo que el `post` entidad se elimina de la base de datos.
+En el ejemplo siguiente, se configura una eliminación en cascada en la relación entre `Blog` y `Post`, por lo que la entidad `post` se elimina de la base de datos.
 
 [!code-csharp[Main](../../../samples/core/Saving/Saving/RelatedData/Sample.cs#RemovingRelationships)]

@@ -1,5 +1,5 @@
 ---
-title: Entidades desconectadas - Core EF
+title: 'Entidades desconectadas: EF Core'
 author: ajcvickers
 ms.author: avickers
 ms.date: 10/27/2016
@@ -8,133 +8,134 @@ ms.technology: entity-framework-core
 uid: core/saving/disconnected-entities
 ms.openlocfilehash: 0b145217d40027c4b8e4746e9c5651652a28c9eb
 ms.sourcegitcommit: d2434edbfa6fbcee7287e33b4915033b796e417e
-ms.translationtype: MT
+ms.translationtype: HT
 ms.contentlocale: es-ES
 ms.lasthandoff: 02/12/2018
+ms.locfileid: "29152421"
 ---
 # <a name="disconnected-entities"></a>Entidades desconectadas
 
-Una instancia de DbContext realizará automáticamente el seguimiento entidades devueltas desde la base de datos. Los cambios realizados en estas entidades, a continuación, se detectará cuando se llama a SaveChanges y se actualizará la base de datos según sea necesario. Vea [guardar básica](basic.md) y [datos relacionados](related-data.md) para obtener más información.
+Una DbContext realizará seguimiento automático de las entidades que se devuelven de la base de datos. De ese modo, los cambios hechos en estas entidades se detectarán cuando se llame a SaveChanges y la base de datos se actualizará según sea necesario. Consulte [Basic Save](basic.md) (Guardado básico) y [Related Data](related-data.md) (Datos relacionados) para información detallada.
 
-Sin embargo, en ocasiones, las entidades se consultan utilizando una instancia de contexto y, a continuación, se guarda con una instancia diferente. Esto suele ocurrir en escenarios "desconectados" como una aplicación web, donde las entidades se consultar, envía al cliente, modificar, envía al servidor en una solicitud y, a continuación, se guarda. En este caso, el contexto de la segundo instancia debe saber si las entidades son nuevo (debe insertarse) o existente (deben actualizarse).
+Sin embargo, en algunas ocasiones las entidades se consultan mediante el uso de una instancia de contexto y luego se guardan con una instancia distinta. Esto suele ocurrir en escenarios "desconectados", como una aplicación web, en los que las entidades se consultan, se envían al cliente, se modifican, se envían de vuelta al servidor en una solicitud y, a continuación, se guardan. En este caso, la segunda instancia de contexto debe saber si las entidades son nuevas (y se deben insertar) o existentes (y se deben actualizar).
 
 > [!TIP]  
 > Puede ver un [ejemplo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/Disconnected/) de este artículo en GitHub.
 
 > [!TIP]
-> EF Core solo puede realizar un seguimiento de una instancia de cualquier entidad con un determinado valor de clave principal. La mejor manera de evitar este un problema consiste en usar un contexto de corta duración para cada unidad de trabajo de forma que el contexto se inicia vacío, tiene entidades asociadas a él, guarda las entidades y, a continuación, en el contexto se elimina y se descarta.
+> EF Core solo puede hacer seguimiento de una instancia de una entidad con un valor de clave principal determinado. La mejor manera de evitar que esto se convierta en un problema es usar un contexto de corta duración para cada unidad de trabajo de manera que el contexto empiece vacío, tenga entidades asociadas, guarde esas entidades y, luego, se elimine y descarte el contexto.
 
-## <a name="identifying-new-entities"></a>Identificar nuevas entidades
+## <a name="identifying-new-entities"></a>Identificación de unidades nuevas
 
-### <a name="client-identifies-new-entities"></a>Cliente identifica nuevas entidades
+### <a name="client-identifies-new-entities"></a>El cliente identifica las unidades nuevas
 
-El caso más simple para tratar con es cuando el cliente informa al servidor si la entidad es nueva o existente. Por ejemplo, a menudo la solicitud para insertar una nueva entidad es diferente de la solicitud para actualizar una entidad existente.
+El caso más sencillo de abordar es cuando el cliente informa al servidor si la entidad es nueva o existente. Por ejemplo, a menudo la solicitud para insertar una entidad nueva es distinta de la solicitud para actualizar una entidad existente.
 
-El resto de esta sección trata los casos donde necesario determinar de alguna otra manera, si se debe insertar o actualizar.
+En el resto de esta sección se analizan los casos en los que resulta necesario determinar de otro modo si se debe realizar una inserción o una actualización.
 
 ### <a name="with-auto-generated-keys"></a>Con claves generadas automáticamente
 
-El valor de una clave generada automáticamente a menudo puede utilizarse para determinar si una entidad debe insertar o actualizar. Si la clave no se ha establecido (es decir, todavía tiene el valor predeterminado CLR de null, cero, etc.), a continuación, la entidad debe ser nuevo y es necesario insertar. Por otro lado, si se ha establecido el valor de clave, a continuación, debe haber ya se ha guardado previamente y ahora necesita actualizar. En otras palabras, si la clave tiene un valor, entidad, a continuación, se consultó, envía al cliente y se vuelven a estar ahora actualizarse.
+El valor de una clave generada automáticamente a menudo se puede usar para determinar si una entidad se debe insertar o actualizar. Si no se estableció la clave (es decir, si todavía tiene el valor predeterminado de CLR de NULL, cero, etc.), la entidad debe ser nueva y se debe insertar. Por el contrario, si el valor de la clave sí se estableció, ya se debe haber guardado anteriormente y ahora se debe actualizar. En otras palabras, si la clave tiene un valor, es porque la entidad ya se consultó, se envió al cliente y ahora vuelve para que la actualicen.
 
-Resulta sencillo comprobar si una clave sin establecer cuando se conoce el tipo de entidad:
+Resulta sencillo comprobar si una clave no se estableció cuando se conoce el tipo de entidad:
 
 [!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#IsItNewSimple)]
 
-Sin embargo, EF también tiene un medio integrado para hacer esto para cualquier tipo de entidad y tipo de clave:
+Sin embargo, EF también tiene una manera integrada de hacer esto con cualquier tipo de entidad y cualquier tipo de clave:
 
 [!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#IsItNewGeneral)]
 
 > [!TIP]  
-> Las claves se establecen en cuanto se realiza un seguimiento de las entidades según el contexto, incluso si la entidad está en el estado agregado. Esto resulta útil cuando atraviesa un gráfico de entidades y decidir qué hacer con cada, como cuando se usa la API de TrackGraph. Solo debe usarse el valor de clave de la manera en que se muestra aquí _antes de_ se realiza cualquier llamada para realizar el seguimiento de la entidad.
+> Las claves se establecen tan pronto como el contexto hace seguimiento de las entidades, incluso si la entidad tiene el estado Added (Agregada). Esto resulta útil cuando se recorre un grafo de entidades y se decide qué hacer con cada una de ellas, como cuándo usar TrackGraph API. El valor de la clave solo se debe usar como se indica aquí _antes_ de cualquier llamada para hacer seguimiento de la entidad.
 
-### <a name="with-other-keys"></a>Con otras teclas
+### <a name="with-other-keys"></a>Con otras claves
 
-Algún otro mecanismo es necesario para identificar entidades nuevas cuando los valores de clave no se generan automáticamente. Hay dos enfoques generales para esto:
+Es necesario algún otro mecanismo para identificar las entidades nuevas cuando los valores de clave no se generan automáticamente. Aquí existen dos enfoques generales:
  * Consulta para la entidad
- * Pase un indicador desde el cliente
+ * Paso de una marca desde el cliente
 
-Para consultar la entidad, use simplemente el método de búsqueda:
+Para consulta la entidad, simplemente use el método Find:
 
 [!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#IsItNewQuery)]
 
-Está fuera del ámbito de este documento para mostrar el código completo para pasar una marca de un cliente. En una aplicación web, normalmente significa que se realizan solicitudes diferentes acciones diferentes, o pasar algún estado de la solicitud, a continuación, extraer en el controlador.
+Mostrar el código completo para pasar una marca desde un cliente va más allá del ámbito del presente documento. En una aplicación web, habitualmente significa hacer distintas solicitudes para acciones diferentes o pasar algún estado en la solicitud para luego extraerlo en el controlador.
 
-## <a name="saving-single-entities"></a>Guardar entidades únicas
+## <a name="saving-single-entities"></a>Guardado de entidades únicas
 
-Si se conoce como si no se necesita una inserción o actualización, a continuación, agregar o actualizar puede utilizarse correctamente:
+Cuando se sabe si es necesario o no realizar una inserción o una actualización, las acciones de agregar o actualizar se pueden usar correctamente:
 
 [!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#InsertAndUpdateSingleEntity)]
 
-Sin embargo, si la entidad utiliza valores de clave generada automáticamente, puede utilizar el método de actualización en ambos casos:
+Sin embargo, si la entidad usa valores de clave generados automáticamente, el método Update se puede usar para ambos casos:
 
 [!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#InsertOrUpdateSingleEntity)]
 
-Normalmente, el método Update marca la entidad para la actualización, inserción no. Sin embargo, si la entidad tiene una clave generada automáticamente y no se ha establecido ningún valor de clave, a continuación, la entidad en su lugar, se marca automáticamente para insertar.
+Habitualmente, el método Update marca la entidad para actualización y no para inserción. Sin embargo, si la entidad tiene una clave generada automáticamente y no se estableció ningún valor de clave, la entidad se marca automáticamente para inserción.
 
 > [!TIP]  
-> Este comportamiento se introdujo en EF Core 2.0. En las versiones anteriores siempre es necesario elegir explícitamente agregar o actualizar.
+> Este comportamiento se introdujo en EF Core 2.0. En las versiones anteriores siempre es necesario elegir explícitamente si agregar o actualizar.
 
-Si la entidad no está utilizando claves generadas automáticamente, la aplicación debe decidir si la entidad se debe insertar o actualizar: por ejemplo:
+Si la entidad no usa claves generadas automáticamente, la aplicación debe decidir si la entidad se debe inserta ro actualizar. Por ejemplo:
 
 [!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#InsertOrUpdateSingleEntityWithFind)]
 
-Son los siguientes pasos:
-* Si agrega Find devuelve un valor null, a continuación, la base de datos ya no contiene el blog con este Id., por lo que llamamos a marcar para la inserción.
-* Si la búsqueda devuelve una entidad, a continuación, se encuentra en la base de datos y el contexto ya está realizando el seguimiento de la entidad existente
-  * A continuación, utilizamos SetValues para establecer los valores para todas las propiedades de esta entidad a los que procede el cliente.
-  * La llamada SetValues marcará la entidad que se actualiza según sea necesario.
+Estos son los pasos:
+* Si Find devuelve un valor NULL, la base de datos todavía no contiene el blog con su identificador, por lo que llamamos a Add para marcarlo para inserción.
+* Si Find devuelve una entidad es porque existe en la base de datos y ahora el contexto hace seguimiento de esa entidad existente.
+  * Luego usamos SetValues para establecer los valores de todas las propiedades de esta entidad en los valores que provienen del cliente.
+  * La llamada a SetValues marcará la entidad para actualizarla según sea necesario.
 
 > [!TIP]  
-> SetValues sólo se marcará como modificar las propiedades que tienen valores diferentes a los de la entidad que realiza un seguimiento. Esto significa que cuando se envía la actualización, se actualizarán sólo aquellas columnas que han cambiado realmente. (Y si no ha cambiado nada, se enviará ninguna actualización en absoluto).
+> SetValues solo marcará como modificadas las propiedades que tengan valores distintos a los de la entidad con seguimiento. Esto significa que, cuando se envíe la actualización, solo se actualizarán las columnas que se hayan modificado realmente. (Si no se modificó nada, no se enviará ninguna actualización).
 
-## <a name="working-with-graphs"></a>Trabajar con gráficos
+## <a name="working-with-graphs"></a>Trabajo con grafos
 
-### <a name="identity-resolution"></a>Resolución de identidades
+### <a name="identity-resolution"></a>Resolución de identidad
 
-Como se mencionó anteriormente, EF Core solo puede realizar un seguimiento una instancia de cualquier entidad con un determinado valor de clave principal. Al trabajar con gráficos lo ideal es que se debe crear el gráfico de forma que se mantiene esta condición invariable, y se debe usar el contexto para solo una unidad de trabajo. Si el gráfico contiene duplicados, será necesario procesar el gráfico antes de enviarlo a EF consolidar varias instancias en una. Esto puede no ser trivial donde instancias tienen valores en conflicto y relaciones, por lo que deben hacerlo tan pronto como sea posible consolidar duplicados en la canalización de aplicación para evitar la resolución de conflictos.
+Como se indicó anteriormente, EF Core solo puede hacer seguimiento de una instancia de una entidad con un valor de clave principal determinado. Cuando se trabaja con grafos, idealmente el grafo se debe crear de manera tal que se mantenga esta invariable y el contexto se debe usar solo para una unidad de trabajo. Si el grafo contiene duplicados, será necesario procesarlo antes de enviarlo a EF para consolidar varias instancias en una sola. Es posible que esta acción no sea trivial cuando haya instancias con valores y relaciones en conflicto, por lo que la consolidación de los duplicados se debe hacer tan pronto como sea posible en la canalización de aplicación para evitar la resolución de conflictos.
 
-### <a name="all-newall-existing-entities"></a>Todos los nuevos o todas las entidades existentes
+### <a name="all-newall-existing-entities"></a>Todas las entidades nuevas o todas las entidades existentes
 
-Un ejemplo del uso de gráficos es insertar o actualizar un blog junto con su colección de entradas asociadas. Si todas las entidades en el gráfico deben insertarse o todos se deben actualizar, el proceso es el mismo tal y como se describió anteriormente para entidades únicas. Por ejemplo, un gráfico de blogs y anuncios creado similar al siguiente:
+Un ejemplo de trabajar con grafos es insertar o actualizar un blog junto con su colección de entradas asociadas. Si las entidades del grafo se deben insertar o actualizar en su totalidad, el proceso es el mismo que se describió anteriormente para las entidades únicas. Por ejemplo, un grafo de blogs y entradas creado de esta manera:
 
 [!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#CreateBlogAndPosts)]
 
-se pueden insertar de forma similar al siguiente:
+se puede insertar así:
 
 [!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#InsertGraph)]
 
-La llamada a Add marcará el blog y todas las entradas va a insertar.
+La llamada a Add marcará el blog y todas las entradas para su inserción.
 
-Asimismo, si todas las entidades en un gráfico necesitan actualizarse, puede usar actualización:
+Del mismo modo, si es necesario actualizar todas las entidades de un grafo, se puede usar Update:
 
 [!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#UpdateGraph)]
 
-El blog y todas sus entradas se marcarán para su actualización.
+El blog y todas las entradas se marcarán para su actualización.
 
-### <a name="mix-of-new-and-existing-entities"></a>Combinación de entidades nuevas y existentes
+### <a name="mix-of-new-and-existing-entities"></a>Combinación de entidades nuevas y entidades existentes
 
-Con claves generadas automáticamente, actualización, vuelva a puede utilizarse para las inserciones y actualizaciones, incluso si el gráfico contiene una mezcla de entidades que requieren la inserción y aquellos que requieren actualización:
+Con las claves generadas automáticamente, Update se puede volver a usar tanto para inserciones como para actualizaciones, incluso si el grafo contiene una combinación de entidades que requiere inserción y las que se deben actualizar:
 
 [!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#InsertOrUpdateGraph)]
 
-Actualización, se marcarán como una entidad en el gráfico, blog o post, de inserción si no tiene un conjunto de valores de clave, mientras que todas las demás entidades están marcados para la actualización.
+Update marcará una entidad en el grafo, ya sea el blog o una entrada, para inserción si no tiene establecido un valor de clave, mientras que todas las demás entidades se marcarán para actualización.
 
-Como antes, si no usa claves generadas automáticamente, una consulta y procesamiento se pueden usar:
+Como antes, cuando no se usan claves generadas automáticamente, es posible usar una consulta y algún procesamiento:
 
 [!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#InsertOrUpdateGraphWithFind)]
 
 ## <a name="handling-deletes"></a>Control de eliminaciones
 
-Delete puede ser difícil de controlar desde a menudo la ausencia de una entidad significa que debe eliminarse. Una manera de solucionar esto es usar "eliminaciones de software" tal que la entidad se marca como eliminada en lugar de que se eliminan realmente. Elimina, a continuación, pasa a ser el mismo que las actualizaciones. Eliminaciones de software pueden implementarse de uso [filtros de consulta](xref:core/querying/filters).
+Puede ser difícil controlar las eliminaciones porque, habitualmente, la ausencia de una entidad implica que se debe eliminar. Una manera de solucionar esto es usar las "eliminaciones temporales" en que la entidad se marca como eliminada en lugar de eliminarla realmente. Luego, las eliminaciones pasan a ser iguales a las actualizaciones. Las eliminaciones temporales se pueden implementar usando [filtros de consulta](xref:core/querying/filters).
 
-Para las eliminaciones es true, un patrón común consiste en utilizar una extensión del patrón de consulta para realizar lo que es esencialmente una diferencia de gráfico. Por ejemplo:
+En el caso de las eliminaciones reales, un patrón común es usar una extensión del modelo de consulta para realizar lo que esencialmente es una diferencia de grafo. Por ejemplo:
 
 [!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#InsertUpdateOrDeleteGraphWithFind)]
 
 ## <a name="trackgraph"></a>TrackGraph
 
-Internamente, agregar, adjuntar y Update utilizan cruce seguro del gráfico con una resolución adoptada para cada entidad en cuanto a si se debería marcarse como Added (para insertar), Modified (para actualizar), sin cambios (no hacen nada), o eliminadas (para eliminar). Este mecanismo se expone a través de la API de TrackGraph. Por ejemplo, supongamos que, cuando el cliente envía un gráfico de entidades, establece algunas marca en cada entidad que indica cómo debe controlarse. TrackGraph, a continuación, puede utilizarse para procesar este indicador:
+De manera interna, Add, Attach y Update usan el recorrido de grafo con una determinación hecha para cada entidad a fin de saber si se debe marcar como Added (para inserción), Modified (para actualización), Unchanged (para no hacer nada) o Deleted (para eliminación). Este mecanismo se expone a través de TrackGraph API. Por ejemplo, supongamos que cuando el cliente envió de vuelta un grafo de entidades, estableció alguna marca en cada entidad para indicar cómo se debe controlar. Entonces se puede usar TrackGraph para procesar esta marca:
 
 [!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#TrackGraph)]
 
-Las marcas solo se muestran como parte de la entidad para simplificar el trabajo del ejemplo. Normalmente, las marcas sería parte de un DTO o algún otro Estado incluido en la solicitud.
+Las marcas solo se muestran como parte de la entidad para simplificar el ejemplo. Habitualmente, las marcas serían parte de una DTO o alguno otro estado incluido en la solicitud.

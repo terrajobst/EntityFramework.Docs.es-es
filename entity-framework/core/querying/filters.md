@@ -1,5 +1,5 @@
 ---
-title: Filtros de consulta global - Core EF
+title: 'Filtros de consulta global: EF Core'
 author: anpete
 ms.author: anpete
 ms.date: 11/03/2017
@@ -7,48 +7,49 @@ ms.technology: entity-framework-core
 uid: core/querying/filters
 ms.openlocfilehash: 4e3c3c99d155f69e00fed99c415f519808ea1a68
 ms.sourcegitcommit: 6e379265e4f087fb7cf180c824722c81750554dc
-ms.translationtype: MT
+ms.translationtype: HT
 ms.contentlocale: es-ES
 ms.lasthandoff: 11/15/2017
+ms.locfileid: "26053905"
 ---
 # <a name="global-query-filters"></a>Filtros de consulta global
 
-Los filtros de consulta global son predicados de consulta LINQ (normalmente se pasa una expresión booleana a LINQ *donde* operador de consulta) aplicado a tipos de entidad en el modelo de metadatos (normalmente en *OnModelCreating*). Estos filtros se aplican automáticamente a las consultas LINQ que afectan a los tipos de entidad, incluidas las referencias de propiedad de navegación directa o indirectamente, como hace referencia mediante el uso de inclusión de tipos de entidad. Algunas aplicaciones comunes de esta característica son:
+Los filtros de consulta global son predicados de consulta LINQ (una expresión booleana que habitualmente se pasa al operador de consulta LINQ *Where*) aplicados a los tipos de entidad del modelo de metadatos (habitualmente en *OnModelCreating*). Estos filtros se aplican automáticamente a las consultas LINQ que implican a esos tipos de entidad, incluidos aquellos a los que se hace referencia de forma indirecta, por ejemplo mediante el uso de Include o de referencias de propiedad de navegación directas. Algunas aplicaciones comunes de esta característica son:
 
-* **Eliminar temporalmente** -un tipo de entidad define una *IsDeleted* propiedad.
-* **La arquitectura multiempresa** -un tipo de entidad define una *TenantId* propiedad.
+* **Eliminación temporal**: un tipo de entidad define una propiedad *IsDeleted*.
+* **Servicios multiinquilino**: un tipo de entidad define una propiedad *TenantId*.
 
 ## <a name="example"></a>Ejemplo
 
-En el ejemplo siguiente se muestra cómo usar filtros de consulta Global para implementar comportamientos de la consulta de eliminación de software y la arquitectura multiempresa en un modelo de creación de blogs simple.
+En el ejemplo siguiente se muestra cómo usar los filtros de consulta global para implementar los comportamientos de consulta de multiinquilino y de eliminación temporal en un simple modelo de creación de blogs.
 
 > [!TIP]
-> Puede ver este artículo [ejemplo](https://github.com/aspnet/EntityFrameworkCore/tree/dev/samples/QueryFilters) en GitHub.
+> Puede ver un [ejemplo](https://github.com/aspnet/EntityFrameworkCore/tree/dev/samples/QueryFilters) de este artículo en GitHub.
 
 En primer lugar, defina las entidades:
 
 [!code-csharp[Main](../../../efcore-dev/samples/QueryFilters/Program.cs#Entities)]
 
-Tenga en cuenta la declaración de un __tenantId_ campo el _Blog_ entidad. Esto se utilizará para asociar cada instancia de Blog específicos del inquilino. También es un _IsDeleted_ propiedad en el _Post_ tipo de entidad. Se utiliza esta opción para realizar un seguimiento de si una _Post_ instancia ha estado "eliminado". Es decir La instancia se marca como eliminado reemplazar quitar físicamente los datos subyacentes.
+Tenga en cuenta la declaración de un campo __tenantId_ en la entidad _Blog_. Se usará para asociar cada instancia de blog con un inquilino específico. También hay definida una propiedad _IsDeleted_ en el tipo de entidad _Post_. Se usa para llevar un seguimiento de si una instancia _Post_ se eliminó de manera temporal. Es decir, la instancia se marca como eliminada sin quitar físicamente los datos subyacentes.
 
-A continuación, configure los filtros de consulta de _OnModelCreating_ mediante el ```HasQueryFilter``` API.
+A continuación, configure los filtros de consulta en _OnModelCreating_ con la API ```HasQueryFilter```.
 
 [!code-csharp[Main](../../../efcore-dev/samples/QueryFilters/Program.cs#Configuration)]
 
-Las expresiones de predicado que se pasan a la _HasQueryFilter_ llamadas ahora se aplicarán automáticamente a las consultas LINQ para esos tipos.
+Las expresiones de predicado pasadas a las llamadas de _HasQueryFilter_ ahora se aplicarán automáticamente a cualquier consulta LINQ para esos tipos.
 
 > [!TIP]
-> Tenga en cuenta el uso de un campo de nivel de instancia de DbContext: ```_tenantId``` usa para establecer el inquilino actual. Filtros de nivel de modelo usará el valor de la instancia de contexto correcto. Es decir La instancia que se está ejecutando la consulta.
+> Tenga en cuenta el uso de un campo en el nivel de instancia de DbContext: ```_tenantId``` se usa para establecer el inquilino actual. Los filtros de nivel de modelo usan el valor de la instancia de contexto correcta. Es decir, la instancia que está ejecutando la consulta.
 
-## <a name="disabling-filters"></a>Deshabilitar filtros
+## <a name="disabling-filters"></a>Deshabilitación de filtros
 
-Los filtros pueden deshabilitarse para consultas LINQ individuales mediante el uso de la ```IgnoreQueryFilters()``` operador.
+Los filtros se pueden deshabilitar para consultas LINQ individuales mediante el operador ```IgnoreQueryFilters()```.
 
 [!code-csharp[Main](../../../efcore-dev/samples/QueryFilters/Program.cs#IgnoreFilters)]
 
 ## <a name="limitations"></a>Limitaciones
 
-Los filtros de consulta global tienen las siguientes limitaciones:
+Los filtros de consulta global tienen las limitaciones siguientes:
 
 * Los filtros no pueden contener referencias a las propiedades de navegación.
-* Solo se pueden definir filtros para la raíz del tipo de entidad de una jerarquía de herencia.
+* Solo se pueden definir filtros para el tipo de entidad raíz de una jerarquía de herencia.

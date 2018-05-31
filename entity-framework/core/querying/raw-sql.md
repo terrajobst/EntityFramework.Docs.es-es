@@ -1,5 +1,5 @@
 ---
-title: Consultas SQL sin formato - Core EF
+title: 'Consultas SQL sin formato: EF Core'
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -8,38 +8,39 @@ ms.technology: entity-framework-core
 uid: core/querying/raw-sql
 ms.openlocfilehash: 29b7e20e875bf791a88a92636c1df4bc4e31656b
 ms.sourcegitcommit: 038acd91ce2f5a28d76dcd2eab72eeba225e366d
-ms.translationtype: MT
+ms.translationtype: HT
 ms.contentlocale: es-ES
 ms.lasthandoff: 05/14/2018
+ms.locfileid: "34163218"
 ---
 # <a name="raw-sql-queries"></a>Consultas SQL sin formato
 
-Entity Framework Core permite desplegable a consultas SQL sin formato cuando se trabaja con una base de datos relacional. Esto puede ser útil si la consulta que desea realizar no se puede expresar utilizando LINQ, o si ineficaz SQL que se envían a la base de datos mediante una consulta LINQ es lo que permite.
+Entity Framework Core le permite descender hasta las consultas SQL sin formato cuando trabaja con una base de datos relacional. Esto puede resultar útil si la consulta que desea hacer no se puede expresar con LINQ o si usar una consulta LINQ hará que se envíe código SQL ineficaz a la base de datos.
 
 > [!TIP]  
 > Puede ver un [ejemplo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying) de este artículo en GitHub.
 
 ## <a name="limitations"></a>Limitaciones
 
-Existen algunas limitaciones a tener en cuenta cuando se usan sin procesar consultas SQL:
-* Las consultas SQL solo se utilizan para devolver tipos de entidades que forman parte del modelo. Hay una mejora en nuestro trabajo pendiente a [permiten devolver tipos de ad-hoc desde consultas SQL sin formato](https://github.com/aspnet/EntityFramework/issues/1862).
+Existen algunas limitaciones que debe considerar al usar las consultas SQL sin formato:
+* Las consultas SQL solo se pueden usar para devolver tipos de entidad que formen parte del modelo. Hay una mejora en el trabajo pendiente para [habilitar la devolución de tipos ad hoc a partir de consultas SQL sin formato](https://github.com/aspnet/EntityFramework/issues/1862).
 
-* La consulta SQL debe devolver datos para todas las propiedades del tipo de entidad o consulta.
+* La consulta SQL debe devolver datos para todas las propiedades del tipo de entidad o de consulta.
 
-* Los nombres de columna del conjunto de resultados deben coincidir con los nombres de columna que se asignan a las propiedades. Tenga en cuenta que esto es diferente de EF6 donde se omitió la asignación de propiedad o columna para las consultas SQL sin formato y nombres tenían que coinciden con los nombres de propiedad de columna del conjunto de resultados.
+* Los nombres de las columnas del conjunto de resultados deben coincidir con los nombres de las columnas a los que se asignan las propiedades. Observe que esto es diferente de lo que ocurre en EF6, donde las consultas SQL omitían la asignación de propiedades y columnas, y los nombres de las columnas del conjunto de resultados tenían que coincidir con los nombres de las propiedades.
 
-* La consulta SQL no puede contener datos relacionados. Sin embargo, en muchos casos se puede componer encima de la consulta con la `Include` operador que se va a devolver datos relacionados (consulte [incluidos los datos relacionados](#including-related-data)).
+* La consulta SQL no puede incluir datos relacionados. Sin embargo, en muchos casos puede redactar sobre la consulta si usa el operador `Include` para devolver datos relacionados (consulte [Inclusión de datos relacionados](#including-related-data)).
 
-* `SELECT` instrucciones pasadas a este método deben estar admite composición: Core EF si es necesario evaluar los operadores de consulta adicionales en el servidor (por ejemplo, para traducir los operadores LINQ que se aplican después de `FromSql`), SQL proporcionado se tratará como una subconsulta. Esto significa que la instrucción SQL que se pasó no debe contener los caracteres o las opciones que no son válidos en una subconsulta, como:
+* Las instrucciones `SELECT` que se pasan a este método generalmente admitirán composición. Si EF Core debe evaluar operadores de consulta adicionales en el servidor (por ejemplo, para trasladar los operadores LINQ aplicados después de `FromSql`), el código SQL suministrado se considerará como una subconsulta. Esto significa que el código SQL que se pasa no contendrá ningún carácter ni opción que no sea válido en una subconsulta, como:
   * un punto y coma final
-  * En SQL Server, un nivel de consulta finales sugerencia, p. ej. `OPTION (HASH JOIN)`
-  * En SQL Server, un `ORDER BY` cláusula que no va acompañada de `TOP 100 PERCENT` en el `SELECT` cláusula
+  * en SQL Server, una sugerencia en el nivel de consulta final, por ejemplo`OPTION (HASH JOIN)`
+  * en SQL Server, una cláusula `ORDER BY` que no va acompañada de `TOP 100 PERCENT` en la cláusula `SELECT`
 
-* Instrucciones SQL distinto `SELECT` se reconocen automáticamente como no admite composición. En consecuencia, los resultados completos de los procedimientos almacenados siempre se devuelven al cliente y los operadores LINQ se aplican después `FromSql` evaluada en memoria. 
+* Las instrucciones SQL que no son `SELECT` se reconocen de manera automáticamente como instrucciones que no admiten composición. Como consecuencia, los resultados completos de los procedimientos almacenados siempre se devuelven al cliente y cualquier operador LINQ aplicado después de `FromSql` se evalúa en la memoria. 
 
-## <a name="basic-raw-sql-queries"></a>Consultas básicas de SQL sin formato
+## <a name="basic-raw-sql-queries"></a>Consultas SQL básicas sin formato
 
-Puede usar el *FromSql* método de extensión para iniciar una consulta LINQ en función de una consulta SQL sin formato.
+Puede usar el método de extensión *FromSql* para empezar una consulta LINQ basada en una consulta SQL sin formato.
 
 <!-- [!code-csharp[Main](samples/core/Querying/Querying/RawSQL/Sample.cs)] -->
 ``` csharp
@@ -48,7 +49,7 @@ var blogs = context.Blogs
     .ToList();
 ```
 
-Sin procesar consultas SQL pueden utilizarse para ejecutar un procedimiento almacenado.
+Las consultas SQL sin formato se pueden usar para ejecutar un procedimiento almacenado.
 
 <!-- [!code-csharp[Main](samples/core/Querying/Querying/RawSQL/Sample.cs)] -->
 ``` csharp
@@ -59,9 +60,9 @@ var blogs = context.Blogs
 
 ## <a name="passing-parameters"></a>Pasar parámetros
 
-Al igual que con cualquier API que acepta SQL, es importante parametrizar cualquier entrada del usuario para protegerse contra un ataque de inyección de SQL. Puede incluir marcadores de posición de parámetro en la cadena de consulta SQL y, a continuación, proporcionar valores de parámetros como argumentos adicionales. Los valores de parámetro se proporciona automáticamente se convertirá en un `DbParameter`.
+Al igual que con cualquier API que acepta código SQL, es importante parametrizar cualquier entrada de usuario como protección contra un ataque por inyección de código SQL. Puede incluir marcadores de posición de parámetro en la cadena de la consulta y luego suministrar valores de parámetro como argumentos adicionales. Cualquier valor de parámetro que suministre se convertirá automáticamente en `DbParameter`.
 
-En el ejemplo siguiente se pasa un solo parámetro para un procedimiento almacenado. Aunque esto puede parecer como `String.Format` sintaxis, el valor proporcionado se ajusta en un parámetro y el nombre de parámetro generado insertan dónde el `{0}` se especificó el marcador de posición.
+En el ejemplo siguiente, se pasa un parámetro único a un procedimiento almacenado. Si bien esto se puede ver como la sintaxis `String.Format`, el valor suministrado se encapsula en un parámetro y el nombre del parámetro generado se inserta donde se especificó el marcador de posición `{0}`.
 
 <!-- [!code-csharp[Main](samples/core/Querying/Querying/RawSQL/Sample.cs)] -->
 ``` csharp
@@ -72,7 +73,7 @@ var blogs = context.Blogs
     .ToList();
 ```
 
-Esta es la misma consulta, pero con la sintaxis de interpolación de cadena, que es compatible en EF Core 2.0 y versiones posteriores:
+Se trata de la misma consulta, pero usando la sintaxis de interpolación de cadena, que se admite en EF Core 2.0 y versiones superiores:
 
 <!-- [!code-csharp[Main](samples/core/Querying/Querying/RawSQL/Sample.cs)] -->
 ``` csharp
@@ -83,7 +84,7 @@ var blogs = context.Blogs
     .ToList();
 ```
 
-También puede construir un DbParameter y suministrarlo como un valor de parámetro. Esto le permite usar parámetros con nombre en la cadena de consulta SQL
+También puede construir un elemento DbParameter y suministrarlo como un valor de parámetro. Esto le permite usar parámetros con nombre en la cadena de consulta SQL
 
 <!-- [!code-csharp[Main](samples/core/Querying/Querying/RawSQL/Sample.cs)] -->
 ``` csharp
@@ -94,11 +95,11 @@ var blogs = context.Blogs
     .ToList();
 ```
 
-## <a name="composing-with-linq"></a>Componer con LINQ
+## <a name="composing-with-linq"></a>Redacción con LINQ
 
-Si la consulta SQL se puede formular en la base de datos, puede crear encima de la consulta SQL sin formato inicial mediante operadores de LINQ. Las consultas SQL que se pueden formular en que se va a con la `SELECT` palabra clave.
+Si la consulta SQL admite redacción en la base de datos, puede redactarla sobre la consulta SQL sin formato inicial mediante operadores LINQ. Las consultas SQL se pueden redactar con la palabra clave `SELECT`.
 
-En el ejemplo siguiente se utiliza una consulta SQL sin formato que selecciona de una función con valores de tabla (TVF) y, a continuación, se crea en el mismo uso de LINQ para realizar el filtrado y ordenación.
+En el ejemplo siguiente, se usa una consulta SQL sin formato que se selecciona de una función con valores de tabla (TVF) y luego se redacta en ella con LINQ para realizar filtrado y ordenación.
 
 <!-- [!code-csharp[Main](samples/core/Querying/Querying/RawSQL/Sample.cs)] -->
 ``` csharp
@@ -111,9 +112,9 @@ var blogs = context.Blogs
     .ToList();
 ```
 
-### <a name="including-related-data"></a>Incluidos los datos relacionados
+### <a name="including-related-data"></a>Inclusión de datos relacionados
 
-Crear operadores de LINQ puede utilizarse para incluir datos relacionados en la consulta.
+Se puede usar la redacción con operadores LINQ para incluir datos relacionados en la consulta.
 
 <!-- [!code-csharp[Main](samples/core/Querying/Querying/RawSQL/Sample.cs)] -->
 ``` csharp
@@ -126,4 +127,4 @@ var blogs = context.Blogs
 ```
 
 > [!WARNING]  
-> **Siempre utiliza la parametrización de consultas SQL sin formato:** API que aceptan una instancia de SQL sin formato de cadena como `FromSql` y `ExecuteSqlCommand` permiten valores fácilmente pasarse como parámetros. Además de validar proporcionados por el usuario, utilice siempre la parametrización para los valores utilizados en un consulta o comando SQL sin formato. Si está utilizando concatenación de cadenas para generar dinámicamente cualquier parte de la cadena de consulta, tú eres responsable de validar ninguna entrada para protegerse frente a ataques de inyección de SQL.
+> **Siempre use la parametrización para las consultas SQL sin formato:** las API que aceptan una cadena SQL sin formato como `FromSql` y `ExecuteSqlCommand` permiten que los valores se pasen de manera sencilla como parámetros. Además de validar la entrada del usuario, siempre use la parametrización para cualquier valor usado en un comando o consulta SQL sin formato. Si usa la concatenación de cadenas para compilar de manera dinámica cualquier parte de la cadena de consulta, es su responsabilidad validar cualquier entrada como protección contra los ataques por inyección de código SQL.
