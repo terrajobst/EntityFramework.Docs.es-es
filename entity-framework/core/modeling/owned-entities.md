@@ -1,5 +1,5 @@
 ---
-title: Propiedad de tipos de entidad - Core EF
+title: Propiedad de tipos de entidad - EF Core
 author: julielerman
 ms.author: divega
 ms.date: 2/26/2018
@@ -11,17 +11,18 @@ ms.sourcegitcommit: 26f33758c47399ae933f22fec8e1d19fa7d2c0b7
 ms.translationtype: MT
 ms.contentlocale: es-ES
 ms.lasthandoff: 04/19/2018
+ms.locfileid: "31533887"
 ---
 # <a name="owned-entity-types"></a>Tipos de entidad en propiedad
 
 >[!NOTE]
 > Esta función es nueva en EF Core 2.0.
 
-Núcleo EF permite a tipos de entidad del modelo que sólo pueden aparecer en las propiedades de navegación de otros tipos de entidad. Estos se denominan _propiedad de tipos de entidad_. La entidad que contiene un tipo de entidad en propiedad es su _propietario_.
+EF Core permite a tipos de entidad del modelo que sólo pueden aparecer en las propiedades de navegación de otros tipos de entidad. Estos se denominan _propiedad de tipos de entidad_. La entidad que contiene un tipo de entidad en propiedad es su _propietario_.
 
 ## <a name="explicit-configuration"></a>Configuración explícita
 
-Propiedad de entidad tipos nunca se incluyen por núcleo de EF en el modelo por convención. Puede utilizar el `OwnsOne` método `OnModelCreating` o anotar el tipo con `OwnedAttribute` (nuevo en EF Core 2.1) para configurar el tipo como un tipo de propiedad.
+Propiedad de entidad tipos nunca se incluyen por EF Core en el modelo por convención. Puede utilizar el `OwnsOne` método `OnModelCreating` o anotar el tipo con `OwnedAttribute` (nuevo en EF Core 2.1) para configurar el tipo como un tipo de propiedad.
 
 En este ejemplo, StreetAddress es un tipo con ninguna propiedad de identidad. Se usa como propiedad del tipo Order para especificar la dirección de envío de un pedido en concreto. En `OnModelCreating`, usamos el `OwnsOne` para especificar que la propiedad ShippingAddress es una entidad de propiedad del tipo de orden.
 
@@ -69,7 +70,7 @@ public class Order
 
 En EF Core 2.0 y 2.1, propiedades de navegación de referencia sólo pueden señalar a los tipos de propiedad. No se admiten colecciones de tipos de propiedad. Estas referencia propiedad tipos siempre tienen una relación uno a uno con el propietario, por lo tanto, no necesitan sus propios valores de clave. En el ejemplo anterior, el tipo de StreetAddress no tiene que definir una propiedad de clave.  
 
-Para comprender cómo EF núcleo realiza el seguimiento de estos objetos, es útil considerar que una clave principal se crea como un [sombrear a la propiedad](xref:core/modeling/shadow-properties) para el tipo de propiedad. El valor de la clave de una instancia del tipo de propiedad será el mismo que el valor de la clave de la instancia de propietario.      
+Para comprender cómo EF Core realiza el seguimiento de estos objetos, es útil considerar que una clave principal se crea como un [sombrear a la propiedad](xref:core/modeling/shadow-properties) para el tipo de propiedad. El valor de la clave de una instancia del tipo de propiedad será el mismo que el valor de la clave de la instancia de propietario.      
 
 ## <a name="mapping-owned-types-with-table-splitting"></a>Tipos con la división de la tabla de asignación de propiedad
 
@@ -78,7 +79,7 @@ Al utilizar bases de datos relacionales, por convención, los tipos de propiedad
 > [!TIP]
 > Propiedad almacenados con la división de la tabla de tipos pueden ser utilizados de forma muy similar a tipos complejos de cómo se utilizan en EF6.
 
-Por convención, Core EF asignará nombre a las columnas de base de datos para las propiedades del tipo de entidad propiedad seguir el patrón de _EntityProperty_OwnedEntityProperty_. Por consiguiente, las propiedades StreetAddress aparecerá en la tabla de pedidos con los nombres ShippingAddress_Street y ShippingAddress_City.
+Por convención, EF Core asignará nombre a las columnas de base de datos para las propiedades del tipo de entidad propiedad seguir el patrón de _EntityProperty_OwnedEntityProperty_. Por consiguiente, las propiedades StreetAddress aparecerá en la tabla de pedidos con los nombres ShippingAddress_Street y ShippingAddress_City.
 
 Puede anexar el `HasColumnName` método para cambiar el nombre de las columnas. En el caso donde StreetAddress es una propiedad pública, sería las asignaciones
 
@@ -96,7 +97,7 @@ modelBuilder.Entity<Order>().OwnsOne(
 
 Un tipo de entidad en propiedad puede ser del mismo tipo .NET como otro tipo de entidad en propiedad, por lo tanto, que el tipo de .NET puede no ser suficiente para identificar un tipo de propiedad.
 
-En esos casos, la propiedad señalando el propietario de la entidad de propiedad se convierte en el _definición de exploración_ del tipo de entidad en propiedad. Desde la perspectiva del núcleo EF, la definición de la navegación es parte de la identidad del tipo junto con el tipo de .NET.   
+En esos casos, la propiedad señalando el propietario de la entidad de propiedad se convierte en el _definición de exploración_ del tipo de entidad en propiedad. Desde la perspectiva del EF Core, la definición de la navegación es parte de la identidad del tipo junto con el tipo de .NET.   
 
 Por ejemplo, en la clase siguiente, ShippingAddress y BillingAddress son ambas del mismo tipo. NET, StreetAddress:
 
