@@ -6,11 +6,12 @@ ms.date: 02/20/2018
 ms.assetid: C21F89EE-FB08-4ED9-A2A0-76CB7656E6E4
 ms.technology: entity-framework-core
 uid: core/what-is-new/index
-ms.openlocfilehash: 7b08f51fe794ba2b10e19057392f016a549979c4
-ms.sourcegitcommit: 2ef0a4a90b01edd22b9206f8729b8de459ef8cab
+ms.openlocfilehash: 557b973c577b5ed8c0b6bae0582d287ee46b9def
+ms.sourcegitcommit: 72e59e6af86b568653e1b29727529dfd7f65d312
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/20/2018
+ms.lasthandoff: 06/04/2018
+ms.locfileid: "34754527"
 ---
 # <a name="what-is-new-in-ef-core"></a>Novedades de EF Core
 
@@ -22,8 +23,8 @@ Puede usar los siguientes vínculos para obtener información sobre las nuevas c
 
 ## <a name="recent-releases"></a>Versiones recientes
 
-- [EF Core 2.1 (actualmente en versión preliminar)](xref:core/what-is-new/ef-core-2.1)
-- [EF Core 2.0 (versión más reciente)](xref:core/what-is-new/ef-core-2.0)
+- [EF Core 2.1 (versión más reciente)](xref:core/what-is-new/ef-core-2.1)
+- [EF Core 2.0](xref:core/what-is-new/ef-core-2.0)
 
 ## <a name="past-releases"></a>Versiones anteriores
 
