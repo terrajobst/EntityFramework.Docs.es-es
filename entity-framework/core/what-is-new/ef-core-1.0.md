@@ -11,6 +11,7 @@ ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
 ms.translationtype: HT
 ms.contentlocale: es-ES
 ms.lasthandoff: 10/27/2017
+ms.locfileid: "26049688"
 ---
 # <a name="features-included-in-ef-core-10"></a>Características incluidas en EF Core 1.0
 

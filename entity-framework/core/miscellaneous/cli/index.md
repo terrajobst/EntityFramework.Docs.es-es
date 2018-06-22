@@ -1,5 +1,5 @@
 ---
-title: "Referencia de la línea de comandos - EF Core"
+title: Referencia de la línea de comandos - EF Core
 author: bricelam
 ms.author: bricelam
 ms.date: 11/6/2017
@@ -9,6 +9,7 @@ ms.sourcegitcommit: fc68321c211aca38f7b9dc3a75677c6ca1b2524b
 ms.translationtype: HT
 ms.contentlocale: es-ES
 ms.lasthandoff: 03/08/2018
+ms.locfileid: "29769426"
 ---
 <a name="entity-framework-core-tools"></a>Herramientas de Entity Framework Core
 ===========================

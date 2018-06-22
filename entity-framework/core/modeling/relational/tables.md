@@ -1,5 +1,5 @@
 ---
-title: "Asignación de tabla - Core EF"
+title: Asignación de tabla - Core EF
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -11,6 +11,7 @@ ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
 ms.translationtype: MT
 ms.contentlocale: es-ES
 ms.lasthandoff: 10/27/2017
+ms.locfileid: "26052735"
 ---
 # <a name="table-mapping"></a>Asignación de tabla
 

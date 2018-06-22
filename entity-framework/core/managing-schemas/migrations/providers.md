@@ -9,6 +9,7 @@ ms.sourcegitcommit: 2ef0a4a90b01edd22b9206f8729b8de459ef8cab
 ms.translationtype: MT
 ms.contentlocale: es-ES
 ms.lasthandoff: 03/20/2018
+ms.locfileid: "30002810"
 ---
 <a name="migrations-with-multiple-providers"></a>Migraciones con varios proveedores
 ==================================

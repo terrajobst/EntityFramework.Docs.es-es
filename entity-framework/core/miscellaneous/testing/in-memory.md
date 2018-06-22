@@ -11,6 +11,7 @@ ms.sourcegitcommit: d096484dcf9eff73d9943fa60db7a418b10ca0b3
 ms.translationtype: MT
 ms.contentlocale: es-ES
 ms.lasthandoff: 01/22/2018
+ms.locfileid: "27995592"
 ---
 # <a name="testing-with-inmemory"></a>Probar con InMemory
 

@@ -11,6 +11,7 @@ ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
 ms.translationtype: HT
 ms.contentlocale: es-ES
 ms.lasthandoff: 10/27/2017
+ms.locfileid: "26049678"
 ---
 # <a name="new-features-in-ef-core-11"></a>Características nuevas en EF Core 1.1
 

@@ -1,5 +1,5 @@
 ---
-title: "Actualización desde versiones anteriores a EF Core 2 - Core EF"
+title: Actualización desde versiones anteriores a EF Core 2 - Core EF
 author: divega
 ms.author: divega
 ms.date: 8/13/2017
@@ -11,6 +11,7 @@ ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
 ms.translationtype: MT
 ms.contentlocale: es-ES
 ms.lasthandoff: 02/28/2018
+ms.locfileid: "29678619"
 ---
 # <a name="upgrading-applications-from-previous-versions-to-ef-core-20"></a>Actualizar aplicaciones de versiones anteriores a EF Core 2.0
 

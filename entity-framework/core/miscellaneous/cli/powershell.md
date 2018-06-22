@@ -9,6 +9,7 @@ ms.sourcegitcommit: 507a40ed050fee957bcf8cf05f6e0ec8a3b1a363
 ms.translationtype: MT
 ms.contentlocale: es-ES
 ms.lasthandoff: 04/26/2018
+ms.locfileid: "31812565"
 ---
 <a name="ef-core-package-manager-console-tools"></a>Herramientas de la consola de administrador de paquetes de EF Core
 =====================================

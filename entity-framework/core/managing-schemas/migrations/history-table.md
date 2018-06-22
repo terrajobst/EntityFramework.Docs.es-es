@@ -9,6 +9,7 @@ ms.sourcegitcommit: b467368cc350e6059fdc0949e042a41cb11e61d9
 ms.translationtype: MT
 ms.contentlocale: es-ES
 ms.lasthandoff: 11/15/2017
+ms.locfileid: "26053815"
 ---
 <a name="custom-migrations-history-table"></a>Tabla de historial de migraciones personalizado
 ===============================
