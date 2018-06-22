@@ -1,5 +1,5 @@
 ---
-title: "Migrar desde EF6 EF básica: validar los requisitos"
+title: 'Migrar desde EF6 EF básica: validar los requisitos'
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -10,6 +10,7 @@ ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
 ms.translationtype: MT
 ms.contentlocale: es-ES
 ms.lasthandoff: 10/27/2017
+ms.locfileid: "26052865"
 ---
 # <a name="before-porting-from-ef6-to-ef-core-validate-your-applications-requirements"></a><span data-ttu-id="8a739-102">Antes de migrar desde EF6 Core EF: validar los requisitos de su aplicación</span><span class="sxs-lookup"><span data-stu-id="8a739-102">Before porting from EF6 to EF Core: Validate your Application's Requirements</span></span>
 

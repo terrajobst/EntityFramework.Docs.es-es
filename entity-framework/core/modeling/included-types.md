@@ -11,6 +11,7 @@ ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
 ms.translationtype: MT
 ms.contentlocale: es-ES
 ms.lasthandoff: 10/27/2017
+ms.locfileid: "26052605"
 ---
 # <a name="including--excluding-types"></a><span data-ttu-id="2e2c7-102">Incluidos & excluir tipos de</span><span class="sxs-lookup"><span data-stu-id="2e2c7-102">Including & Excluding Types</span></span>
 

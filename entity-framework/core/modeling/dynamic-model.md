@@ -11,6 +11,7 @@ ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
 ms.translationtype: MT
 ms.contentlocale: es-ES
 ms.lasthandoff: 02/28/2018
+ms.locfileid: "29678727"
 ---
 # <a name="alternating-between-multiple-models-with-the-same-dbcontext-type"></a><span data-ttu-id="fc5b9-102">Alternando entre varios modelos con el mismo tipo de DbContext</span><span class="sxs-lookup"><span data-stu-id="fc5b9-102">Alternating between multiple models with the same DbContext type</span></span>
 

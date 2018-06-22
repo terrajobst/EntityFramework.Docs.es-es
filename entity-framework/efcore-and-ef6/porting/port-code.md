@@ -1,5 +1,5 @@
 ---
-title: "Migrar desde EF6 EF Core - trasladar un modelo basado en código"
+title: Migrar desde EF6 EF Core - trasladar un modelo basado en código
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -10,6 +10,7 @@ ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
 ms.translationtype: MT
 ms.contentlocale: es-ES
 ms.lasthandoff: 10/27/2017
+ms.locfileid: "26052955"
 ---
 # <a name="porting-an-ef6-code-based-model-to-ef-core"></a><span data-ttu-id="19325-102">Trasladar un modelo basado en código de EF6 a EF Core</span><span class="sxs-lookup"><span data-stu-id="19325-102">Porting an EF6 Code-Based Model to EF Core</span></span>
 

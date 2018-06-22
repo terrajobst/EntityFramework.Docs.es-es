@@ -11,6 +11,7 @@ ms.sourcegitcommit: fc68321c211aca38f7b9dc3a75677c6ca1b2524b
 ms.translationtype: HT
 ms.contentlocale: es-ES
 ms.lasthandoff: 03/08/2018
+ms.locfileid: "29769444"
 ---
 # <a name="ef-core-tools--extensions"></a><span data-ttu-id="91934-102">Herramientas y extensiones de EF Core</span><span class="sxs-lookup"><span data-stu-id="91934-102">EF Core Tools & Extensions</span></span>
 

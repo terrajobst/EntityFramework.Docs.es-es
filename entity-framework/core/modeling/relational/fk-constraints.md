@@ -11,6 +11,7 @@ ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
 ms.translationtype: MT
 ms.contentlocale: es-ES
 ms.lasthandoff: 10/27/2017
+ms.locfileid: "26052745"
 ---
 # <a name="foreign-key-constraints"></a><span data-ttu-id="0e3d3-102">Restricciones de clave externa</span><span class="sxs-lookup"><span data-stu-id="0e3d3-102">Foreign Key Constraints</span></span>
 

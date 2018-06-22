@@ -10,6 +10,7 @@ ms.sourcegitcommit: 2ef0a4a90b01edd22b9206f8729b8de459ef8cab
 ms.translationtype: HT
 ms.contentlocale: es-ES
 ms.lasthandoff: 03/20/2018
+ms.locfileid: "30002761"
 ---
 # <a name="compare-ef-core--ef6"></a><span data-ttu-id="e866a-102">Comparar EF Core y EF6</span><span class="sxs-lookup"><span data-stu-id="e866a-102">Compare EF Core & EF6</span></span>
 

@@ -11,6 +11,7 @@ ms.sourcegitcommit: 8f3be0a2a394253efb653388ec66bda964e5ee1b
 ms.translationtype: MT
 ms.contentlocale: es-ES
 ms.lasthandoff: 03/05/2018
+ms.locfileid: "29745496"
 ---
 # <a name="concurrency-tokens"></a><span data-ttu-id="0b95c-102">Tokens de simultaneidad</span><span class="sxs-lookup"><span data-stu-id="0b95c-102">Concurrency Tokens</span></span>
 

@@ -9,6 +9,7 @@ ms.sourcegitcommit: 507a40ed050fee957bcf8cf05f6e0ec8a3b1a363
 ms.translationtype: MT
 ms.contentlocale: es-ES
 ms.lasthandoff: 04/26/2018
+ms.locfileid: "31812669"
 ---
 # <a name="-reverse-engineering"></a><span data-ttu-id="fa1c4-102">🔧 La ingeniería inversa</span><span class="sxs-lookup"><span data-stu-id="fa1c4-102">🔧 Reverse Engineering</span></span>
 

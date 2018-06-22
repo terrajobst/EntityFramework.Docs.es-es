@@ -1,5 +1,5 @@
 ---
-title: "Resistencia de conexión - Core EF"
+title: Resistencia de conexión - Core EF
 author: rowanmiller
 ms.author: divega
 ms.date: 11/15/2016
@@ -11,6 +11,7 @@ ms.sourcegitcommit: 860ec5d047342fbc4063a0de881c9861cc1f8813
 ms.translationtype: MT
 ms.contentlocale: es-ES
 ms.lasthandoff: 11/05/2017
+ms.locfileid: "26053535"
 ---
 # <a name="connection-resiliency"></a><span data-ttu-id="d4677-102">Resistencia de conexión</span><span class="sxs-lookup"><span data-stu-id="d4677-102">Connection Resiliency</span></span>
 

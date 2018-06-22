@@ -11,6 +11,7 @@ ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
 ms.translationtype: MT
 ms.contentlocale: es-ES
 ms.lasthandoff: 10/27/2017
+ms.locfileid: "26053035"
 ---
 # <a name="relationships"></a><span data-ttu-id="fe3cf-102">Relaciones</span><span class="sxs-lookup"><span data-stu-id="fe3cf-102">Relationships</span></span>
 

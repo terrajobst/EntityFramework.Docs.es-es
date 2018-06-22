@@ -1,5 +1,5 @@
 ---
-title: "Longitud máxima - Core EF"
+title: Longitud máxima - Core EF
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -11,6 +11,7 @@ ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
 ms.translationtype: MT
 ms.contentlocale: es-ES
 ms.lasthandoff: 10/27/2017
+ms.locfileid: "26052675"
 ---
 # <a name="maximum-length"></a><span data-ttu-id="68d98-102">Longitud máxima</span><span class="sxs-lookup"><span data-stu-id="68d98-102">Maximum Length</span></span>
 

@@ -11,6 +11,7 @@ ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
 ms.translationtype: MT
 ms.contentlocale: es-ES
 ms.lasthandoff: 10/27/2017
+ms.locfileid: "26052785"
 ---
 # <a name="inheritance"></a><span data-ttu-id="6e12b-102">Herencia</span><span class="sxs-lookup"><span data-stu-id="6e12b-102">Inheritance</span></span>
 

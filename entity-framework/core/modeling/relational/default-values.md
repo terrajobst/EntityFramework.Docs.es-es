@@ -11,6 +11,7 @@ ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
 ms.translationtype: MT
 ms.contentlocale: es-ES
 ms.lasthandoff: 10/27/2017
+ms.locfileid: "26052765"
 ---
 # <a name="default-values"></a><span data-ttu-id="b13d4-102">Valores predeterminados</span><span class="sxs-lookup"><span data-stu-id="b13d4-102">Default Values</span></span>
 

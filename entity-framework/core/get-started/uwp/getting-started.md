@@ -1,5 +1,5 @@
 ---
-title: "Introducción a UWP: base de datos nueva - EF Core"
+title: 'Introducción a UWP: base de datos nueva - EF Core'
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
@@ -12,6 +12,7 @@ ms.sourcegitcommit: 96324e58c02b97277395ed43173bf13ac80d2012
 ms.translationtype: HT
 ms.contentlocale: es-ES
 ms.lasthandoff: 12/01/2017
+ms.locfileid: "26049838"
 ---
 # <a name="getting-started-with-ef-core-on-universal-windows-platform-uwp-with-a-new-database"></a><span data-ttu-id="4b17a-102">Introducción a EF Core en Plataforma universal de Windows (UWP) con una base de datos nueva</span><span class="sxs-lookup"><span data-stu-id="4b17a-102">Getting Started with EF Core on Universal Windows Platform (UWP) with a New Database</span></span>
 

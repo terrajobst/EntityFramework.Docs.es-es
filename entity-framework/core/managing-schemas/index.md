@@ -1,5 +1,5 @@
 ---
-title: "Administración de esquemas de base de datos - EF Core"
+title: Administración de esquemas de base de datos - EF Core
 author: bricelam
 ms.author: divega
 ms.date: 10/30/2017
@@ -9,6 +9,7 @@ ms.sourcegitcommit: b467368cc350e6059fdc0949e042a41cb11e61d9
 ms.translationtype: HT
 ms.contentlocale: es-ES
 ms.lasthandoff: 11/15/2017
+ms.locfileid: "26049387"
 ---
 # <a name="managing-database-schemas"></a><span data-ttu-id="335e1-102">Administración de esquemas de base de datos</span><span class="sxs-lookup"><span data-stu-id="335e1-102">Managing Database Schemas</span></span>
 <span data-ttu-id="335e1-103">EF Core proporciona dos métodos principales para mantener sincronizados el esquema de la base de datos y el modelo de EF Core. Para elegir entre los dos, decida si es el modelo de EF Core o el esquema de la base de datos el origen verdadero.</span><span class="sxs-lookup"><span data-stu-id="335e1-103">EF Core provides two primary ways of keeping your EF Core model and database schema in sync. To choose between the two, decide whether your EF Core model or the database schema is the source of truth.</span></span>

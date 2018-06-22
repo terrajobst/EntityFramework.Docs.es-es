@@ -11,6 +11,7 @@ ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
 ms.translationtype: MT
 ms.contentlocale: es-ES
 ms.lasthandoff: 10/27/2017
+ms.locfileid: "26052485"
 ---
 # <a name="computed-columns"></a><span data-ttu-id="4f8c8-102">Columnas calculadas</span><span class="sxs-lookup"><span data-stu-id="4f8c8-102">Computed Columns</span></span>
 

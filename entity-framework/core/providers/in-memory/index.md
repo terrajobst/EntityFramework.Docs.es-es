@@ -11,6 +11,7 @@ ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
 ms.translationtype: HT
 ms.contentlocale: es-ES
 ms.lasthandoff: 02/28/2018
+ms.locfileid: "29678991"
 ---
 # <a name="ef-core-in-memory-database-provider"></a><span data-ttu-id="3ad87-102">Proveedor de base de datos InMemory para EF Core</span><span class="sxs-lookup"><span data-stu-id="3ad87-102">EF Core In-Memory Database Provider</span></span>
 
