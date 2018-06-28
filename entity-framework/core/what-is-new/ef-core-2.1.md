@@ -6,15 +6,14 @@ ms.date: 2/20/2018
 ms.assetid: 585F90A3-4D5A-4DD1-92D8-5243B14E0FEC
 ms.technology: entity-framework-core
 uid: core/what-is-new/ef-core-2.1
-ms.openlocfilehash: db1648095aa4d612af53f4e10a30be36edc40da5
-ms.sourcegitcommit: 4997314356118d0d97b04ad82e433e49bb9420a2
+ms.openlocfilehash: 2372a6b2e3f3b7b1d9214a6ea321fe28cea45fff
+ms.sourcegitcommit: 72e59e6af86b568653e1b29727529dfd7f65d312
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 04/16/2018
+ms.lasthandoff: 06/04/2018
+ms.locfileid: "34754430"
 ---
 # <a name="new-features-in-ef-core-21"></a>Novedades de EF Core 2.1
-> [!NOTE]  
-> Esta versión aún está en versión preliminar.
 
 Además de numerosas correcciones de errores y pequeñas mejoras funcionales y de rendimiento, EF Core 2.1 incluye algunas características nuevas muy atractivas:
 
@@ -124,7 +123,7 @@ var query = context.Customers.Select(
 
 Tenga en cuenta que esta consulta solo se trasladará a dos consultas SQL: una para clientes y la siguiente para pedidos.
 
-## <a name="ownedattribute"></a>OwnedAttribute
+## <a name="owned-attribute"></a>Atributo [Owned]
 
 Ahora es posible configurar [tipos de entidad en propiedad](xref:core/modeling/owned-entities) anotando simplemente el tipo con `[Owned]` y asegurándose luego de que la entidad de propietario se agrega al modelo:
 
@@ -143,12 +142,14 @@ public class Order
 }
 ```
 
-## <a name="new-dotnet-ef-global-tool"></a>Nueva herramienta global dotnet-ef
+## <a name="command-line-tool-dotnet-ef-included-in-net-core-sdk"></a>Herramienta de línea de comandos dotnet-ef incluida en el SDK de .NET Core
 
-Los comandos de _dotnet-ef_ se han convertido en una herramienta global de CLI de .NET, así que ya no es necesario usar DotNetCliToolReference en el proyecto para poder utilizar migraciones o para aplicar la técnica scaffolding a DbContext desde una base de datos existente.
+Los comandos de _dotnet-ef_ ahora forman parte del SDK de .NET Core, así que ya no es necesario usar DotNetCliToolReference en el proyecto para poder usar migraciones o para aplicar la técnica scaffolding a DbContext desde una base de datos existente.
+
+Vea la sección sobre [cómo instalar las herramientas](xref:core/miscellaneous/cli/dotnet#installing-the-tools) para obtener más información sobre cómo habilitar herramientas de línea de comandos para diferentes versiones del SDK de .NET Core y EF Core.
 
 ## <a name="microsoftentityframeworkcoreabstractions-package"></a>Paquete Microsoft.EntityFrameworkCore.Abstractions
-El nuevo paquete contiene atributos e interfaces que puede usar en los proyectos para activar características de EF Core sin depender de EF Core como un todo. P. ej., el atributo [Owned] introducido en la versión preliminar 1 se ha movido aquí.
+El nuevo paquete contiene atributos e interfaces que puede usar en los proyectos para activar características de EF Core sin depender de EF Core como un todo. Por ejemplo, el atributo [Owned] y la interfaz de ILazyLoader se encuentran aquí.
 
 ## <a name="state-change-events"></a>Eventos de cambio de estado
 
@@ -165,7 +166,7 @@ var query = context.People.FromSql(sql);
 
 ## <a name="database-provider-compatibility"></a>Compatibilidad del proveedor de bases de datos
 
-EF Core 2.1 se ha diseñado para su compatibilidad con los proveedores de bases de datos creados para EF Core 2.0, o que requieren al menos cambios mínimos. Aunque algunas de las características que se han descrito anteriormente (por ejemplo, las conversiones de valores) requieren un proveedor actualizado, otras (por ejemplo, la carga diferida) funcionarán con los proveedores existentes.
+Se recomienda usar EF Core 2.1 con proveedores que se hayan actualizado o que al menos se haya comprobado que funcionan con EF Core 2.1.
 
 > [!TIP]
 > Si encuentra alguna incompatibilidad inesperada o algún problema en las nuevas características o si tiene comentarios sobre ellas, notifíquelos mediante [nuestro rastreador de problemas](https://github.com/aspnet/EntityFrameworkCore/issues/new).
