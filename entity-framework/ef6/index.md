@@ -1,20 +1,56 @@
 ---
-title: Entity Framework 6
-author: rowanmiller
+title: Introducción rápida a Entity Framework 6
+author: divega
+ms.date: 2016-10-23
+ms.prod: entity-framework
 ms.author: divega
-ms.date: 10/27/2016
-ms.assetid: d16eb5be-7e94-477a-84cd-e6dce25df12a
+ms.manager: avickers
 ms.technology: entity-framework-6
+ms.topic: article
+ms.assetid: 8ae74d63-6bad-4686-b325-bbf9d68f3743
+caps.latest.revision: 5
 uid: ef6/index
-ms.openlocfilehash: 235a1404e56b5a78a3ef4f85e37c84a8bde2c014
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: df661f19afdeef53257c86bdd32b1444737c9b0a
+ms.sourcegitcommit: 45494121254ad4fdcec613d1dd22d850068d6f39
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/27/2017
-ms.locfileid: "26048907"
+ms.lasthandoff: 07/08/2018
+ms.locfileid: "37913504"
 ---
-# <a name="entity-framework-6"></a><span data-ttu-id="76fc7-102">Entity Framework 6</span><span class="sxs-lookup"><span data-stu-id="76fc7-102">Entity Framework 6</span></span>
+# <a name="entity-framework-6-quick-overview"></a><span data-ttu-id="d2992-102">Introducción rápida a Entity Framework 6</span><span class="sxs-lookup"><span data-stu-id="d2992-102">Entity Framework 6 Quick Overview</span></span>
 
-<span data-ttu-id="76fc7-103">Entity Framework 6 (EF6) es una tecnología de acceso a datos probada con muchos años de características y estabilización.</span><span class="sxs-lookup"><span data-stu-id="76fc7-103">Entity Framework 6 (EF6) is a tried and tested data access technology with many years of features and stabilization.</span></span> <span data-ttu-id="76fc7-104">Se publicó por primera vez en 2008, como parte de .NET Framework 3.5 SP1 y Visual Studio 2008 SP1.</span><span class="sxs-lookup"><span data-stu-id="76fc7-104">It first released in 2008, as part of .NET Framework 3.5 SP1 and Visual Studio 2008 SP1.</span></span> <span data-ttu-id="76fc7-105">A partir de la versión EF4.1, se ha distribuido como el [paquete NuGet EntityFramework](https://www.nuget.org/packages/EntityFramework/), actualmente uno de los paquetes más populares en NuGet.org.</span><span class="sxs-lookup"><span data-stu-id="76fc7-105">Starting with the EF4.1 release it has shipped as the [EntityFramework NuGet package](https://www.nuget.org/packages/EntityFramework/) - currently one of the most popular packages on NuGet.org.</span></span>
+<span data-ttu-id="d2992-103">Entity Framework 6 (EF6) es un asignador relacional de objetos (O/RM) probado para .NET con muchos años de desarrollo de características y estabilización.</span><span class="sxs-lookup"><span data-stu-id="d2992-103">Entity Framework 6 (EF6) is a tried and tested object-relational mapper (O/RM) for .NET with many years of feature development and stabilization.</span></span>
 
-<span data-ttu-id="76fc7-106">La documentación de Entity Framework 6 está disponible en [msdn.com/data/ef](http://msdn.com/data/ef).</span><span class="sxs-lookup"><span data-stu-id="76fc7-106">The Entity Framework 6 documentation is currently available at [msdn.com/data/ef](http://msdn.com/data/ef).</span></span>
+<span data-ttu-id="d2992-104">EF6 implementa muchas características de O/RM populares:</span><span class="sxs-lookup"><span data-stu-id="d2992-104">EF6 implements many popular O/RM features:</span></span>
+- <span data-ttu-id="d2992-105">Asignación de clases de entidad con "omisión de persistencia" (lo que también se conoce como "POCO", u objeto CLR estándar) que no depende de ningún tipo de EF</span><span class="sxs-lookup"><span data-stu-id="d2992-105">Mapping of "persistence ignorant" (also known as "POCO", for Plan-Old CLR Object) entity classes which do not depend on any EF types</span></span>
+- <span data-ttu-id="d2992-106">Seguimiento de cambios automático</span><span class="sxs-lookup"><span data-stu-id="d2992-106">Automatic change tracking</span></span>
+- <span data-ttu-id="d2992-107">Resolución de identidad y unidad de trabajo</span><span class="sxs-lookup"><span data-stu-id="d2992-107">Identity resolution and Unit of Work</span></span>
+- <span data-ttu-id="d2992-108">Carga diligente, diferida y explícita</span><span class="sxs-lookup"><span data-stu-id="d2992-108">Eager, lazy and explicit loading</span></span>
+- <span data-ttu-id="d2992-109">Traducción de consultas fuertemente tipadas con LINQ (Language Integrated Query)</span><span class="sxs-lookup"><span data-stu-id="d2992-109">Translation of strongly-typed queries using LINQ (Language INtegrated Query)</span></span> 
+- <span data-ttu-id="d2992-110">Capacidades de asignación enriquecidas que incluyen compatibilidad con:</span><span class="sxs-lookup"><span data-stu-id="d2992-110">Rich mapping capabilities, including support for:</span></span>
+  - <span data-ttu-id="d2992-111">Herencia (tabla por jerarquía, tabla por tipo y tabla por clase concreta)</span><span class="sxs-lookup"><span data-stu-id="d2992-111">Inheritance (table per hierarchy, table per type and table per concrete class)</span></span>
+  - <span data-ttu-id="d2992-112">Tipos complejos</span><span class="sxs-lookup"><span data-stu-id="d2992-112">Complex types</span></span>
+  - <span data-ttu-id="d2992-113">Procedimientos almacenados</span><span class="sxs-lookup"><span data-stu-id="d2992-113">Stored procedures</span></span>
+- <span data-ttu-id="d2992-114">Un diseñador visual para crear modelos de entidad.</span><span class="sxs-lookup"><span data-stu-id="d2992-114">A visual designer to create entity models.</span></span>
+- <span data-ttu-id="d2992-115">Una experiencia de "Code First" que admite la creación de modelos de entidad mediante la escritura de código.</span><span class="sxs-lookup"><span data-stu-id="d2992-115">A "Code First" experience that supports creating entity models by writing code.</span></span>
+- <span data-ttu-id="d2992-116">Los modelos pueden generarse a partir de bases de datos existentes y luego editarse manualmente, o bien se pueden crear desde cero y luego usarse para generar nuevas bases de datos.</span><span class="sxs-lookup"><span data-stu-id="d2992-116">Models can either be generated form existing databases and then hand-edited, or they can be created from scratch and then used to generate new databases.</span></span>
+- <span data-ttu-id="d2992-117">Integración con modelos de aplicación de .NET Framework, incluido ASP.NET, y mediante enlace de datos, con WPF y WinForms.</span><span class="sxs-lookup"><span data-stu-id="d2992-117">Integration with .NET Framework application models, including ASP.NET, and through databinding, with WPF and WinForms.</span></span>
+- <span data-ttu-id="d2992-118">Conectividad de base de datos basada en ADO.NET y varios proveedores disponibles para conectarse a SQL Server, Oracle, MySQL, SQLite, PostgreSQL, DB2, etc.</span><span class="sxs-lookup"><span data-stu-id="d2992-118">Database connectivity based on ADO.NET and numerous providers available to connect to SQL Server, Oracle, MySQL, SQLite, PostgreSQL, DB2, etc.</span></span>
+
+<span data-ttu-id="d2992-119">Como O/RM, EF6 reduce la discordancia de impedancia entre los mundos relacionales y orientados a objetos, lo que permite a los desarrolladores escribir aplicaciones que interactúan con datos almacenados en bases de datos relacionales con objetos .NET fuertemente tipados que representan el dominio de la aplicación, y eliminar la necesidad de una gran parte del código de "mecánica" de acceso de datos que normalmente deben escribir.</span><span class="sxs-lookup"><span data-stu-id="d2992-119">As an O/RM, EF6 reduces the impedance mismatch between the relational and object-oriented worlds, enabling developers to write applications that interact with data stored in relational databases using strongly-typed .NET objects that represent the application's domain, and eliminating the need for a large portion of the data access "plumbing" code that they usually need to write.</span></span>
+
+## <a name="should-i-use-ef6-or-ef-core"></a><span data-ttu-id="d2992-120">¿Debo usar EF6 o EF Core?</span><span class="sxs-lookup"><span data-stu-id="d2992-120">Should I use EF6 or EF Core?</span></span>
+
+<span data-ttu-id="d2992-121">EF Core es una versión más moderna, ligera y extensible de Entity Framework que tiene capacidades y ventajas muy similares a EF6.</span><span class="sxs-lookup"><span data-stu-id="d2992-121">EF Core is a more modern, lightweight and extensible version of Entity Framework that has very similar capabilities and benefits to EF6.</span></span>
+<span data-ttu-id="d2992-122">EF Core es una reescritura completa y contiene muchas características nuevas que no están disponibles en EF6, aunque todavía carece de algunas de las funcionalidades más avanzadas de asignación de EF6.</span><span class="sxs-lookup"><span data-stu-id="d2992-122">EF Core is a complete rewrite and contains many new features not available in EF6, although it also still lacks some of the most advanced mapping capabilities of EF6.</span></span>
+<span data-ttu-id="d2992-123">Se recomienda usar EF Core en las aplicaciones nuevas siempre que el conjunto de características se ajuste a los requisitos.</span><span class="sxs-lookup"><span data-stu-id="d2992-123">We recommend using EF Core in new applications as long as the feature set matches your requirements.</span></span>
+<span data-ttu-id="d2992-124">En [Comparar EF Core y EF6](xref:efcore-and-ef6/index) se examina el proceso de elección más detalladamente.</span><span class="sxs-lookup"><span data-stu-id="d2992-124">[Compare EF Core & EF6](xref:efcore-and-ef6/index) examines this choice in greater detail.</span></span>
+
+## <a name="get-startedef6get-startedmd"></a>[<span data-ttu-id="d2992-125">Primeros pasos</span><span class="sxs-lookup"><span data-stu-id="d2992-125">Get Started</span></span>](~/ef6/get-started.md)
+
+<span data-ttu-id="d2992-126">Agregue el paquete NuGet de EntityFramework al proyecto o instale Entity Framework Tools para Visual Studio.</span><span class="sxs-lookup"><span data-stu-id="d2992-126">Add the EntityFramework NuGet package to your project or install the Entity Framework Tools for Visual Studio.</span></span> <span data-ttu-id="d2992-127">Luego vea vídeos, lea tutoriales y documentación avanzada que le ayuden a sacar el máximo partido de Entity Framework 6.</span><span class="sxs-lookup"><span data-stu-id="d2992-127">Then watch videos, read tutorials, and advanced documentation to help you make the most of Entity Framework 6.</span></span>
+
+## <a name="past-entity-framework-versions"></a><span data-ttu-id="d2992-128">Versiones anteriores de Entity Framework</span><span class="sxs-lookup"><span data-stu-id="d2992-128">Past Entity Framework Versions</span></span>
+
+<span data-ttu-id="d2992-129">Esta es la documentación de la versión más reciente de Entity Framework 6, aunque la mayor parte también se aplica a las versiones anteriores.</span><span class="sxs-lookup"><span data-stu-id="d2992-129">This is the documentation for the latest version of Entity Framework 6, although much of it also applies to past releases.</span></span>
+<span data-ttu-id="d2992-130">Vea [Novedades](~/ef6/what-is-new/index.md) y [Versiones anteriores](~/ef6/what-is-new/past-releases.md) para obtener una lista completa de las versiones de EF y las características incluidas.</span><span class="sxs-lookup"><span data-stu-id="d2992-130">Check out [What's New](~/ef6/what-is-new/index.md) and [Past Releases](~/ef6/what-is-new/past-releases.md) for a complete list of EF releases and the features they introduced.</span></span>
