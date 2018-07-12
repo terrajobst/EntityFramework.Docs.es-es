@@ -9,12 +9,12 @@ ms.technology: entity-framework-6
 ms.topic: article
 ms.assetid: 56e00fa2-f9f0-48b3-8006-f8266ca7e74b
 caps.latest.revision: 3
-ms.openlocfilehash: e06dc1c35f8d74772e5c7d69b29553288fd652d0
-ms.sourcegitcommit: f05e7b62584cf228f17390bb086a61d505712e1b
+ms.openlocfilehash: 8a656ca73a7e1a628f4053ff7ad47f5c1b17d878
+ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 07/08/2018
-ms.locfileid: "37911729"
+ms.lasthandoff: 07/10/2018
+ms.locfileid: "37949184"
 ---
 # <a name="designer-code-generation-templates"></a>Plantillas de generación de código del diseñador
 Cuando se crea un modelo con Entity Framework Designer, las clases y el contexto derivado se generan automáticamente. Además de la generación de código predeterminada, también se proporcionan una serie de plantillas que pueden usarse para personalizar el código que se genera. Estas plantillas se proporcionan como plantillas de texto T4, lo que permite personalizarlas en caso necesario.
@@ -151,7 +151,7 @@ Tiene que seleccionar la pestaña **Online** al agregar la plantilla para descar
 
 ### <a name="what-are-the-web-sites-templates"></a>Qué son las plantillas "Sitios web"
 
-Las plantillas "Sitios web" (es decir, **Generador de DbContext para EF 5.x para sitios web de C\#**) se usan en proyectos de sitio web creados con **Archivo -&gt; Nuevo -&gt; Sitio web...** Son distintas a las aplicaciones web, creadas con **Archivo -&gt; Nuevo -&gt; Proyecto...** , que usan las plantillas estándar. Se proporcionan plantillas independientes porque así lo exige el sistema de plantilla de elemento de Visual Studio.
+Las plantillas "Sitios web" (es decir, **Generador de DbContext para EF 5.x para sitios web de C\#**) se usan en proyectos de sitio web creados con **Archivo -&gt; Nuevo -&gt; Sitio web...**. Son distintas a las aplicaciones web, creadas con **Archivo -&gt; Nuevo -&gt; Proyecto...** , que usan las plantillas estándar. Se proporcionan plantillas independientes porque así lo exige el sistema de plantilla de elemento de Visual Studio.
 
 ## <a name="using-a-template"></a>Uso de una plantilla
 

@@ -9,12 +9,12 @@ ms.technology: entity-framework-6
 ms.topic: article
 ms.assetid: 41d1f86b-ce66-4bf2-8963-48514406fb4c
 caps.latest.revision: 3
-ms.openlocfilehash: 0da2ce778a765037ecacd0726cbb7cda08b5683f
-ms.sourcegitcommit: f05e7b62584cf228f17390bb086a61d505712e1b
+ms.openlocfilehash: dba6403fa341e1abfe8da488a19cf8520e3ea574
+ms.sourcegitcommit: 390f3a37bc55105ed7cc5b0e0925b7f9c9e80ba6
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 07/08/2018
-ms.locfileid: "37911709"
+ms.lasthandoff: 07/09/2018
+ms.locfileid: "37914181"
 ---
 # <a name="whats-new-in-ef6"></a>Novedades de EF6
 
@@ -28,14 +28,14 @@ En esta página se documentan las características incluidas en cada nueva versi
 
 ### <a name="ef-tools-update-in-visual-studio-2017-157"></a>Actualización de EF Tools para Visual Studio 2017 15.7
 
-En mayo de 2018 se ha publicado una versión actualizada de EF6 Tools para Visual Studio 2017 15.7.
-Incluye mejoras en algunas áreas problemáticas habituales:
+En mayo de 2018 se publicó una versión actualizada de EF6 Tools como parte de Visual Studio 2017 15.7.
+Incluye mejoras para algunas de las áreas problemáticas más habituales:
 
-- Revisión de la accesibilidad de la interfaz de usuario
-- Solución alternativa para la regresión de rendimiento de SQL Server sobre la ingeniería inversa [#4](https://github.com/aspnet/entityframework6/issues/4)
-- Actualización del modelo de compatibilidad de base de datos para modelos más grandes en SQL Server [#185](https://github.com/aspnet/EntityFramework6/issues/185)
+- Correcciones de varios errores de accesibilidad de la interfaz de usuario
+- Solución alternativa para la regresión del rendimiento de SQL Server al generar modelos a partir de bases de datos existentes [#4](https://github.com/aspnet/entityframework6/issues/4)
+- Compatibilidad para la actualización de modelos más grandes en SQL Server [#185](https://github.com/aspnet/EntityFramework6/issues/185)
 
-Esta nueva versión de EF Tools instala el runtime de EF 6.2 al crear un modelo en un proyecto nuevo. Con versiones anteriores de Visual Studio, es posible usar el runtime de EF 6.2 (así como cualquier versión anterior de EF) mediante la instalación de la versión correspondiente del paquete NuGet.
+Otra mejora de esta versión nueva de EF Tools es que ahora instala el runtime de EF 6.2 al crear un modelo en un proyecto nuevo. Con versiones anteriores de Visual Studio, es posible usar el runtime de EF 6.2 (así como cualquier versión anterior de EF) mediante la instalación de la versión correspondiente del paquete NuGet.
 
 ### <a name="ef-62-runtime"></a>Runtime de EF 6.2
 
@@ -59,4 +59,4 @@ Para obtener información sobre las próximas versiones de EF6, vea el [plan de 
 
 ## <a name="past-releases"></a>Versiones anteriores
 
-La página [Versiones anteriores](past-releases.md) contiene un archivo de todas las versiones anteriores de EF y de las características principales incluidas en cada versión. 
+La página [Versiones anteriores](past-releases.md) contiene un archivo de todas las versiones anteriores de EF y de las características principales incluidas en cada versión.

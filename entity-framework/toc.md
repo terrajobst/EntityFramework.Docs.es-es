@@ -12,14 +12,14 @@
 
 ## [Entity Framework Core](core/index.md)
 
-### [Novedades de EF Core](core/what-is-new/index.md)
+### [Novedades](core/what-is-new/index.md)
 #### [Guía básica de EF Core](core/what-is-new/roadmap.md)
 #### [EF Core 2.1](core/what-is-new/ef-core-2.1.md)
 #### [EF Core 2.0](core/what-is-new/ef-core-2.0.md)
 #### [EF Core 1.1](core/what-is-new/ef-core-1.1.md)
 #### [EF Core 1.0](core/what-is-new/ef-core-1.0.md)
 
-### [Introducción](core/get-started/index.md)
+### [Primeros pasos](core/get-started/index.md)
 #### [Instalación de EF Core](core/get-started/install/index.md)
 #### [.NET Framework (consola, WinForms, WPF, etc.)](core/get-started/full-dotnet/index.md)
 ##### [.NET Framework: nueva base de datos](core/get-started/full-dotnet/new-db.md)
@@ -67,6 +67,16 @@
 ##### [Claves alternativas (restricciones únicas)](core/modeling/relational/unique-constraints.md)
 ##### [Herencia (base de datos relacional)](core/modeling/relational/inheritance.md)
 
+### [Administración de esquemas de base de datos](core/managing-schemas/index.md)
+#### [Migraciones](core/managing-schemas/migrations/index.md)
+##### [Entornos de equipo](core/managing-schemas/migrations/teams.md)
+##### [Operaciones personalizadas](core/managing-schemas/migrations/operations.md)
+##### [Uso de un proyecto independiente](core/managing-schemas/migrations/projects.md)
+##### [Varios proveedores](core/managing-schemas/migrations/providers.md)
+##### [Tabla de historial personalizada](core/managing-schemas/migrations/history-table.md)
+#### [🔧 Crear y quitar API](core/managing-schemas/ensure-created.md)
+#### [🔧 Ingeniería inversa](core/managing-schemas/scaffolding.md)
+
 ### [Consulta de datos](core/querying/index.md)
 #### [Consulta básica](core/querying/basic.md)
 #### [Carga de datos relacionados](core/querying/related-data.md)
@@ -97,23 +107,13 @@
 #### [InMemory (para pruebas)](core/providers/in-memory/index.md)
 #### [Escritura de un proveedor de base de datos](core/providers/writing-a-provider.md)
 
-### [Administración de esquemas de base de datos](core/managing-schemas/index.md)
-#### [Migraciones](core/managing-schemas/migrations/index.md)
-##### [Entornos de equipo](core/managing-schemas/migrations/teams.md)
-##### [Operaciones personalizadas](core/managing-schemas/migrations/operations.md)
-##### [Uso de un proyecto independiente](core/managing-schemas/migrations/projects.md)
-##### [Varios proveedores](core/managing-schemas/migrations/providers.md)
-##### [Tabla de historial personalizada](core/managing-schemas/migrations/history-table.md)
-#### [🔧 Crear y quitar API](core/managing-schemas/ensure-created.md)
-#### [🔧 Ingeniería inversa](core/managing-schemas/scaffolding.md)
+### [Herramientas y extensiones](core/extensions/index.md)
 
 ### [Referencia de la línea de comandos](core/miscellaneous/cli/index.md)
 #### [Consola del administrador de paquetes (Visual Studio)](core/miscellaneous/cli/powershell.md)
 #### [CLI de .NET Core](core/miscellaneous/cli/dotnet.md)
 #### [Creación de DbContext en tiempo de diseño](core/miscellaneous/cli/dbcontext-creation.md)
 #### [Servicios en tiempo de diseño](core/miscellaneous/cli/services.md)
-
-### [Herramientas y extensiones](core/extensions/index.md)
 
 ### Varios
 #### [Cadenas de conexión](core/miscellaneous/connection-strings.md)
@@ -127,8 +127,158 @@
 #### [Actualización de 1.0 RC2 a RTM](core/miscellaneous/rc2-rtm-upgrade.md)
 #### [Actualización a EF Core 2.0](core/miscellaneous/1x-2x-upgrade.md)
 
-### [⤤ Referencia de API](https://docs.microsoft.com/dotnet/api/?view=efcore-2.1)
+### [Referencia de la API de EF Core](https://docs.microsoft.com/dotnet/api/?view=efcore-2.1)
 
 ## [Entity Framework 6](ef6/index.md)
-### [⤤ Documentación](http://msdn.com/data/ef)
-### [⤤ Referencia de API](https://msdn.microsoft.com/library/dn223258.aspx)
+
+### [Novedades](ef6/what-is-new/index.md)
+#### [Guía básica](ef6/what-is-new/roadmap.md)
+#### [Versiones anteriores](ef6/what-is-new/past-releases.md)
+#### [Actualización a EF6](ef6/what-is-new/upgrading-to-ef6.md)
+#### [Versiones de Visual Studio](ef6/what-is-new/visual-studio.md)
+
+### [Primeros pasos](ef6/get-started.md)
+
+### [Aspectos básicos](ef6/fundamentals/index.md)
+#### [Obtener Entity Framework](ef6/fundamentals/install.md)
+#### [Trabajar con DbContext](ef6/fundamentals/working-with-dbcontext.md)
+#### [Introducción a las relaciones](ef6/fundamentals/relationships.md)
+#### [Consulta asincrónica y guardado](ef6/fundamentals/async.md)
+#### Configuración
+##### [Basada en código](ef6/fundamentals/configuring/code-based.md)
+##### [Archivo de configuración](ef6/fundamentals/configuring/config-file.md)
+##### [Cadenas de conexión](ef6/fundamentals/configuring/connection-strings.md)
+##### [Resolución de dependencias](ef6/fundamentals/configuring/dependency-resolution.md)
+#### [Administración de las conexiones](ef6/fundamentals/connection-management.md)
+#### Resistencia de las conexiones
+##### [Lógica de reintento](ef6/fundamentals/connection-resiliency/retry-logic.md)
+##### [Errores de confirmación de transacciones](ef6/fundamentals/connection-resiliency/commit-failures.md)
+#### Enlace de datos
+##### [WinForms](ef6/fundamentals/databinding/winforms.md)
+##### [WPF](ef6/fundamentals/databinding/wpf.md)
+#### [Entidades desconectadas](ef6/fundamentals/disconnected-entities/index.md)
+##### [Entidades de seguimiento propio](ef6/fundamentals/disconnected-entities/self-tracking-entities/index.md)
+###### [Tutorial](ef6/fundamentals/disconnected-entities/self-tracking-entities/walkthrough.md)
+#### [Registro e intercepción](ef6/fundamentals/logging-and-interception.md)
+#### Rendimiento
+##### [Consideraciones sobre el rendimiento (notas del producto)](ef6/fundamentals/performance/perf-whitepaper.md)
+##### [Uso de NGEN](ef6/fundamentals/performance/ngen.md)
+##### [Uso de vistas generadas previamente](ef6/fundamentals/performance/pre-generated-views.md)
+#### [Proveedores](ef6/fundamentals/providers/index.md)
+##### [Modelo de proveedor de EF6](ef6/fundamentals/providers/provider-model.md)
+##### [Compatibilidad de elementos espaciales con los proveedores](ef6/fundamentals/providers/spatial-support.md)
+#### [Uso de proxies](ef6/fundamentals/proxies.md)
+#### Pruebas con EF6
+##### [Uso de la simulación](ef6/fundamentals/testing/mocking.md)
+##### [Escritura de duplicados de pruebas propias](ef6/fundamentals/testing/writing-test-doubles.md)
+##### [Capacidad de prueba con EF4 (artículo)](ef6/fundamentals/testing/testability-article.md)
+
+### [Creación de un modelo](ef6/modeling/index.md)
+#### Uso de Code First
+##### Flujos de trabajo
+###### [Con una base de datos nueva](ef6/modeling/code-first/workflows/new-database.md)
+###### [Con una base de datos existente](ef6/modeling/code-first/workflows/existing-database.md)
+##### [Anotaciones de datos](ef6/modeling/code-first/data-annotations.md)
+##### [DbSets](ef6/modeling/code-first/dbsets.md)
+##### Tipos de datos
+###### [Enumeraciones](ef6/modeling/code-first/data-types/enums.md)
+###### [Espacial](ef6/modeling/code-first/data-types/spatial.md)
+##### Convenciones
+###### [Convenciones integradas](ef6/modeling/code-first/conventions/built-in.md)
+###### [Convenciones personalizadas](ef6/modeling/code-first/conventions/custom.md)
+###### [Convenciones de modelo](ef6/modeling/code-first/conventions/model.md)
+##### Configuración de Fluent
+###### [Relaciones](ef6/modeling/code-first/fluent/relationships.md)
+###### [Tipos y propiedades](ef6/modeling/code-first/fluent/types-and-properties.md)
+###### [Uso en Visual Basic](ef6/modeling/code-first/fluent/vb.md)
+###### [Asignación de procedimientos almacenados](ef6/modeling/code-first/fluent/cud-stored-procedures.md)
+##### [Migraciones](ef6/modeling/code-first/migrations/index.md)
+###### [Migraciones automáticas](ef6/modeling/code-first/migrations/automatic.md)
+###### [Trabajar con bases de datos existentes](ef6/modeling/code-first/migrations/existing-database.md)
+###### [Personalización del historial de migraciones](ef6/modeling/code-first/migrations/history-customization.md)
+###### [Uso de Migrate.exe](ef6/modeling/code-first/migrations/migrate-exe.md)
+###### [Migraciones en entornos de equipo](ef6/modeling/code-first/migrations/teams.md)
+
+#### Uso de EF Designer
+##### Flujos de trabajo
+###### [Model-First](ef6/modeling/designer/workflows/model-first.md)
+###### [Database-First](ef6/modeling/designer/workflows/database-first.md)
+##### Tipos de datos
+###### [Tipos complejos](ef6/modeling/designer/data-types/complex-types.md)
+###### [Enumeraciones](ef6/modeling/designer/data-types/enums.md)
+###### [Espacial](ef6/modeling/designer/data-types/spatial.md)
+##### División de asignaciones
+###### [División de entidades](ef6/modeling/designer/entity-splitting.md)
+###### [División de tablas](ef6/modeling/designer/table-splitting.md)
+##### Asignaciones heredadas
+###### [Tabla por jerarquía](ef6/modeling/designer/inheritance/tph.md)
+###### [Tabla por tipo](ef6/modeling/designer/inheritance/tpt.md)
+##### Asignación de procedimientos almacenados
+###### [Consulta](ef6/modeling/designer/stored-procedures/query.md)
+###### [Actualizar](ef6/modeling/designer/stored-procedures/cud.md)
+##### [Asignación de relaciones](ef6/modeling/designer/relationships.md)
+##### [Varios diagramas](ef6/modeling/designer/multiple-diagrams.md)
+##### [Selección de la versión de runtime](ef6/modeling/designer/select-runtime-version.md)
+##### [Generación de código](ef6/modeling/designer/codegen/index.md)
+###### [ObjectContext heredado](ef6/modeling/designer/codegen/legacy-objectcontext.md)
+##### Avanzadas
+###### Formato de archivo EDMX
+####### [Especificación CSDL](ef6/modeling/designer/advanced/edmx/csdl-spec.md)
+####### [Especificación MSL](ef6/modeling/designer/advanced/edmx/msl-spec.md)
+####### [Especificación SSDL](ef6/modeling/designer/advanced/edmx/ssdl-spec.md)
+###### [Definición de consulta](ef6/modeling/designer/advanced/defining-query.md)
+###### [Varios conjuntos de resultados](ef6/modeling/designer/advanced/multiple-result-sets.md)
+###### [Funciones con valores de tabla](ef6/modeling/designer/advanced/tvfs.md)
+##### [Métodos abreviados de teclado](ef6/modeling/designer/keyboard-shortcuts.md)
+
+### [Consulta de datos](ef6/querying/index.md)
+#### [Load (método)](ef6/querying/load-method.md)
+#### [Datos locales](ef6/querying/local-data.md)
+#### [Seguimiento y no seguimiento de consultas](ef6/querying/no-tracking.md)
+#### [Uso de consultas SQL sin formato](ef6/querying/raw-sql.md)
+#### [Consulta de datos relacionados](ef6/querying/related-data.md)
+
+### [Guardar datos](ef6/saving/index.md)
+#### Seguimiento de cambios
+##### [Detección de cambios automática](ef6/saving/change-tracking/auto-detect-changes.md)
+##### [Estado de la entidad](ef6/saving/change-tracking/entity-state.md)
+##### [Valores de propiedades](ef6/saving/change-tracking/property-values.md)
+#### [Administración de conflictos de simultaneidad](ef6/saving/concurrency.md)
+#### [Uso de las transacciones](ef6/saving/transactions.md)
+#### [Validación de datos](ef6/saving/validation.md)
+
+### [Recursos adicionales](ef6/resources/index.md)
+#### [Blogs](ef6/resources/blogs.md)
+#### [Casos prácticos](ef6/resources/case-studies.md)
+#### [Obtención de ayuda](ef6/resources/get-help.md)
+#### [Glosario](ef6/resources/glossary.md)
+#### [Base de datos de ejemplo School](ef6/resources/school-database.md)
+#### [Herramientas y extensiones](ef6/resources/tools.md)
+#### Licencias
+##### EF5
+###### [Chino simplificado](ef6/resources/licenses/ef5/chs.md)
+###### [Chino tradicional](ef6/resources/licenses/ef5/cht.md)
+###### [Alemán](ef6/resources/licenses/ef5/deu.md)
+###### [Inglés](ef6/resources/licenses/ef5/enu.md)
+###### [Español](ef6/resources/licenses/ef5/esn.md)
+###### [Francés](ef6/resources/licenses/ef5/fra.md)
+###### [Italiano](ef6/resources/licenses/ef5/ita.md)
+###### [Japonés](ef6/resources/licenses/ef5/jpn.md)
+###### [Coreano](ef6/resources/licenses/ef5/kor.md)
+###### [Ruso](ef6/resources/licenses/ef5/rus.md)
+##### EF6
+###### Versión preliminar
+####### [Alfa](ef6/resources/licenses/ef6/prerelease/alpha.md)
+####### [Beta: versión candidata para lanzamiento](ef6/resources/licenses/ef6/prerelease/beta-rc.md)
+###### [Chino simplificado](ef6/resources/licenses/ef6/chs.md)
+###### [Chino tradicional](ef6/resources/licenses/ef6/cht.md)
+###### [Alemán](ef6/resources/licenses/ef6/deu.md)
+###### [Inglés](ef6/resources/licenses/ef6/enu.md)
+###### [Español](ef6/resources/licenses/ef6/esn.md)
+###### [Francés](ef6/resources/licenses/ef6/fra.md)
+###### [Italiano](ef6/resources/licenses/ef6/ita.md)
+###### [Japonés](ef6/resources/licenses/ef6/jpn.md)
+###### [Coreano](ef6/resources/licenses/ef6/kor.md)
+###### [Ruso](ef6/resources/licenses/ef6/rus.md)
+
+### [Referencia de la API de EF6](https://msdn.microsoft.com/library/dn223258.aspx)
