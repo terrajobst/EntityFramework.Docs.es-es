@@ -9,12 +9,12 @@ ms.technology: entity-framework-6
 ms.topic: article
 ms.assetid: 65bb3db2-2226-44af-8864-caa575cf1b46
 caps.latest.revision: 3
-ms.openlocfilehash: f0319e97d8ca8cfc9c90dac51d2ecbe7a29c1929
-ms.sourcegitcommit: f05e7b62584cf228f17390bb086a61d505712e1b
+ms.openlocfilehash: 92467e1a93f576eca627cf7b7d2351054a882c2c
+ms.sourcegitcommit: 00cb52625b57c1ea339ded1454179fe89b6bcfea
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 07/08/2018
-ms.locfileid: "37911739"
+ms.lasthandoff: 07/16/2018
+ms.locfileid: "39067552"
 ---
 # <a name="querying-and-finding-entities"></a>Consulta y búsqueda de entidades
 En este tema se tratan las distintas formas de consultar datos mediante Entity Framework, incluidos LINQ y el método Find. Las técnicas que se muestran en este tema se aplican igualmente a los modelos creados con Code First y EF Designer.  
@@ -41,7 +41,7 @@ using (var context = new BloggingContext())
 Tenga en cuenta que DbSet e IDbSet siempre crean las consultas en la base de datos, lo que siempre conlleva un viaje de ida y vuelta a la base de datos, aun cuando las entidades devueltas ya existan en el contexto. Una consulta se ejecuta en la base de datos cuando:  
 
 - Se enumera mediante una instrucción **foreach** (C#) o **For Each** (Visual Basic).  
-- Se enumera mediante una operación de recopilación como [ToArray](https://msdn.microsoft.com/library/bb298736), [ToDictionary](https://msdn.microsoft.com/library/system.linq.enumerable.todictionary) o ToList[escribir descripción del vínculo aquí](https://msdn.microsoft.com/library/bb342261).  
+- Se enumera mediante una operación de recopilación como [ToArray](https://msdn.microsoft.com/library/bb298736), [ToDictionary](https://msdn.microsoft.com/library/system.linq.enumerable.todictionary) o [ToList](https://msdn.microsoft.com/library/bb342261).  
 - Los operadores LINQ, como [First](https://msdn.microsoft.com/library/bb291976) o [Any](https://msdn.microsoft.com/library/bb337697), se especifican en la parte más externa de la consulta.  
 - Se llama a los métodos siguientes: el método de extensión [Load](https://msdn.microsoft.com/library/system.data.entity.dbextensions.load) en DbSet, [DbEntityEntry.Reload](https://msdn.microsoft.com/library/system.data.entity.infrastructure.dbentityentry.reload.aspx) y Database.ExecuteSqlCommand.  
 
