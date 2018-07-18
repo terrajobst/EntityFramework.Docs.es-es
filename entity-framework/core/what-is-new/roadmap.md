@@ -6,12 +6,12 @@ ms.date: 02/20/2018
 ms.assetid: 834C9729-7F6E-4355-917D-DE3EE9FE149E
 ms.technology: entity-framework-core
 uid: core/what-is-new/roadmap
-ms.openlocfilehash: e23f5d7b1ff95bead310fa8e618a88c161a4e10c
-ms.sourcegitcommit: 72e59e6af86b568653e1b29727529dfd7f65d312
+ms.openlocfilehash: f319aabb53019e0f153c911dde5814328423081b
+ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 06/04/2018
-ms.locfileid: "34754449"
+ms.lasthandoff: 07/10/2018
+ms.locfileid: "37949171"
 ---
 # <a name="entity-framework-core-roadmap"></a>Mapa de ruta de Entity Framework Core
 
@@ -54,4 +54,4 @@ Detallar todo el proceso que se sigue para planear una versión es muy difícil,
 
 6. **¿Cuáles son las capacidades de las personas disponibles para trabajar en una característica y cómo se aprovechan mejor estos recursos?** Todos los miembros del equipo de EF, e incluso los colaboradores de la comunidad, tienen diferentes niveles de experiencia en varias áreas, y tenemos que elaborar el plan de acuerdo con ello. Incluso aunque quisiéramos tener a todos trabajando en una característica específica, como las traducciones de GroupBy o las relaciones múltiples, no sería práctico.
 
-Como mencionamos anteriormente, el proceso evoluciona con cada versión y en el futuro nos gustaría agregar más oportunidades para que los miembros de la comunidad de desarrolladores colaboren en los planes de versión, por ejemplo, facilitando la revisión de borradores propuestos de características o del propio plan de versión.
+Como se ha mencionado anteriormente, este proceso evoluciona con cada versión y en el futuro nos gustaría agregar más oportunidades para que los miembros de la comunidad de desarrolladores colaboren en los planes de versión, por ejemplo, al facilitar la revisión de borradores propuestos de características o del propio plan de versión.

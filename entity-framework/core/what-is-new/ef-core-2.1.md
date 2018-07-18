@@ -6,12 +6,12 @@ ms.date: 2/20/2018
 ms.assetid: 585F90A3-4D5A-4DD1-92D8-5243B14E0FEC
 ms.technology: entity-framework-core
 uid: core/what-is-new/ef-core-2.1
-ms.openlocfilehash: 2372a6b2e3f3b7b1d9214a6ea321fe28cea45fff
-ms.sourcegitcommit: 72e59e6af86b568653e1b29727529dfd7f65d312
+ms.openlocfilehash: 44cbbc965755a694772dc4336ca2c1efc51fd6cd
+ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 06/04/2018
-ms.locfileid: "34754430"
+ms.lasthandoff: 07/10/2018
+ms.locfileid: "37949236"
 ---
 # <a name="new-features-in-ef-core-21"></a>Novedades de EF Core 2.1
 
@@ -157,7 +157,7 @@ Los nuevos eventos `Tracked` y `StateChanged` de `ChangeTracker` se pueden usar 
 
 ## <a name="raw-sql-parameter-analyzer"></a>Analizador de parámetros de SQL sin formato
 
-Un nuevo analizador de código se incluye en EF Core que detecta los usos potencialmente poco seguros de nuestras API de SQL sin formato, como `FromSql` o `ExecuteSqlCommand`. P. ej., para la consulta siguiente, verá una advertencia porque _minAge_ no tiene parámetros:
+Un nuevo analizador de código se incluye en EF Core que detecta los usos potencialmente poco seguros de nuestras API de SQL sin formato, como `FromSql` o `ExecuteSqlCommand`. Por ejemplo, para la consulta siguiente, verá una advertencia porque _minAge_ no tiene parámetros:
 
 ``` csharp
 var sql = $"SELECT * FROM People WHERE Age > {minAge}";

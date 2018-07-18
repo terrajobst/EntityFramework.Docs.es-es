@@ -6,12 +6,12 @@ ms.date: 02/20/2018
 ms.assetid: 2CB5809E-0EFB-44F6-AF14-9D5BFFFBFF9D
 ms.technology: entity-framework-core
 uid: core/what-is-new/ef-core-2.0
-ms.openlocfilehash: 02d0b6fe2956e819e08e08c9a0658008abd36c34
-ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
+ms.openlocfilehash: 538458cf49ee86b9a5cba2f606adc04e583605e2
+ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 02/28/2018
-ms.locfileid: "29680026"
+ms.lasthandoff: 07/10/2018
+ms.locfileid: "37949132"
 ---
 # <a name="new-features-in-ef-core-20"></a>Nuevas características de EF Core 2.0
 
@@ -93,7 +93,7 @@ public class BloggingContext : DbContext
     }
 }
 ```
-Se define un filtro de nivel de modelo que implementa los servicios multiinquilino y la eliminación temporal para instancias del tipo de entidad ```Post```. Observe el uso de una propiedad de nivel de instancia DbContext: ```TenantId```. Los filtros de nivel de modelo usan el valor de la instancia de contexto correcta. Es decir, la que está ejecutando la consulta.
+Se define un filtro de nivel de modelo que implementa los servicios multiinquilino y la eliminación temporal para instancias del tipo de entidad ```Post```. Observe el uso de una propiedad de nivel de instancia DbContext: ```TenantId```. Los filtros de nivel de modelo usan el valor de la instancia de contexto correcta (es decir, la instancia de contexto que está ejecutando la consulta).
 
 Los filtros se pueden deshabilitar para consultas LINQ individuales mediante el operador IgnoreQueryFilters().
 
@@ -134,7 +134,7 @@ Algunas observaciones:
 
 - Por convención, el nombre del método se usa como nombre de una función (en este caso una función definida por el usuario) al generar el SQL, pero puede invalidar el nombre y el esquema durante el registro del método.
 - Actualmente solo se admiten las funciones escalares.
-- Debe crear la función asignada en la base de datos, por ejemplo, las migraciones de EF Core no se encargan de crearla.
+- Debe crear la función asignada en la base de datos. La migraciones de EF Core no se encargan de crearla
 
 ### <a name="self-contained-type-configuration-for-code-first"></a>Configuración de tipo independiente para Code First
 
@@ -259,7 +259,7 @@ Se ha agregado la propiedad EF.Functions, que EF Core o los proveedores pueden u
 ``` csharp
 var aCustomers =
     from c in context.Customers
-    where EF.Functions.Like(c.Name, "a%");
+    where EF.Functions.Like(c.Name, "a%")
     select c;
 ```
 

@@ -1,15 +1,16 @@
 ---
-title: "Comparación característica a característica de EF Core y EF6"
+title: Comparación característica a característica de EF Core y EF6
 author: rowanmiller
 ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: f22f29ef-efc0-475d-b0b2-12a054f80f95
 uid: efcore-and-ef6/features
-ms.openlocfilehash: 3f05fbe53439826a4e1e1b188a7c03951dc109ec
-ms.sourcegitcommit: b2d94cebdc32edad4fecb07e53fece66437d1b04
+ms.openlocfilehash: 84b40f03cdab27fd6fc68c5bb65c6e3d238f226a
+ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 02/28/2018
+ms.lasthandoff: 07/10/2018
+ms.locfileid: "37967146"
 ---
 # <a name="ef-core-and-ef6-feature-by-feature-comparison"></a>Comparación característica a característica de EF Core y EF6
 
@@ -60,10 +61,10 @@ La columna EF Core contiene el número de la versión del producto en que aparec
 | Carga de datos relacionados: diferida                            | Sí      | 2.1                                   |
 | Carga de datos relacionados: explícita                        | Sí      | 1.1                                   |
 | Consultas SQL sin formato: tipos de entidad                         | Sí      | 1.0                                   |
-| Consultas SQL sin formato: tipos sin entidad (por ejemplo, tipos de consulta)  | Sí      | 2.1                                   |
+| Consultas SQL sin formato: tipos sin entidad (tipos de consulta)       | Sí      | 2.1                                   |
 | Consultas SQL sin procesar: componer con LINQ                  |          | 1.0                                   |
 | Consultas compiladas de manera explícita                           | Insuficiente     | 2.0                                   |
-| Lenguaje de consulta basado en texto (por ejemplo, Entity SQL)           | 1.0      |                                       |
+| Lenguaje de consulta basado en texto (Entity SQL)                | Sí      |                                       |
 |                                                       |          |                                       |
 | **Guardar datos**                                       | **EF6**  | **EF Core**                           |
 | Seguimiento de cambios: instantánea                             | Sí      | 1.0                                   |
@@ -83,7 +84,7 @@ La columna EF Core contiene el número de la versión del producto en que aparec
 | Datos de inicialización                                             | Sí      | 2.1                                   |
 | Resistencia de conexión                                 | Sí      | 1.1                                   |
 | Enlaces de ciclo de vida (eventos, intercepción)                | Sí      |                                       |
-| Registro simple (por ejemplo, Database.Log)                    | Sí      |                                       |
+| Registro simple (Database.Log)                         | Sí      |                                       |
 | Agrupación de DbContext                                     |          | 2.0                                   |
 |                                                       |          |                                       |
 | **Proveedores de bases de datos**                                | **EF6**  | **EF Core**                           |

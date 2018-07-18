@@ -6,12 +6,12 @@ ms.date: 10/27/2016
 ms.assetid: 20A25111-AEBE-4BC2-83A5-3F651952DF72
 ms.technology: entity-framework-core
 uid: core/what-is-new/ef-core-1.0
-ms.openlocfilehash: e5b9e57a01ff302b1d7bd0fc5419aa5b8213865e
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: af7cf490ef2b04afb02461279fbe67c1c7fa3d95
+ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/27/2017
-ms.locfileid: "26049688"
+ms.lasthandoff: 07/10/2018
+ms.locfileid: "37949027"
 ---
 # <a name="features-included-in-ef-core-10"></a>Características incluidas en EF Core 1.0
 
@@ -31,7 +31,7 @@ Construyen un modelo inicial en función de la forma de las clases de entidad.
 ### <a name="fluent-api"></a>API fluida
 Permite reemplazar el método `OnModelCreating` en el contexto para seguir configurando el modelo que la convención detectó.
 ### <a name="data-annotations"></a>Anotaciones de datos
-Atributos que se pueden agregar a las propiedades o clases de entidad y que influirán en el modelo de EF (es decir, si agrega [Obligatorio] hará que EF sepa que se requiere una propiedad).
+Son atributos que se pueden agregar a las propiedades o clases de entidad y que influyen en el modelo de EF. Por ejemplo, al agregar `[Required]` se indica a EF que una propiedad es obligatoria.
 ### <a name="relational-table-mapping"></a>Asignación de tabla relacional
 Permite asignar las entidades a tablas o columnas.
 ### <a name="key-value-generation"></a>Generación de valor de clave
@@ -79,7 +79,7 @@ Proporciona la capacidad de usar LINQ para recuperar datos de la base de datos.
 ### <a name="mixed-clientserver-evaluation"></a>Evaluación combinada de cliente/servidor
 Permite que las consultas contengan una lógica que no se puede evaluar en la base de datos y, por lo tanto, se debe evaluar después de que los datos se recuperan en la memoria.
 ### <a name="notracking"></a>NoTracking
-Las consultas permiten ejecutar más rápido las consultas cuando el contexto no necesita supervisar los cambios realizados en las instancias de entidad (es decir, los resultados son de solo lectura).
+Las consultas permiten ejecutar más rápido las consultas cuando el contexto no necesita supervisar los cambios realizados en las instancias de entidad (esto es útil si los resultados son de solo lectura).
 ### <a name="eager-loading"></a>Carga diligente
 Proporciona los métodos `Include` y `ThenInclude` para identificar los datos relacionados que se deben capturar cuando se realizan las consultas.
 ### <a name="async-query"></a>Consulta asincrónica
