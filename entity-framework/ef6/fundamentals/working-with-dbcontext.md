@@ -1,0 +1,81 @@
+---
+title: Trabajar con DbContext - EF6
+author: divega
+ms.date: 2016-10-23
+ms.prod: entity-framework
+ms.author: divega
+ms.manager: avickers
+ms.technology: entity-framework-6
+ms.topic: article
+ms.assetid: b0e6bddc-8a87-4d51-b1cb-7756df938c23
+caps.latest.revision: 3
+ms.openlocfilehash: 865c9883ce25f405a173791df4e46b98550cd41f
+ms.sourcegitcommit: f05e7b62584cf228f17390bb086a61d505712e1b
+ms.translationtype: MT
+ms.contentlocale: es-ES
+ms.lasthandoff: 07/08/2018
+ms.locfileid: "39121856"
+---
+# <a name="working-with-dbcontext"></a>Trabajar con DbContext
+
+Para usar Entity Framework para consultar, insertar, actualizar y eliminar datos mediante objetos. NET, primero deberá [crear un modelo](~/ef6/modeling/index.md) que asigna las entidades y relaciones que se definen en el modelo en las tablas de una base de datos.
+
+Una vez que un modelo, es la clase principal de la aplicación interactúa con `System.Data.Entity.DbContext` (a menudo denominado como la clase de contexto). Puede usar un DbContext asociado a un modelo para:
+- Escribir y ejecutar consultas   
+- Resultados de la consulta se materializan como objetos entidad
+- Realizar un seguimiento de los cambios realizados en los objetos
+- Conservar los cambios del objeto en la base de datos
+- Enlazar objetos en memoria a los controles de interfaz de usuario
+
+Esta página proporciona algunas instrucciones sobre cómo administrar la clase de contexto.  
+
+## <a name="defining-a-dbcontext-derived-class"></a>Definir una clase derivada de DbContext  
+
+La manera recomendada para que funcione con el contexto es definir una clase que deriva de DbContext y expone las propiedades DbSet que representan colecciones de las entidades en el contexto especificadas. Si está trabajando con EF Designer, se generará el contexto para usted. Si está trabajando con Code First, normalmente, escribirá el contexto usted mismo.  
+
+``` csharp
+public class ProductContext : DbContext
+{
+    public DbSet<Category> Categories { get; set; }
+    public DbSet<Product> Products { get; set; }
+}
+```  
+
+Una vez que un contexto, podría consultar, agregar (con `Add` o `Attach` métodos) o quitar (con `Remove`) entidades en el contexto a través de estas propiedades. Obtener acceso a un `DbSet` propiedad en un objeto de contexto representa una consulta inicial que devuelve todas las entidades del tipo especificado. Tenga en cuenta que sólo tienen acceso a una propiedad no se ejecute la consulta. Se ejecuta una consulta cuando:  
+
+- Se enumera mediante una instrucción `foreach` (C#) o `For Each` (Visual Basic).  
+- Se enumera mediante una operación de colección como `ToArray`, `ToDictionary`, o `ToList`.  
+- Operadores LINQ, como `First` o `Any` se especifican en la parte exterior de la consulta.  
+- Se llama a uno de los métodos siguientes: el `Load` método de extensión, `DbEntityEntry.Reload`, `Database.ExecuteSqlCommand`, y `DbSet<T>.Find`, si una entidad con la clave especificada no se encuentra ya cargada en el contexto.  
+
+## <a name="lifetime"></a>Período de duración  
+
+La duración del contexto comienza cuando se crea y finaliza cuando la instancia se elimina o se recopilan de elementos no utilizados de la instancia. Use **mediante** si desea que todos los recursos que controla el contexto sean eliminados al final del bloque. Cuando usas **mediante**, el compilador crea automáticamente un bloque try/finally y llama a dispose en el **finalmente** bloque.  
+
+``` csharp
+public void UseProducts()
+{
+    using (var context = new ProductContext())
+    {     
+        // Perform data access using the context
+    }
+}
+```  
+
+Estas son algunas directrices generales al decidir la duración del contexto:  
+
+- Cuando se trabaja con aplicaciones Web, utilice una instancia de contexto por solicitud.  
+- Cuando se trabaja con Windows Presentation Foundation (WPF) o Windows Forms, use una instancia de contexto por formulario. Esto le permite usar la funcionalidad de seguimiento de cambios proporciona ese contexto.  
+- Si la instancia de contexto se crea un contenedor de inserción de dependencia, normalmente es responsabilidad del contenedor para eliminar el contexto.
+- Si se crea el contexto en el código de aplicación, recuerde eliminar el contexto cuando ya no sea necesario.  
+- Cuando se trabaja con el contexto de ejecución prolongada, tenga en cuenta lo siguiente:  
+    - La carga de más objetos y sus referencias en la memoria puede aumentar rápidamente el consumo de memoria del contexto. lo que puede ocasionar problemas de rendimiento.  
+    - El contexto no es segura para subprocesos, por lo tanto no debe compartirse entre varios subprocesos que realizan el trabajo en ella al mismo tiempo.
+    - Si una excepción provoca que el contexto en un estado irrecuperable, puede finalizar toda la aplicación.  
+    - Las posibilidades de que haya problemas relacionados con la simultaneidad se incrementan a medida que aumenta la distancia entre el momento en que se consultan los datos y el momento en que se actualizan.  
+
+## <a name="connections"></a>Conexiones  
+
+De forma predeterminada, el contexto administra las conexiones a la base de datos. El contexto se abre y cierra las conexiones según sea necesario. Por ejemplo, el contexto abre una conexión para ejecutar una consulta y, a continuación, cierra la conexión cuando se han procesado todos los conjuntos de resultados.  
+
+Hay casos en los que se desea más control sobre el momento en que se abre y cierra la conexión. Por ejemplo, cuando se trabaja con SQL Server Compact, a menudo se recomienda mantener una conexión abierta independiente a la base de datos durante la vigencia de la aplicación para mejorar el rendimiento. Puede administrar este proceso manualmente mediante la propiedad `Connection`.  
