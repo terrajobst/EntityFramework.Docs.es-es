@@ -5,12 +5,12 @@ ms.author: bricelam
 ms.date: 10/27/2017
 ms.technology: entity-framework-core
 uid: core/miscellaneous/cli/dbcontext-creation
-ms.openlocfilehash: 7c16017d3b97d115841050fe6ac0fdbeb5e71d94
-ms.sourcegitcommit: 00cb52625b57c1ea339ded1454179fe89b6bcfea
+ms.openlocfilehash: 648ca990252fb32d8cf181a7ae672d07a81f56bb
+ms.sourcegitcommit: 0935ff275ae739243297f5b97eb21414398125c6
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 07/16/2018
-ms.locfileid: "39067536"
+ms.lasthandoff: 07/23/2018
+ms.locfileid: "39201924"
 ---
 <a name="design-time-dbcontext-creation"></a>Creación de DbContext en tiempo de diseño
 ==============================
@@ -27,7 +27,7 @@ La herramienta primero intenta obtener el proveedor de servicios mediante la inv
 > [!NOTE]
 > Cuando se crea una nueva aplicación de ASP.NET Core 2.0, este enlace se incluye de forma predeterminada. En versiones anteriores de EF Core y ASP.NET Core, intentan invocar las herramientas `Startup.ConfigureServices` directamente con el fin de obtener el proveedor de servicios de la aplicación, pero este patrón ya no funciona correctamente en las aplicaciones de ASP.NET Core 2.0. Si va a actualizar una aplicación de ASP.NET Core 1.x a 2.0, puede [modificar su `Program` clase seguir el patrón nuevo][3].
 
-El `DbContext` propio y las dependencias en su constructor es necesario registrar como servicios en el proveedor de servicios de la aplicación. Esto puede lograrse fácilmente al tener [un constructor en el `DbContext` que toma una instancia de `DbContextOptions<TContext>` como un argumento] [ 4] y el uso de la [ `AddDbContext<TContext>` (método)] [5].
+El `DbContext` propio y las dependencias en su constructor es necesario registrar como servicios en el proveedor de servicios de la aplicación. Esto puede lograrse fácilmente al tener [un constructor en el `DbContext` que toma una instancia de `DbContextOptions<TContext>` como argumento] [ 4] y el uso de la [ `AddDbContext<TContext>` (método)] [5].
 
 <a name="using-a-constructor-with-no-parameters"></a>Usar un constructor sin parámetros
 --------------------------------------
