@@ -6,12 +6,12 @@ ms.date: 2/26/2018
 ms.assetid: 9F4450C5-1A3F-4BB6-AC19-9FAC64292AAD
 ms.technology: entity-framework-core
 uid: core/modeling/query-types
-ms.openlocfilehash: 89f5be356654dc02e353441a83e34c90fc727593
-ms.sourcegitcommit: fd50ac53b93a03825dcbb42ed2e7ca95ca858d5f
+ms.openlocfilehash: 5a2cd451da8833daf2c315419559eb4a2c705b13
+ms.sourcegitcommit: 4467032fd6ca223e5965b59912d74cf88a1dd77f
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 07/07/2018
-ms.locfileid: "37900309"
+ms.lasthandoff: 08/01/2018
+ms.locfileid: "39388486"
 ---
 # <a name="query-types"></a>Tipos de consulta
 > [!NOTE]
@@ -53,7 +53,7 @@ Algunos de los escenarios de uso principales para tipos de consulta son:
 El ejemplo siguiente muestra cómo usar el tipo de consulta para consultar una vista de base de datos.
 
 > [!TIP]
-> Puede ver un [ejemplo](https://github.com/aspnet/EntityFrameworkCore/tree/dev/samples/QueryTypes) de este artículo en GitHub.
+> Puede ver un [ejemplo](https://github.com/aspnet/EntityFrameworkCore/tree/master/samples/QueryTypes) de este artículo en GitHub.
 
 En primer lugar, definimos un modelo sencillo de Blog y Post:
 
