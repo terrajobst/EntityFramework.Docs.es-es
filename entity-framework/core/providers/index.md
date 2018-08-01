@@ -6,12 +6,12 @@ ms.date: 2/23/2018
 ms.assetid: 14fffb6c-a687-4881-a094-af4a1359a296
 ms.technology: entity-framework-core
 uid: core/providers/index
-ms.openlocfilehash: 6f058698f78c787fc6c313486874b0af2183f97a
-ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
+ms.openlocfilehash: f51304a20bab2c80d2d546fc4685da0fa28d5f92
+ms.sourcegitcommit: 5c2634c546720902fe01935f4fc031d73aa3ebde
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 07/10/2018
-ms.locfileid: "37949321"
+ms.lasthandoff: 08/01/2018
+ms.locfileid: "39393755"
 ---
 # <a name="database-providers"></a>Proveedores de bases de datos
 
@@ -53,7 +53,7 @@ Hemos desarrollado un proveedor de EF Core para la API de DocumentDB de Cosmos D
 El equipo de Oracle .NET ha anunciado que tienen previsto publicar un proveedor propio para EF Core 2.0 aproximadamente en el tercer trimestre de 2018. Vea su [declaración de intenciones para .NET Core y Entity Framework Core](http://www.oracle.com/technetwork/topics/dotnet/tech-info/odpnet-dotnet-ef-core-sod-4395108.pdf) para obtener más información.
 Dirija las preguntas sobre este proveedor, incluida la escala de tiempo de la versión, al [sitio de la comunidad de Oracle](https://community.oracle.com/).
 
-Mientras tanto, el equipo de EF ha generado un [proveedor de EF Core de ejemplo para las bases de datos de Oracle](https://github.com/aspnet/EntityFrameworkCore/blob/dev/samples/OracleProvider/README.md). La finalidad del proyecto no es generar un proveedor de EF Core propiedad de Microsoft, sino ayudarnos a identificar vacíos en la funcionalidad base y relacional de EF Core que hemos de abordar para mejorar la compatibilidad con Oracle e iniciar el desarrollo de otros proveedores de Oracle para EF Core con Oracle o con terceros.
+Mientras tanto, el equipo de EF ha generado un [proveedor de EF Core de ejemplo para las bases de datos de Oracle](https://github.com/aspnet/EntityFrameworkCore/tree/master/samples/OracleProvider). La finalidad del proyecto no es generar un proveedor de EF Core propiedad de Microsoft, sino ayudarnos a identificar vacíos en la funcionalidad base y relacional de EF Core que hemos de abordar para mejorar la compatibilidad con Oracle e iniciar el desarrollo de otros proveedores de Oracle para EF Core con Oracle o con terceros.
 
 Se tendrán en cuenta las contribuciones que mejoren la implementación de ejemplo. También se agradecerá y apoyará cualquier esfuerzo de la comunidad para crear un proveedor de Oracle de código abierto para EF Core, tomando el ejemplo como punto de partida.
 
