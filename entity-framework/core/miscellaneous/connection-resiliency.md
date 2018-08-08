@@ -6,14 +6,14 @@ ms.date: 11/15/2016
 ms.assetid: e079d4af-c455-4a14-8e15-a8471516d748
 ms.technology: entity-framework-core
 uid: core/miscellaneous/connection-resiliency
-ms.openlocfilehash: 34ca1908257ed5544f2e134fa7686c9802fcebea
-ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
+ms.openlocfilehash: dae646e39b4dbd96b34f47582f9b2aa531cf88a7
+ms.sourcegitcommit: 902257be9c63c427dc793750a2b827d6feb8e38c
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 07/10/2018
-ms.locfileid: "37949303"
+ms.lasthandoff: 08/07/2018
+ms.locfileid: "39614342"
 ---
-# <a name="connection-resiliency"></a>Resistencia de conexión
+# <a name="connection-resiliency"></a>Resistencia de las conexiones
 
 Resistencia de la conexión reintenta automáticamente los comandos de base de datos. La característica puede usarse con cualquier base de datos proporcionando una "estrategia de ejecución," que encapsula la lógica necesaria para detectar errores y vuelva a intentar los comandos. Proveedores de EF Core pueden proporcionar estrategias de ejecución adaptadas a sus condiciones de error de base de datos específica y las directivas de reintento óptima.
 
