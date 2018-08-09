@@ -2,22 +2,22 @@
 title: Introducción a .NET Framework - EF Core
 author: rowanmiller
 ms.author: divega
-ms.date: 10/27/2016
+ms.date: 08/06/2018
 ms.assetid: 06f1f18b-3267-4f79-b94e-173f9db0a7cb
 ms.technology: entity-framework-core
 uid: core/get-started/full-dotnet/index
-ms.openlocfilehash: b6b265ed8742459921b7ba4f3f04720eb43d06da
-ms.sourcegitcommit: d2434edbfa6fbcee7287e33b4915033b796e417e
+ms.openlocfilehash: 410a8320d1e36c672f3d69a172719f8b8c47a152
+ms.sourcegitcommit: 902257be9c63c427dc793750a2b827d6feb8e38c
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 02/12/2018
-ms.locfileid: "29152381"
+ms.lasthandoff: 08/07/2018
+ms.locfileid: "39614391"
 ---
 # <a name="getting-started-with-ef-core-on-net-framework"></a>Introducción a EF Core en .NET Framework
 
-Estos 101 tutoriales no exigen ningún conocimiento anterior de Entity Framework Core ni Visual Studio. Le llevarán paso a paso a lo largo del proceso de creación de una sencilla aplicación de consola de .NET Framework que consulta y guarda los datos de una base de datos. Puede elegir un tutorial que crea un modelo basado en una base de datos existente o que crea automáticamente una base de datos en función del modelo.
+Estos tutoriales de nivel 101 no exigen ningún conocimiento anterior de Entity Framework Core ni Visual Studio. Le llevarán paso a paso a lo largo del proceso de creación de una sencilla aplicación de consola de .NET Framework que consulta y guarda los datos de una base de datos. Puede elegir un tutorial que crea un modelo basado en una base de datos existente o que crea automáticamente una base de datos basada en el modelo.
 
 Puede usar las técnicas aprendidas en estos tutoriales en cualquier aplicación para .NET Framework, incluidos WPF y WinForms.
 
 > [!NOTE]  
-> Estos tutoriales y los ejemplos que los acompañan se han actualizado para utilizar EF Core 2.0. Pero en la mayoría de los casos debería ser posible crear aplicaciones que usan versiones anteriores, con una modificación mínima de las instrucciones.
+> Estos tutoriales y los ejemplos que los acompañan se han actualizado para utilizar EF Core 2.1. Pero en la mayoría de los casos debería ser posible crear aplicaciones que usan versiones anteriores, con una modificación mínima de las instrucciones.
