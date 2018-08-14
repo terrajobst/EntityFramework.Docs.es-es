@@ -2,201 +2,124 @@
 title: 'Introducción a .NET Framework: base de datos existente - EF Core'
 author: rowanmiller
 ms.author: divega
-ms.date: 10/27/2016
+ms.date: 08/06/2018
 ms.assetid: a29a3d97-b2d8-4d33-9475-40ac67b3b2c6
 ms.technology: entity-framework-core
 uid: core/get-started/full-dotnet/existing-db
-ms.openlocfilehash: 39e77ab8c124df67458cc5fa6db2882b65943ebe
-ms.sourcegitcommit: 4467032fd6ca223e5965b59912d74cf88a1dd77f
+ms.openlocfilehash: d5c548927b736199c7d6fddc9c74139ca5f6614e
+ms.sourcegitcommit: 902257be9c63c427dc793750a2b827d6feb8e38c
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/01/2018
-ms.locfileid: "39388473"
+ms.lasthandoff: 08/07/2018
+ms.locfileid: "39614420"
 ---
 # <a name="getting-started-with-ef-core-on-net-framework-with-an-existing-database"></a>Introducción a EF Core en .NET Framework con una base de datos existente
 
-En este tutorial, compilará una aplicación de consola que realiza el acceso a datos básicos en una base de datos de Microsoft SQL Server mediante Entity Framework. Usará técnicas de ingeniería inversa para crear un modelo de Entity Framework en función de una base de datos existente.
+En este tutorial, compilará una aplicación de consola que realiza el acceso a datos básicos en una base de datos de Microsoft SQL Server mediante Entity Framework. Para crear un modelo de Entity Framework, usará ingeniería inversa en una base de datos existente.
 
-> [!TIP]  
-> Puede ver un [ejemplo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/GetStarted/FullNet/ConsoleApp.ExistingDb) de este artículo en GitHub.
+[Vea un ejemplo de este artículo en GitHub](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/GetStarted/FullNet/ConsoleApp.ExistingDb).
 
 ## <a name="prerequisites"></a>Requisitos previos
 
-Deberá cumplir los requisitos previos siguientes para completar este tutorial:
+* [Visual Studio 2017 versión 15.7 o posterior](https://www.visualstudio.com/downloads/)
 
-* [Visual Studio 2017](https://www.visualstudio.com/downloads/): al menos la versión 15.3
+## <a name="create-blogging-database"></a>Creación de una base de datos para blogs
 
-* [La versión más reciente del Administrador de paquetes de NuGet](https://dist.nuget.org/index.html)
-
-* [La versión más reciente de Windows PowerShell](https://docs.microsoft.com/powershell/scripting/setup/installing-windows-powershell)
-
-* [Base de datos para blogs](#blogging-database)
-
-### <a name="blogging-database"></a>Base de datos para blogs
-
-En este tutorial se usa una base de datos para **blogs** en la instancia de LocalDB como la base de datos existente.
-
-> [!TIP]  
-> Si ya creó la base de datos de **blogs** como parte de otro tutorial, puede omitir estos pasos.
+En este tutorial se usa una base de datos para **blogs** en la instancia de LocalDB como la base de datos existente. Si ya creó la base de datos de **blogs** como parte de otro tutorial, omita estos pasos.
 
 * Apertura de Visual Studio
 
-* Herramientas -> Conectar con base de datos...
+* **Herramientas -> Conectar con base de datos...**
 
-* Seleccione **Microsoft SQL Server** y haga clic en **Continuar**
+* Seleccione **Microsoft SQL Server** y haga clic en **Continuar**.
 
-* Escriba **(localdb)\mssqllocaldb** como el **nombre del servidor**
+* Escriba **(localdb)\mssqllocaldb** como el **nombre del servidor**.
 
-* Escriba **maestra** como el **nombre de la base de datos** y haga clic en **Aceptar**
+* Escriba **maestra** como el **nombre de la base de datos** y haga clic en **Aceptar**.
 
-* La base de datos maestra ahora aparece en **Conexiones de base de datos** del **Explorador de servidores**
+* La base de datos maestra ahora aparece en **Conexiones de base de datos** del **Explorador de servidores**.
 
-* Haga clic con el botón derecho en la base de datos en el **Explorador de servidores** y seleccione **Nueva consulta**
+* Haga clic con el botón derecho en la base de datos en el **Explorador de servidores** y seleccione **Nueva consulta**.
 
 * En el editor de consultas, copie el script que aparece a continuación.
 
-* Haga clic con el botón derecho en el editor de consultas y seleccione **Ejecutar**
+* Haga clic con el botón derecho en el editor de consultas y seleccione **Ejecutar**.
 
 [!code-sql[Main](../_shared/create-blogging-database-script.sql)]
 
 ## <a name="create-a-new-project"></a>Crear un proyecto nuevo
 
-* Apertura de Visual Studio
+* Abra Visual Studio 2017.
 
-* Archivo > Nuevo > Proyecto...
+* **Archivo > Nuevo > Proyecto...**
 
-* En el menú de la izquierda, seleccione Plantillas > Visual C# > Windows
+* En el menú izquierdo, seleccione **Instalado > Visual C# > Escritorio de Windows**.
 
-* Seleccione la plantilla de proyecto **Aplicación de consola**.
+* Seleccione la plantilla del proyecto **Aplicación de consola (.NET Framework)**.
 
-* Asegúrese de tener como destino **.NET Framework 4.6.1** o una versión posterior.
+* Asegúrese de que el proyecto tenga **.NET Framework 4.6.1** o posterior como destino.
 
-* Asigne un nombre al proyecto y haga clic en **Aceptar**
+* Asigne el nombre *ConsoleApp.ExistingDb* al proyecto y haga clic en **Aceptar**.
 
 ## <a name="install-entity-framework"></a>Instalación de Entity Framework
 
-Para usar EF Core, instale el paquete correspondiente a los proveedores de bases de datos a los que desea dirigirse. Este tutorial usa SQL Server. Para una lista de los proveedores disponibles, consulte [Proveedores de bases de datos](../../providers/index.md).
+Para usar EF Core, instale el paquete correspondiente a los proveedores de bases de datos a los que desea dirigirse. Este tutorial usa SQL Server. Para ver una lista de los proveedores disponibles, consulte [Proveedores de bases de datos](../../providers/index.md).
 
-* Herramientas > Administrador de paquetes NuGet > Consola del Administrador de paquetes
+* **Herramientas > Administrador de paquetes NuGet > Consola del Administrador de paquetes**
 
 * Ejecute `Install-Package Microsoft.EntityFrameworkCore.SqlServer`.
 
-Para habilitar técnicas de ingeniería inversa desde una base de datos existente, es necesario instalar también un par de otros paquetes.
+En el paso siguiente, usará parte de Entity Framework Tools para aplicar ingeniería inversa en la base de datos. Por lo tanto, instale el paquete de herramientas.
 
 * Ejecute `Install-Package Microsoft.EntityFrameworkCore.Tools`.
 
-## <a name="reverse-engineer-your-model"></a>Utilización de técnicas de ingeniería inversa para el modelo
+## <a name="reverse-engineer-the-model"></a>Aplicación de ingeniería inversa en el modelo
 
-Ya es momento de crear el modelo de EF en función de la base de datos existente.
+Ahora hay que crear el modelo de EF en función de una base de datos existente.
 
-* Herramientas –> Administrador de paquetes NuGet –> Consola del Administrador de paquetes
+* **Herramientas –> Administrador de paquetes NuGet –> Consola del Administrador de paquetes**
 
-* Ejecute el comando siguiente para crear un modelo a partir de la base de datos existente
+* Ejecute el comando siguiente para crear un modelo a partir de la base de datos existente.
 
-``` powershell
-Scaffold-DbContext "Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer
-```
+  ``` powershell
+  Scaffold-DbContext "Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer
+  ```
 
-El proceso de ingeniería inversa creó clases de entidad y un contexto derivado en función del esquema de la base de datos existente. Las clases de entidad son simples objetos de C# que representan los datos que va a consultar y guardar.
+> [!TIP]  
+> Para especificar las tablas para generar entidades, agregue el argumento `-Tables` al comando anterior. Por ejemplo: `-Tables Blog,Post`.
 
-<!-- [!code-csharp[Main](samples/core/GetStarted/FullNet/ConsoleApp.ExistingDb/Blog.cs)] -->
-``` csharp
-using System;
-using System.Collections.Generic;
+El proceso de ingeniería inversa creó clases de entidad (`Blog` y `Post`) y un contexto derivado (`BloggingContext`) en función del esquema de la base de datos existente.
 
-namespace EFGetStarted.ConsoleApp.ExistingDb
-{
-    public partial class Blog
-    {
-        public Blog()
-        {
-            Post = new HashSet<Post>();
-        }
+Las clases de entidad son simples objetos de C# que representan los datos que va a consultar y guardar. Estas son las clases de entidad `Blog` y `Post`:
 
-        public int BlogId { get; set; }
-        public string Url { get; set; }
+ [!code-csharp[Main](../../../../samples/core/GetStarted/FullNet/ConsoleApp.ExistingDb/Blog.cs)]
 
-        public virtual ICollection<Post> Post { get; set; }
-    }
-}
-```
+[!code-csharp[Main](../../../../samples/core/GetStarted/FullNet/ConsoleApp.ExistingDb/Post.cs)]
 
-El contexto representa una sesión con la base de datos y le permite consultar y guardar instancias de las clases de entidad.
+> [!TIP]  
+> Para habilitar la carga diferida, puede usar las propiedades de navegación `virtual` (Blog.Post y Post.Blog).
 
-<!-- [!code-csharp[Main](samples/core/GetStarted/FullNet/ConsoleApp.ExistingDb/BloggingContext.cs)] -->
-``` csharp
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+El contexto representa una sesión con la base de datos. Tiene métodos que puede usar para consultar y guardar instancias de las clases de entidad.
 
-namespace EFGetStarted.ConsoleApp.ExistingDb
-{
-    public partial class BloggingContext : DbContext
-    {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Connection=True;");
-        }
+[!code-csharp[Main](../../../../samples/core/GetStarted/FullNet/ConsoleApp.ExistingDb/BloggingContext.cs)]
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Blog>(entity =>
-            {
-                entity.Property(e => e.Url).IsRequired();
-            });
-
-            modelBuilder.Entity<Post>(entity =>
-            {
-                entity.HasOne(d => d.Blog)
-                    .WithMany(p => p.Post)
-                    .HasForeignKey(d => d.BlogId);
-            });
-        }
-
-        public virtual DbSet<Blog> Blog { get; set; }
-        public virtual DbSet<Post> Post { get; set; }
-    }
-}
-```
-
-## <a name="use-your-model"></a>Uso del modelo
+## <a name="use-the-model"></a>Uso del modelo
 
 Ahora puede usar el modelo para realizar el acceso a los datos.
 
 * Abra *Program.cs*.
 
-* Reemplace el contenido del archivo por el código siguiente
+* Reemplace el contenido del archivo por el código siguiente.
 
-<!-- [!code-csharp[Main](samples/core/GetStarted/FullNet/ConsoleApp.ExistingDb/Program.cs)] -->
-``` csharp
-using System;
-
-namespace EFGetStarted.ConsoleApp.ExistingDb
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            using (var db = new BloggingContext())
-            {
-                db.Blog.Add(new Blog { Url = "http://blogs.msdn.com/adonet" });
-                var count = db.SaveChanges();
-                Console.WriteLine("{0} records saved to database", count);
-
-                Console.WriteLine();
-                Console.WriteLine("All blogs in database:");
-                foreach (var blog in db.Blog)
-                {
-                    Console.WriteLine(" - {0}", blog.Url);
-                }
-            }
-        }
-    }
-}
-```
+  [!code-csharp[Main](../../../../samples/core/GetStarted/FullNet/ConsoleApp.ExistingDb/Program.cs)] 
 
 * Depurar > Iniciar sin depuración
 
-Verá que un blog se guarda en la base de datos y luego los detalles de todos los blogs se imprimen en la consola.
+  Verá que un blog se guarda en la base de datos y, luego, los detalles de todos los blogs se imprimen en la consola.
 
-![imagen](_static/output-existing-db.png)
+  ![imagen](_static/output-existing-db.png)
+
+## <a name="additional-resources"></a>Recursos adicionales
+
+* [EF Core en .NET Framework con una base de datos nueva](xref:core/get-started/full-dotnet/new-db)
+* [EF Core en .NET Core con una base de datos nueva (SQLite)](xref:core/get-started/netcore/new-db-sqlite), un tutorial de EF para la consola multiplataforma.
