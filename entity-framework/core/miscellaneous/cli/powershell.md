@@ -3,13 +3,12 @@ title: Consola del Administrador de paquetes (Visual Studio) - EF Core
 author: bricelam
 ms.author: bricelam
 ms.date: 11/6/2017
-ms.technology: entity-framework-core
-ms.openlocfilehash: 0799b0cb7c5d837fdbb7a4af510a9a4d9d34ec1a
-ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
+ms.openlocfilehash: 6a3594a3535f8de30ec1898fd21cfcbe272f216b
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 07/10/2018
-ms.locfileid: "37949043"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42997939"
 ---
 <a name="ef-core-package-manager-console-tools"></a>Herramientas de la consola de administrador de paquetes de EF Core
 =====================================

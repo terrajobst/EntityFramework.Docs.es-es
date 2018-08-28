@@ -1,26 +1,24 @@
 ---
-title: Claves alternativas - Core EF
+title: Claves alternativas - EF Core
 author: rowanmiller
-ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: 8a5931d4-b480-4298-af36-0e29d74a37c0
-ms.technology: entity-framework-core
 uid: core/modeling/alternate-keys
-ms.openlocfilehash: 09f86a8932b71ec8f30ee90a088091a00233c20f
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: b26d8bc1630af9e811d9c4e7da850a618bc8042e
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/27/2017
-ms.locfileid: "26052475"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42996976"
 ---
 # <a name="alternate-keys"></a>Claves alternativas
 
-Una clave alternativa actúa como un identificador exclusivo alternativo para cada instancia de entidad además de la clave principal. Las claves alternativas pueden utilizarse como destino de una relación. Cuando se usa una base de datos relacional se asigna al concepto de un índice o restricción unique en las columnas de clave alternativas y uno o más restricciones de clave externa que hacen referencia a las columnas.
+Una clave alternativa actúa como un identificador exclusivo alternativo para cada instancia de entidad además de la clave principal. Claves alternativas se pueden usar como destino de una relación. Cuando se usa una base de datos relacional se asigna al concepto de un índice o restricción unique en las columnas de clave alternativas y uno o más restricciones foreign key que hacen referencia a las columnas.
 
 > [!TIP]  
-> Si desea exigir la unicidad de una columna, a continuación, desea que un índice único en lugar de una clave alternativa, consulte [índices](indexes.md). En EF, claves alternativas de las proporcionan mayor funcionalidad que los índices únicos, ya que pueden utilizarse como destino de una clave externa.
+> Si desea exigir la unicidad de una columna, entonces le interesará un índice único en lugar de una clave alternativa, consulte [índices](indexes.md). En EF, las claves alternativas proporcionan mayor funcionalidad que los índices únicos porque se pueden usar como destino de una clave externa.
 
-Las claves alternativas normalmente se introducen automáticamente cuando sea necesario y no es necesario configurarlos manualmente. Vea [convenciones](#conventions) para obtener más detalles.
+Claves alternativas normalmente se introducen automáticamente cuando sea necesario y no es necesario configurarlos manualmente. Consulte [convenciones](#conventions) para obtener más detalles.
 
 ## <a name="conventions"></a>Convenciones
 
@@ -68,7 +66,7 @@ No se pueden configurar las claves alternativas usando anotaciones de datos.
 
 ## <a name="fluent-api"></a>API fluida
 
-Puede usar la API fluida para configurar una sola propiedad para que sea una clave alternativa.
+Puede usar la API Fluent para configurar una propiedad única para que sea una clave alternativa.
 
 <!-- [!code-csharp[Main](samples/core/Modeling/FluentAPI/Samples/AlternateKeySingle.cs?highlight=7,8)] -->
 ``` csharp
@@ -92,7 +90,7 @@ class Car
 }
 ```
 
-También puede usar la API fluida para configurar varias propiedades para que sea una clave alternativa (conocida como una clave compuesta alternativa).
+También puede usar la API Fluent para configurar varias propiedades para que sea una clave alternativa (conocida como una clave compuesta alternativa).
 
 <!-- [!code-csharp[Main](samples/core/Modeling/FluentAPI/Samples/AlternateKeyComposite.cs?highlight=7,8)] -->
 ``` csharp

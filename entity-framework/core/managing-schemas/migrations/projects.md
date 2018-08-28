@@ -1,19 +1,18 @@
 ---
-title: Migraciones con varios proyectos - Core EF
+title: Migraciones con varios proyectos - EF Core
 author: bricelam
 ms.author: bricelam
 ms.date: 10/30/2017
-ms.technology: entity-framework-core
-ms.openlocfilehash: 3684e86cce0005056380d89604d038c734054d14
-ms.sourcegitcommit: ced2637bf8cc5964c6daa6c7fcfce501bf9ef6e8
+ms.openlocfilehash: 76e88dd486b1c53dc69a24e35710511bf9cb673b
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 12/22/2017
-ms.locfileid: "27161232"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42997992"
 ---
 <a name="using-a-separate-project"></a>Uso de un proyecto independiente
 ========================
-Puede que desee almacenar las migraciones en un ensamblado diferente del que contiene el `DbContext`. También puede utilizar esta estrategia para mantener varios conjuntos de migraciones, por ejemplo, uno para el desarrollo y otro para las actualizaciones de versión a otra.
+Es posible que desea almacenar las migraciones en un ensamblado diferente del que contiene su `DbContext`. También puede usar esta estrategia que mantener varios conjuntos de migraciones, por ejemplo, uno para el desarrollo y otro para las actualizaciones de versión a otra.
 
 Para...
 
@@ -22,7 +21,8 @@ Para...
 2. Agregue una referencia al ensamblado DbContext.
 
 3. Mueva los archivos de instantánea de modelo y las migraciones a la biblioteca de clases.
-   * Si aún no lo ha agregado, agregue una al proyecto de DbContext, a continuación, moverlo.
+   > [!TIP]
+   > Si dispone de ninguna de las migraciones, generar uno en el proyecto que contiene la clase DbContext, a continuación, moverla. Esto es importante porque si el ensamblado de las migraciones no contiene una migración existente, el comando Add-Migration será no se puede encontrar la clase DbContext.
 
 4. Configure el ensamblado de migraciones:
 
@@ -37,11 +37,11 @@ Para...
 
      ``` xml
      <PropertyGroup>
-       <OutputPath>..\MyStarupProject\bin\$(Configuration)\</OutputPath>
+       <OutputPath>..\MyStartupProject\bin\$(Configuration)\</OutputPath>
      </PropertyGroup>
      ```
 
-Si hizo todo correctamente, podrá agregar las migraciones nuevas al proyecto.
+Si hizo todo correctamente, debería poder agregar migraciones nueva al proyecto.
 
 ``` powershell
 Add-Migration NewMigration -Project MyApp.Migrations

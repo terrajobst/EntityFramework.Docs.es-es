@@ -2,19 +2,13 @@
 title: Glosario de Entity Framework - EF6
 author: divega
 ms.date: 2016-10-23
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: 3f05ffdd-49bc-499c-9732-4a368bf5d2d7
-caps.latest.revision: 3
-ms.openlocfilehash: cbd61838afc23dfb37cee7c624c65476c5270099
-ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
+ms.openlocfilehash: 4ad56c4d655e004d97c3537707fa6b13c7acf88e
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 07/10/2018
-ms.locfileid: "39122735"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42997724"
 ---
 # <a name="entity-framework-glossary"></a>Glosario de Entity Framework
 ## <a name="code-first"></a>Code First
@@ -32,7 +26,7 @@ Creación de un modelo de Entity Framework mediante el Diseñador de EF, destina
 ## <a name="eager-loading"></a>Carga diligente
 Modelo de carga de datos relacionados en una consulta para un tipo de entidad también carga las entidades relacionadas como parte de la consulta.
 
-## <a name="ef-designer"></a>Diseñador de EF
+## <a name="ef-designer"></a>EF Designer
 Un diseñador visual de Visual Studio que le permite crear un modelo de Entity Framework con cuadros y líneas.
 
 ## <a name="entity"></a>Entity

@@ -2,19 +2,13 @@
 title: 'Compatibilidad con el proveedor de tipos espaciales: EF6'
 author: divega
 ms.date: 2016-10-23
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: 1097cb00-15f5-453d-90ed-bff9403d23e3
-caps.latest.revision: 3
-ms.openlocfilehash: 76020e2a3127b1026a5cb8f032686cc8ce9c0c5f
-ms.sourcegitcommit: f05e7b62584cf228f17390bb086a61d505712e1b
+ms.openlocfilehash: 07eeecb5f5e3e3eab8548c4c7c0ed55c5ffb4f31
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 07/08/2018
-ms.locfileid: "39121895"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42998292"
 ---
 # <a name="provider-support-for-spatial-types"></a>Proveedor de compatibilidad para tipos espaciales
 Entity Framework admite trabajar con datos espaciales a través de las clases de DbGeography o DbGeometry. Estas clases se basan en la funcionalidad específica de la base de datos que ofrece el proveedor de Entity Framework. No todos los proveedores admiten datos espaciales y aquellos que lo hacen pueden tener requisitos previos adicionales, como la instalación de los ensamblados de tipo espacial. Para obtener más información sobre la compatibilidad con proveedor de tipos espaciales se proporciona a continuación.  
