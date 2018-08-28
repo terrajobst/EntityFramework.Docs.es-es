@@ -2,19 +2,13 @@
 title: Especificación de SSDL - EF6
 author: divega
 ms.date: 2016-10-23
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: a4af4b1a-40f4-48cc-b2e0-fa8f5d9d5419
-caps.latest.revision: 3
-ms.openlocfilehash: a9977c80d9a9401afdcad2284a705bcb28790fb8
-ms.sourcegitcommit: 9ae4473425c5e76337c9d032b0e5dbfedf1fcf57
+ms.openlocfilehash: 35c560d88e5078a7fc4c07b76020f3ad7d0735e1
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 07/09/2018
-ms.locfileid: "39122720"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42995284"
 ---
 # <a name="ssdl-specification"></a>Especificación SSDL
 El lenguaje de definición de esquemas de almacenamiento (SSDL) es un lenguaje basado en XML que describe el modelo de almacenamiento de una aplicación Entity Framework.
@@ -419,7 +413,7 @@ En la tabla siguiente se describe los atributos que se pueden aplicar a la **Ent
 |:---------------|:------------|:-----------------------------------------------------------------------------------------|
 | **Name**       | Sí         | Nombre del conjunto de entidades.                                                              |
 | **EntityType** | Sí         | El nombre completo del tipo de entidad para el que el conjunto de entidades contiene las instancias. |
-| **Esquema**     | No          | El esquema de base de datos.                                                                     |
+| **esquema**     | No          | El esquema de base de datos.                                                                     |
 | **Table**      | No          | La tabla de base de datos.                                                                      |
 
 > [!NOTE]
@@ -517,7 +511,7 @@ En la tabla siguiente se describe los atributos que se pueden aplicar a la **fun
 | **NiladicFunction**        | No          | **True** si la función es una función niládica<sup>2</sup> función; **False** en caso contrario.                                                                                                                                   |
 | **IsComposable**           | No          | **True** si la función es una composición<sup>3</sup> función; **False** en caso contrario.                                                                                                                                |
 | **ParameterTypeSemantics** | No          | La enumeración que define la semántica de tipos que se utiliza para resolver sobrecargas de función. La enumeración se define en el manifiesto del proveedor por cada definición de función. El valor predeterminado es **AllowImplicitConversion**. |
-| **Esquema**                 | No          | El nombre del esquema donde se define el procedimiento almacenado.                                                                                                                                                   |
+| **esquema**                 | No          | El nombre del esquema donde se define el procedimiento almacenado.                                                                                                                                                   |
 
 <sup>1</sup> una función integrada es una función que se define en la base de datos. Para obtener información acerca de las funciones que se definen en el modelo de almacenamiento, vea el elemento CommandText (SSDL).
 
