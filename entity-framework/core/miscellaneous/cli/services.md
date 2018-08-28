@@ -1,19 +1,18 @@
 ---
-title: Servicios en tiempo de diseño - Core EF
+title: Servicios de tiempo de diseño - EF Core
 author: bricelam
 ms.author: bricelam
 ms.date: 10/26/2017
-ms.technology: entity-framework-core
-ms.openlocfilehash: f9c8208a59bfcefeaab01ea69e65fe809a0b3d89
-ms.sourcegitcommit: 5e2d97e731f975cf3405ff3deab2a3c75ad1b969
+ms.openlocfilehash: e1cacdd4f40f9c395d8c88a91df4a92ef27001a8
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/15/2017
-ms.locfileid: "26053695"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42997536"
 ---
-<a name="design-time-services"></a><span data-ttu-id="eac79-102">Servicios en tiempo de diseño</span><span class="sxs-lookup"><span data-stu-id="eac79-102">Design-time services</span></span>
+<a name="design-time-services"></a><span data-ttu-id="05757-102">Servicios en tiempo de diseño</span><span class="sxs-lookup"><span data-stu-id="05757-102">Design-time services</span></span>
 ====================
-<span data-ttu-id="eac79-103">Algunos servicios utilizados por las herramientas solo se usan en tiempo de diseño.</span><span class="sxs-lookup"><span data-stu-id="eac79-103">Some services used by the tools are only used at design time.</span></span> <span data-ttu-id="eac79-104">Estos servicios se administran por separado de los servicios en tiempo de ejecución del núcleo de EF para impedir que se implementan con la aplicación.</span><span class="sxs-lookup"><span data-stu-id="eac79-104">These services are managed separately from EF Core's runtime services to prevent them from being deployed with your app.</span></span> <span data-ttu-id="eac79-105">Para reemplazar uno de estos servicios (por ejemplo, el servicio para generar archivos de migración), agregue una implementación de `IDesignTimeServices` a su proyecto de inicio.</span><span class="sxs-lookup"><span data-stu-id="eac79-105">To override one of these services (for example the service to generate migration files), add an implementation of `IDesignTimeServices` to your startup project.</span></span>
+<span data-ttu-id="05757-103">Algunos servicios que usan las herramientas solo se usan en tiempo de diseño.</span><span class="sxs-lookup"><span data-stu-id="05757-103">Some services used by the tools are only used at design time.</span></span> <span data-ttu-id="05757-104">Estos servicios se administran por separado de los servicios de tiempo de ejecución de EF Core para impedir que se implementarán con la aplicación.</span><span class="sxs-lookup"><span data-stu-id="05757-104">These services are managed separately from EF Core's runtime services to prevent them from being deployed with your app.</span></span> <span data-ttu-id="05757-105">Para reemplazar uno de estos servicios (por ejemplo, el servicio para generar los archivos de migración), agregue una implementación de `IDesignTimeServices` a su proyecto de inicio.</span><span class="sxs-lookup"><span data-stu-id="05757-105">To override one of these services (for example the service to generate migration files), add an implementation of `IDesignTimeServices` to your startup project.</span></span>
 
 ``` csharp
 class MyDesignTimeServices : IDesignTimeServices
