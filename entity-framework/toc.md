@@ -106,6 +106,7 @@
 ##### [Limitaciones de SQLite](core/providers/sqlite/limitations.md)
 #### [InMemory (para pruebas)](core/providers/in-memory/index.md)
 #### [Escritura de un proveedor de base de datos](core/providers/writing-a-provider.md)
+#### [Cambios que afectan al proveedor](core/providers/provider-log.md)
 
 ### [Herramientas y extensiones](core/extensions/index.md)
 
