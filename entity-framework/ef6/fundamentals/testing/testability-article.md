@@ -2,19 +2,13 @@
 title: Capacidad de prueba y Entity Framework 4.0
 author: divega
 ms.date: 2016-10-23
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: 9430e2ab-261c-4e8e-8545-2ebc52d7a247
-caps.latest.revision: 3
-ms.openlocfilehash: 61773f8a23ff54ddb78aeeb5656c669b12f91478
-ms.sourcegitcommit: f05e7b62584cf228f17390bb086a61d505712e1b
+ms.openlocfilehash: 17a9f09022531a81042979464de05fbbd2570759
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 07/08/2018
-ms.locfileid: "39122368"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42995234"
 ---
 # <a name="testability-and-entity-framework-40"></a>Capacidad de prueba y Entity Framework 4.0
 Scott Allen
@@ -979,8 +973,8 @@ En este artículo hemos mostrado varios enfoques para crear código fácil de pr
 -   Martin Fowler, " [las simulaciones no son códigos auxiliares](http://martinfowler.com/articles/mocksArentStubs.html)"
 -   Martin Fowler, " [doble de pruebas](http://martinfowler.com/bliki/TestDouble.html)"
 -   Jeremy Miller, " [estado frente a las pruebas de interacción](http://codebetter.com/blogs/jeremy.miller/articles/129544.aspx)"
--   Moq, \<http://code.google.com/p/moq/>
+-   [Moq](http://code.google.com/p/moq/)
 
 ### <a name="biography"></a>Biografía
 
-Scott Allen es un miembro del personal técnico en Pluralsight y fundador de OdeToCode.com. De 15 años de desarrollo de software comercial, Scott ha trabajado en soluciones para todo, desde dispositivos incrustados de 8 bits a las aplicaciones web ASP.NET altamente escalables. Puede llegar a Scott en su blog en OdeToCode o en Twitter en \< http://twitter.com/OdeToCode>.
+Scott Allen es un miembro del personal técnico en Pluralsight y fundador de OdeToCode.com. De 15 años de desarrollo de software comercial, Scott ha trabajado en soluciones para todo, desde dispositivos incrustados de 8 bits a las aplicaciones web ASP.NET altamente escalables. Puede llegar a Scott en su blog en OdeToCode o en Twitter en [ http://twitter.com/OdeToCode ](http://twitter.com/OdeToCode).

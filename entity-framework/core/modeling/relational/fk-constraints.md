@@ -1,36 +1,34 @@
 ---
-title: Restricciones Foreign Key - Core EF
+title: Restricciones Foreign Key - EF Core
 author: rowanmiller
-ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: dbaf4bac-1fd5-46c0-ac57-64d7153bc574
-ms.technology: entity-framework-core
 uid: core/modeling/relational/fk-constraints
-ms.openlocfilehash: 726f03e2ee4cd3ec851c9a861b75dd12f9203e9c
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: a83f72b5d832e349fb4a5fb3b2de0b82bd79ef2a
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/27/2017
-ms.locfileid: "26052745"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42993993"
 ---
 # <a name="foreign-key-constraints"></a>Restricciones de clave externa
 
 > [!NOTE]  
-> La configuración de esta sección es aplicable a bases de datos relacionales en general. Los métodos de extensión que se muestra a continuación pasará a estar disponibles cuando se instala un proveedor de base de datos relacional (porque el recurso compartido *Microsoft.EntityFrameworkCore.Relational* paquete).
+> La configuración de esta sección se aplica a bases de datos relacionales en general. Los métodos de extensión que se muestran a continuación estarán disponibles cuando instale un proveedor de base de datos relacional (debido al paquete compartido *Microsoft.EntityFrameworkCore.Relational*).
 
-Una restricción foreign key se introdujo para cada relación en el modelo.
+Se introdujo una restricción foreign key para cada relación en el modelo.
 
 ## <a name="conventions"></a>Convenciones
 
-Por convención, se denominan restricciones foreign key `FK_<dependent type name>_<principal type name>_<foreign key property name>`. Para las claves externas compuestas `<foreign key property name>` se convierte en una lista de subrayado separado de los nombres de propiedad de clave externa.
+Por convención, se denominan restricciones foreign key `FK_<dependent type name>_<principal type name>_<foreign key property name>`. Para las claves externas compuestas `<foreign key property name>` se convierte en una lista separada por un carácter de subrayado de los nombres de propiedad de clave externa.
 
 ## <a name="data-annotations"></a>Anotaciones de datos
 
-Nombres de restricción de clave externa no se puede configurar mediante las anotaciones de datos.
+Los nombres de restricción de clave externa no se puede configurar mediante las anotaciones de datos.
 
 ## <a name="fluent-api"></a>API fluida
 
-Puede usar la API fluida para configurar el nombre de restricción de clave externa de una relación.
+Puede usar la API Fluent para configurar el nombre de restricción de clave externa de una relación.
 
 <!-- [!code-csharp[Main](samples/core/relational/Modeling/FluentAPI/Samples/Relational/RelationshipConstraintName.cs?highlight=12)] -->
 ``` csharp

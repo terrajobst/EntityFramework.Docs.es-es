@@ -2,19 +2,13 @@
 title: 'Consulta del diseñador procedimientos almacenados: EF6'
 author: divega
 ms.date: 2016-10-23
-ms.prod: entity-framework
-ms.author: divega
-ms.manager: avickers
-ms.technology: entity-framework-6
-ms.topic: article
 ms.assetid: 9554ed25-c5c1-43be-acad-5da37739697f
-caps.latest.revision: 3
-ms.openlocfilehash: a08c1afc02266b35372a49fca1e829963e4785b2
-ms.sourcegitcommit: f05e7b62584cf228f17390bb086a61d505712e1b
+ms.openlocfilehash: 29b7745c2229ce4a38ad81e11406474424adfa24
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 07/08/2018
-ms.locfileid: "39122311"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42994977"
 ---
 # <a name="designer-query-stored-procedures"></a>Consulta del Diseñador de procedimientos almacenados
 En este tutorial paso a paso muestra cómo usar el Diseñador de Entity Framework (EF Designer) para importar los procedimientos almacenados en un modelo y, a continuación, llamar a los procedimientos almacenados importados para recuperar los resultados. 

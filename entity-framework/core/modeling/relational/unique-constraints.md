@@ -1,28 +1,26 @@
 ---
-title: Claves alternativas (restricciones únicas) - Core EF
+title: Claves alternativas (restricciones únicas) - EF Core
 author: rowanmiller
-ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: 3d419dcf-2b5d-467c-b408-ea03d830721a
-ms.technology: entity-framework-core
 uid: core/modeling/relational/unique-constraints
-ms.openlocfilehash: 1b7e2bef6ede95f8c27211ba00dcc6b97cccde9b
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: 7ec58ee31aac79e15329dc8542f37fd117772fbe
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/27/2017
-ms.locfileid: "26052795"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42994196"
 ---
 # <a name="alternate-keys-unique-constraints"></a>Claves alternativas (restricciones únicas)
 
 > [!NOTE]  
-> La configuración de esta sección es aplicable a bases de datos relacionales en general. Los métodos de extensión que se muestra a continuación pasará a estar disponibles cuando se instala un proveedor de base de datos relacional (porque el recurso compartido *Microsoft.EntityFrameworkCore.Relational* paquete).
+> La configuración de esta sección se aplica a bases de datos relacionales en general. Los métodos de extensión que se muestran a continuación estarán disponibles cuando instale un proveedor de base de datos relacional (debido al paquete compartido *Microsoft.EntityFrameworkCore.Relational*).
 
-Una restricción unique se introdujo para cada clave alternativa en el modelo.
+Se introdujo una restricción única para cada clave alternativa en el modelo.
 
 ## <a name="conventions"></a>Convenciones
 
-Por convención, se llamará el índice y la restricción que se introducen para una clave alternativa `AK_<type name>_<property name>`. Para las claves compuestas de alternativas `<property name>` se convierte en una lista de subrayado separado de los nombres de propiedad.
+Por convención, se denominará el índice y la restricción que se presentan para una clave alternativa `AK_<type name>_<property name>`. Para las claves alternativas compuestas `<property name>` se convierte en una lista separada por un carácter de subrayado de los nombres de propiedad.
 
 ## <a name="data-annotations"></a>Anotaciones de datos
 
@@ -30,6 +28,6 @@ Restricciones UNIQUE no se pueden configurar mediante las anotaciones de datos.
 
 ## <a name="fluent-api"></a>API fluida
 
-Puede usar la API fluida para configurar el nombre de índice y de restricción para una clave alternativa.
+Puede usar la API Fluent para configurar el nombre de índice y de restricción para una clave alternativa.
 
 [!code-csharp[Main](../../../../samples/core/Modeling/FluentAPI/Samples/Relational/AlternateKeyName.cs?name=Model&highlight=9)]

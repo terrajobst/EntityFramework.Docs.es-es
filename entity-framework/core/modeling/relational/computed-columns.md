@@ -1,24 +1,22 @@
 ---
-title: Columnas calculadas - Core EF
+title: Columnas calculadas - EF Core
 author: rowanmiller
-ms.author: divega
 ms.date: 10/27/2016
 ms.assetid: e9d81f06-805d-45c9-97c2-3546df654829
-ms.technology: entity-framework-core
 uid: core/modeling/relational/computed-columns
-ms.openlocfilehash: 95312504286bd34cc666b5a21273835c4b35d379
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: b88efdf69e5100e4eff55f3a41925d2d8e7c3178
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/27/2017
-ms.locfileid: "26052485"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42993958"
 ---
 # <a name="computed-columns"></a>Columnas calculadas
 
 > [!NOTE]  
-> La configuración de esta sección es aplicable a bases de datos relacionales en general. Los métodos de extensión que se muestra a continuación pasará a estar disponibles cuando se instala un proveedor de base de datos relacional (porque el recurso compartido *Microsoft.EntityFrameworkCore.Relational* paquete).
+> La configuración de esta sección se aplica a bases de datos relacionales en general. Los métodos de extensión que se muestran a continuación estarán disponibles cuando instale un proveedor de base de datos relacional (debido al paquete compartido *Microsoft.EntityFrameworkCore.Relational*).
 
-Una columna calculada es una columna cuyo valor se calcula en la base de datos. Una columna calculada puede usar otras columnas de la tabla para calcular su valor.
+Una columna calculada es una columna cuyo valor se calcula en la base de datos. Una columna calculada puede usar otras columnas en la tabla para calcular su valor.
 
 ## <a name="conventions"></a>Convenciones
 
@@ -26,11 +24,11 @@ Por convención, las columnas calculadas no se crean en el modelo.
 
 ## <a name="data-annotations"></a>Anotaciones de datos
 
-Las columnas calculadas no pueden configurarse con las anotaciones de datos.
+No se pueden configurar las columnas calculadas con las anotaciones de datos.
 
 ## <a name="fluent-api"></a>API fluida
 
-Puede usar la API fluida para especificar que una propiedad se debe asignar a una columna calculada.
+Puede usar la API Fluent para especificar que una propiedad se debe asignar a una columna calculada.
 
 <!-- [!code-csharp[Main](samples/core/relational/Modeling/FluentAPI/Samples/Relational/ComputedColumn.cs?highlight=9)] -->
 ``` csharp
