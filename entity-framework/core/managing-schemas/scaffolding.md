@@ -1,20 +1,18 @@
 ---
-title: "\U0001F527 Invertir ingeniería - Core EF"
+title: "\U0001F527 Reverse Engineering - EF Core"
 author: smitpatel
-ms.author: divega
 ms.date: 10/30/2017
-ms.technology: entity-framework-core
-ms.openlocfilehash: 6bec5185714211a93afe012a296112337a563b04
-ms.sourcegitcommit: 507a40ed050fee957bcf8cf05f6e0ec8a3b1a363
+ms.openlocfilehash: 3b5ccb7fd4a944f8179b4c1c445fd897cef29e1b
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 04/26/2018
-ms.locfileid: "31812669"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42993585"
 ---
-# <a name="-reverse-engineering"></a>🔧 La ingeniería inversa
+# <a name="-reverse-engineering"></a>🔧 Ingeniería inversa
 
 > [!NOTE]
-> Este tema no se ha escrito todavía. Puede realizar un seguimiento del estado de este [problema] [ 1] a través de nuestro issue tracker público de GitHub. Obtenga información acerca de cómo puede [contribuir] [ 2] en GitHub.
+> Este tema no se ha escrito todavía. Puede realizar un seguimiento del estado de este [problema] [ 1] a través de nuestro rastreador de problemas de GitHub público. Aprenda cómo puede [contribuir] [ 2] en GitHub.
 
 
   [1]: https://github.com/aspnet/EntityFramework.Docs/issues/508

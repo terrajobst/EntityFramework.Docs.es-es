@@ -4,12 +4,12 @@ author: ajcvickers
 ms.date: 02/19/2018
 ms.assetid: 3154BF3C-1749-4C60-8D51-AE86773AA116
 uid: core/modeling/value-conversions
-ms.openlocfilehash: d6b51a0a70ee527844b6fe995f39bec534dbaba8
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 2a1956221ecc920feba796e4d95cc97259e89c53
+ms.sourcegitcommit: 0cef7d448e1e47bdb333002e2254ed42d57b45b6
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42996293"
+ms.lasthandoff: 08/29/2018
+ms.locfileid: "43152515"
 ---
 # <a name="value-conversions"></a>Conversiones de valores
 
@@ -27,7 +27,7 @@ Las conversiones se definen mediante dos `Func` árboles de expresión: uno de `
 ## <a name="configuring-a-value-converter"></a>Configuración de un convertidor de valores
 
 Conversiones de valores se definen en las propiedades de la `OnModelCreating` de su `DbContext`. Por ejemplo, considere la posibilidad de un tipo enum y entidad definido como:
-```Csharp
+``` csharp
 public class Rider
 {
     public int Id { get; set; }
@@ -43,7 +43,7 @@ public enum EquineBeast
 }
 ```
 A continuación, se pueden definir conversiones en `OnModelCreating` para almacenar los valores de enumeración como cadenas (por ejemplo, "Burro", "Mula",...) en la base de datos:
-```Csharp
+``` csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
     modelBuilder
@@ -60,7 +60,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 ## <a name="the-valueconverter-class"></a>La clase ValueConverter
 
 Una llamada a `HasConversion` como se indicó anteriormente, se creará un `ValueConverter` de instancia y establézcalo en la propiedad. El `ValueConverter` en su lugar, se pueden crear explícitamente. Por ejemplo:
-```Csharp
+``` csharp
 var converter = new ValueConverter<EquineBeast, string>(
     v => v.ToString(),
     v => (EquineBeast)Enum.Parse(typeof(EquineBeast), v));
@@ -82,7 +82,7 @@ EF Core incluye un conjunto de predefinidos `ValueConverter` clases, que se encu
 * `BoolToStringConverter` -Bool a cadenas como "Y" y "N"
 * `BoolToTwoValuesConverter` -Bool a los dos valores.
 * `BytesToStringConverter` -Matriz de bytes en cadena codificada en Base64
-* `CastingConverter` -Las conversiones que requieren solo una conversión de Csharp
+* `CastingConverter` -Las conversiones que requieren solo una conversión de tipo
 * `CharToStringConverter` -Char cadena de carácter único
 * `DateTimeOffsetToBinaryConverter` -DateTimeOffset al valor de 64 bits con codificación binaria
 * `DateTimeOffsetToBytesConverter` -DateTimeOffset a la matriz de bytes
@@ -101,7 +101,7 @@ EF Core incluye un conjunto de predefinidos `ValueConverter` clases, que se encu
 * `TimeSpanToTicksConverter` -Intervalo de tiempo en pasos
 
 Tenga en cuenta que `EnumToStringConverter` se incluye en esta lista. Esto significa que no hay ninguna necesidad de especificar la conversión de forma explícita, como se indicó anteriormente. En su lugar, use el convertidor de tipos integrado:
-```Csharp
+``` csharp
 var converter = new EnumToStringConverter<EquineBeast>();
 
 modelBuilder
@@ -114,14 +114,14 @@ Tenga en cuenta que todos los convertidores integrados tienen estados y por lo q
 ## <a name="pre-defined-conversions"></a>Conversiones predefinidas
 
 Para las conversiones comunes para el que existe un convertidor de tipos integrado, no hay ninguna necesidad especificar explícitamente el convertidor. En su lugar, se configura simplemente se debe usar el tipo de proveedor y EF utilizará automáticamente el convertidor integrado apropiado. Enumeración para las conversiones de cadenas se usan como un ejemplo anterior, pero EF realmente hacen esto automáticamente si se configura el tipo de proveedor:
-```Csharp
+``` csharp
 modelBuilder
     .Entity<Rider>()
     .Property(e => e.Mount)
     .HasConversion<string>();
 ```
 Lo mismo se puede lograr si se especifica explícitamente el tipo de columna. Por ejemplo, si el tipo de entidad se define como para:
-```Csharp
+``` csharp
 public class Rider
 {
     public int Id { get; set; }

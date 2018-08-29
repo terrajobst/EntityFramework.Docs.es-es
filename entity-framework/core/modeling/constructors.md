@@ -4,12 +4,12 @@ author: ajcvickers
 ms.date: 02/23/2018
 ms.assetid: 420AFFE7-B709-4A68-9149-F06F8746FB33
 uid: core/modeling/constructors
-ms.openlocfilehash: 0536393d074d82583f47faae13cc22498193cb7e
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 1b36197465fb9a6571a306d36eb1e9d885a5399e
+ms.sourcegitcommit: 0cef7d448e1e47bdb333002e2254ed42d57b45b6
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994898"
+ms.lasthandoff: 08/29/2018
+ms.locfileid: "43152470"
 ---
 # <a name="entity-types-with-constructors"></a>Tipos de entidad con constructores
 
@@ -25,7 +25,7 @@ A partir de EF Core 2.1, ahora es posible definir un constructor con parámetros
 
 Considere la posibilidad de un modelo de entrada de Blog/típico:
 
-```Csharp
+``` csharp
 public class Blog
 {
     public int Id { get; set; }
@@ -50,7 +50,7 @@ public class Post
 
 Cuando EF Core crea instancias de estos tipos, como los resultados de una consulta, se llamar primero al constructor sin parámetros predeterminado y, a continuación, establece cada propiedad en el valor de la base de datos. Sin embargo, si EF Core busca un constructor con parámetros con los nombres de parámetro y tipos que coinciden con los de asignan propiedades y después en su lugar, llamará al constructor con parámetros con valores de esas propiedades y no establece explícitamente cada propiedad. Por ejemplo:
 
-```Csharp
+``` csharp
 public class Blog
 {
     public Blog(int id, string name, string author)
@@ -99,7 +99,7 @@ Una vez que se establecen las propiedades mediante el constructor puede sentido 
 * Utilizando los valores de clave generados automáticamente, requiere una propiedad de clave es de lectura y escritura, ya que el valor de clave debe establecerse mediante el generador de claves cuando se insertan nuevas entidades.
 
 Una manera fácil de evitar estas situaciones es usar establecedores privados. Por ejemplo:
-```Csharp
+``` csharp
 public class Blog
 {
     public Blog(int id, string name, string author)
@@ -139,7 +139,7 @@ EF Core, ve una propiedad con un establecedor privado de lectura y escritura, lo
 
 Una alternativa al uso de establecedores privados es poner propiedades realmente de solo lectura y agregar una asignación más explícita en OnModelCreating. Del mismo modo, algunas propiedades se pueden quitar completamente y reemplaza con solo los campos. Por ejemplo, considere la posibilidad de estos tipos de entidad:
 
-```Csharp
+``` csharp
 public class Blog
 {
     private int _id;
@@ -174,7 +174,7 @@ public class Post
 }
 ```
 Y esta configuración en OnModelCreating:
-```Csharp
+``` csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
     modelBuilder.Entity<Blog>(
@@ -215,7 +215,7 @@ EF Core también puede insertar "servicios" en el constructor de un tipo de enti
 
 Por ejemplo, puede utilizarse un DbContext insertado selectivamente acceder a la base de datos para obtener información sobre las entidades relacionadas sin tener que cargar todos ellos. En el ejemplo siguiente se utiliza para obtener el número de publicaciones en un blog sin tener que cargar las entradas de esto:
 
-```Csharp
+``` csharp
 public class Blog
 {
     public Blog()
