@@ -6,12 +6,12 @@ ms.date: 10/27/2016
 ms.assetid: ee8e14ec-2158-4c9c-96b5-118715e2ed9e
 ms.technology: entity-framework-core
 uid: core/saving/cascade-delete
-ms.openlocfilehash: 0fc8929c56d4c657b7fb1e3c8e4b1a71659220c9
-ms.sourcegitcommit: 507a40ed050fee957bcf8cf05f6e0ec8a3b1a363
+ms.openlocfilehash: 7e1c87ae3a955c22b267a108ea7c2bb504e9acc3
+ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 04/26/2018
-ms.locfileid: "31812682"
+ms.lasthandoff: 07/10/2018
+ms.locfileid: "42447730"
 ---
 # <a name="cascade-delete"></a>Eliminación en cascada
 
@@ -32,7 +32,10 @@ Hay tres acciones que EF puede llevar a cabo cuando se elimina una entidad princ
 
 La segunda acción mencionada, establecer un valor de clave externa en NULL, no es válida si la clave externa no admite un valor NULL. (Una clave externa que no admite un valor NULL equivale a una relación obligatoria). En estos casos, EF Core hace seguimiento de que la propiedad de la clave externa se haya marcado como NULL hasta que se llama a SaveChanges, momento en que se genera una excepción porque el cambio no puede durar hasta la base de datos. Esto es similar a obtener una infracción de restricción de la base de datos.
 
-Existen cuatro comportamientos de eliminación, los que se indican en las tablas siguientes. En el caso de las relaciones opcionales (clave externa que admite un valor NULL) _es_ posible guardar un valor de clave externa NULL, lo que tiene como resultado los efectos siguientes:
+Existen cuatro comportamientos de eliminación, los que se indican en las tablas siguientes.
+
+### <a name="optional-relationships"></a>Relaciones opcionales
+En el caso de las relaciones opcionales (clave externa que admite un valor NULL) _es_ posible guardar un valor de clave externa NULL, lo que tiene como resultado los efectos siguientes:
 
 | Nombre del comportamiento               | Efecto en la entidad dependiente o secundaria en la memoria    | Efecto en la entidad dependiente o secundaria en la base de datos  |
 |:----------------------------|:---------------------------------------|:---------------------------------------|
@@ -41,6 +44,7 @@ Existen cuatro comportamientos de eliminación, los que se indican en las tablas
 | **SetNull**                 | Las propiedades de clave externa se establecen en NULL | Las propiedades de clave externa se establecen en NULL |
 | **Restrict**                | Ninguna                                   | Ninguna                                   |
 
+### <a name="required-relationships"></a>Relaciones obligatorias
 En el caso de las relaciones obligatorias (clave externa que no admite un valor NULL) _no_ es posible guardar un valor de clave externa NULL, lo que tiene como resultado los efectos siguientes:
 
 | Nombre del comportamiento         | Efecto en la entidad dependiente o secundaria en la memoria | Efecto en la entidad dependiente o secundaria en la base de datos |

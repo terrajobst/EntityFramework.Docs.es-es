@@ -6,16 +6,16 @@ ms.date: 10/27/2016
 ms.assetid: 70aae9b5-8743-4557-9c5d-239f688bf418
 ms.technology: entity-framework-core
 uid: core/querying/raw-sql
-ms.openlocfilehash: 29b7e20e875bf791a88a92636c1df4bc4e31656b
-ms.sourcegitcommit: 038acd91ce2f5a28d76dcd2eab72eeba225e366d
+ms.openlocfilehash: a1d554795dcd8a3e5b44e89ac014f538598461cc
+ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 05/14/2018
-ms.locfileid: "34163218"
+ms.lasthandoff: 07/10/2018
+ms.locfileid: "42447694"
 ---
 # <a name="raw-sql-queries"></a>Consultas SQL sin formato
 
-Entity Framework Core le permite descender hasta las consultas SQL sin formato cuando trabaja con una base de datos relacional. Esto puede resultar útil si la consulta que desea hacer no se puede expresar con LINQ o si usar una consulta LINQ hará que se envíe código SQL ineficaz a la base de datos.
+Entity Framework Core le permite descender hasta las consultas SQL sin formato cuando trabaja con una base de datos relacional. Esto puede resultar útil si la consulta que desea hacer no se puede expresar con LINQ o si usar una consulta LINQ hará que se envíe código SQL ineficaz a la base de datos. Las consultas SQL sin formato pueden devolver tipos de entidad o, a partir de EF Core 2.1, [tipos de consulta](xref:core/modeling/query-types) que son parte del modelo.
 
 > [!TIP]  
 > Puede ver un [ejemplo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying) de este artículo en GitHub.
@@ -23,7 +23,6 @@ Entity Framework Core le permite descender hasta las consultas SQL sin formato c
 ## <a name="limitations"></a>Limitaciones
 
 Existen algunas limitaciones que debe considerar al usar las consultas SQL sin formato:
-* Las consultas SQL solo se pueden usar para devolver tipos de entidad que formen parte del modelo. Hay una mejora en el trabajo pendiente para [habilitar la devolución de tipos ad hoc a partir de consultas SQL sin formato](https://github.com/aspnet/EntityFramework/issues/1862).
 
 * La consulta SQL debe devolver datos para todas las propiedades del tipo de entidad o de consulta.
 
@@ -33,10 +32,10 @@ Existen algunas limitaciones que debe considerar al usar las consultas SQL sin f
 
 * Las instrucciones `SELECT` que se pasan a este método generalmente admitirán composición. Si EF Core debe evaluar operadores de consulta adicionales en el servidor (por ejemplo, para trasladar los operadores LINQ aplicados después de `FromSql`), el código SQL suministrado se considerará como una subconsulta. Esto significa que el código SQL que se pasa no contendrá ningún carácter ni opción que no sea válido en una subconsulta, como:
   * un punto y coma final
-  * en SQL Server, una sugerencia en el nivel de consulta final, por ejemplo`OPTION (HASH JOIN)`
+  * En SQL Server, una sugerencia en el nivel de consulta final (por ejemplo, `OPTION (HASH JOIN)`)
   * en SQL Server, una cláusula `ORDER BY` que no va acompañada de `TOP 100 PERCENT` en la cláusula `SELECT`
 
-* Las instrucciones SQL que no son `SELECT` se reconocen de manera automáticamente como instrucciones que no admiten composición. Como consecuencia, los resultados completos de los procedimientos almacenados siempre se devuelven al cliente y cualquier operador LINQ aplicado después de `FromSql` se evalúa en la memoria. 
+* Las instrucciones SQL que no son `SELECT` se reconocen de manera automáticamente como instrucciones que no admiten composición. Como consecuencia, los resultados completos de los procedimientos almacenados siempre se devuelven al cliente y cualquier operador LINQ aplicado después de `FromSql` se evalúa en la memoria.
 
 ## <a name="basic-raw-sql-queries"></a>Consultas SQL básicas sin formato
 

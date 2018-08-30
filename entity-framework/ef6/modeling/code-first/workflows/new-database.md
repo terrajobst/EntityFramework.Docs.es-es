@@ -3,18 +3,18 @@ title: 'Code First en una base de datos: EF6'
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 2df6cb0a-7d8b-4e28-9d05-e2b9a90125af
-ms.openlocfilehash: bb44a3300bc8ffc9d7050c4784e7b76b29c61796
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
-ms.translationtype: HT
+ms.openlocfilehash: 50c6a4710bc50879304f64e781a46c4836f86882
+ms.sourcegitcommit: 0cef7d448e1e47bdb333002e2254ed42d57b45b6
+ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994623"
+ms.lasthandoff: 08/29/2018
+ms.locfileid: "43152483"
 ---
 # <a name="code-first-to-a-new-database"></a>Code First en una base de datos
-En este tutorial de vídeo y paso a paso proporcionan una introducción al desarrollo de Code First destinadas a una base de datos. Este escenario incluye destinadas a una base de datos que no existe y Code First creará o una base de datos vacía que Code First a agregar nuevas tablas demasiado. Código primero le permite definir su modelo mediante C\# o clases de VB.Net. Configuración adicional si lo desea puede realizarse mediante los atributos en las clases y propiedades o mediante una API fluida.
+En este tutorial de vídeo y paso a paso proporcionan una introducción al desarrollo de Code First destinadas a una base de datos. Este escenario incluye destinadas a una base de datos que no existe y Code First creará o una base de datos vacía que Code First agregará nuevas tablas a. Código primero le permite definir su modelo mediante C\# o clases de VB.Net. Configuración adicional si lo desea puede realizarse mediante los atributos en las clases y propiedades o mediante una API fluida.
 
 ## <a name="watch-the-video"></a>Vea el vídeo
-Este vídeo ofrece una introducción al desarrollo de Code First destinadas a una base de datos. Este escenario incluye destinadas a una base de datos que no existe y Code First creará o una base de datos vacía que Code First a agregar nuevas tablas demasiado. Código primero permite definir su modelo mediante clases de C# o VB.Net. Configuración adicional si lo desea puede realizarse mediante los atributos en las clases y propiedades o mediante una API fluida.
+Este vídeo ofrece una introducción al desarrollo de Code First destinadas a una base de datos. Este escenario incluye destinadas a una base de datos que no existe y Code First creará o una base de datos vacía que Code First agregará nuevas tablas a. Código primero permite definir su modelo mediante clases de C# o VB.Net. Configuración adicional si lo desea puede realizarse mediante los atributos en las clases y propiedades o mediante una API fluida.
 
 **Presentado por**: [Rowan Miller](http://romiller.com/)
 

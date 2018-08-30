@@ -5,12 +5,12 @@ ms.author: anpete
 ms.date: 11/03/2017
 ms.technology: entity-framework-core
 uid: core/querying/filters
-ms.openlocfilehash: 4e3c3c99d155f69e00fed99c415f519808ea1a68
-ms.sourcegitcommit: 6e379265e4f087fb7cf180c824722c81750554dc
+ms.openlocfilehash: 6b7a4069917c93015a218c131ff0d0a3920fb69d
+ms.sourcegitcommit: 4467032fd6ca223e5965b59912d74cf88a1dd77f
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/15/2017
-ms.locfileid: "26053905"
+ms.lasthandoff: 08/01/2018
+ms.locfileid: "42447697"
 ---
 # <a name="global-query-filters"></a>Filtros de consulta global
 
@@ -24,28 +24,28 @@ Los filtros de consulta global son predicados de consulta LINQ (una expresión b
 En el ejemplo siguiente se muestra cómo usar los filtros de consulta global para implementar los comportamientos de consulta de multiinquilino y de eliminación temporal en un simple modelo de creación de blogs.
 
 > [!TIP]
-> Puede ver un [ejemplo](https://github.com/aspnet/EntityFrameworkCore/tree/dev/samples/QueryFilters) de este artículo en GitHub.
+> Puede ver un [ejemplo](https://github.com/aspnet/EntityFrameworkCore/tree/master/samples/QueryFilters) de este artículo en GitHub.
 
 En primer lugar, defina las entidades:
 
-[!code-csharp[Main](../../../efcore-dev/samples/QueryFilters/Program.cs#Entities)]
+[!code-csharp[Main](../../../efcore-repo/samples/QueryFilters/Program.cs#Entities)]
 
 Tenga en cuenta la declaración de un campo __tenantId_ en la entidad _Blog_. Se usará para asociar cada instancia de blog con un inquilino específico. También hay definida una propiedad _IsDeleted_ en el tipo de entidad _Post_. Se usa para llevar un seguimiento de si una instancia _Post_ se eliminó de manera temporal. Es decir, la instancia se marca como eliminada sin quitar físicamente los datos subyacentes.
 
 A continuación, configure los filtros de consulta en _OnModelCreating_ con la API ```HasQueryFilter```.
 
-[!code-csharp[Main](../../../efcore-dev/samples/QueryFilters/Program.cs#Configuration)]
+[!code-csharp[Main](../../../efcore-repo/samples/QueryFilters/Program.cs#Configuration)]
 
 Las expresiones de predicado pasadas a las llamadas de _HasQueryFilter_ ahora se aplicarán automáticamente a cualquier consulta LINQ para esos tipos.
 
 > [!TIP]
-> Tenga en cuenta el uso de un campo en el nivel de instancia de DbContext: ```_tenantId``` se usa para establecer el inquilino actual. Los filtros de nivel de modelo usan el valor de la instancia de contexto correcta. Es decir, la instancia que está ejecutando la consulta.
+> Tenga en cuenta el uso de un campo en el nivel de instancia de DbContext: ```_tenantId``` se usa para establecer el inquilino actual. Los filtros de nivel de modelo usan el valor de la instancia de contexto correcta (es decir, la instancia que está ejecutando la consulta).
 
 ## <a name="disabling-filters"></a>Deshabilitación de filtros
 
 Los filtros se pueden deshabilitar para consultas LINQ individuales mediante el operador ```IgnoreQueryFilters()```.
 
-[!code-csharp[Main](../../../efcore-dev/samples/QueryFilters/Program.cs#IgnoreFilters)]
+[!code-csharp[Main](../../../efcore-repo/samples/QueryFilters/Program.cs#IgnoreFilters)]
 
 ## <a name="limitations"></a>Limitaciones
 

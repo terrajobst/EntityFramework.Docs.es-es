@@ -6,16 +6,16 @@ ms.date: 10/27/2016
 ms.assetid: de2e34cd-659b-4cab-b5ed-7a979c6bf120
 ms.technology: entity-framework-core
 uid: core/querying/overview
-ms.openlocfilehash: 7fd2940d559f82016d7a8fc3fdcf3af0d5b8bc8f
-ms.sourcegitcommit: 01a75cd483c1943ddd6f82af971f07abde20912e
+ms.openlocfilehash: 1d28d215302625cf2b6788359527a93a77b7e9fd
+ms.sourcegitcommit: bdd06c9a591ba5e6d6a3ec046c80de98f598f3f3
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/27/2017
-ms.locfileid: "26052875"
+ms.lasthandoff: 07/10/2018
+ms.locfileid: "42447659"
 ---
 # <a name="how-queries-work"></a>Funcionamiento de las consultas
 
-Entity Framework Core usa Language Integrated Query (LINQ) para consultar los datos de la base de datos. LINQ permite usar C# (o el lenguaje .NET que prefiera) para escribir consultas fuertemente tipadas basadas en el contexto derivado y las clases de entidad.
+Entity Framework Core usa Language Integrated Query (LINQ) para consultar datos de la base de datos. LINQ permite usar C# (o el lenguaje .NET que prefiera) para escribir consultas fuertemente tipadas basadas en el contexto derivado y las clases de entidad.
 
 ## <a name="the-life-of-a-query"></a>La duración de una consulta
 
