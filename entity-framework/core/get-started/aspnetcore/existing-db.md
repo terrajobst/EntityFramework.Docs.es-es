@@ -1,17 +1,15 @@
 ---
 title: 'Introducción a ASP.NET Core: base de datos existente - EF Core'
 author: rowanmiller
-ms.author: divega
 ms.date: 08/02/2018
 ms.assetid: 2bc68bea-ff77-4860-bf0b-cf00db6712a0
-ms.technology: entity-framework-core
 uid: core/get-started/aspnetcore/existing-db
-ms.openlocfilehash: c231a456abd4c110aba0326821799d6e9d567b3c
-ms.sourcegitcommit: 902257be9c63c427dc793750a2b827d6feb8e38c
+ms.openlocfilehash: 79a73e38fdc9c4268c21de66571d6272f33e9457
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/07/2018
-ms.locfileid: "39614326"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42997041"
 ---
 # <a name="getting-started-with-ef-core-on-aspnet-core-with-an-existing-database"></a>Introducción a EF Core en ASP.NET Core con una base de datos existente
 
@@ -32,26 +30,26 @@ Instale el software siguiente:
 
 En este tutorial se usa una base de datos para **blogs** en la instancia de LocalDB como la base de datos existente. Si ya creó la base de datos de **blogs** como parte de otro tutorial, omita estos pasos.
 
-* Abra Visual Studio.
+* Apertura de Visual Studio
 * **Herramientas -> Conectar con base de datos...**
-* Seleccione **Microsoft SQL Server** y haga clic en **Continuar**.
-* Escriba **(localdb)\mssqllocaldb** como el **nombre del servidor**.
-* Escriba **maestra** como el **nombre de la base de datos** y haga clic en **Aceptar**.
-* La base de datos maestra ahora aparece en **Conexiones de base de datos** del **Explorador de servidores**.
-* Haga clic con el botón derecho en la base de datos en el **Explorador de servidores** y seleccione **Nueva consulta**.
+* Seleccione **Microsoft SQL Server** y haga clic en **Continuar**
+* Escriba **(localdb)\mssqllocaldb** como el **nombre del servidor**
+* Escriba **maestra** como el **nombre de la base de datos** y haga clic en **Aceptar**
+* La base de datos maestra ahora aparece en **Conexiones de base de datos** del **Explorador de servidores**
+* Haga clic con el botón derecho en la base de datos en el **Explorador de servidores** y seleccione **Nueva consulta**
 * En el editor de consultas, copie el script que aparece a continuación.
-* Haga clic con el botón derecho en el editor de consultas y seleccione **Ejecutar**.
+* Haga clic con el botón derecho en el editor de consultas y seleccione **Ejecutar**
 
 [!code-sql[Main](../_shared/create-blogging-database-script.sql)]
 
 ## <a name="create-a-new-project"></a>Crear un proyecto nuevo
 
-* Abra Visual Studio 2017.
+* Abra Visual Studio 2017
 * **Archivo > Nuevo > Proyecto...**
 * En el menú de la izquierda, seleccione **Instalado > Visual C# > Web**.
 * Seleccione la plantilla de proyecto **Aplicación web ASP.NET Core**.
-* Escriba **EFGetStarted.AspNetCore.ExistingDb** como el nombre y haga clic en **Aceptar**.
-* Espere que aparezca el cuadro de diálogo **Nueva aplicación web de ASP.NET Core**.
+* Escriba **EFGetStarted.AspNetCore.ExistingDb** como el nombre y haga clic en **Aceptar**
+* Espere que aparezca el cuadro de diálogo **Nueva aplicación web de ASP.NET Core**
 * Asegúrese de que el menú desplegable de la plataforma de destino esté establecido en **.NET Core** y de que el menú desplegable de versión esté establecido en **ASP.NET Core 2.1**.
 * Seleccione la plantilla **Aplicación web (Model-View-Controller)**.
 * Asegúrese de que la **autenticación** esté establecida en **Sin autenticación**.
@@ -142,13 +140,13 @@ El concepto de la inserción de dependencias es fundamental para ASP.NET Core. L
 
 Para que `BloggingContext` esté disponible para los controladores MVC, debe registrarlo como servicio.
 
-* Abra **Startup.cs**.
-* Agregue las instrucciones `using` siguientes en el comienzo del archivo.
+* Abra **Startup.cs**
+* Agregue las instrucciones `using` siguientes en el comienzo del archivo
 
 [!code-csharp[Main](../../../../samples/core/GetStarted/AspNetCore/EFGetStarted.AspNetCore.ExistingDb/Startup.cs#AddedUsings)]
 
 Ahora puede usar el método `AddDbContext(...)` para registrarlo como servicio.
-* Ubique el método `ConfigureServices(...)`.
+* Ubique el método `ConfigureServices(...)`
 * Agregue el código siguiente resaltado para registrar el contexto como servicio.
 
 [!code-csharp[Main](../../../../samples/core/GetStarted/AspNetCore/EFGetStarted.AspNetCore.ExistingDb/Startup.cs?name=ConfigureServices&highlight=14-15)]
@@ -170,8 +168,8 @@ Ahora puede ejecutar la aplicación para verla en acción.
 * **Depurar -> Iniciar sin depuración**
 * La aplicación se compila y se abre en un explorador web.
 * Navegue a `/Blogs`.
-* Haga clic en **Crear nuevo**.
-* Escriba una **dirección URL** para el blog nuevo y haga clic en **Crear**.
+* Haga clic en **Crear nuevo**
+* Escriba una **dirección URL** para el blog nuevo y haga clic en **Crear**
 
 ![imagen](_static/create.png)
 

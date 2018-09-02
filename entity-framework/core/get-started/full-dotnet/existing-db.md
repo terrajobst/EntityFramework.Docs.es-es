@@ -1,17 +1,15 @@
 ---
 title: 'Introducción a .NET Framework: base de datos existente - EF Core'
 author: rowanmiller
-ms.author: divega
 ms.date: 08/06/2018
 ms.assetid: a29a3d97-b2d8-4d33-9475-40ac67b3b2c6
-ms.technology: entity-framework-core
 uid: core/get-started/full-dotnet/existing-db
-ms.openlocfilehash: d5c548927b736199c7d6fddc9c74139ca5f6614e
-ms.sourcegitcommit: 902257be9c63c427dc793750a2b827d6feb8e38c
+ms.openlocfilehash: edcdc0b76394c4d604cf43fc170424e474532b17
+ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/07/2018
-ms.locfileid: "39614420"
+ms.lasthandoff: 08/27/2018
+ms.locfileid: "42993423"
 ---
 # <a name="getting-started-with-ef-core-on-net-framework-with-an-existing-database"></a>Introducción a EF Core en .NET Framework con una base de datos existente
 
@@ -31,31 +29,31 @@ En este tutorial se usa una base de datos para **blogs** en la instancia de Loca
 
 * **Herramientas -> Conectar con base de datos...**
 
-* Seleccione **Microsoft SQL Server** y haga clic en **Continuar**.
+* Seleccione **Microsoft SQL Server** y haga clic en **Continuar**
 
-* Escriba **(localdb)\mssqllocaldb** como el **nombre del servidor**.
+* Escriba **(localdb)\mssqllocaldb** como el **nombre del servidor**
 
-* Escriba **maestra** como el **nombre de la base de datos** y haga clic en **Aceptar**.
+* Escriba **maestra** como el **nombre de la base de datos** y haga clic en **Aceptar**
 
-* La base de datos maestra ahora aparece en **Conexiones de base de datos** del **Explorador de servidores**.
+* La base de datos maestra ahora aparece en **Conexiones de base de datos** del **Explorador de servidores**
 
-* Haga clic con el botón derecho en la base de datos en el **Explorador de servidores** y seleccione **Nueva consulta**.
+* Haga clic con el botón derecho en la base de datos en el **Explorador de servidores** y seleccione **Nueva consulta**
 
 * En el editor de consultas, copie el script que aparece a continuación.
 
-* Haga clic con el botón derecho en el editor de consultas y seleccione **Ejecutar**.
+* Haga clic con el botón derecho en el editor de consultas y seleccione **Ejecutar**
 
 [!code-sql[Main](../_shared/create-blogging-database-script.sql)]
 
 ## <a name="create-a-new-project"></a>Crear un proyecto nuevo
 
-* Abra Visual Studio 2017.
+* Abra Visual Studio 2017
 
 * **Archivo > Nuevo > Proyecto...**
 
 * En el menú izquierdo, seleccione **Instalado > Visual C# > Escritorio de Windows**.
 
-* Seleccione la plantilla del proyecto **Aplicación de consola (.NET Framework)**.
+* Seleccione la plantilla del proyecto **Aplicación de consola (.NET Framework)**
 
 * Asegúrese de que el proyecto tenga **.NET Framework 4.6.1** o posterior como destino.
 
@@ -63,7 +61,7 @@ En este tutorial se usa una base de datos para **blogs** en la instancia de Loca
 
 ## <a name="install-entity-framework"></a>Instalación de Entity Framework
 
-Para usar EF Core, instale el paquete correspondiente a los proveedores de bases de datos a los que desea dirigirse. Este tutorial usa SQL Server. Para ver una lista de los proveedores disponibles, consulte [Proveedores de bases de datos](../../providers/index.md).
+Para usar EF Core, instale el paquete correspondiente a los proveedores de bases de datos a los que desea dirigirse. Este tutorial usa SQL Server. Para una lista de los proveedores disponibles, consulte [Proveedores de bases de datos](../../providers/index.md).
 
 * **Herramientas > Administrador de paquetes NuGet > Consola del Administrador de paquetes**
 
@@ -79,7 +77,7 @@ Ahora hay que crear el modelo de EF en función de una base de datos existente.
 
 * **Herramientas –> Administrador de paquetes NuGet –> Consola del Administrador de paquetes**
 
-* Ejecute el comando siguiente para crear un modelo a partir de la base de datos existente.
+* Ejecute el comando siguiente para crear un modelo a partir de la base de datos existente
 
   ``` powershell
   Scaffold-DbContext "Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer
@@ -109,7 +107,7 @@ Ahora puede usar el modelo para realizar el acceso a los datos.
 
 * Abra *Program.cs*.
 
-* Reemplace el contenido del archivo por el código siguiente.
+* Reemplace el contenido del archivo por el código siguiente
 
   [!code-csharp[Main](../../../../samples/core/GetStarted/FullNet/ConsoleApp.ExistingDb/Program.cs)] 
 
