@@ -6,12 +6,12 @@ ms.date: 08/08/2018
 ms.assetid: 7CEF496E-A5B0-4F5F-B68E-529609B23EF9
 ms.technology: entity-framework-core
 uid: core/providers/provider-log
-ms.openlocfilehash: ee73940e3c0030b76e73438b1852cc29ebeadb45
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 44b200223153fca44cb2cfa3e78b3bedc7b4a552
+ms.sourcegitcommit: a81aed575372637997b18a0f9466d8fefb33350a
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42998346"
+ms.lasthandoff: 09/06/2018
+ms.locfileid: "43821340"
 ---
 # <a name="provider-impacting-changes"></a>Cambios en el impacto de proveedor
 
@@ -46,3 +46,8 @@ Este registro estamos empezando con los cambios de 2.1 a 2.2. Antes de 2.1 se ut
   * Se permiten cambios en el RelationalTypeMapping 2.1 para una simplificación de las clases derivadas. No creemos que esto era importantes en los proveedores, pero los proveedores pueden aprovechar las ventajas de este cambio en su tipo derivado asignar clases.
 * https://github.com/aspnet/EntityFrameworkCore/pull/12069 -Consultas con nombre o etiquetadas
   * Agrega la infraestructura para el etiquetado de las consultas LINQ y tener esas etiquetas se muestran como comentarios en el código SQL. Esto puede requerir que los proveedores reaccionar ante la generación de SQL.
+* https://github.com/aspnet/EntityFrameworkCore/pull/13115 -Compatibilidad con datos espaciales a través de interrupción
+  * Permite que las asignaciones de tipos y miembros traductores registrarse fuera del proveedor
+    * Los proveedores deben llamar a bases. FindMapping() en su implementación ITypeMappingSource para que funcione
+  * Siga este patrón para agregar compatibilidad espacial en el proveedor que es coherente entre todos los proveedores.
+
