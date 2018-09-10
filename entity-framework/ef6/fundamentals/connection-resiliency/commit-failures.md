@@ -3,12 +3,12 @@ title: Control de errores de confirmación de transacción - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 5b1f7a7d-1b24-4645-95ec-5608a31ef577
-ms.openlocfilehash: a22a651851bc46e2bf1fe652b3b9a921ec22b70b
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: f912777104c2e925122c05046d4d65660de8b8a8
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42996842"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250868"
 ---
 # <a name="handling-transaction-commit-failures"></a>Control de errores de confirmación de transacción
 > [!NOTE]
@@ -50,23 +50,23 @@ Aunque EF hará todo lo posible para que elimine las filas de la tabla cuando ya
 
 Antes de EF 6.1 no hubo mecanismo para controlar los errores de confirmación en el producto EF. Hay varias maneras de tratar esta situación que se puede aplicar a versiones anteriores de EF6:  
 
-### <a name="option-1---do-nothing"></a>Opción 1: no hacer nada  
+* Opción 1: no hacer nada  
 
-La probabilidad de un error de conexión durante la confirmación de transacción es baja, por lo que puede ser aceptable para su aplicación simplemente no funcione correctamente si esta condición se produce realmente.  
+  La probabilidad de un error de conexión durante la confirmación de transacción es baja, por lo que puede ser aceptable para su aplicación simplemente no funcione correctamente si esta condición se produce realmente.  
 
-## <a name="option-2---use-the-database-to-reset-state"></a>Opción 2: usar la base de datos para restablecer estado  
+* Opción 2: usar la base de datos para restablecer estado  
 
-1. Descartar el DbContext actual  
-2. Crear una nueva clase de DbContext y restaurar el estado de la aplicación desde la base de datos  
-3. Informar al usuario que la última operación es posible que no se completaron correctamente  
+  1. Descartar el DbContext actual  
+  2. Crear una nueva clase de DbContext y restaurar el estado de la aplicación desde la base de datos  
+  3. Informar al usuario que la última operación es posible que no se completaron correctamente  
 
-## <a name="option-3---manually-track-the-transaction"></a>Opción 3: realizar un seguimiento manual de la transacción  
+* Opción 3: realizar un seguimiento manual de la transacción  
 
-1. Agregar una tabla no realiza un seguimiento a la base de datos utilizada para realizar un seguimiento del estado de las transacciones.  
-2. Insertar una fila en la tabla al principio de cada transacción.  
-3. Si se produce un error en la conexión durante la confirmación, compruebe la presencia de la fila correspondiente en la base de datos.  
-    - Si la fila está presente, continúe con normalidad, como la transacción se confirmó correctamente  
-    - Si la fila no está presente, use una estrategia de ejecución para volver a intentar la operación actual.  
-4. Si la confirmación se realiza correctamente, elimine la fila correspondiente para evitar el crecimiento de la tabla.  
+  1. Agregar una tabla no realiza un seguimiento a la base de datos utilizada para realizar un seguimiento del estado de las transacciones.  
+  2. Insertar una fila en la tabla al principio de cada transacción.  
+  3. Si se produce un error en la conexión durante la confirmación, compruebe la presencia de la fila correspondiente en la base de datos.  
+     - Si la fila está presente, continúe con normalidad, como la transacción se confirmó correctamente  
+     - Si la fila no está presente, use una estrategia de ejecución para volver a intentar la operación actual.  
+  4. Si la confirmación se realiza correctamente, elimine la fila correspondiente para evitar el crecimiento de la tabla.  
 
 [Esta entrada de blog](http://blogs.msdn.com/b/adonet/archive/2013/03/11/sql-database-connectivity-and-the-idempotency-issue.aspx) contiene código de ejemplo para llevar a cabo esto en SQL Azure.  

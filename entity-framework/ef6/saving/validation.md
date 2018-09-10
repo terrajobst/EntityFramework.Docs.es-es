@@ -3,12 +3,12 @@ title: Validación - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 77d6a095-c0d0-471e-80b9-8f9aea6108b2
-ms.openlocfilehash: eec834888e2e3efaadc8acf9d4f64307f394ea4a
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 65639b0f91f54ee2cd1336f6b6cd4caf45ede680
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994450"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251029"
 ---
 # <a name="data-validation"></a>Validación de datos
 > [!NOTE]
@@ -54,7 +54,7 @@ Código primero usa anotaciones desde el ensamblado System.ComponentModel.DataAn
 
 Sin código adicional ni cambios de marcado en la aplicación, una aplicación existente de MVC realizará la validación del lado cliente, crear incluso dinámicamente un mensaje con los nombres de propiedad y anotación.
 
-![figure01](~/ef6/media/figure01.png)
+![Figura 1](~/ef6/media/figure01.png)
 
 En la publicación back (método) de esta vista de creación, Entity Framework se usa para guardar el nuevo blog de la base de datos, pero se desencadene la validación del lado cliente de MVC antes de la aplicación llegue a ese código.
 
@@ -153,7 +153,7 @@ El constructor ValidationResult toma una cadena que representa el mensaje de err
 
 A diferencia de la validación proporcionada por la API Fluent, este resultado de la validación se reconocerá la vista y el controlador de excepciones que usé anteriormente para agregar el error en la clase ModelState no es necesario. Dado que ambos nombres de propiedad establece en ValidationResult, el HtmlHelpers MVC muestra el mensaje de error para ambas propiedades de.
 
-![figure02](~/ef6/media/figure02.png)
+![Figura 2](~/ef6/media/figure02.png)
 
 ## <a name="dbcontextvalidateentity"></a>DbContext.ValidateEntity
 

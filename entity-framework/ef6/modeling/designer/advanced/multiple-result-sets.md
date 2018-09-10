@@ -3,12 +3,12 @@ title: Procedimientos almacenados con varios conjuntos de resultados - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 1b3797f9-cd3d-4752-a55e-47b84b399dc1
-ms.openlocfilehash: bb104ac5f584d26d279259a173de9afe3f018968
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 56c28f05bd7efe1b54d6cadd32afe0e9c6cf38b5
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42996180"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251016"
 ---
 # <a name="stored-procedures-with-multiple-result-sets"></a>Procedimientos almacenados con varios conjuntos de resultados
 En ocasiones, al usar almacenados establecen procedimientos deberá devolver más de un resultado. Este escenario se usa habitualmente para reducir el número de la base de datos de ciclos de ida y necesarios para crear una sola pantalla. Antes de EF5, Entity Framework permitiría que el procedimiento almacenado que se llame, pero solo devuelve el primer resultado establecido en el código de llamada.
@@ -104,7 +104,7 @@ Si usa el Diseñador de EF, también puede modificar el modelo para que sepa sob
 -   Para ello, deberá agregar el procedimiento almacenado al modelo como lo haría para una consulta de conjunto de resultados único.
 -   Una vez que esto tiene que haga clic con el botón derecho en el modelo y seleccione **abrir con...** a continuación, **Xml**
 
-    ![OpenAs](~/ef6/media/openas.png)
+    ![Abrir como](~/ef6/media/openas.png)
 
 Una vez que tenga el modelo que se abrió como XML, deberá hacer lo siguiente:
 

@@ -3,12 +3,12 @@ title: 'EF6 relaciones - EF Designer:'
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 402fe960-754b-470f-976b-e5de3e9986b5
-ms.openlocfilehash: 72efe76956c930a787449e6cce453ab0317adc7c
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: e1912a5e00e51b4f07b1ac83848fdbe0aa4755aa
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994653"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250717"
 ---
 # <a name="relationships---ef-designer"></a>Relaciones - EF Designer
 > [!NOTE]
@@ -16,7 +16,7 @@ ms.locfileid: "42994653"
 
 Las asociaciones definen las relaciones entre tipos de entidad en un modelo. En este tema se muestra cómo asignar las asociaciones con Entity Framework Designer (Diseñador de EF). La siguiente imagen muestra las ventanas principales que se usan al trabajar con EF Designer.
 
-![EFDesigner](~/ef6/media/efdesigner.png)
+![EF Designer](~/ef6/media/efdesigner.png)
 
 > [!NOTE]
 > Cuando se compila el modelo conceptual, las advertencias sobre sin asignar entidades y asociaciones pueden aparecer en la lista de errores. Puede omitir estas advertencias porque después de elegir generar la base de datos del modelo, los errores desaparecerán.
@@ -44,7 +44,7 @@ Crear una asociación con las actualizaciones de EF Designer en el contenido del
 1.  Haga clic en un área vacía de la superficie de diseño, seleccione **Agregar nuevo**y seleccione **asociación...** .
 2.  Rellene los valores para la asociación en el **Agregar asociación** cuadro de diálogo.
 
-    ![AddAssociation](~/ef6/media/addassociation.png)
+    ![Agregar asociación](~/ef6/media/addassociation.png)
 
     > [!NOTE]
     > Opta por no agregar las propiedades de navegación o propiedades de clave externa a las entidades en los extremos de la asociación desactivando la ** propiedad de navegación ** y ** agregar propiedades de clave externa a la &lt;nombre de tipo de entidad&gt; entidad ** casillas de verificación. Si agrega solo una propiedad de navegación, la asociación se podrá recorrer en una única dirección. Si no agrega ninguna propiedad de navegación, deberá agregar propiedades de clave externa para poder tener acceso a las entidades situadas en los extremos de la asociación.
@@ -76,7 +76,7 @@ Cuando use EF Designer para agregar o editar una restricción referencial, EF De
 -   Desde el **dependientes** lista desplegable, seleccione la entidad dependiente de la restricción referencial.
 -   Para cada clave principal que tiene una clave dependiente, seleccione una clave dependiente correspondiente en las listas desplegables en el **clave dependiente** columna.
 
-    ![RefConstraint](~/ef6/media/refconstraint.png)
+    ![Restricción de referencia](~/ef6/media/refconstraint.png)
 
 -   Haga clic en **Aceptar**.
 
@@ -97,7 +97,7 @@ Puede especificar cómo se asigna una asociación a la base de datos en el **det
     El **detalles de Mapping** ventana muestra los dos extremos de la asociación y las propiedades de clave para el tipo de entidad en cada **final**.
 -   Para cada propiedad de clave, haga clic en el **columna** campo y seleccione la columna a la que se asignará la propiedad.
 
-    ![MappingDetails4](~/ef6/media/mappingdetails4.png)
+    ![Detalles de mapping 4](~/ef6/media/mappingdetails4.png)
 
 ### <a name="edit-an-association-mapping"></a>Editar una asignación de asociación
 

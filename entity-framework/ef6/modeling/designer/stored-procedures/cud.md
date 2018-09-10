@@ -3,12 +3,12 @@ title: 'Diseñador CUD procedimientos almacenados: EF6'
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 1e773972-2da5-45e0-85a2-3cf3fbcfa5cf
-ms.openlocfilehash: 7a3176e1057816dd11ced5fc545aa3baa672bd03
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 36c9b97b77fec30136cba1d850a0259c689e69ae
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42993894"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250925"
 ---
 # <a name="designer-cud-stored-procedures"></a>Diseñador CUD procedimientos almacenados
 En este tutorial paso a paso muestran cómo asignar el crear\\Insertar, actualizar y eliminar operaciones (CUD) de un tipo de entidad a procedimientos almacenados mediante el Diseñador de Entity Framework (EF Designer).  De forma predeterminada, Entity Framework genera automáticamente las instrucciones SQL para las operaciones CUD, pero también se pueden asignar procedimientos almacenados a estas operaciones.  
@@ -54,7 +54,7 @@ Para completar este tutorial, necesitará:
 -   Además, seleccione los siguientes procedimientos almacenados en el **procedimientos almacenados y funciones** nodo: **DeletePerson**, **InsertPerson**, y **UpdatePerson** . 
 -   A partir de Visual Studio 2012, EF Designer admite la importación masiva de los procedimientos almacenados. El **Importar seleccionada procedimientos almacenados y funciones en el modelo de entidad** está activada de forma predeterminada. Puesto que en este ejemplo nos hemos procedimientos almacenados que insertarán, actualización y eliminación tipos de entidad, quiere importarlos y se desactiva esta casilla de verificación. 
 
-    ![ImportSProcs](~/ef6/media/importsprocs.jpg)
+    ![Importar S procedimientos](~/ef6/media/importsprocs.jpg)
 
 -   Haga clic en **Finalizar**.
     EF Designer, que proporciona una superficie de diseño para modificar el modelo, se muestra.
@@ -72,7 +72,7 @@ Para completar este tutorial, necesitará:
 -   Presione **ENTRAR**.
 -   De forma predeterminada, **NewPersonID** se asigna a la clave de entidad **PersonID**. Observe que una flecha indica la dirección de la asignación: el valor de la columna de resultado se proporciona para la propiedad.
 
-    ![MappingDetails](~/ef6/media/mappingdetails.png)
+    ![Detalles de la asignación](~/ef6/media/mappingdetails.png)
 
 -   Haga clic en **&lt;seleccionar Update Function&gt;** y seleccione **UpdatePerson** en la lista desplegable resultante.
 -   Aparecen las asignaciones predeterminadas entre los parámetros de procedimiento almacenado y las propiedades de entidad.

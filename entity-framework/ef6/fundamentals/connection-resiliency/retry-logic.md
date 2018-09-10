@@ -3,12 +3,12 @@ title: Lógica de reintento y resistencia de conexión - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 47d68ac1-927e-4842-ab8c-ed8c8698dff2
-ms.openlocfilehash: 47181292873009c7bce2047787503258ffa35d9d
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: d7e58abfa17c5537cdc9b0068e7c2a3c2e390038
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42997490"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250523"
 ---
 # <a name="connection-resiliency-and-retry-logic"></a>Lógica de reintento y resistencia de conexión
 > [!NOTE]
@@ -68,11 +68,9 @@ El SqlAzureExecutionStrategy volverá a intentar al instante se supera la primer
 
 Las estrategias de ejecución solo volverá a intentar un número limitado de las excepciones que suelen ser tansient, todavía deberá controlar otros errores, así como detectar la excepción RetryLimitExceeded para el caso de que un error no es transitorio o tarda demasiado tiempo resolver Sí.  
 
-## <a name="limitations"></a>Limitaciones  
-
 Hay algunos conocidos de limitaciones cuando se usa una estrategia de ejecución de reintento:  
 
-### <a name="streaming-queries-are-not-supported"></a>No se admiten consultas de streaming  
+## <a name="streaming-queries-are-not-supported"></a>No se admiten consultas de streaming  
 
 De forma predeterminada, EF6 y versiones posteriores mantiene los resultados de la consulta en lugar de streaming en ellos. Si desea tener resultados transmite por secuencias puede usar el método AsStreaming para cambiar un LINQ para consultar las entidades en streaming.  
 
@@ -88,11 +86,9 @@ using (var db = new BloggingContext())
 
 No se admite la transmisión por secuencias cuando se registra una estrategia de ejecución de reintento. Esta limitación existe porque la conexión se puede quitar parte a través de los resultados devueltos. Cuando esto ocurre, EF debe volver a ejecutar la consulta completa, pero no tiene ninguna manera de saber qué resultados ya se han devuelto confiable (datos que han cambiado desde que se envió la consulta inicial, los resultados pueden proceder de vuelta en un orden diferente, los resultados no pueden tener un identificador único etcetera.).  
 
-### <a name="user-initiated-transactions-not-supported"></a>Las transacciones no admitidas iniciada por el usuario  
+## <a name="user-initiated-transactions-are-not-supported"></a>No se admiten las transacciones iniciadas por el usuario  
 
 Cuando se ha configurado una estrategia de ejecución que da como resultado reintentos, existen algunas limitaciones respecto al uso de transacciones.  
-
-#### <a name="whats-supported-efs-default-transaction-behavior"></a>¿Qué es compatible: de EF el comportamiento de transacciones predeterminado  
 
 De forma predeterminada, EF llevará a cabo las actualizaciones de base de datos dentro de una transacción. No es necesario hacer nada para habilitar esta opción, EF siempre lo hace automáticamente.  
 
@@ -106,8 +102,6 @@ using (var db = new BloggingContext())
     db.SaveChanges();
 }
 ```  
-
-#### <a name="whats-not-supported-user-initiated-transactions"></a>Lo que no se admite: las transacciones iniciada por el usuario  
 
 Cuando no se utiliza una estrategia de ejecución de reintento puede encapsular varias operaciones en una sola transacción. Por ejemplo, el código siguiente incluye dos llamadas de SaveChanges en una sola transacción. Si cualquier parte de cualquiera de las operaciones se produce un error, a continuación, ninguno de los cambios se aplican.  
 
@@ -130,9 +124,7 @@ using (var db = new BloggingContext())
 
 Esto no se admite cuando se usa una estrategia de ejecución de reintento, dado que EF no tiene en cuenta todas las operaciones anteriores y cómo reintentarlos. Por ejemplo, si el segundo error de SaveChanges, a continuación, EF ya no tiene la información necesaria para volver a intentar la primera llamada a SaveChanges.  
 
-#### <a name="possible-workarounds"></a>Posibles soluciones  
-
-##### <a name="suspend-execution-strategy"></a>Suspender la estrategia de ejecución  
+### <a name="workaround-suspend-execution-strategy"></a>Solución alternativa: Suspenda la estrategia de ejecución  
 
 Una posible solución es suspender la estrategia de ejecución de reintento para el fragmento de código que se debe utilizar un usuario inició la transacción. La manera más fácil de hacerlo es agregar una marca SuspendExecutionStrategy para el código en función de clase de configuración y cambie la expresión lambda de estrategia de ejecución para devolver la estrategia de ejecución (no retying) predeterminada cuando se establece la marca.  
 
@@ -193,7 +185,7 @@ using (var db = new BloggingContext())
 }
 ```  
 
-##### <a name="manually-call-execution-strategy"></a>Llamar manualmente a la estrategia de ejecución  
+### <a name="workaround-manually-call-execution-strategy"></a>Solución alternativa: Llamar manualmente a la estrategia de ejecución  
 
 Otra opción es usar la estrategia de ejecución manualmente y asignarle el conjunto completo de la lógica que se ejecutará; por lo que puede reintentar todo lo que si se produce un error en una de las operaciones. Todavía es necesario suspender la estrategia de ejecución - mediante la técnica anterior - para que los contextos utilizados dentro del bloque de código que se puede reintentar no intentará volver a realizar.  
 

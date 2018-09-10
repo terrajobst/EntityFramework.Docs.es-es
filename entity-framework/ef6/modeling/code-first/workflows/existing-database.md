@@ -3,12 +3,12 @@ title: Code First en una base de datos existente - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: a7e60b74-973d-4480-868f-500a3899932e
-ms.openlocfilehash: 29f959265e0fd0d5e14c156519e6931fd8da0677
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: fedfb921919582e2cdb5f3bc497f11889b972ad6
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42995095"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251081"
 ---
 # <a name="code-first-to-an-existing-database"></a>Code First en una base de datos existente
 En este tutorial de vídeo y paso a paso proporcionan una introducción al desarrollo de Code First destinadas a una base de datos existente. Código primero le permite definir su modelo mediante C\# o clases de VB.Net. Configuración adicional si lo desea puede realizarse mediante los atributos en las clases y propiedades o mediante una API fluida.
@@ -33,15 +33,15 @@ Sigamos adelante y generar la base de datos.
 -   Haga clic con el botón derecho en **conexiones de datos -&gt; Agregar conexión...**
 -   Si aún no lo ha conectado a una base de datos **Explorador de servidores** antes de que tendrá que seleccionar **Microsoft SQL Server** como origen de datos
 
-    ![SelectDataSource](~/ef6/media/selectdatasource.png)
+    ![Seleccionar origen de datos](~/ef6/media/selectdatasource.png)
 
 -   Conectarse a la instancia de LocalDB y escriba **blogs** como el nombre de la base de datos
 
-    ![LocalDBConnection](~/ef6/media/localdbconnection.png)
+    ![Conexión de LocalDB](~/ef6/media/localdbconnection.png)
 
 -   Seleccione **Aceptar** y se le solicitará si desea crear una nueva base de datos, seleccione **sí**
 
-    ![CreateDatabaseDialog](~/ef6/media/createdatabasedialog.png)
+    ![Crear el cuadro de diálogo de base de datos](~/ef6/media/createdatabasedialog.png)
 
 -   La nueva base de datos aparecerá ahora en el Explorador de servidores, haga doble clic en él y seleccione **nueva consulta**
 -   Copie el siguiente código SQL en la consulta nueva y, después, haga doble clic en la consulta y seleccione **Execute**
@@ -92,15 +92,15 @@ Vamos a usar Entity Framework Tools para Visual Studio para ayudarnos a generar 
 -   Esto inicia el **Asistente para Entity Data Model**
 -   Seleccione **Code First de base de datos** y haga clic en **siguiente**
 
-    ![WizardOneCFE](~/ef6/media/wizardonecfe.png)
+    ![Un CFE Asistente](~/ef6/media/wizardonecfe.png)
 
 -   Seleccione la conexión a la base de datos que creó en la primera sección y haga clic en **siguiente**
 
-    ![WizardTwoCFE](~/ef6/media/wizardtwocfe.png)
+    ![Asistente para dos CFE](~/ef6/media/wizardtwocfe.png)
 
 -   Haga clic en la casilla de verificación junto a **tablas** para importar todas las tablas y haga clic en **finalizar**
 
-    ![WizardThreeCFE](~/ef6/media/wizardthreecfe.png)
+    ![Asistente para tres CFE](~/ef6/media/wizardthreecfe.png)
 
 Una vez que un número de elementos de completa el proceso de ingeniería inversa habrá agregado al proyecto, vamos a Eche un vistazo a lo que se ha agregado.
 

@@ -3,12 +3,12 @@ title: La base de datos en primer lugar - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: cc6ffdb3-388d-4e79-a201-01ec2577c949
-ms.openlocfilehash: c60108c09fcbaaa1f86e77fa52cb13fe018975e1
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 93ae5729e487ed9be3972ac78d599dbea19ed458
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42995915"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251094"
 ---
 # <a name="database-first"></a>En primer lugar la base de datos
 En este tutorial de vídeo y paso a paso proporcionan una introducción al desarrollo de primera base de datos mediante Entity Framework. Base de datos en primer lugar le permite aplicar ingeniería inversa a un modelo a partir de una base de datos existente. El modelo se almacena en un archivo EDMX (extensión edmx) y se puede ver y editar en el Diseñador de Entity Framework. Las clases que interactúan en la aplicación se generan automáticamente desde el archivo EDMX.
@@ -46,17 +46,17 @@ Sigamos adelante y generar la base de datos.
 -   Haga clic con el botón derecho en **conexiones de datos -&gt; Agregar conexión...**
 -   Si aún no lo ha conectado a una base de datos del explorador de servidores antes de que tendrá que seleccionar Microsoft SQL Server como origen de datos
 
-    ![SelectDataSource](~/ef6/media/selectdatasource.png)
+    ![Seleccionar origen de datos](~/ef6/media/selectdatasource.png)
 
 -   Conectarse a LocalDB o Express de SQL, según lo que se ha instalado y escriba **DatabaseFirst.Blogging** como el nombre de la base de datos
 
-    ![SqlExpressConnectionDF](~/ef6/media/sqlexpressconnectiondf.png)
+    ![Conexión de SQL Express DF](~/ef6/media/sqlexpressconnectiondf.png)
 
-    ![LocalDBConnectionDF](~/ef6/media/localdbconnectiondf.png)
+    ![Conexión de LocalDB DF](~/ef6/media/localdbconnectiondf.png)
 
 -   Seleccione **Aceptar** y se le solicitará si desea crear una nueva base de datos, seleccione **sí**
 
-    ![CreateDatabaseDialog](~/ef6/media/createdatabasedialog.png)
+    ![Crear el cuadro de diálogo de base de datos](~/ef6/media/createdatabasedialog.png)
 
 -   La nueva base de datos aparecerá ahora en el Explorador de servidores, haga doble clic en él y seleccione **nueva consulta**
 -   Copie el siguiente código SQL en la consulta nueva y, después, haga doble clic en la consulta y seleccione **Execute**
@@ -101,21 +101,21 @@ Vamos a usar Entity Framework Designer, que se incluye como parte de Visual Stud
 -   Esto inicia el **Asistente para Entity Data Model**
 -   Seleccione **generar desde la base de datos** y haga clic en **siguiente**
 
-    ![WizardStep1](~/ef6/media/wizardstep1.png)
+    ![Paso 1 del Asistente](~/ef6/media/wizardstep1.png)
 
 -   Seleccione la conexión a la base de datos que creó en la primera sección, escriba **BloggingContext** como el nombre de la cadena de conexión y haga clic en **siguiente**
 
-    ![WizardStep2](~/ef6/media/wizardstep2.png)
+    ![Paso 2 del Asistente](~/ef6/media/wizardstep2.png)
 
 -   Haga clic en la casilla de verificación situada junto a 'Tablas' para importar todas las tablas y haga clic en 'Finalizar'
 
-    ![WizardStep3](~/ef6/media/wizardstep3.png)
+    ![Paso 3 del Asistente](~/ef6/media/wizardstep3.png)
 
  
 
 Una vez completado el proceso de ingeniería inversa el nuevo modelo se agrega al proyecto y se abrirá para que pueda ver en el Diseñador de Entity Framework. También se agregó un archivo App.config al proyecto con los detalles de conexión para la base de datos.
 
-![ModelInitial](~/ef6/media/modelinitial.png)
+![Modelo inicial](~/ef6/media/modelinitial.png)
 
 ### <a name="additional-steps-in-visual-studio-2010"></a>Pasos adicionales en Visual Studio 2010
 
@@ -135,7 +135,7 @@ A continuación, se debe intercambiar nuestro modelo para generar código que ha
 -   Seleccione **plantillas en línea** desde el menú izquierdo y busque **DbContext**
 -   Seleccione el EF **5.x generador de DbContext para C\#**, escriba **BloggingModel** como el nombre y haga clic en **agregar**
 
-    ![DbContextTemplate](~/ef6/media/dbcontexttemplate.png)
+    ![Plantilla de DbContext](~/ef6/media/dbcontexttemplate.png)
 
  
 
@@ -145,7 +145,7 @@ Ahora que tenemos un modelo es el momento de usarlo para acceder a algunos datos
 
 *Esta captura de pantalla es de Visual Studio 2012, si usa Visual Studio 2010 el BloggingModel.tt y BloggingModel.Context.tt archivos estarán directamente en el proyecto en lugar de anidan en el archivo EDMX.*
 
-![GeneratedClassesDF](~/ef6/media/generatedclassesdf.png)
+![Clases generadas DF](~/ef6/media/generatedclassesdf.png)
 
  
 
@@ -217,7 +217,7 @@ Ahora que se actualiza el esquema, es momento de actualizar el modelo con esos c
 -   En la pestaña agregar de la comprobación del Asistente para actualizar la casilla situada junto a las tablas, esto indica que deseamos agregar una tabla nueva desde el esquema.
     *La pestaña de actualización muestra las tablas existentes en el modelo que se comprobará los cambios durante la actualización. Las pestañas de eliminación muestran todas las tablas que se han quitado del esquema y también se quitará del modelo como parte de la actualización. La información de estos dos fichas se detecta automáticamente y se proporciona con propósito informativo únicamente, no se puede cambiar cualquier configuración.*
 
-    ![RefreshWizard](~/ef6/media/refreshwizard.png)
+    ![Asistente de actualización](~/ef6/media/refreshwizard.png)
 
 -   Haga clic en Finalizar en el Asistente para actualizar
 
@@ -225,7 +225,7 @@ Ahora que se actualiza el esquema, es momento de actualizar el modelo con esos c
 
 El modelo se ha actualizado para incluir una nueva entidad de usuario que se asigna a la tabla de usuarios que se agregan a la base de datos.
 
-![ModelUpdated](~/ef6/media/modelupdated.png)
+![Modelo actualizado](~/ef6/media/modelupdated.png)
 
 ## <a name="summary"></a>Resumen
 

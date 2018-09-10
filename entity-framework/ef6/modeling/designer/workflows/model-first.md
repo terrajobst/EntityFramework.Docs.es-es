@@ -3,12 +3,12 @@ title: Model First - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: e1b9c319-bb8a-4417-ac94-7890f257e7f6
-ms.openlocfilehash: c21592b27fa752532f5ede5923d0bd751f0bf372
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 3dd0eba29619f09995d7009dd29462c14bde98c4
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42998120"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251146"
 ---
 # <a name="model-first"></a>En primer lugar del modelo
 En este tutorial de vídeo y paso a paso proporcionan una introducción al desarrollo de Model First mediante Entity Framework. Modelo primero le permite crear un nuevo modelo con Entity Framework Designer y, a continuación, generar un esquema de base de datos del modelo. El modelo se almacena en un archivo EDMX (extensión edmx) y se puede ver y editar en el Diseñador de Entity Framework. Las clases que interactúan en la aplicación se generan automáticamente desde el archivo EDMX.
@@ -45,7 +45,7 @@ Vamos a usar Entity Framework Designer, que se incluye como parte de Visual Stud
 -   Escriba **BloggingModel** como el nombre y haga clic en **Aceptar**, esto inicia el Asistente para Entity Data Model
 -   Seleccione **modelo vacío** y haga clic en **finalizar**
 
-    ![CreateEmptyModel](~/ef6/media/createemptymodel.png)
+    ![Crear un modelo vacío](~/ef6/media/createemptymodel.png)
 
 Se abre el Diseñador de Entity Framework con un modelo en blanco. Ahora podemos comenzar a agregar entidades, propiedades y asociaciones en el modelo.
 
@@ -55,7 +55,7 @@ Se abre el Diseñador de Entity Framework con un modelo en blanco. Ahora podemos
 -   Haga doble clic en la superficie de diseño y seleccione **Add New -&gt; entidad...**
 -   Escriba **Blog** como el nombre de entidad y **BlogId** como el nombre de clave y haga clic en **Aceptar**
 
-    ![AddBlogEntity](~/ef6/media/addblogentity.png)
+    ![Agregar entidad Blog](~/ef6/media/addblogentity.png)
 
 -   Haga doble clic en la nueva entidad en la superficie de diseño y seleccione **Add New -&gt; propiedad escalar**, escriba **nombre** como el nombre de la propiedad.
 -   Repita este proceso para agregar un **Url** propiedad.
@@ -71,11 +71,11 @@ Ahora que tenemos un par de entidades, es momento de agregar una asociación (o 
      *Esto significa que un Blog tiene todas las entradas y una entrada pertenezca a un Blog*
 -   Asegúrese del **agregar propiedades de clave externa a la entidad 'Post'** está activada y haga clic en **Aceptar**
 
-    ![AddAssociationMF](~/ef6/media/addassociationmf.png)
+    ![Agregar asociación MF](~/ef6/media/addassociationmf.png)
 
 Ahora tenemos un modelo simple que podemos usar para leer y escribir datos y generar una base de datos.
 
-![ModelInitial](~/ef6/media/modelinitial.png)
+![Modelo inicial](~/ef6/media/modelinitial.png)
 
 ### <a name="additional-steps-in-visual-studio-2010"></a>Pasos adicionales en Visual Studio 2010
 
@@ -95,7 +95,7 @@ A continuación, se debe intercambiar nuestro modelo para generar código que ha
 -   Seleccione **plantillas en línea** desde el menú izquierdo y busque **DbContext**
 -   Seleccione el EF **5.x generador de DbContext para C\#**, escriba **BloggingModel** como el nombre y haga clic en **agregar**
 
-    ![DbContextTemplate](~/ef6/media/dbcontexttemplate.png)
+    ![Plantilla de DbContext](~/ef6/media/dbcontexttemplate.png)
 
 ## <a name="3-generating-the-database"></a>3. Generar la base de datos
 
@@ -111,9 +111,9 @@ Sigamos adelante y generar la base de datos.
 -   Haga doble clic en la superficie de diseño y seleccione **generar base de datos de modelo...**
 -   Haga clic en **nueva conexión...** y especifique LocalDB o Express de SQL, según la versión de Visual Studio que está utilizando, escriba **ModelFirst.Blogging** como el nombre de la base de datos.
 
-    ![LocalDBConnectionMF](~/ef6/media/localdbconnectionmf.png)
+    ![Conexión de LocalDB MF](~/ef6/media/localdbconnectionmf.png)
 
-    ![SqlExpressConnectionMF](~/ef6/media/sqlexpressconnectionmf.png)
+    ![Conexión de SQL Express MF](~/ef6/media/sqlexpressconnectionmf.png)
 
 -   Seleccione **Aceptar** y se le solicitará si desea crear una nueva base de datos, seleccione **sí**
 -   Seleccione **siguiente** y Entity Framework Designer calculará una secuencia de comandos para crear el esquema de base de datos
@@ -126,7 +126,7 @@ Ahora que tenemos un modelo es el momento de usarlo para acceder a algunos datos
 
 *Esta captura de pantalla es de Visual Studio 2012, si usa Visual Studio 2010 el BloggingModel.tt y BloggingModel.Context.tt archivos estarán directamente en el proyecto en lugar de anidan en el archivo EDMX.*
 
-![GeneratedClasses](~/ef6/media/generatedclasses.png)
+![Clases generadas](~/ef6/media/generatedclasses.png)
 
 Como se muestra a continuación, implemente el método Main en Program.cs. Este código crea una nueva instancia de nuestro contexto y, a continuación, usa para insertar un nuevo Blog. A continuación, usa una consulta LINQ para recuperar todos los Blogs de la base de datos ordenado alfabéticamente por título.
 
@@ -180,7 +180,7 @@ Comenzaremos por agregar una nueva entidad de usuario a nuestro modelo.
 
 -   Agregue un nuevo **usuario** nombre de la entidad con **Username** como el nombre de clave y **cadena** como el tipo de propiedad para la clave
 
-    ![AddUserEntity](~/ef6/media/adduserentity.png)
+    ![Agregar entidad de usuario](~/ef6/media/adduserentity.png)
 
 -   Haga doble clic en el **Username** propiedad en la superficie de diseño y seleccione **propiedades**, cambio de las propiedades en la ventana la **MaxLength** si se establece en **50 ** 
      *Esto restringe los datos que se pueden almacenar en el nombre de usuario y 50 caracteres*

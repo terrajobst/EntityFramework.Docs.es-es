@@ -3,12 +3,12 @@ title: Métodos abreviados de teclado del Diseñador de Framework Entity - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 3c76cdd5-17c5-4c54-a6a5-cf21b974636b
-ms.openlocfilehash: 70c9705956b58f4d00908dd9cca6ad0e0a078fc6
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: e3a9d968c26841c143b1b7b0ba9a168ecd13f469
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42997768"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251133"
 ---
 # <a name="entity-framework-designer-keyboard-shortcuts"></a>Métodos abreviados de teclado del Diseñador de Entity Framework
 Esta página proporciona una lista de accesos directos de teclado que están disponibles en las pantallas de distintos de Entity Framework Tools para Visual Studio.
@@ -17,7 +17,7 @@ Esta página proporciona una lista de accesos directos de teclado que están dis
 
 ### <a name="step-one-choose-model-contents"></a>Paso 1: Elegir contenido de Model
 
-![WizardOne](~/ef6/media/wizardone.png)
+![Un asistente](~/ef6/media/wizardone.png)
 
 | Acceso directo  | Acción                                                     | Notas                                               |
 |:----------|:-----------------------------------------------------------|:----------------------------------------------------|
@@ -27,7 +27,7 @@ Esta página proporciona una lista de accesos directos de teclado que están dis
 
 ### <a name="step-two-choose-your-connection"></a>Paso 2: Elegir la conexión
 
-![WizardTwo](~/ef6/media/wizardtwo.png)
+![Asistente para dos](~/ef6/media/wizardtwo.png)
 
 | Acceso directo  | Acción                                                     | Notas                                                   |
 |:----------|:-----------------------------------------------------------|:--------------------------------------------------------|
@@ -41,7 +41,7 @@ Esta página proporciona una lista de accesos directos de teclado que están dis
 
 ### <a name="step-three-choose-your-version"></a>Paso 3: Elija su versión
 
-![WizardThree](~/ef6/media/wizardthree.png)
+![Asistente para tres](~/ef6/media/wizardthree.png)
 
 | Acceso directo  | Acción                                             | Notas                                                                                 |
 |:----------|:---------------------------------------------------|:--------------------------------------------------------------------------------------|
@@ -51,7 +51,7 @@ Esta página proporciona una lista de accesos directos de teclado que están dis
 
 ### <a name="step-four-choose-your-database-objects-and-settings"></a>Paso cuatro: Elija la configuración y los objetos de base de datos
 
-![WizardFour](~/ef6/media/wizardfour.png)
+![Asistente para cuatro](~/ef6/media/wizardfour.png)
 
 | Acceso directo  | Acción                                                                                    | Notas                                                               |
 |:----------|:------------------------------------------------------------------------------------------|:--------------------------------------------------------------------|
@@ -70,7 +70,7 @@ Esta página proporciona una lista de accesos directos de teclado que están dis
 
 ## <a name="ef-designer-surface"></a>Superficie del Diseñador de EF
 
-![DesignerSurface](~/ef6/media/designersurface.png)
+![Superficie del diseñador](~/ef6/media/designersurface.png)
 
 | Acceso directo                                                                                | Acción                      | Notas                                                                                                                                                                                                                               |
 |:----------------------------------------------------------------------------------------|:----------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -113,7 +113,7 @@ Esta página proporciona una lista de accesos directos de teclado que están dis
 
 ## <a name="mapping-details-window"></a>Detalles de la asignación (ventana)
 
-![MappingDetailsShortcuts](~/ef6/media/mappingdetailsshortcuts.png)
+![Detalles de asignación de accesos directos](~/ef6/media/mappingdetailsshortcuts.png)
 
 | Acceso directo                  | Acción         | Notas                                                                                                                                 |
 |:--------------------------|:---------------|:--------------------------------------------------------------------------------------------------------------------------------------|

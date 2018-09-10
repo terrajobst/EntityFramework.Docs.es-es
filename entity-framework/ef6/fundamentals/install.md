@@ -3,12 +3,12 @@ title: Obtener Entity Framework - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 122c38a2-f9e8-4ecc-9c72-a83bc9af7814
-ms.openlocfilehash: 91b78e56f60edf7ebc8769b1c385f8547f63cd3d
-ms.sourcegitcommit: 0cef7d448e1e47bdb333002e2254ed42d57b45b6
+ms.openlocfilehash: 601f8d123d5494be6a658da1c4ad3743ed50385c
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/29/2018
-ms.locfileid: "43152393"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250886"
 ---
 # <a name="get-entity-framework"></a>Obtener Entity Framework
 Entity Framework está formado por las herramientas de EF para Visual Studio y el tiempo de ejecución de EF.
@@ -27,7 +27,7 @@ La versión más reciente de Entity Framework está disponible como la [paquete 
 
 Puede instalar el paquete de Entity Framework con el botón secundario en el **referencias** carpeta del proyecto y seleccionando **administrar paquetes NuGet...**
 
-![ManageNuGetPackages](~/ef6/media/managenugetpackages.png)
+![Administrar paquetes de NuGet](~/ef6/media/managenugetpackages.png)
 
 ### <a name="installing-from-package-manager-console"></a>Instalación desde la consola de administrador de paquetes
 
@@ -55,7 +55,7 @@ Los métodos anteriores le proporcionará la versión más reciente totalmente c
 
 Para instalar la versión preliminar más reciente de Entity Framework puede seleccionar **incluir versión preliminar** en la ventana Administrar paquetes de NuGet. Si no hay ninguna versión preliminar está disponible automáticamente obtendrá la última versión compatible totalmente de Entity Framework.
 
-![IncludePreRelease](~/ef6/media/includeprerelease.png)
+![Incluir versión preliminar](~/ef6/media/includeprerelease.png)
 
 Como alternativa, puede ejecutar el comando siguiente el [Package Manager Console](http://docs.nuget.org/docs/start-here/using-the-package-manager-console).
 

@@ -3,12 +3,12 @@ title: Vistas de asignación generados previamente - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 917ba9c8-6ddf-4631-ab8c-c4fb378c2fcd
-ms.openlocfilehash: 397569ef374cb44d4938f9e201b588a26c408f6e
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: c2ad7125122c04af238e8fdd07da2c6c308a2756
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42996477"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250769"
 ---
 # <a name="pre-generated-mapping-views"></a>Vistas de asignación generados previamente
 Antes de Entity Framework puede ejecutar una consulta o guardar los cambios en el origen de datos, debe generar un conjunto de vistas de asignación para tener acceso a la base de datos. Estas vistas de asignación son un conjunto de instrucción de Entity SQL que representan la base de datos de forma abstracta y forman parte de los metadatos que se almacena en caché por dominio de aplicación. Si crea varias instancias del mismo contexto en el mismo dominio de aplicación, volverá a usar las vistas de asignación de los metadatos almacenados en caché en lugar de volver a generarlos. Porque la generación de vistas de asignación es una parte significativa del costo total de la ejecución de la primera consulta, Entity Framework permite generar previamente las vistas de asignación e incluirlos en el proyecto compilado. Para obtener más información, consulte [consideraciones de rendimiento (Entity Framework)](~/ef6/fundamentals/performance/perf-whitepaper.md).
@@ -20,11 +20,11 @@ Para generar previamente las vistas más sencillo es usar el [EF Power Tools](ht
 -   Para **Code First** modelos haga doble clic en el archivo de código que contiene la clase DbContext.
 -   Para **EF Designer** modelos haga doble clic en el archivo EDMX.
 
-![generateViews](~/ef6/media/generateviews.png)
+![generar vistas](~/ef6/media/generateviews.png)
 
 Una vez que finalice el proceso, tendrá una clase similar a lo siguiente genera
 
-![generatedViews](~/ef6/media/generatedviews.png)
+![Vistas generadas](~/ef6/media/generatedviews.png)
 
 Ahora cuando se ejecuta la aplicación EF utilizará esta clase para cargar las vistas según sea necesario. Si cambia el modelo y no volver a generar la clase EF producirá una excepción.
 

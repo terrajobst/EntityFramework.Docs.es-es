@@ -3,12 +3,12 @@ title: Capacidad de prueba y Entity Framework 4.0
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 9430e2ab-261c-4e8e-8545-2ebc52d7a247
-ms.openlocfilehash: 17a9f09022531a81042979464de05fbbd2570759
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 2a2384c7868ae3cf6af4f915c06ae9fdb622634c
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42995234"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251328"
 ---
 # <a name="testability-and-entity-framework-40"></a>Capacidad de prueba y Entity Framework 4.0
 Scott Allen
@@ -194,13 +194,13 @@ Estas definiciones de clase cambiará ligeramente como exploramos diferentes enf
 
 Con los objetos poco en su lugar que podemos crear un Entity Data Model (EDM) en Visual Studio (consulte la figura 1). No se utilizará el EDM para generar código para nuestras entidades. En su lugar, queremos usar las entidades que elaborar cariñosamente a mano. Solo se utilizará el EDM para generar el esquema de base de datos y proporcionar los metadatos de que ef4 necesita para asignar objetos a la base de datos.
 
-![eftest_01](~/ef6/media/eftest-01.jpg)
+![EF test_01](~/ef6/media/eftest-01.jpg)
 
 **Figura 1**
 
 Nota: si desea desarrollar el modelo EDM en primer lugar, es posible limpiar, generar código POCO del EDM. Puede hacerlo con una extensión de Visual Studio 2010 ofrecida el equipo de programabilidad de datos. Para descargar la extensión, inicie el Administrador de extensiones en el menú Herramientas en Visual Studio y busque "POCO" (vea la ilustración 2) en la Galería de plantillas en línea. Hay varias plantillas POCO para EF. Para obtener más información sobre el uso de la plantilla, vea " [Tutorial: plantilla de POCO para Entity Framework](http://blogs.msdn.com/adonet/pages/walkthrough-poco-template-for-the-entity-framework.aspx)".
 
-![eftest_02](~/ef6/media/eftest-02.png)
+![EF test_02](~/ef6/media/eftest-02.png)
 
 **Figura 2**
 
@@ -415,13 +415,13 @@ La "madre de objeto" se usa en la clase base es un patrón común para crear dat
 
 Podemos usar el EmployeeControllerTestBase como clase base para un número de accesorios de prueba (consulte la figura 3). Cada accesorio de prueba a probar una acción de controlador específica. Por ejemplo, un accesorio de prueba se centrará en las pruebas de la acción Create utilizada durante una solicitud HTTP GET (para mostrar la vista para la creación de un empleado), y un accesorio diferentes se centrará en la acción Create utilizada en una solicitud HTTP POST (para aprovechar la información presentada por el usuario para crear a un empleado). Cada clase derivada solo es responsable de la configuración necesaria en su contexto específico y para proporcionar las aserciones necesarios para comprobar los resultados de su contexto de la prueba específica.
 
-![eftest_03](~/ef6/media/eftest-03.png)
+![EF test_03](~/ef6/media/eftest-03.png)
 
 **Figura 3**
 
 El estilo de prueba y la convención de nomenclatura presentado aquí no es necesario para el código comprobable: es solo un enfoque. Figura 4 muestra las pruebas que se ejecutan en el Resharper cerebro Jet probar el complemento de ejecutor para Visual Studio 2010.
 
-![eftest_04](~/ef6/media/eftest-04.png)
+![EF test_04](~/ef6/media/eftest-04.png)
 
 **Figura 4**
 

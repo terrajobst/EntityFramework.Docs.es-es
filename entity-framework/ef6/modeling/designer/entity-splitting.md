@@ -3,19 +3,19 @@ title: Separación de entidad diseñador - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: aa2dd48a-1f0e-49dd-863d-d6b4f5834832
-ms.openlocfilehash: 214561f0a0381bced3ceae0b6acfcd45f5dd65c5
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 06199be977276cd3656e2550df79bac24276ec51
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42995624"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250603"
 ---
 # <a name="designer-entity-splitting"></a>División de entidades de diseñador
 En este tutorial se muestra cómo asignar un tipo de entidad a dos tablas modificando un modelo con Entity Framework Designer (Diseñador de EF). Puede asignar una entidad a varias tablas cuando estas comparten una clave común. Los conceptos que se aplican en la asignación de un tipo de entidad a dos tablas se extienden con facilidad a la asignación de un tipo de entidad a más de dos tablas.
 
 La siguiente imagen muestra las ventanas principales que se usan al trabajar con EF Designer.
 
-![EFDesigner](~/ef6/media/efdesigner.png)
+![EF Designer](~/ef6/media/efdesigner.png)
 
 ## <a name="prerequisites"></a>Requisitos previos
 
@@ -93,7 +93,7 @@ En este paso se actualizará el **persona** tipo de entidad para combinar datos 
 -   En la superficie de diseño, seleccione el **PersonInfo** entidad y presione **eliminar** botón en el teclado.
 -   Haga clic en **No** cuando se le pregunte si desea quitar el **PersonInfo** tabla del modelo, que se van a asignar a la **persona** entidad.
 
-    ![DeleteTables](~/ef6/media/deletetables.png)
+    ![Eliminar tablas](~/ef6/media/deletetables.png)
 
 Los pasos siguientes requieren la **detalles de Mapping** ventana. Si no puede ver esta ventana, haga clic en la superficie de diseño y seleccione **detalles de Mapping**.
 
@@ -103,7 +103,7 @@ Los pasos siguientes requieren la **detalles de Mapping** ventana. Si no puede v
 
 El **persona** tipo de entidad está asignado ahora a la **persona** y **PersonInfo** tablas.
 
-![Mapping2](~/ef6/media/mapping2.png)
+![Asignación de 2](~/ef6/media/mapping2.png)
 
 ## <a name="use-the-model"></a>Usar el modelo
 
@@ -136,9 +136,9 @@ Las siguientes instrucciones de T-SQL se ejecutaron en la base de datos como res
 
 -   Las dos siguientes **insertar** las instrucciones que se ejecutaron como resultado de ejecutar el contexto. SaveChanges(). Obtienen los datos el **persona** entidad y dividirla entre el **persona** y **PersonInfo** tablas.
 
-    ![Insert1](~/ef6/media/insert1.png)
+    ![Insertar 1](~/ef6/media/insert1.png)
 
-    ![Insert2](~/ef6/media/insert2.png)
+    ![Insertar 2](~/ef6/media/insert2.png)
 -   La siguiente **seleccione** se ejecutó como resultado de la enumeración de las personas de la base de datos. Combina los datos de la **persona** y **PersonInfo** tabla.
 
     ![Seleccionar](~/ef6/media/select.png)

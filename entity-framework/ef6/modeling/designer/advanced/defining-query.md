@@ -3,12 +3,12 @@ title: Definir consulta - EF Designer - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: e52a297e-85aa-42f6-a922-ba960f8a4b22
-ms.openlocfilehash: 60d5310589bb9bc3fdb971673422e80537357e55
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 8415a265cdbe078422e0467ee97da955a81b873d
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42996312"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250977"
 ---
 # <a name="defining-query---ef-designer"></a>Definir consulta - EF Designer
 Este tutorial muestra cómo agregar una definición de tipo de consulta y una entidad correspondiente a un modelo con EF Designer. Una consulta de definición se usa normalmente para proporcionar funcionalidad similar a la que ofrece una vista de base de datos, pero la vista se define en el modelo, no en la base de datos. Una consulta de definición permite ejecutar una instrucción SQL que se especifica en el **DefiningQuery** elemento de un archivo .edmx. Para obtener más información, consulte **DefiningQuery** en el [especificación de SSDL](~/ef6/modeling/designer/advanced/edmx/ssdl-spec.md).
@@ -54,11 +54,11 @@ En este tutorial usa Visual Studio 2012 o posterior.
 -   En el Explorador de soluciones, haga clic en el **DefiningQueryModel.edmx** de archivo y seleccione **abrir con...** .
 -   Seleccione **Editor XML (texto)**.
 
-    ![XMLEditor](~/ef6/media/xmleditor.png)
+    ![Editor XML](~/ef6/media/xmleditor.png)
 
 -   Haga clic en **Sí** si aparece el mensaje siguiente:
 
-    ![Warning2](~/ef6/media/warning2.png)
+    ![Advertencia 2](~/ef6/media/warning2.png)
 
  
 
@@ -136,7 +136,7 @@ Abra el modelo de EF Designer.
 -   Haga doble clic en el DefiningQueryModel.edmx.
 -   Por ejemplo **Sí** en el siguiente mensaje:
 
-    ![Warning2](~/ef6/media/warning2.png)
+    ![Advertencia 2](~/ef6/media/warning2.png)
 
  
 
@@ -172,7 +172,7 @@ En este paso, se usará la ventana de detalles de la asignación para asignar co
     El **detalles de Mapping** se muestra la ventana.
 -   Seleccione **GradeReport** desde el **&lt;agregar una tabla o vista&gt;** lista desplegable (ubicado en **tabla**s).  
     Asignaciones entre conceptual predeterminado y el almacenamiento **GradeReport** aparecen el tipo de entidad.  
-    ![MappingDetails3](~/ef6/media/mappingdetails.png)
+    ![Asignación detalles3](~/ef6/media/mappingdetails.png)
 
 Como resultado, el **EntitySetMapping** elemento se agrega a la sección de asignación del archivo .edmx. 
 

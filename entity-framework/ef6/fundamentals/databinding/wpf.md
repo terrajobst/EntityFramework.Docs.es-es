@@ -3,12 +3,12 @@ title: Enlace de datos con WPF - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: e90d48e6-bea5-47ef-b756-7b89cce4daf0
-ms.openlocfilehash: 0b1f4d5ea204cd80acf42caa499732610daa0e31
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: e6df90db17d39d3aa91275800a6414fed40fb5db
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994828"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251159"
 ---
 # <a name="databinding-with-wpf"></a>Enlace de datos con WPF
 En este tutorial paso a paso muestra cómo enlazar tipos POCO a controles de WPF en un formulario de "master-detail". La aplicación utiliza la API de Entity Framework para rellenar los objetos con los datos de la base de datos, realizar un seguimiento de cambios y conservar los datos en la base de datos.
@@ -142,17 +142,17 @@ Sigamos adelante y generar la base de datos.
 -   Haga clic con el botón derecho en **conexiones de datos -&gt; Agregar conexión...**
 -   Si aún no lo ha conectado a una base de datos del explorador de servidores antes de que tendrá que seleccionar Microsoft SQL Server como origen de datos
 
-    ![ChangeDataSource](~/ef6/media/changedatasource.png)
+    ![Cambiar origen de datos](~/ef6/media/changedatasource.png)
 
 -   Conectarse a LocalDB o Express de SQL, según lo que se ha instalado y escriba **productos** como el nombre de la base de datos
 
-    ![AddConnectionLocalDB](~/ef6/media/addconnectionlocaldb.png)
+    ![Agregar conexión LocalDB](~/ef6/media/addconnectionlocaldb.png)
 
-    ![AddConnectionExpress](~/ef6/media/addconnectionexpress.png)
+    ![Agregar conexión rápida](~/ef6/media/addconnectionexpress.png)
 
 -   Seleccione **Aceptar** y se le solicitará si desea crear una nueva base de datos, seleccione **sí**
 
-    ![CreateDatabase](~/ef6/media/createdatabase.png)
+    ![Crear base de datos](~/ef6/media/createdatabase.png)
 
 -   La nueva base de datos aparecerá ahora en el Explorador de servidores, haga doble clic en él y seleccione **nueva consulta**
 -   Copie el siguiente código SQL en la consulta nueva y, después, haga doble clic en la consulta y seleccione **Execute**
@@ -186,15 +186,15 @@ Vamos a usar Entity Framework Designer, que se incluye como parte de Visual Stud
 -   Esto inicia el **Asistente para Entity Data Model**
 -   Seleccione **generar desde la base de datos** y haga clic en **siguiente**
 
-    ![ChooseModelContents](~/ef6/media/choosemodelcontents.png)
+    ![Elegir contenido de Model](~/ef6/media/choosemodelcontents.png)
 
 -   Seleccione la conexión a la base de datos que creó en la primera sección, escriba **ProductContext** como el nombre de la cadena de conexión y haga clic en **siguiente**
 
-    ![ChooseYourConnection](~/ef6/media/chooseyourconnection.png)
+    ![Elegir la conexión](~/ef6/media/chooseyourconnection.png)
 
 -   Haga clic en la casilla de verificación situada junto a 'Tablas' para importar todas las tablas y haga clic en 'Finalizar'
 
-    ![ChooseYourObjects](~/ef6/media/chooseyourobjects.png)
+    ![Elija los objetos](~/ef6/media/chooseyourobjects.png)
 
 Una vez completado el proceso de ingeniería inversa el nuevo modelo se agrega al proyecto y se abrirá para que pueda ver en el Diseñador de Entity Framework. También se agregó un archivo App.config al proyecto con los detalles de conexión para la base de datos.
 
@@ -213,7 +213,7 @@ EF genera código desde el modelo usando plantillas T4. Las plantillas se incluy
 -   Abra el **el Explorador de soluciones** y encontrar **ProductModel.edmx** archivo
 -   Buscar el **ProductModel.tt** archivo que se anidará en el archivo ProductModel.edmx
 
-    ![WpfProductModelTemplate](~/ef6/media/wpfproductmodeltemplate.png)
+    ![Plantilla de modelo de producto WPF](~/ef6/media/wpfproductmodeltemplate.png)
 
 -   Haga doble clic en el archivo ProductModel.tt para abrirlo en el editor de Visual Studio
 -   Buscar y reemplazar las dos repeticiones de "**ICollection**"con"**ObservableCollection**". Estos se encuentran aproximadamente en las líneas 296 y 484.
@@ -244,13 +244,13 @@ Agregue las clases que se definen en el modelo como orígenes de datos para esta
 -   En el cuadro de diálogo de objetos de datos, seleccione expandir la **WPFwithEFSample** dos veces y seleccione **categoría**  
     *No es necesario para seleccionar la **producto** del origen de datos, ya que obtenemos a él a través de la **producto**de propiedad en el **categoría** origen de datos*  
 
-    ![SelectDataObjects](~/ef6/media/selectdataobjects.png)
+    ![Seleccionar objetos de datos](~/ef6/media/selectdataobjects.png)
 
 -   Haga clic en **Finalizar.**
 -   Se abre la ventana de orígenes de datos junto a la ventana de MainWindow.xaml *si la ventana de orígenes de datos no aparece, seleccione **vista -&gt; otras Windows -&gt; orígenes de datos***
 -   Presione el icono de anclaje, por lo que la ventana de orígenes de datos no auto ocultar. Deberá presionar el botón de actualización si la ventana que ya estaba visible.
 
-    ![DataSources](~/ef6/media/datasources.png)
+    ![Orígenes de datos](~/ef6/media/datasources.png)
 
 -   Seleccione el ** categoría ** origen de datos y arrastrarlo en el formulario.
 
@@ -299,7 +299,7 @@ Es el momento de agregar algunos controladores de eventos a la ventana principal
 -   En la ventana XAML, haga clic en el  **&lt;ventana** elemento, este comando selecciona la ventana principal
 -   En el **propiedades** ventana Elegir **eventos** en la esquina superior derecha, a continuación, haga doble clic en el cuadro de texto a la derecha de la **Loaded** etiqueta
 
-    ![MainWindowProperties](~/ef6/media/mainwindowproperties.png)
+    ![Propiedades de la ventana principal](~/ef6/media/mainwindowproperties.png)
 
 -   Agregue también el **haga clic en** eventos para el **guardar** botón haciendo doble clic en el botón Guardar en el diseñador. 
 
@@ -385,10 +385,10 @@ El código declara una instancia de ejecución prolongada de **ProductContext**.
 -   Compile y ejecute la aplicación. Si utilizó Code First, verá que una **WPFwithEFSample.ProductContext** base de datos se crea automáticamente.
 -   Escriba un nombre de categoría en los nombres de producto y de cuadrícula principales en la cuadrícula inferior *no escribir nada en las columnas de identificador, ya que la clave principal se genera la base de datos*
 
-    ![Screen1](~/ef6/media/screen1.png)
+    ![Ventana principal con los productos y las nuevas categorías](~/ef6/media/screen1.png)
 
 -   Presione el **guardar** botón para guardar los datos en la base de datos
 
 Después de llamar a la clase DbContext **SaveChanges**(), los identificadores se rellenan con los valores de la base de datos generada. Dado que se llama **actualizar**() después de **SaveChanges**() la **DataGrid** controles se actualizan con los nuevos valores.
 
-![Screen2](~/ef6/media/screen2.png)
+![Ventana principal con los identificadores de rellenado](~/ef6/media/screen2.png)

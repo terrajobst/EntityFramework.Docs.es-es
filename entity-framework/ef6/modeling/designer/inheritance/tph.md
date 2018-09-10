@@ -3,12 +3,12 @@ title: Herencia de TPH diseñador - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 72d26a8e-20ab-4500-bd13-394a08e73394
-ms.openlocfilehash: 9a546f6450b5aa3b03c062d1ab2c6f9257ba8292
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 1eb935414b20d6e93e9d470ccc845bc13626ed3a
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42995009"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250849"
 ---
 # <a name="designer-tph-inheritance"></a>Herencia de TPH Diseñador
 En este tutorial paso a paso muestra cómo implementar la herencia de tabla por jerarquía (TPH) en el modelo conceptual con Entity Framework Designer (Diseñador de EF). Herencia de TPH emplea una tabla de base de datos para mantener los datos para todos los tipos de entidad en una jerarquía de herencia.
@@ -54,7 +54,7 @@ Entity Designer, que proporciona una superficie de diseño para modificar el mod
 
 Que es el modo **persona** tabla busca en la base de datos.
 
-![PersonTable](~/ef6/media/persontable.png) 
+![Tabla Person](~/ef6/media/persontable.png) 
 
 ## <a name="implement-table-per-hierarchy-inheritance"></a>Implementar la herencia de tabla por jerarquía
 
@@ -94,14 +94,14 @@ Se agregaron dos nuevos tipos de entidad a la superficie de diseño. Una flecha 
 -   En el **operador** columna de la **detalles de Mapping** ventana, seleccione = de la lista desplegable.
 -   En el **valor/propiedad** columna, escriba **Instructor**. El resultado final debe tener este aspecto:
 
-    ![MappingDetails2](~/ef6/media/mappingdetails2.png)
+    ![Detalles de la asignación](~/ef6/media/mappingdetails2.png)
 
 -   Repita estos pasos para la **estudiante** tipo de entidad, pero asegúrese de la condición igual a **estudiante** valor.  
     *La razón por la que desea quitar el **discriminador** propiedad, es porque no se puede asignar una columna de tabla de más de una vez. Esta columna se utilizará para la asignación condicional, por lo que no se puede usar para la asignación de propiedad así. La única manera que puede usarse en ambos casos, si utiliza una condición de un **Is Null** o **Is Not Null** comparación.*
 
 Ahora se implementa la herencia de tabla por jerarquía.
 
-![FinalTPH](~/ef6/media/finaltph.png)
+![TPH final](~/ef6/media/finaltph.png)
 
 ## <a name="use-the-model"></a>Usar el modelo
 

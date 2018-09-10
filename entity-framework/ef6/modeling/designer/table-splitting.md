@@ -3,12 +3,12 @@ title: La división de tablas diseñador - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 452f17c3-9f26-4de4-9894-8bc036e23b0f
-ms.openlocfilehash: 87b6e1bd0374f77dfffab342c659cf4e16c8a337
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: f07aeb0aa679f6fa8131c667ac808f17c3f03f20
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994508"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250990"
 ---
 # <a name="designer-table-splitting"></a>División de tabla del diseñador
 En este tutorial se muestra cómo asignar varios tipos de entidad a una única tabla mediante la modificación de un modelo con Entity Framework Designer (Diseñador de EF).
@@ -17,7 +17,7 @@ Una razón que desea utilizar la división de tablas está retrasando la carga d
 
 La siguiente imagen muestra las ventanas principales que se usan al trabajar con EF Designer.
 
-![EFDesigner](~/ef6/media/efdesigner.png)
+![EF Designer](~/ef6/media/efdesigner.png)
 
 ## <a name="prerequisites"></a>Requisitos previos
 
@@ -130,8 +130,8 @@ Las siguientes instrucciones de T-SQL se ejecutaron en el **School** base de dat
 
 -   La siguiente **seleccione** se ejecutó como resultado de ejecutar el contexto. People.FirstOrDefault() y selecciona solo las columnas asignadas a **persona**
 
-    ![Select1](~/ef6/media/select1.png)
+    ![Seleccione 1](~/ef6/media/select1.png)
 
 -   La siguiente **seleccione** se ejecutó como consecuencia de tener acceso a la existingPerson.Instructor de propiedad de navegación y selecciona solo las columnas asignadas a **HireInfo**
 
-    ![Select2](~/ef6/media/select2.png)
+    ![Seleccione 2](~/ef6/media/select2.png)

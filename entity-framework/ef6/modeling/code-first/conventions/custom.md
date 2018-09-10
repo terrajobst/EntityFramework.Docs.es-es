@@ -3,12 +3,12 @@ title: Convenciones de código personalizado First - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: dd2bdbd9-ae9e-470a-aeb8-d0ba160499b7
-ms.openlocfilehash: 79450790c6d3c8ce7fad209e3946e81d3fad4b75
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: a0e8080037cf86640275f498ed159c847ff5c057
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42995833"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251068"
 ---
 # <a name="custom-code-first-conventions"></a>Primera convenciones de código personalizado
 > [!NOTE]
@@ -115,7 +115,7 @@ Una característica del método IsKey interesante es que es aditiva. Lo que sign
 
 Este código configurará los tipos en nuestro modelo de tener una clave compuesta que consta de la columna de clave de tipo int y la columna de nombre de cadena. Si observamos el modelo en el diseñador sería similar al siguiente:
 
-![compositeKey](~/ef6/media/compositekey.png)
+![Clave compuesta](~/ef6/media/compositekey.png)
 
 Otro ejemplo de convenciones de la propiedad es configurar todas las propiedades de fecha y hora en mi modelo para asignar al tipo datetime2 en SQL Server en lugar de fecha y hora. Puede lograr esto con lo siguiente:
 
@@ -292,7 +292,7 @@ De forma predeterminada el empleado y administrador se asignan a la misma tabla 
 
 El código anterior se asignará a una estructura de tabla con el siguiente aspecto:
 
-![tptExample](~/ef6/media/tptexample.jpg)
+![Ejemplo de TPT](~/ef6/media/tptexample.jpg)
 
 Puede evitar este problema y mantener la asignación de TPH de forma predeterminada, en un par de formas:
 

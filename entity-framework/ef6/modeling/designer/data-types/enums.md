@@ -3,12 +3,12 @@ title: Compatibilidad de enumeraciones - EF Designer - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: c6ae6d8f-1ace-47db-ad47-b1718f1ba082
-ms.openlocfilehash: d4c5528c4dc13ab7189421feebf84c2cb2f4b2bb
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: a94a497e8c5b3213dd7eb4215de90164d437507d
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42995642"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250640"
 ---
 # <a name="enum-support---ef-designer"></a>Compatibilidad con enum - EF Designer
 > [!NOTE]
@@ -70,11 +70,11 @@ El asistente realiza las siguientes acciones:
 
 1.  En Entity Framework Designer, haga clic en la propiedad Name, seleccione **convertir para una enumeración**
 
-    ![ConvertToEnum](~/ef6/media/converttoenum.png)
+    ![Convertir en Enum](~/ef6/media/converttoenum.png)
 
 2.  En el **agregar Enum** tipo de cuadro de diálogo **DepartmentNames** para el nombre del tipo Enum, cambie el tipo subyacente a **Int32**, y, a continuación, agregue los siguientes miembros para el tipo: inglés, Matemáticas y ahorro
 
-    ![AddEnumType](~/ef6/media/addenumtype.png)
+    ![Agregar tipo de enumeración](~/ef6/media/addenumtype.png)
 
 3.  Presione **Aceptar**
 4.  Guardar el modelo y compile el proyecto
@@ -85,7 +85,7 @@ Si observa la ventana Propiedades, observará que el tipo de la propiedad Name s
 
 Si cambia a la ventana del explorador de modelos, verá que el tipo también se ha agregado al nodo de tipos de enumeración.
 
-![ModelBrowser](~/ef6/media/modelbrowser.png)
+![Explorador de modelos](~/ef6/media/modelbrowser.png)
 
 >[!NOTE]
 > También puede agregar nuevos tipos de enumeración desde esta ventana, haga clic en el botón secundario del mouse y seleccione **Agregar tipo de enumeración**. Una vez creado el tipo aparecerá en la lista de tipos y podrá asociar a una propiedad

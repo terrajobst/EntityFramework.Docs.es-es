@@ -3,12 +3,12 @@ title: Consideraciones de rendimiento de EF4, EF5 y EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: d6d5a465-6434-45fa-855d-5eb48c61a2ea
-ms.openlocfilehash: f71a13ec06ad46259b3f33216367723b53314a5c
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 3ec061559f6ad7cbdce59118c13543d9993ec5a5
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42996753"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251315"
 ---
 # <a name="performance-considerations-for-ef-4-5-and-6"></a>Consideraciones de rendimiento para EF 4, 5 y 6
 Por David Obando, Eric Dettinger y otros
@@ -181,7 +181,7 @@ Búsqueda usa el valor de clave principal para intentar buscar una entidad en el
 
 Hay una consideración de rendimiento que se realizará cuando el uso de la búsqueda. Las llamadas a este método de forma predeterminada desencadenarán una validación de la caché de objetos con el fin de detectar cambios siguen pendientes de confirmación a la base de datos. Este proceso puede resultar muy caro si hay un gran número de objetos en la caché de objetos o en un gráfico de objetos grandes que se va a agregar a la caché de objetos, pero también se puede deshabilitar. En algunos casos, pueden percibir a través de un orden de magnitud de diferencia en la llamada a la búsqueda de método cuando se deshabilita automáticamente detectar cambios. Aún se percibe un segundo orden de magnitud cuando el objeto está realmente en la caché frente a cuando el objeto tiene que deben recuperarse de la base de datos. Este es un gráfico de ejemplo con las mediciones tomadas con algunos de nuestros microbenchmarks, expresado en milisegundos, con una carga de 5000 entidades:
 
-![Net45LogScale](~/ef6/media/net45logscale.png ".NET 4.5 - escala logarítmica")
+![Escala logarítmica de .NET 4.5](~/ef6/media/net45logscale.png ".NET 4.5 - escala logarítmica")
 
 Ejemplo de búsqueda con los cambios de la detección automática deshabilitada:
 
@@ -825,9 +825,9 @@ Microbenchmarks simple donde no se programó la creación del contexto se ponga 
 | EF6 | Consulta de Linq de DbContext                 | 3420      | 47652864 |
 | EF6 | Ningún seguimiento de consultas de ObjectContext Linq | 3593      | 45260800 |
 
-![EF5Micro5000Warm](~/ef6/media/ef5micro5000warm.png)
+![Pruebas comparativas microcargas de EF5, 5000 iteraciones semiactivos](~/ef6/media/ef5micro5000warm.png)
 
-![EF6Micro5000Warm](~/ef6/media/ef6micro5000warm.png)
+![EF6 micro las pruebas comparativas, 5000 iteraciones semiactivos](~/ef6/media/ef6micro5000warm.png)
 
 Microbenchmarks son muy sensibles a pequeños cambios en el código. En este caso, la diferencia entre los costos de Entity Framework 5 y Entity Framework 6 son debido a la adición de [intercepción](~/ef6/fundamentals/logging-and-interception.md) y [mejoras transaccionales](~/ef6/saving/transactions.md). Estos números microbenchmarks, sin embargo, son una visión amplificada en un fragmento muy pequeño de lo que hace Entity Framework. Escenarios del mundo real de las consultas calientes no deberían ver una regresión del rendimiento al actualizar desde Entity Framework 5 a Entity Framework 6.
 
@@ -858,9 +858,9 @@ Para comparar el rendimiento real de las opciones de consulta diferentes, creamo
 | EF6 | Consulta de Linq de DbContext                        | 1290      | 47529984 |
 
 
-![EF5WarmQuery1000](~/ef6/media/ef5warmquery1000.png)
+![Iteraciones de consulta activa 1000 EF5](~/ef6/media/ef5warmquery1000.png)
 
-![EF6WarmQuery1000](~/ef6/media/ef6warmquery1000.png)
+![Iteraciones de consulta activa 1000 EF6](~/ef6/media/ef6warmquery1000.png)
 
 > [!NOTE]
 > Por integridad, hemos incluido una variación donde se ejecuta una consulta de Entity SQL en un EntityCommand. Sin embargo, dado que no se materializan los resultados de este tipo de consultas, la comparación no es necesariamente manzanas a manzanas. La prueba incluye una buena aproximación al materializar intentar realizar la comparación más justa.

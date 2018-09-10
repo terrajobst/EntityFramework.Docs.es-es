@@ -6,12 +6,12 @@ ms.date: 08/08/2018
 ms.assetid: 7CEF496E-A5B0-4F5F-B68E-529609B23EF9
 ms.technology: entity-framework-core
 uid: core/providers/provider-log
-ms.openlocfilehash: 44b200223153fca44cb2cfa3e78b3bedc7b4a552
-ms.sourcegitcommit: a81aed575372637997b18a0f9466d8fefb33350a
+ms.openlocfilehash: 5da1043310e2858638c81a0654a9cab23e39c220
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/06/2018
-ms.locfileid: "43821340"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250821"
 ---
 # <a name="provider-impacting-changes"></a>Cambios en el impacto de proveedor
 
@@ -19,9 +19,9 @@ Esta página contiene vínculos para extraer las solicitudes realizadas en el re
 
 Este registro estamos empezando con los cambios de 2.1 a 2.2. Antes de 2.1 se utilizaba el [ `providers-beware` ](https://github.com/aspnet/EntityFrameworkCore/labels/providers-beware) y [ `providers-fyi` ](https://github.com/aspnet/EntityFrameworkCore/labels/providers-fyi) etiquetas en nuestros problemas y solicitudes de extracción.
 
-### <a name="21-----22"></a>2.1---> 2.2
+## <a name="21-----22"></a>2.1---> 2.2
 
-#### <a name="test-only-changes"></a>Cambios sólo para pruebas
+### <a name="test-only-changes"></a>Cambios sólo para pruebas
 
 * https://github.com/aspnet/EntityFrameworkCore/pull/12057 -Permitir delimitadores personalizable de SQL en las pruebas
   * Probar los cambios que permiten las comparaciones de punto flotante no estricta en BuiltInDataTypesTestBase
@@ -40,7 +40,7 @@ Este registro estamos empezando con los cambios de 2.1 a 2.2. Antes de 2.1 se ut
   * Este cambio incluye algunas pruebas de refactorización que quizá requiera proveedores reaccionar ante ellos
 
 
-#### <a name="test-and-product-code-changes"></a>Cambios de código de prueba y producto
+### <a name="test-and-product-code-changes"></a>Cambios de código de prueba y producto
 
 * https://github.com/aspnet/EntityFrameworkCore/pull/12109 -Consolidar RelationalTypeMapping.Clone métodos
   * Se permiten cambios en el RelationalTypeMapping 2.1 para una simplificación de las clases derivadas. No creemos que esto era importantes en los proveedores, pero los proveedores pueden aprovechar las ventajas de este cambio en su tipo derivado asignar clases.
@@ -50,4 +50,5 @@ Este registro estamos empezando con los cambios de 2.1 a 2.2. Antes de 2.1 se ut
   * Permite que las asignaciones de tipos y miembros traductores registrarse fuera del proveedor
     * Los proveedores deben llamar a bases. FindMapping() en su implementación ITypeMappingSource para que funcione
   * Siga este patrón para agregar compatibilidad espacial en el proveedor que es coherente entre todos los proveedores.
-
+* https://github.com/aspnet/EntityFrameworkCore/pull/13199 -Agregar depuración mejorada para la creación del proveedor de servicio
+  * Permite DbContextOptionsExtensions implementar una nueva interfaz que puede ayudarle a entender por qué se recompile el proveedor de servicios interno

@@ -3,12 +3,12 @@ title: Tutorial de entidades - EF6 con seguimiento propio
 author: divega
 ms.date: 2016-10-23
 ms.assetid: b21207c9-1d95-4aa3-ae05-bc5fe300dab0
-ms.openlocfilehash: 64ca9ae42df1a1c740131e254b8f80f67b2f9f97
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 1c450bbb20c246d9b9d58707ac03eb48eadfa970
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42995426"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251289"
 ---
 # <a name="self-tracking-entities-walkthrough"></a>Tutorial de las entidades de seguimiento propio
 > [!IMPORTANT]
@@ -142,7 +142,7 @@ A continuación, vamos a agregar un nuevo proyecto y generar las clases de entid
 -   Seleccione el **STETemplate.tt** archivo
 -   Haga clic en la flecha desplegable junto a la **agregar** y seleccione **agregar como vínculo**
 
-    ![AddLinkedTemplate](~/ef6/media/addlinkedtemplate.png)
+    ![Agregar la plantilla vinculada](~/ef6/media/addlinkedtemplate.png)
 
 También vamos a asegurarse de que se generan las clases de entidad en el mismo espacio de nombres como el contexto. Simplemente, esto reduce el número del uso de las instrucciones que se deba agregar a lo largo de nuestra aplicación.
 
@@ -552,4 +552,4 @@ Ahora puede ejecutar la aplicación para verla en acción.
 -   Haga clic en el **STESample.WPFTest** proyecto **el Explorador de soluciones** y seleccione **depurar -&gt; Iniciar nueva instancia**
 -   Puede manipular los datos mediante la pantalla y guardarlo mediante el servicio del sistema con el **guardar** botón
 
-![WPF](~/ef6/media/wpf.png)
+![Ventana principal de WPF](~/ef6/media/wpf.png)

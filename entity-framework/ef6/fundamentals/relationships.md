@@ -3,12 +3,12 @@ title: Las relaciones, las propiedades de navegación y las claves externas - EF
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 8a21ae73-6d9b-4b50-838a-ec1fddffcf37
-ms.openlocfilehash: a1653afd609280ab572ef88a9fcf8a6275b79fd6
-ms.sourcegitcommit: a81aed575372637997b18a0f9466d8fefb33350a
+ms.openlocfilehash: 53f428360be4ea2e11a42676d22e584633ceedbc
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/06/2018
-ms.locfileid: "43821405"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251224"
 ---
 # <a name="relationships-navigation-properties-and-foreign-keys"></a>Las relaciones, las propiedades de navegación y las claves externas
 En este tema se proporciona información general de cómo Entity Framework administra las relaciones entre entidades. También se ofrece orientación sobre cómo asignar y manipular las relaciones.
@@ -19,7 +19,7 @@ En las bases de datos relacionales, se definen relaciones (también denominadas 
 
 La siguiente imagen muestra dos tablas que participan en la relación de uno a varios. El **curso** tabla es la tabla dependiente porque contiene la **DepartmentID** columna que se vincula a la **departamento** tabla.
 
-![Database2](~/ef6/media/database2.png)
+![Tablas de departamento y en curso](~/ef6/media/database2.png)
 
 En Entity Framework, una entidad puede deberse a otras entidades a través de una asociación o relación. Cada relación contiene dos extremos que describen el tipo de entidad y la multiplicidad del tipo (uno, cero o uno o muchos) para las dos entidades en dicha relación. La relación puede venir gobernada por una restricción referencial, que describe qué extremo de la relación es un rol principal y que es un rol dependiente.
 
@@ -33,7 +33,7 @@ Puede decidir entre utilizar uno o ambos tipos de asociaciones en su modelo. Sin
 
 La siguiente imagen muestra un modelo conceptual que se creó con Entity Framework Designer. El modelo contiene dos entidades que participan en la relación de uno a varios. Ambas entidades tienen propiedades de navegación. **Curso** es la entidad de dependencia y tiene la **DepartmentID** propiedad de clave externa definida.
 
-![RelationshipEFDesigner](~/ef6/media/relationshipefdesigner.png)
+![Tablas de departamento y curso con las propiedades de navegación](~/ef6/media/relationshipefdesigner.png)
 
 El fragmento de código siguiente muestra el mismo modelo que se creó con Code First.
 
