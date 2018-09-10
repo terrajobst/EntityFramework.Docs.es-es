@@ -3,12 +3,12 @@ title: 'Code First en una base de datos: EF6'
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 2df6cb0a-7d8b-4e28-9d05-e2b9a90125af
-ms.openlocfilehash: 50c6a4710bc50879304f64e781a46c4836f86882
-ms.sourcegitcommit: 0cef7d448e1e47bdb333002e2254ed42d57b45b6
+ms.openlocfilehash: 8ed1bfbc3536acc0d83b9c8ecdd180aeb44eff83
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/29/2018
-ms.locfileid: "43152483"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251055"
 ---
 # <a name="code-first-to-a-new-database"></a>Code First en una base de datos
 En este tutorial de vídeo y paso a paso proporcionan una introducción al desarrollo de Code First destinadas a una base de datos. Este escenario incluye destinadas a una base de datos que no existe y Code First creará o una base de datos vacía que Code First agregará nuevas tablas a. Código primero le permite definir su modelo mediante C\# o clases de VB.Net. Configuración adicional si lo desea puede realizarse mediante los atributos en las clases y propiedades o mediante una API fluida.
@@ -199,13 +199,13 @@ Puede conectarse a esta base de datos mediante el Explorador de servidores en Vi
 -   Haga clic con el botón derecho en **conexiones de datos** y seleccione **Agregar conexión...**
 -   Si aún no lo ha conectado a una base de datos del explorador de servidores antes de que tendrá que seleccionar Microsoft SQL Server como origen de datos
 
-    ![SelectDataSource](~/ef6/media/selectdatasource.png)
+    ![Seleccionar origen de datos](~/ef6/media/selectdatasource.png)
 
 -   Conectarse a LocalDB o Express de SQL, según lo que se ha instalado
 
 Ahora podemos inspeccionar el esquema que Code First crea.
 
-![SchemaInitial](~/ef6/media/schemainitial.png)
+![Esquema inicial](~/ef6/media/schemainitial.png)
 
 DbContext puede averiguar qué clases debe incluir en el modelo echando un vistazo a las propiedades DbSet que hemos definido. A continuación, se usa el conjunto predeterminado de las convenciones de Code First para determinar los nombres de tabla y columna, determinar los tipos de datos, buscar las claves principales, etcetera. Más adelante en este tutorial, buscaremos en cómo puede invalidar estas convenciones.
 
@@ -266,7 +266,7 @@ namespace CodeFirstNewDatabaseSample.Migrations
 
 Ahora, la nueva columna de dirección Url se agrega a la tabla Blogs en la base de datos:
 
-![SchemaWithUrl](~/ef6/media/schemawithurl.png)
+![Esquema de dirección Url](~/ef6/media/schemawithurl.png)
 
 ## <a name="6-data-annotations"></a>6. Anotaciones de datos
 
@@ -316,7 +316,7 @@ public class User
 
 La nueva tabla se agrega ahora a la base de datos:
 
-![SchemaWithUsers](~/ef6/media/schemawithusers.png)
+![Esquema con los usuarios](~/ef6/media/schemawithusers.png)
 
 La lista completa de anotaciones compatibles con EF es:
 
@@ -365,7 +365,7 @@ public class BloggingContext : DbContext
 
 La columna DisplayName ahora se cambia el nombre para mostrar\_nombre:
 
-![SchemaWithDisplayNameRenamed](~/ef6/media/schemawithdisplaynamerenamed.png)
+![Esquema con nombre cambiado el nombre para mostrar](~/ef6/media/schemawithdisplaynamerenamed.png)
 
 ## <a name="summary"></a>Resumen
 
