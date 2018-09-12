@@ -3,12 +3,12 @@ title: Enlace de datos con WinForms - EF6
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 80fc5062-2f1c-4dbd-ab6e-b99496784b36
-ms.openlocfilehash: 071172810f7dac45f42aca0efa7f329bac31e9cd
-ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
+ms.openlocfilehash: 48e6d997875a25a5954484f854953df69a267d05
+ms.sourcegitcommit: 8d04a2ad98036f32ca70c77ce3040c5edb1cdf82
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/09/2018
-ms.locfileid: "44251198"
+ms.lasthandoff: 09/11/2018
+ms.locfileid: "44384857"
 ---
 # <a name="databinding-with-winforms"></a>Enlace de datos con formularios Windows Forms
 En este tutorial paso a paso muestra cómo enlazar tipos POCO a controles de Windows Forms (WinForms) en forma de "master-detail". La aplicación usa Entity Framework para rellenar los objetos con los datos de la base de datos, realizar un seguimiento de cambios y conservar los datos en la base de datos.
@@ -71,7 +71,7 @@ Propiedades de la colección deben implementar la interfaz IListSource para habi
 
             IList IListSource.GetList()
             {
-                return _bindingList  (_bindingList = this.ToBindingList());
+                return _bindingList ?? (_bindingList = this.ToBindingList());
             }
         }
     }
