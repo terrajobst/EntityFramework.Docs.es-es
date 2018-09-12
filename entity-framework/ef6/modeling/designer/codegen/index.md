@@ -3,12 +3,12 @@ title: 'Plantillas de generación de código del diseñador: EF6'
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 56e00fa2-f9f0-48b3-8006-f8266ca7e74b
-ms.openlocfilehash: 29e28dd4ebe0e5e6e3cddacb1d34202c2010f389
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: e4d4aaa647baca9f85b85db1aadaade37abd6ff2
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994876"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44251172"
 ---
 # <a name="designer-code-generation-templates"></a>Plantillas de generación de código del diseñador
 Cuando se crea un modelo con Entity Framework Designer, las clases y el contexto derivado se generan automáticamente. Además de la generación de código predeterminada, también se proporcionan una serie de plantillas que pueden usarse para personalizar el código que se genera. Estas plantillas se proporcionan como plantillas de texto T4, lo que permite personalizarlas en caso necesario.
@@ -151,7 +151,7 @@ Las plantillas "Sitios web" (es decir, **Generador de DbContext para EF 5.x para
 
 Para empezar a usar una plantilla de generación de código, haga clic con el botón derecho en un punto vacío de la superficie de diseño de EF Designer y seleccione **Agregar elemento de generación de código...**
 
-![Add_Code_Gen_Item](~/ef6/media/add-code-gen-item.png)
+![Agregación de elementos de generación de código](~/ef6/media/add-code-gen-item.png)
 
 Si ya ha instalado la plantilla que quiere usar (o estaba incluida en Visual Studio), estará disponible en la sección **Código** o **Datos** del menú izquierdo.
 
@@ -166,8 +166,8 @@ Si usa Visual Studio 2012, los nuevos archivos .tt aparecen anidados en el archi
 > [!NOTE]
 > En el caso de los modelos creados en Visual Studio 2012, tiene que eliminar las plantillas usadas para la generación de código predeterminada; si no lo hace, se generarán clases y contexto duplicados. Los archivos predeterminados son **&lt;nombreDelModelo&gt;.tt** y **&lt;nombreDelModelo&gt;.context.tt**. 
 
-![VS2012_Templates](~/ef6/media/vs2012-templates.png)
+![Plantillas de VS2012](~/ef6/media/vs2012-templates.png)
 
 Si usa Visual Studio 2010, los archivos tt se agregan directamente al proyecto.  
 
-![VS2010_Templates](~/ef6/media/vs2010-templates.png)
+![Plantillas de VS2010](~/ef6/media/vs2010-templates.png)

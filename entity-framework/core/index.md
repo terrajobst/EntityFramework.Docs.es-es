@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: bc2a2676-bc46-493f-bf49-e3cc97994d57
 uid: core/index
-ms.openlocfilehash: d9fcafb35248b1af54e1ac707e2ff7d4e80e4aa2
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: ee3fac9e9103749195886a632fbeac3163a46689
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42995656"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250548"
 ---
 # <a name="entity-framework-core"></a>Entity Framework Core
 
@@ -18,31 +18,6 @@ Entity Framework (EF) Core es una versión ligera, extensible y multiplataforma 
 EF Core puede servir como asignador relacional de objetos (O/RM), lo que permite a los desarrolladores de .NET trabajar con una base de datos mediante objetos .NET y eliminar la mayoría del código de acceso a los datos que normalmente deben escribir.
 
 EF Core es compatible con muchos motores de base de datos; vea [Proveedores de bases de datos](providers/index.md) para más información.
-
-Si quiere aprender mediante la escritura de código, se recomienda usar una de las guías de [introducción](get-started/index.md) para empezar a trabajar con EF Core.
-
-## <a name="what-is-new-in-ef-core"></a>Novedades de EF Core
-
-Si está familiarizado con EF Core y quiere ir directamente a los detalles de las versiones más recientes:
-
-- **[Novedades de EF Core2.1](xref:core/what-is-new/ef-core-2.1)**
-- **[Actualización de aplicaciones existentes a EF Core 2.x](xref:core/miscellaneous/1x-2x-upgrade)**
-
-
-## <a name="get-entity-framework-core"></a>Obtener Entity Framework Core
-
-[Instale el paquete NuGet](https://docs.nuget.org/ndocs/quickstart/use-a-package) correspondiente al proveedor de base de datos que quiera usar. Por ejemplo, para instalar el proveedor de SQL Server en el desarrollo multiplataforma mediante la herramienta `dotnet` en la línea de comandos:
-
-``` Console
-dotnet add package Microsoft.EntityFrameworkCore.SqlServer
-```
-
-O en Visual Studio, con la Consola del administrador de paquetes:
-
-``` PowerShell
-Install-Package Microsoft.EntityFrameworkCore.SqlServer
-```
-Vea [Proveedores de bases de datos](providers/index.md) para más información sobre los proveedores disponibles e [Instalación de EF Core](get-started/install/index.md) para obtener pasos de instalación detallados.
 
 ## <a name="the-model"></a>El modelo
 
@@ -113,3 +88,8 @@ using (var db = new BloggingContext())
     db.SaveChanges();
 }
 ```
+
+## <a name="next-steps"></a>Pasos siguientes
+
+Para consultar tutoriales de introducción, vea [Introducción a Entity Framework Core](get-started/index.md).
+

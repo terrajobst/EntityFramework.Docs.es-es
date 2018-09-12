@@ -3,12 +3,12 @@ title: 'Entidades de autoseguimiento: EF6'
 author: divega
 ms.date: 2016-10-23
 ms.assetid: 5e60f5be-7bbb-4bf8-835e-0ac808d6c84a
-ms.openlocfilehash: 8b555d211facd737aedf120a1ecfdc88d3903107
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: bd22df9e14fe71ae065baf1d747b1642dd7bafce
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42998021"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250873"
 ---
 # <a name="self-tracking-entities"></a>Entidades de autoseguimiento
 
@@ -28,7 +28,7 @@ Este elemento de plantilla genera dos archivos .tt (plantilla de texto):
 
 Para comenzar, visite la página [Self-Tracking Entities Walkthrough](walkthrough.md) (Tutorial sobre entidades de autoseguimiento).  
 
-## <a name="considerations-when-working-with-self-tracking-entities"></a>Consideraciones al trabajar con entidades de seguimiento propio  
+## <a name="functional-considerations-when-working-with-self-tracking-entities"></a>Consideraciones funcionales al trabajar con entidades de seguimiento propio  
 > [!IMPORTANT]
 > Ya no se recomienda usar la plantilla Entidades de autoseguimiento. Solo sigue estando disponible para la compatibilidad con las aplicaciones existentes. Si la aplicación necesita trabajar con gráficos desconectados de entidades, considere otras alternativas, como [Trackable Entities](http://trackableentities.github.io/), que es una tecnología similar a Entidades de autoseguimiento pero que la comunidad desarrolla de forma más activa, o escriba código personalizado mediante la API de seguimiento de cambios de bajo nivel.
 
@@ -46,7 +46,7 @@ Tenga en cuenta lo siguiente al trabajar con entidades de seguimiento propio:
 - Las entidades con seguimiento propio no están habilitadas para realizar una carga diferida.  
 - La serialización binaria y la serialización a los objetos de administración de estado de ASP.NET no se admiten en las entidades de autoseguimiento. Sin embargo, puede personalizar la plantilla para agregar la compatibilidad de serialización binaria. Para obtener más información, vea [Using Binary Serialization and ViewState with Self-Tracking Entities](http://go.microsoft.com/fwlink/?LinkId=199208) (Uso de la serialización binaria y ViewState con entidades de autoseguimiento).  
 
-### <a name="security-considerations"></a>Consideraciones de seguridad  
+## <a name="security-considerations"></a>Consideraciones de seguridad  
 
 Al trabajar con entidades de autoseguimiento, deben contemplarse las siguientes consideraciones de seguridad:  
 
