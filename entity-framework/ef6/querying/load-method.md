@@ -1,21 +1,21 @@
 ---
 title: El método Load - EF6
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: 03c5a069-b7b4-455f-a16f-ee3b96cc4e28
-ms.openlocfilehash: f7e8410b8fb8b5c3e86c51cd61868604a7566d0c
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 3a0d11552b6bfd8b83f15c58c6cb9f945d9d4536
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42996656"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45490901"
 ---
-# <a name="the-load-method"></a><span data-ttu-id="3b4d1-102">El método de carga</span><span class="sxs-lookup"><span data-stu-id="3b4d1-102">The Load Method</span></span>
-<span data-ttu-id="3b4d1-103">Hay varios escenarios donde desea cargar las entidades de la base de datos en el contexto sin inmediatamente hacer nada con esas entidades.</span><span class="sxs-lookup"><span data-stu-id="3b4d1-103">There are several scenarios where you may want to load entities from the database into the context without immediately doing anything with those entities.</span></span> <span data-ttu-id="3b4d1-104">Un buen ejemplo de esto está cargando entidades para el enlace de datos, como se describe en [datos locales](~/ef6/querying/local-data.md).</span><span class="sxs-lookup"><span data-stu-id="3b4d1-104">A good example of this is loading entities for data binding as described in [Local Data](~/ef6/querying/local-data.md).</span></span> <span data-ttu-id="3b4d1-105">Una manera común de hacerlo es escribir una consulta LINQ y, a continuación, llame a ToList en él, sólo para descartar inmediatamente la lista creada.</span><span class="sxs-lookup"><span data-stu-id="3b4d1-105">One common way to do this is to write a LINQ query and then call ToList on it, only to immediately discard the created list.</span></span> <span data-ttu-id="3b4d1-106">El método de extensión de carga funciona igual que ToList, salvo que evita la creación de la lista por completo.</span><span class="sxs-lookup"><span data-stu-id="3b4d1-106">The Load extension method works just like ToList except that it avoids the creation of the list altogether.</span></span>  
+# <a name="the-load-method"></a><span data-ttu-id="d7b0e-102">El método de carga</span><span class="sxs-lookup"><span data-stu-id="d7b0e-102">The Load Method</span></span>
+<span data-ttu-id="d7b0e-103">Hay varios escenarios donde desea cargar las entidades de la base de datos en el contexto sin inmediatamente hacer nada con esas entidades.</span><span class="sxs-lookup"><span data-stu-id="d7b0e-103">There are several scenarios where you may want to load entities from the database into the context without immediately doing anything with those entities.</span></span> <span data-ttu-id="d7b0e-104">Un buen ejemplo de esto está cargando entidades para el enlace de datos, como se describe en [datos locales](~/ef6/querying/local-data.md).</span><span class="sxs-lookup"><span data-stu-id="d7b0e-104">A good example of this is loading entities for data binding as described in [Local Data](~/ef6/querying/local-data.md).</span></span> <span data-ttu-id="d7b0e-105">Una manera común de hacerlo es escribir una consulta LINQ y, a continuación, llame a ToList en él, sólo para descartar inmediatamente la lista creada.</span><span class="sxs-lookup"><span data-stu-id="d7b0e-105">One common way to do this is to write a LINQ query and then call ToList on it, only to immediately discard the created list.</span></span> <span data-ttu-id="d7b0e-106">El método de extensión de carga funciona igual que ToList, salvo que evita la creación de la lista por completo.</span><span class="sxs-lookup"><span data-stu-id="d7b0e-106">The Load extension method works just like ToList except that it avoids the creation of the list altogether.</span></span>  
 
-<span data-ttu-id="3b4d1-107">Las técnicas que se muestran en este tema se aplican igualmente a los modelos creados con Code First y EF Designer.</span><span class="sxs-lookup"><span data-stu-id="3b4d1-107">The techniques shown in this topic apply equally to models created with Code First and the EF Designer.</span></span>  
+<span data-ttu-id="d7b0e-107">Las técnicas que se muestran en este tema se aplican igualmente a los modelos creados con Code First y EF Designer.</span><span class="sxs-lookup"><span data-stu-id="d7b0e-107">The techniques shown in this topic apply equally to models created with Code First and the EF Designer.</span></span>  
 
-<span data-ttu-id="3b4d1-108">Estos son dos ejemplos del uso de la carga.</span><span class="sxs-lookup"><span data-stu-id="3b4d1-108">Here are two examples of using Load.</span></span> <span data-ttu-id="3b4d1-109">La primera se toma de una aplicación de enlace de datos de Windows Forms que se usa la carga para consultar entidades antes del enlace a la colección local, como se describe en [datos locales](~/ef6/querying/local-data.md):</span><span class="sxs-lookup"><span data-stu-id="3b4d1-109">The first is taken from a Windows Forms data binding application where Load is used to query for entities before binding to the local collection, as described in [Local Data](~/ef6/querying/local-data.md):</span></span>  
+<span data-ttu-id="d7b0e-108">Estos son dos ejemplos del uso de la carga.</span><span class="sxs-lookup"><span data-stu-id="d7b0e-108">Here are two examples of using Load.</span></span> <span data-ttu-id="d7b0e-109">La primera se toma de una aplicación de enlace de datos de Windows Forms que se usa la carga para consultar entidades antes del enlace a la colección local, como se describe en [datos locales](~/ef6/querying/local-data.md):</span><span class="sxs-lookup"><span data-stu-id="d7b0e-109">The first is taken from a Windows Forms data binding application where Load is used to query for entities before binding to the local collection, as described in [Local Data](~/ef6/querying/local-data.md):</span></span>  
 
 ``` csharp
 protected override void OnLoad(EventArgs e)
@@ -29,7 +29,7 @@ protected override void OnLoad(EventArgs e)
 }
 ```  
 
-<span data-ttu-id="3b4d1-110">El segundo ejemplo se muestra mediante Load para cargar una colección filtrada de las entidades relacionadas, como se describe en [cargar entidades relacionadas](~/ef6/querying/related-data.md):</span><span class="sxs-lookup"><span data-stu-id="3b4d1-110">The second example shows using Load to load a filtered collection of related entities, as described in [Loading Related Entities](~/ef6/querying/related-data.md):</span></span>  
+<span data-ttu-id="d7b0e-110">El segundo ejemplo se muestra mediante Load para cargar una colección filtrada de las entidades relacionadas, como se describe en [cargar entidades relacionadas](~/ef6/querying/related-data.md):</span><span class="sxs-lookup"><span data-stu-id="d7b0e-110">The second example shows using Load to load a filtered collection of related entities, as described in [Loading Related Entities](~/ef6/querying/related-data.md):</span></span>  
 
 ``` csharp
 using (var context = new BloggingContext())
