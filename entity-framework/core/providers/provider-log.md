@@ -6,12 +6,12 @@ ms.date: 08/08/2018
 ms.assetid: 7CEF496E-A5B0-4F5F-B68E-529609B23EF9
 ms.technology: entity-framework-core
 uid: core/providers/provider-log
-ms.openlocfilehash: 5da1043310e2858638c81a0654a9cab23e39c220
-ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
+ms.openlocfilehash: a637e5e2f75e16bc7b11b1a51abcbe16274a1c75
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/09/2018
-ms.locfileid: "44250821"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45490777"
 ---
 # <a name="provider-impacting-changes"></a>Cambios en el impacto de proveedor
 
@@ -52,3 +52,7 @@ Este registro estamos empezando con los cambios de 2.1 a 2.2. Antes de 2.1 se ut
   * Siga este patrón para agregar compatibilidad espacial en el proveedor que es coherente entre todos los proveedores.
 * https://github.com/aspnet/EntityFrameworkCore/pull/13199 -Agregar depuración mejorada para la creación del proveedor de servicio
   * Permite DbContextOptionsExtensions implementar una nueva interfaz que puede ayudarle a entender por qué se recompile el proveedor de servicios interno
+* https://github.com/aspnet/EntityFrameworkCore/pull/13289 -Agrega CanConnect API para su uso por las comprobaciones de mantenimiento
+  * Esta solicitud agrega el concepto de `CanConnect` que se usará en el estado de ASP.NET Core comprueba para determinar si la base de datos está disponible. De forma predeterminada, la implementación relacional simplemente llama a `Exist`, pero los proveedores pueden implementar algo diferente si es necesario. No relacionales proveedores debe implementar la nueva API para la comprobación de estado que se pueda usar.
+* https://github.com/aspnet/EntityFrameworkCore/pull/13306 -Actualizar RelationalTypeMapping base para no establecer tamaño DbParameter
+  * Detener configuración tamaño de forma predeterminada, ya que puede provocar el truncamiento. Los proveedores que necesite agregar su propia lógica si se debe establecer tamaño.

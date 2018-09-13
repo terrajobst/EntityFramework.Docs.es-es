@@ -1,14 +1,14 @@
 ---
 title: Métodos abreviados de teclado del Diseñador de Framework Entity - EF6
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: 3c76cdd5-17c5-4c54-a6a5-cf21b974636b
-ms.openlocfilehash: e3a9d968c26841c143b1b7b0ba9a168ecd13f469
-ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
+ms.openlocfilehash: c75eafcca0863faa1ad64202e98b61832827377c
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/09/2018
-ms.locfileid: "44251133"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45490251"
 ---
 # <a name="entity-framework-designer-keyboard-shortcuts"></a>Métodos abreviados de teclado del Diseñador de Entity Framework
 Esta página proporciona una lista de accesos directos de teclado que están disponibles en las pantallas de distintos de Entity Framework Tools para Visual Studio.

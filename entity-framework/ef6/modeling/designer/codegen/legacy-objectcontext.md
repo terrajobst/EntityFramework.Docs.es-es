@@ -1,14 +1,14 @@
 ---
 title: Revertir a un ObjectContext en Entity Framework Designer - EF6
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: 36550569-a1de-47cb-ba6d-544794ffd500
-ms.openlocfilehash: e90af3e973c71e2ce872e3edc24aafc1b2ccce0f
-ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
+ms.openlocfilehash: 3e436f0d9cf94720be9c424b327816438d571ae8
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/09/2018
-ms.locfileid: "44250340"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45488952"
 ---
 # <a name="reverting-to-objectcontext-in-entity-framework-designer"></a>Revertir a un ObjectContext en Entity Framework Designer
 Con la versión anterior de Entity Framework, un modelo creado con EF Designer generaría un contexto que deriva de ObjectContext y clases de entidad que se derivan de EntityObject.

@@ -1,14 +1,14 @@
 ---
 title: Separación de entidad diseñador - EF6
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: aa2dd48a-1f0e-49dd-863d-d6b4f5834832
-ms.openlocfilehash: 06199be977276cd3656e2550df79bac24276ec51
-ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
+ms.openlocfilehash: ba1895ae491cec909ff88a8784eea82f1876f595
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/09/2018
-ms.locfileid: "44250603"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45490861"
 ---
 # <a name="designer-entity-splitting"></a>División de entidades de diseñador
 En este tutorial se muestra cómo asignar un tipo de entidad a dos tablas modificando un modelo con Entity Framework Designer (Diseñador de EF). Puede asignar una entidad a varias tablas cuando estas comparten una clave común. Los conceptos que se aplican en la asignación de un tipo de entidad a dos tablas se extienden con facilidad a la asignación de un tipo de entidad a más de dos tablas.

@@ -1,14 +1,14 @@
 ---
 title: 'Espacial EF6 - EF Designer:'
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: 06baa6e1-d680-4a95-845b-81305c87a962
-ms.openlocfilehash: 39fe54ffe9d0ffd1753844f7bffcd1832d82eec5
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 04ba6e8d4a59816ca31e831b8e466cb1152a3d1b
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994372"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45490220"
 ---
 # <a name="spatial---ef-designer"></a>Espacial - EF Designer
 > [!NOTE]

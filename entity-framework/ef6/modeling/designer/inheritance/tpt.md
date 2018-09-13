@@ -1,14 +1,14 @@
 ---
 title: Herencia de TPT diseñador - EF6
 author: divega
-ms.date: 2016-10-23
+ms.date: 10/23/2016
 ms.assetid: efc78c31-b4ea-4ea3-a0cd-c69eb507020e
-ms.openlocfilehash: 68980fa89446940b8b7f5f73c519d38e727a9039
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 84330fba4807620aa242a70cd8ac76a60284416d
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42996353"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45489458"
 ---
 # <a name="designer-tpt-inheritance"></a>Herencia de TPT Diseñador
 Este tutorial paso a paso muestra cómo implementar la herencia de tabla por tipo (TPT) en el modelo usando el Diseñador de Entity Framework (EF Designer). La herencia de tabla por tipo utiliza una tabla independiente de la base de datos para mantener los datos de las propiedades no heredadas y de las propiedades de clave para cada tipo de la jerarquía de herencia.
