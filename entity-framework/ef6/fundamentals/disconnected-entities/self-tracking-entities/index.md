@@ -3,12 +3,12 @@ title: 'Entidades de autoseguimiento: EF6'
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 5e60f5be-7bbb-4bf8-835e-0ac808d6c84a
-ms.openlocfilehash: 3575977ceabe7d93ac48d5fac253eac1341e2353
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: b098736ef47e79c916f4bf054716022d5032eee5
+ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489705"
+ms.lasthandoff: 09/18/2018
+ms.locfileid: "46283815"
 ---
 # <a name="self-tracking-entities"></a>Entidades de autoseguimiento
 
@@ -39,12 +39,12 @@ Tenga en cuenta lo siguiente al trabajar con entidades de seguimiento propio:
 - Si envía el gráfico modificado en el cliente al servicio y luego planea seguir trabajando con el mismo gráfico en el cliente, debe iterar manualmente el gráfico y llamar al método **AcceptChanges** en cada objeto para restablecer la herramienta de seguimiento de cambios.  
 
     > Si los objetos del gráfico contienen propiedades con valores generados por la base de datos (por ejemplo, valores de identidad o simultaneidad), Entity Framework reemplaza los valores de estas propiedades por los valores generados por la base de datos después de llamar al método **SaveChanges**. Puede implementar la operación del servicio para que devuelva objetos guardados o una lista de los valores de propiedad generados de los objetos devueltos al cliente. El cliente debe reemplazar las instancias del objeto o los valores de propiedad del objeto con los objetos o los valores de propiedad devueltos desde la operación de servicio.  
-- Si se combinan gráficos de varias solicitudes de servicio, se pueden presentar objetos con valores de clave duplicada en el gráfico resultante. Entity Framework no quita los objetos con claves duplicadas cuando llama al método **ApplyChanges**, sino que produce una excepción. Para evitar tener gráficos con valores de clave duplicados, siga uno de los modelos descritos en el siguiente blog: [Self-Tracking Entities: ApplyChanges and duplicate entities](http://go.microsoft.com/fwlink/?LinkID=205119&clcid=0x409) (Entidades de autoseguimiento: ApplyChanges y entidades duplicadas).  
+- Si se combinan gráficos de varias solicitudes de servicio, se pueden presentar objetos con valores de clave duplicada en el gráfico resultante. Entity Framework no quita los objetos con claves duplicadas cuando llama al método **ApplyChanges**, sino que produce una excepción. Para evitar tener gráficos con valores de clave duplicados, siga uno de los modelos descritos en el siguiente blog: [Self-Tracking Entities: ApplyChanges and duplicate entities](https://go.microsoft.com/fwlink/?LinkID=205119&clcid=0x409) (Entidades de autoseguimiento: ApplyChanges y entidades duplicadas).  
 - Cuando se cambia la relación entre objetos mediante el establecimiento de la propiedad de clave externa, la propiedad de navegación de referencia se establece en NULL y no se sincroniza con la entidad de seguridad adecuada en el cliente. Después de adjuntar el gráfico al contexto del objeto (por ejemplo, después de llamar al método **ApplyChanges**), se sincronizan las propiedades de clave externa y de navegación.  
 
     > No disponer de ninguna propiedad de navegación de referencia sincronizada con el objeto principal adecuado podría representar un problema si ha especificado la eliminación en cascada en la relación de clave externa. Si elimina la entidad de seguridad, la eliminación no se propagará a los objetos dependientes. Si ha especificado eliminaciones en cascada, use las propiedades de navegación para cambiar las relaciones en vez de establecer la propiedad de clave externa.  
 - Las entidades con seguimiento propio no están habilitadas para realizar una carga diferida.  
-- La serialización binaria y la serialización a los objetos de administración de estado de ASP.NET no se admiten en las entidades de autoseguimiento. Sin embargo, puede personalizar la plantilla para agregar la compatibilidad de serialización binaria. Para obtener más información, vea [Using Binary Serialization and ViewState with Self-Tracking Entities](http://go.microsoft.com/fwlink/?LinkId=199208) (Uso de la serialización binaria y ViewState con entidades de autoseguimiento).  
+- La serialización binaria y la serialización a los objetos de administración de estado de ASP.NET no se admiten en las entidades de autoseguimiento. Sin embargo, puede personalizar la plantilla para agregar la compatibilidad de serialización binaria. Para obtener más información, vea [Using Binary Serialization and ViewState with Self-Tracking Entities](https://go.microsoft.com/fwlink/?LinkId=199208) (Uso de la serialización binaria y ViewState con entidades de autoseguimiento).  
 
 ## <a name="security-considerations"></a>Consideraciones de seguridad  
 
