@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 11/15/2016
 ms.assetid: e079d4af-c455-4a14-8e15-a8471516d748
 uid: core/miscellaneous/connection-resiliency
-ms.openlocfilehash: d6e31cf2b9b783ea503703536d159b34bf2e18c0
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: d5101d0622ddc2c90ddded16b9ec6cc4eb814c36
+ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42997195"
+ms.lasthandoff: 09/18/2018
+ms.locfileid: "46283841"
 ---
 # <a name="connection-resiliency"></a>Resistencia de las conexiones
 
@@ -49,7 +49,7 @@ La solución consiste en invocar manualmente la estrategia de ejecución con un 
 
 ## <a name="transaction-commit-failure-and-the-idempotency-issue"></a>Error de confirmación de transacción y el problema de idempotencia
 
-En general, cuando se produce un error de conexión se revierte la transacción actual. Sin embargo, si se interrumpe la conexión mientras la transacción está confirmada resultante se conoce el estado de la transacción. Vea este [entrada de blog](http://blogs.msdn.com/b/adonet/archive/2013/03/11/sql-database-connectivity-and-the-idempotency-issue.aspx) para obtener más detalles.
+En general, cuando se produce un error de conexión se revierte la transacción actual. Sin embargo, si se interrumpe la conexión mientras la transacción está confirmada resultante se conoce el estado de la transacción. Vea este [entrada de blog](https://blogs.msdn.com/b/adonet/archive/2013/03/11/sql-database-connectivity-and-the-idempotency-issue.aspx) para obtener más detalles.
 
 De forma predeterminada, la estrategia de ejecución volverá a intentar la operación como si se ha revertido la transacción, pero si no es así Esto provocará una excepción si el nuevo estado de la base de datos no es compatible o podría dar lugar a **daños en los datos** si el operación no se basa en un estado determinado, por ejemplo, cuando se inserta una nueva fila con valores de clave generados automáticamente.
 

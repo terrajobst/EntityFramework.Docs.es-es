@@ -3,12 +3,12 @@ title: Las pruebas con un marco de simulación - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: bd66a638-d245-44d4-8e71-b9c6cb335cc7
-ms.openlocfilehash: b50d0afb52ae1c496f2734ecc015cdaaa060aff7
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 20799b55b2dffe27637c4fb84df06cee174e6dd9
+ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489978"
+ms.lasthandoff: 09/18/2018
+ms.locfileid: "46284101"
 ---
 # <a name="testing-with-a-mocking-framework"></a>Las pruebas con un marco de simulación
 > [!NOTE]
@@ -235,7 +235,7 @@ Entity Framework 6 introdujo un conjunto de métodos de extensión que puede usa
 
 Dado que las consultas de Entity Framework hacen uso de LINQ, los métodos de extensión se definen en IQueryable y IEnumerable. Sin embargo, ya que solo están diseñados para usarse con Entity Framework puede recibir el siguiente error si intenta usarlas en una consulta LINQ que no es una consulta de Entity Framework:
 
-> El origen de IQueryable no implementa IDbAsyncEnumerable{0}. Solo los orígenes que implementan IDbAsyncEnumerable pueden usarse para las operaciones asincrónicas de Entity Framework. Para obtener más información, consulte [ http://go.microsoft.com/fwlink/?LinkId=287068 ](http://go.microsoft.com/fwlink/?LinkId=287068).  
+> El origen de IQueryable no implementa IDbAsyncEnumerable{0}. Solo los orígenes que implementan IDbAsyncEnumerable pueden usarse para las operaciones asincrónicas de Entity Framework. Para obtener más información, consulte [ http://go.microsoft.com/fwlink/?LinkId=287068 ](https://go.microsoft.com/fwlink/?LinkId=287068).  
 
 Mientras que los métodos asincrónicos se admiten solo cuando se ejecuta en una consulta EF, desea usarlos en la prueba unitaria al doble de un DbSet de prueba de ejecución frente a en memoria.  
 

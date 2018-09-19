@@ -3,12 +3,12 @@ title: Model First - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: e1b9c319-bb8a-4417-ac94-7890f257e7f6
-ms.openlocfilehash: 8e010f95db40261073b4af80a3c0e3225a2cd1cf
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: d429d5ea590b22c77f3f7f0bcfbd5dfc0a3e0049
+ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490485"
+ms.lasthandoff: 09/18/2018
+ms.locfileid: "46283880"
 ---
 # <a name="model-first"></a>En primer lugar del modelo
 En este tutorial de vídeo y paso a paso proporcionan una introducción al desarrollo de Model First mediante Entity Framework. Modelo primero le permite crear un nuevo modelo con Entity Framework Designer y, a continuación, generar un esquema de base de datos del modelo. El modelo se almacena en un archivo EDMX (extensión edmx) y se puede ver y editar en el Diseñador de Entity Framework. Las clases que interactúan en la aplicación se generan automáticamente desde el archivo EDMX.
@@ -18,13 +18,13 @@ En este tutorial de vídeo y paso a paso proporcionan una introducción al desar
 
 **Presentado por**: [Rowan Miller](http://romiller.com/)
 
-**Vídeo**: [WMV](http://download.microsoft.com/download/5/B/1/5B1C338C-AFA7-4F68-B304-48BB008146EF/HDI-ITPro-MSDN-winvideo-modelfirst.wmv) | [MP4](http://download.microsoft.com/download/5/B/1/5B1C338C-AFA7-4F68-B304-48BB008146EF/HDI-ITPro-MSDN-mp4video-modelfirst.m4v) | [WMV (ZIP)](http://download.microsoft.com/download/5/B/1/5B1C338C-AFA7-4F68-B304-48BB008146EF/HDI-ITPro-MSDN-winvideo-modelfirst.zip)
+**Vídeo**: [WMV](https://download.microsoft.com/download/5/B/1/5B1C338C-AFA7-4F68-B304-48BB008146EF/HDI-ITPro-MSDN-winvideo-modelfirst.wmv) | [MP4](https://download.microsoft.com/download/5/B/1/5B1C338C-AFA7-4F68-B304-48BB008146EF/HDI-ITPro-MSDN-mp4video-modelfirst.m4v) | [WMV (ZIP)](https://download.microsoft.com/download/5/B/1/5B1C338C-AFA7-4F68-B304-48BB008146EF/HDI-ITPro-MSDN-winvideo-modelfirst.zip)
 
 ## <a name="pre-requisites"></a>Requisitos previos
 
 Necesitará tener Visual Studio 2010 o Visual Studio 2012 instalado para completar este tutorial.
 
-Si utiliza Visual Studio 2010, también necesitará tener [NuGet](http://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c) instalado.
+Si utiliza Visual Studio 2010, también necesitará tener [NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c) instalado.
 
 ## <a name="1-create-the-application"></a>1. Crear la aplicación
 
@@ -84,7 +84,7 @@ Si está trabajando en Visual Studio 2010, hay algunos pasos adicionales que deb
 En primer lugar, necesitamos obtener la versión más reciente de Entity Framework en NuGet.
 
 -   **Proyecto –&gt; administrar paquetes NuGet... ** 
-     *Si no tiene el **administrar paquetes NuGet... ** opción, debe instalar la [versión más reciente de NuGet](http://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)*
+     *Si no tiene el **administrar paquetes NuGet... ** opción, debe instalar la [versión más reciente de NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)*
 -   Seleccione el **Online** ficha
 -   Seleccione el **EntityFramework** paquete
 -   Haga clic en **instalar**

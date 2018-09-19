@@ -3,12 +3,12 @@ title: Convenciones basadas en modelos - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 0fc4eef8-29b8-4192-9c77-08fd33d3db3a
-ms.openlocfilehash: fb79164f71cb3afff705a83f5078a13d043abca8
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 80b722730b4ca6c9d00a8611b6c9027e8bc9fe61
+ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490940"
+ms.lasthandoff: 09/18/2018
+ms.locfileid: "46283712"
 ---
 # <a name="model-based-conventions"></a>Convenciones de modelo
 > [!NOTE]
@@ -146,7 +146,7 @@ public class ForeignKeyNamingConvention : IStoreModelConvention<AssociationType>
 
 ## <a name="extending-existing-conventions"></a>Extender las convenciones de existentes   
 
-Si tiene que escribir una convención que es similar a una de las convenciones que Entity Framework ya se aplica a su modelo que siempre puede extender esta convención para evitar tener que escribirlo desde cero.  Un ejemplo de esto es reemplazar el identificador existente que coincide con la convención con uno personalizado.   Una ventaja adicional para reemplazar la convención de clave es que se llamará el método invalidado solo si no hay ninguna clave ya se ha detectado o se haya configurado explícitamente. Una lista de las convenciones que usa Entity Framework está disponible aquí: [ http://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx ](http://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx).  
+Si tiene que escribir una convención que es similar a una de las convenciones que Entity Framework ya se aplica a su modelo que siempre puede extender esta convención para evitar tener que escribirlo desde cero.  Un ejemplo de esto es reemplazar el identificador existente que coincide con la convención con uno personalizado.   Una ventaja adicional para reemplazar la convención de clave es que se llamará el método invalidado solo si no hay ninguna clave ya se ha detectado o se haya configurado explícitamente. Una lista de las convenciones que usa Entity Framework está disponible aquí: [ http://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx ](https://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx).  
 
 ``` csharp
 using System.Data.Entity;
@@ -209,4 +209,4 @@ public class BlogContext : DbContext
 
 ## <a name="notes"></a>Notas  
 
-Una lista de las convenciones que se aplican actualmente por Entity Framework está disponible en la documentación de MSDN aquí: [ http://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx ](http://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx).  Esta lista se extrae directamente desde el código fuente.  El código fuente de Entity Framework 6 está disponible en [GitHub](https://github.com/aspnet/entityframework6/) y muchas de las convenciones empleadas por Entity Framework son buenos puntos de partida para crear un modelo personalizado según las convenciones.  
+Una lista de las convenciones que se aplican actualmente por Entity Framework está disponible en la documentación de MSDN aquí: [ http://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx ](https://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx).  Esta lista se extrae directamente desde el código fuente.  El código fuente de Entity Framework 6 está disponible en [GitHub](https://github.com/aspnet/entityframework6/) y muchas de las convenciones empleadas por Entity Framework son buenos puntos de partida para crear un modelo personalizado según las convenciones.  

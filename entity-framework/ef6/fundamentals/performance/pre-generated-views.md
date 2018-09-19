@@ -3,19 +3,19 @@ title: Vistas de asignación generados previamente - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 917ba9c8-6ddf-4631-ab8c-c4fb378c2fcd
-ms.openlocfilehash: cb374d007252710b42c31061bf15d7d32af0db27
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: da5d59ba5a899a0ee3a1eec3db0da1b4ece871d8
+ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489250"
+ms.lasthandoff: 09/18/2018
+ms.locfileid: "46284114"
 ---
 # <a name="pre-generated-mapping-views"></a>Vistas de asignación generados previamente
 Antes de Entity Framework puede ejecutar una consulta o guardar los cambios en el origen de datos, debe generar un conjunto de vistas de asignación para tener acceso a la base de datos. Estas vistas de asignación son un conjunto de instrucción de Entity SQL que representan la base de datos de forma abstracta y forman parte de los metadatos que se almacena en caché por dominio de aplicación. Si crea varias instancias del mismo contexto en el mismo dominio de aplicación, volverá a usar las vistas de asignación de los metadatos almacenados en caché en lugar de volver a generarlos. Porque la generación de vistas de asignación es una parte significativa del costo total de la ejecución de la primera consulta, Entity Framework permite generar previamente las vistas de asignación e incluirlos en el proyecto compilado. Para obtener más información, consulte [consideraciones de rendimiento (Entity Framework)](~/ef6/fundamentals/performance/perf-whitepaper.md).
 
 ## <a name="generating-mapping-views-with-the-ef-power-tools"></a>Generar vistas con EF Power Tools de asignación
 
-Para generar previamente las vistas más sencillo es usar el [EF Power Tools](http://visualstudiogallery.msdn.microsoft.com/72a60b14-1581-4b9b-89f2-846072eff19d). Una vez que tenga instaladas las herramientas de alimentación tendrá una opción de menú para generar vistas, como sigue.
+Para generar previamente las vistas más sencillo es usar el [EF Power Tools](https://visualstudiogallery.msdn.microsoft.com/72a60b14-1581-4b9b-89f2-846072eff19d). Una vez que tenga instaladas las herramientas de alimentación tendrá una opción de menú para generar vistas, como sigue.
 
 -   Para **Code First** modelos haga doble clic en el archivo de código que contiene la clase DbContext.
 -   Para **EF Designer** modelos haga doble clic en el archivo EDMX.

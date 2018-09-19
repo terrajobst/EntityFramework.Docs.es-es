@@ -3,18 +3,18 @@ title: Control de errores de confirmación de transacción - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 5b1f7a7d-1b24-4645-95ec-5608a31ef577
-ms.openlocfilehash: 71d5649dd993bb95e24165a55d812c71a37f03f3
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 27e75e6a1919ee2300fe76cfcdf67cceaad887b3
+ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489393"
+ms.lasthandoff: 09/18/2018
+ms.locfileid: "46283659"
 ---
 # <a name="handling-transaction-commit-failures"></a>Control de errores de confirmación de transacción
 > [!NOTE]
 > **EF6.1 y versiones posteriores solo** -las características, las API, etc. se describe en esta página se introdujeron en Entity Framework 6.1. Si usa una versión anterior, no se aplica parte o la totalidad de la información.  
 
-Como parte de 6.1 estamos introduciendo una nueva característica de resistencia de conexión para EF: la capacidad para detectar y recuperarse automáticamente cuando los errores transitorios de conexión afecta a la confirmación de transacciones confirmadas. Los detalles completos del escenario se describe mejor en la entrada de blog [conectividad de base de datos de SQL y el problema de idempotencia](http://blogs.msdn.com/b/adonet/archive/2013/03/11/sql-database-connectivity-and-the-idempotency-issue.aspx).  En resumen, el escenario es que, cuando se produce una excepción durante una confirmación de transacción hay dos causas posibles:  
+Como parte de 6.1 estamos introduciendo una nueva característica de resistencia de conexión para EF: la capacidad para detectar y recuperarse automáticamente cuando los errores transitorios de conexión afecta a la confirmación de transacciones confirmadas. Los detalles completos del escenario se describe mejor en la entrada de blog [conectividad de base de datos de SQL y el problema de idempotencia](https://blogs.msdn.com/b/adonet/archive/2013/03/11/sql-database-connectivity-and-the-idempotency-issue.aspx).  En resumen, el escenario es que, cuando se produce una excepción durante una confirmación de transacción hay dos causas posibles:  
 
 1. Error de la confirmación de transacción en el servidor
 2. La confirmación de transacción se realizó correctamente en el servidor pero un problema de conectividad impidió la notificación correcta de alcanzar el cliente  
@@ -69,4 +69,4 @@ Antes de EF 6.1 no hubo mecanismo para controlar los errores de confirmación en
      - Si la fila no está presente, use una estrategia de ejecución para volver a intentar la operación actual.  
   4. Si la confirmación se realiza correctamente, elimine la fila correspondiente para evitar el crecimiento de la tabla.  
 
-[Esta entrada de blog](http://blogs.msdn.com/b/adonet/archive/2013/03/11/sql-database-connectivity-and-the-idempotency-issue.aspx) contiene código de ejemplo para llevar a cabo esto en SQL Azure.  
+[Esta entrada de blog](https://blogs.msdn.com/b/adonet/archive/2013/03/11/sql-database-connectivity-and-the-idempotency-issue.aspx) contiene código de ejemplo para llevar a cabo esto en SQL Azure.  

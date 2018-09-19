@@ -3,12 +3,12 @@ title: Capacidad de prueba y Entity Framework 4.0
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 9430e2ab-261c-4e8e-8545-2ebc52d7a247
-ms.openlocfilehash: 0ddf72ab46e2d67dc8a9cf75cbd40430352c5210
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: aec177438004fd255bef85a5e5047cf6b5a6f782
+ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490537"
+ms.lasthandoff: 09/18/2018
+ms.locfileid: "46284049"
 ---
 # <a name="testability-and-entity-framework-40"></a>Capacidad de prueba y Entity Framework 4.0
 Scott Allen
@@ -198,7 +198,7 @@ Con los objetos poco en su lugar que podemos crear un Entity Data Model (EDM) en
 
 **Figura 1**
 
-Nota: si desea desarrollar el modelo EDM en primer lugar, es posible limpiar, generar código POCO del EDM. Puede hacerlo con una extensión de Visual Studio 2010 ofrecida el equipo de programabilidad de datos. Para descargar la extensión, inicie el Administrador de extensiones en el menú Herramientas en Visual Studio y busque "POCO" (vea la ilustración 2) en la Galería de plantillas en línea. Hay varias plantillas POCO para EF. Para obtener más información sobre el uso de la plantilla, vea " [Tutorial: plantilla de POCO para Entity Framework](http://blogs.msdn.com/adonet/pages/walkthrough-poco-template-for-the-entity-framework.aspx)".
+Nota: si desea desarrollar el modelo EDM en primer lugar, es posible limpiar, generar código POCO del EDM. Puede hacerlo con una extensión de Visual Studio 2010 ofrecida el equipo de programabilidad de datos. Para descargar la extensión, inicie el Administrador de extensiones en el menú Herramientas en Visual Studio y busque "POCO" (vea la ilustración 2) en la Galería de plantillas en línea. Hay varias plantillas POCO para EF. Para obtener más información sobre el uso de la plantilla, vea " [Tutorial: plantilla de POCO para Entity Framework](https://blogs.msdn.com/adonet/pages/walkthrough-poco-template-for-the-entity-framework.aspx)".
 
 ![EF test_02](~/ef6/media/eftest-02.png)
 
@@ -964,11 +964,11 @@ En este artículo hemos mostrado varios enfoques para crear código fácil de pr
 -   Robert C. Martin, " [el principio de responsabilidad única](http://www.objectmentor.com/resources/articles/srp.pdf)"
 -   Martin Fowler, [catálogo de patrones de](http://www.martinfowler.com/eaaCatalog/index.html) desde *patrones de arquitectura de aplicaciones de empresa*
 -   Griffin Caprio, " [inserción de dependencias](https://msdn.microsoft.com/magazine/cc163739.aspx)"
--   Blog de programación de datos, " [Tutorial: desarrollo con Entity Framework 4.0 controlado por pruebas](http://blogs.msdn.com/adonet/pages/walkthrough-test-driven-development-with-the-entity-framework-4-0.aspx)".
--   Blog de programación de datos, " [patrones de uso de repositorio y unidad de trabajo con Entity Framework 4.0](http://blogs.msdn.com/adonet/archive/2009/06/16/using-repository-and-unit-of-work-patterns-with-entity-framework-4-0.aspx)"
+-   Blog de programación de datos, " [Tutorial: desarrollo con Entity Framework 4.0 controlado por pruebas](https://blogs.msdn.com/adonet/pages/walkthrough-test-driven-development-with-the-entity-framework-4-0.aspx)".
+-   Blog de programación de datos, " [patrones de uso de repositorio y unidad de trabajo con Entity Framework 4.0](https://blogs.msdn.com/adonet/archive/2009/06/16/using-repository-and-unit-of-work-patterns-with-entity-framework-4-0.aspx)"
 -   Dave Astels, " [Introducción BDD](http://blog.daveastels.com/files/BDD_Intro.pdf)"
 -   Aaron Jensen, " [Introducción a las especificaciones de máquina](http://codebetter.com/blogs/aaron.jensen/archive/2008/05/08/introducing-machine-specifications-or-mspec-for-short.aspx)"
--   Eric Lee, " [BDD con MSTest](http://blogs.msdn.com/elee/archive/2009/01/20/bdd-with-mstest.aspx)"
+-   Eric Lee, " [BDD con MSTest](https://blogs.msdn.com/elee/archive/2009/01/20/bdd-with-mstest.aspx)"
 -   Eric Evans, " [Domain Driven Design](http://books.google.com/books?id=7dlaMs0SECsC&printsec=frontcover&dq=evans%20domain%20driven%20design&hl=en&ei=cHztS6C8KIaglAfA_dS1CA&sa=X&oi=book_result&ct=result&resnum=1&ved=0CCoQ6AEwAA)"
 -   Martin Fowler, " [las simulaciones no son códigos auxiliares](http://martinfowler.com/articles/mocksArentStubs.html)"
 -   Martin Fowler, " [doble de pruebas](http://martinfowler.com/bliki/TestDouble.html)"

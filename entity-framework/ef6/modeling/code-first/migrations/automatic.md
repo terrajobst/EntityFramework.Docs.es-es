@@ -3,12 +3,12 @@ title: Migraciones de Code automática First - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 0eb86787-2161-4cb4-9cb8-67c5d6e95650
-ms.openlocfilehash: 21f77ef49db2485047292b3928b4f63d49dbb180
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 2713afaf09707b7696e90464aac9945c2d82d274
+ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489991"
+ms.lasthandoff: 09/18/2018
+ms.locfileid: "46283919"
 ---
 # <a name="automatic-code-first-migrations"></a>Migraciones automáticas de Code First
 Las migraciones automáticas permite usar migraciones de Code First sin necesidad de un archivo de código en el proyecto para cada cambio realizado. No todos los cambios se pueden aplicar automáticamente: por ejemplo cambia el nombre de columna exige el uso de una migración basada en código.
@@ -97,7 +97,7 @@ Es hora de realizar más cambios en el modelo.
     public string Url { get; set; }
 ```
 
-Si volviera a ejecutar la aplicación de nuevo, aparecería una excepción InvalidOperationException con el texto *El modelo que respalda el contexto 'BlogContext' ha cambiado desde que se creó la base de datos. Considere la posibilidad de usar Migraciones de Code First para actualizar la base de datos (* [*http://go.microsoft.com/fwlink/?LinkId=238269*](http://go.microsoft.com/fwlink/?LinkId=238269)*).*
+Si volviera a ejecutar la aplicación de nuevo, aparecería una excepción InvalidOperationException con el texto *El modelo que respalda el contexto 'BlogContext' ha cambiado desde que se creó la base de datos. Considere la posibilidad de usar Migraciones de Code First para actualizar la base de datos (* [*http://go.microsoft.com/fwlink/?LinkId=238269*](https://go.microsoft.com/fwlink/?LinkId=238269)*).*
 
 Como sugiere la excepción, es hora de empezar a usar Migraciones de Code First. Puesto que deseamos usar las migraciones automáticas, vamos a especificar la **– EnableAutomaticMigrations** cambie.
 

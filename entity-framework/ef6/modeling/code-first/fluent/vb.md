@@ -3,12 +3,12 @@ title: API Fluent con VB.NET - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 763dc6a2-764a-4600-896c-f6f13abf56ec
-ms.openlocfilehash: cbdd32696fb88d3de6cf1966040e5dda49fe19cd
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 6aa74fa72296f66f0b069b9b5ee7e2e016570525
+ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489477"
+ms.lasthandoff: 09/18/2018
+ms.locfileid: "46283750"
 ---
 # <a name="fluent-api-with-vbnet"></a>API Fluent con VB.NET
 Código primero le permite definir su modelo mediante C\# o clases VB.NET. Configuración adicional si lo desea puede realizarse mediante los atributos en las clases y propiedades o mediante una API fluida. En este tutorial se muestra cómo realizar la configuración de la API fluida con VB.NET.
@@ -22,7 +22,7 @@ Esta página se supone que tiene un conocimiento básico de Code First. Consulte
 
 Debe tener al menos Visual Studio 2010 o Visual Studio 2012 instalado para completar este tutorial.
 
-Si utiliza Visual Studio 2010, también necesitará tener [NuGet](http://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c) instalado
+Si utiliza Visual Studio 2010, también necesitará tener [NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c) instalado
 
 ## <a name="create-the-application"></a>Crear la aplicación
 
@@ -139,7 +139,7 @@ Vamos a empezar a usar tipos de Entity Framework, por lo que necesitamos agregar
 
 -   ** Proyecto –&gt; **administrar paquetes NuGet...**
 > [!NOTE]
-> Si no tienes el **administrar paquetes NuGet...** opción que debe instalar la [versión más reciente de NuGet](http://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)
+> Si no tienes el **administrar paquetes NuGet...** opción que debe instalar la [versión más reciente de NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)
 -   Seleccione el **Online** ficha
 -   Seleccione el **EntityFramework** paquete
 -   Haga clic en **instalar**

@@ -3,12 +3,12 @@ title: 'Code First en una base de datos: EF6'
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 2df6cb0a-7d8b-4e28-9d05-e2b9a90125af
-ms.openlocfilehash: 6572574ad36094ac0960c429cfa8606b6aebb492
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: a19db575b685cde98509fff4a0efaf26106b26bc
+ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490758"
+ms.lasthandoff: 09/18/2018
+ms.locfileid: "46284127"
 ---
 # <a name="code-first-to-a-new-database"></a>Code First en una base de datos
 En este tutorial de vídeo y paso a paso proporcionan una introducción al desarrollo de Code First destinadas a una base de datos. Este escenario incluye destinadas a una base de datos que no existe y Code First creará o una base de datos vacía que Code First agregará nuevas tablas a. Código primero le permite definir su modelo mediante C\# o clases de VB.Net. Configuración adicional si lo desea puede realizarse mediante los atributos en las clases y propiedades o mediante una API fluida.
@@ -18,13 +18,13 @@ Este vídeo ofrece una introducción al desarrollo de Code First destinadas a un
 
 **Presentado por**: [Rowan Miller](http://romiller.com/)
 
-**Vídeo**: [WMV](http://download.microsoft.com/download/B/A/5/BA57BADE-D558-4693-8F82-29E64E4084AB/HDI-ITPro-MSDN-winvideo-CodeFirstNewDatabase.wmv) | [MP4](http://download.microsoft.com/download/B/A/5/BA57BADE-D558-4693-8F82-29E64E4084AB/HDI-ITPro-MSDN-mp4Video-CodeFirstNewDatabase.m4v) | [WMV (ZIP)](http://download.microsoft.com/download/B/A/5/BA57BADE-D558-4693-8F82-29E64E4084AB/HDI-ITPro-MSDN-winvideo-CodeFirstNewDatabase.zip)
+**Vídeo**: [WMV](https://download.microsoft.com/download/B/A/5/BA57BADE-D558-4693-8F82-29E64E4084AB/HDI-ITPro-MSDN-winvideo-CodeFirstNewDatabase.wmv) | [MP4](https://download.microsoft.com/download/B/A/5/BA57BADE-D558-4693-8F82-29E64E4084AB/HDI-ITPro-MSDN-mp4Video-CodeFirstNewDatabase.m4v) | [WMV (ZIP)](https://download.microsoft.com/download/B/A/5/BA57BADE-D558-4693-8F82-29E64E4084AB/HDI-ITPro-MSDN-winvideo-CodeFirstNewDatabase.zip)
 
 ## <a name="pre-requisites"></a>Requisitos previos
 
 Debe tener al menos Visual Studio 2010 o Visual Studio 2012 instalado para completar este tutorial.
 
-Si utiliza Visual Studio 2010, también necesitará tener [NuGet](http://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c) instalado.
+Si utiliza Visual Studio 2010, también necesitará tener [NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c) instalado.
 
 ## <a name="1-create-the-application"></a>1. Crear la aplicación
 
@@ -71,7 +71,7 @@ Ahora es momento de definir un contexto derivado que representa una sesión con 
 Ahora comienza a usar tipos de Entity Framework, por lo que necesitamos agregar el paquete EntityFramework NuGet.
 
 -   **Proyecto –&gt; administrar paquetes NuGet...**
-    Nota: Si no tienes el **administrar paquetes NuGet...** opción que debe instalar la [versión más reciente de NuGet](http://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)
+    Nota: Si no tienes el **administrar paquetes NuGet...** opción que debe instalar la [versión más reciente de NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)
 -   Seleccione el **Online** ficha
 -   Seleccione el **EntityFramework** paquete
 -   Haga clic en **instalar**

@@ -3,12 +3,12 @@ title: Consultas SQL sin formato - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 9e1ee76e-2499-408c-81e8-9b6c5d1945a0
-ms.openlocfilehash: 6b00648939ccedffeed09b4e1d6e8d70fa262a36
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 168aee67186535bf2a50705e86bfc5a88147e369
+ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490589"
+ms.lasthandoff: 09/18/2018
+ms.locfileid: "46283789"
 ---
 # <a name="raw-sql-queries"></a>Consultas SQL sin formato
 Entity Framework le permite realizar consultas con LINQ con las clases de entidad. Sin embargo, puede haber ocasiones en los que desea ejecutar consultas con SQL sin procesar directamente en la base de datos. Esto incluye una llamada a procedimientos almacenados, que pueden ser útiles para los modelos de Code First que actualmente no admiten la asignación a los procedimientos almacenados. Las técnicas que se muestran en este tema se aplican igualmente a los modelos creados con Code First y EF Designer.  
@@ -82,4 +82,4 @@ Tenga en cuenta que los cambios realizados en los datos en la base de datos medi
 
 ### <a name="output-parameters"></a>Parámetros de salida  
 
-Si se usan parámetros de salida, sus valores no estará disponibles hasta que se han leído completamente los resultados. Esto es debido al comportamiento subyacente de DbDataReader, vea [recuperar datos mediante DataReader](http://go.microsoft.com/fwlink/?LinkID=398589) para obtener más detalles.  
+Si se usan parámetros de salida, sus valores no estará disponibles hasta que se han leído completamente los resultados. Esto es debido al comportamiento subyacente de DbDataReader, vea [recuperar datos mediante DataReader](https://go.microsoft.com/fwlink/?LinkID=398589) para obtener más detalles.  

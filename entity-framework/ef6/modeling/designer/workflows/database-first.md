@@ -3,12 +3,12 @@ title: La base de datos en primer lugar - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: cc6ffdb3-388d-4e79-a201-01ec2577c949
-ms.openlocfilehash: b499dea02cbeaa64f6ef87bf89cc739110c8b560
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: c81025fe7c3ad6398f003f7be2a3f9f072eec327
+ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490927"
+ms.lasthandoff: 09/18/2018
+ms.locfileid: "46284088"
 ---
 # <a name="database-first"></a>En primer lugar la base de datos
 En este tutorial de vídeo y paso a paso proporcionan una introducción al desarrollo de primera base de datos mediante Entity Framework. Base de datos en primer lugar le permite aplicar ingeniería inversa a un modelo a partir de una base de datos existente. El modelo se almacena en un archivo EDMX (extensión edmx) y se puede ver y editar en el Diseñador de Entity Framework. Las clases que interactúan en la aplicación se generan automáticamente desde el archivo EDMX.
@@ -18,13 +18,13 @@ Este vídeo ofrece una introducción al desarrollo de primera base de datos medi
 
 **Presentado por**: [Rowan Miller](http://romiller.com/)
 
-**Vídeo**: [WMV](http://download.microsoft.com/download/8/F/0/8F0B5F63-4939-4DC8-A726-FF139B37F8D8/HDI-ITPro-MSDN-winvideo-databasefirst.wmv) | [MP4](http://download.microsoft.com/download/8/F/0/8F0B5F63-4939-4DC8-A726-FF139B37F8D8/HDI-ITPro-MSDN-mp4video-databasefirst.m4v) | [WMV (ZIP)](http://download.microsoft.com/download/8/F/0/8F0B5F63-4939-4DC8-A726-FF139B37F8D8/HDI-ITPro-MSDN-winvideo-databasefirst.zip)
+**Vídeo**: [WMV](https://download.microsoft.com/download/8/F/0/8F0B5F63-4939-4DC8-A726-FF139B37F8D8/HDI-ITPro-MSDN-winvideo-databasefirst.wmv) | [MP4](https://download.microsoft.com/download/8/F/0/8F0B5F63-4939-4DC8-A726-FF139B37F8D8/HDI-ITPro-MSDN-mp4video-databasefirst.m4v) | [WMV (ZIP)](https://download.microsoft.com/download/8/F/0/8F0B5F63-4939-4DC8-A726-FF139B37F8D8/HDI-ITPro-MSDN-winvideo-databasefirst.zip)
 
 ## <a name="pre-requisites"></a>Requisitos previos
 
 Debe tener al menos Visual Studio 2010 o Visual Studio 2012 instalado para completar este tutorial.
 
-Si utiliza Visual Studio 2010, también necesitará tener [NuGet](http://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c) instalado.
+Si utiliza Visual Studio 2010, también necesitará tener [NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c) instalado.
 
  
 
@@ -124,7 +124,7 @@ Si está trabajando en Visual Studio 2010, hay algunos pasos adicionales que deb
 En primer lugar, necesitamos obtener la versión más reciente de Entity Framework en NuGet.
 
 -   **Proyecto –&gt; administrar paquetes NuGet... ** 
-     *Si no tiene el **administrar paquetes NuGet... ** opción, debe instalar la [versión más reciente de NuGet](http://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)*
+     *Si no tiene el **administrar paquetes NuGet... ** opción, debe instalar la [versión más reciente de NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)*
 -   Seleccione el **Online** ficha
 -   Seleccione el **EntityFramework** paquete
 -   Haga clic en **instalar**

@@ -3,12 +3,12 @@ title: 'Consulta del diseñador procedimientos almacenados: EF6'
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 9554ed25-c5c1-43be-acad-5da37739697f
-ms.openlocfilehash: 6284b10261e6f3b9bf69d1c15e121988e4976d48
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 04478ea1c8cd43a7ba4ee788e464992af3de7f64
+ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489952"
+ms.lasthandoff: 09/18/2018
+ms.locfileid: "46283906"
 ---
 # <a name="designer-query-stored-procedures"></a>Consulta del Diseñador de procedimientos almacenados
 En este tutorial paso a paso muestra cómo usar el Diseñador de Entity Framework (EF Designer) para importar los procedimientos almacenados en un modelo y, a continuación, llamar a los procedimientos almacenados importados para recuperar los resultados. 
@@ -100,4 +100,4 @@ The department name is Engineering
 <a name="output-parameters"></a>Parámetros de salida
 -----------------
 
-Si se usan parámetros de salida, sus valores no estará disponibles hasta que se han leído completamente los resultados. Esto es debido al comportamiento subyacente de DbDataReader, vea [recuperar datos mediante DataReader](http://go.microsoft.com/fwlink/?LinkID=398589) para obtener más detalles.
+Si se usan parámetros de salida, sus valores no estará disponibles hasta que se han leído completamente los resultados. Esto es debido al comportamiento subyacente de DbDataReader, vea [recuperar datos mediante DataReader](https://go.microsoft.com/fwlink/?LinkID=398589) para obtener más detalles.
