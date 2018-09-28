@@ -3,12 +3,12 @@ title: 'Código de la primera anotaciones de datos: EF6'
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 80abefbd-23c9-4fce-9cd3-520e5df9856e
-ms.openlocfilehash: 38ae52543ed99e5a1c1da7d19a2e15d168e3a1bd
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 54e27f1b866da14d68db66ca5eca5a6dde819e26
+ms.sourcegitcommit: 15022dd06d919c29b1189c82611ea32f9fdc6617
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490120"
+ms.lasthandoff: 09/27/2018
+ms.locfileid: "47415814"
 ---
 # <a name="code-first-data-annotations"></a>Anotaciones de datos de Code First
 > [!NOTE]
@@ -319,13 +319,13 @@ Esta es la tabla después de que se ha vuelto a generar. El nombre de la tabla h
 Características de una base de datos importantes es la capacidad para que se han calculado las propiedades. Si está asignando las clases de Code First en las tablas que contienen columnas calculan, no desea que Entity Framework al intentar actualizar las columnas. Pero desea EF al devolver esos valores de la base de datos después de insertar o actualizar datos. Puede usar la anotación DatabaseGenerated para marcar aquellas propiedades en la clase junto con la enumeración calculado. Otras enumeraciones son ninguno y la identidad.
 
 ``` csharp
-    [DatabaseGenerated(DatabaseGenerationOption.Computed)]
+    [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
     public DateTime DateCreated { get; set; }
 ```
 
 Puede usar la base de datos generada en las columnas byte o marca de tiempo cuando el código está generando en primer lugar la base de datos, en caso contrario, solo debe usar esto al señalar a bases de datos existentes de porque el código en primer lugar no podrá determinar la fórmula para la columna calculada.
 
-Mencionamos anteriormente de forma predeterminada, una propiedad de clave que es un entero se convertirá en una clave de identidad en la base de datos. Eso sería lo mismo que establecer DatabaseGenerated a DatabaseGenerationOption.Identity. Si no desea que sea una clave de identidad, puede establecer el valor en DatabaseGenerationOption.None.
+Mencionamos anteriormente de forma predeterminada, una propiedad de clave que es un entero se convertirá en una clave de identidad en la base de datos. Eso sería lo mismo que establecer DatabaseGenerated a DatabaseGeneratedOption.Identity. Si no desea que sea una clave de identidad, puede establecer el valor en DatabaseGeneratedOption.None.
 
  
 

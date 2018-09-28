@@ -3,12 +3,12 @@ title: Archivo de configuración - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 000044c6-1d32-4cf7-ae1f-ea21d86ebf8f
-ms.openlocfilehash: 949ad4f030205753c5fbf9b95f4d183d8c0d1fe7
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: faba4e406b9f26f5bed6149f75c59da362d84692
+ms.sourcegitcommit: 15022dd06d919c29b1189c82611ea32f9fdc6617
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490881"
+ms.lasthandoff: 09/27/2018
+ms.locfileid: "47415788"
 ---
 # <a name="configuration-file-settings"></a>Archivo de configuración
 Entity Framework permite a una serie de valores que se especifique el archivo de configuración. En general EF sigue un principio 'convención sobre configuración': todas las opciones descritas en esta publicación tienen un comportamiento predeterminado, sólo deberá preocuparse acerca de cómo cambiar la configuración cuando el valor predeterminado ya no satisface sus requisitos.  
@@ -153,7 +153,7 @@ La sección de configuración permite especificar un generador de conexión pred
 
 Cuando instala el paquete NuGet de EF se registró un generador de conexión predeterminada que apunta a SQL Express o LocalDB, dependiendo de cuál ha instalado.  
 
-Para establecer un generador de conexión, especifique el nombre de tipo calificado de ensamblado en el **deafultConnectionFactory** elemento.  
+Para establecer un generador de conexión, especifique el nombre de tipo calificado de ensamblado en el **defaultConnectionFactory** elemento.  
 
 > [!NOTE]
 > Nombre completo de ensamblado es el nombre completo del espacio de nombres, seguido por una coma, a continuación, el ensamblado que se encuentra en el tipo. Opcionalmente puede especificar también la versión del ensamblado, la referencia cultural y el token de clave pública.  
