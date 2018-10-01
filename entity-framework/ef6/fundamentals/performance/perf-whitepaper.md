@@ -3,12 +3,12 @@ title: Consideraciones de rendimiento de EF4, EF5 y EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: d6d5a465-6434-45fa-855d-5eb48c61a2ea
-ms.openlocfilehash: a58461a6d18d9d53c002b5d45cecbff7b0cdf81e
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: fb184fe8720b552a2050607bb17648f0413c31d1
+ms.sourcegitcommit: c568d33214fc25c76e02c8529a29da7a356b37b4
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490264"
+ms.lasthandoff: 09/30/2018
+ms.locfileid: "47459596"
 ---
 # <a name="performance-considerations-for-ef-4-5-and-6"></a>Consideraciones de rendimiento para EF 4, 5 y 6
 Por David Obando, Eric Dettinger y otros
@@ -88,19 +88,17 @@ Para los modelos pequeños y sencillos, el costo puede ser lo suficientemente pe
 
 ### <a name="23-using-pre-generated-views-to-decrease-model-load-time"></a>2.3 mediante Pre-Generated vistas para reducir el modelo de tiempo de carga
 
-#### <a name="231-pre-generated-views-using-the-entity-framework-power-tools"></a>2.3.1 las vistas generadas previamente mediante Entity Framework Power Tools
+Para obtener información detallada sobre cómo usar las vistas generadas previamente en Entity Framework 6 visite [Pre-Generated vistas de asignación](~/ef6/fundamentals/performance/pre-generated-views.md)
 
-También puede usar Entity Framework Power Tools para generar vistas de modelos EDMX y Code First haciendo clic en el archivo de clase de modelo y seleccione "Generar vistas" mediante el menú de Entity Framework. Entity Framework Power Tools funcionan únicamente en contextos derivada de DbContext y puede encontrarse en \<http://visualstudiogallery.msdn.microsoft.com/72a60b14-1581-4b9b-89f2-846072eff19d>.
+#### <a name="231-pre-generated-views-using-the-entity-framework-power-tools-community-edition"></a>2.3.1 las vistas generadas previamente mediante la edición Community de Entity Framework Power Tools
 
-Para obtener más información sobre cómo usar las vistas generadas previamente en Entity Framework 6, visite [Pre-Generated asignación vistas](~/ef6/fundamentals/performance/pre-generated-views.md).
+Puede usar el [Entity Framework 6 Power Tools Community Edition](https://marketplace.visualstudio.com/items?itemName=ErikEJ.EntityFramework6PowerToolsCommunityEdition) para generar vistas de modelos EDMX y Code First haciendo clic en el archivo de clase de modelo y seleccione "Generar vistas" mediante el menú de Entity Framework. La edición Community de Entity Framework Power Tools funcionan únicamente en contextos derivada de DbContext.
 
 #### <a name="232-how-to-use-pre-generated-views-with-a-model-created-by-edmgen"></a>2.3.2 cómo usar las vistas generadas previamente con un modelo creado forma EDMGen
 
 EDMGen es una utilidad que se distribuye con .NET y funciona con Entity Framework 4 y 5, pero no con Entity Framework 6. EDMGen le permite generar un archivo de modelo, la capa de objeto y las vistas de la línea de comandos. Una de las salidas será un archivo de vistas en el lenguaje elegido, VB o C\#. Se trata de un archivo de código que contiene fragmentos de código de Entity SQL para cada conjunto de entidades. Para habilitar las vistas generadas previamente, basta con incluir el archivo en el proyecto.
 
 Si realiza modificaciones a los archivos de esquema para el modelo manualmente, deberá volver a generar el archivo de vistas. Puede hacerlo mediante la ejecución EDMGen con el **/mode:ViewGeneration** marca.
-
-Para obtener más información, consulte [Cómo: Pre-Generate Views para mejorar el rendimiento de consulta](https://msdn.microsoft.com/library/bb896240.aspx).
 
 #### <a name="233-how-to-use-pre-generated-views-with-an-edmx-file"></a>2.3.3 cómo usar vistas Pre-Generated con un archivo EDMX
 
@@ -113,13 +111,9 @@ El blog del equipo ADO.NET tiene una entrada de blog que describe cómo utilizar
 
 Si usa Entity Framework 6 puede obtener la vista por plantillas T4 de generación de la Galería de Visual Studio en \<http://visualstudiogallery.msdn.microsoft.com/18a7db90-6705-4d19-9dd1-0a6c23d0751f>.
 
-#### <a name="234-how-to-use-pre-generated-views-with-a-code-first-model"></a>2.3.4 cómo usar vistas Pre-Generated con un modelo de Code First
-
-También es posible usar las vistas generadas previamente con un proyecto de Code First. Entity Framework Power Tools tiene la capacidad para generar un archivo de vistas para el proyecto de Code First. Puede encontrar en la Galería de Visual Studio en Entity Framework Power Tools \<http://visualstudiogallery.msdn.microsoft.com/72a60b14-1581-4b9b-89f2-846072eff19d/>.
-
 ### <a name="24-reducing-the-cost-of-view-generation"></a>2.4, lo que reduce el costo de la generación de vistas
 
-Utilizando las vistas generadas previamente mueve el costo de la generación de vistas de carga de modelos (tiempo de ejecución) en tiempo de compilación. Aunque esto mejora el rendimiento de inicio en tiempo de ejecución, sigue experimentando la dificultad de generación de la vista mientras está desarrollando. Existen varios trucos adicionales que pueden ayudar a reducir el costo de generación de la vista, tanto en tiempo de compilación y tiempo de ejecución.
+Uso de las vistas generadas previamente mueve el costo de la generación de la vista de modelo de carga (tiempo de ejecución) al tiempo de diseño. Aunque esto mejora el rendimiento de inicio en tiempo de ejecución, sigue experimentando la dificultad de generación de la vista mientras está desarrollando. Existen varios trucos adicionales que pueden ayudar a reducir el costo de generación de la vista, tanto en tiempo de compilación y tiempo de ejecución.
 
 #### <a name="241-using-foreign-key-associations-to-reduce-view-generation-cost"></a>2.4.1 utilizando las asociaciones de clave externa para reducir los costos de generación de vista
 
@@ -419,7 +413,7 @@ Esta implementación de almacenamiento en caché de segundo nivel es una funcion
 #### <a name="351-additional-references-for-results-caching-with-the-wrapping-provider"></a>3.5.1 referencias adicionales de para con el proveedor de ajuste de almacenamiento en caché de resultados
 
 -   Julie Lerman ha escrito un artículo MSDN "Segundo nivel de almacenamiento en caché en Entity Framework y Windows Azure" que incluye cómo actualizar el proveedor de ajuste de ejemplo para usar el almacenamiento en caché de Windows Server AppFabric: [https://msdn.microsoft.com/magazine/hh394143.aspx](https://msdn.microsoft.com/magazine/hh394143.aspx)
--   Si trabaja con Entity Framework 5, el blog del equipo tiene una entrada de blog que describe cómo empezar a funcionar con el proveedor de almacenamiento en caché para Entity Framework 5: \<http://blogs.msdn.com/b/adonet/archive/2010/09/13/ef-caching-with-jarek-kowalski-s-provider.aspx>. También incluye una plantilla T4 para ayudar a automatizar la adición de la memoria caché a nivel 2 º al proyecto.
+-   Si trabaja con Entity Framework 5, el blog del equipo tiene una entrada de blog que describe cómo empezar a funcionar con el proveedor de almacenamiento en caché para Entity Framework 5: \< http://blogs.msdn.com/b/adonet/archive/2010/09/13/ef-caching-with-jarek-kowalski-s-provider.aspx>. También incluye una plantilla T4 para ayudar a automatizar la adición de la memoria caché a nivel 2 º al proyecto.
 
 ## <a name="4-autocompiled-queries"></a>4 consultas Autocompiled
 
