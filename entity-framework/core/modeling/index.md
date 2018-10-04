@@ -13,7 +13,7 @@ ms.locfileid: "44250353"
 ---
 # <a name="creating-and-configuring-a-model"></a>Creación y configuración de un modelo
 
-Entity Framework usa un conjunto de convenciones para compilar un modelo basado en la forma de las clases de entidad. Puede especificar una configuración adicional para complementar o reemplazar lo que se ha detectado por convención.
+Entity Framework usa un conjunto de convenciones para compilar un modelo basado en la estructura de las clases de entidad. Usted también puede especificar una configuración adicional para complementar o reemplazar lo que haya sido detectado por convención.
 
 Este artículo trata de la configuración que se puede aplicar a un modelo para cualquier almacén de datos y que se puede aplicar al elegir como destino cualquier base de datos relacional. Los proveedores también pueden habilitar la configuración específica de un almacén de datos determinado. Para obtener documentación sobre la configuración específica del proveedor, vea la sección [Proveedores de bases de datos](../providers/index.md).
 
