@@ -3,12 +3,12 @@ title: Glosario de Entity Framework - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 3f05ffdd-49bc-499c-9732-4a368bf5d2d7
-ms.openlocfilehash: 298913891fb372bf57d7504c5a54f1dc83ea1a80
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 9ed7a2d841c625de35de57edb4e57e69b89a3db9
+ms.sourcegitcommit: 5d74ac575f813110db6d870720f50dd7606446bc
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490704"
+ms.lasthandoff: 10/09/2018
+ms.locfileid: "48881272"
 ---
 # <a name="entity-framework-glossary"></a>Glosario de Entity Framework
 ## <a name="code-first"></a>Code First
@@ -60,7 +60,7 @@ Creación de un modelo de Entity Framework mediante el Diseñador de EF, que, a 
 Una propiedad de una entidad que hace referencia a otra entidad. Por ejemplo, el producto contiene una propiedad de navegación de la categoría y categoría contiene una propiedad de navegación de productos.
 
 ## <a name="poco"></a>POCO
-Acrónimo de objetos CLR antiguos sin formato. Una clase de usuario simple que no tiene ninguna dependencia con cualquier marco de trabajo. En el contexto de EF, un una clase de entidad que no se deriva de EntityObject, implementa las interfaces o lleva a cabo los atributos definidos en EF. Estas clases de entidad que se desconectan entre el marco de persistencia también se dice que "que ignoran la persistencia".  
+Acrónimo de objetos CLR antiguos sin formato. Una clase de usuario simple que no tiene ninguna dependencia con cualquier marco de trabajo. En el contexto de EF, una clase de entidad que no se deriva de EntityObject, implementa las interfaces o lleva a cabo los atributos definidos en EF. Estas clases de entidad que se desconectan entre el marco de persistencia también se dice que "que ignoran la persistencia".  
 
 ## <a name="relationship-inverse"></a>Inverso de relación
 El extremo opuesto de una relación, por ejemplo, el producto. Categoría y categoría. Producto.
