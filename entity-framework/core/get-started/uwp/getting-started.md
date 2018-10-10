@@ -102,6 +102,10 @@ Ya puede crear su migración inicial.
 
 * En el **Explorador de soluciones**, establezca el proyecto *Blogging.Migrations.Startup* como proyecto de inicio.
 
+* Ejecute `Install-Package Microsoft.EntityFrameworkCore.Design`
+
+  Este paquete es requerido por el paquete de herramientas Microsoft.EntityFrameworkCore.Tools.
+
 * Ejecute `Add-Migration InitialCreate`.
 
   Este comando aplica el scaffolding a una migración que crea el conjunto inicial de tablas para el modelo.
