@@ -4,16 +4,16 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 88253ff3-174e-485c-b3f8-768243d01ee1
 uid: core/modeling/index
-ms.openlocfilehash: e4eed480178ce43cbc5ece8db8e584032da7b2b9
-ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
+ms.openlocfilehash: 67012d0f52cc77ce872fc428fccc20526f3fefad
+ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/09/2018
-ms.locfileid: "44250353"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45489276"
 ---
 # <a name="creating-and-configuring-a-model"></a>Creación y configuración de un modelo
 
-Entity Framework usa un conjunto de convenciones para compilar un modelo basado en la estructura de las clases de entidad. Usted también puede especificar una configuración adicional para complementar o reemplazar lo que haya sido detectado por convención.
+Entity Framework usa un conjunto de convenciones para compilar un modelo basado en la forma de las clases de entidad. Puede especificar una configuración adicional para complementar o reemplazar lo que se ha detectado por convención.
 
 Este artículo trata de la configuración que se puede aplicar a un modelo para cualquier almacén de datos y que se puede aplicar al elegir como destino cualquier base de datos relacional. Los proveedores también pueden habilitar la configuración específica de un almacén de datos determinado. Para obtener documentación sobre la configuración específica del proveedor, vea la sección [Proveedores de bases de datos](../providers/index.md).
 
@@ -42,7 +42,7 @@ Puede reemplazar el método `OnModelCreating` del contexto derivado y usar `Mode
 
 ## <a name="use-data-annotations-to-configure-a-model"></a>Uso de anotaciones de datos para configurar un modelo
 
-También puede aplicar atributos (conocidos como anotaciones de datos) a las clases y las propiedades. Las anotaciones de datos reemplazan a las convenciones, pero son reemplazadas por la configuración de API fluida.
+También puede aplicar atributos (conocidos como anotaciones de datos) a las clases y las propiedades. Las anotaciones de datos reemplazarán a las convenciones, pero la configuración de la API fluida también las reemplazará.
 
 <!-- [!code-csharp[Main](samples/core/Modeling/DataAnnotations/Samples/Required.cs?range=11-16&highlight=4)] -->
 ``` csharp

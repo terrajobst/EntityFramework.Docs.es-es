@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 08/06/2018
 ms.assetid: a29a3d97-b2d8-4d33-9475-40ac67b3b2c6
 uid: core/get-started/full-dotnet/existing-db
-ms.openlocfilehash: edcdc0b76394c4d604cf43fc170424e474532b17
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: b9e079f88dd35016407b19bb627f8bd46edb3d4c
+ms.sourcegitcommit: ad1bdea58ed35d0f19791044efe9f72f94189c18
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42993423"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47447162"
 ---
 # <a name="getting-started-with-ef-core-on-net-framework-with-an-existing-database"></a>Introducción a EF Core en .NET Framework con una base de datos existente
 
@@ -117,7 +117,8 @@ Ahora puede usar el modelo para realizar el acceso a los datos.
 
   ![imagen](_static/output-existing-db.png)
 
-## <a name="additional-resources"></a>Recursos adicionales
+## <a name="next-steps"></a>Pasos siguientes
 
-* [EF Core en .NET Framework con una base de datos nueva](xref:core/get-started/full-dotnet/new-db)
-* [EF Core en .NET Core con una base de datos nueva (SQLite)](xref:core/get-started/netcore/new-db-sqlite), un tutorial de EF para la consola multiplataforma.
+Para obtener más información sobre cómo aplicar scaffolding a un contexto y a clases de entidad, vea los siguientes artículos:
+* [Referencia sobre las herramientas de Entity Framework Core (CLI de .NET)](xref:core/miscellaneous/cli/dotnet#dotnet-ef-dbcontext-scaffold)
+* [Referencia sobre las herramientas de Entity Framework Core (Consola del Administrador de paquetes)](xref:core/miscellaneous/cli/powershell#scaffold-dbcontext)

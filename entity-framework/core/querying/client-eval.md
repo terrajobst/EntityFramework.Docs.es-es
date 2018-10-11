@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 8b6697cc-7067-4dc2-8007-85d80503d123
 uid: core/querying/client-eval
-ms.openlocfilehash: 78f8d9576748a725634665f915def80b5a13820c
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 47e22be274d02b5221c638d07151d9607aa7e24f
+ms.sourcegitcommit: 0d36e8ff0892b7f034b765b15e041f375f88579a
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42997882"
+ms.lasthandoff: 09/09/2018
+ms.locfileid: "44250808"
 ---
 # <a name="client-vs-server-evaluation"></a>Evaluación de cliente frente a servidor
 
@@ -49,7 +49,7 @@ public static string StandardizeUrl(string url)
 }
 ```
 
-## <a name="disabling-client-evaluation"></a>Deshabilitación de la evaluación de cliente
+## <a name="client-evaluation-performance-issues"></a>Problemas de rendimiento de evaluación de cliente
 
 Si bien la evaluación de cliente puede resultar muy útil, en algunas instancias puede generar un rendimiento deficiente. Considere la consulta siguiente, en la que el método auxiliar ahora se usa en un filtro. Como no se puede realizar en la base de datos, todos los datos se incorporan a la memoria y, luego, el filtro se aplica en el cliente. En función de la cantidad de datos y de cuántos de esos datos se filtran, esta acción podría generar un rendimiento deficiente.
 
@@ -60,7 +60,13 @@ var blogs = context.Blogs
     .ToList();
 ```
 
-De manera predeterminada, EF Core registrará una advertencia cuando se realice la evaluación de cliente. Consulte [Logging](../miscellaneous/logging.md) (Registro) para más información sobre cómo ver la salida de registro. Puede cambiar el comportamiento cuando se produzca la evaluación de cliente, ya sea para que se genere una excepción o para que no haga nada. Esto se hace al configurar las opciones del contexto, por lo general en `DbContext.OnConfiguring` o en `Startup.cs` si usa ASP.NET Core.
+## <a name="client-evaluation-logging"></a>Registros de evaluación de cliente
+
+De manera predeterminada, EF Core registrará una advertencia cuando se realice la evaluación de cliente. Consulte [Logging](../miscellaneous/logging.md) (Registro) para más información sobre cómo ver la salida de registro. 
+
+## <a name="optional-behavior-throw-an-exception-for-client-evaluation"></a>Comportamiento opcional: iniciar una excepción para la evaluación de cliente
+
+Puede cambiar el comportamiento cuando se produzca la evaluación de cliente, ya sea para que se genere una excepción o para que no haga nada. Esto se hace al configurar las opciones del contexto, por lo general en `DbContext.OnConfiguring` o en `Startup.cs` si usa ASP.NET Core.
 
 <!-- [!code-csharp[Main](samples/core/Querying/Querying/ClientEval/ThrowOnClientEval/BloggingContext.cs?highlight=5)] -->
 ``` csharp

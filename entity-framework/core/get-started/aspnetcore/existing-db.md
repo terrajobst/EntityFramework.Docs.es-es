@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 08/02/2018
 ms.assetid: 2bc68bea-ff77-4860-bf0b-cf00db6712a0
 uid: core/get-started/aspnetcore/existing-db
-ms.openlocfilehash: 79a73e38fdc9c4268c21de66571d6272f33e9457
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 84e2e4bc1bdc774fa059fa893e0f8ac128931feb
+ms.sourcegitcommit: ad1bdea58ed35d0f19791044efe9f72f94189c18
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42997041"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47447188"
 ---
 # <a name="getting-started-with-ef-core-on-aspnet-core-with-an-existing-database"></a>Introducción a EF Core en ASP.NET Core con una base de datos existente
 
@@ -171,6 +171,12 @@ Ahora puede ejecutar la aplicación para verla en acción.
 * Haga clic en **Crear nuevo**
 * Escriba una **dirección URL** para el blog nuevo y haga clic en **Crear**
 
-![imagen](_static/create.png)
+  ![Página Crear](_static/create.png)
 
-![imagen](_static/index-existing-db.png)
+  ![Página de índice](_static/index-existing-db.png)
+
+## <a name="next-steps"></a>Pasos siguientes
+
+Para obtener más información sobre cómo aplicar scaffolding a un contexto y a clases de entidad, vea los siguientes artículos:
+* [Referencia sobre las herramientas de Entity Framework Core (CLI de .NET)](xref:core/miscellaneous/cli/dotnet#dotnet-ef-dbcontext-scaffold)
+* [Referencia sobre las herramientas de Entity Framework Core (Consola del Administrador de paquetes)](xref:core/miscellaneous/cli/powershell#scaffold-dbcontext)

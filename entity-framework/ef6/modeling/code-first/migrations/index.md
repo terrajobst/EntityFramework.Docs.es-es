@@ -3,12 +3,12 @@ title: 'Migraciones de Code First: EF6'
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 36591d8f-36e1-4835-8a51-90f34f633d1e
-ms.openlocfilehash: 389da6c54e063a5dc598f98f8ac92cfc0e686019
-ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
+ms.openlocfilehash: f408ef861a2992783142fa1483d1433ca710399a
+ms.sourcegitcommit: 15022dd06d919c29b1189c82611ea32f9fdc6617
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/18/2018
-ms.locfileid: "46283854"
+ms.lasthandoff: 09/27/2018
+ms.locfileid: "47415801"
 ---
 # <a name="code-first-migrations"></a>Migraciones de Code First
 Migraciones de Code First es la manera recomendada de desarrollar el esquema de base de datos de la aplicación si usa el flujo de trabajo de Code First. Migraciones proporciona un conjunto de herramientas que permiten:
