@@ -6,12 +6,12 @@ ms.date: 08/08/2018
 ms.assetid: 7CEF496E-A5B0-4F5F-B68E-529609B23EF9
 ms.technology: entity-framework-core
 uid: core/providers/provider-log
-ms.openlocfilehash: f5a16e13de7f3b892cfb9b7ecb76e4973c175812
-ms.sourcegitcommit: ae399f9f3d1bae2c446b552247bd3af3ca5a2cf9
+ms.openlocfilehash: a87eca72aa58487415eea11e4f83de1a19e73506
+ms.sourcegitcommit: 5e11125c9b838ce356d673ef5504aec477321724
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/04/2018
-ms.locfileid: "48575631"
+ms.lasthandoff: 10/25/2018
+ms.locfileid: "50022342"
 ---
 # <a name="provider-impacting-changes"></a>Cambios en el impacto de proveedor
 
@@ -60,3 +60,4 @@ Este registro estamos empezando con los cambios de 2.1 a 2.2. Antes de 2.1 se ut
   * Configure siempre el tipo de columna para columnas decimales en código con scaffold en lugar de configurar por convención.
   * Los proveedores no deberían requerir cambios en su extremo.
 * https://github.com/aspnet/EntityFrameworkCore/pull/13469 -Agrega CaseExpression para generar las expresiones CASE de SQL
+* https://github.com/aspnet/EntityFrameworkCore/pull/13648 : Agrega la capacidad de especificar asignaciones de tipos en SqlFunctionExpression para mejorar el almacén de inferencia de tipos de argumentos y los resultados.

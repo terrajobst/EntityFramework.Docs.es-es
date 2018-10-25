@@ -3,12 +3,12 @@ title: 'Compatibilidad con el proveedor de tipos espaciales: EF6'
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 1097cb00-15f5-453d-90ed-bff9403d23e3
-ms.openlocfilehash: ffd22222f59a541d8135d3738d37a7e8f5dc5d7c
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 9c00e82c663daec219fe649a8d889afcc81564f7
+ms.sourcegitcommit: 5e11125c9b838ce356d673ef5504aec477321724
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489757"
+ms.lasthandoff: 10/25/2018
+ms.locfileid: "50022280"
 ---
 # <a name="provider-support-for-spatial-types"></a>Proveedor de compatibilidad para tipos espaciales
 Entity Framework admite trabajar con datos espaciales a través de las clases de DbGeography o DbGeometry. Estas clases se basan en la funcionalidad específica de la base de datos que ofrece el proveedor de Entity Framework. No todos los proveedores admiten datos espaciales y aquellos que lo hacen pueden tener requisitos previos adicionales, como la instalación de los ensamblados de tipo espacial. Para obtener más información sobre la compatibilidad con proveedor de tipos espaciales se proporciona a continuación.  
@@ -56,4 +56,4 @@ Compatibilidad espacial de SQL Server depende de los tipos específicos de SQL S
 
 Cuando se instala Visual Studio a menudo también instalará una versión de SQL Server, y esto incluye la instalación de Microsoft.SqlServer.Types.dll.  
 
-Si SQL Server no está instalado en el equipo donde desea usar tipos espaciales o tipos espaciales se excluyeron de la instalación de SQL Server, deberá instalarlos manualmente. Los tipos se pueden instalar mediante `SQLSysClrTypes.msi`, que forma parte del Feature Pack de Microsoft SQL Server. Tipos espaciales son SQL Server específica de la versión, por lo que recomendamos [busque "Feature Pack de SQL Server"](https://www.microsoft.com/en-us/search/result.aspx?q=sql+server+feature+pack) de Microsoft Download Center, a continuación, seleccione y descargue la opción que corresponda a la versión de SQL Server que se va a usar.
+Si SQL Server no está instalado en el equipo donde desea usar tipos espaciales o tipos espaciales se excluyeron de la instalación de SQL Server, deberá instalarlos manualmente. Los tipos se pueden instalar mediante `SQLSysClrTypes.msi`, que forma parte del Feature Pack de Microsoft SQL Server. Tipos espaciales son SQL Server específica de la versión, por lo que recomendamos [busque "Feature Pack de SQL Server"](https://www.microsoft.com/search/result.aspx?q=sql+server+feature+pack) de Microsoft Download Center, a continuación, seleccione y descargue la opción que corresponda a la versión de SQL Server que se va a usar.

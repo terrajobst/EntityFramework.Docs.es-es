@@ -3,12 +3,12 @@ title: Versiones de Visual Studio - EF6
 author: divega
 ms.date: 07/05/2018
 ms.assetid: 028FF890-4EDB-4F03-AE53-72F9C33EC92F
-ms.openlocfilehash: d104236ac5c8877da421ba10de9827f17937a9ec
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 16bcdc6d0e7c5632d4f4c06ba285a7a666f24204
+ms.sourcegitcommit: 5e11125c9b838ce356d673ef5504aec477321724
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489926"
+ms.lasthandoff: 10/25/2018
+ms.locfileid: "50022256"
 ---
 # <a name="visual-studio-releases"></a>Versiones de Visual Studio
 
@@ -41,7 +41,7 @@ Recuerde que debe usar una cadena textual con el prefijo `@` o doble barra diago
 
 ## <a name="visual-studio-2013"></a>Visual Studio 2013
 - Esta versión de Visual Studio incluye y una versión anterior de herramientas de Entity Framework y en tiempo de ejecución.
-Se recomienda que actualice a Entity Framework Tools 6.1.3, mediante [el instalador](https://www.microsoft.com/en-us/download/details.aspx?id=40762) disponibles en Microsoft Download Center.
+Se recomienda que actualice a Entity Framework Tools 6.1.3, mediante [el instalador](https://www.microsoft.com/download/details.aspx?id=40762) disponibles en Microsoft Download Center.
 Consulte [libera últimos](~/ef6/what-is-new/past-releases.md#ef-613) para obtener más información acerca de estas versiones.
 - Adición de Entity Framework a los nuevos proyectos con las herramientas EF actualizadas agregará automáticamente el EF 6.1.3 paquete NuGet.
 Manualmente, puede instalar o actualizar a cualquier paquete NuGet de EF de disponibles en línea.
@@ -52,7 +52,7 @@ Recuerde que debe usar una cadena textual con el prefijo `@` o doble barra diago
 ## <a name="visual-studio-2012"></a>Visual Studio 2012
 
 - Esta versión de Visual Studio incluye y una versión anterior de herramientas de Entity Framework y en tiempo de ejecución.
-Se recomienda que actualice a Entity Framework Tools 6.1.3, mediante [el instalador](https://www.microsoft.com/en-us/download/details.aspx?id=40762) disponibles en Microsoft Download Center.
+Se recomienda que actualice a Entity Framework Tools 6.1.3, mediante [el instalador](https://www.microsoft.com/download/details.aspx?id=40762) disponibles en Microsoft Download Center.
 Consulte [libera últimos](~/ef6/what-is-new/past-releases.md#ef-613) para obtener más información acerca de estas versiones.
 - Adición de Entity Framework a los nuevos proyectos con las herramientas EF actualizadas agregará automáticamente el EF 6.1.3 paquete NuGet.
 Manualmente, puede instalar o actualizar a cualquier paquete NuGet de EF de disponibles en línea.
