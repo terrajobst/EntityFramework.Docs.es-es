@@ -3,12 +3,12 @@ title: 'Proveedores de Entity Framework: EF6'
 author: divega
 ms.date: 06/27/2018
 ms.assetid: 7BFB7763-CD6C-4520-93A2-7B265F5FA586
-ms.openlocfilehash: c9afb32caeeef5111b32251c62019460b62f48b3
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 0cfe6c30d6533b0207f78a031d342847a7f68632
+ms.sourcegitcommit: 5e11125c9b838ce356d673ef5504aec477321724
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489445"
+ms.lasthandoff: 10/25/2018
+ms.locfileid: "50022228"
 ---
 # <a name="entity-framework-6-providers"></a>Proveedores de Entity Framework 6
 > [!NOTE]
@@ -68,7 +68,7 @@ El elemento "type" de este registro es el nombre calificado con el ensamblado de
 
 ### <a name="code-based-registration"></a>Registro basado en código
 
-A partir de Entity Framework 6, la configuración de la aplicación de EF puede especificarse en el código. Para obtener todos los detalles, vea _[Entity Framework Code-Based Configuration](https://msdn.microsoft.com/en-us/data/jj680699)_ (Configuración basada en código de Entity Framework). La forma habitual de registrar un proveedor de EF mediante configuración basada en código es crear una nueva clase que se derive de System.Data.Entity.DbConfiguration y colocarla en el mismo ensamblado que la clase DbContext. Luego la clase DbConfiguration debe registrar el proveedor en su constructor. Por ejemplo, para registrar el proveedor de SQL Compact, la clase DbConfiguration tiene este aspecto:
+A partir de Entity Framework 6, la configuración de la aplicación de EF puede especificarse en el código. Para obtener todos los detalles, vea _[Entity Framework Code-Based Configuration](https://msdn.microsoft.com/data/jj680699)_ (Configuración basada en código de Entity Framework). La forma habitual de registrar un proveedor de EF mediante configuración basada en código es crear una nueva clase que se derive de System.Data.Entity.DbConfiguration y colocarla en el mismo ensamblado que la clase DbContext. Luego la clase DbConfiguration debe registrar el proveedor en su constructor. Por ejemplo, para registrar el proveedor de SQL Compact, la clase DbConfiguration tiene este aspecto:
 
 ``` csharp
     public class MyConfiguration : DbConfiguration

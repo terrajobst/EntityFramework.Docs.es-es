@@ -3,21 +3,21 @@ title: 'Trabajo con entidades desconectadas: EF6'
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 12138003-a373-4817-b1b7-724130202f5f
-ms.openlocfilehash: beb3847ce507a2112ac0d396a2023c7c4e2fca7d
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 11ca2a9a4161e02d32d98bf03dd4cf28545334b7
+ms.sourcegitcommit: 5e11125c9b838ce356d673ef5504aec477321724
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489939"
+ms.lasthandoff: 10/25/2018
+ms.locfileid: "50022176"
 ---
 # <a name="working-with-disconnected-entities"></a>Trabajo con entidades desconectadas
 En una aplicación basada en Entity Framework, una clase de contexto es responsable de detectar los cambios aplicados a las entidades sometidas a seguimiento. Una llamada al método SaveChanges almacena los cambios que controla el contexto en la base de datos. Cuando se trabaja con aplicaciones de n niveles, los objetos de entidad generalmente se modifican mientras están desconectados del contexto y es necesario decidir cómo realizar el seguimiento de los cambios y notificar esos cambios al contexto. En este tema se habla de las distintas opciones disponibles cuando se usa Entity Framework con entidades desconectadas.   
 
 ## <a name="web-service-frameworks"></a>Marcos de trabajo de servicio web
 
-Las tecnologías de servicios web suelen admitir modelos que pueden usarse para almacenar los cambios en objetos individuales desconectados. Por ejemplo, ASP.NET Web API permite codificar acciones de controlador que pueden incluir llamadas a EF para almacenar los cambios realizados en un objeto en una base de datos. De hecho, las herramientas de Web API de Visual Studio facilitan la aplicación de scaffolding a un controlador de Web API desde el modelo de Entity Framework 6. Para obtener más información, vea [Usar Web API con Entity Framework 6](https://docs.microsoft.com/en-us/aspnet/web-api/overview/data/using-web-api-with-entity-framework/).   
+Las tecnologías de servicios web suelen admitir modelos que pueden usarse para almacenar los cambios en objetos individuales desconectados. Por ejemplo, ASP.NET Web API permite codificar acciones de controlador que pueden incluir llamadas a EF para almacenar los cambios realizados en un objeto en una base de datos. De hecho, las herramientas de Web API de Visual Studio facilitan la aplicación de scaffolding a un controlador de Web API desde el modelo de Entity Framework 6. Para obtener más información, vea [Usar Web API con Entity Framework 6](https://docs.microsoft.com/aspnet/web-api/overview/data/using-web-api-with-entity-framework/).   
 
-Históricamente, ha habido otras tecnologías de servicios web que ofrecían integración con Entity Framework, como [WCF Data Services](https://docs.microsoft.com/dotnet/framework/data/wcf/create-a-data-service-using-an-adonet-ef-data-wcf) y [RIA Services](https://docs.microsoft.com/en-us/previous-versions/dotnet/wcf-ria/ee707344(v=vs.91)).
+Históricamente, ha habido otras tecnologías de servicios web que ofrecían integración con Entity Framework, como [WCF Data Services](https://docs.microsoft.com/dotnet/framework/data/wcf/create-a-data-service-using-an-adonet-ef-data-wcf) y [RIA Services](https://docs.microsoft.com/previous-versions/dotnet/wcf-ria/ee707344(v=vs.91)).
 
 ## <a name="low-level-ef-apis"></a>API de EF de bajo nivel
 

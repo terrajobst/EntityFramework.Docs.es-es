@@ -5,12 +5,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: a6b9cd22-6803-4c6c-a4d4-21147c0a81cb
 uid: efcore-and-ef6/index
-ms.openlocfilehash: 8568f0a3c6c4585c4fe05508fd610614107c8f66
-ms.sourcegitcommit: 8b42045cd21f80f425a92f5e4e9dd4972a31720b
+ms.openlocfilehash: 0f9f0d4708fa283855eddf2cfc231b37356e413e
+ms.sourcegitcommit: 5e11125c9b838ce356d673ef5504aec477321724
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/14/2018
-ms.locfileid: "49315651"
+ms.lasthandoff: 10/25/2018
+ms.locfileid: "50022355"
 ---
 # <a name="compare-ef-core--ef6"></a>Comparar EF Core y EF6
 
@@ -73,7 +73,7 @@ La columna EF Core indica la versión del producto en la que la característica 
 
 ### <a name="querying-data"></a>Consulta de datos
 
-| **Característica                                             | **EF6**  | **EF Core**                           |
+| **Característica**                                           | **EF6**  | **EF Core**                           |
 |:------------------------------------------------------|:---------|:--------------------------------------|
 | Consultas LINQ                                          | Sí      | 1.0 (en curso para consultas complejas) |
 | SQL generado legible                                | Insuficiente     | 1.0                                   |
@@ -147,7 +147,7 @@ La columna EF Core indica la versión del producto en la que la característica 
 ## <a name="guidance-for-new-applications"></a>Guía para las aplicaciones nuevas
 
 Considere el uso de EF Core para una nueva aplicación si se cumplen las dos condiciones siguientes:
-* La aplicación necesita las funcionalidades de .NET Core. Para obtener más información, vea [Selección entre .NET Core y .NET Framework para aplicaciones de servidor](https://docs.microsoft.com/en-us/dotnet/standard/choosing-core-framework-server).
+* La aplicación necesita las funcionalidades de .NET Core. Para obtener más información, vea [Selección entre .NET Core y .NET Framework para aplicaciones de servidor](https://docs.microsoft.com/dotnet/standard/choosing-core-framework-server).
 * EF Core es compatible con todas las características que necesita la aplicación. Si falta alguna característica que quiera, vea el [Mapa de ruta de Entity Framework Core](xref:core/what-is-new/roadmap) para averiguar si existen planes de admitirla en el futuro. 
 
 Considere el uso de EF6 si se cumplen las dos condiciones siguientes:
