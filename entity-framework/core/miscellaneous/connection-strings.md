@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: aeb0f5f8-b212-4f89-ae83-c642a5190ba0
 uid: core/miscellaneous/connection-strings
-ms.openlocfilehash: 942865effba7b491dd950886ea30b69a86f1186c
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 7bb39d260f700e5087673e92a50377dc68151710
+ms.sourcegitcommit: 85ccc9ed42d4aaf7525c6312058c5c9ebdaed3ae
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42997676"
+ms.lasthandoff: 10/27/2018
+ms.locfileid: "50191347"
 ---
 # <a name="connection-strings"></a>Cadenas de conexión
 
@@ -77,7 +77,7 @@ En ASP.NET Core, el sistema de configuración es muy flexible y la cadena de con
 }
 ```
 
-Normalmente se configura en el contexto `Startup.cs` con la cadena de conexión que se leen de la configuración. Tenga en cuenta la `GetConnectionString()` método busca un valor de configuración cuya clave es `ConnectionStrings:<connection string name>`.
+Normalmente se configura en el contexto `Startup.cs` con la cadena de conexión que se leen de la configuración. Tenga en cuenta la `GetConnectionString()` método busca un valor de configuración cuya clave es `ConnectionStrings:<connection string name>`. Debe importar el [Microsoft.Extensions.Configuration](https://docs.microsoft.com/dotnet/api/microsoft.extensions.configuration) espacio de nombres para utilizar este método de extensión.
 
 ``` csharp
 public void ConfigureServices(IServiceCollection services)
