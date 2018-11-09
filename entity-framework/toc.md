@@ -72,7 +72,7 @@
 ##### [Uso de un proyecto independiente](core/managing-schemas/migrations/projects.md)
 ##### [Varios proveedores](core/managing-schemas/migrations/providers.md)
 ##### [Tabla de historial personalizada](core/managing-schemas/migrations/history-table.md)
-#### [🔧 Crear y quitar API](core/managing-schemas/ensure-created.md)
+#### [Crear y quitar API](core/managing-schemas/ensure-created.md)
 #### [🔧 Ingeniería inversa](core/managing-schemas/scaffolding.md)
 
 ### [Consulta de datos](core/querying/index.md)
