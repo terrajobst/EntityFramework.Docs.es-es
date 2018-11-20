@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 08/06/2018
 ms.assetid: a29a3d97-b2d8-4d33-9475-40ac67b3b2c6
 uid: core/get-started/full-dotnet/existing-db
-ms.openlocfilehash: b9e079f88dd35016407b19bb627f8bd46edb3d4c
-ms.sourcegitcommit: ad1bdea58ed35d0f19791044efe9f72f94189c18
+ms.openlocfilehash: 1b90c491a3b2025da750a3266ff45d9d92bb1d0d
+ms.sourcegitcommit: b3c2b34d5f006ee3b41d6668f16fe7dcad1b4317
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47447162"
+ms.lasthandoff: 11/15/2018
+ms.locfileid: "51688620"
 ---
 # <a name="getting-started-with-ef-core-on-net-framework-with-an-existing-database"></a>Introducción a EF Core en .NET Framework con una base de datos existente
 
@@ -120,5 +120,6 @@ Ahora puede usar el modelo para realizar el acceso a los datos.
 ## <a name="next-steps"></a>Pasos siguientes
 
 Para obtener más información sobre cómo aplicar scaffolding a un contexto y a clases de entidad, vea los siguientes artículos:
+* [Ingeniería inversa](xref:core/managing-schemas/scaffolding)
 * [Referencia sobre las herramientas de Entity Framework Core (CLI de .NET)](xref:core/miscellaneous/cli/dotnet#dotnet-ef-dbcontext-scaffold)
 * [Referencia sobre las herramientas de Entity Framework Core (Consola del Administrador de paquetes)](xref:core/miscellaneous/cli/powershell#scaffold-dbcontext)
