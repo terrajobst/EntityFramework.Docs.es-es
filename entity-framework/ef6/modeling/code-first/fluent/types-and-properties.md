@@ -3,12 +3,12 @@ title: 'EF6 API Fluent: configuración y asignación de tipos y propiedades:'
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 648ed274-c501-4630-88e0-d728ab5c4057
-ms.openlocfilehash: 031376d2fc4778e6f0fa2434ab7ccfd45d436c4a
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 7371cc99142ccf8fc6bea237d7d58d1e67fcecec
+ms.sourcegitcommit: 75f8a179ac9a70ad390fc7ab2a6c5e714e701b8b
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490207"
+ms.lasthandoff: 11/27/2018
+ms.locfileid: "52339808"
 ---
 # <a name="fluent-api---configuring-and-mapping-properties-and-types"></a>API de Fluent: configuración y asignación de tipos y propiedades
 Cuando se trabaja con Entity Framework Code First es el comportamiento predeterminado asignar las clases POCO a tablas mediante un conjunto de convenciones incorporada en EF. A veces, sin embargo, no puede ni no desea seguir estas convenciones y deba asignar entidades a un valor distinto de lo que dictan las convenciones.  
@@ -24,7 +24,7 @@ Normalmente se tiene acceso a la API fluida de code first invalidando el [OnMode
 A partir de con EF6, puede usar el método HasDefaultSchema en DbModelBuilder para especificar el esquema de base de datos que se usará para todas las tablas, procedimientos almacenados, etcetera. Para los objetos que se configure explícitamente un esquema diferente para se invalidará esta configuración predeterminada.  
 
 ``` csharp
-modelBuilder.HasDefaultSchema(“sales”);
+modelBuilder.HasDefaultSchema("sales");
 ```  
 
 ### <a name="custom-conventions-ef6-onwards"></a>Convenciones personalizadas (EF6 y versiones posteriores)  
