@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 3c88427c-20c6-42ec-a736-22d3eccd5071
 uid: core/get-started/index
-ms.openlocfilehash: 744ea587207775f3a5b9f7b14ba5959c55539c13
-ms.sourcegitcommit: 39080d38e1adea90db741257e60dc0e7ed08aa82
+ms.openlocfilehash: b846d63f2c285a43d60eecfb2be3d460a5d31924
+ms.sourcegitcommit: 064b09431f05848830e145a6cd65cad58881557c
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/03/2018
-ms.locfileid: "50980020"
+ms.lasthandoff: 11/28/2018
+ms.locfileid: "52552599"
 ---
 # <a name="getting-started-with-entity-framework-core"></a>Introducción a Entity Framework Core
 
@@ -23,17 +23,17 @@ Estos tutoriales introductorios no requieren ningún conocimiento previo de Enti
 
 Entity Framework Core puede crear un modelo basado en una base de datos existente o crear automáticamente una base de datos en función del modelo. Hay tutoriales que muestran ambos métodos.
 
-* .NET Framework (aplicaciones de consola, WinForms, WPF)
-  * [Nueva base de datos](full-dotnet/new-db.md)
-  * [Base de datos existente](full-dotnet/existing-db.md)
-* .NET Core (Windows, macOS y Linux)
+* Aplicaciones de consola .NET Core
   * [Nueva base de datos](netcore/new-db-sqlite.md)
-* ASP.NET Core
+* Aplicaciones ASP.NET Core
   * [Nueva base de datos](aspnetcore/new-db.md)
   * [Base de datos existente](aspnetcore/existing-db.md)
   * [EF Core y Razor Pages](/aspnet/core/data/ef-rp/intro)
-* Plataforma universal de Windows (UWP)
+* Aplicaciones de Plataforma universal de Windows (UWP)
   * [Nueva base de datos](uwp/getting-started.md)
+* Aplicaciones .NET Framework
+  * [Nueva base de datos](full-dotnet/new-db.md)
+  * [Base de datos existente](full-dotnet/existing-db.md)
 
 > [!NOTE]  
 > Estos tutoriales y los ejemplos que los acompañan se han actualizado para utilizar EF Core 2.1. Pero en la mayoría de los casos debería ser posible crear aplicaciones que usan versiones anteriores, con una modificación mínima de las instrucciones. 
