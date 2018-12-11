@@ -3,12 +3,12 @@ title: Actualizar a Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 29958ae5-85d3-4585-9ba6-550b8ec9393a
-ms.openlocfilehash: 2e2dacfe67238bdb7fd1f31f784319049f0f2cb0
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 711f1940080de27bd23cb8f641a5c7f2711dd65b
+ms.sourcegitcommit: a6082a2caee62029f101eb1000656966195cd6ee
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490953"
+ms.lasthandoff: 12/10/2018
+ms.locfileid: "53182012"
 ---
 # <a name="upgrading-to-entity-framework-6"></a>Actualizar a Entity Framework 6
 
@@ -66,20 +66,20 @@ Tipos como ObjectContext que anteriormente se encontraban en System.Data.Entity.
 
 La regla general para los cambios del espacio de nombres es que cualquier tipo de System.Data.* se mueve al System.Data.Entity.Core.*. En otras palabras, sólo tiene que insertar **Entity.Core.** Después de System.Data. Por ejemplo:
 
-- System.Data.EntityException = > System.Data. **Entity.Core.** EntityException  
-- System.Data.Objects.ObjectContext = > System.Data. **Entity.Core.** Objects.ObjectContext  
-- System.Data.Objects.DataClasses.RelationshipManager = > System.Data. **Entity.Core.** Objects.DataClasses.RelationshipManager  
+- System.Data.EntityException = > System.Data. **Entity.Core**. EntityException  
+- System.Data.Objects.ObjectContext = > System.Data. **Entity.Core**. Objects.ObjectContext  
+- System.Data.Objects.DataClasses.RelationshipManager = > System.Data. **Entity.Core**. Objects.DataClasses.RelationshipManager  
 
 Estos tipos están en el *Core* espacios de nombres porque no se usan directamente para la mayoría de las aplicaciones basadas en DbContext. Algunos tipos que formaban parte de System.Data.Entity.dll todavía se utilizan con frecuencia y directamente para las aplicaciones basadas en DbContext y lo que no se han movido los *Core* espacios de nombres. Estos son:
 
-- System.Data.EntityState = > System.Data. **Entidad.** EntityState  
+- System.Data.EntityState = > System.Data. **Entidad**. Valor de EntityState  
 - System.Data.Objects.DataClasses.EdmFunctionAttribute = > System.Data. **Entity.DbFunctionAttribute**  
   > [!NOTE]
   > Esta clase ha cambiado de nombre; una clase con el nombre antiguo todavía existe y funciona, pero ahora marcado como obsoleto.  
 - System.Data.Objects.EntityFunctions = > System.Data. **Entity.DbFunctions**  
   > [!NOTE]
   > Esta clase ha cambiado de nombre; una clase con el nombre antiguo todavía existe y funciona, pero ahora marcado como obsoleto.)  
-- Clases espaciales (por ejemplo, DbGeography, DbGeometry) han movido desde System.Data.Spatial = > System.Data. **Entidad.** Espacial
+- Clases espaciales (por ejemplo, DbGeography, DbGeometry) han movido desde System.Data.Spatial = > System.Data. **Entidad**. Espacial
 
 > [!NOTE]
 > Algunos tipos en el espacio de nombres System.Data se encuentran en System.Data.dll, que no es un ensamblado EF. Estos tipos no se han movido y por lo que sus espacios de nombres permanecen sin cambios.
