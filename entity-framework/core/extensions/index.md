@@ -4,12 +4,12 @@ author: ErikEJ
 ms.date: 07/03/2018
 ms.assetid: 14fffb6c-a687-4881-a094-af4a1359a296
 uid: core/extensions/index
-ms.openlocfilehash: 1edc7a20f54b2d26f899c93e98dfaf6d62c29f86
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 67eae6cb943b974cc9cd581b8054836d2e37b1e9
+ms.sourcegitcommit: a6082a2caee62029f101eb1000656966195cd6ee
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490732"
+ms.lasthandoff: 12/10/2018
+ms.locfileid: "53181999"
 ---
 # <a name="ef-core-tools--extensions"></a>Herramientas y extensiones de EF Core
 
@@ -43,6 +43,19 @@ Extensión de Visual Studio 2017+. Puede usar técnicas de ingeniería inversa d
 Una extensión de Visual Studio 2017 que agrega un diseñador ORM para el diseño visual de las clases de Entity Framework 6, Core 2.0 y Core 2.1. El código se genera mediante plantillas T4, por lo que se puede personalizar completamente para adaptarlo según las necesidades. Se admiten asociaciones de herencia, unidireccionales y bidireccionales, además de enumeraciones, la capacidad de asignar colores a las clases y la adición de bloques de texto para explicar posibles partes difíciles del diseño.
 
 [Marketplace](https://marketplace.visualstudio.com/items?itemName=michaelsawczyn.EFDesigner)
+
+### <a name="catfactory"></a>CatFactory
+
+CatFactory es un motor de scaffolding para .NET Core y Entity Framework Core. El funcionamiento de CatFactory se basa en la exportación de una base de datos existente desde una instancia de SQL Server. Después, se genera una representación en modelos de la base de datos, entidades de scaffolding, configuraciones, repositorios y otros elementos.
+
+[Repositorio de GitHub](https://github.com/hherzl/CatFactory.EntityFrameworkCore)
+
+### <a name="loresofts-entity-framework-core-generator"></a>LoreSoft's Entity Framework Core Generator
+
+Entity Framework Core Generator (efg) es una herramienta de la CLI de .NET Core que permite generar modelos de EF Core a partir de una base de datos existente, con un funcionamiento muy parecido al de `dotnet ef dbcontext scaffold`. Pero no es exactamente igual, ya que además admite la [regeneración](https://efg.loresoft.com/en/latest/regeneration/) del código administrado. La regeneración se lleva a cabo mediante la sustitución de la región o el análisis de los archivos de asignación. Esta herramienta también admite la generación de modelos de vista, validaciones y códigos de mapeadores de objetos. Para obtener más información, consulte el tutorial y los vínculos de documentación del producto.
+
+[Tutorial](http://www.loresoft.com/Generate-ASP-NET-Web-API)
+[Documentación](https://efg.loresoft.com/en/latest/)
 
 ## <a name="extensions"></a>Extensiones
 
