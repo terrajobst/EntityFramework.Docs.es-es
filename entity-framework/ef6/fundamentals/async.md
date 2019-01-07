@@ -3,12 +3,12 @@ title: Async consultar y guardar - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: d56e6f1d-4bd1-4b50-9558-9a30e04a8ec3
-ms.openlocfilehash: 4ed4f5c13341f33ccff8325a5ddacd8f7b195a76
-ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
+ms.openlocfilehash: de702365251fd05c423c8590ccaefa7d8542ad02
+ms.sourcegitcommit: e66745c9f91258b2cacf5ff263141be3cba4b09e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/18/2018
-ms.locfileid: "46283828"
+ms.lasthandoff: 01/06/2019
+ms.locfileid: "54058765"
 ---
 # <a name="async-query-and-save"></a>Async consultar y guardar
 > [!NOTE]
@@ -76,7 +76,7 @@ Vamos a usar el [flujo de trabajo Code First](~/ef6/modeling/code-first/workflow
     }
 ```
 
- 
+ 
 
 ## <a name="create-a-synchronous-program"></a>Crear un programa sincrónico
 
@@ -96,7 +96,6 @@ Ahora que tenemos un modelo de EF, vamos a escribir algún código que lo utiliz
             {
                 PerformDatabaseOperations();
 
-                Console.WriteLine();
                 Console.WriteLine("Quote of the day");
                 Console.WriteLine(" Don't worry about the world coming to an end today... ");
                 Console.WriteLine(" It's already tomorrow in Australia.");
@@ -115,16 +114,18 @@ Ahora que tenemos un modelo de EF, vamos a escribir algún código que lo utiliz
                     {
                         Name = "Test Blog #" + (db.Blogs.Count() + 1)
                     });
+                    Console.WriteLine("Calling SaveChanges.");
                     db.SaveChanges();
+                    Console.WriteLine("SaveChanges completed.");
 
                     // Query for all blogs ordered by name
+                    Console.WriteLine("Executing query.");
                     var blogs = (from b in db.Blogs
                                 orderby b.Name
                                 select b).ToList();
 
                     // Write all blogs out to Console
-                    Console.WriteLine();
-                    Console.WriteLine("All blogs:");
+                    Console.WriteLine("Query completed with following results:");
                     foreach (var blog in blogs)
                     {
                         Console.WriteLine(" " + blog.Name);
@@ -145,17 +146,17 @@ Puesto que el código es sincrónico, nos podemos observar el siguiente flujo de
 4.  Devuelve la consulta y los resultados se escriben en **consola**
 5.  Cita del día se escribe en **consola**
 
-![Salida de sincronización](~/ef6/media/syncoutput.png) 
+![Salida de sincronización](~/ef6/media/syncoutput.png) 
 
- 
+ 
 
 ## <a name="making-it-asynchronous"></a>Convertirla en asincrónica
 
 Ahora que tenemos nuestro programa ponerse en marcha, podremos hacer uso del nuevas async y await palabras clave. Nos hemos realizado los cambios siguientes en Program.cs
 
-1.  La línea 2: El uso de la instrucción para el **System.Data.Entity** espacio de nombres nos da acceso a los métodos de extensión de async EF.
-2.  La línea 4: El uso de la instrucción para el **System.Threading.Tasks** espacio de nombres nos permite utilizar el **tarea** tipo.
-3.  Línea 12 y 18: vamos a capturar como tarea que supervisa el progreso de **PerformSomeDatabaseOperations** (línea 12) y, a continuación, bloquear la ejecución de programa para esta tarea a una vez completada todo el trabajo para el programa se realiza (línea 18).
+1.  Línea 2: El mediante declaración para el **System.Data.Entity** espacio de nombres nos da acceso a los métodos de extensión de async EF.
+2.  Línea 4: El mediante declaración para el **System.Threading.Tasks** espacio de nombres nos permite utilizar el **tarea** tipo.
+3.  Línea 12 y 18: Hemos recopilado como tarea que supervisa el progreso de **PerformSomeDatabaseOperations** (línea 12) y, a continuación, bloquear la ejecución de programa para esta tarea a una vez completada todo el trabajo para el programa se realiza (línea 18).
 4.  Línea 25: Hemos actualización **PerformSomeDatabaseOperations** se marquen como **async** y devolver un **tarea**.
 5.  Línea 35: Ahora estamos llamando a la versión asincrónica de SaveChanges y espera su finalización.
 6.  Línea 42: Ahora estamos llamando a la versión asincrónica de ToList y se espera en el resultado.
@@ -227,9 +228,9 @@ Ahora que el código es asincrónica, nos podemos observar un flujo de ejecució
 4.  Consulta para todos los **Blogs** se envía a la base de datos *de nuevo, el subproceso administrado es libre para realizar otro trabajo mientras se procesa la consulta en la base de datos. Puesto que se haya completado toda la ejecución de otra, el subproceso simplemente detendrá en la llamada espera aunque.*
 5.  Devuelve la consulta y los resultados se escriben en **consola**
 
-![Salida de Async](~/ef6/media/asyncoutput.png) 
+![Salida de Async](~/ef6/media/asyncoutput.png) 
 
- 
+ 
 
 ## <a name="the-takeaway"></a>La conclusión
 
