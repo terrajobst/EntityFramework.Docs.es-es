@@ -5,12 +5,12 @@ ms.author: ansvyryd
 ms.date: 02/26/2018
 ms.assetid: 2B0BADCE-E23E-4B28-B8EE-537883E16DF3
 uid: core/modeling/owned-entities
-ms.openlocfilehash: fe7e07b8bd483fb3f9b672ee78ef7541f06a21a4
-ms.sourcegitcommit: e66745c9f91258b2cacf5ff263141be3cba4b09e
+ms.openlocfilehash: b2d72b08de79939904bf4e726c695440c906a8aa
+ms.sourcegitcommit: 7bde8e6ad3c4565a4638646ce04bcf5e66f7b5fd
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 01/06/2019
-ms.locfileid: "54058778"
+ms.lasthandoff: 01/07/2019
+ms.locfileid: "54069209"
 ---
 # <a name="owned-entity-types"></a>Tipos de entidad en propiedad
 
@@ -52,7 +52,7 @@ Para comprender cómo EF Core realiza el seguimiento de estos objetos, es útil 
 >[!NOTE]
 > Esta característica es nueva en EF Core 2.2.
 
-Para configurar una colección de tipos de propiedad `OwnsMany` debe usarse en `OnModelCreating`. Sin embargo la clave principal no se configura por convención, por lo que necesita especificarse explícitamente. Es habitual usar una clave compleja para estos tipos de entidades que incorpora la clave externa para el propietario y una propiedad adicional única que también puede estar en estado de la sombra:
+Para configurar una colección de tipos de propiedad `OwnsMany` debe usarse en `OnModelCreating`. Sin embargo la clave principal no se configura por convención, por lo que debe especificarse explícitamente. Es habitual usar una clave compleja para estos tipos de entidades que incorpora la clave externa para el propietario y una propiedad adicional única que también puede estar en estado de la sombra:
 
 [!code-csharp[OwnsMany](../../../samples/core/Modeling/OwnedEntities/OwnedEntityContext.cs?name=OwnsMany)]
 
