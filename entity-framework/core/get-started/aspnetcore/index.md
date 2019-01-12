@@ -13,7 +13,7 @@ ms.locfileid: "42993552"
 ---
 # <a name="getting-started-with-ef-core-on-aspnet-core"></a>Introducción a EF Core en ASP.NET Core
 
-Estos 101 tutoriales no exigen ningún conocimiento anterior de Entity Framework Core ni Visual Studio. Le llevarán paso a paso a lo largo del proceso de creación de una sencilla aplicación de ASP.NET Core que consulta y guarda los datos de una base de datos. Puede elegir un tutorial que crea un modelo basado en una base de datos existente o que crea automáticamente una base de datos basada en el modelo.
+Estos tutoriales 101 no exigen ningún conocimiento anterior de Entity Framework Core ni Visual Studio. Le llevarán paso a paso a lo largo del proceso de creación de una sencilla aplicación de ASP.NET Core que consulta y guarda los datos de una base de datos. Puede elegir un tutorial que crea un modelo basado en una base de datos existente o que crea automáticamente una base de datos basada en el modelo.
 
 Puede encontrar la documentación de ASP.NET Core en [Introducción a ASP.NET Core](/aspnet/core/).
 
