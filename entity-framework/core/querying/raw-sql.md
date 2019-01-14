@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 70aae9b5-8743-4557-9c5d-239f688bf418
 uid: core/querying/raw-sql
-ms.openlocfilehash: 0ad9731840c5f72064f2f66932b9867a0144f437
-ms.sourcegitcommit: 2da6f9b05e1ce3a46491e5cc68f17758bdeb6b02
+ms.openlocfilehash: 5bddddfbc2fe8d0ba99914f03b28bde4076fae42
+ms.sourcegitcommit: e66745c9f91258b2cacf5ff263141be3cba4b09e
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 12/06/2018
-ms.locfileid: "53006874"
+ms.lasthandoff: 01/06/2019
+ms.locfileid: "54058720"
 ---
 # <a name="raw-sql-queries"></a>Consultas SQL sin formato
 
@@ -28,7 +28,7 @@ Existen algunas limitaciones que debe considerar al usar las consultas SQL sin f
 
 * La consulta SQL no puede incluir datos relacionados. Sin embargo, en muchos casos puede redactar sobre la consulta si usa el operador `Include` para devolver datos relacionados (consulte [Inclusión de datos relacionados](#including-related-data)).
 
-* Las instrucciones `SELECT` que se pasan a este método generalmente admitirán composición. Si EF Core debe evaluar operadores de consulta adicionales en el servidor (por ejemplo, para trasladar los operadores LINQ aplicados después de `FromSql`), el código SQL suministrado se considerará como una subconsulta. Esto significa que el código SQL que se pasa no contendrá ningún carácter ni opción que no sea válido en una subconsulta, como:
+* Las instrucciones `SELECT` que se pasan a este método por lo general admiten composición: Si EF Core debe evaluar operadores de consulta adicionales en el servidor (por ejemplo, para trasladar los operadores LINQ aplicados después de `FromSql`), el código SQL suministrado se considerará una subconsulta. Esto significa que el código SQL que se pasa no contendrá ningún carácter ni opción que no sea válido en una subconsulta, como:
   * un punto y coma final
   * En SQL Server, una sugerencia en el nivel de consulta final (por ejemplo, `OPTION (HASH JOIN)`)
   * en SQL Server, una cláusula `ORDER BY` que no va acompañada de `TOP 100 PERCENT` en la cláusula `SELECT`
@@ -81,7 +81,7 @@ var blogs = context.Blogs
     .ToList();
 ```
 
-También puede construir un elemento DbParameter y suministrarlo como un valor de parámetro. Esto le permite usar parámetros con nombre en la cadena de consulta SQL
+También puede construir un elemento DbParameter y suministrarlo como un valor de parámetro. Esto le permite usar parámetros con nombre en la cadena de consulta SQL.
 
 <!-- [!code-csharp[Main](samples/core/Querying/Querying/RawSQL/Sample.cs)] -->
 ``` csharp

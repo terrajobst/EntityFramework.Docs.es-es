@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: d3e6515b-8181-482c-a790-c4a6778748c1
 uid: core/saving/transactions
-ms.openlocfilehash: 7083a1228420416a1b60d9744ca2dad2339be53f
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 4c50d6694c6678678c0af8defe2601abee923af1
+ms.sourcegitcommit: 5f11a5fa5d2cde81a4e4d0d5c3a60aa74b83cbd4
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42993610"
+ms.lasthandoff: 01/11/2019
+ms.locfileid: "54226197"
 ---
 # <a name="using-transactions"></a>Uso de las transacciones
 
@@ -99,7 +99,7 @@ También es posible inscribir en una transacción explícita.
 
 ### <a name="limitations-of-systemtransactions"></a>Limitaciones de System.Transactions  
 
-1. EF Core se basa en los proveedores de base de datos para implementar la compatibilidad con System.Transactions. Si bien la compatibilidad es bastante común entre los proveedores de ADO.NET para .NET Framework, la API solo se agregó recientemente a .NET Core y, por tanto, la compatibilidad no siempre está tan extendida. Si un proveedor no implementa la compatibilidad con System.Transactions, es posible que las llamadas a estas API se omitan completamente. SqlClient para .NET no lo admite desde la versión 2.1 en adelante. SqlClient para .NET Core 2.0 generará una excepción del intento de usar la característica. 
+1. EF Core se basa en los proveedores de base de datos para implementar la compatibilidad con System.Transactions. Si bien la compatibilidad es bastante común entre los proveedores de ADO.NET para .NET Framework, la API solo se agregó recientemente a .NET Core y, por tanto, la compatibilidad no siempre está tan extendida. Si un proveedor no implementa la compatibilidad con System.Transactions, es posible que las llamadas a estas API se omitan completamente. SqlClient para .NET no lo admite desde la versión 2.1 en adelante. SqlClient para .NET Core 2.0 generará una excepción si intent usar la característica. 
 
    > [!IMPORTANT]  
    > Se recomienda probar que la API se comporte correctamente con el proveedor antes de usarla para administrar las transacciones. Si no es así, recomendamos que se ponga en contacto con el mantenedor del proveedor de base de datos. 

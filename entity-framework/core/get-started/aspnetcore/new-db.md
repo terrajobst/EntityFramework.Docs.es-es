@@ -5,12 +5,12 @@ ms.author: riande
 ms.date: 08/03/2018
 ms.assetid: e153627f-f132-4c11-b13c-6c9a607addce
 uid: core/get-started/aspnetcore/new-db
-ms.openlocfilehash: 2248c60045a914c902f1c958a86c69b283abd722
-ms.sourcegitcommit: 5e11125c9b838ce356d673ef5504aec477321724
+ms.openlocfilehash: 4734586adc89e9c1d866a1b4accd8b5e51fe2bb0
+ms.sourcegitcommit: ebf661025d2ad2b62466fa7bf0e0772a7811cbe7
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/25/2018
-ms.locfileid: "50022241"
+ms.lasthandoff: 01/11/2019
+ms.locfileid: "54211171"
 ---
 # <a name="getting-started-with-ef-core-on-aspnet-core-with-a-new-database"></a>Introducción a EF Core en ASP.NET Core con una base de datos nueva
 
@@ -201,7 +201,7 @@ Aplique scaffolding a un controlador y a las vistas de la entidad `Blog`.
 El motor de scaffolding crea los siguientes archivos:
 
 * Un controlador (*Controllers/BlogsController.cs*)
-* Vistas de Razor para las páginas Create, Delete, Details, Edit e Index (_Views/Movies/*.cshtml_)
+* Vistas de Razor para las páginas Create, Delete, Details, Edit e Index (_Views/Blogs/*.cshtml_)
 
 ## <a name="run-the-application"></a>Ejecutar la aplicación
 
