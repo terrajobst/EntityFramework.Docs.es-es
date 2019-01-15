@@ -12,7 +12,7 @@ ms.locfileid: "45489068"
 ---
 # <a name="working-with-dbcontext"></a>Trabajar con DbContext
 
-Para usar Entity Framework para consultar, insertar, actualizar y eliminar datos mediante objetos .NET, primero deberá [crear un modelo](~/ef6/modeling/index.md) que asigna las entidades y relaciones que se definen en el modelo en las tablas de una base de datos.
+Para usar Entity Framework para consultar, insertar, actualizar y eliminar datos mediante objetos. NET, primero deberá [crear un modelo](~/ef6/modeling/index.md) que asigna las entidades y relaciones que se definen en el modelo en las tablas de una base de datos.
 
 Una vez tenga un modelo, la clase principal con la que tu aplicación interactúa es `System.Data.Entity.DbContext` (a menudo denominado como la clase de contexto). Puede usar un DbContext asociado a un modelo para:
 - Escribir y ejecutar consultas   
@@ -44,7 +44,7 @@ Una vez que tenga un contexto, podría consultar, agregar (con los métodos `Add
 
 ## <a name="lifetime"></a>Período de duración  
 
-La duración del contexto comienza cuando se crea y finaliza cuando la instancia se elimina o es recogida por el recolector de basura. Use `using` si desea que todos los recursos que controla el contexto sean eliminados al final del bloque. Cuando usas `using`, el compilador crea automáticamente un bloque try/finally y llama a `dispose` en el bloque `finally`.  
+La duración del contexto comienza cuando se crea y finaliza cuando la instancia se elimina o se recopilan de elementos no utilizados de la instancia. Use **mediante** si desea que todos los recursos que controla el contexto sean eliminados al final del bloque. Cuando usas **mediante**, el compilador crea automáticamente un bloque try/finally y llama a dispose en el **finalmente** bloque.  
 
 ``` csharp
 public void UseProducts()
