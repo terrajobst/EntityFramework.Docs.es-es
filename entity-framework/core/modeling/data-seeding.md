@@ -5,12 +5,12 @@ ms.author: ansvyryd
 ms.date: 11/02/2018
 ms.assetid: 3154BF3C-1749-4C60-8D51-AE86773AA116
 uid: core/modeling/data-seeding
-ms.openlocfilehash: 8f28dfea12461572ade8fbf3910ebd216dafb389
-ms.sourcegitcommit: fa863883f1193d2118c2f9cee90808baa5e3e73e
+ms.openlocfilehash: 1c450b142573368d043430f55a3144b6696a8691
+ms.sourcegitcommit: b4a5ed177b86bf7f81602106dab6b4acc18dfc18
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 12/04/2018
-ms.locfileid: "52857434"
+ms.lasthandoff: 01/15/2019
+ms.locfileid: "54316639"
 ---
 # <a name="data-seeding"></a>Propagación de datos
 
@@ -55,6 +55,8 @@ Una vez que los datos se ha agregado al modelo, [migraciones](xref:core/managing
 > Si tiene que aplicar las migraciones como parte de una implementación automatizada, puede [crear un script SQL](xref:core/managing-schemas/migrations/index#generate-sql-scripts) que puede obtener una vista previa antes de la ejecución.
 
 Como alternativa, puede usar `context.Database.EnsureCreated()` para crear una nueva base de datos que contiene los datos de inicialización, por ejemplo, para una base de datos de prueba o cuando se usa el proveedor en memoria o cualquier base de datos sin relación. Observe que si ya existe la base de datos, `EnsureCreated()` ninguno, se actualizará los datos de esquema ni el valor de inicialización de la base de datos. Bases de datos relacionales no debería llamar a `EnsureCreated()` si tiene previsto usar migraciones.
+
+### <a name="limitations-of-model-seed-data"></a>Limitaciones de los datos de inicialización del modelo
 
 Las migraciones se administra este tipo de datos de inicialización y la secuencia de comandos para actualizar los datos que ya está en la base de datos se debe generar sin necesidad de conectarse a la base de datos. Esto impone algunas restricciones:
 * El valor de clave principal debe especificarse incluso si se genera normalmente por la base de datos. Se utilizará para detectar cambios en los datos entre las migraciones.
