@@ -15,7 +15,7 @@ Entity Framework está formado por EF Tools para Visual Studio y EF runtime.
 
 ## <a name="ef-tools-for-visual-studio"></a>EF Tools para Visual Studio
 
-Entity Framework Tools para Visual Studio incluyen EF Designer y el Asistente para modelo de EF y son necesarios para la base de datos en primer lugar y modelar flujos de trabajo primeros. Herramientas EF se incluyen en todas las versiones recientes de Visual Studio. Si lleva a cabo una instalación personalizada de Visual Studio, deberá asegurarse de que el elemento se selecciona "Herramientas de Entity Framework 6" eligiendo una carga de trabajo que lo incluye o seleccionando como un componente individual.
+Entity Framework Tools para Visual Studio incluyen EF Designer y el EF Model Wizard y son necesarios para los flujos de trabajo _database first_ y _model first_. EF Tools es includo en todas las versiones recientes de Visual Studio. Si lleva a cabo una instalación personalizada de Visual Studio, deberá asegurarse el elemento "Entity Frameworks 6 Tools" está seleccionado eligiendo un _workload_ que lo incluya o seleccionandolo como un componente individual.
 
 Para algunas versiones anteriores de Visual Studio, EF Tools actualizadas están disponibles como descarga. Consulte [versiones de Visual Studio](~/ef6/what-is-new/visual-studio.md) para obtener instrucciones sobre cómo obtener la versión más reciente disponible de EF Tools para su versión de Visual Studio.
 
