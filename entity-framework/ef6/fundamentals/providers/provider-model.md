@@ -3,12 +3,12 @@ title: El modelo de proveedor de Entity Framework 6 - EF6
 author: divega
 ms.date: 06/27/2018
 ms.assetid: 066832F0-D51B-4655-8BE7-C983C557E0E4
-ms.openlocfilehash: d07a8689fe968bb1512095a59a61abc7ac346a31
-ms.sourcegitcommit: 5e11125c9b838ce356d673ef5504aec477321724
+ms.openlocfilehash: 8cbf6f87e0936f374c3d8a0c15a0e1d9c828f764
+ms.sourcegitcommit: 159c2e9afed7745e7512730ffffaf154bcf2ff4a
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/25/2018
-ms.locfileid: "50022329"
+ms.lasthandoff: 02/03/2019
+ms.locfileid: "55668757"
 ---
 # <a name="the-entity-framework-6-provider-model"></a>El modelo de proveedor de Entity Framework 6
 
@@ -28,7 +28,7 @@ Un proveedor de EF es realmente una colección de servicios específicos del pro
 
 ### <a name="dbproviderfactory"></a>DbProviderFactory
 
-EF depende de si hay un tipo derivado de [System.Data.Common.DbProviderFactory](https://msdn.microsoft.com/library/system.data.common.dbproviderfactory.aspx) para llevar a cabo todo el acceso de bajo nivel de base de datos. No es parte de EF DbProviderFactory sino que es una clase en .NET Framework que actúa un punto de entrada para los proveedores ADO.NET que puede utilizarse por EF, otra Micro-o/RM o directamente por una aplicación para obtener instancias de las conexiones, comandos, parámetros y otras abstracciones de ADO.NET en un proveedor de manera independiente. Para obtener más información sobre el objeto DbProviderFactory una se encuentra en la [documentación de MSDN para ADO.NET](https://msdn.microsoft.com/library/a6cd7c08.aspx).
+EF depende de si hay un tipo derivado de [System.Data.Common.DbProviderFactory](https://msdn.microsoft.com/library/system.data.common.dbproviderfactory.aspx) para llevar a cabo todo el acceso de bajo nivel de base de datos. No es parte de EF DbProviderFactory sino que es una clase en .NET Framework que actúa un punto de entrada para los proveedores ADO.NET que puede utilizarse por EF, otra Micro-o/RM o directamente por una aplicación para obtener instancias de las conexiones, comandos, parámetros y otras abstracciones de ADO.NET en un proveedor de manera independiente. Puede encontrar más información sobre el objeto DbProviderFactory en el [documentación de MSDN para ADO.NET](https://msdn.microsoft.com/library/a6cd7c08.aspx).
 
 ### <a name="dbproviderservices"></a>DbProviderServices
 

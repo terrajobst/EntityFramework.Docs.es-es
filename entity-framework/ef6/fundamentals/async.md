@@ -3,12 +3,12 @@ title: Async consultar y guardar - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: d56e6f1d-4bd1-4b50-9558-9a30e04a8ec3
-ms.openlocfilehash: de702365251fd05c423c8590ccaefa7d8542ad02
-ms.sourcegitcommit: e66745c9f91258b2cacf5ff263141be3cba4b09e
+ms.openlocfilehash: 89c7b9d533d37b4c9e123f37d8ab27c67ba26cc8
+ms.sourcegitcommit: 159c2e9afed7745e7512730ffffaf154bcf2ff4a
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 01/06/2019
-ms.locfileid: "54058765"
+ms.lasthandoff: 02/03/2019
+ms.locfileid: "55668718"
 ---
 # <a name="async-query-and-save"></a>Async consultar y guardar
 > [!NOTE]
@@ -223,7 +223,7 @@ Ahora que el código es asincrónica, nos podemos observar un flujo de ejecució
 
 1.  **SaveChanges** comienza a insertar el nuevo **Blog** a la base de datos *una vez que el comando se envía a la base de datos no más de proceso se necesita tiempo en el subproceso administrado actual. El **PerformDatabaseOperations** método devuelve (incluso si no ha terminado de ejecutarse) y continúa el flujo del programa en el método Main.*
 2.  **Cita del día se escribe en la consola**
-    *ya que no hay nada más trabajo que hacer en el método Main, se bloquea el subproceso administrado en la espera llamar hasta que se complete la operación de base de datos. Cuando haya terminado, el resto de nuestro **PerformDatabaseOperations** * se ejecutará.
+    *ya que no hay nada más trabajo que hacer en el método Main, se bloquea el subproceso administrado en la espera llamar hasta que se complete la operación de base de datos. Cuando haya terminado, el resto de nuestro **PerformDatabaseOperations** se ejecutará.*
 3.  **SaveChanges** completa
 4.  Consulta para todos los **Blogs** se envía a la base de datos *de nuevo, el subproceso administrado es libre para realizar otro trabajo mientras se procesa la consulta en la base de datos. Puesto que se haya completado toda la ejecución de otra, el subproceso simplemente detendrá en la llamada espera aunque.*
 5.  Devuelve la consulta y los resultados se escriben en **consola**
