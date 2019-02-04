@@ -3,12 +3,12 @@ title: 'Proveedores de Entity Framework: EF6'
 author: divega
 ms.date: 06/27/2018
 ms.assetid: 7BFB7763-CD6C-4520-93A2-7B265F5FA586
-ms.openlocfilehash: 0cfe6c30d6533b0207f78a031d342847a7f68632
-ms.sourcegitcommit: 5e11125c9b838ce356d673ef5504aec477321724
+ms.openlocfilehash: f6e34d1273bd1004ce9d1610ce3613068088eb5e
+ms.sourcegitcommit: 159c2e9afed7745e7512730ffffaf154bcf2ff4a
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/25/2018
-ms.locfileid: "50022228"
+ms.lasthandoff: 02/03/2019
+ms.locfileid: "55668744"
 ---
 # <a name="entity-framework-6-providers"></a>Proveedores de Entity Framework 6
 > [!NOTE]
@@ -31,13 +31,13 @@ Los proveedores conocidos que se han vuelto a compilar para EF6 incluyen:
 *   [**Proveedores de CData Software**](http://www.cdata.com/ado/)
     *   Existen proveedores de terceros de [CData Software](http://www.cdata.com/ado/) para una serie de almacenes de datos como Salesforce, Azure Table Storage, MySql, etc.
 *   **Proveedor de Firebird**
-    *   Disponible como [paquete NuGet](http://www.nuget.org/packages/FirebirdSql.Data.FirebirdClient/)
+    *   Disponible como [paquete NuGet](https://www.nuget.org/packages/EntityFramework.Firebird/)
 *   **Proveedor de Visual Fox Pro**
     *   Disponible como [paquete NuGet](https://www.nuget.org/packages/VFPEntityFrameworkProvider2/)
 *   **MySQL**
-    *   [Conector MySQL para Net](http://dev.mysql.com/downloads/connector/net/)
+    *   [Conector MySQL/NET para Entity Framework](https://dev.mysql.com/doc/connector-net/en/connector-net-entityframework60.html)
 *   **PostgreSQL**
-    *   Npgsql está disponible como [paquete NuGet](http://www.nuget.org/packages/Npgsql.EF6/)
+    *   Npgsql está disponible como [paquete NuGet](https://www.nuget.org/packages/EntityFramework6.Npgsql/)
 *   **Oracle**
     *   ODP.NET está disponible como [paquete NuGet](https://www.nuget.org/packages/Oracle.ManagedDataAccess.EntityFramework/)
 

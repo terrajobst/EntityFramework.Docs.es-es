@@ -3,12 +3,12 @@ title: 'Migraciones de Code First: EF6'
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 36591d8f-36e1-4835-8a51-90f34f633d1e
-ms.openlocfilehash: f408ef861a2992783142fa1483d1433ca710399a
-ms.sourcegitcommit: 15022dd06d919c29b1189c82611ea32f9fdc6617
+ms.openlocfilehash: e5a91af73bab9d45b0f1f4242ce503c6b6f407f6
+ms.sourcegitcommit: 159c2e9afed7745e7512730ffffaf154bcf2ff4a
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/27/2018
-ms.locfileid: "47415801"
+ms.lasthandoff: 02/03/2019
+ms.locfileid: "55668706"
 ---
 # <a name="code-first-migrations"></a>Migraciones de Code First
 Migraciones de Code First es la manera recomendada de desarrollar el esquema de base de datos de la aplicación si usa el flujo de trabajo de Code First. Migraciones proporciona un conjunto de herramientas que permiten:
@@ -300,7 +300,7 @@ Si otro desarrollador quiere estos cambios en su equipo, puede sincronizar una v
 
 -   Ejecute el comando **Update-Database**, pero esta vez especifique la marca **–Script** para que los cambios se escriban en un script en lugar de aplicarse. También se especifican una migración de origen y de destino para las que generar el script. Queremos un script que abarque desde una base de datos vacía (**$InitialDatabase**) a la versión más reciente (migración **AddPostAbstract**).
     *Si no se especifica una migración de destino, Migraciones usa la última migración como destino. Si no se especifica una migración de origen, Migraciones usa el estado actual de la base de datos.*
--   Ejecute el comando **Update-Database -Script -SourceMigration: $InitialDatabase -TargetMigration: AddPostAbstract** en la consola del Administrador de paquetes
+-   Ejecute el comando **Update-Database -Script -SourceMigration: $InitialDatabase -TargetMigration: AddPostAbstract** en la consola del Administrador de paquetes.
 
 Migraciones de Code First ejecuta la canalización de migración, pero en lugar de aplicar los cambios, los escribe en un archivo .sql. Una vez que se ha generado el script, se abre automáticamente en Visual Studio, listo para verse o guardarse.
 
@@ -330,7 +330,7 @@ Se puede actualizar el archivo **Program.cs**, como se muestra a continuación, 
         {
             static void Main(string[] args)
             {
-                Database.SetInitializer(new MigrateDatabaseToLatestVersion\<BlogContext, Configuration>());
+                Database.SetInitializer(new MigrateDatabaseToLatestVersion<BlogContext, Configuration>());
 
                 using (var db = new BlogContext())
                 {
