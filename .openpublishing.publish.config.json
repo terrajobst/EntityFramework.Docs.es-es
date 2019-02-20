@@ -5,7 +5,8 @@
       "docset_name": "ef",
       "build_source_folder": "entity-framework",
       "build_output_subfolder": "ef",
-      "locale": "es-ES",
+      "locale": "es-es",
+      "version": 0,
       "open_to_public_contributors": true,
       "type_mapping": {
         "Conceptual": "Content",
@@ -22,15 +23,16 @@
     "live",
     "master"
   ],
-  "continue_with_document_error": true,
   "git_repository_url_open_to_public_contributors": "https://github.com/aspnet/EntityFramework.Docs.es-es",
   "git_repository_branch_open_to_public_contributors": "live",
+  "continue_with_document_error": true,
   "skip_source_output_uploading": false,
   "need_preview_pull_request": true,
+  "need_pr_comments": false,
   "dependent_repositories": [
     {
       "path_to_root": "_themes",
-      "url": "https://github.com/Microsoft/templates.docs.msft.es-ES",
+      "url": "https://github.com/Microsoft/templates.docs.msft.es-es",
       "branch": "master",
       "branch_mapping": {}
     },
