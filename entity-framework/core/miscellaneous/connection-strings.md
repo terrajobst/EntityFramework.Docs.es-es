@@ -50,7 +50,7 @@ public class BloggingContext : DbContext
 
 ## <a name="universal-windows-platform-uwp"></a>Plataforma universal de Windows (UWP)
 
-Cadenas de conexión en una aplicación de UWP suelen ser una conexión de SQLite que solo especifica un nombre de archivo local. Normalmente no contienen información confidencial y no deben cambiarse según se implementa una aplicación. Por lo tanto, estas cadenas de conexión son suele funcionar correctamente dejarse en el código, como se muestra a continuación. Si desea moverlas fuera del código UWP admite el concepto de configuración, consulte el [sección de configuración de la aplicación de la documentación de UWP](https://docs.microsoft.com/windows/uwp/app-settings/store-and-retrieve-app-data) para obtener más información.
+Las cadenas de conexión en una aplicación de UWP suelen ser una conexión de SQLite que solo especifica un nombre de archivo local. Normalmente no contienen información confidencial y no deben cambiarse según se implementa una aplicación. Por lo tanto, estas cadenas de conexión suelen funcionar correctamente al dejarse en el código, como se muestra a continuación. Si desea moverlas fuera del código UWP admite el concepto de configuración, consulte el [sección de configuración de la aplicación de la documentación de UWP](https://docs.microsoft.com/windows/uwp/app-settings/store-and-retrieve-app-data) para obtener más información.
 
 ``` csharp
 public class BloggingContext : DbContext
