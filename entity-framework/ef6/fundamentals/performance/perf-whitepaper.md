@@ -3,19 +3,19 @@ title: Consideraciones de rendimiento de EF4, EF5 y EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: d6d5a465-6434-45fa-855d-5eb48c61a2ea
-ms.openlocfilehash: c87c1412cb23abf232663d7e4f44eef5f7818ea2
-ms.sourcegitcommit: 5e11125c9b838ce356d673ef5504aec477321724
+ms.openlocfilehash: 4c1f03533cf6df49555c3ef8d09d5949b9a3335c
+ms.sourcegitcommit: 33b2e84dae96040f60a613186a24ff3c7b00b6db
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/25/2018
-ms.locfileid: "50022394"
+ms.lasthandoff: 02/21/2019
+ms.locfileid: "56459216"
 ---
 # <a name="performance-considerations-for-ef-4-5-and-6"></a>Consideraciones de rendimiento para EF 4, 5 y 6
 Por David Obando, Eric Dettinger y otros
 
 Fecha de publicación: Abril de 2012
 
-Última actualización: mayo de 2014
+Última actualización: Mayo de 2014
 
 ------------------------------------------------------------------------
 
@@ -43,7 +43,7 @@ Tomemos una visión general de tiempo empleado al ejecutar una consulta mediante
 |:-----------------------------------------------------------------------------------------------------|:--------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `using(var db = new MyContext())` <br/> `{`                                                          | Creación del contexto          | Medium                                                                                                                                                                                                                                                                                                                                                                                                                        | Medium                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Bajo                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | `  var q1 = ` <br/> `    from c in db.Customers` <br/> `    where c.Id == id1` <br/> `    select c;` | Creación de la expresión de consulta | Bajo                                                                                                                                                                                                                                                                                                                                                                                                                           | Bajo                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Bajo                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| `  var c1 = q1.First();`                                                                             | Ejecución de consultas LINQ      | -Carga metadatos: alta, pero se ha almacenado en caché <br/> -Ver generación: potencialmente muy alta pero almacenados en caché <br/> -Evaluación del parámetro: medio <br/> -Traducción de consultas: medio <br/> -Generación materializador: medio, pero se ha almacenado en caché <br/> -Ejecución de la consulta de base de datos: potencialmente alto <br/> + Connection.Open <br/> + Command.ExecuteReader <br/> + DataReader.Read <br/> Materialización de objetos: medio <br/> -Búsqueda identity: medio | -Carga metadatos: alta, pero se ha almacenado en caché <br/> -Ver generación: potencialmente muy alta pero almacenados en caché <br/> -Evaluación del parámetro: baja <br/> -Traducción de consultas: medio, pero se ha almacenado en caché <br/> -Generación materializador: medio, pero se ha almacenado en caché <br/> -Ejecución de la consulta de base de datos: potencialmente alto (mejor las consultas en algunas situaciones) <br/> + Connection.Open <br/> + Command.ExecuteReader <br/> + DataReader.Read <br/> Materialización de objetos: medio <br/> -Búsqueda identity: medio | -Carga metadatos: alta, pero se ha almacenado en caché <br/> -Ver generación: medio, pero se ha almacenado en caché <br/> -Evaluación del parámetro: baja <br/> -Traducción de consultas: medio, pero se ha almacenado en caché <br/> -Generación materializador: medio, pero se ha almacenado en caché <br/> -Ejecución de la consulta de base de datos: potencialmente alto (mejor las consultas en algunas situaciones) <br/> + Connection.Open <br/> + Command.ExecuteReader <br/> + DataReader.Read <br/> Materialización de objetos: medio (Faster de EF5) <br/> -Búsqueda identity: medio |
+| `  var c1 = q1.First();`                                                                             | Ejecución de consultas LINQ      | -Carga metadatos: Alta, pero se ha almacenado en caché <br/> -Vista generación: Potencialmente muy alto, pero se ha almacenado en caché <br/> -Evaluación del parámetro: Medium <br/> -Consulta traducción: Medium <br/> -Generación de materializador: Medio, pero se ha almacenado en caché <br/> -Ejecución de la consulta base de datos: Potencialmente alto <br/> + Connection.Open <br/> + Command.ExecuteReader <br/> + DataReader.Read <br/> Materialización de objetos: Medium <br/> -Búsqueda identity: Medium | -Carga metadatos: Alta, pero se ha almacenado en caché <br/> -Vista generación: Potencialmente muy alto, pero se ha almacenado en caché <br/> -Evaluación del parámetro: Bajo <br/> -Consulta traducción: Medio, pero se ha almacenado en caché <br/> -Generación de materializador: Medio, pero se ha almacenado en caché <br/> -Ejecución de la consulta base de datos: Potencialmente alto (mejor las consultas en algunas situaciones) <br/> + Connection.Open <br/> + Command.ExecuteReader <br/> + DataReader.Read <br/> Materialización de objetos: Medium <br/> -Búsqueda identity: Medium | -Carga metadatos: Alta, pero se ha almacenado en caché <br/> -Vista generación: Medio, pero se ha almacenado en caché <br/> -Evaluación del parámetro: Bajo <br/> -Consulta traducción: Medio, pero se ha almacenado en caché <br/> -Generación de materializador: Medio, pero se ha almacenado en caché <br/> -Ejecución de la consulta base de datos: Potencialmente alto (mejor las consultas en algunas situaciones) <br/> + Connection.Open <br/> + Command.ExecuteReader <br/> + DataReader.Read <br/> Materialización de objetos: Mediano (más rápido que EF5) <br/> -Búsqueda identity: Medium |
 | `}`                                                                                                  | Connection.Close          | Bajo                                                                                                                                                                                                                                                                                                                                                                                                                           | Bajo                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Bajo                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 
 
@@ -53,7 +53,7 @@ Tomemos una visión general de tiempo empleado al ejecutar una consulta mediante
 |:-----------------------------------------------------------------------------------------------------|:--------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `using(var db = new MyContext())` <br/> `{`                                                          | Creación del contexto          | Medium                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | Medium                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | Bajo                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | `  var q1 = ` <br/> `    from c in db.Customers` <br/> `    where c.Id == id1` <br/> `    select c;` | Creación de la expresión de consulta | Bajo                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Bajo                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | Bajo                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| `  var c1 = q1.First();`                                                                             | Ejecución de consultas LINQ      | -Metadata ~~cargando~~ búsqueda: ~~alta, pero se ha almacenado en caché~~ baja <br/> -Ver ~~generación~~ búsqueda: ~~potencialmente muy alta pero almacenados en caché~~ baja <br/> -Evaluación del parámetro: medio <br/> -Query ~~traducción~~ búsqueda: medio <br/> -Materializador ~~generación~~ búsqueda: ~~medio, pero se ha almacenado en caché~~ baja <br/> -Ejecución de la consulta de base de datos: potencialmente alto <br/> + Connection.Open <br/> + Command.ExecuteReader <br/> + DataReader.Read <br/> Materialización de objetos: medio <br/> -Búsqueda identity: medio | -Metadata ~~cargando~~ búsqueda: ~~alta, pero se ha almacenado en caché~~ baja <br/> -Ver ~~generación~~ búsqueda: ~~potencialmente muy alta pero almacenados en caché~~ baja <br/> -Evaluación del parámetro: baja <br/> -Query ~~traducción~~ búsqueda: ~~medio, pero se ha almacenado en caché~~ baja <br/> -Materializador ~~generación~~ búsqueda: ~~medio, pero se ha almacenado en caché~~ baja <br/> -Ejecución de la consulta de base de datos: potencialmente alto (mejor las consultas en algunas situaciones) <br/> + Connection.Open <br/> + Command.ExecuteReader <br/> + DataReader.Read <br/> Materialización de objetos: medio <br/> -Búsqueda identity: medio | -Metadata ~~cargando~~ búsqueda: ~~alta, pero se ha almacenado en caché~~ baja <br/> -Ver ~~generación~~ búsqueda: ~~medio, pero se ha almacenado en caché~~ baja <br/> -Evaluación del parámetro: baja <br/> -Query ~~traducción~~ búsqueda: ~~medio, pero se ha almacenado en caché~~ baja <br/> -Materializador ~~generación~~ búsqueda: ~~medio, pero se ha almacenado en caché~~ baja <br/> -Ejecución de la consulta de base de datos: potencialmente alto (mejor las consultas en algunas situaciones) <br/> + Connection.Open <br/> + Command.ExecuteReader <br/> + DataReader.Read <br/> Materialización de objetos: medio (Faster de EF5) <br/> -Búsqueda identity: medio |
+| `  var c1 = q1.First();`                                                                             | Ejecución de consultas LINQ      | -Metadata ~~cargando~~ búsqueda: ~~Alta, pero en caché~~ baja <br/> -Ver ~~generación~~ búsqueda: ~~Potencialmente muy alta pero almacenados en caché~~ baja <br/> -Evaluación del parámetro: Medium <br/> -Query ~~traducción~~ búsqueda: Medium <br/> -Materializador ~~generación~~ búsqueda: ~~Medio pero almacenados en caché~~ baja <br/> -Ejecución de la consulta base de datos: Potencialmente alto <br/> + Connection.Open <br/> + Command.ExecuteReader <br/> + DataReader.Read <br/> Materialización de objetos: Medium <br/> -Búsqueda identity: Medium | -Metadata ~~cargando~~ búsqueda: ~~Alta, pero en caché~~ baja <br/> -Ver ~~generación~~ búsqueda: ~~Potencialmente muy alta pero almacenados en caché~~ baja <br/> -Evaluación del parámetro: Bajo <br/> -Query ~~traducción~~ búsqueda: ~~Medio pero almacenados en caché~~ baja <br/> -Materializador ~~generación~~ búsqueda: ~~Medio pero almacenados en caché~~ baja <br/> -Ejecución de la consulta base de datos: Potencialmente alto (mejor las consultas en algunas situaciones) <br/> + Connection.Open <br/> + Command.ExecuteReader <br/> + DataReader.Read <br/> Materialización de objetos: Medium <br/> -Búsqueda identity: Medium | -Metadata ~~cargando~~ búsqueda: ~~Alta, pero en caché~~ baja <br/> -Ver ~~generación~~ búsqueda: ~~Medio pero almacenados en caché~~ baja <br/> -Evaluación del parámetro: Bajo <br/> -Query ~~traducción~~ búsqueda: ~~Medio pero almacenados en caché~~ baja <br/> -Materializador ~~generación~~ búsqueda: ~~Medio pero almacenados en caché~~ baja <br/> -Ejecución de la consulta base de datos: Potencialmente alto (mejor las consultas en algunas situaciones) <br/> + Connection.Open <br/> + Command.ExecuteReader <br/> + DataReader.Read <br/> Materialización de objetos: Mediano (más rápido que EF5) <br/> -Búsqueda identity: Medium |
 | `}`                                                                                                  | Connection.Close          | Bajo                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Bajo                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | Bajo                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 
 
@@ -244,10 +244,10 @@ Para mostrar el efecto del plan de consulta en el rendimiento de la aplicación 
 
 ##### <a name="3231-test-results"></a>3.2.3.1 los resultados de pruebas
 
-| Prueba                                                                   | EF5 sin caché | EF5 en caché | EF6 sin caché | EF6 en caché |
+| Prueba                                                                   | EF5 no cache | EF5 en caché | EF6 sin caché | EF6 en caché |
 |:-----------------------------------------------------------------------|:-------------|:-----------|:-------------|:-----------|
 | Enumerar todas las 18723 consultas                                          | 124          | 125.4      | 124.3        | 125.3      |
-| Evitar barrido (solo el primero 800 consultas, independientemente de complejidad)  | 41.7         | 5.5        | 40,5         | 5.4        |
+| Evitar barrido (solo el primero 800 consultas, independientemente de complejidad)  | 41.7         | 5.5        | 40.5         | 5.4        |
 | Solo las consultas AggregatingSubtotals (178 total: lo que evita el barrido) | 39.5         | 4.5        | 38.1         | 4.6        |
 
 *Todas las horas en segundos.*
@@ -319,8 +319,6 @@ Este método auxiliar se invocaría como sigue:
 La capacidad de crear a través de cualquier consulta LINQ es extremadamente útil; Para ello, basta con invocar un método después de IQueryable como *Skip()* o *Count()*. Sin embargo, si se realiza básicamente, devuelve un nuevo objeto IQueryable. Aunque no hay nada que impida técnicamente componer sobre un CompiledQuery, esto hará que la generación de un nuevo objeto IQueryable requiere pasando por el compilador plan nuevo.
 
 Algunos componentes hará uso de IQueryable compuesto objetos para habilitar la funcionalidad avanzada. Por ejemplo, ASP. GridView de la red puede estar enlazado a datos a un objeto IQueryable a través de la propiedad SelectMethod. El control GridView, a continuación, se creará sobre este objeto IQueryable para permitir la ordenación y paginación a través del modelo de datos. Como puede ver, utilizando un CompiledQuery de GridView podría no alcanzar la consulta compilada pero generaría una nueva consulta autocompiled.
-
-El equipo de asesoramiento al cliente se describe en su blog "Potencial rendimiento problemas con compilado LINQ consulta vuelve a compilar": <http://blogs.msdn.com/b/appfabriccat/archive/2010/08/06/potential-performance-issues-with-compiled-linq-query-re-compiles.aspx>.
 
 Un único lugar donde puede encontrarse con esto es cuando se agregan filtros progresivos a una consulta. Por ejemplo, suponga que tiene una página de los clientes con varias listas desplegables para filtros opcionales (por ejemplo, país y OrdersCount). Estos filtros puede redactar sobre los resultados de IQueryable de un CompiledQuery, pero hacerlo dará lugar a en la nueva consulta que pasar por el compilador plan cada vez que la ejecute.
 
@@ -649,7 +647,7 @@ Entity Framework ofrece varias formas de consulta. Se le Eche un vistazo a las s
 var q = context.Products.Where(p => p.Category.CategoryName == "Beverages");
 ```
 
-**Profesionales**
+**Pros**
 
 -   Adecuado para las operaciones CUD.
 -   Objetos materializados completamente.
@@ -678,7 +676,7 @@ var q = context.Products.AsNoTracking()
                         .Where(p => p.Category.CategoryName == "Beverages");
 ```
 
-**Profesionales**
+**Pros**
 
 -   Mejorar el rendimiento a través de las consultas LINQ normales.
 -   Objetos materializados completamente.
@@ -705,7 +703,7 @@ Esta consulta en particular no especifica explícitamente que se va a NoTracking
 ObjectQuery<Product> products = context.Products.Where("it.Category.CategoryName = 'Beverages'");
 ```
 
-**Profesionales**
+**Pros**
 
 -   Adecuado para las operaciones CUD.
 -   Objetos materializados completamente.
@@ -730,7 +728,7 @@ using (EntityDataReader reader = cmd.ExecuteReader(CommandBehavior.SequentialAcc
 }
 ```
 
-**Profesionales**
+**Pros**
 
 -   Admite el almacenamiento en caché de plan en .NET Framework 4.0 (almacenamiento en caché de plan es compatible con todos los demás tipos de consulta en .NET 4.5) de consulta.
 
@@ -766,7 +764,7 @@ var beverages = context.ExecuteStoreQuery<Product>(
 );
 ```
 
-**Profesionales**
+**Pros**
 
 -   Por lo general rendimiento más rápido porque el compilador de plan se omite.
 -   Objetos materializados completamente.
@@ -789,7 +787,7 @@ private static readonly Func<NorthwindEntities, string, IQueryable<Product>> pro
 var q = context.InvokeProductsForCategoryCQ("Beverages");
 ```
 
-**Profesionales**
+**Pros**
 
 -   Proporciona hasta una mejora del rendimiento de 7% con respecto a las consultas LINQ normales.
 -   Objetos materializados completamente.
@@ -810,13 +808,13 @@ Microbenchmarks simple donde no se programó la creación del contexto se ponga 
 | EF5 | ESQL ObjectContext                   | 2414      | 38801408 |
 | EF5 | Consulta de Linq de ObjectContext             | 2692      | 38277120 |
 | EF5 | Ningún seguimiento de consultas de DbContext Linq     | 2818      | 41840640 |
-| EF5 | Consulta de Linq de DbContext                 | 2930      | 41771008 |
+| EF5 | DbContext Linq Query                 | 2930      | 41771008 |
 | EF5 | Ningún seguimiento de consultas de ObjectContext Linq | 3013      | 38412288 |
 |     |                                      |           |          |
 | EF6 | ESQL ObjectContext                   | 2059      | 46039040 |
 | EF6 | Consulta de Linq de ObjectContext             | 3074      | 45248512 |
 | EF6 | Ningún seguimiento de consultas de DbContext Linq     | 3125      | 47575040 |
-| EF6 | Consulta de Linq de DbContext                 | 3420      | 47652864 |
+| EF6 | DbContext Linq Query                 | 3420      | 47652864 |
 | EF6 | Ningún seguimiento de consultas de ObjectContext Linq | 3593      | 45260800 |
 
 ![Pruebas comparativas microcargas de EF5, 5000 iteraciones semiactivos](~/ef6/media/ef5micro5000warm.png)
@@ -838,7 +836,7 @@ Para comparar el rendimiento real de las opciones de consulta diferentes, creamo
 | EF5 | Consulta de Linq de ObjectContext                    | 1152      | 38178816 |
 | EF5 | Ningún seguimiento de consultas de DbContext Linq            | 1208      | 41803776 |
 | EF5 | Consulta Sql de DbContext en DbSet                | 1414      | 37982208 |
-| EF5 | Consulta de Linq de DbContext                        | 1574      | 41738240 |
+| EF5 | DbContext Linq Query                        | 1574      | 41738240 |
 |     |                                             |           |          |
 | EF6 | Comando de la entidad de ObjectContext                | 480       | 47247360 |
 | EF6 | Query Store ObjectContext                   | 493       | 46739456 |
@@ -849,7 +847,7 @@ Para comparar el rendimiento real de las opciones de consulta diferentes, creamo
 | EF6 | Ningún seguimiento de consultas de DbContext Linq            | 878       | 47554560 |
 | EF6 | Consulta de Linq de ObjectContext                    | 953       | 47632384 |
 | EF6 | Consulta Sql de DbContext en DbSet                | 1023      | 41992192 |
-| EF6 | Consulta de Linq de DbContext                        | 1290      | 47529984 |
+| EF6 | DbContext Linq Query                        | 1290      | 47529984 |
 
 
 ![Iteraciones de consulta activa 1000 EF5](~/ef6/media/ef5warmquery1000.png)
@@ -891,7 +889,7 @@ El modelo contiene conjuntos de entidades 1005 y 4227 conjuntos de asociaciones.
 
 | Configuración                              | Desglose de tiempo consumido                                                                                                                                               |
 |:-------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Visual Studio 2010, Entity Framework 4     | Generación de SSDL: 2 horas 27 min. <br/> Generación de asignación: 1 segundo <br/> Generación de CSDL: 1 segundo <br/> Generación de ObjectLayer: 1 segundo <br/> Generación de vistas: 2 h 14 minutos |
+| Visual Studio 2010, Entity Framework 4     | Generación de SSDL: 2 horas a 27 min. <br/> Generación de asignación: 1 segundo <br/> Generación de CSDL: 1 segundo <br/> Generación de ObjectLayer: 1 segundo <br/> Generación de vistas: 2 h a 14 minutos |
 | Visual Studio 2010 SP1, Entity Framework 4 | Generación de SSDL: 1 segundo <br/> Generación de asignación: 1 segundo <br/> Generación de CSDL: 1 segundo <br/> Generación de ObjectLayer: 1 segundo <br/> Generación de vistas: 1 hora 53 min.   |
 | Visual Studio 2013, Entity Framework 5     | Generación de SSDL: 1 segundo <br/> Generación de asignación: 1 segundo <br/> Generación de CSDL: 1 segundo <br/> Generación de ObjectLayer: 1 segundo <br/> Generación de vistas: 65 minutos    |
 | Visual Studio 2013, Entity Framework 6     | Generación de SSDL: 1 segundo <br/> Generación de asignación: 1 segundo <br/> Generación de CSDL: 1 segundo <br/> Generación de ObjectLayer: 1 segundo <br/> Generación de vistas: 28 segundos.   |
@@ -1231,7 +1229,7 @@ Entity Framework 6 introdujo compatibilidad con las operaciones asincrónicas cu
 Para obtener información sobre el trabajo de programación asincrónico que le ayudarán a decidir si async mejorará el rendimiento de la aplicación visita [http://msdn.microsoft.com/library/hh191443.aspx](https://msdn.microsoft.com/library/hh191443.aspx). Para obtener más información sobre el uso de operaciones asincrónicas en Entity Framework, vea [consulta asincrónica y guardar](~/ef6/fundamentals/async.md
 ).
 
-### <a name="96-ngen"></a>9.6 NGEN
+### <a name="96-ngen"></a>9.6      NGEN
 
 Entity Framework 6 no se incluye en la instalación predeterminada de .NET framework. Por lo tanto, los ensamblados de Entity Framework no están que Ngen de forma predeterminada, lo que significa que todo el código de Entity Framework está sujeto a los mismos costes JIT'ing como cualquier otro ensamblado MSIL. Esto podría degradar la experiencia de F5 al desarrollar y también el inicio en frío de la aplicación en los entornos de producción. Con el fin de reducir los costos de CPU y memoria de JIT'ing es aconsejable NGEN Entity Framework imágenes según corresponda. Para obtener más información sobre cómo mejorar el rendimiento de inicio de Entity Framework 6 con NGEN, consulte [mejorar el rendimiento de inicio con NGen](~/ef6/fundamentals/performance/ngen.md).
 
@@ -1303,16 +1301,16 @@ Este entorno usa una configuración de máquina de 2 con la base de datos en un 
 ##### <a name="11111-software-environment"></a>11.1.1.1 entorno de software
 
 -   Entorno de Software de Entity Framework 4
-    -   Nombre del sistema operativo: Windows Server 2008 R2 SP1 Enterprise.
+    -   Nombre del sistema operativo: Windows Server 2008 R2 Enterprise SP1.
     -   Visual Studio 2010: Ultimate.
     -   Visual Studio 2010 SP1 (solo para algunos comparaciones).
 -   Entorno de Software de Entity Framework 5 y 6
-    -   Nombre del sistema operativo: Windows 8.1 Enterprise
+    -   Nombre del sistema operativo: Windows 8,1 Enterprise
     -   Visual Studio 2013: Ultimate.
 
 ##### <a name="11112-hardware-environment"></a>11.1.1.2 entorno de hardware
 
--   Procesador dual: W3530 de Intel (r) Xeon (r) CPU L5520 a 2,27 GHz, 2261 Mhz8 GHz, 4 núcleos, 84 procesadores lógicos.
+-   Procesador dual:     W3530 de Intel (r) Xeon (r) CPU L5520 a 2,27 GHz, 2261 Mhz8 GHz, 4 núcleos, 84 procesadores lógicos.
 -   RamRAM de 2412 GB.
 -   136 GB SCSI250GB SATA 7200 rpm / 3GB/s unidad dividir en 4 particiones.
 
@@ -1325,7 +1323,7 @@ Este entorno usa una configuración de máquina de 2 con la base de datos en un 
 
 ##### <a name="11122-hardware-environment"></a>11.1.2.2 entorno de hardware
 
--   Único procesador: Intel (r) Xeon (r) CPU L5520 a 2,27 GHz, 2261 MhzES-1620 0 @ 3,60 GHz, 4 núcleos, 8 procesadores lógicos.
+-   Procesador: Intel (r) Xeon (r) CPU L5520 a 2,27 GHz, 2261 MhzES-1620 0 @ 3,60 GHz, 4 núcleos, 8 procesadores lógicos.
 -   RamRAM de 824 GB.
 -   465 GB ATA500GB SATA 7200 rpm 6GB/s unidad dividir en 4 particiones.
 

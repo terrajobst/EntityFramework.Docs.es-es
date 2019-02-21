@@ -5,12 +5,12 @@ ms.author: bricelam
 ms.date: 11/13/2018
 ms.assetid: 6263EF7D-4989-42E6-BDEE-45DA770342FB
 uid: core/managing-schemas/scaffolding
-ms.openlocfilehash: ef729c0c26d5a1f57099f339eb51cda7e83289df
-ms.sourcegitcommit: b3c2b34d5f006ee3b41d6668f16fe7dcad1b4317
+ms.openlocfilehash: 6e61d2ebcf5ada365dcdb264bc371199574e12fa
+ms.sourcegitcommit: 33b2e84dae96040f60a613186a24ff3c7b00b6db
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/15/2018
-ms.locfileid: "51688685"
+ms.lasthandoff: 02/21/2019
+ms.locfileid: "56459190"
 ---
 # <a name="reverse-engineering"></a>Ingeniería inversa
 
@@ -79,7 +79,7 @@ Los nombres de tabla y columna se corrigen que mejor coincida con las convencion
 
 Tipos de entidad se configuran mediante la API Fluent de forma predeterminada. Especificar `-DataAnnotations` (PMC) o `--data-annotations` (CLI) para usar en su lugar, las anotaciones de datos cuando sea posible.
 
-Por ejemplo, mediante la API Fluent aplicará la técnica scaffolding este.
+Por ejemplo, mediante la API Fluent aplicará la técnica scaffolding esto:
 
 ``` csharp
 entity.Property(e => e.Title)
@@ -87,7 +87,7 @@ entity.Property(e => e.Title)
     .HasMaxLength(160);
 ```
 
-Al usar anotaciones de datos aplicará la técnica scaffolding esto.
+Al usar anotaciones de datos aplicará la técnica scaffolding esto:
 
 ``` csharp
 [Required]
