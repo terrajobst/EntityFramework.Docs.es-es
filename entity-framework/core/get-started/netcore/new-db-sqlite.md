@@ -6,12 +6,12 @@ description: Introducción a .NET Core con Entity Framework Core
 ms.date: 08/03/2018
 ms.assetid: 099d179e-dd7b-4755-8f3c-fcde914bf50b
 uid: core/get-started/netcore/new-db-sqlite
-ms.openlocfilehash: 6cebe14e179cb6998592f5d3823c114b3bda0138
-ms.sourcegitcommit: 5e11125c9b838ce356d673ef5504aec477321724
+ms.openlocfilehash: a0df80a8fe96be4f8cc3177919e2b087e14cb49c
+ms.sourcegitcommit: 735715f10cc8a231c213e4f055d79f0effd86570
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/25/2018
-ms.locfileid: "50022316"
+ms.lasthandoff: 02/16/2019
+ms.locfileid: "56325332"
 ---
 # <a name="getting-started-with-ef-core-on-net-core-console-app-with-a-new-database"></a>Introducción a EF Core en la aplicación de consola de .NET Core con una base de datos nueva
 
@@ -60,7 +60,7 @@ Defina un contexto y clases de entidad que constituirán el modelo.
 
   [!code-csharp[Main](../../../../samples/core/GetStarted/NetCore/ConsoleApp.SQLite/Model.cs)]
 
-Consejo: En una aplicación real, lo habitual sería colocar cada clase en un archivo independiente, y la cadena de conexión, en un archivo de configuración o una variable de entorno. Para que el tutorial sea sencillo, todo está incluido en un archivo.
+Sugerencia: En una aplicación real, lo habitual sería colocar cada clase en un archivo independiente, y la cadena de conexión, en un archivo de configuración o una variable de entorno. Para que el tutorial sea sencillo, todo está incluido en un archivo.
 
 ## <a name="create-the-database"></a>Creación de la base de datos
 
@@ -69,7 +69,7 @@ Una vez que tenga un modelo, puede usar [migraciones](xref:core/managing-schemas
 * Ejecute `dotnet ef migrations add InitialCreate` para aplicar scaffolding a una migración y crear el conjunto inicial de tablas para el modelo.
 * Ejecute `dotnet ef database update` para aplicar la migración nueva a la base de datos. Este comando crea la base de datos antes de aplicar las migraciones.
 
-*blogging.db** SQLite DB está en el directorio del proyecto.
+*blogging.db* SQLite DB está en el directorio del proyecto.
 
 ## <a name="use-the-model"></a>Uso del modelo
 
@@ -111,6 +111,6 @@ Para establecer el directorio de trabajo:
 
 ## <a name="additional-resources"></a>Recursos adicionales
 
-* [Tutorial: Introducción a EF Core en ASP.NET Core con una base de datos nueva](xref:core/get-started/aspnetcore/new-db)
+* [Tutorial: Introducción a EF Core en ASP.NET Core con una base de datos nueva mediante SQLite](xref:core/get-started/aspnetcore/new-db)
 * [Tutorial: Introducción a Razor Pages en ASP.NET Core](https://docs.microsoft.com/aspnet/core/tutorials/razor-pages/razor-pages-start)
 * [Tutorial: Razor Pages con Entity Framework Core en ASP.NET Core](https://docs.microsoft.com/aspnet/core/data/ef-rp/intro)
