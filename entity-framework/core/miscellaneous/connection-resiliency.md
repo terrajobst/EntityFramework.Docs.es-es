@@ -13,7 +13,7 @@ ms.locfileid: "56459177"
 ---
 # <a name="connection-resiliency"></a>Resistencia de las conexiones
 
-Resistencia de la conexión reintenta automáticamente los comandos de base de datos. La característica puede usarse con cualquier base de datos proporcionando una "estrategia de ejecución," que encapsula la lógica necesaria para detectar errores y vuelva a intentar los comandos. Proveedores de EF Core pueden proporcionar estrategias de ejecución adaptadas a sus condiciones de error de base de datos específica y las directivas de reintento óptima.
+Resistencia de la conexión reintenta automáticamente los comandos de base de datos. La característica puede usarse con cualquier base de datos proporcionando una "estrategia de ejecución," que encapsula la lógica necesaria para detectar errores y vuelva a intentar los comandos. Los proveedores de EF Core pueden proporcionar estrategias de ejecución adaptándose a sus condiciones de error de base de datos específica y las directivas de reintento óptima.
 
 Por ejemplo, el proveedor de SQL Server incluye una estrategia de ejecución que está específicamente adaptada a SQL Server (incluido SQL Azure). Es compatible con los tipos de excepción que se pueden recuperar y tiene valores predeterminados razonables para el número máximo de reintentos, el retraso entre reintentos, etcetera.
 
