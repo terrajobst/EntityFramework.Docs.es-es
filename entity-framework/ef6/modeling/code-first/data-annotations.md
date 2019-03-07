@@ -3,12 +3,12 @@ title: 'Código de la primera anotaciones de datos: EF6'
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 80abefbd-23c9-4fce-9cd3-520e5df9856e
-ms.openlocfilehash: 8d85ef85f56a23d9b3b526554417dc9dd360e139
-ms.sourcegitcommit: 39080d38e1adea90db741257e60dc0e7ed08aa82
+ms.openlocfilehash: e6b017306b4f66f5bac2a9964e11391da28ceb40
+ms.sourcegitcommit: a013e243a14f384999ceccaf9c779b8c1ae3b936
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/03/2018
-ms.locfileid: "50980046"
+ms.lasthandoff: 03/06/2019
+ms.locfileid: "57463287"
 ---
 # <a name="code-first-data-annotations"></a>Anotaciones de datos de Code First
 > [!NOTE]
@@ -176,7 +176,7 @@ La anotación MaxLength afectará a la base de datos estableciendo la longitud d
 
 ![Tabla de blogs que muestra la longitud máxima en la columna BloggerName](~/ef6/media/jj591583-figure04.png)
 
-Anotación de MVC del lado cliente y anotación de EF 4.1 del lado servidor respetan esta validación, crear nuevo dinámicamente un mensaje de error: "el campo BloggerName debe ser un tipo de cadena o matriz con una longitud máxima de '10'." Ese mensaje es un poco largo. Muchas de las anotaciones le permiten especificar un mensaje de error con el atributo de mensaje de error.
+Anotación de MVC del lado cliente y anotación de EF 4.1 del lado servidor respetan esta validación, crear nuevo dinámicamente un mensaje de error: "El campo BloggerName debe ser un tipo de cadena o matriz con una longitud máxima de '10'." Ese mensaje es un poco largo. Muchas de las anotaciones le permiten especificar un mensaje de error con el atributo de mensaje de error.
 
 ``` csharp
     [MaxLength(10, ErrorMessage="BloggerName must be 10 characters or less"),MinLength(5)]
@@ -245,9 +245,6 @@ En la base de datos, la tabla Blog contendrá todas las propiedades del blog, in
 
 ![Tabla de blog con un tipo complejo](~/ef6/media/jj591583-figure06.png)
 
-Otro aspecto interesante es que aunque la propiedad DateCreated se definió como una fecha y hora que no aceptan valores NULL en la clase, el campo de base de datos pertinente que acepta valores NULL. Debe usar la anotación necesaria si lo desea influir en el esquema de base de datos.
-
- 
 
 ## <a name="concurrencycheck"></a>ConcurrencyCheck
 
@@ -271,7 +268,7 @@ Si alguien ha cambiado el nombre de blogger para blog mientras tanto, se produci
 
  
 
-## <a name="timestamp"></a>Marca de tiempo
+## <a name="timestamp"></a>TimeStamp
 
 Es más habitual utilizar campos rowversion o marca de tiempo para la comprobación de simultaneidad. Pero en lugar de usar la anotación ConcurrencyCheck, puede usar la anotación de marca de tiempo más específica, siempre y cuando el tipo de la propiedad es la matriz de bytes. Código primero tratará las propiedades de la marca de tiempo del mismo como propiedades ConcurrencyCheck, pero también se asegurará que el campo de base de datos que genera el código en primer lugar es distinto de NULL. Solo puede tener una propiedad de marca de tiempo en una clase determinada.
 
@@ -374,7 +371,7 @@ De forma predeterminada, los índices no son únicas, pero puede usar el **IsUni
 
 ### <a name="multiple-column-indexes"></a>Índices de varias columnas
 
-Los índices que abarcan varias columnas se especifican con el mismo nombre en varias anotaciones de índice para una tabla determinada. Al crear los índices de varias columnas, deberá especificar un orden de las columnas en el índice. Por ejemplo, el código siguiente crea un índice de varias columna en **clasificación** y **BlogId** llamado **IX\_BlogAndRating**. **BlogId** es la primera columna en el índice y **clasificación** es el segundo.
+Los índices que abarcan varias columnas se especifican con el mismo nombre en varias anotaciones de índice para una tabla determinada. Al crear los índices de varias columnas, deberá especificar un orden de las columnas en el índice. Por ejemplo, el código siguiente crea un índice de varias columna en **clasificación** y **BlogId** llamado **IX\_BlogIdAndRating**. **BlogId** es la primera columna en el índice y **clasificación** es el segundo.
 
 ``` csharp
     public class Post
@@ -391,7 +388,7 @@ Los índices que abarcan varias columnas se especifican con el mismo nombre en v
 
  
 
-## <a name="relationship-attributes-inverseproperty-and-foreignkey"></a>Relación de atributos: InverseProperty y ForeignKey
+## <a name="relationship-attributes-inverseproperty-and-foreignkey"></a>Atributos de relación: InverseProperty y ForeignKey
 
 > [!NOTE]
 > Esta página proporciona información sobre cómo configurar las relaciones en el modelo de Code First usando anotaciones de datos. Para obtener información general acerca de las relaciones de EF y cómo obtener acceso y manipular datos mediante relaciones, vea [& Propiedades de navegación de relaciones](~/ef6/fundamentals/relationships.md). *
@@ -441,7 +438,7 @@ También deberá agregar en la clase Person que se hace referencia a estas propi
     }
 ```
 
-En primer lugar no es capaz de hacer coincidir las propiedades en las dos clases en su propio código. La tabla de base de datos de publicaciones debe tener una clave externa de la persona CreatedBy y uno para la persona UpdatedBy pero el código en primer lugar creará cuatro propiedades clave externa de voluntad: persona\_Id, persona\_Id1, CreatedBy\_Id y UpdatedBy\_identificador.
+En primer lugar no es capaz de hacer coincidir las propiedades en las dos clases en su propio código. La tabla de base de datos de publicaciones debe tener una clave externa para la persona CreatedBy y otra para la persona UpdatedBy pero código primero creará cuatro propiedades de clave externa: Persona\_Id, persona\_Id1, CreatedBy\_Id y UpdatedBy\_identificador.
 
 ![Tabla de entradas con claves externas adicionales](~/ef6/media/jj591583-figure10.png)
 
