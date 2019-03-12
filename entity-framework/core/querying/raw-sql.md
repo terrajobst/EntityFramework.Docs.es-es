@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 70aae9b5-8743-4557-9c5d-239f688bf418
 uid: core/querying/raw-sql
-ms.openlocfilehash: 343162596780e6146b57f73a38221701009cd855
-ms.sourcegitcommit: 85d17524d8e022f933cde7fc848313f57dfd3eb8
+ms.openlocfilehash: ad7ac3099cfd4c49b88acfbbff61f2af9294b6ec
+ms.sourcegitcommit: a013e243a14f384999ceccaf9c779b8c1ae3b936
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 02/06/2019
-ms.locfileid: "55760514"
+ms.lasthandoff: 03/06/2019
+ms.locfileid: "57463248"
 ---
 # <a name="raw-sql-queries"></a>Consultas SQL sin formato
 
@@ -140,4 +140,6 @@ Existen algunas limitaciones que debe considerar al usar las consultas SQL sin f
 * Las instrucciones SQL que no son `SELECT` se reconocen de manera automáticamente como instrucciones que no admiten composición. Como consecuencia, los resultados completos de los procedimientos almacenados siempre se devuelven al cliente y cualquier operador LINQ aplicado después de `FromSql` se evalúa en la memoria.
 
 > [!WARNING]  
-> **Siempre use la parametrización para las consultas SQL sin formato:** las API que aceptan una cadena SQL sin formato como `FromSql` y `ExecuteSqlCommand` permiten que los valores se pasen de manera sencilla como parámetros. Además de validar la entrada del usuario, siempre use la parametrización para cualquier valor usado en un comando o consulta SQL sin formato. Si usa la concatenación de cadenas para compilar de manera dinámica cualquier parte de la cadena de consulta, es su responsabilidad validar cualquier entrada como protección contra los ataques por inyección de código SQL.
+> **Siempre use la parametrización para las consultas SQL sin formato:** Además de validar la entrada del usuario, siempre use la parametrización para cualquier valor usado en un comando o consulta SQL sin formato. las API que aceptan una cadena SQL sin formato como `FromSql` y `ExecuteSqlCommand` permiten que los valores se pasen de manera sencilla como parámetros. Las sobrecargas de `FromSql` y `ExecuteSqlCommand` que aceptan FormattableString también permiten el uso de la sintaxis de interpolación de cadenas de una manera que ayude a proteger contra ataques por inyección de código SQL. 
+> 
+> Si usa la concatenación o interpolación de cadenas para generar de forma dinámica cualquier elemento de la cadena de consulta, o bien pasa la entrada del usuario a instrucciones o procedimientos almacenados que la puedan ejecutar como SQL dinámico, será responsable de validar todas las entradas para protegerlas contra ataques por inyección de código SQL.
