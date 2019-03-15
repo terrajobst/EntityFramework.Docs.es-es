@@ -3,12 +3,12 @@ title: Las relaciones, las propiedades de navegación y las claves externas - EF
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 8a21ae73-6d9b-4b50-838a-ec1fddffcf37
-ms.openlocfilehash: 46c2d11b5704ec7ae82a423ae042b87f5efe436f
-ms.sourcegitcommit: 8b42045cd21f80f425a92f5e4e9dd4972a31720b
+ms.openlocfilehash: 416eb1fb590330ba292a858347e26b83dddc74df
+ms.sourcegitcommit: a709054b2bc7a8365201d71f59325891aacd315f
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/14/2018
-ms.locfileid: "49315664"
+ms.lasthandoff: 03/14/2019
+ms.locfileid: "57829205"
 ---
 # <a name="relationships-navigation-properties-and-foreign-keys"></a>Las relaciones, las propiedades de navegación y las claves externas
 En este tema se proporciona información general de cómo Entity Framework administra las relaciones entre entidades. También se ofrece orientación sobre cómo asignar y manipular las relaciones.
@@ -29,7 +29,7 @@ Se recomienda incluir propiedades en el modelo que se asignan a las claves exter
 
 Cuando las columnas de clave externas no se incluyen en el modelo, la información de asociación se administra como un objeto independiente. Se realiza un seguimiento de las relaciones a través de referencias de objeto en lugar de propiedades de clave externa. Este tipo de asociación se denomina un *asociación independiente*. La manera más común para modificar un *asociación independiente* consiste en modificar las propiedades de navegación que se generan para cada entidad que participa en la asociación.
 
-Puede decidir entre utilizar uno o ambos tipos de asociaciones en su modelo. Sin embargo, si tiene una relación muchos a muchos pura que está conectada mediante una tabla de combinación que solo contiene claves externas, EF utilizará una asociación independiente para administrar este tipo de relación muchos a muchos.   
+Puede decidir entre utilizar uno o ambos tipos de asociaciones en su modelo. Sin embargo, si tiene una relación muchos a muchos pura que está conectada mediante una tabla de combinación que solo contiene claves externas, EF utilizará una asociación independiente para administrar este tipo de relación muchos a muchos.   
 
 La siguiente imagen muestra un modelo conceptual que se creó con Entity Framework Designer. El modelo contiene dos entidades que participan en la relación de uno a varios. Ambas entidades tienen propiedades de navegación. **Curso** es la entidad de dependencia y tiene la **DepartmentID** propiedad de clave externa definida.
 
@@ -51,7 +51,7 @@ public class Department
 {
    public Department()
    {
-     this.Course = new HashSet<Course>();
+     this.Courses = new HashSet<Course>();
    }  
    public int DepartmentID { get; set; }
    public string Name { get; set; }
