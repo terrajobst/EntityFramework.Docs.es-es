@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/19/2019
 ms.assetid: 2EBE2CCC-E52D-483F-834C-8877F5EB0C0C
 uid: core/what-is-new/ef-core-3.0/features
-ms.openlocfilehash: cf0d2cf032b9aa319fe706aece5b1ea66a5d6251
-ms.sourcegitcommit: a013e243a14f384999ceccaf9c779b8c1ae3b936
+ms.openlocfilehash: b6774f615b04bf9579aac5dea217e7321631da0c
+ms.sourcegitcommit: a709054b2bc7a8365201d71f59325891aacd315f
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/06/2019
-ms.locfileid: "57463379"
+ms.lasthandoff: 03/14/2019
+ms.locfileid: "57829192"
 ---
 # <a name="new-features-included-in-ef-core-30-currently-in-preview"></a>Nuevas características incluidas en EF Core 3.0 (actualmente en versión preliminar)
 
@@ -75,7 +75,7 @@ Esta característica los convierte en una elección excelente para las vistas de
 Se ha iniciado el trabajo en esta característica, pero no se incluye en la versión preliminar actual. 
 
 Esta característica trata de permitir entidades que almacenan datos en propiedades indexadas en lugar de propiedades regulares, y también de utilizar instancias de la misma clase .NET (potencialmente algo tan simple como un `Dictionary<string, object>`) para representar diferentes tipos de entidades en el mismo modelo de EF Core.
-Esta característica es un punto de partida para admitir las relaciones varios a varios sin una entidad de unión, que es una de las mejoras más solicitadas por EF Core.
+Esta característica es un punto de partida para admitir las relaciones varios a varios sin una entidad de unión ([problema n.° 1368](https://github.com/aspnet/EntityFrameworkCore/issues/1368)), que es una de las mejoras más solicitadas por EF Core.
 
 ## <a name="ef-63-on-net-core"></a>EF 6.3 en .NET Core 
 
