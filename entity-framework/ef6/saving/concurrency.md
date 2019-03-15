@@ -94,7 +94,7 @@ using (var context = new BloggingContext())
 
 ## <a name="custom-resolution-of-optimistic-concurrency-exceptions"></a>Resolución personalizada de las excepciones de simultaneidad optimista  
 
-A veces desea combinar los valores actuales de la base de datos con los valores actuales de la entidad. Normalmente esto requiere alguna interacción lógica o de usuario personalizado. Por ejemplo, podría presentar un formulario al usuario que contiene los valores actuales, los valores de la base de datos y establece un valor predeterminado de valores resueltos. El usuario, a continuación, modificar los valores resueltos según sea necesario y sería estos valores resueltos en el que se guardan en la base de datos. Esto puede hacerse mediante los objetos DbPropertyValues devuelto desde CurrentValues y GetDatabaseValues en la entrada de la entidad. Por ejemplo:  
+A veces desea combinar los valores actuales de la base de datos con los valores actuales de la entidad. Normalmente esto requiere alguna interacción lógica o de usuario personalizado. Por ejemplo, podría presentar un formulario al usuario que contiene los valores actuales, los valores de la base de datos y establece un valor predeterminado de valores resueltos. El usuario modificara los valores resueltos según sea necesario y estos valores resueltos son los que se guardan en la base de datos. Esto puede hacerse mediante los objetos DbPropertyValues devuelto desde CurrentValues y GetDatabaseValues en la entrada de la entidad. Por ejemplo:  
 
 ``` csharp
 using (var context = new BloggingContext())
