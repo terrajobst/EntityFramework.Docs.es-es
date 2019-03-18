@@ -3,16 +3,16 @@ title: Glosario de Entity Framework - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 3f05ffdd-49bc-499c-9732-4a368bf5d2d7
-ms.openlocfilehash: 9ed7a2d841c625de35de57edb4e57e69b89a3db9
-ms.sourcegitcommit: 5d74ac575f813110db6d870720f50dd7606446bc
+ms.openlocfilehash: 4e42e5870879524b814cecdc361e688d36f0180f
+ms.sourcegitcommit: 6c4e06bc62d98442530e93a44725e38e59483d42
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/09/2018
-ms.locfileid: "48881272"
+ms.lasthandoff: 03/18/2019
+ms.locfileid: "58131388"
 ---
 # <a name="entity-framework-glossary"></a>Glosario de Entity Framework
 ## <a name="code-first"></a>Code First
-Creación de un modelo de Entity Framework mediante código. Puede tener como destino el modelo y base de datos existente o una base de datos.
+Creación de un modelo de Entity Framework mediante código. El modelo puede tener como destino una base de datos existente o una base de datos.
 
 ## <a name="context"></a>Contexto
 Una clase que representa una sesión con la base de datos, lo que le permite consultar y guardar los datos. Un contexto se deriva de la clase DbContext o ObjectContext.

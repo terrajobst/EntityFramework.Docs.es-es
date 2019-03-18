@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 04/09/2017
 ms.assetid: 94ab4800-c460-4caa-a5e8-acdfee6e6ce2
 uid: core/providers/sqlite/limitations
-ms.openlocfilehash: 69c40fcd8b7ddb925728b1bad9992ad2a81e7540
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 53262bc926d79f42c4418a62717a462564dc80bf
+ms.sourcegitcommit: 6c4e06bc62d98442530e93a44725e38e59483d42
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994669"
+ms.lasthandoff: 03/18/2019
+ms.locfileid: "58131414"
 ---
 # <a name="sqlite-ef-core-database-provider-limitations"></a>Limitaciones del proveedor de base de datos de SQLite EF Core
 
@@ -41,7 +41,7 @@ El motor de base de datos de SQLite no admite un número de operaciones de esque
 | DropPrimaryKey       | ✗          |                  |
 | DropTable            | ✔          | 1.0              |
 | DropUniqueConstraint | ✗          |                  |
-| RenameColumn         | ✗          |                  |
+| RenameColumn         | ✔          | 2.2.2            |
 | RenameIndex          | ✔          | 2.1              |
 | RenameTable          | ✔          | 1.0              |
 | EnsureSchema         | ✔ (no operativo)  | 2.0              |
@@ -52,7 +52,7 @@ El motor de base de datos de SQLite no admite un número de operaciones de esque
 
 ## <a name="migrations-limitations-workaround"></a>Solución alternativa de las limitaciones de las migraciones
 
-Puede solucionar algunas de estas limitaciones escribiendo manualmente el código en las migraciones para realizar una tabla de volver a generar. Una recompilación de la tabla implica cambiar el nombre de la tabla existente, creando una nueva tabla, copiar los datos a la nueva tabla y eliminación de la tabla anterior. Deberá usar el `Sql(string)` método para realizar algunos de estos pasos.
+Puede solucionar algunas de estas limitaciones escribiendo manualmente el código en las migraciones para realizar una tabla de volver a generar. Una recompilación de la tabla implica cambiar el nombre de la tabla existente, crear otra tabla, copiar los datos en la tabla nueva y eliminar la anterior. Deberá usar el `Sql(string)` método para realizar algunos de estos pasos.
 
 Consulte [realizar otros tipos de tabla de cambios de esquema](http://sqlite.org/lang_altertable.html#otheralter) en la documentación de SQLite para obtener más detalles.
 
