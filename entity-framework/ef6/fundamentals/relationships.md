@@ -3,12 +3,12 @@ title: Las relaciones, las propiedades de navegación y las claves externas - EF
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 8a21ae73-6d9b-4b50-838a-ec1fddffcf37
-ms.openlocfilehash: 416eb1fb590330ba292a858347e26b83dddc74df
-ms.sourcegitcommit: a709054b2bc7a8365201d71f59325891aacd315f
+ms.openlocfilehash: 8292ae7af8d760240715854611d92ab340bf1ca7
+ms.sourcegitcommit: eb8359b7ab3b0a1a08522faf67b703a00ecdcefd
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/14/2019
-ms.locfileid: "57829205"
+ms.lasthandoff: 03/21/2019
+ms.locfileid: "58319197"
 ---
 # <a name="relationships-navigation-properties-and-foreign-keys"></a>Las relaciones, las propiedades de navegación y las claves externas
 En este tema se proporciona información general de cómo Entity Framework administra las relaciones entre entidades. También se ofrece orientación sobre cómo asignar y manipular las relaciones.
@@ -147,7 +147,7 @@ Si está utilizando entidades POCO sin objetos proxy, debe asegurarse que la **D
 
 ## <a name="loading-related-objects"></a>Cargar objetos relacionados
 
-En Entity Framework que usa con más frecuencia, utilice las propiedades de navegación para cargar entidades relacionadas con la entidad devuelta por la asociación definida. Para obtener más información, consulte [cargar objetos relacionados](~/ef6/querying/related-data.md).
+En Entity Framework se suelen usan las propiedades de navegación para cargar entidades relacionadas con la entidad devuelta por la asociación definida. Para obtener más información, consulte [cargar objetos relacionados](~/ef6/querying/related-data.md).
 
 > [!NOTE]
 > En una asociación de clave externa, al cargar un extremo relacionado de un objeto dependiente, el objeto relacionado se cargará dependiendo del valor de clave externa del objeto dependiente actualmente en memoria:

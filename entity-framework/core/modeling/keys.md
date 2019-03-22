@@ -4,16 +4,18 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 912ffef7-86a0-4cdc-a776-55f907459d20
 uid: core/modeling/keys
-ms.openlocfilehash: 9e6946100ebabc6ba57cb792b3672219098b1e21
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 6272e323b83ccab2ed060a2ebbde1d1e8e353d66
+ms.sourcegitcommit: eb8359b7ab3b0a1a08522faf67b703a00ecdcefd
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994026"
+ms.lasthandoff: 03/21/2019
+ms.locfileid: "58319171"
 ---
 # <a name="keys-primary"></a>Claves (principal)
 
-Una clave actúa como identificador único para cada instancia de la entidad principal. Cuando se usa una base de datos relacional se asigna al concepto de un *clave principal*. También puede configurar un identificador único que no es la clave principal (consulte [claves alternativas](alternate-keys.md) para obtener más información).
+Una clave actúa como identificador único para cada instancia de la entidad principal. Cuando se usa una base de datos relacional se asigna al concepto de un *clave principal*. También puede configurar un identificador único que no es la clave principal (consulte [claves alternativas](alternate-keys.md) para obtener más información). 
+
+Uno de los métodos siguientes se puede usar el programa de instalación o crear una clave principal.
 
 ## <a name="conventions"></a>Convenciones
 

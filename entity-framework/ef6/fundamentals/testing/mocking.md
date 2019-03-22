@@ -3,12 +3,12 @@ title: Las pruebas con un marco de simulación - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: bd66a638-d245-44d4-8e71-b9c6cb335cc7
-ms.openlocfilehash: 80fd97073744be40d66c09706d3513dba18e724d
-ms.sourcegitcommit: 7a7da65404c9338e1e3df42576a13be536a6f95f
+ms.openlocfilehash: 3d39b41018beb70b72105dfb2fe4d61afc0b0525
+ms.sourcegitcommit: eb8359b7ab3b0a1a08522faf67b703a00ecdcefd
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/06/2018
-ms.locfileid: "48834726"
+ms.lasthandoff: 03/21/2019
+ms.locfileid: "58319210"
 ---
 # <a name="testing-with-a-mocking-framework"></a>Las pruebas con un marco de simulación
 > [!NOTE]
@@ -21,7 +21,7 @@ Al escribir pruebas para la aplicación suele ser deseable para evitar llegar a 
 Existen dos enfoques diferentes que pueden usarse para crear una versión en memoria de su contexto.  
 
 - **Crear sus propio dobles de pruebas** – este enfoque implica escribir su propia implementación en memoria de su contexto y DbSets. Esto le ofrece un gran control sobre cómo se comportan las clases, pero pueden implicar escribir y poseer una cantidad razonable de código.  
-- **Usar un marco de simulación para crear los dobles de pruebas** : mediante un marco de simulación (como Moq) puede tener las implementaciones en memoria que contexto y los conjuntos creados dinámicamente en tiempo de ejecución para usted.  
+- **Usar un marco de simulación para crear los dobles de pruebas** : mediante un marco de simulación (como Moq) puede tener las implementaciones en memoria de su contexto y los conjuntos creados dinámicamente en tiempo de ejecución para usted.  
 
 En este artículo se tratará con el uso de un marco de simulación. Para crear sus propio dobles de pruebas, vea [las pruebas con su dobles de pruebas propio](writing-test-doubles.md).  
 
