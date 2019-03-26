@@ -4,12 +4,12 @@ author: bricelam
 ms.author: bricelam
 ms.date: 09/18/2018
 uid: core/miscellaneous/cli/powershell
-ms.openlocfilehash: 468698d1bbd17d4ad10b1b1601bfbc315a01c1ff
-ms.sourcegitcommit: b3c2b34d5f006ee3b41d6668f16fe7dcad1b4317
+ms.openlocfilehash: cb05e3fb66adf96f8a6778711a76520d0be24c71
+ms.sourcegitcommit: 645785187ae23ddf7d7b0642c7a4da5ffb0c7f30
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/15/2018
-ms.locfileid: "51688711"
+ms.lasthandoff: 03/25/2019
+ms.locfileid: "58419775"
 ---
 # <a name="entity-framework-core-tools-reference---package-manager-console-in-visual-studio"></a>Referencia: consola de administrador de paquetes en Visual Studio de las herramientas de Entity Framework Core
 
@@ -130,9 +130,9 @@ La siguiente tabla muestra los parámetros que son comunes a todos los comandos 
 
 | Parámetro                 | Descripción                                                                                                                                                                                                          |
 |:--------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| -Contexto \<cadena >        | La `DbContext` clase se debe utilizar. Nombre de clase completa con espacios de nombres o única.  Si se omite este parámetro, EF Core busca la clase de contexto. Si hay varias clases de contexto, este parámetro es necesario. |
+| -Contexto \<cadena >        | La clase `DbContext` que se va a usar. Nombre de clase completa con espacios de nombres o única.  Si se omite este parámetro, EF Core busca la clase de contexto. Si hay varias clases de contexto, este parámetro es necesario. |
 | -Proyecto \<cadena >        | El proyecto de destino. Si se omite este parámetro, el **proyecto predeterminado** para **Package Manager Console** se utiliza como el proyecto de destino.                                                                             |
-| Proyecto de inicio - \<cadena > | El proyecto de inicio. Si se omite este parámetro, el **proyecto de inicio** en **propiedades de la solución** se utiliza como el proyecto de destino.                                                                                 |
+| -StartupProject \<String> | El proyecto de inicio. Si se omite este parámetro, el **proyecto de inicio** en **propiedades de la solución** se utiliza como el proyecto de destino.                                                                                 |
 | -Verbose                  | Mostrar resultados detallados.                                                                                                                                                                                                 |
 
 Para mostrar información de ayuda sobre un comando, use PowerShell `Get-Help` comando.
@@ -163,7 +163,7 @@ Parámetros:
 
 ## <a name="get-dbcontext"></a>Get-DbContext
 
-Listas disponibles `DbContext` tipos.
+Obtiene información sobre un `DbContext` tipo.
 
 ## <a name="remove-migration"></a>Remove-Migration
 
@@ -188,7 +188,7 @@ Parámetros:
 | -OutputDir \<cadena >               | Para poner los archivos en el directorio. Las rutas de acceso son relativas al directorio de proyecto.                                                                                                                                                                                             |
 | -ContextDir \<cadena >              | El directorio para colocar el `DbContext` archivo. Las rutas de acceso son relativas al directorio de proyecto.                                                                                                                                                                              |
 | -Contexto \<cadena >                 | El nombre de la `DbContext` clase genere.                                                                                                                                                                                                                          |
-| -Esquemas \<String [] >               | Los esquemas de tablas para generar tipos de entidad para. Si se omite este parámetro, se incluyen todos los esquemas.                                                                                                                                                             |
+| -Schemas \<String[]>               | Los esquemas de tablas para generar tipos de entidad para. Si se omite este parámetro, se incluyen todos los esquemas.                                                                                                                                                             |
 | -Tablas \<String [] >                | Para generar tipos de entidad para las tablas. Si se omite este parámetro, se incluyen todas las tablas.                                                                                                                                                                         |
 | -DataAnnotations                   | Usar atributos para configurar el modelo (donde sea posible). Si se omite este parámetro, se usa solo la API fluida.                                                                                                                                                      |
 | -UseDatabaseNames                  | Usar nombres de tabla y columna exactamente como aparecen en la base de datos. Si se omite este parámetro, se cambian los nombres de base de datos que mejor se ajuste a convenciones de estilo de nombre de C#.                                                                                       |
@@ -206,7 +206,7 @@ Ejemplo que se aplica la técnica scaffolding únicamente las tablas seleccionad
 Scaffold-DbContext "Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Tables "Blog","Post" -ContextDir Context -Context BlogContext
 ```
 
-## <a name="script-migration"></a>Migración de scripts
+## <a name="script-migration"></a>Script-Migration
 
 Genera un script SQL que se aplica a todos los cambios de una migración seleccionada a otra migración seleccionado.
 
@@ -214,9 +214,9 @@ Parámetros:
 
 | Parámetro                | Descripción                                                                                                                                                                                                                |
 |:-------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| *-Desde* \<cadena >        | La migración inicial. Las migraciones pueden identificarse por su nombre o identificador. El número 0 es un caso especial que significa *antes de la primera migración*. El valor predeterminado es 0.                                                              |
-| *-A* \<cadena >          | La migración final. De forma predeterminada a la última migración.                                                                                                                                                                      |
-| <nobr>-Idempotente</nobr> | Generar un script que se puede usar en una base de datos en cualquier migración.                                                                                                                                                         |
+| *-From* \<String>        | La migración inicial. Las migraciones pueden identificarse por su nombre o identificador. El número 0 es un caso especial que significa *antes de la primera migración*. El valor predeterminado es 0.                                                              |
+| *-To* \<String>          | La migración final. De forma predeterminada a la última migración.                                                                                                                                                                      |
+| <nobr>-Idempotent</nobr> | Generar un script que se puede usar en una base de datos en cualquier migración.                                                                                                                                                         |
 | -Output \<cadena >        | Para escribir el resultado en el archivo. Si se omite este parámetro, se crea el archivo con un nombre generado en la misma carpeta cuando se crean archivos de tiempo de ejecución de la aplicación, por ejemplo: */obj/Debug/netcoreapp2.1/ghbkztfz.sql/*. |
 
 > [!TIP]

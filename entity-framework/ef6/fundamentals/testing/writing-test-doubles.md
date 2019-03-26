@@ -3,12 +3,12 @@ title: Las pruebas con sus propio dobles de pruebas - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 16a8b7c0-2d23-47f4-9cc0-e2eb2e738ca3
-ms.openlocfilehash: 2158dc73585c2720e7293096b0478c73edf522d9
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 9db56e28cd89084fece36c3e5a2c1b4495991d01
+ms.sourcegitcommit: 645785187ae23ddf7d7b0642c7a4da5ffb0c7f30
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490914"
+ms.lasthandoff: 03/25/2019
+ms.locfileid: "58419736"
 ---
 # <a name="testing-with-your-own-test-doubles"></a>Las pruebas con sus propio dobles de pruebas
 > [!NOTE]
@@ -43,7 +43,7 @@ Este artículo proporcionan listas de código completo que se pueden copiar en V
 
 ## <a name="creating-a-context-interface"></a>Creación de una interfaz de contexto  
 
-Vamos a ver en las pruebas de un servicio que hace uso de EF modelo. Para poder reemplazar el contexto de EF con una versión en memoria para las pruebas, definiremos una interfaz que nuestro contexto EF (y su doble de memoria) seguirán imeplement.  
+Vamos a ver en las pruebas de un servicio que hace uso de EF modelo. Para poder reemplazar el contexto de EF con una versión en memoria para las pruebas, definiremos una interfaz que implementarán el contexto de EF (y su doble de memoria).
 
 Vamos a probar el servicio de consultar y modificar datos mediante las propiedades DbSet de nuestro contexto y también llamar a SaveChanges para insertar los cambios en la base de datos. Por lo que hemos incluido a estos miembros en la interfaz.  
 
