@@ -99,7 +99,7 @@ Tenga en cuenta que muchos de los [cambios importantes en el nivel de aplicació
   * Esta solicitud agrega el concepto de `CanConnect` que se usará en el estado de ASP.NET Core comprueba para determinar si la base de datos está disponible. De forma predeterminada, la implementación relacional simplemente llama a `Exist`, pero los proveedores pueden implementar algo diferente si es necesario. No relacionales proveedores debe implementar la nueva API para la comprobación de estado que se pueda usar.
 * [https://github.com/aspnet/EntityFrameworkCore/pull/13306](https://github.com/aspnet/EntityFrameworkCore/pull/13306) -Actualizar RelationalTypeMapping base para no establecer tamaño DbParameter
   * Detener configuración tamaño de forma predeterminada, ya que puede provocar el truncamiento. Los proveedores que necesite agregar su propia lógica si se debe establecer tamaño.
-* https://github.com/aspnet/EntityFrameworkCore/pull/13372 -RevEng: Especifique siempre el tipo de columna para columnas decimales
+* (https://github.com/aspnet/EntityFrameworkCore/pull/13372) -RevEng: Especifique siempre el tipo de columna para columnas decimales
   * Configure siempre el tipo de columna para columnas decimales en código con scaffold en lugar de configurar por convención.
   * Los proveedores no deberían requerir cambios en su extremo.
 * [https://github.com/aspnet/EntityFrameworkCore/pull/13469](https://github.com/aspnet/EntityFrameworkCore/pull/13469) -Agrega CaseExpression para generar las expresiones CASE de SQL
