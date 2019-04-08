@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/19/2019
 ms.assetid: 2EBE2CCC-E52D-483F-834C-8877F5EB0C0C
 uid: core/what-is-new/ef-core-3.0/features
-ms.openlocfilehash: b6774f615b04bf9579aac5dea217e7321631da0c
-ms.sourcegitcommit: a709054b2bc7a8365201d71f59325891aacd315f
+ms.openlocfilehash: 7501a806271c9734e85e31845f260f2d512da077
+ms.sourcegitcommit: a8b04050033c5dc46c076b7e21b017749e0967a8
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/14/2019
-ms.locfileid: "57829192"
+ms.lasthandoff: 04/02/2019
+ms.locfileid: "58867962"
 ---
 # <a name="new-features-included-in-ef-core-30-currently-in-preview"></a>Nuevas características incluidas en EF Core 3.0 (actualmente en versión preliminar)
 
@@ -27,7 +27,7 @@ Para obtener una lista completa de las correcciones de errores y las mejoras en 
 
 ## <a name="linq-improvements"></a>Mejoras de LINQ 
 
-[Problema de seguimiento n.º 12795](https://github.com/aspnet/EntityFrameworkCore/issues/12795)
+[Problema de seguimiento n.º 12795](https://github.com/aspnet/EntityFrameworkCore/issues/12795)
 
 Se ha iniciado el trabajo en esta característica, pero no se incluye en la versión preliminar actual.
 
@@ -40,7 +40,7 @@ Los objetivos son hacerla más eficaz (por ejemplo, evitar interrumpir las consu
 
 ## <a name="cosmos-db-support"></a>Compatibilidad con Cosmos DB 
 
-[Problema de seguimiento n.º 8443](https://github.com/aspnet/EntityFrameworkCore/issues/8443)
+[Problema de seguimiento n.º 8443](https://github.com/aspnet/EntityFrameworkCore/issues/8443)
 
 Esta característica está incluida en la versión preliminar actual, pero todavía no está completa. 
 
@@ -49,6 +49,31 @@ El objetivo es hacer que algunas de las ventajas de Cosmos DB, como la distribuc
 El proveedor habilitará la mayoría de las características de EF Core, como el seguimiento automático de cambios, LINQ y conversiones de valores, en comparación con SQL API de Cosmos DB.
 Comenzamos este esfuerzo antes de EF Core 2.2 y [hemos puesto a disposición algunas versiones preliminares del proveedor](https://blogs.msdn.microsoft.com/dotnet/2018/10/17/announcing-entity-framework-core-2-2-preview-3/).
 El nuevo plan es continuar desarrollando el proveedor junto con EF Core 3.0. 
+
+## <a name="dependent-entities-sharing-the-table-with-the-principal-are-now-optional"></a>Ahora, las entidades dependientes que comparten la tabla con la entidad de seguridad son opcionales
+
+[Problema de seguimiento n.º 9005](https://github.com/aspnet/EntityFrameworkCore/issues/9005)
+
+Esta característica se introducirá en EF Core 3.0 (versión preliminar 4).
+
+Considere el modelo siguiente:
+```C#
+public class Order
+{
+    public int Id { get; set; }
+    public int CustomerId { get; set; }
+    public OrderDetails Details { get; set; }
+}
+
+public class OrderDetails
+{
+    public int Id { get; set; }
+    public string ShippingAddress { get; set; }
+}
+```
+
+A partir de la versión EF Core 3.0, si `OrderDetails` es propiedad de `Order` o está asignado explícitamente a la misma tabla, será posible agregar `Order` sin `OrderDetails` y todas las propiedades `OrderDetails` excepto la clave principal se asignarán a columnas que aceptan valores NULL.
+Al realizar consultas, EF Core establecerá `OrderDetails` en `null` si ninguna de las propiedades necesarias tiene un valor o si no tiene propiedades necesarias más allá de la clave principal y todas las propiedades son `null`.
 
 ## <a name="c-80-support"></a>Compatibilidad con C# 8.0
 
@@ -61,14 +86,14 @@ Queremos que, mientras usan EF Core, nuestros clientes aprovechen algunas de las
 
 ## <a name="reverse-engineering-of-database-views"></a>Ingeniería inversa de vistas de base de datos
 
-[Problema de seguimiento n.º 1679](https://github.com/aspnet/EntityFrameworkCore/issues/1679)
+[Problema de seguimiento n.º 1679](https://github.com/aspnet/EntityFrameworkCore/issues/1679)
 
 Esta característica no está incluida en la versión preliminar actual.
 
 Los [tipos de consulta](xref:core/modeling/query-types), presentados en EF Core 2.1 y considerados tipos de entidad sin claves en EF Core 3.0, representan datos que se pueden leer desde la base de datos, pero que no se pueden actualizar.
 Esta característica los convierte en una elección excelente para las vistas de base de datos en la mayoría de los escenarios, por lo que tenemos previsto automatizar la creación de tipos de entidad sin claves al usar de técnicas de ingeniería inversa en vistas de base de datos.
 
-## <a name="property-bag-entities"></a>Entidades de contenedor de propiedades 
+## <a name="property-bag-entities"></a>Entidades de contenedor de propiedades
 
 [Problema de seguimiento n.º 13610](https://github.com/aspnet/EntityFrameworkCore/issues/13610) y [n.º 9914](https://github.com/aspnet/EntityFrameworkCore/issues/9914)
 
@@ -77,9 +102,9 @@ Se ha iniciado el trabajo en esta característica, pero no se incluye en la vers
 Esta característica trata de permitir entidades que almacenan datos en propiedades indexadas en lugar de propiedades regulares, y también de utilizar instancias de la misma clase .NET (potencialmente algo tan simple como un `Dictionary<string, object>`) para representar diferentes tipos de entidades en el mismo modelo de EF Core.
 Esta característica es un punto de partida para admitir las relaciones varios a varios sin una entidad de unión ([problema n.° 1368](https://github.com/aspnet/EntityFrameworkCore/issues/1368)), que es una de las mejoras más solicitadas por EF Core.
 
-## <a name="ef-63-on-net-core"></a>EF 6.3 en .NET Core 
+## <a name="ef-63-on-net-core"></a>EF 6.3 en .NET Core
 
-[Problema de seguimiento n.º 271 de EF 6](https://github.com/aspnet/EntityFramework6/issues/271)
+[Problema de seguimiento n.º 271 de EF 6](https://github.com/aspnet/EntityFramework6/issues/271)
 
 Se ha iniciado el trabajo en esta característica, pero no se incluye en la versión preliminar actual. 
 

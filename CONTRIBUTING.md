@@ -1,10 +1,18 @@
+---
+ms.openlocfilehash: 79a2a10cae9f8a5541bca132e407d4abbe95e093
+ms.sourcegitcommit: ce44f85a5bce32ef2d3d09b7682108d3473511b3
+ms.translationtype: HT
+ms.contentlocale: es-ES
+ms.lasthandoff: 04/04/2019
+ms.locfileid: "58914107"
+---
 # <a name="contributing-to-the-entity-framework-documentation"></a>Contribución a la documentación de Entity Framework
 
-En este documento se describe el proceso para colaborar en los artículos y ejemplos de código que se hospedan en el [sitio de documentación de Entity Framework](https://docs.microsoft.com/ef). Las contribuciones pueden ser tan simples como corregir errores ortográficos o tan complejos como redactar nuevos artículos.
+A continuación se explica el proceso de contribución a los artículos y ejemplos de código de la documentación de Entity Framework. Las contribuciones pueden ser tan simples como corregir errores ortográficos o tan complejos como redactar artículos nuevos.
 
 ## <a name="how-to-make-a-simple-correction-or-suggestion"></a>Cómo hacer una corrección o sugerencia sencilla
 
-Los artículos se almacenan en el repositorio como archivos Markdown. Para realizar cambios sencillos en el contenido de un archivo Markdown en el explorador, pulse el vínculo **Editar** en la esquina superior derecha de la ventana del explorador. (Si la ventana del explorador es estrecha, puede expandir la barra **Opciones** para mostrar el vínculo **Editar**). Siga las instrucciones para crear una solicitud de incorporación de cambios (PR). El equipo de EF revisará la PR y la aceptará o sugerirá cambios.
+Los artículos se almacenan como archivos Markdown en este repositorio. Para realizar un cambio sencillo al contenido de un archivo Markdown, haga clic en el vínculo **Editar** de la esquina superior derecha de la ventana del explorador. Puede expandir la barra **Opciones** para mostrar el vínculo **Editar**. Siga las instrucciones para crear una solicitud de incorporación de cambios (PR). El equipo de EF revisará la PR y la aceptará o sugerirá cambios.
 
 ## <a name="how-to-make-a-more-complex-submission"></a>Cómo realizar un envío más complejo
 
@@ -17,17 +25,17 @@ Necesita tener conocimientos básicos de [Git y GitHub.com](https://guides.githu
 
 ## <a name="markdown-syntax"></a>Sintaxis de Markdown
 
-Los artículos se escriben en [DocFx flavored Markdown](http://dotnet.github.io/docfx/spec/docfx_flavored_markdown.html), que es un superconjunto de [GitHub flavored Markdown (GFM)](https://guides.github.com/features/mastering-markdown/). Para obtener ejemplos de sintaxis DFM para las características de interfaz de usuario usadas en la documentación de EF, vea [Metadata and Markdown Template](https://github.com/dotnet/docs/blob/master/styleguide/template.md) (Metadatos y plantillas de Markdown) en la guía de estilo del repositorio .NET Core. 
+Los artículos se escriben en [DocFx flavored Markdown (DFM)](http://dotnet.github.io/docfx/spec/docfx_flavored_markdown.html), un superconjunto de [GitHub flavored Markdown (GFM)](https://guides.github.com/features/mastering-markdown/). Para obtener ejemplos de sintaxis y metadatos de DFM para las características de interfaz de usuario usadas en la documentación de EF, vea [Metadata and Markdown Template](https://github.com/dotnet/docs/blob/master/styleguide/template.md) (Metadatos y plantillas de Markdown) en la guía de estilo del repositorio .NET Core.
 
 ## <a name="folder-structure-conventions"></a>Convenciones de estructura de carpetas
 
-Las imágenes y el resto de los contenidos estáticos se almacenan en una carpeta `_static` dentro de cada área o carpeta del sitio.
+Las imágenes y el resto del contenido estático se almacenan en una carpeta `_static` dentro de cada área o carpeta del sitio.
 
 Los ejemplos de código se almacenan en la carpeta raíz `samples`. Estos ejemplos se organizan en una estructura de carpetas que imita la estructura de la documentación (en la carpeta raíz `entity-framework`).
 
 ## <a name="code-snippets"></a>Fragmentos de código
 
-Los artículos suelen contener fragmentos de código para ilustrar el contenido. DFM permite copiar código en el archivo de Markdown o hacer referencia a un archivo de código independiente. Es preferible usar archivos de código independientes, siempre que sea posible, para minimizar la posibilidad de errores en el código. Los archivos de código deben estar almacenarse en el repositorio con la estructura de carpetas que se ha descrito antes para proyectos de ejemplo.
+Los artículos suelen contener fragmentos de código para ilustrar el contenido. DFM permite copiar código en el archivo de Markdown o hacer referencia a un archivo de código independiente. Siempre que sea posible, use archivos de código independientes para minimizar la posibilidad de errores en el código. Los archivos de código deben estar almacenarse en el repositorio con la estructura de carpetas que se ha descrito antes para proyectos de ejemplo.
 
 Estos son algunos ejemplos de [sintaxis de fragmento de código DFM](http://dotnet.github.io/docfx/spec/docfx_flavored_markdown.html#code-snippet).
 
@@ -43,7 +51,7 @@ Para representar una parte de un archivo como un fragmento de código mediante e
 [!code-csharp[Main](../../../samples/core/saving/Program.cs?range=1-10]
 ```
 
-Para fragmentos de código en C#, haga referencia a una [región de C#](https://msdn.microsoft.com/library/9a1ybwek.aspx). Siempre que sea posible, use regiones en lugar de números de línea porque los números de línea en un archivo de código tienden a cambiar y dejan de estar sincronizados con las referencias de números de línea en Markdown. Las regiones de C# se pueden anidar y, si se hace referencia a la región externa, las directivas `#region` y `#endregion` internas no se representan en un fragmento de código.
+Para fragmentos de código en C#, haga referencia a una [región de C#](https://msdn.microsoft.com/library/9a1ybwek.aspx). Use regiones en vez de números de línea. Los números de línea de un archivo de código tienden a cambiar y dejan de estar sincronizados con las referencias de números de línea en Markdown. Las regiones de C# se pueden anidar. Si se hace referencia a la región externa, las directivas `#region` y `#endregion` internas no se representan en un fragmento de código.
 
 Para representar una región de C# denominada "snippet_Example":
 
