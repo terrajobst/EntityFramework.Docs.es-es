@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 7a2b75e2-1875-4487-9877-feff0651b5a6
 uid: core/miscellaneous/testing/sqlite
-ms.openlocfilehash: bc9d6768a90ce17160c4126d2a68fddaa30d63de
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: e8ff204a09d50064b4f0d4376f02b05c8681ac25
+ms.sourcegitcommit: 8f801993c9b8cd8a8fbfa7134818a8edca79e31a
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42996873"
+ms.lasthandoff: 04/14/2019
+ms.locfileid: "59562538"
 ---
 # <a name="testing-with-sqlite"></a>Pruebas con SQLite
 
@@ -47,5 +47,8 @@ Es la manera más sencilla de habilitar las pruebas con otra base de datos modif
 ## <a name="writing-tests"></a>Escribir pruebas
 
 La clave para las pruebas con este proveedor es la capacidad de decirle el contexto para usar SQLite y controlar el ámbito de la base de datos en memoria. El ámbito de la base de datos se controla mediante la apertura y cierre la conexión. La base de datos se limita a la duración de la conexión está abierta. Normalmente desea limpiar una base de datos de cada método de prueba.
+
+>[!TIP]
+> Para usar `SqliteConnection()` y `.UseSqlite()` método de extensión, el paquete NuGet de referencia [Microsoft.EntityFrameworkCore.Sqlite](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Sqlite/).
 
 [!code-csharp[Main](../../../../samples/core/Miscellaneous/Testing/TestProject/SQLite/BlogServiceTests.cs)]
