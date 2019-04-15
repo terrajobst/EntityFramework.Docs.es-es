@@ -4,12 +4,12 @@ author: bricelam
 ms.author: bricelam
 ms.date: 10/05/2018
 uid: core/managing-schemas/migrations/index
-ms.openlocfilehash: 5ae06a4342a556936dc44c5bf6622814eaad4733
-ms.sourcegitcommit: 7a7da65404c9338e1e3df42576a13be536a6f95f
+ms.openlocfilehash: b94ac567644a9d98a05a40857cc072c500203370
+ms.sourcegitcommit: 8f801993c9b8cd8a8fbfa7134818a8edca79e31a
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/06/2018
-ms.locfileid: "48834752"
+ms.lasthandoff: 04/14/2019
+ms.locfileid: "59562564"
 ---
 <a name="migrations"></a>Migraciones
 ==========
@@ -47,8 +47,8 @@ dotnet ef migrations add InitialCreate
 
 Se agregan tres archivos al proyecto en el directorio **Migraciones**:
 
-* **00000000000000_InitialCreate.cs**: archivo principal de migraciones. Contiene las operaciones necesarias para aplicar la migración (en `Up()`) y para revertirla (en `Down()`).
-* **00000000000000_InitialCreate.Designer.cs**: archivo de metadatos de migraciones. Contiene información que usa EF.
+* **XXXXXXXXXXXXXX_InitialCreate.cs**: archivo principal de las migraciones. Contiene las operaciones necesarias para aplicar la migración (en `Up()`) y para revertirla (en `Down()`).
+* **XXXXXXXXXXXXXX_InitialCreate.Designer.cs**: archivo de metadatos de las migraciones. Contiene información que usa EF.
 * **MyContextModelSnapshot.cs**: instantánea del modelo actual. Se usa para determinar qué ha cambiado al agregar la siguiente migración.
 
 La marca de tiempo del nombre del archivo ayuda a mantenerlos ordenados cronológicamente para que se pueda ver la progresión de cambios.
