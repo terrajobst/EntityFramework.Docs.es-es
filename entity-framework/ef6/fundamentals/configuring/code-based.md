@@ -3,12 +3,12 @@ title: Configuración basada en código - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 13886d24-2c74-4a00-89eb-aa0dee328d83
-ms.openlocfilehash: c317f112f713612f7b9aef3764a0bd004fef5424
-ms.sourcegitcommit: 735715f10cc8a231c213e4f055d79f0effd86570
+ms.openlocfilehash: 079a4ab30af74eac8b1f51ece5801ff40a867a29
+ms.sourcegitcommit: 5280dcac4423acad8b440143433459b18886115b
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 02/16/2019
-ms.locfileid: "56325358"
+ms.lasthandoff: 04/16/2019
+ms.locfileid: "59619290"
 ---
 # <a name="code-based-configuration"></a>Configuración basada en código
 > [!NOTE]
@@ -106,7 +106,7 @@ Para ello, Entity Framework permite registrar un controlador de eventos que se p
 - Al iniciar la aplicación (antes de que se usa EF) el complemento o el proveedor debe registrar el método de controlador de eventos para este evento. (Tenga en cuenta que esto debe ocurrir antes de la aplicación usa EF.)  
 - El controlador de eventos realiza una llamada a ReplaceService para todos los servicios que deben reemplazarse.  
 
-Por ejemplo, sustituye IDbConnectionFactory y DbProviderService, registrar un controlador algo parecido a esto:  
+Por ejemplo, para reemplazar IDbConnectionFactory y DbProviderService podría registrar un controlador algo parecido a esto:  
 
 ``` csharp
 DbConfiguration.Loaded += (_, a) =>
