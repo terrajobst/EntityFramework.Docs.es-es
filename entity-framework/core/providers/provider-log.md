@@ -6,12 +6,12 @@ ms.date: 08/08/2018
 ms.assetid: 7CEF496E-A5B0-4F5F-B68E-529609B23EF9
 ms.technology: entity-framework-core
 uid: core/providers/provider-log
-ms.openlocfilehash: 9ef87a737111053df0359f3b2d7a4f82d25c578a
-ms.sourcegitcommit: 5280dcac4423acad8b440143433459b18886115b
+ms.openlocfilehash: 61a58bd6119763d90731fac62343b983af510cb6
+ms.sourcegitcommit: 87fcaba46535aa351db4bdb1231bd14b40e459b9
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 04/18/2019
-ms.locfileid: "58867949"
+ms.lasthandoff: 04/22/2019
+ms.locfileid: "59929880"
 ---
 # <a name="provider-impacting-changes"></a>Cambios en el impacto de proveedor
 
@@ -62,6 +62,7 @@ Tenga en cuenta que muchos de los [cambios importantes en el nivel de aplicació
   * Conjunto de servicios de convención ha cambiado. Los proveedores deben heredar "ProviderConventionSet" o "RelationalConventionSet".
   * Se pueden agregar personalizaciones a través de `IConventionSetCustomizer` servicios, pero esto está pensado para usarse por otras extensiones, no los proveedores.
   * Convenciones que se usan en tiempo de ejecución deben resolverse desde `IConventionSetBuilder`.
+* https://github.com/aspnet/EntityFrameworkCore/pull/15288 -Propagación de datos se ha refactorizado en una API pública para evitar la necesidad de utilizar los tipos internos. Solo esto debería afectar a los proveedores no relacionales, puesto que la propagación se controla mediante la clase base relacional para todos los proveedores relacionales.
 
 ## <a name="21-----22"></a>2.1 ---> 2.2
 
@@ -82,7 +83,6 @@ Tenga en cuenta que muchos de los [cambios importantes en el nivel de aplicació
   * Proveedores de uso de estas pruebas que deba reaccionar
 * [https://github.com/aspnet/EntityFrameworkCore/pull/12141](https://github.com/aspnet/EntityFrameworkCore/pull/12141) : Devuelve el contexto para el grupo en lugar de eliminarlos en las pruebas funcionales
   * Este cambio incluye algunas pruebas de refactorización que quizá requiera proveedores reaccionar ante ellos
-
 
 ### <a name="test-and-product-code-changes"></a>Cambios de código de prueba y producto
 
