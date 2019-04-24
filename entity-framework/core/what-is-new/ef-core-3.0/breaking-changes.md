@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/19/2019
 ms.assetid: EE2878C9-71F9-4FA5-9BC4-60517C7C9830
 uid: core/what-is-new/ef-core-3.0/breaking-changes
-ms.openlocfilehash: fd593b2832a5a6ffe27cd4493127b5d405f684ba
-ms.sourcegitcommit: ce44f85a5bce32ef2d3d09b7682108d3473511b3
+ms.openlocfilehash: 4b251638de43af6525f3e6faa0bd4113ab1714b9
+ms.sourcegitcommit: 5280dcac4423acad8b440143433459b18886115b
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 04/04/2019
-ms.locfileid: "58914132"
+ms.lasthandoff: 04/16/2019
+ms.locfileid: "59619264"
 ---
 # <a name="breaking-changes-included-in-ef-core-30-currently-in-preview"></a>Cambios importantes incluidos en EF Core 3.0 (actualmente en versión preliminar)
 
@@ -53,7 +53,7 @@ Si una consulta no se puede traducir totalmente, vuelva a escribirla en un forma
 
 ## <a name="entity-framework-core-is-no-longer-part-of-the-aspnet-core-shared-framework"></a>Entity Framework Core ya no forma parte del marco compartido ASP.NET Core
 
-[Anuncios del problema de seguimiento n.º 325](https://github.com/aspnet/Announcements/issues/325)
+[Anuncios del problema de seguimiento n.º 325](https://github.com/aspnet/Announcements/issues/325)
 
 Este cambio se ha introducido en ASP.NET Core 3.0, versión preliminar 1. 
 
@@ -118,7 +118,7 @@ Haga el cambio para usar los nuevos nombres de métodos.
 
 ## <a name="query-execution-is-logged-at-debug-level"></a>La ejecución de consultas se registra en el nivel de depuración
 
-[Problema de seguimiento n.º 14523](https://github.com/aspnet/EntityFrameworkCore/issues/14523)
+[Problema de seguimiento n.º 14523](https://github.com/aspnet/EntityFrameworkCore/issues/14523)
 
 Este cambio se ha introducido en EF Core 3.0 (versión preliminar 3).
 
@@ -148,7 +148,7 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 
 ## <a name="temporary-key-values-are-no-longer-set-onto-entity-instances"></a>Los valores de clave temporal ya no se establecen en instancias de entidad
 
-[Problema de seguimiento n.º 12378](https://github.com/aspnet/EntityFrameworkCore/issues/12378)
+[Problema de seguimiento n.º 12378](https://github.com/aspnet/EntityFrameworkCore/issues/12378)
 
 Este cambio se ha introducido en EF Core 3.0 (versión preliminar 2).
 
@@ -176,7 +176,7 @@ Por ejemplo, `context.Entry(blog).Property(e => e.Id).CurrentValue` devolverá e
 
 ## <a name="detectchanges-honors-store-generated-key-values"></a>DetectChanges respeta los valores de clave generados por el almacén
 
-[Problema de seguimiento n.º 14616](https://github.com/aspnet/EntityFrameworkCore/issues/14616)
+[Problema de seguimiento n.º 14616](https://github.com/aspnet/EntityFrameworkCore/issues/14616)
 
 Este cambio se ha introducido en EF Core 3.0 (versión preliminar 3).
 
@@ -216,7 +216,7 @@ public string Id { get; set; }
 
 ## <a name="cascade-deletions-now-happen-immediately-by-default"></a>Las eliminaciones en cascada ahora se realizan inmediatamente de forma predeterminada
 
-[Problema de seguimiento n.º 10114](https://github.com/aspnet/EntityFrameworkCore/issues/10114)
+[Problema de seguimiento n.º 10114](https://github.com/aspnet/EntityFrameworkCore/issues/10114)
 
 Este cambio se ha introducido en EF Core 3.0 (versión preliminar 3).
 
@@ -243,9 +243,31 @@ context.ChangeTracker.CascadeDeleteTiming = CascadeTiming.OnSaveChanges;
 context.ChangeTracker.DeleteOrphansTiming = CascadeTiming.OnSaveChanges;
 ```
 
+## <a name="deletebehaviorrestrict-has-cleaner-semantics"></a>DeleteBehavior.Restrict tiene una semántica más limpia
+
+[Problema de seguimiento n.º 12661](https://github.com/aspnet/EntityFrameworkCore/issues/12661)
+
+Este cambio se introducirá en EF Core 3.0 (versión preliminar 5).
+
+**Comportamiento anterior**
+
+Antes de la versión 3.0, `DeleteBehavior.Restrict` creaba claves externas en la base de datos con la semántica `Restrict`, pero también realizaba una corrección interna de manera no evidente.
+
+**Comportamiento nuevo**
+
+A partir de la versión 3.0, `DeleteBehavior.Restrict` garantiza que las claves externas se crean con la semántica `Restrict`, es decir, sin cascadas y realizando una infracción de restricción, sin llevar a cabo correcciones internas de EF.
+
+**Por qué**
+
+Este cambio se realizó para mejorar la experiencia de uso de `DeleteBehavior` de manera intuitiva sin efectos secundarios inesperados.
+
+**Mitigaciones**
+
+El comportamiento anterior se puede restaurar con `DeleteBehavior.ClientNoAction`.
+
 ## <a name="query-types-are-consolidated-with-entity-types"></a>Los tipos de consulta se consolidan con tipos de entidad
 
-[Problema de seguimiento n.º 14194](https://github.com/aspnet/EntityFrameworkCore/issues/14194)
+[Problema de seguimiento n.º 14194](https://github.com/aspnet/EntityFrameworkCore/issues/14194)
 
 Este cambio se ha introducido en EF Core 3.0 (versión preliminar 3).
 
@@ -483,7 +505,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 ## <a name="the-foreign-key-property-convention-no-longer-matches-same-name-as-the-principal-property"></a>La convención de propiedad de clave externa ya no coincide con el mismo nombre que la propiedad de entidad de seguridad
 
-[Problema de seguimiento n.º 13274](https://github.com/aspnet/EntityFrameworkCore/issues/13274)
+[Problema de seguimiento n.º 13274](https://github.com/aspnet/EntityFrameworkCore/issues/13274)
 
 Este cambio se ha introducido en EF Core 3.0 (versión preliminar 3).
 
@@ -603,7 +625,7 @@ using (new TransactionScope())
 
 ## <a name="each-property-uses-independent-in-memory-integer-key-generation"></a>Cada propiedad usa la generación de claves enteras en memoria independiente
 
-[Problema de seguimiento n.º 6872](https://github.com/aspnet/EntityFrameworkCore/issues/6872)
+[Problema de seguimiento n.º 6872](https://github.com/aspnet/EntityFrameworkCore/issues/6872)
 
 Este cambio se introducirá en EF Core 3.0 (versión preliminar 4).
 
@@ -627,7 +649,7 @@ En su lugar, considere la posibilidad de no depender de valores de clave especí
 
 ## <a name="backing-fields-are-used-by-default"></a>Los campos de respaldo se usan de forma predeterminada
 
-[Problema de seguimiento n.º 12430](https://github.com/aspnet/EntityFrameworkCore/issues/12430)
+[Problema de seguimiento n.º 12430](https://github.com/aspnet/EntityFrameworkCore/issues/12430)
 
 Este cambio se ha introducido en EF Core 3.0 (versión preliminar 2).
 
@@ -656,7 +678,7 @@ modelBuilder.UsePropertyAccessMode(PropertyAccessMode.PreferFieldDuringConstruct
 
 ## <a name="throw-if-multiple-compatible-backing-fields-are-found"></a>Inicio de excepciones si se encuentran varios campos de respaldo compatibles
 
-[Problema de seguimiento n.º 12523](https://github.com/aspnet/EntityFrameworkCore/issues/12523)
+[Problema de seguimiento n.º 12523](https://github.com/aspnet/EntityFrameworkCore/issues/12523)
 
 Este cambio se introducirá en EF Core 3.0 (versión preliminar 4).
 
@@ -685,9 +707,55 @@ modelBuilder
     .HasField("_id");
 ```
 
+## <a name="field-only-property-names-should-match-the-field-name"></a>Los nombres de propiedades de solo campo deben coincidir con el nombre del campo
+
+Este cambio se introducirá en EF Core 3.0 (versión preliminar 4).
+
+**Comportamiento anterior**
+
+Antes de EF Core 3.0, una propiedad podía especificarse con un valor de cadena y, si no había ninguna propiedad con ese nombre en el tipo CLR, EF Core intentaba hacerla coincidir con un campo mediante reglas de convención.
+```C#
+private class Blog
+{
+    private int _id;
+    public string Name { get; set; }
+}
+```
+```C#
+modelBuilder
+    .Entity<Blog>()
+    .Property("Id");
+```
+
+**Comportamiento nuevo**
+
+A partir de EF Core 3.0, una propiedad de solo campo debe coincidir exactamente con el nombre del campo.
+
+```C#
+modelBuilder
+    .Entity<Blog>()
+    .Property("_id");
+```
+
+**Por qué**
+
+Este cambio se realizó para evitar el uso del mismo campo para dos propiedades con nombres similares. También hace que las reglas de coincidencia para propiedades solo de campo sean las mismas que para las propiedades asignadas a propiedades CLR.
+
+**Mitigaciones**
+
+Las propiedades solo de campo deberían tener el mismo nombre que el campo al que están asignadas.
+En una próxima versión preliminar de EF Core 3.0 tenemos planeado volver a habilitar la configuración explícita de un nombre de campo distinto al nombre de la propiedad:
+
+```C#
+modelBuilder
+    .Entity<Blog>()
+    .Property("Id")
+    .HasField("_id");
+```
+
 ## <a name="adddbcontextadddbcontextpool-no-longer-call-addlogging-and-addmemorycache"></a>AddDbContext/AddDbContextPool ya no llaman a AddLogging ni a AddMemoryCache
 
-[Problema de seguimiento n.º 14756](https://github.com/aspnet/EntityFrameworkCore/issues/14756)
+[Problema de seguimiento n.° 14756](https://github.com/aspnet/EntityFrameworkCore/issues/14756)
 
 Este cambio se introducirá en EF Core 3.0 (versión preliminar 4).
 
@@ -709,7 +777,7 @@ Si la aplicación necesita estos servicios, regístrelos de manera explícita co
 
 ## <a name="dbcontextentry-now-performs-a-local-detectchanges"></a>Ahora DbContext.Entry realiza una operación DetectChanges local
 
-[Problema de seguimiento n.º 13552](https://github.com/aspnet/EntityFrameworkCore/issues/13552)
+[Problema de seguimiento n.º 13552](https://github.com/aspnet/EntityFrameworkCore/issues/13552)
 
 Este cambio se ha introducido en EF Core 3.0 (versión preliminar 3).
 
@@ -737,7 +805,7 @@ Llame a `ChgangeTracker.DetectChanges()` de forma explícita antes de llamar a `
 
 ## <a name="string-and-byte-array-keys-are-not-client-generated-by-default"></a>El cliente no genera las claves de matriz de cadena y byte de forma predeterminada
 
-[Problema de seguimiento n.º 14617](https://github.com/aspnet/EntityFrameworkCore/issues/14617)
+[Problema de seguimiento n.º 14617](https://github.com/aspnet/EntityFrameworkCore/issues/14617)
 
 Este cambio se introducirá en EF Core 3.0 (versión preliminar 4).
 
@@ -775,7 +843,7 @@ public string Id { get; set; }
 
 ## <a name="iloggerfactory-is-now-a-scoped-service"></a>Ahora ILoggerFactory es un servicio con ámbito
 
-[Problema de seguimiento n.º 14698](https://github.com/aspnet/EntityFrameworkCore/issues/14698)
+[Problema de seguimiento n.º 14698](https://github.com/aspnet/EntityFrameworkCore/issues/14698)
 
 Este cambio se ha introducido en EF Core 3.0 (versión preliminar 3).
 
@@ -801,7 +869,7 @@ Si experimenta situaciones como esta, registre un problema en el [rastreador de 
 
 ## <a name="idbcontextoptionsextensionwithdebuginfo-merged-into-idbcontextoptionsextension"></a>IDbContextOptionsExtensionWithDebugInfo se ha fusionado en IDbContextOptionsExtension
 
-[Problema de seguimiento n.º 13552](https://github.com/aspnet/EntityFrameworkCore/issues/13552)
+[Problema de seguimiento n.º 13552](https://github.com/aspnet/EntityFrameworkCore/issues/13552)
 
 Este cambio se ha introducido en EF Core 3.0 (versión preliminar 3).
 
@@ -823,7 +891,7 @@ Cualquier implementación de `IDbContextOptionsExtension` tendrá que actualizar
 
 ## <a name="lazy-loading-proxies-no-longer-assume-navigation-properties-are-fully-loaded"></a>En los proxies de carga diferida ya no se supone que las propiedades de navegación están totalmente cargadas
 
-[Problema de seguimiento n.º 12780](https://github.com/aspnet/EntityFrameworkCore/issues/12780)
+[Problema de seguimiento n.º 12780](https://github.com/aspnet/EntityFrameworkCore/issues/12780)
 
 Este cambio se introducirá en EF Core 3.0 (versión preliminar 4).
 
@@ -850,7 +918,7 @@ Actualice el código de la aplicación para que no intente la carga diferida con
 
 ## <a name="excessive-creation-of-internal-service-providers-is-now-an-error-by-default"></a>La creación excesiva de proveedores de servicios internos ahora es un error de forma predeterminada
 
-[Problema de seguimiento n.º 10236](https://github.com/aspnet/EntityFrameworkCore/issues/10236)
+[Problema de seguimiento n.º 10236](https://github.com/aspnet/EntityFrameworkCore/issues/10236)
 
 Este cambio se ha introducido en EF Core 3.0 (versión preliminar 3).
 
@@ -882,7 +950,7 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 
 ## <a name="new-behavior-for-hasonehasmany-called-with-a-single-string"></a>Comportamiento nuevo de HasOne/HasMany llamado con una sola cadena
 
-[Problema de seguimiento n.º 9171](https://github.com/aspnet/EntityFrameworkCore/issues/9171)
+[Problema de seguimiento n.° 9171](https://github.com/aspnet/EntityFrameworkCore/issues/9171)
 
 Este cambio se introducirá en EF Core 3.0 (versión preliminar 4).
 
@@ -949,7 +1017,7 @@ Tenga en cuenta que esto niega la reducción de asignación que implica este cam
 
 ## <a name="the-relationaltypemapping-annotation-is-now-just-typemapping"></a>La anotación Relational:TypeMapping ahora es simplemente TypeMapping
 
-[Problema de seguimiento n.º 9913](https://github.com/aspnet/EntityFrameworkCore/issues/9913)
+[Problema de seguimiento n.º 9913](https://github.com/aspnet/EntityFrameworkCore/issues/9913)
 
 Este cambio se ha introducido en EF Core 3.0 (versión preliminar 2).
 
@@ -972,7 +1040,7 @@ La acción más apropiada para corregir es usar la superficie de API para accede
 
 ## <a name="totable-on-a-derived-type-throws-an-exception"></a>ToTable en un tipo derivado inicia una excepción 
 
-[Problema de seguimiento n.º 11811](https://github.com/aspnet/EntityFrameworkCore/issues/11811)
+[Problema de seguimiento n.º 11811](https://github.com/aspnet/EntityFrameworkCore/issues/11811)
 
 Este cambio se ha introducido en EF Core 3.0 (versión preliminar 3).
 
@@ -995,7 +1063,7 @@ Quite todos los intentos de asignar tipos derivados a otras tablas.
 
 ## <a name="forsqlserverhasindex-replaced-with-hasindex"></a>ForSqlServerHasIndex se ha reemplazado por HasIndex 
 
-[Problema de seguimiento n.º 12366](https://github.com/aspnet/EntityFrameworkCore/issues/12366)
+[Problema de seguimiento n.º 12366](https://github.com/aspnet/EntityFrameworkCore/issues/12366)
 
 Este cambio se ha introducido en EF Core 3.0 (versión preliminar 3).
 
@@ -1010,15 +1078,39 @@ Use `HasIndex().ForSqlServerInclude()`.
 
 **Por qué**
 
-Este cambio se ha realizado para consolidar la API para índices con `Includes` en un mismo lugar para todos los proveedores de base de datos.
+Este cambio se ha realizado para consolidar la API para índices con `Include` en un mismo lugar para todos los proveedores de base de datos.
 
 **Mitigaciones**
 
 Use la API nueva, como se ha mostrado anteriormente.
 
+## <a name="metadata-api-changes"></a>Cambios en la API de metadatos
+
+[Problema de seguimiento n.º 214](https://github.com/aspnet/EntityFrameworkCore/issues/214)
+
+Este cambio se introducirá en EF Core 3.0 (versión preliminar 4).
+
+**Comportamiento nuevo**
+
+Las siguientes propiedades se han convertido en métodos de extensión:
+
+* `IEntityType.QueryFilter` -> `GetQueryFilter()`
+* `IEntityType.DefiningQuery` -> `GetDefiningQuery()`
+* `IProperty.IsShadowProperty` -> `IsShadowProperty()`
+* `IProperty.BeforeSaveBehavior` -> `GetBeforeSaveBehavior()`
+* `IProperty.AfterSaveBehavior` -> `GetAfterSaveBehavior()`
+
+**Por qué**
+
+Este cambio simplifica la implementación de las interfaces mencionadas anteriormente.
+
+**Mitigaciones**
+
+Use los nuevos métodos de extensión.
+
 ## <a name="ef-core-no-longer-sends-pragma-for-sqlite-fk-enforcement"></a>EF Core ya no envía pragma para el cumplimiento de SQLite FK
 
-[Problema de seguimiento n.º 12151](https://github.com/aspnet/EntityFrameworkCore/issues/12151)
+[Problema de seguimiento n.º 12151](https://github.com/aspnet/EntityFrameworkCore/issues/12151)
 
 Este cambio se ha introducido en EF Core 3.0 (versión preliminar 3).
 
@@ -1195,7 +1287,7 @@ Este cambio se ha introducido en EF Core 3.0 (versión preliminar 4).
 
 **Cambio**
 
-`RelationalEventId.LogQueryPossibleExceptionWithAggregateOperator` ha cambiado de nombre a `RelationalEventId.LogQueryPossibleExceptionWithAggregateOperatorWarning`.
+Se ha cambiado el nombre de `RelationalEventId.LogQueryPossibleExceptionWithAggregateOperator` a `RelationalEventId.LogQueryPossibleExceptionWithAggregateOperatorWarning`.
 
 **Por qué**
 

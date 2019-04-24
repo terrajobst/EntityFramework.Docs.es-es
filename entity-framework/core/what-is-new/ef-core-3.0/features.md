@@ -5,10 +5,10 @@ ms.date: 02/19/2019
 ms.assetid: 2EBE2CCC-E52D-483F-834C-8877F5EB0C0C
 uid: core/what-is-new/ef-core-3.0/features
 ms.openlocfilehash: 7501a806271c9734e85e31845f260f2d512da077
-ms.sourcegitcommit: a8b04050033c5dc46c076b7e21b017749e0967a8
+ms.sourcegitcommit: 5280dcac4423acad8b440143433459b18886115b
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 04/02/2019
+ms.lasthandoff: 04/18/2019
 ms.locfileid: "58867962"
 ---
 # <a name="new-features-included-in-ef-core-30-currently-in-preview"></a>Nuevas características incluidas en EF Core 3.0 (actualmente en versión preliminar)
@@ -27,7 +27,7 @@ Para obtener una lista completa de las correcciones de errores y las mejoras en 
 
 ## <a name="linq-improvements"></a>Mejoras de LINQ 
 
-[Problema de seguimiento n.º 12795](https://github.com/aspnet/EntityFrameworkCore/issues/12795)
+[Problema de seguimiento n.º 12795](https://github.com/aspnet/EntityFrameworkCore/issues/12795)
 
 Se ha iniciado el trabajo en esta característica, pero no se incluye en la versión preliminar actual.
 
@@ -40,7 +40,7 @@ Los objetivos son hacerla más eficaz (por ejemplo, evitar interrumpir las consu
 
 ## <a name="cosmos-db-support"></a>Compatibilidad con Cosmos DB 
 
-[Problema de seguimiento n.º 8443](https://github.com/aspnet/EntityFrameworkCore/issues/8443)
+[Problema de seguimiento n.º 8443](https://github.com/aspnet/EntityFrameworkCore/issues/8443)
 
 Esta característica está incluida en la versión preliminar actual, pero todavía no está completa. 
 
@@ -86,7 +86,7 @@ Queremos que, mientras usan EF Core, nuestros clientes aprovechen algunas de las
 
 ## <a name="reverse-engineering-of-database-views"></a>Ingeniería inversa de vistas de base de datos
 
-[Problema de seguimiento n.º 1679](https://github.com/aspnet/EntityFrameworkCore/issues/1679)
+[Problema de seguimiento n.º 1679](https://github.com/aspnet/EntityFrameworkCore/issues/1679)
 
 Esta característica no está incluida en la versión preliminar actual.
 
@@ -104,7 +104,7 @@ Esta característica es un punto de partida para admitir las relaciones varios a
 
 ## <a name="ef-63-on-net-core"></a>EF 6.3 en .NET Core
 
-[Problema de seguimiento n.º 271 de EF 6](https://github.com/aspnet/EntityFramework6/issues/271)
+[Problema de seguimiento n.º 271 de EF 6](https://github.com/aspnet/EntityFramework6/issues/271)
 
 Se ha iniciado el trabajo en esta característica, pero no se incluye en la versión preliminar actual. 
 
