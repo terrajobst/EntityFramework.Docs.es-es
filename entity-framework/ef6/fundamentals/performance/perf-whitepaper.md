@@ -411,7 +411,7 @@ Esta implementación de almacenamiento en caché de segundo nivel es una funcion
 #### <a name="351-additional-references-for-results-caching-with-the-wrapping-provider"></a>3.5.1 referencias adicionales de para con el proveedor de ajuste de almacenamiento en caché de resultados
 
 -   Julie Lerman ha escrito un artículo MSDN "Segundo nivel de almacenamiento en caché en Entity Framework y Windows Azure" que incluye cómo actualizar el proveedor de ajuste de ejemplo para usar el almacenamiento en caché de Windows Server AppFabric: [https://msdn.microsoft.com/magazine/hh394143.aspx](https://msdn.microsoft.com/magazine/hh394143.aspx)
--   Si trabaja con Entity Framework 5, el blog del equipo tiene una entrada de blog que describe cómo empezar a funcionar con el proveedor de almacenamiento en caché para Entity Framework 5: \< http://blogs.msdn.com/b/adonet/archive/2010/09/13/ef-caching-with-jarek-kowalski-s-provider.aspx>. También incluye una plantilla T4 para ayudar a automatizar la adición de la memoria caché a nivel 2 º al proyecto.
+-   Si trabaja con Entity Framework 5, el blog del equipo tiene una entrada de blog que describe cómo empezar a funcionar con el proveedor de almacenamiento en caché para Entity Framework 5: \<http://blogs.msdn.com/b/adonet/archive/2010/09/13/ef-caching-with-jarek-kowalski-s-provider.aspx>. También incluye una plantilla T4 para ayudar a automatizar la adición de la memoria caché a nivel 2 º al proyecto.
 
 ## <a name="4-autocompiled-queries"></a>4 consultas Autocompiled
 
