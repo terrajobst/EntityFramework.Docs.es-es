@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: d7a22b5a-4c5b-4e3b-9897-4d7320fcd13f
 uid: core/miscellaneous/configuring-dbcontext
-ms.openlocfilehash: 0350b25d0d0efe05df7cb9e93a3f4ae2d864fd63
-ms.sourcegitcommit: 5280dcac4423acad8b440143433459b18886115b
+ms.openlocfilehash: 316d363d4a1b8a909efc1c32b492280c0d16cb4e
+ms.sourcegitcommit: 960e42a01b3a2f76da82e074f64f52252a8afecc
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 04/18/2019
-ms.locfileid: "59363942"
+ms.lasthandoff: 05/08/2019
+ms.locfileid: "65405205"
 ---
 # <a name="configuring-a-dbcontext"></a>Configuración de un DbContext
 
@@ -163,7 +163,13 @@ var options = serviceProvider.GetService<DbContextOptions<BloggingContext>>();
 ```
 ## <a name="avoiding-dbcontext-threading-issues"></a>Evitar problemas de subprocesamiento de DbContext
 
-Entity Framework Core no admite varias operaciones en paralelo que se ejecutan en el mismo `DbContext` instancia. Acceso simultáneo puede producir un comportamiento indefinido, bloqueos de la aplicación y daños en los datos. Debido a esto es importante usar siempre separar `DbContext` instancias para las operaciones que se ejecutan en paralelo. 
+Entity Framework Core no admite varias operaciones en paralelo que se ejecutan en el mismo `DbContext` instancia. Esto incluye la ejecución paralela de consultas de async y cualquier uso explícito de simultánea desde varios subprocesos. Por lo tanto, siempre `await` asincrónico llama inmediatamente, o usar independiente `DbContext` instancias para las operaciones que se ejecutan en paralelo.
+
+Cuando EF Core detecta un intento de utilizar un `DbContext` instancia al mismo tiempo, verá un `InvalidOperationException` con un mensaje similar al siguiente: 
+
+> Una segunda operación iniciado en este contexto antes de se completó una operación anterior. Esto se debe normalmente a que diferentes subprocesos con la misma instancia de DbContext, pero los miembros de instancia no se garantiza que sea seguro para subprocesos.
+
+Cuando no se detecta el acceso simultáneo, puede producir un comportamiento indefinido, bloqueos de la aplicación y daños en los datos.
 
 Hay errores comunes que pueden inadvernetly causa simultáneo en la misma `DbContext` instancia:
 

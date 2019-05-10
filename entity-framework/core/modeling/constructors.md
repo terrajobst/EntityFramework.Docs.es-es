@@ -4,12 +4,12 @@ author: ajcvickers
 ms.date: 02/23/2018
 ms.assetid: 420AFFE7-B709-4A68-9149-F06F8746FB33
 uid: core/modeling/constructors
-ms.openlocfilehash: 1b36197465fb9a6571a306d36eb1e9d885a5399e
-ms.sourcegitcommit: 0cef7d448e1e47bdb333002e2254ed42d57b45b6
+ms.openlocfilehash: 5bf49718f02c1860871b1f4c255ec4d98fce2fc7
+ms.sourcegitcommit: 960e42a01b3a2f76da82e074f64f52252a8afecc
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/29/2018
-ms.locfileid: "43152470"
+ms.lasthandoff: 05/08/2019
+ms.locfileid: "65405244"
 ---
 # <a name="entity-types-with-constructors"></a>Tipos de entidad con constructores
 
@@ -90,7 +90,7 @@ Algunos aspectos a tener en cuenta:
 * No todas las propiedades deben tener los parámetros del constructor. Por ejemplo, no se establece la propiedad Post.Content por cualquier parámetro de constructor, por lo que EF Core establecerá después de llamar al constructor de la manera normal.
 * Los tipos de parámetro y nombres deben coincidir con los tipos de propiedad y los nombres, excepto en que las propiedades pueden ser con grafía Pascal mientras que los parámetros son mayúsculas y minúsculas camel.
 * EF Core no puede establecer las propiedades de navegación (por ejemplo, Blog o publicaciones anteriores) mediante un constructor.
-* El constructor puede ser público, privado, o tiene cualquier otro tipo de accesibilidad.
+* El constructor puede ser público, privado, o tiene cualquier otro tipo de accesibilidad. Sin embargo, los proxies de carga diferida requieren que el constructor es accesible desde la clase de proxy heredada. Normalmente, esto significa que se hace público o protegido.
 
 ### <a name="read-only-properties"></a>Propiedades de solo lectura
 

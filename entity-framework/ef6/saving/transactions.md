@@ -3,12 +3,12 @@ title: Trabajar con transacciones - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 0d0f1824-d781-4cb3-8fda-b7eaefced1cd
-ms.openlocfilehash: 7197733ab25c8475746e7863963384730919e3ff
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 96cfff4cca59ab27dd68f50d0260e90902e33a92
+ms.sourcegitcommit: eefcab31142f61a7aaeac03ea90dcd39f158b8b8
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489783"
+ms.lasthandoff: 04/29/2019
+ms.locfileid: "64873229"
 ---
 # <a name="working-with-transactions"></a>Trabajar con transacciones
 > [!NOTE]
@@ -39,7 +39,7 @@ Antes de EF6 Entity Framework insistía en abrir la conexión de base de datos p
 
 A partir de EF6 el marco de trabajo ahora proporciona:  
 
-1. **Database.BeginTransaction()** : un método más fácil para un usuario iniciar y completar las transacciones dentro de un elemento DbContext existente: permitir que varias operaciones que va a combinarse en la misma transacción y, por tanto, todos confirmada o todos revierte como uno. También permite al usuario especificar más fácilmente el nivel de aislamiento de la transacción.  
+1. **Database.BeginTransaction()** : Un método más fácil para un usuario iniciar y completar las transacciones dentro de un elemento DbContext existente: permitir que varias operaciones que va a combinarse en la misma transacción y, por tanto, confirma o revierte como uno. También permite al usuario especificar más fácilmente el nivel de aislamiento de la transacción.  
 2. **Database.UseTransaction()** : lo que permite que la clase DbContext para utilizar una transacción que se inició fuera de Entity Framework.  
 
 ### <a name="combining-several-operations-into-one-transaction-within-the-same-context"></a>Combinar varias operaciones en una transacción dentro del mismo contexto  
@@ -126,7 +126,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Linq;
-sing System.Transactions;
+using System.Transactions;
 
 namespace TransactionsExamples
 {
