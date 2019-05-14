@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/19/2019
 ms.assetid: EE2878C9-71F9-4FA5-9BC4-60517C7C9830
 uid: core/what-is-new/ef-core-3.0/breaking-changes
-ms.openlocfilehash: 4b251638de43af6525f3e6faa0bd4113ab1714b9
-ms.sourcegitcommit: 5280dcac4423acad8b440143433459b18886115b
+ms.openlocfilehash: b1b5e286e08a8b6b4efe225a176e76023f9fdd20
+ms.sourcegitcommit: 960e42a01b3a2f76da82e074f64f52252a8afecc
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 04/16/2019
-ms.locfileid: "59619264"
+ms.lasthandoff: 05/08/2019
+ms.locfileid: "65405240"
 ---
 # <a name="breaking-changes-included-in-ef-core-30-currently-in-preview"></a>Cambios importantes incluidos en EF Core 3.0 (actualmente en versión preliminar)
 
@@ -75,6 +75,35 @@ Ahora los desarrolladores también pueden controlar exactamente cuándo se actua
 **Mitigaciones**
 
 Para usar EF Core en una aplicación ASP.NET Core 3.0 o cualquier otra aplicación compatible, debe agregar de forma explícita una referencia de paquete al proveedor de base de datos de EF Core que se va a usar en la aplicación.
+
+## <a name="the-ef-core-command-line-tool-dotnet-ef-is-no-longer-part-of-the-net-core-sdk"></a>La herramienta de línea de comandos de EF Core, dotnet ef, ya no forma parte del SDK de .NET Core
+
+[Problema de seguimiento n.º 14016](https://github.com/aspnet/EntityFrameworkCore/issues/14016)
+
+Este cambio se introdujo en EF Core 3.0-preview 4 y la versión correspondiente del SDK de .NET Core.
+
+**Comportamiento anterior**
+
+Antes de 3.0, la herramienta `dotnet ef` se incluía en el SDK de .NET Core y estaba disponible para usarse desde la línea de comandos de cualquier proyecto sin necesidad de realizar pasos adicionales. 
+
+**Comportamiento nuevo**
+
+A partir de la versión 3.0, el SDK de .NET no incluye la herramienta `dotnet ef`, por lo que antes de poder usarla tendrá que instalarla de forma explícita como una herramienta local o global. 
+
+**Por qué**
+
+Este cambio nos permite distribuir y actualizar `dotnet ef` como una herramienta convencional de la CLI de .NET en NuGet, coherente con el hecho de que la versión 3.0 de EF Core también se distribuye siempre como un paquete NuGet.
+
+**Mitigaciones**
+
+Para poder administrar las migraciones o aplicar la técnica de scaffolding a `DbContext`, instale `dotnet-ef` con el comando `dotnet tool install`.
+Por ejemplo, para instalarlo como una herramienta global, puede escribir este comando:
+
+  ``` console
+  $ dotnet tool install --global dotnet-ef --version <exact-version>
+  ```
+
+También se puede obtener una herramienta local cuando se restauran las dependencias de un proyecto que la declara como una dependencia de herramientas mediante un [archivo de manifiesto de herramientas](https://github.com/dotnet/cli/issues/10288).
 
 ## <a name="fromsql-executesql-and-executesqlasync-have-been-renamed"></a>FromSql, ExecuteSql y ExecuteSqlAsync han cambiado de nombre
 
@@ -602,7 +631,7 @@ A partir de la versión 3.0, EF Core cierra la conexión en cuanto se deja de us
 
 **Por qué**
 
-Este cambio permite usar varios contextos en el mismo ámbito `TransactionScope`. El nuevo comportamiento coincide con el de EF6.
+Este cambio permite usar varios contextos en el mismo ámbito `TransactionScope`. El comportamiento nuevo también coincide con el de EF6.
 
 **Mitigaciones**
 
@@ -660,7 +689,7 @@ La excepción era la ejecución de consultas, donde el campo de respaldo se esta
 
 **Comportamiento nuevo**
 
-A partir de EF Core 3.0, si se conoce el campo de respaldo para una propiedad, esa propiedad siempre se leerá y escribirá mediante el campo de respaldo.
+A partir de EF Core 3.0, si se conoce el campo de respaldo para una propiedad, EF Core siempre la leerá y escribirá mediante el campo de respaldo.
 Esto podría provocar una interrupción de la aplicación si depende de un comportamiento adicional codificado en los métodos captadores o establecedores.
 
 **Por qué**
