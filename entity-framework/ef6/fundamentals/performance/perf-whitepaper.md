@@ -3,12 +3,12 @@ title: Consideraciones de rendimiento de EF4, EF5 y EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: d6d5a465-6434-45fa-855d-5eb48c61a2ea
-ms.openlocfilehash: 4c1f03533cf6df49555c3ef8d09d5949b9a3335c
-ms.sourcegitcommit: 33b2e84dae96040f60a613186a24ff3c7b00b6db
+ms.openlocfilehash: f8fa1001c85366e169cf50e89efdb65bd92b671e
+ms.sourcegitcommit: f277883a5ed28eba57d14aaaf17405bc1ae9cf94
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 02/21/2019
-ms.locfileid: "56459216"
+ms.lasthandoff: 05/18/2019
+ms.locfileid: "65874613"
 ---
 # <a name="performance-considerations-for-ef-4-5-and-6"></a>Consideraciones de rendimiento para EF 4, 5 y 6
 Por David Obando, Eric Dettinger y otros
@@ -119,9 +119,9 @@ Uso de las vistas generadas previamente mueve el costo de la generación de la v
 
 Hemos visto un número de casos que cambiar drásticamente las asociaciones en el modelo de asociaciones independientes a las asociaciones de clave externa mejora el tiempo empleado en la generación de la vista.
 
-Para demostrar esta mejora, se generan dos versiones del modelo Navision mediante EDMGen. *Nota: seeappendix Cfor una descripción del modelo Navision.* El modelo Navision es interesante para este ejercicio debido a su gran cantidad de entidades y relaciones entre ellos.
+Para demostrar esta mejora, se generan dos versiones del modelo Navision mediante EDMGen. *Nota: consulte el apéndice C para obtener una descripción del modelo Navision.* El modelo Navision es interesante para este ejercicio debido a su gran cantidad de entidades y relaciones entre ellos.
 
-Se ha generado una versión de este modelo muy grande con asociaciones de las claves externas y la otra se generó con asociaciones independientes. Hemos, a continuación, ha superado el tiempo ¿cuánto tiempo se tardó en generar las vistas para cada modelo. Prueba Framework5 de entidad usa el método GenerateViews() de la clase EntityViewGenerator para generar las vistas, mientras que la prueba de Entity Framework 6 usa el método GenerateViews() de la clase StorageMappingItemCollection. Esto debido a la reestructuración de código que se produjeron en la base de código de Entity Framework 6.
+Se ha generado una versión de este modelo muy grande con asociaciones de las claves externas y la otra se generó con asociaciones independientes. Hemos, a continuación, ha superado el tiempo ¿cuánto tiempo se tardó en generar las vistas para cada modelo. Prueba de Entity Framework 5 usa el método GenerateViews() de la clase EntityViewGenerator para generar las vistas, mientras que la prueba de Entity Framework 6 usa el método GenerateViews() de la clase StorageMappingItemCollection. Esto debido a la reestructuración de código que se produjeron en la base de código de Entity Framework 6.
 
 Con Entity Framework 5, generación de la vista para el modelo con claves externas tardó 65 minutos en una máquina de laboratorio. Se desconoce el tiempo que habría necesitado para generar las vistas para el modelo que usa asociaciones independientes. Hemos dejado la prueba en ejecución durante más de un mes antes de que se ha reiniciado el equipo en nuestro laboratorio para instalar las actualizaciones mensuales.
 
@@ -240,7 +240,7 @@ Tenga en cuenta que el temporizador de expulsión de caché es entrara en acció
 
 #### <a name="323-test-metrics-demonstrating-query-plan-caching-performance"></a>3.2.3 probar las métricas que muestran el rendimiento de almacenamiento en caché el plan de consulta
 
-Para mostrar el efecto del plan de consulta en el rendimiento de la aplicación de almacenamiento en caché, se realiza una prueba donde se ejecuta un número de consultas de Entity SQL en el modelo de Navision. Consulte el apéndice para obtener una descripción del modelo Navision y los tipos de consultas que se ejecutaron. En esta prueba, primero se recorrer en iteración la lista de consultas y ejecute cada uno de ellos una vez para agregarlos a la memoria caché (si está habilitado el almacenamiento en caché). Este paso es untimed. A continuación, nos suspender el subproceso principal de más de 60 segundos permitir que la memoria caché de barrido de hiperparámetros para tener lugar; Por último, establecemos una iteración por la hora de la lista una 2ª para ejecutar las consultas en caché. Además, le caché de planes de SQL Server se vacíe antes de que se ejecuta cada conjunto de consultas para que reflejen de las horas que obtenemos con precisión el beneficio proporcionado por la caché del plan de consulta.
+Para mostrar el efecto del plan de consulta en el rendimiento de la aplicación de almacenamiento en caché, se realiza una prueba donde se ejecuta un número de consultas de Entity SQL en el modelo de Navision. Consulte el apéndice para obtener una descripción del modelo Navision y los tipos de consultas que se ejecutaron. En esta prueba, primero se recorrer en iteración la lista de consultas y ejecute cada uno de ellos una vez para agregarlos a la memoria caché (si está habilitado el almacenamiento en caché). Este paso es untimed. A continuación, nos suspender el subproceso principal de más de 60 segundos permitir que la memoria caché de barrido de hiperparámetros para tener lugar; Por último, establecemos una iteración por la hora de la lista una 2ª para ejecutar las consultas en caché. Además, se vacía la caché de planes de SQL Server antes de que se ejecuta cada conjunto de consultas para que reflejen de las horas que obtenemos con precisión el beneficio proporcionado por la caché del plan de consulta.
 
 ##### <a name="3231-test-results"></a>3.2.3.1 los resultados de pruebas
 
@@ -487,7 +487,7 @@ Una versión más rápida de este mismo código implicaría una llamada a Skip c
 
 ``` csharp
 var customers = context.Customers.OrderBy(c => c.LastName);
-for (var i = 0; i \< count; ++i)
+for (var i = 0; i < count; ++i)
 {
     var currentCustomer = customers.Skip(() => i).FirstOrDefault();
     ProcessCustomer(currentCustomer);
