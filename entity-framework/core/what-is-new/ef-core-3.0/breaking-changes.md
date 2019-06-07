@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/19/2019
 ms.assetid: EE2878C9-71F9-4FA5-9BC4-60517C7C9830
 uid: core/what-is-new/ef-core-3.0/breaking-changes
-ms.openlocfilehash: b1b5e286e08a8b6b4efe225a176e76023f9fdd20
-ms.sourcegitcommit: 960e42a01b3a2f76da82e074f64f52252a8afecc
+ms.openlocfilehash: faae0153e0f2bdd42d3b316582dfcab88d9ceb5b
+ms.sourcegitcommit: ea1cdec0b982b922a59b9d9301d3ed2b94baca0f
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 05/08/2019
-ms.locfileid: "65405240"
+ms.lasthandoff: 05/31/2019
+ms.locfileid: "66452299"
 ---
 # <a name="breaking-changes-included-in-ef-core-30-currently-in-preview"></a>Cambios importantes incluidos en EF Core 3.0 (actualmente en versión preliminar)
 
@@ -88,7 +88,7 @@ Antes de 3.0, la herramienta `dotnet ef` se incluía en el SDK de .NET Core y es
 
 **Comportamiento nuevo**
 
-A partir de la versión 3.0, el SDK de .NET no incluye la herramienta `dotnet ef`, por lo que antes de poder usarla tendrá que instalarla de forma explícita como una herramienta local o global. 
+A partir de la versión 3.0, el SDK de .NET no incluye la herramienta `dotnet ef`, por lo que antes de poder usarla tendrá que instalarla de forma explícita como una herramienta local o global. 
 
 **Por qué**
 
@@ -319,10 +319,10 @@ Del mismo modo, se suelen asignar a vistas, pero solo porque las vistas no suele
 **Mitigaciones**
 
 Los elementos siguientes de la API ahora están obsoletos:
-* **`ModelBuilder.Query<>()`**: en su lugar es necesario llamar a `ModelBuilder.Entity<>().HasNoKey()` para marcar un tipo de entidad como sin claves.
+* **`ModelBuilder.Query<>()`** : en su lugar es necesario llamar a `ModelBuilder.Entity<>().HasNoKey()` para marcar un tipo de entidad como sin claves.
 Esto todavía no se configurará por convención para evitar una configuración incorrecta cuando se espera una clave principal, pero no coincide con la convención.
-* **`DbQuery<>`**: en su lugar se debe usar `DbSet<>`.
-* **`DbContext.Query<>()`**: en su lugar se debe usar `DbContext.Set<>()`.
+* **`DbQuery<>`** : en su lugar se debe usar `DbSet<>`.
+* **`DbContext.Query<>()`** : en su lugar se debe usar `DbContext.Set<>()`.
 
 ## <a name="configuration-api-for-owned-type-relationships-has-changed"></a>La API de configuración para las relaciones de tipo de propiedad ha cambiado
 
@@ -798,7 +798,7 @@ A partir de EF Core 3.0, `AddDbContext` y `AddDbContextPool` ya no registrarán 
 
 **Por qué**
 
-EF Core 3.0 no requiere que estos servicios estén en el contenedor de inserción de dependencias de la aplicación. Pero si `ILoggerFactory` se registra en el contenedor de DI de la aplicación, EF Core lo empezará a usar de todos modos.
+EF Core 3.0 no requiere que estos servicios estén en el contenedor de inserción de dependencias de la aplicación. Pero si `ILoggerFactory` se registra en el contenedor de DI de la aplicación, EF Core lo empezará a usar de todos modos.
 
 **Mitigaciones**
 
@@ -985,7 +985,7 @@ Este cambio se introducirá en EF Core 3.0 (versión preliminar 4).
 
 **Comportamiento anterior**
 
-Antes de EF Core 3.0, el código para llamar a `HasOne` o `HasMany` con una cadena se interpretaba de manera confusa.
+Antes de EF Core 3.0, el código para llamar a `HasOne` o `HasMany` con una cadena se interpretaba de manera confusa.
 Por ejemplo:
 ```C#
 modelBuilder.Entity<Samurai>().HasOne("Entrance").WithOne();
@@ -1277,7 +1277,7 @@ Este cambio se ha introducido en EF Core 3.0 (versión preliminar 4).
 
 **Comportamiento anterior**
 
-Los id. de migración se generaban de forma involuntaria con el calendario de la referencia cultural actual.
+Los identificadores de migración se generaban de forma involuntaria con el calendario de la referencia cultural actual.
 
 **Comportamiento nuevo**
 
@@ -1342,7 +1342,7 @@ var constraintName = myForeignKey.Name;
 
 **Comportamiento nuevo**
 
-A partir de EF Core 3.0, el término con el que se hace referencia a los nombres de las restricciones de claves externas es "nombre de la restricción". Por ejemplo:
+A partir de EF Core 3.0, el término con el que se hace referencia a los nombres de las restricciones de claves externas es "nombre de la restricción". Por ejemplo:
 
 ```C#
 var constraintName = myForeignKey.ConstraintName;

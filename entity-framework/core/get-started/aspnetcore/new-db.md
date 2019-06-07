@@ -5,12 +5,12 @@ ms.author: riande
 ms.date: 08/03/2018
 ms.assetid: e153627f-f132-4c11-b13c-6c9a607addce
 uid: core/get-started/aspnetcore/new-db
-ms.openlocfilehash: fbc1a00d6d6d0624bcbbfa1e51f4e21a915baaaa
-ms.sourcegitcommit: f277883a5ed28eba57d14aaaf17405bc1ae9cf94
+ms.openlocfilehash: 2eb1668b8c077fabc9cb21088452fd1bead7ff22
+ms.sourcegitcommit: ea1cdec0b982b922a59b9d9301d3ed2b94baca0f
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 05/18/2019
-ms.locfileid: "65874576"
+ms.lasthandoff: 05/31/2019
+ms.locfileid: "66452239"
 ---
 # <a name="getting-started-with-ef-core-on-aspnet-core-with-a-new-database"></a>Introducción a EF Core en ASP.NET Core con una base de datos nueva
 
@@ -50,7 +50,7 @@ Instale el software siguiente:
 * Escriba **EFGetStarted.AspNetCore.NewDb** como el nombre y haga clic en **Aceptar**.
 * En el cuadro de diálogo **Nueva aplicación web de ASP.NET Core**, haga lo siguiente:
   * Asegúrese de que **.NET Core** y **ASP.NET Core 2.1** estén seleccionados en las listas desplegables
-  * Seleccione la plantilla de proyecto **Aplicación web (Model-View-Controller)**.
+  * Seleccione la plantilla de proyecto **Aplicación web (Model-View-Controller)** .
   * Asegúrese de que **Autenticación** esté establecido en **Sin autenticación**
   * Haga clic en **Aceptar**.
 
@@ -226,8 +226,12 @@ dotnet run
 
   ![Página de índice](_static/index-new-db.png)
 
-## <a name="additional-resources"></a>Recursos adicionales
+## <a name="additional-tutorials"></a>Otros tutoriales
 
-* [Tutorial: Introducción a EF Core en la aplicación de consola de .NET Core con una base de datos nueva](xref:core/get-started/netcore/new-db-sqlite)
-* [Introducción a las páginas de Razor en ASP.NET Core](/aspnet/core/tutorials/razor-pages/razor-pages-start) o [Introducción a ASP.NET Core MVC](/aspnet/core/tutorials/first-mvc-app/start-mvc)
-* [Tutorial: Páginas de Razor con Entity Framework Core en ASP.NET Core](https://docs.microsoft.com/aspnet/core/data/ef-rp/intro) o [Introducción a EF Core en una aplicación web de ASP.NET Core MVC](/aspnet/core/data/ef-mvc/intro)
+* [Introducción a EF Core en la aplicación de consola de .NET Core con una base de datos nueva mediante SQLite](xref:core/get-started/netcore/new-db-sqlite)
+* ASP.NET Core MVC:
+  * [Introducción a ASP.NET Core MVC](/aspnet/core/tutorials/first-mvc-app/start-mvc)
+  * [Introducción a EF Core en una aplicación web de ASP.NET Core MVC](/aspnet/core/data/ef-mvc/intro)
+* [Razor Pages](/aspnet/core/razor-pages/index):
+  * [Introducción a Razor Pages en ASP.NET Core](/aspnet/core/tutorials/razor-pages/razor-pages-start)
+  * [Razor Pages con Entity Framework Core en ASP.NET Core](https://docs.microsoft.com/aspnet/core/data/ef-rp/intro)
