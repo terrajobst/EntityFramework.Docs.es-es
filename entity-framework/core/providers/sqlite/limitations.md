@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 04/09/2017
 ms.assetid: 94ab4800-c460-4caa-a5e8-acdfee6e6ce2
 uid: core/providers/sqlite/limitations
-ms.openlocfilehash: ce834d60b9ceb4c414f097f2d86254cc5edd958f
-ms.sourcegitcommit: 645785187ae23ddf7d7b0642c7a4da5ffb0c7f30
+ms.openlocfilehash: eaa7d5b1496172e4f3821433a1cd098ee7e8b737
+ms.sourcegitcommit: 9bd64a1a71b7f7aeb044aeecc7c4785b57db1ec9
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/25/2019
-ms.locfileid: "58419710"
+ms.lasthandoff: 06/26/2019
+ms.locfileid: "67394800"
 ---
 # <a name="sqlite-ef-core-database-provider-limitations"></a>Limitaciones del proveedor de base de datos de SQLite EF Core
 
@@ -22,6 +22,25 @@ La biblioteca común de relacional (compartida por los proveedores de base de da
 * Esquemas
 * Secuencias
 * Columnas calculadas
+
+## <a name="query-limitations"></a>Limitaciones de la consulta
+
+SQLite no admite de forma nativa los siguientes tipos de datos. EF Core puede leer y escribir valores de estos tipos y consultas de igualdad (`where e.Property == value`) también es compatible con. Otras operaciones, sin embargo, al igual que la comparación y ordenación requerirá la evaluación en el cliente.
+
+* DateTimeOffset
+* Decimal
+* TimeSpan
+* UInt64
+
+En lugar de `DateTimeOffset`, recomendamos usar valores de fecha y hora. Al controlar varias zonas horarias, se recomienda convertir los valores a la hora UTC antes de guardar y, a continuación, volver a convertir a la zona horaria adecuada.
+
+El `Decimal` tipo proporciona un alto nivel de precisión. Si no necesita ese nivel de precisión, sin embargo, se recomienda usar dobles en su lugar. Puede usar un [convertidor](../../modeling/value-conversions.md) para seguir usando el separador decimal en las clases.
+
+``` csharp
+modelBuilder.Entity<MyEntity>()
+    .Property(e => e.DecimalProperty)
+    .HasConversion<double>();
+```
 
 ## <a name="migrations-limitations"></a>Limitaciones de las migraciones
 
