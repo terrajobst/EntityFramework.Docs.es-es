@@ -3,12 +3,12 @@ title: Trabajar con valores de propiedad - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: e3278b4b-9378-4fdb-923d-f64d80aaae70
-ms.openlocfilehash: 97902021a671dea9854a365dc2f10eaecb9e5ab8
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: afde503bb4ed15fcf83a57053541cd5da8c89835
+ms.sourcegitcommit: 50521b4a2f71139e6a7210a69ac73da582ef46cf
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45488840"
+ms.lasthandoff: 06/27/2019
+ms.locfileid: "67416670"
 ---
 # <a name="working-with-property-values"></a>Trabajar con valores de propiedad
 La mayor parte, Entity Framework se encargará de seguimiento del estado, los valores originales y los valores actuales de las propiedades de las instancias de entidad. Sin embargo, puede haber algunos casos, como los escenarios desconectados - donde desea ver o manipular la información de que EF tiene acerca de las propiedades. Las técnicas que se muestran en este tema se aplican igualmente a los modelos creados con Code First y EF Designer.  
@@ -35,7 +35,7 @@ using (var context = new BloggingContext())
     string currentName1 = context.Entry(blog).Property(u => u.Name).CurrentValue;
 
     // Set the Name property to a new value
-    context.Entry(name).Property(u => u.Name).CurrentValue = "My Fancy Blog";
+    context.Entry(blog).Property(u => u.Name).CurrentValue = "My Fancy Blog";
 
     // Read the current value of the Name property using a string for the property name
     object currentName2 = context.Entry(blog).Property("Name").CurrentValue;
