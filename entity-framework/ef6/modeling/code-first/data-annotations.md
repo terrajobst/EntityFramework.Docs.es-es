@@ -3,12 +3,12 @@ title: 'Código de la primera anotaciones de datos: EF6'
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 80abefbd-23c9-4fce-9cd3-520e5df9856e
-ms.openlocfilehash: e6b017306b4f66f5bac2a9964e11391da28ceb40
-ms.sourcegitcommit: a013e243a14f384999ceccaf9c779b8c1ae3b936
+ms.openlocfilehash: fcd01aef7303573001460b352f8099b2cc6e224a
+ms.sourcegitcommit: e90d6cfa3e96f10b8b5275430759a66a0c714ed1
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/06/2019
-ms.locfileid: "57463287"
+ms.lasthandoff: 07/17/2019
+ms.locfileid: "68286476"
 ---
 # <a name="code-first-data-annotations"></a>Anotaciones de datos de Code First
 > [!NOTE]
@@ -51,7 +51,7 @@ Tal como están, las clases de Blog y Post cómodamente siguen la convención de
 
  
 
-## <a name="key"></a>Key
+## <a name="key"></a>Clave
 
 Entity Framework se basa en todas las entidades que contienen un valor de clave que se usa para la entidad de seguimiento. Una convención de Code First es propiedades de clave implícitas; Código primero busca una propiedad denominada "Id" o una combinación de nombre de clase y "Id", por ejemplo, "BlogId". Esta propiedad se asignará a una columna de clave principal en la base de datos.
 
@@ -146,7 +146,7 @@ Agregar necesarios para la propiedad Title obligará a EF (y MVC) para asegurars
     public string Title { get; set; }
 ```
 
-Con ningún adicional n cambios de código o marcado en la aplicación, una aplicación MVC realizará la validación del lado cliente, crear incluso dinámicamente un mensaje con los nombres de propiedad y anotación.
+Sin código adicional ni cambios de marcado en la aplicación, una aplicación MVC realizará la validación del lado cliente, crear incluso dinámicamente un mensaje con los nombres de propiedad y la anotación.
 
 ![Crear página con el título es error necesario](~/ef6/media/jj591583-figure02.png)
 
@@ -268,7 +268,7 @@ Si alguien ha cambiado el nombre de blogger para blog mientras tanto, se produci
 
  
 
-## <a name="timestamp"></a>TimeStamp
+## <a name="timestamp"></a>Marca de tiempo
 
 Es más habitual utilizar campos rowversion o marca de tiempo para la comprobación de simultaneidad. Pero en lugar de usar la anotación ConcurrencyCheck, puede usar la anotación de marca de tiempo más específica, siempre y cuando el tipo de la propiedad es la matriz de bytes. Código primero tratará las propiedades de la marca de tiempo del mismo como propiedades ConcurrencyCheck, pero también se asegurará que el campo de base de datos que genera el código en primer lugar es distinto de NULL. Solo puede tener una propiedad de marca de tiempo en una clase determinada.
 

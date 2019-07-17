@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: aeb0f5f8-b212-4f89-ae83-c642a5190ba0
 uid: core/miscellaneous/connection-strings
-ms.openlocfilehash: 52a8527170845d3e73ebcec518713ade3f3844f0
-ms.sourcegitcommit: 06073f8efde97dd5f540dbfb69f574d8380566fe
+ms.openlocfilehash: c306f9ca7a51fc9e3db18e883fd44f56dd1a3cb4
+ms.sourcegitcommit: e90d6cfa3e96f10b8b5275430759a66a0c714ed1
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 06/24/2019
-ms.locfileid: "67333838"
+ms.lasthandoff: 07/17/2019
+ms.locfileid: "68286448"
 ---
 # <a name="connection-strings"></a>Cadenas de conexión
 
@@ -17,7 +17,7 @@ La mayoría de los proveedores de base de datos requiere algún tipo de cadena d
 
 ## <a name="net-framework-applications"></a>Aplicaciones de .NET framework
 
-Aplicaciones de .NET framework, como WPF, WinForms, consola y ASP.NET 4, tienen un patrón de cadena de conexión probadas y comprobadas. La cadena de conexión debe agregarse al archivo App.config aplicaciones (si está usando ASP.NET de Web.config). Si la cadena de conexión contiene información confidencial, como el nombre de usuario y contraseña, puede proteger el contenido del archivo de configuración utilizando [configuración protegida](https://docs.microsoft.com/dotnet/framework/data/adonet/connection-strings-and-configuration-files#encrypting-configuration-file-sections-using-protected-configuration).
+Aplicaciones de .NET framework, como WPF, WinForms, consola y ASP.NET 4, tienen un patrón de cadena de conexión probadas y comprobadas. La cadena de conexión debe agregarse al archivo App.config de la aplicación (Web.config si está utilizando ASP.NET). Si la cadena de conexión contiene información confidencial, como el nombre de usuario y contraseña, puede proteger el contenido del archivo de configuración utilizando [configuración protegida](https://docs.microsoft.com/dotnet/framework/data/adonet/connection-strings-and-configuration-files#encrypting-configuration-file-sections-using-protected-configuration).
 
 ``` xml
 <?xml version="1.0" encoding="utf-8"?>
