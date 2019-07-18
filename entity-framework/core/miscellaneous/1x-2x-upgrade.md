@@ -1,41 +1,41 @@
 ---
-title: Actualización desde versiones anteriores a EF Core 2 - EF Core
+title: Actualización de versiones anteriores a EF Core 2-EF Core
 author: divega
 ms.date: 08/13/2017
 ms.assetid: 8BD43C8C-63D9-4F3A-B954-7BC518A1B7DB
 uid: core/miscellaneous/1x-2x-upgrade
-ms.openlocfilehash: 5371c8f3b7c6102c621296bbae145d13779e0c6e
-ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
+ms.openlocfilehash: 1222f10811914f65822a49e18522c287ece12174
+ms.sourcegitcommit: c9c3e00c2d445b784423469838adc071a946e7c9
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/18/2018
-ms.locfileid: "46283776"
+ms.lasthandoff: 07/18/2019
+ms.locfileid: "68306502"
 ---
-# <a name="upgrading-applications-from-previous-versions-to-ef-core-20"></a>Actualización de aplicaciones desde versiones anteriores a EF Core 2.0
+# <a name="upgrading-applications-from-previous-versions-to-ef-core-20"></a>Actualización de las aplicaciones de las versiones anteriores a EF Core 2,0
 
-Hemos tomado la oportunidad para redefinir significativamente nuestras API existentes y los comportamientos en 2.0. Hay algunas mejoras que pueden requerir la modificación de código de aplicación existente, aunque creemos para la mayoría de las aplicaciones el impacto suele ser bajo, en la mayoría de los casos que requieren solo recompilación y unos cambios mínimos guiados para reemplazar API obsoletas.
+Hemos aprovechado la oportunidad de refinar significativamente las API y los comportamientos existentes en 2,0. Hay algunas mejoras que pueden requerir la modificación del código de aplicación existente, aunque creemos que, para la mayoría de las aplicaciones, el impacto será bajo, en la mayoría de los casos solo requiere volver a compilar y cambios guiados mínimos para reemplazar las API obsoletas.
 
-Puede requerir la actualización de una aplicación existente a EF Core 2.0:
+La actualización de una aplicación existente a EF Core 2,0 puede requerir:
 
-1. Actualización de la implementación de .NET de destino de la aplicación a una que admita .NET Standard 2.0. Consulte [admite implementaciones de .NET](../platforms/index.md) para obtener más detalles.
+1. Actualización de la implementación de .NET de destino de la aplicación a una que admite .NET Standard 2,0. Vea [implementaciones de .net compatibles](../platforms/index.md) para obtener más detalles.
 
-2. Identificar un proveedor para la base de datos de destino que es compatible con EF Core 2.0. Consulte [EF Core 2.0 requiere un proveedor de base de 2.0 datos](#ef-core-20-requires-a-20-database-provider) a continuación.
+2. Identifique un proveedor para la base de datos de destino que sea compatible con EF Core 2,0. Consulte [EF Core 2,0 requiere un proveedor de base de datos 2,0](#ef-core-20-requires-a-20-database-provider) .
 
-3. Actualizar todos los paquetes de EF Core (tooling y en tiempo de ejecución) a la 2.0. Consulte [instalar EF Core](../get-started/install/index.md) para obtener más detalles.
+3. Actualizar todos los paquetes de EF Core (tiempo de ejecución y herramientas) a 2,0. Consulte [instalación de EF Core](../get-started/install/index.md) para obtener más detalles.
 
-4. Realice los cambios de código necesario para compensar los cambios descritos en el resto de este documento.
+4. Realice los cambios de código necesarios para compensar los cambios importantes descritos en el resto de este documento.
 
-## <a name="aspnet-core-now-includes-ef-core"></a>ASP.NET Core incluye ahora EF Core
+## <a name="aspnet-core-now-includes-ef-core"></a>ASP.NET Core ahora incluye EF Core
 
-Las aplicaciones para ASP.NET Core 2.0 pueden usar EF Core 2.0 sin dependencias adicionales además de proveedores de bases de datos de terceros. Sin embargo, las aplicaciones destinadas a versiones anteriores de ASP.NET Core deben actualizar a ASP.NET Core 2.0 para poder usar EF Core 2.0. Para obtener más información sobre cómo actualizar las aplicaciones ASP.NET Core 2.0, consulte [la documentación de ASP.NET Core en el asunto](https://docs.microsoft.com/aspnet/core/migration/1x-to-2x/).
+Las aplicaciones para ASP.NET Core 2.0 pueden usar EF Core 2.0 sin dependencias adicionales además de proveedores de bases de datos de terceros. Sin embargo, las aplicaciones que tienen como destino versiones anteriores de ASP.NET Core deben actualizar a ASP.NET Core 2,0 para poder usar EF Core 2,0. Para obtener más información sobre la actualización de aplicaciones ASP.NET Core a 2,0, consulte [la documentación de ASP.net Core sobre el tema](https://docs.microsoft.com/aspnet/core/migration/1x-to-2x/).
 
-## <a name="new-way-of-getting-application-services-in-aspnet-core"></a>Nueva forma de obtener los servicios de aplicaciones de ASP.NET Core
+## <a name="new-way-of-getting-application-services-in-aspnet-core"></a>Nueva forma de obtener servicios de aplicación en ASP.NET Core
 
-Se actualizó el patrón recomendado para aplicaciones web ASP.NET Core 2.0 de forma que se interrumpió la lógica en tiempo de diseño que usa EF Core en la versión 1.x. Anteriormente en tiempo de diseño, EF Core intentaría invocar `Startup.ConfigureServices` directamente con el fin de obtener acceso a proveedor de servicios de la aplicación. En ASP.NET Core 2.0, se inicializa la configuración fuera de la `Startup` clase. Las aplicaciones que usan EF Core suelen tener acceso a su cadena de conexión de configuración, por lo que `Startup` por sí mismo ya no es suficiente. Si actualiza una aplicación de ASP.NET Core 1.x, puede recibir el siguiente error al usar las herramientas de EF Core.
+El patrón recomendado para las aplicaciones Web de ASP.NET Core se ha actualizado para 2,0 de forma que se interrumpió la lógica en tiempo de diseño EF Core utiliza en 1. x. Anteriormente, en tiempo de diseño, EF Core intentaría invocar `Startup.ConfigureServices` directamente para tener acceso al proveedor de servicios de la aplicación. En ASP.net Core 2,0, la configuración se inicializa fuera de la `Startup` clase. Las aplicaciones que usan EF Core normalmente acceden a su cadena de `Startup` conexión desde la configuración, por lo que por sí sola ya no es suficiente. Si actualiza una aplicación ASP.NET Core 1. x, es posible que reciba el siguiente error al usar las herramientas de EF Core.
 
-> No se encontró ningún constructor sin parámetros en 'ApplicationContext'. Agregue un constructor sin parámetros para 'ApplicationContext' o agregue una implementación de ' IDesignTimeDbContextFactory&lt;ApplicationContext&gt;' en el mismo ensamblado que 'ApplicationContext'
+> No se encontró ningún constructor sin parámetros en ' ApplicationContext '. Agregue un constructor sin parámetros a ' ApplicationContext ' o agregue una implementación de ' IDesignTimeDbContextFactory&lt;ApplicationContext&gt;' en el mismo ensamblado que ' ApplicationContext '
 
-Se ha agregado un nuevo enlace de tiempo de diseño en la plantilla predeterminada de ASP.NET Core 2.0. Estático `Program.BuildWebHost` método permite que EF Core tener acceso a proveedor de servicios de la aplicación en tiempo de diseño. Si va a actualizar una aplicación de ASP.NET Core 1.x, deberá actualizar el `Program` clase similar a lo siguiente.
+Se ha agregado un nuevo enlace en tiempo de diseño a la plantilla predeterminada de ASP.NET Core 2.0. El método `Program.BuildWebHost` estático permite a EF Core tener acceso al proveedor de servicios de la aplicación en tiempo de diseño. Si está actualizando una aplicación ASP.net Core 1. x, deberá actualizar la `Program` clase para que se parezca a lo siguiente.
 
 ``` csharp
 using Microsoft.AspNetCore;
@@ -58,108 +58,108 @@ namespace AspNetCoreDotNetCore2._0App
 }
 ```
 
-La adopción de este nuevo patrón al actualizar las aplicaciones a 2.0 es muy recomendable y es necesario para características de producto como migraciones de Entity Framework Core funcione. La otra alternativa común es [implementar *IDesignTimeDbContextFactory\<TContext >*](xref:core/miscellaneous/cli/dbcontext-creation#from-a-design-time-factory).
+La adopción de este nuevo patrón al actualizar las aplicaciones a 2,0 es muy recomendable y es necesaria para que funcionen las características del producto, como Entity Framework Core las migraciones. La otra alternativa común es [implementar *IDesignTimeDbContextFactory\<TContext >* ](xref:core/miscellaneous/cli/dbcontext-creation#from-a-design-time-factory).
 
-## <a name="idbcontextfactory-renamed"></a>Cambiar el nombre de IDbContextFactory
+## <a name="idbcontextfactory-renamed"></a>IDbContextFactory cambiado
 
-Con el fin de admitir patrones de aplicación diferentes y proporcionar a los usuarios más control sobre cómo sus `DbContext` se utiliza en tiempo de diseño, entregamos, en el pasado, el `IDbContextFactory<TContext>` interfaz. En tiempo de diseño, las herramientas de EF Core detectará las implementaciones de esta interfaz en el proyecto y usarlo para crear `DbContext` objetos.
+Con el fin de admitir diversos patrones de aplicación y proporcionar a los usuarios más `DbContext` control sobre la forma en que se usan en tiempo de diseño, en el `IDbContextFactory<TContext>` pasado, siempre se ofrecía la interfaz. En tiempo de diseño, las herramientas de EF Core detectarán las implementaciones de esta interfaz en el proyecto y la usarán para crear `DbContext` objetos.
 
-Esta interfaz tenía un nombre muy general que confundir a algunos usuarios para intentar volver a usarla para otros `DbContext`-creación de escenarios. Que se ven desprevenidas cuando las herramientas de EF, a continuación, ha intentado usar su implementación en tiempo de diseño y provocó comandos como `Update-Database` o `dotnet ef database update` para producir un error.
+Esta interfaz tenía un nombre muy general que engaña a algunos usuarios para intentar volver a usarlo para otros `DbContext`escenarios de creación. No estaban protegidos cuando las herramientas de EF intentaban usar su implementación en tiempo de diseño y provocaban errores en los `Update-Database` comandos `dotnet ef database update` como o.
 
-Con el fin de comunicar la semántica de tiempo de diseño segura de esta interfaz, nos hemos cambiado el nombre a `IDesignTimeDbContextFactory<TContext>`.
+Con el fin de comunicar la semántica sólida en tiempo de diseño de esta interfaz, se le ha cambiado `IDesignTimeDbContextFactory<TContext>`el nombre a.
 
-Para la versión 2.0 de la versión de la `IDbContextFactory<TContext>` todavía existe, pero está marcado como obsoleto.
+En el caso de la `IDbContextFactory<TContext>` versión 2,0, el todavía existe pero está marcado como obsoleto.
 
-## <a name="dbcontextfactoryoptions-removed"></a>Quitar DbContextFactoryOptions
+## <a name="dbcontextfactoryoptions-removed"></a>DbContextFactoryOptions quitado
 
-Debido a los cambios de ASP.NET Core 2.0 se ha descrito anteriormente, hemos encontrado que `DbContextFactoryOptions` ya no era necesario en el nuevo `IDesignTimeDbContextFactory<TContext>` interfaz. Estas son las alternativas que se debería utilizar en su lugar.
+Debido a los cambios ASP.net Core 2,0 descritos anteriormente, encontramos que `DbContextFactoryOptions` ya no era necesario en la nueva `IDesignTimeDbContextFactory<TContext>` interfaz. Estas son las alternativas que debe usar en su lugar.
 
 | DbContextFactoryOptions | Alternativa                                                  |
 |:------------------------|:-------------------------------------------------------------|
-| ApplicationBasePath     | AppContext.BaseDirectory                                     |
-| ContentRootPath         | Directory.GetCurrentDirectory()                              |
-| EnvironmentName         | Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") |
+| ApplicationBasePath     | AppContext. BaseDirectory                                     |
+| ContentRootPath         | Directorio. GetCurrentDirectory ()                              |
+| EnvironmentName         | Environment. GetEnvironmentVariable ("ASPNETCORE_ENVIRONMENT") |
 
-## <a name="design-time-working-directory-changed"></a>Puede cambiar el directorio de trabajo de tiempo de diseño
+## <a name="design-time-working-directory-changed"></a>Directorio de trabajo en tiempo de diseño cambiado
 
-Los cambios de ASP.NET Core 2.0 requieren también el directorio de trabajo usando `dotnet ef` para alinearse con el directorio de trabajo que usa Visual Studio cuando se ejecuta la aplicación. Un efecto secundario observable de esto es que SQLite los nombres de archivo están ahora en relación con el directorio del proyecto y no en el directorio de salida como los que.
+Los cambios ASP.net Core 2,0 también requerían el directorio de `dotnet ef` trabajo usado por para alinearlo con el directorio de trabajo que usa Visual Studio cuando se ejecuta la aplicación. Un efecto lateral observable de esto es que los nombres de archivo de SQLite ahora son relativos al directorio del proyecto y no al directorio de salida como se solían usar.
 
-## <a name="ef-core-20-requires-a-20-database-provider"></a>EF Core 2.0 requiere un proveedor de base de 2.0 datos
+## <a name="ef-core-20-requires-a-20-database-provider"></a>EF Core 2,0 requiere un proveedor de base de datos 2,0
 
-Para EF Core 2.0 se han realizado muchas mejoras en los proveedores de base de datos de manera y simplificaciones funcione. Esto significa que los proveedores de 1.0 y 1.1 no funcionarán con EF Core 2.0.
+Por EF Core 2,0 hemos realizado muchas simplificaciones y mejoras en la forma en que funcionan los proveedores de bases de datos. Esto significa que los proveedores 1.0. x y 1.1. x no funcionarán con EF Core 2,0.
 
-Los proveedores de SQL Server y SQLite enviados por el equipo de EF y 2.0 versiones estará disponibles como parte de la versión 2.0 de versión. Los proveedores de código abierto de terceros para [SQL Compact](https://github.com/ErikEJ/EntityFramework.SqlServerCompact), [PostgreSQL](https://github.com/npgsql/Npgsql.EntityFrameworkCore.PostgreSQL), y [MySQL](https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.MySql) se actualizan para 2.0. Para todos los otros proveedores, póngase en contacto con el escritor de proveedores.
+El equipo de EF envía los proveedores de SQL Server y SQLite, y las versiones 2,0 estarán disponibles como parte de la versión 2,0. Los proveedores de terceros de código abierto para [SQL Compact](https://github.com/ErikEJ/EntityFramework.SqlServerCompact), [PostgreSQL](https://github.com/npgsql/Npgsql.EntityFrameworkCore.PostgreSQL)y [MySQL](https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.MySql) se están actualizando para 2,0. Para todos los demás proveedores, póngase en contacto con el escritor del proveedor.
 
-## <a name="logging-and-diagnostics-events-have-changed"></a>Han cambiado los eventos de registro y diagnóstico
+## <a name="logging-and-diagnostics-events-have-changed"></a>Los eventos de diagnóstico y registro han cambiado
 
-Nota: estos cambios no deberían afectar a la mayoría de código de aplicación.
+Nota: estos cambios no deben afectar a la mayoría del código de aplicación.
 
-Los identificadores de evento para los mensajes enviados a un [ILogger](https://github.com/aspnet/Logging/blob/dev/src/Microsoft.Extensions.Logging.Abstractions/ILogger.cs) han cambiado en 2.0. Los identificadores de evento ahora son únicos en el código de EF Core. Ahora, estos mensajes también siguen el patrón estándar de registro estructurado que usa, por ejemplo, MVC.
+Los identificadores de eventos de los mensajes enviados a un [ILogger](https://github.com/aspnet/Logging/blob/dev/src/Microsoft.Extensions.Logging.Abstractions/ILogger.cs) han cambiado en 2,0. Los identificadores de evento ahora son únicos en el código de EF Core. Ahora, estos mensajes también siguen el patrón estándar de registro estructurado que usa, por ejemplo, MVC.
 
 Las categorías de registrador también han cambiado. Ahora hay un conjunto conocido de categorías a las que se accede a través de [DbLoggerCategory](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/DbLoggerCategory.cs).
 
-[DiagnosticSource](https://github.com/dotnet/corefx/blob/master/src/System.Diagnostics.DiagnosticSource/src/DiagnosticSourceUsersGuide.md) eventos ahora usan los mismos nombres de Id. de evento correspondiente `ILogger` mensajes. Las cargas del evento son todos los tipos nominales que se deriva de [EventData](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Diagnostics/EventData.cs).
+Los eventos de [DiagnosticSource](https://github.com/dotnet/corefx/blob/master/src/System.Diagnostics.DiagnosticSource/src/DiagnosticSourceUsersGuide.md) ahora usan los mismos nombres de ID. `ILogger` de evento que los mensajes correspondientes. Las cargas de evento son tipos nominales derivados de [EventData](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Diagnostics/EventData.cs).
 
-Id. de evento, tipos de carga y categorías se documentan en el [CoreEventId](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Diagnostics/CoreEventId.cs) y [RelationalEventId](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore.Relational/Diagnostics/RelationalEventId.cs) clases.
+Los identificadores de eventos, tipos de carga y categorías se documentan en las clases [CoreEventId](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Diagnostics/CoreEventId.cs) y [RelationalEventId](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore.Relational/Diagnostics/RelationalEventId.cs) .
 
-Identificadores también han movido desde Microsoft.EntityFrameworkCore.Infraestructure a nuevo espacio de nombres Microsoft.EntityFrameworkCore.Diagnostics.
+Los identificadores también se han pasado de Microsoft. EntityFrameworkCore. Infrastructure al nuevo espacio de nombres Microsoft. EntityFrameworkCore. Diagnostics.
 
-## <a name="ef-core-relational-metadata-api-changes"></a>API de metadatos relacionales cambios EF Core
+## <a name="ef-core-relational-metadata-api-changes"></a>Cambios de la API de metadatos relacionales EF Core
 
-EF Core 2.0 ahora compila un elemento [IModel](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/IModel.cs) diferente para cada proveedor que se va a usar. Esto suele ser transparente para la aplicación. Esto ha permitido una simplificación de las API de metadatos de nivel inferior, de modo que cualquier acceso a _conceptos de metadatos relacionales comunes_ siempre se realiza mediante una llamada a `.Relational` en lugar de a `.SqlServer`, `.Sqlite`, etc. Por ejemplo, 1.1 código similar al siguiente:
+EF Core 2.0 ahora compila un elemento [IModel](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/IModel.cs) diferente para cada proveedor que se va a usar. Esto suele ser transparente para la aplicación. Esto ha permitido una simplificación de las API de metadatos de nivel inferior, de modo que cualquier acceso a _conceptos de metadatos relacionales comunes_ siempre se realiza mediante una llamada a `.Relational` en lugar de a `.SqlServer`, `.Sqlite`, etc. Por ejemplo, 1.1. x código similar al siguiente:
 
 ``` csharp
 var tableName = context.Model.FindEntityType(typeof(User)).SqlServer().TableName;
 ```
 
-Ahora debe escribirse como esta:
+Ahora debe escribirse de la siguiente manera:
 
 ``` csharp
 var tableName = context.Model.FindEntityType(typeof(User)).Relational().TableName;
 ```
 
-En lugar de usar métodos como `ForSqlServerToTable`, métodos de extensión ahora están disponibles para escribir código condicional basado en el proveedor actual en uso. Por ejemplo:
+En lugar de utilizar métodos como `ForSqlServerToTable`, los métodos de extensión ahora están disponibles para escribir código condicional basado en el proveedor actual en uso. Por ejemplo:
 
 ```C#
 modelBuilder.Entity<User>().ToTable(
     Database.IsSqlServer() ? "SqlServerName" : "OtherName");
 ```
 
-Tenga en cuenta que este cambio solo se aplica a las API y metadatos que se define para _todas_ proveedores relacionales. La API y los metadatos permanece invariable cuando es solo un único proveedor específico. Por ejemplo, los índices agrupados son específicos de SQL Server, por lo que `ForSqlServerIsClustered` y `.SqlServer().IsClustered()` debe seguir usándose.
+Tenga en cuenta que este cambio solo se aplica a las API/metadatos que se definen para _todos los_ proveedores relacionales. La API y los metadatos siguen siendo los mismos cuando son específicos de un solo proveedor. Por ejemplo, los índices clúster son específicos de SQL Server, por lo `ForSqlServerIsClustered` que `.SqlServer().IsClustered()` y todavía deben usarse.
 
-## <a name="dont-take-control-of-the-ef-service-provider"></a>No tome el control del proveedor de servicios EF
+## <a name="dont-take-control-of-the-ef-service-provider"></a>No tomar el control del proveedor de servicios de EF
 
-EF Core usa una instancia interna `IServiceProvider` (un contenedor de inserción de dependencia) para su implementación interna. Las aplicaciones deben permitir que EF Core crear y administrar este proveedor, excepto en casos especiales. Considerar la eliminación de todas las llamadas a `UseInternalServiceProvider`. Si una aplicación necesita llamar a `UseInternalServiceProvider`, a continuación, considere la posibilidad de [archivando un problema](https://github.com/aspnet/EntityFramework/Issues) para que podamos investigarlo otras formas de controlar su escenario.
+EF Core usa un contenedor `IServiceProvider` de inserción de dependencias interno para su implementación interna. Las aplicaciones deben permitir que EF Core crear y administrar este proveedor, excepto en casos especiales. Considere la posibilidad de quitar todas `UseInternalServiceProvider`las llamadas a. Si una aplicación necesita llamar `UseInternalServiceProvider`a, considere la posibilidad de [presentar un problema](https://github.com/aspnet/EntityFramework/Issues) para que podamos investigar otras maneras de controlar su escenario.
 
-Una llamada a `AddEntityFramework`, `AddEntityFrameworkSqlServer`, etc. no es necesario el código de aplicación a menos que `UseInternalServiceProvider` también se denomina. Quite cualquier llamada existente al `AddEntityFramework` o `AddEntityFrameworkSqlServer`, etc. `AddDbContext` todavía debe usarse en la misma manera que antes.
+El `AddEntityFramework`código `AddEntityFrameworkSqlServer`de aplicación no necesita llamar a,, etc. `UseInternalServiceProvider` , a menos que también se llame a. Quite todas las llamadas existentes `AddEntityFramework` a `AddEntityFrameworkSqlServer`o, etc `AddDbContext` . deben seguir utilizándose de la misma manera que antes.
 
-## <a name="in-memory-databases-must-be-named"></a>Se deben llamar a las bases de datos en memoria
+## <a name="in-memory-databases-must-be-named"></a>Las bases de datos en memoria deben tener nombre
 
-Se ha quitado la base de datos en memoria sin nombre global y en su lugar deben denominarse todas las bases de datos en memoria. Por ejemplo:
+La base de datos en memoria global sin nombre se ha quitado y, en su lugar, todas las bases de datos en memoria deben tener nombre. Por ejemplo:
 
 ``` csharp
 optionsBuilder.UseInMemoryDatabase("MyDatabase");
 ```
 
-Esto crea y usa una base de datos con el nombre "MyDatabase". Si `UseInMemoryDatabase` se llama de nuevo con el mismo nombre, a continuación, se usará la misma base de datos en memoria, para que puedan compartirse entre varias instancias de contexto.
+Esto crea o usa una base de datos con el nombre "base de datos". Si `UseInMemoryDatabase` se llama de nuevo con el mismo nombre, se usará la misma base de datos en memoria, lo que permite que varias instancias de contexto lo compartan.
 
-## <a name="read-only-api-changes"></a>Cambios en la API de solo lectura
+## <a name="read-only-api-changes"></a>Cambios de la API de solo lectura
 
-`IsReadOnlyBeforeSave`, `IsReadOnlyAfterSave`, y `IsStoreGeneratedAlways` se han obsoleto y se reemplazan por [BeforeSaveBehavior](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/IProperty.cs#L39) y [AfterSaveBehavior](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/IProperty.cs#L55). Estos comportamientos se aplican a cualquier propiedad (no sólo las propiedades generadas por el almacén) y determinar cómo se debe usar el valor de la propiedad cuando se insertan en una fila de la base de datos (`BeforeSaveBehavior`) o al actualizar una existente base de datos fila (`AfterSaveBehavior`).
+`IsReadOnlyBeforeSave`, `IsReadOnlyAfterSave`y `IsStoreGeneratedAlways` han quedado obsoletos y se han reemplazado por [BeforeSaveBehavior](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/IProperty.cs#L39) y [AfterSaveBehavior](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/IProperty.cs#L55). Estos comportamientos se aplican a cualquier propiedad (no solo a las propiedades generadas por el almacenamiento) y determinan cómo se debe usar el valor de la propiedad`BeforeSaveBehavior`al insertar en una fila de base de datos`AfterSaveBehavior`() o al actualizar una fila de base de datos existente ().
 
-Las propiedades marcan como [ValueGenerated.OnAddOrUpdate](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/ValueGenerated.cs) (por ejemplo, para las columnas calculadas) omitirá de forma predeterminada cualquier valor establecido actualmente en la propiedad. Esto significa que siempre se obtendrá un valor generado por el almacén, independientemente de si cualquier valor se ha establecido o modificado en la entidad con seguimiento. Esto se puede cambiar estableciendo otro `Before\AfterSaveBehavior`.
+Las propiedades marcadas como [ValueGenerated. OnAddOrUpdate](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/ValueGenerated.cs) (por ejemplo, para las columnas calculadas) omitirán de forma predeterminada cualquier valor establecido actualmente en la propiedad. Esto significa que siempre se obtendrá un valor generado por el almacén independientemente de si se ha establecido o modificado algún valor en la entidad a la que se realiza el seguimiento. Esto se puede cambiar estableciendo otro diferente `Before\AfterSaveBehavior`.
 
-## <a name="new-clientsetnull-delete-behavior"></a>Nuevo comportamiento de eliminación ClientSetNull
+## <a name="new-clientsetnull-delete-behavior"></a>Nuevo comportamiento de eliminación de ClientSetNull
 
-En versiones anteriores, [DeleteBehavior.Restrict](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/DeleteBehavior.cs) tenía un comportamiento para las entidades seguidas por el contexto que más cerrado coincidente `SetNull` semántica. En EF Core 2.0, un nuevo `ClientSetNull` comportamiento se ha introducido como el valor predeterminado para las relaciones opcionales. Este comportamiento tiene `SetNull` semántica para las entidades sometidas a seguimiento y `Restrict` comportamiento para las bases de datos creadas con EF Core. En nuestra experiencia, estos son los comportamientos más espera/útiles para las entidades sometidas a seguimiento y la base de datos. `DeleteBehavior.Restrict` Ahora se admite para las entidades sometidas a seguimiento cuando se establece para las relaciones opcionales.
+En versiones anteriores, [DeleteBehavior. Restrict](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/DeleteBehavior.cs) tenía un comportamiento para las entidades a las que realiza un seguimiento el contexto que `SetNull` mejoró la semántica coincidente. En EF Core 2,0, se ha `ClientSetNull` introducido un nuevo comportamiento como valor predeterminado para las relaciones opcionales. Este comportamiento tiene `SetNull` semántica para las entidades a las que `Restrict` se realiza un seguimiento y el comportamiento de las bases de datos creadas mediante EF Core. En nuestra experiencia, estos son los comportamientos más previstos y útiles para las entidades de las que se realiza un seguimiento y la base de datos. `DeleteBehavior.Restrict`ahora se admite para entidades de las que se ha realizado un seguimiento cuando se establece para relaciones opcionales.
 
-## <a name="provider-design-time-packages-removed"></a>Paquetes de tiempo de diseño del proveedor quitados
+## <a name="provider-design-time-packages-removed"></a>Paquetes en tiempo de diseño del proveedor quitados
 
-El `Microsoft.EntityFrameworkCore.Relational.Design` se ha quitado el paquete. Su contenido se consolidaron `Microsoft.EntityFrameworkCore.Relational` y `Microsoft.EntityFrameworkCore.Design`.
+Se `Microsoft.EntityFrameworkCore.Relational.Design` ha quitado el paquete. Su contenido se ha consolidado `Microsoft.EntityFrameworkCore.Relational` en `Microsoft.EntityFrameworkCore.Design`y.
 
-Esto se propaga a los paquetes de tiempo de diseño de proveedor. Los paquetes (`Microsoft.EntityFrameworkCore.Sqlite.Design`, `Microsoft.EntityFrameworkCore.SqlServer.Design`, etc.) se quitaron y su contenido se consolida en los paquetes de proveedor principal.
+Esto se propaga a los paquetes en tiempo de diseño del proveedor. Los paquetes (`Microsoft.EntityFrameworkCore.Sqlite.Design`, `Microsoft.EntityFrameworkCore.SqlServer.Design`, etc.) se han quitado y su contenido se ha consolidado en los paquetes principales del proveedor.
 
-Para habilitar `Scaffold-DbContext` o `dotnet ef dbcontext scaffold` en EF Core 2.0, solo deberá hacen referencia al paquete de proveedor único:
+Para habilitar `Scaffold-DbContext` o `dotnet ef dbcontext scaffold` en EF Core 2,0, solo tiene que hacer referencia al paquete de proveedor único:
 
 ``` xml
 <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer"
