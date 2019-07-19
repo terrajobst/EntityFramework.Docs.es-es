@@ -4,12 +4,12 @@ author: ErikEJ
 ms.date: 01/07/2019
 ms.assetid: 14fffb6c-a687-4881-a094-af4a1359a296
 uid: core/extensions/index
-ms.openlocfilehash: d432ca36c166f7baf71253709bf58b1f5428a11a
-ms.sourcegitcommit: 8f801993c9b8cd8a8fbfa7134818a8edca79e31a
+ms.openlocfilehash: 08231cd93002a6d1b3cebe20f4f7cf57ea085af2
+ms.sourcegitcommit: c9c3e00c2d445b784423469838adc071a946e7c9
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 04/14/2019
-ms.locfileid: "59562512"
+ms.lasthandoff: 07/18/2019
+ms.locfileid: "68306405"
 ---
 # <a name="ef-core-tools--extensions"></a>Herramientas y extensiones de EF Core
 
@@ -38,7 +38,7 @@ EF Core Power Tools es una extensión de Visual Studio 2017 que expone varias ta
 
 [Wiki de GitHub](https://github.com/ErikEJ/EFCorePowerTools/wiki)
 
-### <a name="entity-framework-visual-editor"></a>Editor de objetos visuales de Entity Framework
+### <a name="entity-framework-visual-editor"></a>Editor visual de Entity Framework
 
 El Editor de objetos visuales de Entity Framework es una extensión de Visual Studio que agrega un diseñador ORM que permite generar objetos visuales de las clases EF 6 y EF Core. El código se genera mediante plantillas T4, por lo que se puede personalizar. Asimismo, admite enumeraciones y asociaciones de herencia, unidireccionales y bidireccionales, y permite asignar colores a las clases y agregar bloques de texto para explicar ciertas partes del diseño que puedan resultar difíciles de comprender.
 
@@ -155,3 +155,16 @@ Implementación de compatibilidad temporal para EF Core.
 Caché de consulta de segundo nivel y alto rendimiento para EF Core.
 
 [Repositorio de GitHub](https://github.com/SteffenMangold/EntityFrameworkCore.Cacheable)
+
+### <a name="entity-framework-plus"></a>Entity Framework Plus
+
+Amplía su DbContext con características como: Incluir filtro, Auditoría, Cache, Consulta de futuro, Batch Delete, Actualización por lotes y más.
+
+[Sitio web](https://entityframework-plus.net/)
+[Repositorio de GitHub](https://github.com/zzzprojects/EntityFramework-Plus)
+
+### <a name="entity-framework-extensions"></a>Extensiones de Entity Framework
+
+Extiende su DbContext con operaciones masivas de alto rendimiento: BulkSaveChanges, BulkInsert, BulkUpdate, BulkDelete, BulkMerge y más.
+
+[Sitio web](https://entityframework-extensions.net/)
