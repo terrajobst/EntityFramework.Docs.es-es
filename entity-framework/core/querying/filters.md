@@ -3,12 +3,12 @@ title: 'Filtros de consulta global: EF Core'
 author: anpete
 ms.date: 11/03/2017
 uid: core/querying/filters
-ms.openlocfilehash: 4afc9fb0338d34845639d57013ac710445321940
-ms.sourcegitcommit: 8f801993c9b8cd8a8fbfa7134818a8edca79e31a
+ms.openlocfilehash: e1cb9f5afc54aaa12e5880ace606277b00911c06
+ms.sourcegitcommit: c9c3e00c2d445b784423469838adc071a946e7c9
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 04/14/2019
-ms.locfileid: "59562447"
+ms.lasthandoff: 07/18/2019
+ms.locfileid: "68306470"
 ---
 # <a name="global-query-filters"></a>Filtros de consulta global
 
@@ -31,20 +31,20 @@ En primer lugar, defina las entidades:
 
 [!code-csharp[Main](../../../samples/core/QueryFilters/Program.cs#Entities)]
 
-Tenga en cuenta la declaración de un campo __tenantId_ en la entidad _Blog_. Se usará para asociar cada instancia de blog con un inquilino específico. También hay definida una propiedad _IsDeleted_ en el tipo de entidad _Post_. Se usa para llevar un seguimiento de si una instancia _Post_ se eliminó de manera temporal. Es decir, la instancia se marca como eliminada sin quitar físicamente los datos subyacentes.
+Tenga en cuenta la declaración de un campo _tenantId_ en la entidad _Blog_. Se usará para asociar cada instancia de blog con un inquilino específico. También hay definida una propiedad _IsDeleted_ en el tipo de entidad _Post_. Se usa para llevar un seguimiento de si una instancia _Post_ se eliminó de manera temporal. Es decir, la instancia se marca como eliminada sin quitar físicamente los datos subyacentes.
 
-A continuación, configure los filtros de consulta en _OnModelCreating_ con la API ```HasQueryFilter```.
+A continuación, configure los filtros de consulta en _OnModelCreating_ con la API `HasQueryFilter`.
 
 [!code-csharp[Main](../../../samples/core/QueryFilters/Program.cs#Configuration)]
 
 Las expresiones de predicado pasadas a las llamadas de _HasQueryFilter_ ahora se aplicarán automáticamente a cualquier consulta LINQ para esos tipos.
 
 > [!TIP]
-> Tenga en cuenta el uso de un campo en el nivel de instancia de DbContext: ```_tenantId``` se usa para establecer el inquilino actual. Los filtros de nivel de modelo usan el valor de la instancia de contexto correcta (es decir, la instancia que está ejecutando la consulta).
+> Tenga en cuenta el uso de un campo en el nivel de instancia de DbContext: `_tenantId` se usa para establecer el inquilino actual. Los filtros de nivel de modelo usan el valor de la instancia de contexto correcta (es decir, la instancia que está ejecutando la consulta).
 
 ## <a name="disabling-filters"></a>Deshabilitación de filtros
 
-Los filtros se pueden deshabilitar para consultas LINQ individuales mediante el operador ```IgnoreQueryFilters()```.
+Los filtros se pueden deshabilitar para consultas LINQ individuales mediante el operador `IgnoreQueryFilters()`.
 
 [!code-csharp[Main](../../../samples/core/QueryFilters/Program.cs#IgnoreFilters)]
 

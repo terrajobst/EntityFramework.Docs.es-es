@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 70aae9b5-8743-4557-9c5d-239f688bf418
 uid: core/querying/raw-sql
-ms.openlocfilehash: 3024c0101c9d886ef844d1b7dc85aaf1be27e86b
-ms.sourcegitcommit: 5280dcac4423acad8b440143433459b18886115b
+ms.openlocfilehash: 91592ea9f7c73f10446993282c1874c852000871
+ms.sourcegitcommit: c9c3e00c2d445b784423469838adc071a946e7c9
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 04/18/2019
-ms.locfileid: "58914083"
+ms.lasthandoff: 07/18/2019
+ms.locfileid: "68306544"
 ---
 # <a name="raw-sql-queries"></a>Consultas SQL sin formato
 
@@ -146,11 +146,11 @@ Existen algunas limitaciones que debe considerar al usar las consultas SQL sin f
 * Las instrucciones `SELECT` que se pasan a este método por lo general admiten composición: Si EF Core debe evaluar operadores de consulta adicionales en el servidor (por ejemplo, para trasladar los operadores LINQ aplicados después de `FromSql`), el código SQL suministrado se considerará una subconsulta. Esto significa que el código SQL que se pasa no contendrá ningún carácter ni opción que no sea válido en una subconsulta, como:
   * un punto y coma final
   * En SQL Server, una sugerencia en el nivel de consulta final (por ejemplo, `OPTION (HASH JOIN)`)
-  * en SQL Server, una cláusula `ORDER BY` que no va acompañada de `TOP 100 PERCENT` en la cláusula `SELECT`
+  * En SQL Server, cláusula `ORDER BY` que no va acompañada por `OFFSET 0` O BIEN `TOP 100 PERCENT` en la cláusula `SELECT`
 
 * Las instrucciones SQL que no son `SELECT` se reconocen de manera automáticamente como instrucciones que no admiten composición. Como consecuencia, los resultados completos de los procedimientos almacenados siempre se devuelven al cliente y cualquier operador LINQ aplicado después de `FromSql` se evalúa en la memoria.
 
 > [!WARNING]  
-> **Siempre use la parametrización para las consultas SQL sin formato:** Además de validar la entrada del usuario, siempre use la parametrización para cualquier valor usado en un comando o consulta SQL sin formato. las API que aceptan una cadena SQL sin formato como `FromSql` y `ExecuteSqlCommand` permiten que los valores se pasen de manera sencilla como parámetros. Las sobrecargas de `FromSql` y `ExecuteSqlCommand` que aceptan FormattableString también permiten el uso de la sintaxis de interpolación de cadenas de una manera que ayude a proteger contra ataques por inyección de código SQL. 
+> **Siempre use la parametrización para las consultas SQL sin formato:** Además de validar la entrada del usuario, siempre use la parametrización para cualquier valor usado en un comando o consulta SQL sin formato. las API que aceptan una cadena SQL sin formato como `FromSql` y `ExecuteSqlCommand` permiten que los valores se pasen de manera sencilla como parámetros. Las sobrecargas de `FromSql` y `ExecuteSqlCommand` que aceptan FormattableString también permiten el uso de la sintaxis de interpolación de cadenas de una manera que mejora la protección contra ataques por inyección de código SQL. 
 > 
 > Si usa la concatenación o interpolación de cadenas para generar de forma dinámica cualquier elemento de la cadena de consulta, o bien pasa la entrada del usuario a instrucciones o procedimientos almacenados que la puedan ejecutar como SQL dinámico, será responsable de validar todas las entradas para protegerlas contra ataques por inyección de código SQL.
