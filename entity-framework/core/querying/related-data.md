@@ -15,7 +15,7 @@ ms.locfileid: "64873190"
 
 Entity Framework Core permite usar las propiedades de navegación del modelo para cargar las entidades relacionados. Existen tres patrones de O/RM comunes que se usan para cargar los datos relacionados.
 * **Carga diligente** significa que los datos relacionados se cargan desde la base de datos como parte de la consulta inicial.
-* **Carga explícita** significa que los datos relacionados se cargan de manera explícita desde la base de datos más adelanto.
+* **Carga explícita** significa que los datos relacionados se cargan de manera explícita desde la base de datos más adelante.
 * **Carga diferida** significa que los datos relacionados se cargan de manera transparente desde la base de datos cuando se accede a la propiedad de navegación.
 
 > [!TIP]  
