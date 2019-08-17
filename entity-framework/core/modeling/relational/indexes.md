@@ -1,34 +1,34 @@
 ---
-title: Índices - EF Core
+title: 'Índices: EF Core'
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 4581e7ba-5e7f-452c-9937-0aaf790ba10a
 uid: core/modeling/relational/indexes
-ms.openlocfilehash: 605b30ce710d9034deab97f695496ec66a576565
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: dfada7446f812f3c277572cc1338441272e8f448
+ms.sourcegitcommit: 7b7f774a5966b20d2aed5435a672a1edbe73b6fb
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42993222"
+ms.lasthandoff: 08/17/2019
+ms.locfileid: "69565357"
 ---
 # <a name="indexes"></a>Índices
 
 > [!NOTE]  
 > La configuración de esta sección se aplica a bases de datos relacionales en general. Los métodos de extensión que se muestran a continuación estarán disponibles cuando instale un proveedor de base de datos relacional (debido al paquete compartido *Microsoft.EntityFrameworkCore.Relational*).
 
-Un índice en una base de datos relacional se asigna en el mismo concepto que un índice en el núcleo de Entity Framework.
+Un índice en una base de datos relacional se asigna al mismo concepto que un índice en el núcleo de Entity Framework.
 
 ## <a name="conventions"></a>Convenciones
 
-Por convención, se denominan índices `IX_<type name>_<property name>`. Para los índices compuestos `<property name>` se convierte en una lista separada por un carácter de subrayado de los nombres de propiedad.
+Por Convención, los índices se denominan `IX_<type name>_<property name>`. En el caso de `<property name>` los índices compuestos se convierte en una lista de nombres de propiedad separados por guiones bajos.
 
 ## <a name="data-annotations"></a>Anotaciones de datos
 
-Los índices no se pueden configurar mediante las anotaciones de datos.
+Los índices no se pueden configurar con anotaciones de datos.
 
 ## <a name="fluent-api"></a>API fluida
 
-Puede usar la API Fluent para configurar el nombre de un índice.
+Puede usar la API fluida para configurar el nombre de un índice.
 
 [!code-csharp[Main](../../../../samples/core/Modeling/FluentAPI/Samples/Relational/IndexName.cs?name=Model&highlight=9)]
 
@@ -36,6 +36,12 @@ También puede especificar un filtro.
 
 [!code-csharp[Main](../../../../samples/core/Modeling/FluentAPI/Samples/Relational/IndexFilter.cs?name=Model&highlight=9)]
 
-Cuando se agrega mediante el proveedor de SQL Server EF filtrar un 'IS NOT NULL' para todas las columnas que aceptan valores null que forman parte de un índice único. Para invalidar esta convención puede proporcionar un `null` valor.
+Al usar el proveedor de SQL Server EF agrega un filtro ' IS NOT NULL ' para todas las columnas que aceptan valores NULL que forman parte de un índice único. Para invalidar esta Convención, puede proporcionar `null` un valor.
 
 [!code-csharp[Main](../../../../samples/core/Modeling/FluentAPI/Samples/Relational/IndexNoFilter.cs?name=Model&highlight=10)]
+
+### <a name="include-columns-in-sql-server-indexes"></a>Incluir columnas en índices de SQL Server
+
+Puede configurar [índices con columnas incluidas](https://docs.microsoft.com/sql/relational-databases/indexes/create-indexes-with-included-columns) para mejorar significativamente el rendimiento de las consultas cuando todas las columnas de la consulta se incluyen en el índice como columnas de clave o que no son de clave.
+
+[!code-csharp[Main](../../../../samples/core/Modeling/FluentAPI/Samples/Relational/ForSqlServerHasIndex.cs?name=Model)]
