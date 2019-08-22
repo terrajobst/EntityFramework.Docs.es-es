@@ -5,12 +5,12 @@ description: Introducción a EF Core en ASP.NET Core con una base de datos exist
 ms.date: 08/02/2018
 ms.assetid: 2bc68bea-ff77-4860-bf0b-cf00db6712a0
 uid: core/get-started/aspnetcore/existing-db
-ms.openlocfilehash: 6b0ed0a9222644bee31d23234aa27b2084137f4a
-ms.sourcegitcommit: 755a15a789631cc4ea581e2262a2dcc49c219eef
+ms.openlocfilehash: eeebd75bebe85994c6439e06243e113f2bda814c
+ms.sourcegitcommit: 7b7f774a5966b20d2aed5435a672a1edbe73b6fb
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 07/25/2019
-ms.locfileid: "68497512"
+ms.lasthandoff: 08/17/2019
+ms.locfileid: "69565232"
 ---
 # <a name="get-started-with-ef-core-on-aspnet-core-with-an-existing-database"></a>Introducción a EF Core en ASP.NET Core con una base de datos existente
 
@@ -92,7 +92,7 @@ El proceso de ingeniería inversa creó clases de entidad (`Blog.cs` & `Post.cs`
  El contexto representa una sesión con la base de datos y le permite consultar y guardar instancias de las clases de entidad.
 
 <!-- Static code listing, rather than a linked file, because the tutorial modifies the context file heavily -->
- ``` csharp
+``` csharp
 public partial class BloggingContext : DbContext
 {
     public BloggingContext()

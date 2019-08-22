@@ -1,27 +1,27 @@
 ---
-title: Archivo de configuración - EF6
+title: 'Configuración del archivo de configuración: EF6'
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 000044c6-1d32-4cf7-ae1f-ea21d86ebf8f
-ms.openlocfilehash: faba4e406b9f26f5bed6149f75c59da362d84692
-ms.sourcegitcommit: 15022dd06d919c29b1189c82611ea32f9fdc6617
+ms.openlocfilehash: 86389e4a3a3bac46e2a4cf2da648a4b19e29f3c3
+ms.sourcegitcommit: 299011fc4bd576eed58a4274f967639fa13fec53
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/27/2018
-ms.locfileid: "47415788"
+ms.lasthandoff: 08/21/2019
+ms.locfileid: "69886551"
 ---
-# <a name="configuration-file-settings"></a>Archivo de configuración
-Entity Framework permite a una serie de valores que se especifique el archivo de configuración. En general EF sigue un principio 'convención sobre configuración': todas las opciones descritas en esta publicación tienen un comportamiento predeterminado, sólo deberá preocuparse acerca de cómo cambiar la configuración cuando el valor predeterminado ya no satisface sus requisitos.  
+# <a name="configuration-file-settings"></a>Configuración del archivo de configuración
+Entity Framework permite especificar una serie de valores desde el archivo de configuración. En general, EF sigue un comportamiento de "Convención sobre configuración": todos los valores de configuración descritos en esta publicación tienen un comportamiento predeterminado, solo tiene que preocuparse por cambiar el valor cuando el valor predeterminado ya no satisface sus requisitos.  
 
 ## <a name="a-code-based-alternative"></a>Una alternativa basada en código  
 
-Todas estas configuraciones pueden aplicarse también mediante código. A partir de EF6 introdujimos [configuración basada en código](code-based.md), que proporciona un modo centralizado de la aplicación configuración desde el código. Antes de EF6, todavía se puede aplicar la configuración desde el código, pero deberá usar varias API para configurar diferentes áreas. La opción de archivo de configuración permite que esta configuración se puede cambiar fácilmente durante la implementación sin actualizar el código.
+Todos estos valores también se pueden aplicar mediante código. A partir de EF6, se presentó la [configuración basada en código](code-based.md), que proporciona una manera centralizada de aplicar la configuración desde el código. Antes de EF6, todavía se puede aplicar la configuración desde el código, pero es necesario usar varias API para configurar distintas áreas. La opción del archivo de configuración permite cambiar fácilmente esta configuración durante la implementación sin necesidad de actualizar el código.
 
-## <a name="the-entity-framework-configuration-section"></a>La sección de configuración de Entity Framework  
+## <a name="the-entity-framework-configuration-section"></a>La sección de configuración Entity Framework  
 
-A partir con EF4.1, puede establecer el inicializador de base de datos para un contexto con el **appSettings** sección del archivo de configuración. En EF 4.3 introdujimos personalizado **entityFramework** sección para controlar la nueva configuración. Entity Framework reconocerá sigue establecidos con el formato antiguo de inicializadores de base de datos, pero se recomienda mover al nuevo formato siempre que sea posible.
+A partir de EF 4.1, podría establecer el inicializador de base de datos para un contexto mediante la sección **appSettings** del archivo de configuración. En EF 4,3, se presentó la sección **entityFramework** personalizada para controlar la nueva configuración. Entity Framework seguirá reconociendo los inicializadores de base de datos establecidos con el formato antiguo, pero se recomienda pasar al nuevo formato siempre que sea posible.
 
-El **entityFramework** sección se agregó automáticamente al archivo de configuración del proyecto cuando se ha instalado el paquete EntityFramework NuGet.  
+La sección **entityFramework** se agregó automáticamente al archivo de configuración del proyecto al instalar el paquete NuGet entityFramework.  
 
 ``` xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -36,11 +36,11 @@ El **entityFramework** sección se agregó automáticamente al archivo de config
 
 ## <a name="connection-strings"></a>Cadenas de conexión  
 
-[Esta página](~/ef6/fundamentals/configuring/connection-strings.md) proporciona más detalles sobre cómo Entity Framework determina la base de datos que se usará, incluidas las cadenas de conexión en el archivo de configuración.  
+En [esta página](~/ef6/fundamentals/configuring/connection-strings.md) se proporcionan más detalles sobre cómo Entity Framework determina la base de datos que se va a usar, incluidas las cadenas de conexión en el archivo de configuración.  
 
-Van de cadenas de conexión en el estándar **connectionStrings** elemento y no requieren la **entityFramework** sección.  
+Las cadenas de conexión van en el elemento **connectionStrings** estándar y no requieren la sección **entityFramework** .  
 
-Los modelos de código que se basa en primer lugar utilizan cadenas de conexión de ADO.NET normales. Por ejemplo:  
+Los modelos basados en Code First usan cadenas de conexión ADO.NET normales. Por ejemplo:  
 
 ``` xml
 <connectionStrings>
@@ -50,7 +50,7 @@ Los modelos de código que se basa en primer lugar utilizan cadenas de conexión
 </connectionStrings>
 ```  
 
-EF Designer en función de las cadenas de conexión de modelos uso especiales EF. Por ejemplo:  
+Los modelos basados en el diseñador EF usan cadenas de conexión EF especiales. Por ejemplo:  
 
 ``` xml  
 <connectionStrings>
@@ -60,7 +60,7 @@ EF Designer en función de las cadenas de conexión de modelos uso especiales EF
         res://*/BloggingModel.csdl|
         res://*/BloggingModel.ssdl|
         res://*/BloggingModel.msl;
-      provider=System.Data.SqlClient
+      provider=System.Data.SqlClient;
       provider connection string=
         &quot;data source=(localdb)\mssqllocaldb;
         initial catalog=Blogging;
@@ -70,35 +70,35 @@ EF Designer en función de las cadenas de conexión de modelos uso especiales EF
 </connectionStrings>
 ```
 
-## <a name="code-based-configuration-type-ef6-onwards"></a>Tipo de configuración basado en código (EF6 y versiones posteriores)  
+## <a name="code-based-configuration-type-ef6-onwards"></a>Tipo de configuración basada en código (EF6 en adelante)  
 
-A partir de EF6, puede especificar el DbConfiguration para EF que use para [configuración basada en código](code-based.md) en la aplicación. En la mayoría de los casos no es necesario especificar esta opción como EF detectará automáticamente su DbConfiguration. Para obtener información detallada de cuándo es posible que necesite especificar DbConfiguration en el archivo de configuración, consulte el **mover DbConfiguration** sección de [configuración basada en código](code-based.md).  
+A partir de EF6, puede especificar el DbConfiguration para EF que se va a usar para la [configuración basada en código](code-based.md) en la aplicación. En la mayoría de los casos, no es necesario especificar esta configuración, ya que EF detectará automáticamente el DbConfiguration. Para obtener detalles sobre Cuándo es posible que tenga que especificar DbConfiguration en el archivo de configuración, consulte la sección **mover DbConfiguration** de [configuración basada en código](code-based.md).  
 
-Para establecer un tipo de DbConfiguration, especifique el nombre de tipo calificado de ensamblado en el **codeConfigurationType** elemento.  
+Para establecer un tipo DbConfiguration, especifique el nombre del tipo calificado con el ensamblado en el elemento **codeConfigurationType** .  
 
 > [!NOTE]
-> Nombre completo de ensamblado es el nombre completo del espacio de nombres, seguido por una coma, a continuación, el ensamblado que se encuentra en el tipo. Opcionalmente puede especificar también la versión del ensamblado, la referencia cultural y el token de clave pública.  
+> Un nombre completo de ensamblado es el nombre completo del espacio de nombres, seguido de una coma, el ensamblado en el que reside el tipo. También puede especificar la versión del ensamblado, la referencia cultural y el token de clave pública.  
 
 ``` xml
 <entityFramework codeConfigurationType="MyNamespace.MyConfiguration, MyAssembly">
 </entityFramework>
 ```  
 
-## <a name="ef-database-providers-ef6-onwards"></a>Proveedores de base de datos EF (EF6 y versiones posteriores)  
+## <a name="ef-database-providers-ef6-onwards"></a>Proveedores de bases de datos de EF (EF6 en adelante)  
 
-Antes de EF6, partes específicas de Entity Framework de un proveedor de base de datos se tenían que se incluye como parte del proveedor ADO.NET core. A partir de EF6, las partes concretas de EF están administradas y registrar por separado.  
+Antes de EF6, los elementos específicos de Entity Framework de un proveedor de base de datos debían incluirse como parte del proveedor ADO.NET básico. A partir de EF6, las partes específicas de EF ahora se administran y registran por separado.  
 
-Normalmente no tendrá que registrar proveedores usted mismo. Esto normalmente se realiza por el proveedor que se instala.  
+Normalmente no necesitará registrar los proveedores. Esto lo realiza normalmente el proveedor cuando se instala.  
 
-Los proveedores se registran mediante la inclusión de un **proveedor** elemento bajo el **proveedores** sección secundarios de la **entityFramework** sección. Hay dos atributos necesarios para una entrada del proveedor:  
+Los proveedores se registran mediante la inclusión de un elemento de **proveedor** en la sección de **proveedores** secundarios de la sección **entityFramework** . Hay dos atributos necesarios para una entrada de proveedor:  
 
-- **invariantName** identifica el proveedor de ADO.NET básico que los destinos de proveedor EF  
-- **tipo** es el nombre de tipo calificado de ensamblado de la implementación del proveedor EF  
+- **invariantName** identifica el proveedor ADO.net principal al que se destina este proveedor EF  
+- **Type** es el nombre de tipo calificado con el ensamblado de la implementación del proveedor EF  
 
 > [!NOTE]
-> Nombre completo de ensamblado es el nombre completo del espacio de nombres, seguido por una coma, a continuación, el ensamblado que se encuentra en el tipo. Opcionalmente puede especificar también la versión del ensamblado, la referencia cultural y el token de clave pública.  
+> Un nombre completo de ensamblado es el nombre completo del espacio de nombres, seguido de una coma, el ensamblado en el que reside el tipo. También puede especificar la versión del ensamblado, la referencia cultural y el token de clave pública.  
 
-Como ejemplo aquí es la entrada creada para registrar el proveedor de SQL Server de forma predeterminada al instalar Entity Framework.  
+Como ejemplo, aquí se muestra la entrada que se crea para registrar el proveedor de SQL Server predeterminado al instalar Entity Framework.  
 
 ``` xml  
 <providers>
@@ -106,11 +106,11 @@ Como ejemplo aquí es la entrada creada para registrar el proveedor de SQL Serve
 </providers>
 ```  
 
-## <a name="interceptors-ef61-onwards"></a>Interceptores (EF6.1 y versiones posteriores)  
+## <a name="interceptors-ef61-onwards"></a>Interceptores (EF 6.1 y versiones posteriores)  
 
-Comenzando con EF6.1 puede registrar los interceptores en el archivo de configuración. Los interceptores permiten ejecutar una lógica adicional cuando EF realiza ciertas operaciones, tales como ejecutar consultas de base de datos, abrir las conexiones, etc.  
+A partir de EF 6.1, puede registrar los interceptores en el archivo de configuración. Los interceptores permiten ejecutar lógica adicional cuando EF realiza ciertas operaciones, como la ejecución de consultas de base de datos, la apertura de conexiones, etc.  
 
-Los interceptores se registran mediante la inclusión de un **interceptor** elemento bajo el **interceptores** sección secundarios de la **entityFramework** sección. Por ejemplo, la siguiente configuración registra integrado **DatabaseLogger** interceptor que se registrará todas las operaciones de base de datos en la consola.  
+Los interceptores se registran mediante la inclusión de un elemento **interceptor** en la sección de interceptores secundaria de la sección **entityFramework** . Por ejemplo, la configuración siguiente registra el interceptor de **DatabaseLogger** integrado que registrará todas las operaciones de base de datos en la consola.  
 
 ``` xml  
 <interceptors>
@@ -118,9 +118,9 @@ Los interceptores se registran mediante la inclusión de un **interceptor** elem
 </interceptors>
 ```  
 
-### <a name="logging-database-operations-to-a-file-ef61-onwards"></a>Operaciones de base de datos de registro en un archivo (EF6.1 y versiones posteriores)  
+### <a name="logging-database-operations-to-a-file-ef61-onwards"></a>Registro de operaciones de base de datos en un archivo (EF 6.1 en adelante)  
 
-Registrar los interceptores mediante el archivo de configuración es especialmente útil cuando desea agregar el registro a una aplicación existente para ayudar a depurar un problema. **DatabaseLogger** admite el registro en un archivo, proporcionando el nombre de archivo como un parámetro de constructor.  
+El registro de los interceptores mediante el archivo de configuración es especialmente útil si desea agregar el registro a una aplicación existente para ayudar a depurar un problema. **DatabaseLogger** admite el registro en un archivo proporcionando el nombre de archivo como un parámetro de constructor.  
 
 ``` xml  
 <interceptors>
@@ -132,7 +132,7 @@ Registrar los interceptores mediante el archivo de configuración es especialmen
 </interceptors>
 ```  
 
-De forma predeterminada, esto hará que el archivo de registro se sobrescriba con un archivo nuevo cada vez que se inicia la aplicación. Para anexar en su lugar en el registro de archivo si ya existe usar algo como:  
+De forma predeterminada, esto hará que el archivo de registro se sobrescriba con un nuevo archivo cada vez que se inicie la aplicación. En su lugar, anexe al archivo de registro si ya existe, use algo parecido a:  
 
 ``` xml  
 <interceptors>
@@ -145,20 +145,20 @@ De forma predeterminada, esto hará que el archivo de registro se sobrescriba co
 </interceptors>
 ```  
 
-Para obtener más información sobre **DatabaseLogger** y registrar los interceptores, consulte el blog [EF 6.1: activar el registro sin volver a compilar](https://blog.oneunicorn.com/2014/02/09/ef-6-1-turning-on-logging-without-recompiling/).  
+Para obtener información adicional sobre **DatabaseLogger** y el registro de interceptores, consulte [la entrada de blog EF 6,1: Activar el registro sin volver a](https://blog.oneunicorn.com/2014/02/09/ef-6-1-turning-on-logging-without-recompiling/)compilar.  
 
-## <a name="code-first-default-connection-factory"></a>Generador de conexión predeterminado primer código  
+## <a name="code-first-default-connection-factory"></a>Code First factoría de conexión predeterminada  
 
-La sección de configuración permite especificar un generador de conexión predeterminada que debe usar Code First para buscar una base de datos que se usará para un contexto. El generador de conexión predeterminada solo se usa cuando no se ha agregado ninguna cadena de conexión para el archivo de configuración para un contexto.  
+La sección configuración permite especificar un generador de conexiones predeterminado que Code First debe usar para buscar una base de datos que se utilizará para un contexto. El generador de conexiones predeterminado solo se usa cuando no se ha agregado ninguna cadena de conexión al archivo de configuración para un contexto.  
 
-Cuando instala el paquete NuGet de EF se registró un generador de conexión predeterminada que apunta a SQL Express o LocalDB, dependiendo de cuál ha instalado.  
+Al instalar el paquete de NuGet de EF, se registró una factoría de conexión predeterminada que señala a SQL Express o a LocalDB, en función de la que haya instalado.  
 
-Para establecer un generador de conexión, especifique el nombre de tipo calificado de ensamblado en el **defaultConnectionFactory** elemento.  
+Para establecer un generador de conexiones, especifique el nombre del tipo calificado con el ensamblado en el elemento **defaultConnectionFactory** .  
 
 > [!NOTE]
-> Nombre completo de ensamblado es el nombre completo del espacio de nombres, seguido por una coma, a continuación, el ensamblado que se encuentra en el tipo. Opcionalmente puede especificar también la versión del ensamblado, la referencia cultural y el token de clave pública.  
+> Un nombre completo de ensamblado es el nombre completo del espacio de nombres, seguido de una coma, el ensamblado en el que reside el tipo. También puede especificar la versión del ensamblado, la referencia cultural y el token de clave pública.  
 
-Este es un ejemplo de cómo configurar su propio generador de conexión predeterminada:  
+A continuación se muestra un ejemplo de configuración de su propio generador de conexiones predeterminado:  
 
 ``` xml  
 <entityFramework>
@@ -166,9 +166,9 @@ Este es un ejemplo de cómo configurar su propio generador de conexión predeter
 </entityFramework>
 ```  
 
-El ejemplo anterior requiere que la fábrica personalizada para tener un constructor sin parámetros. Si es necesario, puede especificar los parámetros del constructor mediante el **parámetros** elemento.  
+En el ejemplo anterior se requiere que el generador personalizado tenga un constructor sin parámetros. Si es necesario, puede especificar parámetros de constructor mediante el elemento Parameters.  
 
-Por ejemplo, el SqlCeConnectionFactory, que se incluye en Entity Framework, requiere que proporcione un nombre invariable del proveedor al constructor. El nombre invariable del proveedor identifica la versión de SQL Compact que desea usar. La siguiente configuración hará que los contextos para utilizar SQL Compact versión 4.0 de forma predeterminada.  
+Por ejemplo, SqlCeConnectionFactory, que se incluye en Entity Framework, requiere que proporcione un nombre invariable de proveedor al constructor. El nombre invariable del proveedor identifica la versión de SQL Compact que quiere usar. La configuración siguiente hará que los contextos usen SQL Compact versión 4,0 de forma predeterminada.  
 
 ``` xml  
 <entityFramework>
@@ -180,9 +180,9 @@ Por ejemplo, el SqlCeConnectionFactory, que se incluye en Entity Framework, requ
 </entityFramework>
 ```  
 
-Si no establece un generador de conexión de forma predeterminada, Code First utiliza el SqlConnectionFactory, que apunta a `.\SQLEXPRESS`. SqlConnectionFactory también tiene un constructor que le permite invalidar las partes de la cadena de conexión. Si desea utilizar una instancia de SQL Server distinto `.\SQLEXPRESS` puede utilizar este constructor para establecer el servidor.  
+Si no establece un generador de conexiones predeterminado, Code First usa SqlConnectionFactory, que apunta a `.\SQLEXPRESS`. SqlConnectionFactory también tiene un constructor que permite invalidar partes de la cadena de conexión. Si desea utilizar una instancia de SQL Server distinta de `.\SQLEXPRESS` , puede usar este constructor para establecer el servidor.  
 
-La siguiente configuración hará que Code First usar **miServidorDeBasesDeDatos** para contextos que no tienen una cadena de conexión explícito establecido.  
+La configuración siguiente hará que Code First use **MyDatabaseServer** para los contextos que no tienen un conjunto de cadenas de conexión explícitas.  
 
 ``` xml  
 <entityFramework>
@@ -194,7 +194,7 @@ La siguiente configuración hará que Code First usar **miServidorDeBasesDeDatos
 </entityFramework>
 ```  
 
-De forma predeterminada, se supone que son argumentos de constructor de tipo cadena. Puede usar el atributo de tipo para cambiar esto.  
+De forma predeterminada, se supone que los argumentos del constructor son del tipo cadena. Puede usar el atributo type para cambiar esto.  
 
 ``` xml
 <parameter value="2" type="System.Int32" />
@@ -202,11 +202,11 @@ De forma predeterminada, se supone que son argumentos de constructor de tipo cad
 
 ## <a name="database-initializers"></a>Inicializadores de base de datos  
 
-Inicializadores de base de datos se configuran por contexto. Se pueden establecer en el archivo de configuración mediante el **contexto** elemento. Este elemento usa el nombre completo del ensamblado para identificar el contexto que se está configurando.  
+Los inicializadores de base de datos se configuran en función del contexto. Se pueden establecer en el archivo de configuración mediante el elemento de **contexto** . Este elemento usa el nombre completo del ensamblado para identificar el contexto que se está configurando.  
 
-De forma predeterminada, los contextos de Code First se configuran para usar al inicializador de CreateDatabaseIfNotExists. Hay un **disableDatabaseInitialization** atributo el **contexto** elemento que se puede usar para deshabilitar la inicialización de la base de datos.  
+De forma predeterminada, Code First contextos se configuran para usar el inicializador CreateDatabaseIfNotExists. Hay un atributo **disableDatabaseInitialization** en el elemento de **contexto** que se puede usar para deshabilitar la inicialización de la base de datos.  
 
-Por ejemplo, la siguiente configuración deshabilita la inicialización de la base de datos para el contexto de Blogging.BlogContext definido en MyAssembly.dll.  
+Por ejemplo, la siguiente configuración deshabilita la inicialización de la base de datos para el contexto blog. BlogContext definido en myAssembly. dll.  
 
 ``` xml  
 <contexts>
@@ -214,7 +214,7 @@ Por ejemplo, la siguiente configuración deshabilita la inicialización de la ba
 </contexts>
 ```  
 
-Puede usar el **databaseInitializer** elemento va a establecer un inicializador personalizado.  
+Puede usar el elemento **databaseInitializer** para establecer un inicializador personalizado.  
 
 ``` xml
 <contexts>
@@ -224,7 +224,7 @@ Puede usar el **databaseInitializer** elemento va a establecer un inicializador 
 </contexts>
 ```  
 
-Los parámetros del constructor usar la misma sintaxis como generadores de conexiones de forma predeterminada.  
+Los parámetros de constructor utilizan la misma sintaxis que los generadores de conexiones predeterminados.  
 
 ``` xml  
 <contexts>
@@ -238,9 +238,9 @@ Los parámetros del constructor usar la misma sintaxis como generadores de conex
 </contexts>
 ```  
 
-Puede configurar uno de los inicializadores de base de datos genérico que se incluyen en Entity Framework. El **tipo** atributo usa el formato de .NET Framework para tipos genéricos.  
+Puede configurar uno de los inicializadores de base de datos genéricos que se incluyen en Entity Framework. El atributo **Type** utiliza el formato de .NET Framework para los tipos genéricos.  
 
-Por ejemplo, si usa migraciones de Code First, puede configurar la base de datos para migrar automáticamente con el `MigrateDatabaseToLatestVersion<TContext, TMigrationsConfiguration>` inicializador.  
+Por ejemplo, si usa migraciones de Code First, puede configurar la base de datos que se va a migrar automáticamente mediante `MigrateDatabaseToLatestVersion<TContext, TMigrationsConfiguration>` el inicializador.  
 
 ``` xml
 <contexts>
