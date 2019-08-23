@@ -3,12 +3,12 @@ title: DataBinding con WinForms-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 80fc5062-2f1c-4dbd-ab6e-b99496784b36
-ms.openlocfilehash: ad55ef4d496bbfe30eafcab9811c92989066519f
-ms.sourcegitcommit: c9c3e00c2d445b784423469838adc071a946e7c9
+ms.openlocfilehash: 3c7c58f5ded29c136bbdca1d81c64b07c53ce583
+ms.sourcegitcommit: 7391cc31193c1216ec9ed485709042ad0c2106cf
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 07/18/2019
-ms.locfileid: "68306564"
+ms.lasthandoff: 08/23/2019
+ms.locfileid: "69985474"
 ---
 # <a name="databinding-with-winforms"></a>DataBinding con WinForms
 En este tutorial paso a paso se muestra cómo enlazar tipos POCO a controles de formularios Windows Forms (WinForms) en un formulario "principal-detalle". La aplicación utiliza Entity Framework para rellenar los objetos con datos de la base de datos, realizar un seguimiento de los cambios y conservar los datos en la base de datos.
@@ -263,7 +263,7 @@ Compile el proyecto.
 
 ## <a name="lazy-loading"></a>Carga diferida
 
-La  propiedad Products de la clase **categoría** y la propiedad **categoría** de la clase **Product** son propiedades de navegación. En Entity Framework, las propiedades de navegación proporcionan una manera de navegar por una relación entre dos tipos de entidad.
+La propiedad Products de la clase **categoría** y la propiedad **categoría** de la clase **Product** son propiedades de navegación. En Entity Framework, las propiedades de navegación proporcionan una manera de navegar por una relación entre dos tipos de entidad.
 
 EF ofrece una opción para cargar automáticamente entidades relacionadas desde la base de datos la primera vez que se tiene acceso a la propiedad de navegación. Con este tipo de carga (denominado carga diferida), tenga en cuenta que la primera vez que se tiene acceso a cada propiedad de navegación se ejecutará una consulta independiente en la base de datos si el contenido no está ya en el contexto.
 
@@ -280,8 +280,8 @@ Agregue las clases que se definen en el modelo como orígenes de datos para esta
 
     ![Origen de datos](~/ef6/media/datasource.png)
 
--   Haga clic en **Finalizar.** Si la *ventana orígenes de datos&gt; no aparece, seleccione * * * Ver-otros orígenes de datos de&gt; Windows* . 
-    *
+-   Haga clic en **Finalizar.**
+    Si la ventana orígenes de datos no aparece, seleccione **&gt; ver-otras ventanas-otros&gt; orígenes de datos** .
 -   Presione el icono de anclaje para que la ventana orígenes de datos no se oculte automáticamente. Es posible que tenga que presionar el botón actualizar si la ventana ya estaba visible.
 
     ![Origen de datos 2](~/ef6/media/datasource2.png)

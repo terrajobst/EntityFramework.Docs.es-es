@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/19/2019
 ms.assetid: 2EBE2CCC-E52D-483F-834C-8877F5EB0C0C
 uid: core/what-is-new/ef-core-3.0/features
-ms.openlocfilehash: 7501a806271c9734e85e31845f260f2d512da077
-ms.sourcegitcommit: 5280dcac4423acad8b440143433459b18886115b
+ms.openlocfilehash: a71aa01e81d9830d7b9e6cb01c200851100a15df
+ms.sourcegitcommit: 87e72899d17602f7526d6ccd22f3c8ee844145df
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 04/18/2019
-ms.locfileid: "58867962"
+ms.lasthandoff: 08/20/2019
+ms.locfileid: "69628428"
 ---
 # <a name="new-features-included-in-ef-core-30-currently-in-preview"></a>Nuevas características incluidas en EF Core 3.0 (actualmente en versión preliminar)
 
@@ -65,6 +65,7 @@ public class Order
     public OrderDetails Details { get; set; }
 }
 
+[Owned]
 public class OrderDetails
 {
     public int Id { get; set; }
@@ -72,8 +73,9 @@ public class OrderDetails
 }
 ```
 
-A partir de la versión EF Core 3.0, si `OrderDetails` es propiedad de `Order` o está asignado explícitamente a la misma tabla, será posible agregar `Order` sin `OrderDetails` y todas las propiedades `OrderDetails` excepto la clave principal se asignarán a columnas que aceptan valores NULL.
-Al realizar consultas, EF Core establecerá `OrderDetails` en `null` si ninguna de las propiedades necesarias tiene un valor o si no tiene propiedades necesarias más allá de la clave principal y todas las propiedades son `null`.
+A partir de la versión EF Core 3.0, si `OrderDetails` pertenece a `Order` o está asignado a la misma tabla explícitamente, será posible agregar `Order` sin `OrderDetails`; todas las propiedades `OrderDetails`, salvo la clave principal, se asignarán a columnas que aceptan valores NULL.
+
+Al realizar consultas, EF Core establecerá `OrderDetails` en `null` si ninguna de las propiedades necesarias tiene un valor, o bien no tiene las propiedades necesarias más allá de la clave principal y todas las propiedades son `null`.
 
 ## <a name="c-80-support"></a>Compatibilidad con C# 8.0
 

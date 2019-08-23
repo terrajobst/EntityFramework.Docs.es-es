@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/20/2018
 ms.assetid: 2CB5809E-0EFB-44F6-AF14-9D5BFFFBFF9D
 uid: core/what-is-new/ef-core-2.0
-ms.openlocfilehash: b5ac31722f49589f1494a3d8d1c8a7011a4cf9ce
-ms.sourcegitcommit: a013e243a14f384999ceccaf9c779b8c1ae3b936
+ms.openlocfilehash: 2712845512d9eb349ef3a7e14f4365327db0fcd6
+ms.sourcegitcommit: 7b7f774a5966b20d2aed5435a672a1edbe73b6fb
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/06/2019
-ms.locfileid: "57463274"
+ms.lasthandoff: 08/17/2019
+ms.locfileid: "69565339"
 ---
 # <a name="new-features-in-ef-core-20"></a>Nuevas características de EF Core 2.0
 
@@ -32,6 +32,7 @@ modelBuilder.Entity<Product>()
 modelBuilder.Entity<Product>().ToTable("Products");
 modelBuilder.Entity<ProductDetails>().ToTable("Products");
 ```
+Consulte la [sección sobre la división de las tablas](xref:core/modeling/table-splitting) para obtener más información sobre esta característica.
 
 ### <a name="owned-types"></a>Tipos de propiedad
 
@@ -91,7 +92,7 @@ public class BloggingContext : DbContext
     }
 }
 ```
-Se define un filtro de nivel de modelo que implementa los servicios multiinquilino y la eliminación temporal para instancias del tipo de entidad ```Post```. Observe el uso de una propiedad de nivel de instancia DbContext: ```TenantId```. Los filtros de nivel de modelo usan el valor de la instancia de contexto correcta (es decir, la instancia de contexto que está ejecutando la consulta).
+Se define un filtro de nivel de modelo que implementa los servicios multiinquilino y la eliminación temporal para instancias del tipo de entidad `Post`. Observe el uso de una propiedad de nivel de instancia DbContext: `TenantId`. Los filtros de nivel de modelo usan el valor de la instancia de contexto correcta (es decir, la instancia de contexto que está ejecutando la consulta).
 
 Los filtros se pueden deshabilitar para consultas LINQ individuales mediante el operador IgnoreQueryFilters().
 
@@ -159,7 +160,7 @@ builder.ApplyConfiguration(new CustomerConfiguration());
 
 El patrón básico para usar EF Core en una aplicación de ASP.NET Core normalmente implica el registro de un tipo de DbContext personalizado en el sistema de inserción de dependencias y la posterior obtención de instancias de ese tipo a través de los parámetros del constructor de los controladores. Esto significa que se crea una nueva instancia de DbContext para cada solicitud.
 
-En la versión 2.0 se incorpora una nueva manera de registrar tipos de DbContext personalizados en la inserción de dependencias que presenta un grupo de instancias de DbContext reutilizables de forma transparente. Para usar la agrupación de DbContext, use ```AddDbContextPool``` en lugar de ```AddDbContext``` durante el registro del servicio:
+En la versión 2.0 se incorpora una nueva manera de registrar tipos de DbContext personalizados en la inserción de dependencias que presenta un grupo de instancias de DbContext reutilizables de forma transparente. Para usar la agrupación de DbContext, use `AddDbContextPool` en lugar de `AddDbContext` durante el registro del servicio:
 
 ``` csharp
 services.AddDbContextPool<BloggingContext>(
@@ -172,7 +173,7 @@ Esto es conceptualmente similar a la forma en que funciona la agrupación de con
 
 ### <a name="limitations"></a>Limitaciones
 
-El nuevo método presenta algunas limitaciones con respecto a lo que se puede hacer en el método ```OnConfiguring()``` de DbContext.
+El nuevo método presenta algunas limitaciones con respecto a lo que se puede hacer en el método `OnConfiguring()` de DbContext.
 
 > [!WARNING]  
 > Evite el uso de la agrupación de DbContext si mantiene su propio estado (por ejemplo, campos privados) en la clase derivada DbContext que no debe compartirse con otras solicitudes. EF Core solo restablece el estado del que es consciente antes de agregar una instancia de DbContext al grupo.
@@ -218,7 +219,7 @@ Este trabajo mejora el SQL que se genera para las combinaciones agrupadas. Las c
 
 ### <a name="string-interpolation-in-fromsql-and-executesqlcommand"></a>Interpolación de cadenas en FromSql y ExecuteSqlCommand
 
-C# 6 presentó la interpolación de cadenas, una característica que permite insertar expresiones de C# directamente en literales de cadena, lo que proporciona una forma útil de compilar cadenas en tiempo de ejecución. En EF Core 2.0 se ha agregado compatibilidad especial con las cadenas interpoladas a las dos API principales que aceptan cadenas SQL sin formato: ```FromSql``` y ```ExecuteSqlCommand```. Esta nueva compatibilidad permite que la interpolación de cadenas de C# se use de forma "segura". Es decir, de una forma que protege frente a errores de inserción de SQL comunes que pueden producirse al crear SQL de forma dinámica en tiempo de ejecución.
+C# 6 presentó la interpolación de cadenas, una característica que permite insertar expresiones de C# directamente en literales de cadena, lo que proporciona una forma útil de compilar cadenas en tiempo de ejecución. En EF Core 2.0 se ha agregado compatibilidad especial con las cadenas interpoladas a las dos API principales que aceptan cadenas SQL sin formato: `FromSql` y `ExecuteSqlCommand`. Esta nueva compatibilidad permite que la interpolación de cadenas de C# se use de forma "segura". Es decir, de una forma que protege frente a errores de inserción de SQL comunes que pueden producirse al crear SQL de forma dinámica en tiempo de ejecución.
 
 A continuación se muestra un ejemplo:
 
