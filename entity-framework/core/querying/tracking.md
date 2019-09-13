@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: e17e060c-929f-4180-8883-40c438fbcc01
 uid: core/querying/tracking
-ms.openlocfilehash: 6c5d516fcb3950ae168860029660e1b1061546b8
-ms.sourcegitcommit: 159c2e9afed7745e7512730ffffaf154bcf2ff4a
+ms.openlocfilehash: d93be5c2b727d8fbaddd103f8f367c699ae80a7c
+ms.sourcegitcommit: b2b9468de2cf930687f8b85c3ce54ff8c449f644
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 02/03/2019
-ms.locfileid: "55668783"
+ms.lasthandoff: 09/12/2019
+ms.locfileid: "70921655"
 ---
 # <a name="tracking-vs-no-tracking-queries"></a>Consultas de seguimiento frente a consultas de no seguimiento
 
@@ -24,7 +24,7 @@ De manera predeterminada, las consultas que devuelven tipos de entidad son consu
 
 En el ejemplo siguiente, se detectará el cambio en la clasificación de los blogs y persistirá hasta la base de datos durante `SaveChanges()`.
 
-<!-- [!code-csharp[Main](samples/core/Querying/Querying/Tracking/Sample.cs)] -->
+<!-- [!code-csharp[Main](samples/core/Querying/Tracking/Sample.cs)] -->
 ``` csharp
 using (var context = new BloggingContext())
 {
@@ -40,7 +40,7 @@ Las consultas de no seguimiento son útiles cuando los resultados se usan en un 
 
 Puede cambiar una consulta individual para que sea una consulta de no seguimiento:
 
-<!-- [!code-csharp[Main](samples/core/Querying/Querying/Tracking/Sample.cs?highlight=4)] -->
+<!-- [!code-csharp[Main](samples/core/Querying/Tracking/Sample.cs?highlight=4)] -->
 ``` csharp
 using (var context = new BloggingContext())
 {
@@ -52,7 +52,7 @@ using (var context = new BloggingContext())
 
 También puede cambiar el comportamiento de seguimiento predeterminado en el nivel de instancia de contexto:
 
-<!-- [!code-csharp[Main](samples/core/Querying/Querying/Tracking/Sample.cs?highlight=3)] -->
+<!-- [!code-csharp[Main](samples/core/Querying/Tracking/Sample.cs?highlight=3)] -->
 ``` csharp
 using (var context = new BloggingContext())
 {
@@ -69,7 +69,7 @@ using (var context = new BloggingContext())
 
 Incluso si el tipo de resultado de la consulta no es un tipo de entidad, si el resultado contiene tipos de entidad, de todos modos se hará seguimiento de estos de manera predeterminada. En la consulta siguiente, que devuelve un tipo anónimo, se hará seguimiento de las instancias de `Blog` en el conjunto de resultados.
 
-<!-- [!code-csharp[Main](samples/core/Querying/Querying/Tracking/Sample.cs?highlight=7)] -->
+<!-- [!code-csharp[Main](samples/core/Querying/Tracking/Sample.cs?highlight=7)] -->
 ``` csharp
 using (var context = new BloggingContext())
 {
@@ -85,7 +85,7 @@ using (var context = new BloggingContext())
 
 Si el conjunto de resultados no contiene ningún tipo de entidad, no se realiza ningún seguimiento. En la consulta siguiente, que devuelve un tipo anónimo con algunos de los valores de la entidad (pero no instancias del tipo de entidad real), no se realiza ningún seguimiento.
 
-<!-- [!code-csharp[Main](samples/core/Querying/Querying/Tracking/Sample.cs)] -->
+<!-- [!code-csharp[Main](samples/core/Querying/Tracking/Sample.cs)] -->
 ``` csharp
 using (var context = new BloggingContext())
 {

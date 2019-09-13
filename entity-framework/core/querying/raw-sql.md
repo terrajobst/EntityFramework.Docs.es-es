@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 70aae9b5-8743-4557-9c5d-239f688bf418
 uid: core/querying/raw-sql
-ms.openlocfilehash: 91592ea9f7c73f10446993282c1874c852000871
-ms.sourcegitcommit: c9c3e00c2d445b784423469838adc071a946e7c9
+ms.openlocfilehash: 7a0df6fb656be58103971f45b9e12e9f1383311f
+ms.sourcegitcommit: b2b9468de2cf930687f8b85c3ce54ff8c449f644
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 07/18/2019
-ms.locfileid: "68306544"
+ms.lasthandoff: 09/12/2019
+ms.locfileid: "70921717"
 ---
 # <a name="raw-sql-queries"></a>Consultas SQL sin formato
 
@@ -22,7 +22,7 @@ Entity Framework Core le permite descender hasta las consultas SQL sin formato c
 
 Puede usar el método de extensión *FromSql* para empezar una consulta LINQ basada en una consulta SQL sin formato.
 
-<!-- [!code-csharp[Main](samples/core/Querying/Querying/RawSQL/Sample.cs)] -->
+<!-- [!code-csharp[Main](samples/core/Querying/RawSQL/Sample.cs)] -->
 ``` csharp
 var blogs = context.Blogs
     .FromSql("SELECT * FROM dbo.Blogs")
@@ -31,7 +31,7 @@ var blogs = context.Blogs
 
 Las consultas SQL sin formato se pueden usar para ejecutar un procedimiento almacenado.
 
-<!-- [!code-csharp[Main](samples/core/Querying/Querying/RawSQL/Sample.cs)] -->
+<!-- [!code-csharp[Main](samples/core/Querying/RawSQL/Sample.cs)] -->
 ``` csharp
 var blogs = context.Blogs
     .FromSql("EXECUTE dbo.GetMostPopularBlogs")
@@ -44,7 +44,7 @@ Al igual que con cualquier API que acepta código SQL, es importante parametriza
 
 En el ejemplo siguiente, se pasa un parámetro único a un procedimiento almacenado. Si bien esto se puede ver como la sintaxis `String.Format`, el valor suministrado se encapsula en un parámetro y el nombre del parámetro generado se inserta donde se especificó el marcador de posición `{0}`.
 
-<!-- [!code-csharp[Main](samples/core/Querying/Querying/RawSQL/Sample.cs)] -->
+<!-- [!code-csharp[Main](samples/core/Querying/RawSQL/Sample.cs)] -->
 ``` csharp
 var user = "johndoe";
 
@@ -55,7 +55,7 @@ var blogs = context.Blogs
 
 Se trata de la misma consulta, pero usando la sintaxis de interpolación de cadena, que se admite en EF Core 2.0 y versiones superiores:
 
-<!-- [!code-csharp[Main](samples/core/Querying/Querying/RawSQL/Sample.cs)] -->
+<!-- [!code-csharp[Main](samples/core/Querying/RawSQL/Sample.cs)] -->
 ``` csharp
 var user = "johndoe";
 
@@ -66,7 +66,7 @@ var blogs = context.Blogs
 
 También puede construir un elemento DbParameter y suministrarlo como un valor de parámetro:
 
-<!-- [!code-csharp[Main](samples/core/Querying/Querying/RawSQL/Sample.cs)] -->
+<!-- [!code-csharp[Main](samples/core/Querying/RawSQL/Sample.cs)] -->
 ``` csharp
 var user = new SqlParameter("user", "johndoe");
 
@@ -77,7 +77,7 @@ var blogs = context.Blogs
 
 Esto permite usar los parámetros con nombre en la cadena de consulta SQL, lo que resulta útil cuando un procedimiento almacenado tiene parámetros opcionales:
 
-<!-- [!code-csharp[Main](samples/core/Querying/Querying/RawSQL/Sample.cs)] -->
+<!-- [!code-csharp[Main](samples/core/Querying/RawSQL/Sample.cs)] -->
 ``` csharp
 var user = new SqlParameter("user", "johndoe");
 
@@ -92,7 +92,7 @@ Si la consulta SQL admite redacción en la base de datos, puede redactarla sobre
 
 En el ejemplo siguiente, se usa una consulta SQL sin formato que se selecciona de una función con valores de tabla (TVF) y luego se redacta en ella con LINQ para realizar filtrado y ordenación.
 
-<!-- [!code-csharp[Main](samples/core/Querying/Querying/RawSQL/Sample.cs)] -->
+<!-- [!code-csharp[Main](samples/core/Querying/RawSQL/Sample.cs)] -->
 ``` csharp
 var searchTerm = ".NET";
 
@@ -109,7 +109,7 @@ Las consultas que usan `FromSql()` siguen las mismas reglas de seguimiento de ca
 
 En el ejemplo siguiente se usa una consulta SQL sin formato que realiza una selección en una función con valores de tabla (TVF) y, a continuación, deshabilita el seguimiento de cambios con la llamada a .AsNoTracking():
 
-<!-- [!code-csharp[Main](samples/core/Querying/Querying/RawSQL/Sample.cs)] -->
+<!-- [!code-csharp[Main](samples/core/Querying/RawSQL/Sample.cs)] -->
 ``` csharp
 var searchTerm = ".NET";
 
@@ -123,7 +123,7 @@ var blogs = context.Query<SearchBlogsDto>()
 
 El método `Include()` puede usarse para incluir datos relacionados, igual que cualquier otra consulta LINQ:
 
-<!-- [!code-csharp[Main](samples/core/Querying/Querying/RawSQL/Sample.cs)] -->
+<!-- [!code-csharp[Main](samples/core/Querying/RawSQL/Sample.cs)] -->
 ``` csharp
 var searchTerm = ".NET";
 

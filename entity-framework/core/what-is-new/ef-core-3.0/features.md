@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/19/2019
 ms.assetid: 2EBE2CCC-E52D-483F-834C-8877F5EB0C0C
 uid: core/what-is-new/ef-core-3.0/features
-ms.openlocfilehash: a71aa01e81d9830d7b9e6cb01c200851100a15df
-ms.sourcegitcommit: 87e72899d17602f7526d6ccd22f3c8ee844145df
+ms.openlocfilehash: d61fa884f4669daa220ffc96ae59dd63518e6d5a
+ms.sourcegitcommit: b2b9468de2cf930687f8b85c3ce54ff8c449f644
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/20/2019
-ms.locfileid: "69628428"
+ms.lasthandoff: 09/12/2019
+ms.locfileid: "70921672"
 ---
 # <a name="new-features-included-in-ef-core-30-currently-in-preview"></a>Nuevas características incluidas en EF Core 3.0 (actualmente en versión preliminar)
 
@@ -94,15 +94,6 @@ Esta característica no está incluida en la versión preliminar actual.
 
 Los [tipos de consulta](xref:core/modeling/query-types), presentados en EF Core 2.1 y considerados tipos de entidad sin claves en EF Core 3.0, representan datos que se pueden leer desde la base de datos, pero que no se pueden actualizar.
 Esta característica los convierte en una elección excelente para las vistas de base de datos en la mayoría de los escenarios, por lo que tenemos previsto automatizar la creación de tipos de entidad sin claves al usar de técnicas de ingeniería inversa en vistas de base de datos.
-
-## <a name="property-bag-entities"></a>Entidades de contenedor de propiedades
-
-[Problema de seguimiento n.º 13610](https://github.com/aspnet/EntityFrameworkCore/issues/13610) y [n.º 9914](https://github.com/aspnet/EntityFrameworkCore/issues/9914)
-
-Se ha iniciado el trabajo en esta característica, pero no se incluye en la versión preliminar actual. 
-
-Esta característica trata de permitir entidades que almacenan datos en propiedades indexadas en lugar de propiedades regulares, y también de utilizar instancias de la misma clase .NET (potencialmente algo tan simple como un `Dictionary<string, object>`) para representar diferentes tipos de entidades en el mismo modelo de EF Core.
-Esta característica es un punto de partida para admitir las relaciones varios a varios sin una entidad de unión ([problema n.° 1368](https://github.com/aspnet/EntityFrameworkCore/issues/1368)), que es una de las mejoras más solicitadas por EF Core.
 
 ## <a name="ef-63-on-net-core"></a>EF 6.3 en .NET Core
 
