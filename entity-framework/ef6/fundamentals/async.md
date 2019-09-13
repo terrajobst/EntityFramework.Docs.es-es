@@ -3,12 +3,12 @@ title: Consulta asincrónica y Save-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: d56e6f1d-4bd1-4b50-9558-9a30e04a8ec3
-ms.openlocfilehash: bf2039110962e8dd114242dcd0b9454963750774
-ms.sourcegitcommit: c9c3e00c2d445b784423469838adc071a946e7c9
+ms.openlocfilehash: ae578976ffc88b407ef0aaa0017935005bedd093
+ms.sourcegitcommit: b2b9468de2cf930687f8b85c3ce54ff8c449f644
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 07/18/2019
-ms.locfileid: "68306586"
+ms.lasthandoff: 09/12/2019
+ms.locfileid: "70921626"
 ---
 # <a name="async-query-and-save"></a>Consulta asincrónica y guardar
 > [!NOTE]
@@ -221,12 +221,14 @@ Para obtener una lista completa de los métodos de extensión disponibles en el 
 
 Ahora que el código es asincrónico, podemos observar otro flujo de ejecución cuando se ejecuta el programa:
 
-1.  **SaveChanges** comienza a introducir el nuevo **blog** en la base *de datos una vez que el comando se envía a la base de datos, ya no se necesita más tiempo de proceso en el subproceso administrado actual. El método **PerformDatabaseOperations** devuelve (aunque no ha terminado de ejecutarse) y continúa el flujo del programa en el método Main.*
-2.  **La oferta del día se escribe en la consola**
-    *porque no hay más trabajo que hacer en el método Main, el subproceso administrado se bloquea en la llamada de espera hasta que se completa la operación de base de datos. Una vez que se completa, se ejecutará el resto de **PerformDatabaseOperations** .*
-3.  **SaveChanges** completado
-4.  La consulta de todos los **blogs** se envía de *nuevo a la base de datos, el subproceso administrado es gratuito para realizar otro trabajo mientras la consulta se procesa en la base de datos. Dado que el resto de la ejecución se ha completado, el subproceso se detendrá simplemente en la llamada de espera.*
-5.  Las devoluciones de consultas y los resultados se escriben en la **consola**
+1. **SaveChanges** comienza a introducir el nuevo **blog** en la base de datos  
+    *Una vez que el comando se envía a la base de datos, no se necesita más tiempo de proceso en el subproceso administrado actual. El método **PerformDatabaseOperations** devuelve (aunque no ha terminado de ejecutarse) y continúa el flujo del programa en el método Main.*
+2. **La oferta del día se escribe en la consola**  
+    *Dado que no hay más trabajo que hacer en el método Main, el subproceso administrado se bloquea en la llamada de espera hasta que se completa la operación de base de datos. Una vez que se completa, se ejecutará el resto de **PerformDatabaseOperations** .*
+3.  **SaveChanges** completado  
+4.  La consulta de todos los **blogs** se envía a la base de datos  
+    *De nuevo, el subproceso administrado es gratuito para realizar otro trabajo mientras la consulta se procesa en la base de datos. Dado que el resto de la ejecución se ha completado, el subproceso se detendrá simplemente en la llamada de espera.*
+5.  Las devoluciones de consultas y los resultados se escriben en la **consola**  
 
 ![Salida asincrónica](~/ef6/media/asyncoutput.png) 
 

@@ -1,21 +1,21 @@
 ---
-title: La división de tablas diseñador - EF6
+title: 'División de la tabla del diseñador: EF6'
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 452f17c3-9f26-4de4-9894-8bc036e23b0f
-ms.openlocfilehash: 8b0ca6778a06ed43b1365d2e5969ff15948f8004
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: f5e7532e6c0b473d8ce77cbd11e3e673b0af6cbe
+ms.sourcegitcommit: b2b9468de2cf930687f8b85c3ce54ff8c449f644
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490705"
+ms.lasthandoff: 09/12/2019
+ms.locfileid: "70921777"
 ---
-# <a name="designer-table-splitting"></a>División de tabla del diseñador
-En este tutorial se muestra cómo asignar varios tipos de entidad a una única tabla mediante la modificación de un modelo con Entity Framework Designer (Diseñador de EF).
+# <a name="designer-table-splitting"></a>División de tablas del diseñador
+En este tutorial se muestra cómo asignar varios tipos de entidad a una sola tabla modificando un modelo con el Entity Framework Designer (EF Designer).
 
-Una razón que desea utilizar la división de tablas está retrasando la carga de algunas propiedades cuando se usa la carga para los objetos de la carga diferida. Puede separar las propiedades que es posible que contienen gran cantidad de datos en una entidad independiente y la carga solo cuando sea necesario.
+Uno de los motivos por los que puede querer usar la división de tablas es retrasar la carga de algunas propiedades al usar la carga diferida para cargar los objetos. Puede separar las propiedades que pueden contener una gran cantidad de datos en una entidad independiente y solo cargarlos cuando sea necesario.
 
-La siguiente imagen muestra las ventanas principales que se usan al trabajar con EF Designer.
+En la imagen siguiente se muestran las ventanas principales que se usan al trabajar con el diseñador de EF.
 
 ![EF Designer](~/ef6/media/efdesigner.png)
 
@@ -24,7 +24,7 @@ La siguiente imagen muestra las ventanas principales que se usan al trabajar con
 Para completar este tutorial, necesitará:
 
 - Una versión reciente de Visual Studio.
-- El [base de datos de ejemplo School](~/ef6/resources/school-database.md).
+- La [base de datos de ejemplo School](~/ef6/resources/school-database.md).
 
 ## <a name="set-up-the-project"></a>Configurar el proyecto
 
@@ -32,56 +32,56 @@ En este tutorial se usa Visual Studio 2012.
 
 -   Abra Visual Studio 2012.
 -   En el menú **Archivo** , elija **Nuevo**y haga clic en **Proyecto**.
--   En el panel izquierdo, haga clic en Visual C\#y, a continuación, seleccione la plantilla de aplicación de consola.
--   Escriba **TableSplittingSample** como el nombre del proyecto y haga clic en **Aceptar**.
+-   En el panel izquierdo, haga clic en\#Visual C y, a continuación, seleccione la plantilla aplicación de consola.
+-   Escriba **TableSplittingSample** como nombre del proyecto y haga clic en **Aceptar**.
 
-## <a name="create-a-model-based-on-the-school-database"></a>Crear un modelo basado en la base de datos School
+## <a name="create-a-model-based-on-the-school-database"></a>Creación de un modelo basado en la base de datos School
 
--   Haga clic en el nombre del proyecto en el Explorador de soluciones, seleccione **agregar**y, a continuación, haga clic en **nuevo elemento**.
--   Seleccione **datos** desde el menú de la izquierda y seleccione **ADO.NET Entity Data Model** en el panel Plantillas.
--   Escriba **TableSplittingModel.edmx** para el nombre de archivo y, a continuación, haga clic en **agregar**.
--   En el cuadro de diálogo Elegir contenido del modelo, seleccione **generar desde la base de datos**y, a continuación, haga clic en **siguiente.**
--   Haga clic en nueva conexión. En el cuadro de diálogo Propiedades de conexión, escriba el nombre del servidor (por ejemplo, **(localdb)\\mssqllocaldb**), seleccione el método de autenticación, el tipo **School** para el nombre de la base de datos y, a continuación, Haga clic en **Aceptar**.
-    El cuadro de diálogo Elegir la conexión de datos se actualiza con la configuración de conexión de base de datos.
--   En el cuadro de diálogo Elija los objetos de base de datos, expandir el **tablas** nodo y compruebe el **persona** tabla. Esto agregará la tabla especificada en el **School** modelo.
--   Haga clic en **Finalizar**.
+-   Haga clic con el botón secundario en el nombre del proyecto en Explorador de soluciones, seleccione **Agregar**y, a continuación, haga clic en **nuevo elemento**.
+-   Seleccione **datos** en el menú de la izquierda y, a continuación, seleccione **ADO.NET Entity Data Model** en el panel Plantillas.
+-   Escriba **TableSplittingModel. edmx** como nombre de archivo y, a continuación, haga clic en **Agregar**.
+-   En el cuadro de diálogo elegir contenido del modelo, seleccione **generar desde la base de datos**y, a continuación, haga clic en **siguiente.**
+-   Haga clic en nueva conexión. En el cuadro de diálogo Propiedades de conexión, escriba el nombre del servidor (por ejemplo, **(LocalDB)\\mssqllocaldb**), seleccione el método de autenticación, escriba **School** como nombre de la base de datos y, a continuación, haga clic en **Aceptar**.
+    El cuadro de diálogo elegir la conexión de datos se actualiza con la configuración de conexión de la base de datos.
+-   En el cuadro de diálogo elija los objetos de base de datos, desactive el nodo **tablas** y Compruebe la tabla **Person** . Esto agregará la tabla especificada al modelo **School** .
+-   Haga clic en **Finalizar**.
 
-Entity Designer, que proporciona una superficie de diseño para modificar el modelo, se muestra. Todos los objetos que seleccionó en el **elija los objetos de base de datos** cuadro de diálogo se agregan al modelo.
+Se muestra el diseñador de entidades, que proporciona una superficie de diseño para editar el modelo. Todos los objetos que seleccionó en el cuadro de diálogo **Elija los objetos** de base de datos se agregan al modelo.
 
-## <a name="map-two-entities-to-a-single-table"></a>Dos entidades se asignan a una sola tabla
+## <a name="map-two-entities-to-a-single-table"></a>Asignación de dos entidades a una sola tabla
 
-En esta sección dividirá el **persona** entidad a dos entidades y, a continuación, se asignan a una única tabla.
+En esta sección dividirá la entidad **Person** en dos entidades y, a continuación, las asignará a una sola tabla.
 
 > [!NOTE]
-> El **persona** entidad no contiene todas las propiedades que pueden contener grandes cantidades de datos; simplemente sirve como ejemplo.
+> La entidad **Person** no contiene propiedades que puedan contener grandes cantidades de datos. simplemente se usa como ejemplo.
 
--   Haga clic en un área vacía de la superficie de diseño, seleccione **Agregar nuevo**y haga clic en **entidad**.
-    El **nueva entidad** aparece el cuadro de diálogo.
--   Tipo **HireInfo** para el **nombre de entidad** y **PersonID** para el **propiedad Key** nombre.
--   Haga clic en **Aceptar**.
+-   Haga clic con el botón secundario en un área vacía de la superficie de diseño, seleccione **Agregar nuevo**y haga clic en **entidad**.
+    Aparecerá el cuadro de diálogo **nueva entidad** .
+-   Escriba **HireInfo** para el **nombre de entidad** y **PersonID** para el nombre de la **propiedad de clave** .
+-   Haga clic en **Aceptar**.
 -   Se crea y se muestra un nuevo tipo de entidad en la superficie de diseño.
--   Seleccione el **HireDate** propiedad de la **persona** tipo de entidad y presione **CTRL+x** claves.
--   Seleccione el **HireInfo** entidad y presione **CTRL+v** claves.
--   Crear una asociación entre **persona** y **HireInfo**. Para ello, haga clic en un área vacía de la superficie de diseño, seleccione **Agregar nuevo**y haga clic en **asociación**.
--   El **Agregar asociación** aparece el cuadro de diálogo. El **PersonHireInfo** se asigna el nombre de forma predeterminada.
--   Especificar la multiplicidad **1(One)** en ambos extremos de la relación.
--   Presione **Aceptar**.
+-   Seleccione la propiedad **HireDate** del tipo de entidad **Person** y presione las teclas **Ctrl + X** .
+-   Seleccione la entidad **HireInfo** y presione las teclas **Ctrl + V** .
+-   Cree una asociación entre **Person** y **HireInfo**. Para ello, haga clic con el botón secundario en un área vacía de la superficie de diseño, seleccione **Agregar nuevo**y haga clic en **Asociación**.
+-   Aparece el cuadro de diálogo **Agregar Asociación** . El nombre de **PersonHireInfo** se proporciona de forma predeterminada.
+-   Especifique Multiplicity **1 (uno)** en ambos extremos de la relación.
+-   Haga clic en **Aceptar**.
 
-El paso siguiente requiere la **detalles de Mapping** ventana. Si no puede ver esta ventana, haga clic en la superficie de diseño y seleccione **detalles de Mapping**.
+El paso siguiente requiere la ventana **detalles** de la asignación. Si no puede ver esta ventana, haga clic con el botón secundario en la superficie de diseño y seleccione detalles de la **asignación**.
 
--   Seleccione el **HireInfo** tipo de entidad y haga clic en **&lt;agregar una tabla o vista&gt;** en el **detalles de Mapping** ventana.
--   Seleccione **persona** desde el **&lt;agregar una tabla o vista&gt;** lista de campos de lista desplegable. La lista contiene las tablas o vistas a la que se puede asignar la entidad seleccionada.
-    Las propiedades adecuadas deben asignarse de forma predeterminada.
+-   Seleccione el tipo de entidad **HireInfo** y haga clic **&lt;en agregar una&gt;tabla o vista** en la ventana **detalles** de la asignación.
+-   Seleccione **persona** en la  **&lt;lista desplegable agregar una&gt;tabla o vista**. La lista contiene tablas o vistas a las que se puede asignar la entidad seleccionada.
+    Las propiedades adecuadas deben estar asignadas de forma predeterminada.
 
     ![Asignación](~/ef6/media/mapping.png)
 
--   Seleccione el **PersonHireInfo** asociación en la superficie de diseño.
--   Haga clic en la asociación en la superficie de diseño y seleccione **propiedades**.
--   En el **propiedades** ventana, seleccione el **las restricciones referenciales** propiedad y haga clic en el botón de puntos suspensivos.
--   Seleccione **persona** desde el **Principal** lista desplegable.
--   Presione **Aceptar**.
+-   Seleccione la Asociación **PersonHireInfo** en la superficie de diseño.
+-   Haga clic con el botón secundario en la asociación en la superficie de diseño y seleccione **propiedades**.
+-   En la ventana **propiedades** , seleccione la propiedad **restricciones referenciales** y haga clic en el botón de puntos suspensivos.
+-   Seleccione **persona** en la lista desplegable **principal** .
+-   Haga clic en **Aceptar**.
 
- 
+ 
 
 ## <a name="use-the-model"></a>Usar el modelo
 
@@ -122,16 +122,16 @@ El paso siguiente requiere la **detalles de Mapping** ventana. Si no puede ver e
 ```
 -   Compile y ejecute la aplicación.
 
-Las siguientes instrucciones de T-SQL se ejecutaron en el **School** base de datos como resultado de ejecutar esta aplicación. 
+Las siguientes instrucciones T-SQL se ejecutaron en la base de datos **School** como resultado de la ejecución de esta aplicación. 
 
--   La siguiente **insertar** se ejecutó como resultado de ejecutar el contexto. SaveChanges() y combina datos de la **persona** y **HireInfo** entidades
+-   La siguiente **inserción** se ejecutó como resultado de la ejecución del contexto. SaveChanges () y combina datos de las entidades **Person** y **HireInfo**
 
     ![Insertar](~/ef6/media/insert.png)
 
--   La siguiente **seleccione** se ejecutó como resultado de ejecutar el contexto. People.FirstOrDefault() y selecciona solo las columnas asignadas a **persona**
+-   La siguiente **selección** se ejecutó como resultado de la ejecución del contexto. People. FirstOrDefault () y selecciona solo las columnas asignadas a **Person**
 
     ![Seleccione 1](~/ef6/media/select1.png)
 
--   La siguiente **seleccione** se ejecutó como consecuencia de tener acceso a la existingPerson.Instructor de propiedad de navegación y selecciona solo las columnas asignadas a **HireInfo**
+-   La siguiente **selección** se ejecutó como resultado del acceso a la propiedad de navegación ExistingPerson. instructor y selecciona solo las columnas asignadas a **HireInfo**
 
     ![Seleccione 2](~/ef6/media/select2.png)
