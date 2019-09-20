@@ -1,32 +1,32 @@
 ---
-title: Reverse Engineering - EF Core
+title: 'Ingeniería inversa: EF Core'
 author: bricelam
 ms.author: bricelam
 ms.date: 11/13/2018
 ms.assetid: 6263EF7D-4989-42E6-BDEE-45DA770342FB
 uid: core/managing-schemas/scaffolding
-ms.openlocfilehash: 6e61d2ebcf5ada365dcdb264bc371199574e12fa
-ms.sourcegitcommit: 33b2e84dae96040f60a613186a24ff3c7b00b6db
+ms.openlocfilehash: 775a929982b9f4fb10aad9cd43bbb555ce632ad1
+ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 02/21/2019
-ms.locfileid: "56459190"
+ms.lasthandoff: 09/20/2019
+ms.locfileid: "71149018"
 ---
 # <a name="reverse-engineering"></a>Ingeniería inversa
 
-Ingeniería inversa es el proceso de scaffolding de las clases de tipo de entidad y una clase DbContext según un esquema de base de datos. Puede realizarse mediante la `Scaffold-DbContext` comando de las herramientas de la consola de administrador de paquetes (PMC) de EF Core o la `dotnet ef dbcontext scaffold` comando de las herramientas de interfaz de línea de comandos (CLI) de .NET.
+La ingeniería inversa es el proceso de scaffolding de las clases de tipo de entidad y una clase DbContext basada en un esquema de base de datos. Puede realizarse mediante el `Scaffold-DbContext` comando de EF Core herramientas de la consola del administrador de paquetes (PMC) o el `dotnet ef dbcontext scaffold` comando de las herramientas de la interfaz de la línea de comandos (CLI) de .net.
 
 ## <a name="installing"></a>Instalación
 
-Antes de aplicar ingeniería inversa, deberá instalar el [herramientas PMC](xref:core/miscellaneous/cli/powershell) (solo Visual Studio) o el [herramientas CLI](xref:core/miscellaneous/cli/dotnet). Consulte los vínculos para obtener más información.
+Antes de la ingeniería inversa, deberá instalar las herramientas de [PMC](xref:core/miscellaneous/cli/powershell) (solo en Visual Studio) o las [herramientas](xref:core/miscellaneous/cli/dotnet)de la CLI. Vea los vínculos para obtener más información.
 
-También deberá instalar una adecuada [proveedor de base de datos](xref:core/providers/index) para el esquema de base de datos que desea aplicar ingeniería inversa.
+También necesitará instalar un [proveedor de base de datos](xref:core/providers/index) adecuado para el esquema de la base de datos al que desea aplicar ingeniería inversa.
 
 ## <a name="connection-string"></a>Cadena de conexión
 
-El primer argumento para el comando es una cadena de conexión a la base de datos. Las herramientas usará esta cadena de conexión para leer el esquema de base de datos.
+El primer argumento del comando es una cadena de conexión a la base de datos. Las herramientas usarán esta cadena de conexión para leer el esquema de la base de datos.
 
-Cómo comillas y escape de la cadena de conexión depende de qué shell que esté utilizando para ejecutar el comando. Consulte la documentación de su shell para obtener información específica. Por ejemplo, PowerShell, deberá escape la `$` de caracteres, pero no `\`.
+La forma de citar y escapar de la cadena de conexión depende del shell que use para ejecutar el comando. Consulte la documentación de su shell para obtener información específica. Por ejemplo, PowerShell requiere que se escape el `$` carácter, pero no `\`.
 
 ``` powershell
 Scaffold-DbContext 'Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Chinook' Microsoft.EntityFrameworkCore.SqlServer
@@ -36,11 +36,11 @@ Scaffold-DbContext 'Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Chinook' 
 dotnet ef dbcontext scaffold "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Chinook" Microsoft.EntityFrameworkCore.SqlServer
 ```
 
-### <a name="configuration-and-user-secrets"></a>Configuración y los secretos de usuario
+### <a name="configuration-and-user-secrets"></a>Configuración y secretos de usuario
 
-Si tiene un proyecto de ASP.NET Core, puede usar el `Name=<connection-string>` sintaxis para leer la cadena de conexión de configuración.
+Si tiene un proyecto de ASP.net Core, puede usar la `Name=<connection-string>` sintaxis para leer la cadena de conexión de la configuración.
 
-Esto funciona bien con la [herramienta Secret Manager](https://docs.microsoft.com/aspnet/core/security/app-secrets#secret-manager) separar la contraseña de la base de datos de la base de código.
+Esto funciona bien con la [herramienta de administración de secretos](https://docs.microsoft.com/aspnet/core/security/app-secrets#secret-manager) para mantener la contraseña de la base de datos separada del código base.
 
 ``` Console
 dotnet user-secrets set ConnectionStrings.Chinook "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Chinook"
@@ -51,15 +51,15 @@ dotnet ef dbcontext scaffold Name=Chinook Microsoft.EntityFrameworkCore.SqlServe
 
 El segundo argumento es el nombre del proveedor. El nombre del proveedor suele ser el mismo que el nombre del paquete NuGet del proveedor.
 
-## <a name="specifying-tables"></a>Especificación de tablas
+## <a name="specifying-tables"></a>Especificar tablas
 
-Todas las tablas en el esquema de base de datos son inversas diseñadas en tipos de entidad de forma predeterminada. Puede limitar qué tablas son inversos ingeniería mediante la especificación de esquemas y tablas.
+De forma predeterminada, se aplica ingeniería inversa a todas las tablas del esquema de la base de datos en tipos de entidad. Puede limitar las tablas a las que se aplica ingeniería inversa mediante la especificación de esquemas y tablas.
 
-El `-Schemas` parámetro en la PMC y `--schema` opción en la CLI puede utilizarse para incluir todas las tablas dentro de un esquema.
+El `-Schemas` parámetro en PMC y la `--schema` opción en la CLI se pueden usar para incluir todas las tablas de un esquema.
 
-`-Tables` (PMC) y `--table` (CLI) puede usarse para incluir tablas específicas.
+`-Tables`(PMC) y `--table` (CLI) se pueden usar para incluir tablas específicas.
 
-Para incluir varias tablas en la PMC, use una matriz.
+Para incluir varias tablas en PMC, use una matriz.
 
 ``` powershell
 Scaffold-DbContext ... -Tables Artist, Album
@@ -71,15 +71,15 @@ Para incluir varias tablas en la CLI, especifique la opción varias veces.
 dotnet ef dbcontext scaffold ... --table Artist --table Album
 ```
 
-## <a name="preserving-names"></a>Conservación de nombres
+## <a name="preserving-names"></a>Conservar nombres
 
-Los nombres de tabla y columna se corrigen que mejor coincida con las convenciones de nomenclatura .NET para los tipos y propiedades de forma predeterminada. Especificar el `-UseDatabaseNames` cambie en PMC o el `--use-database-names` opción en la CLI, deshabilitará este comportamiento conserva los nombres de base de datos original tanto como sea posible. Todavía se corregirán los identificadores no válidos de .NET y convenciones de nomenclatura .NET aún cumpla sintetizados nombres como propiedades de navegación.
+Los nombres de tablas y columnas se han corregido para que coincidan mejor con las convenciones de nomenclatura de .NET para tipos y propiedades de forma predeterminada. Si se especifica `-UseDatabaseNames` el modificador en PMC `--use-database-names` o en la opción de la CLI, se deshabilitará este comportamiento para conservar los nombres de las bases de datos originales lo máximo posible. Los identificadores de .NET no válidos seguirán siendo fijos y los nombres sintetizados, como las propiedades de navegación, seguirán conforme a las convenciones de nomenclatura de .NET.
 
-## <a name="fluent-api-or-data-annotations"></a>La API Fluent o las anotaciones de datos
+## <a name="fluent-api-or-data-annotations"></a>Anotaciones de datos o API fluidas
 
-Tipos de entidad se configuran mediante la API Fluent de forma predeterminada. Especificar `-DataAnnotations` (PMC) o `--data-annotations` (CLI) para usar en su lugar, las anotaciones de datos cuando sea posible.
+Los tipos de entidad se configuran mediante la API fluida de forma predeterminada. Especifique `-DataAnnotations` (PMC) o `--data-annotations` (CLI) para usar anotaciones de datos siempre que sea posible.
 
-Por ejemplo, mediante la API Fluent aplicará la técnica scaffolding esto:
+Por ejemplo, el uso de la API fluida le aplicará esta técnica:
 
 ``` csharp
 entity.Property(e => e.Title)
@@ -87,7 +87,7 @@ entity.Property(e => e.Title)
     .HasMaxLength(160);
 ```
 
-Al usar anotaciones de datos aplicará la técnica scaffolding esto:
+Aunque el uso de anotaciones de datos es scaffolding:
 
 ``` csharp
 [Required]
@@ -97,13 +97,13 @@ public string Title { get; set; }
 
 ## <a name="dbcontext-name"></a>Nombre de DbContext
 
-El nombre de clase con scaffolding de DbContext será el nombre de la base de datos con el sufijo *contexto* de forma predeterminada. Para especificar otro diferente, use `-Context` en PMC y `--context` en la CLI.
+El nombre de la clase DbContext con scaffolding será el nombre de la base de datos con sufijo de *contexto* de forma predeterminada. Para especificar otro, use `-Context` en PMC y `--context` en la CLI.
 
-## <a name="directories-and-namespaces"></a>Espacios de nombres y directorios
+## <a name="directories-and-namespaces"></a>Directorios y espacios de nombres
 
-Las clases de entidad y una clase DbContext se ha aplicado scaffolding en el directorio raíz del proyecto y usan el espacio de nombres del proyecto predeterminado. Puede especificar el directorio donde se ha aplicado scaffolding a las clases con `-OutputDir` (PMC) o `--output-dir` (CLI). El espacio de nombres será el espacio de nombres raíz y los nombres de sus subdirectorios en el directorio raíz del proyecto.
+Las clases de entidad y una clase DbContext se scaffolding en el directorio raíz del proyecto y usan el espacio de nombres predeterminado del proyecto. Puede especificar el directorio en el que se van a aplicar `-OutputDir` scaffolding mediante (PMC `--output-dir` ) o (CLI). El espacio de nombres será el espacio de nombres raíz más los nombres de los subdirectorios del directorio raíz del proyecto.
 
-También puede usar `-ContextDir` (PMC) y `--context-dir` (CLI) para aplicar scaffolding a la clase DbContext en un directorio diferente de las clases de tipo de entidad.
+También puede usar ( `-ContextDir` PMC) y `--context-dir` (CLI) para aplicar la técnica scaffolding a un directorio independiente de las clases de tipo de entidad.
 
 ``` powershell
 Scaffold-DbContext ... -ContextDir Data -OutputDir Models
@@ -115,37 +115,35 @@ dotnet ef dbcontext scaffold ... --context-dir Data --output-dir Models
 
 ## <a name="how-it-works"></a>Cómo funciona
 
-Ingeniería inversa comienza por leer el esquema de base de datos. Lee información sobre tablas, columnas, restricciones e índices.
+La ingeniería inversa comienza leyendo el esquema de la base de datos. Lee información acerca de las tablas, columnas, restricciones e índices.
 
-A continuación, usa la información de esquema para crear un modelo de EF Core. Las tablas se utilizan para crear tipos de entidad; las columnas se utilizan para crear las propiedades; y las claves externas se utilizan para crear las relaciones.
+A continuación, usa la información de esquema para crear un modelo de EF Core. Las tablas se usan para crear tipos de entidad. las columnas se usan para crear propiedades; y las claves externas se utilizan para crear relaciones.
 
-Por último, el modelo se usa para generar código. Se ha aplicado scaffolding a la correspondiente entidad clases, la API Fluent y datos de las anotaciones de tipo con el fin de volver a crear el mismo modelo de la aplicación.
+Por último, el modelo se usa para generar código. Las clases de tipo de entidad, la API fluida y las anotaciones de datos correspondientes son scaffolding para volver a crear el mismo modelo desde la aplicación.
 
-## <a name="what-doesnt-work"></a>¿Qué no funciona
+## <a name="what-doesnt-work"></a>Qué no funciona
 
-No todo sobre un modelo puede representarse mediante un esquema de base de datos. Por ejemplo, información sobre **jerarquías de herencia**, **tipos de propiedad**, y **dividir la tabla** no están presentes en el esquema de base de datos. Por este motivo, estas construcciones no se nunca se ingeniería inversa.
+No todo lo relacionado con un modelo se puede representar mediante un esquema de la base de datos. Por ejemplo, la información sobre las [**jerarquías de herencia**](../modeling/inheritance.md), los [**tipos de propiedad**](../modeling/owned-entities.md)y la [**División de tablas**](../modeling/table-splitting.md) no están presentes en el esquema de la base de datos. Por este motivo, estas construcciones nunca se aplicarán a ingeniería inversa.
 
-Además, **algunos tipos de columna** es posible que no se admite el proveedor de EF Core. Estas columnas no se incluirán en el modelo.
+Además, es posible que **algunos tipos de columna** no sean compatibles con el proveedor de EF Core. Estas columnas no se incluirán en el modelo.
 
-EF Core requiere tener una clave de cada tipo de entidad. Las tablas, sin embargo, no se deben especificar una clave principal. **Las tablas sin una clave principal** son actualmente no se realizó ingeniería inversa.
+Puede definir [**tokens de simultaneidad**](../modeling/concurrency.md)en un modelo de EF Core para evitar que dos usuarios actualicen la misma entidad al mismo tiempo. Algunas bases de datos tienen un tipo especial para representar este tipo de columna (por ejemplo, rowversion en SQL Server), en cuyo caso se puede aplicar ingeniería inversa a esta información; sin embargo, no se aplicarán ingeniería inversa a otros tokens de simultaneidad.
 
-Puede definir **tokens de simultaneidad** en un modelo de EF Core para evitar que dos usuarios actualizando la misma entidad al mismo tiempo. Algunas bases de datos tienen un tipo especial para representar este tipo de columna (por ejemplo, rowversion en SQL Server), en cuyo caso de que la podemos invertir diseñar esta información; Sin embargo, otros tokens de simultaneidad no se invertirá ingeniería.
+## <a name="customizing-the-model"></a>Personalización del modelo
 
-## <a name="customizing-the-model"></a>Personalizar el modelo
+El código generado por EF Core es el código. No dude en cambiarlo. Solo se regenerará si vuelve a aplicar ingeniería inversa al mismo modelo. El código con scaffolding representa *un* modelo que se puede utilizar para tener acceso a la base de datos, pero ciertamente no es el *único* modelo que se puede usar.
 
-El código generado por EF Core es el código. No dude en cambiar. Solo se regenerará si aplicar ingeniería inversa del mismo modelo nuevo. Representa el código con scaffolding *una* modelo que puede utilizarse para tener acceso a la base de datos, pero es ciertamente no la *sólo* modelo que se puede usar.
+Personalice las clases de tipo de entidad y la clase DbContext para que se adapte a sus necesidades. Por ejemplo, puede elegir cambiar el nombre de tipos y propiedades, introducir jerarquías de herencia o dividir una tabla en varias entidades. También puede quitar índices no únicos, secuencias sin usar y propiedades de navegación, propiedades escalares opcionales y nombres de restricción del modelo.
 
-Personalizar las clases de tipos de entidad y la clase DbContext para ajustarlo a sus necesidades. Por ejemplo, puede cambiar el nombre de tipos y propiedades, introducir a las jerarquías de herencia o dividir una tabla en a varias entidades. También puede quitar índices no únicos, sin usar secuencias y las propiedades de navegación, las propiedades escalares opcionales y los nombres de restricción del modelo.
+También puede Agregar constructores, métodos, propiedades, etc. adicionales. usar otra clase parcial en un archivo independiente. Este enfoque funciona incluso cuando se desea volver a aplicar ingeniería inversa al modelo.
 
-También se pueden agregar constructores adicionales, métodos, propiedades, etcetera. uso de otra clase parcial en un archivo independiente. Este enfoque funciona incluso cuando se desea aplicar el modelo de ingeniería inversa a nuevo.
+## <a name="updating-the-model"></a>Actualizar el modelo
 
-## <a name="updating-the-model"></a>Actualización del modelo
+Después de realizar cambios en la base de datos, puede que tenga que actualizar el modelo de EF Core para reflejar los cambios. Si los cambios en la base de datos son sencillos, puede que sea más fácil realizar los cambios manualmente en el modelo de EF Core. Por ejemplo, cambiar el nombre de una tabla o columna, quitar una columna o actualizar el tipo de una columna son cambios triviales que se deben realizar en el código.
 
-Después de realizar cambios en la base de datos, debe actualizar el modelo de EF Core para reflejar dichos cambios. Si los cambios de la base de datos son simples, puede ser más fácil realizar manualmente los cambios en el modelo de EF Core. Por ejemplo, cambiar el nombre de una tabla o columna, quitar una columna o la actualización de un tipo de columna es triviales cambios realizados en el código.
+Sin embargo, los cambios más significativos no son tan sencillos como los que se realizan de forma manual. Un flujo de trabajo común consiste en volver a aplicar ingeniería inversa del modelo `-Force` de la base de `--force` datos mediante (PMC) o (CLI) para sobrescribir el modelo existente con uno actualizado.
 
-Los cambios más importantes, sin embargo, no son tan fácil hacer manualmente. Un flujo de trabajo común es invertir diseñar el modelo de la base de datos nuevo con `-Force` (PMC) o `--force` (CLI) para sobrescribir el modelo existente con uno actualizado.
-
-Otra característica habitualmente solicitada es la capacidad para actualizar el modelo de la base de datos conservando la personalización, como cambios de nombre, las jerarquías de tipos, etcetera. Usar problema [#831](https://github.com/aspnet/EntityFrameworkCore/issues/831) para realizar un seguimiento del progreso de esta característica.
+Otra característica solicitada comúnmente es la posibilidad de actualizar el modelo de la base de datos a la vez que se conserva la personalización, como cambiar el nombre, las jerarquías de tipos, etc. Use el [#831](https://github.com/aspnet/EntityFrameworkCore/issues/831) de problemas para realizar el seguimiento del progreso de esta característica.
 
 > [!WARNING]
-> Si la ingeniería inversa el modelo de la base de datos nuevo, se perderán los cambios realizados en los archivos.
+> Si vuelve a aplicar ingeniería inversa al modelo desde la base de datos, se perderán los cambios realizados en los archivos.

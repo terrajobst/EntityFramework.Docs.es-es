@@ -1,53 +1,50 @@
 ---
-title: 'Portabilidad de EF6 a EF Core: trasladar un modelo basado en EDMX'
+title: Migrar de EF6 a EF Core portabilidad de un modelo basado en EDMX
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 63003709-f1ec-4bdc-8083-65a60c4826d2
 uid: efcore-and-ef6/porting/port-edmx
-ms.openlocfilehash: 2c3336ac675a830566001a0ddb3777839f52db18
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: a1c978e141f47a39fff59eb5fc417a63afd37b04
+ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42997416"
+ms.lasthandoff: 09/20/2019
+ms.locfileid: "71148990"
 ---
-# <a name="porting-an-ef6-edmx-based-model-to-ef-core"></a>Portabilidad de un modelo basado en EDMX de EF6 a EF Core
+# <a name="porting-an-ef6-edmx-based-model-to-ef-core"></a>Portabilidad de un modelo basado en EF6 EDMX a EF Core
 
-EF Core no es compatible con el formato de archivo EDMX para los modelos. Es la mejor opción para estos modelos, el puerto generar un nuevo modelo basado en código de la base de datos para la aplicación.
+EF Core no admite el formato de archivo EDMX para los modelos. La mejor opción para portar estos modelos es generar un nuevo modelo basado en código a partir de la base de datos de la aplicación.
 
-## <a name="install-ef-core-nuget-packages"></a>Instalar paquetes de NuGet de EF Core
+## <a name="install-ef-core-nuget-packages"></a>Instalación de EF Core paquetes NuGet
 
-Instalar el `Microsoft.EntityFrameworkCore.Tools` paquete NuGet.
+Instale el paquete NuGet `Microsoft.EntityFrameworkCore.Tools`.
 
-## <a name="regenerate-the-model"></a>Volver a generar el modelo
+## <a name="regenerate-the-model"></a>Regeneración del modelo
 
 Ahora puede usar la funcionalidad de ingeniería inversa para crear un modelo basado en la base de datos existente.
 
-Ejecute el siguiente comando en la consola de administrador de paquetes (Herramientas –> Administrador de paquetes de NuGet –> Package Manager Console). Consulte [consola del Administrador de paquetes (Visual Studio)](../../core/miscellaneous/cli/powershell.md) para opciones de comando aplicar scaffolding a un subconjunto de tablas etcetera.
+Ejecute el siguiente comando en la consola del administrador de paquetes (Herramientas – > Administrador de paquetes NuGet – > consola del administrador de paquetes). Vea [consola del administrador de paquetes (Visual Studio)](../../core/miscellaneous/cli/powershell.md) para ver las opciones de comando para aplicar scaffolding a un subconjunto de tablas, etc.
 
 ``` powershell
 Scaffold-DbContext "<connection string>" <database provider name>
 ```
 
-Por ejemplo, aquí es el comando para aplicar scaffolding a un modelo a partir de la base de datos de creación de blogs en la instancia de SQL Server LocalDB.
+Por ejemplo, este es el comando para aplicar scaffolding a un modelo a partir de la base de datos de blogs en la SQL Server instancia de LocalDB.
 
 ``` powershell
 Scaffold-DbContext "Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer
 ```
 
-## <a name="remove-ef6-model"></a>Quitar el modelo de EF6
+## <a name="remove-ef6-model"></a>Quitar el modelo EF6
 
-El modelo de EF6 se quitarían ahora desde su aplicación.
+Ahora se quitará el modelo EF6 de la aplicación.
 
-Es correcto dejar el paquete NuGet de EF6 (Entity Framework) instalado, como EF Core y EF6 pueden ser utilizado por en paralelo en la misma aplicación. Sin embargo, si no se pretende usar EF6 en las áreas de la aplicación, a continuación, desinstalar el paquete para obtener errores de compilación en fragmentos de código que necesitan atención.
+Es adecuado dejar el paquete NuGet de EF6 (EntityFramework) instalado, ya que EF Core y EF6 se pueden usar en paralelo en la misma aplicación. Sin embargo, si no va a usar EF6 en ninguna de las áreas de la aplicación, la desinstalación del paquete le ayudará a dar errores de compilación en fragmentos de código que requieren atención.
 
-## <a name="update-your-code"></a>Actualizar el código
+## <a name="update-your-code"></a>Actualización del código
 
-En este momento, es cuestión de direccionamiento de los errores de compilación y revisión de código para ver si los cambios de comportamiento entre EF6 y EF Core le afectará.
+En este punto, es cuestión de solucionar los errores de compilación y revisar el código para ver si el comportamiento cambia entre EF6 y EF Core afectará a su caso.
 
-## <a name="test-the-port"></a>Probar el puerto
+## <a name="test-the-port"></a>Prueba del puerto
 
-Simplemente porque se compila la aplicación, no significa que es portada correctamente a EF Core. Debe probar todas las áreas de la aplicación para asegurarse de que ninguno de los cambios de comportamiento han afectado negativamente la aplicación.
-
-> [!TIP]
-> Consulte [Introducción a EF Core en ASP.NET Core con una base de datos](xref:core/get-started/aspnetcore/existing-db) para una referencia adicional sobre cómo trabajar con una base de datos existente 
+El hecho de que la aplicación se compile, no significa que se haya trasladado correctamente a EF Core. Tendrá que probar todas las áreas de la aplicación para asegurarse de que ninguno de los cambios de comportamiento afecte negativamente a la aplicación.

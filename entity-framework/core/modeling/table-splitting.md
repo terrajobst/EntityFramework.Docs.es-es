@@ -1,52 +1,53 @@
 ---
-title: Tabla dividir - EF Core
+title: 'División de tablas: EF Core'
 author: AndriySvyryd
 ms.author: ansvyryd
 ms.date: 04/10/2019
 ms.assetid: 0EC2CCE1-BD55-45D8-9EA9-20634987F094
 uid: core/modeling/table-splitting
-ms.openlocfilehash: 4a0bfaf017106a0bfdff084b1c472bdc17459a89
-ms.sourcegitcommit: 8f801993c9b8cd8a8fbfa7134818a8edca79e31a
+ms.openlocfilehash: 684fcfbb66debfd1b89e23c8aaf0a32909378c6b
+ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 04/14/2019
-ms.locfileid: "59562595"
+ms.lasthandoff: 09/20/2019
+ms.locfileid: "71149183"
 ---
-# <a name="table-splitting"></a>División de tablas
+# <a name="table-splitting"></a>División de tabla
 
 >[!NOTE]
-> Esta característica es nueva en EF Core 2.0.
+> Esta característica es nueva en EF Core 2,0.
 
-EF Core permite asignar dos o más entidades a una sola fila. Esto se denomina _división de tabla_ o _uso compartido de la tabla_.
+EF Core permite asignar dos o más entidades a una sola fila. Esto se denomina _División de tablas_ o _uso compartido de tablas_.
 
 ## <a name="configuration"></a>Configuración
 
-Para usar los tipos de entidad deben asignarse a la misma tabla de la división de tablas, tiene las claves principales que se asignan a las mismas columnas y al menos una relación configurado entre la clave principal de un tipo de entidad y otra en la misma tabla.
+Para usar la división de tablas, los tipos de entidad deben asignarse a la misma tabla, tener las claves principales asignadas a las mismas columnas y al menos una relación configurada entre la clave principal de un tipo de entidad y otra en la misma tabla.
 
-Un escenario común para la división de tablas está utilizando solo un subconjunto de las columnas de la tabla para mayor rendimiento o encapsulación.
+Un escenario común para la división de tablas es usar solo un subconjunto de las columnas de la tabla para un mayor rendimiento o encapsulación.
 
-En este ejemplo `Order` representa un subconjunto de `DetailedOrder`.
+En este ejemplo `Order` representa un subconjunto `DetailedOrder`de.
 
 [!code-csharp[Order](../../../samples/core/Modeling/TableSplitting/Order.cs?name=Order)]
 
 [!code-csharp[DetailedOrder](../../../samples/core/Modeling/TableSplitting/DetailedOrder.cs?name=DetailedOrder)]
 
-Además de la configuración necesaria que llamamos `HasBaseType((string)null)` para evitar la asignación `DetailedOrder` en la misma jerarquía que `Order`.
+Además de la configuración necesaria, `Property(o => o.Status).HasColumnName("Status")` llamamos a para asignarla `DetailedOrder.Status` a la misma columna `Order.Status`que.
 
 [!code-csharp[TableSplittingConfiguration](../../../samples/core/Modeling/TableSplitting/TableSplittingContext.cs?name=TableSplitting&highlight=3)]
 
-Consulte la [proyecto de ejemplo completa](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Modeling/TableSplitting) para obtener más contexto.
+> [!TIP]
+> Vea el [proyecto de ejemplo completo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Modeling/TableSplitting) para obtener más contexto.
 
 ## <a name="usage"></a>Uso
 
-Guardar y consultar entidades mediante la división de tablas se realiza en la misma manera que otras entidades, la única diferencia es que se deben realizar un seguimiento de todas las entidades de uso compartido de una fila para la inserción.
+Guardar y consultar entidades mediante la división de tablas se realiza de la misma manera que otras entidades. Y, a partir de EF Core 3,0, la referencia de `null`entidad dependiente puede ser. Si todas las columnas utilizadas por la entidad dependiente son `NULL` la base de datos, no se creará ninguna instancia para ella cuando se realice la consulta. Esto también ocurre cuando todas las propiedades son opcionales y se establecen en `null`, lo que podría no ser el esperado.
 
 [!code-csharp[Usage](../../../samples/core/Modeling/TableSplitting/Program.cs?name=Usage)]
 
 ## <a name="concurrency-tokens"></a>Tokens de simultaneidad
 
-Si alguno de los tipos de entidad uso compartido de una tabla tiene un token de simultaneidad, a continuación, se debe incluir en todos los demás tipos de entidad para evitar un valor de token de simultaneidad obsoletos cuando se actualiza solo una de las entidades que se asigna a la misma tabla.
+Si alguno de los tipos de entidad que comparten una tabla tiene un token de simultaneidad, debe estar incluido en todos los demás tipos de entidad para evitar un valor de token de simultaneidad obsoleto cuando solo se actualiza una de las entidades asignadas a la misma tabla.
 
-Para evitar la exposición a que el código utilizado es posible crear uno en estado de la sombra.
+Para evitar que se exponga al código de consumo, es posible crear uno en el estado de sombra.
 
 [!code-csharp[TableSplittingConfiguration](../../../samples/core/Modeling/TableSplitting/TableSplittingContext.cs?name=ConcurrencyToken&highlight=2)]
