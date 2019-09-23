@@ -4,60 +4,83 @@ author: divega
 ms.date: 02/19/2019
 ms.assetid: 2EBE2CCC-E52D-483F-834C-8877F5EB0C0C
 uid: core/what-is-new/ef-core-3.0/features
-ms.openlocfilehash: d61fa884f4669daa220ffc96ae59dd63518e6d5a
-ms.sourcegitcommit: b2b9468de2cf930687f8b85c3ce54ff8c449f644
+ms.openlocfilehash: 528733d6eec33de2c9538541a6ed5be704b9d433
+ms.sourcegitcommit: d01fc19aa42ca34c3bebccbc96ee26d06fcecaa2
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/12/2019
-ms.locfileid: "70921672"
+ms.lasthandoff: 09/16/2019
+ms.locfileid: "71005557"
 ---
-# <a name="new-features-included-in-ef-core-30-currently-in-preview"></a>Nuevas características incluidas en EF Core 3.0 (actualmente en versión preliminar)
-
-> [!IMPORTANT]
-> Tenga en cuenta que los conjuntos de características y las programaciones de las versiones futuras siempre están sujetos a cambios y, aunque intentamos mantener esta página actualizada, es posible que no refleje nuestros planes más recientes en todo momento.
+# <a name="new-features-included-in-ef-core-30"></a>Nuevas características incluidas en EF Core 3.0
 
 En la lista siguiente se incluyen las principales características nuevas planeadas para EF Core 3.0.
-La mayoría de estas características no están incluidas en la versión preliminar actual, pero estarán disponibles cuando avancemos hacia RTM.
 
-El motivo es que al principio de la versión, nos centraremos en la implementación de los [cambios importantes](xref:core/what-is-new/ef-core-3.0/breaking-changes) planeados.
-Muchos de estos cambios son, por sí solos, mejoras de EF Core.
-Otros muchos son necesarios para desbloquear más mejoras. 
-
-Para obtener una lista completa de las correcciones de errores y las mejoras en curso, puede ver [esta consulta en nuestro rastreador de problemas](https://github.com/aspnet/EntityFrameworkCore/issues?q=is%3Aopen+is%3Aissue+milestone%3A3.0.0+sort%3Areactions-%2B1-desc).
+EF Core 3.0 es una versión principal que también presenta numerosos [cambios importantes](xref:core/what-is-new/ef-core-3.0/breaking-changes). Se trata de mejoras en la API que podrían afectar negativamente a las aplicaciones existentes.  
 
 ## <a name="linq-improvements"></a>Mejoras de LINQ 
 
-[Problema de seguimiento n.º 12795](https://github.com/aspnet/EntityFrameworkCore/issues/12795)
+LINQ permite escribir consultas a la base de datos sin abandonar el idioma de elección, con lo que se aprovecha la información de tipo enriquecido para ofrecer la comprobación de IntelliSense y de tipos en tiempo de compilación.
+Pero LINQ también permite escribir un número ilimitado de consultas complicadas que contienen expresiones arbitrarias (llamadas a métodos u operaciones).
+Controlar todas esas combinaciones siempre ha sido un desafío importante para los proveedores LINQ.
+En EF Core 3.0, hemos vuelto a escribir nuestra implementación de LINQ para habilitar la traducción de más expresiones en SQL, generar consultas eficaces en más casos, evitar que las consultas ineficaces no se detecten y facilitar la introducción gradual de las mejoras de las capacidades y el rendimiento de la nueva consulta, sin interrumpir las aplicaciones y los proveedores de datos existentes.
 
-Se ha iniciado el trabajo en esta característica, pero no se incluye en la versión preliminar actual.
+### <a name="client-evaluation"></a>Evaluación de cliente
 
-LINQ permite escribir consultas a la base de datos sin abandonar el idioma de elección, con lo que se aprovecha la información de tipo enriquecido para obtener la comprobación de IntelliSense y de tipos en tiempo de compilación.
-Pero LINQ también le permite escribir un número ilimitado de consultas complicadas, y eso siempre ha sido un gran reto para los proveedores de LINQ.
-En las primeras versiones de EF Core, resolvimos esto en parte al calcular qué partes de una consulta se podían traducir a SQL, y luego al permitir que el resto de la consulta se ejecutara en memoria en el cliente.
-Esta ejecución de cliente puede ser deseable en algunas situaciones, pero en muchos otros casos puede dar como resultado consultas ineficientes que pueden no ser identificadas hasta que una aplicación se implemente en producción.
-En EF Core 3.0, tenemos previsto hacer cambios profundos en cómo funciona nuestra implementación de LINQ, y cómo la probamos.
-Los objetivos son hacerla más eficaz (por ejemplo, evitar interrumpir las consultas en las versiones de revisión), poder traducir más expresiones correctamente a SQL, generar consultas eficientes en más casos y evitar que las consultas ineficientes pasen desapercibidas.
+El cambio de diseño principal en EF Core 3.0 está relacionado con cómo controla las expresiones LINQ que no se pueden traducir a SQL o parámetros:
+
+En las primeras versiones, EF Core simplemente averiguaba qué partes de una consulta se pueden traducir a SQL y ejecutaba el resto de la consulta en el cliente.
+Este tipo de ejecución en el lado cliente puede ser una opción interesante en algunas situaciones, pero en muchos otros casos puede dar lugar a consultas ineficaces.
+Por ejemplo, si EF Core 2.2 no podía traducir un predicado en una llamada a `Where()`, ejecutaba una instrucción SQL sin filtro, leía todas las filas de la base de datos y luego las filtraba en memoria.
+Esta operación puede ser aceptable si la base de datos contiene pocas filas, pero puede dar lugar a problemas de rendimiento considerables o incluso errores en la aplicación si la base de datos contiene muchas filas.
+En EF Core 3.0 hemos restringido la evaluación de cliente para que solo suceda en la proyección de nivel superior (la última llamada a `Select()`).
+Cuando EF Core 3.0 detecta expresiones que no se pueden traducir en ningún otro lugar de la consulta, produce una excepción en tiempo de ejecución.
 
 ## <a name="cosmos-db-support"></a>Compatibilidad con Cosmos DB 
 
-[Problema de seguimiento n.º 8443](https://github.com/aspnet/EntityFrameworkCore/issues/8443)
-
-Esta característica está incluida en la versión preliminar actual, pero todavía no está completa. 
-
-Estamos trabajando en un proveedor de Cosmos DB para EF Core, para que los desarrolladores familiarizados con el modelo de programación de EF puedan utilizar fácilmente Azure Cosmos DB como base de datos de aplicación.
+Con el proveedor de Cosmos DB para EF Core, los desarrolladores que están familiarizados con el modelo de programación de EF puedan usar fácilmente Azure Cosmos DB como base de datos de aplicación.
 El objetivo es hacer que algunas de las ventajas de Cosmos DB, como la distribución global, la disponibilidad "AlwaysOn", la escalabilidad elástica y la baja latencia, sean aún más accesibles para los desarrolladores de .NET.
 El proveedor habilitará la mayoría de las características de EF Core, como el seguimiento automático de cambios, LINQ y conversiones de valores, en comparación con SQL API de Cosmos DB.
-Comenzamos este esfuerzo antes de EF Core 2.2 y [hemos puesto a disposición algunas versiones preliminares del proveedor](https://blogs.msdn.microsoft.com/dotnet/2018/10/17/announcing-entity-framework-core-2-2-preview-3/).
-El nuevo plan es continuar desarrollando el proveedor junto con EF Core 3.0. 
+
+## <a name="c-80-support"></a>Compatibilidad con C# 8.0
+
+EF Core 3.0 aprovecha algunas de las nuevas características de C# 8.0:
+
+### <a name="asynchronous-streams"></a>Secuencias asincrónicas
+
+Los resultados de la consulta asincrónica se exponen ahora mediante la nueva interfaz de `await foreach` estándar y se pueden usar con `IAsyncEnumerable<T>`.
+
+``` csharp
+var orders = 
+  from o in context.Orders
+  where o.Status == OrderStatus.Pending
+  select o;
+
+await foreach(var o in orders)
+{
+  Proccess(o);
+} 
+```
+
+### <a name="nullable-reference-types"></a>Tipos de referencia que aceptan valores NULL 
+
+Cuando esta nueva característica está habilitada en el código, EF Core puede tener en cuenta la nulabilidad de las propiedades de los tipos de referencia (ya sea de tipos primitivos, como las propiedades de navegación o de cadena) para decidir la nulabilidad de las columnas y las relaciones de la base de datos.
+
+## <a name="interception"></a>Interception
+
+La nueva API de interceptación en EF Core 3.0 permite observar y modificar mediante programación el resultado de las operaciones detalladas de la base de datos que se producen como parte del funcionamiento normal de EF Core, como abrir conexiones, iniciar transacciones y ejecutar comandos. 
+
+## <a name="reverse-engineering-of-database-views"></a>Ingeniería inversa de vistas de base de datos
+
+Los tipos de entidad sin claves (denominados anteriormente [tipos de consulta](xref:core/modeling/query-types)) representan los datos que se pueden leer de la base de datos, pero que no se pueden actualizar.
+Esta característica los convierte en una elección excelente para asignar vistas de base de datos en la mayoría de los escenarios, por lo que hemos automatizado la creación de tipos de entidad sin claves al usar técnicas de ingeniería inversa en vistas de base de datos.
 
 ## <a name="dependent-entities-sharing-the-table-with-the-principal-are-now-optional"></a>Ahora, las entidades dependientes que comparten la tabla con la entidad de seguridad son opcionales
 
-[Problema de seguimiento n.º 9005](https://github.com/aspnet/EntityFrameworkCore/issues/9005)
+A partir de la versión EF Core 3.0, si `OrderDetails` pertenece a `Order` o está asignado a la misma tabla explícitamente, será posible agregar `Order` sin `OrderDetails`; todas las propiedades `OrderDetails`, salvo la clave principal, se asignarán a columnas que aceptan valores NULL.
 
-Esta característica se introducirá en EF Core 3.0 (versión preliminar 4).
+Al realizar consultas, EF Core establecerá `OrderDetails` en `null` si ninguna de las propiedades necesarias tiene un valor, o bien no tiene las propiedades necesarias más allá de la clave principal y todas las propiedades son `null`.
 
-Considere el modelo siguiente:
-```C#
+``` csharp
 public class Order
 {
     public int Id { get; set; }
@@ -73,39 +96,17 @@ public class OrderDetails
 }
 ```
 
-A partir de la versión EF Core 3.0, si `OrderDetails` pertenece a `Order` o está asignado a la misma tabla explícitamente, será posible agregar `Order` sin `OrderDetails`; todas las propiedades `OrderDetails`, salvo la clave principal, se asignarán a columnas que aceptan valores NULL.
-
-Al realizar consultas, EF Core establecerá `OrderDetails` en `null` si ninguna de las propiedades necesarias tiene un valor, o bien no tiene las propiedades necesarias más allá de la clave principal y todas las propiedades son `null`.
-
-## <a name="c-80-support"></a>Compatibilidad con C# 8.0
-
-[Problema de seguimiento n.º 12047](https://github.com/aspnet/EntityFrameworkCore/issues/12047)
-[Problema de seguimiento n.º 10347](https://github.com/aspnet/EntityFrameworkCore/issues/10347)
-
-Se ha iniciado el trabajo en esta característica, pero no se incluye en la versión preliminar actual.
-
-Queremos que, mientras usan EF Core, nuestros clientes aprovechen algunas de las [nuevas características que se incluyen en C# 8.0](https://blogs.msdn.microsoft.com/dotnet/2018/11/12/building-c-8-0/), como las secuencias de sincronización (incluida `await foreach`) y los tipos de referencia que aceptan valores NULL.
-
-## <a name="reverse-engineering-of-database-views"></a>Ingeniería inversa de vistas de base de datos
-
-[Problema de seguimiento n.º 1679](https://github.com/aspnet/EntityFrameworkCore/issues/1679)
-
-Esta característica no está incluida en la versión preliminar actual.
-
-Los [tipos de consulta](xref:core/modeling/query-types), presentados en EF Core 2.1 y considerados tipos de entidad sin claves en EF Core 3.0, representan datos que se pueden leer desde la base de datos, pero que no se pueden actualizar.
-Esta característica los convierte en una elección excelente para las vistas de base de datos en la mayoría de los escenarios, por lo que tenemos previsto automatizar la creación de tipos de entidad sin claves al usar de técnicas de ingeniería inversa en vistas de base de datos.
-
 ## <a name="ef-63-on-net-core"></a>EF 6.3 en .NET Core
 
-[Problema de seguimiento n.º 271 de EF 6](https://github.com/aspnet/EntityFramework6/issues/271)
-
-Se ha iniciado el trabajo en esta característica, pero no se incluye en la versión preliminar actual. 
-
 Entendemos que muchas aplicaciones existentes utilizan versiones anteriores de EF, y que portarlas a EF Core solo para aprovechar las ventajas de .NET Core puede requerir a veces un esfuerzo considerable.
-Por ese motivo, adaptaremos la próxima versión de EF 6 para se ejecute en .NET Core 3.0.
-Hacemos esto para facilitar la portabilidad de las aplicaciones existentes con cambios mínimos.
-Habrá algunas limitaciones. Por ejemplo:
-- Se necesitarán nuevos proveedores para trabajar con otras bases de datos, además de la compatibilidad de SQL Server incluida en .NET Core.
+Por ese motivo, hemos habilitado la versión más reciente de EF 6 para que se ejecute en .NET Core 3.0.
+Existen algunas limitaciones, como por ejemplo:
+- Se necesitan nuevos proveedores para trabajar en .NET Core
 - No se habilitará la compatibilidad espacial con SQL Server.
 
-Tenga en cuenta también que, en este momento, no hay características nuevas planeadas para EF 6.
+## <a name="postponed-features"></a>Características pospuestas
+
+Algunas características planeadas originalmente para EF Core 3.0 se pospusieron para versiones futuras: 
+
+- Capacidad de omitir partes de un modelo en migraciones, con seguimiento realizado a través del problema [n.° 2725](https://github.com/aspnet/EntityFrameworkCore/issues/2725).
+- Entidades contenedoras de propiedades, de las que se realiza un seguimiento a través de dos problemas independientes: [n.° 9914](https://github.com/aspnet/EntityFrameworkCore/issues/9914) sobre las entidades de tipo compartido y [n.° 13610](https://github.com/aspnet/EntityFrameworkCore/issues/13610) sobre la compatibilidad con la asignación de propiedades indizadas.
