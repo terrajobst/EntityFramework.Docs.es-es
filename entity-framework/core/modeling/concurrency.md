@@ -4,54 +4,54 @@ author: rowanmiller
 ms.date: 03/03/2018
 ms.assetid: bc8b1cb0-befe-4b67-8004-26e6c5f69385
 uid: core/modeling/concurrency
-ms.openlocfilehash: 0051d416544a11385f99d36e45843c5b20725af7
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: db768c1de99000be91d33764ccd3c3924237f8bb
+ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994231"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71197450"
 ---
-# <a name="concurrency-tokens"></a><span data-ttu-id="f602a-102">Tokens de simultaneidad</span><span class="sxs-lookup"><span data-stu-id="f602a-102">Concurrency Tokens</span></span>
+# <a name="concurrency-tokens"></a><span data-ttu-id="d5bbe-102">Tokens de simultaneidad</span><span class="sxs-lookup"><span data-stu-id="d5bbe-102">Concurrency Tokens</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="f602a-103">Esta página describe cómo configurar los tokens de simultaneidad.</span><span class="sxs-lookup"><span data-stu-id="f602a-103">This page documents how to configure concurrency tokens.</span></span> <span data-ttu-id="f602a-104">Consulte [controlar los conflictos de simultaneidad](../saving/concurrency.md) para obtener una explicación detallada de cómo funciona el control de simultaneidad en EF Core y ejemplos de cómo controlar los conflictos de simultaneidad en la aplicación.</span><span class="sxs-lookup"><span data-stu-id="f602a-104">See [Handling Concurrency Conflicts](../saving/concurrency.md) for a detailed explanation of how concurrency control works on EF Core and examples of how to handle concurrency conflicts in your application.</span></span>
+> <span data-ttu-id="d5bbe-103">En esta página se documenta cómo configurar los tokens de simultaneidad.</span><span class="sxs-lookup"><span data-stu-id="d5bbe-103">This page documents how to configure concurrency tokens.</span></span> <span data-ttu-id="d5bbe-104">Vea [controlar los conflictos de simultaneidad](../saving/concurrency.md) para obtener una explicación detallada de cómo funciona el control de simultaneidad en EF Core y ejemplos de cómo controlar los conflictos de simultaneidad en la aplicación.</span><span class="sxs-lookup"><span data-stu-id="d5bbe-104">See [Handling Concurrency Conflicts](../saving/concurrency.md) for a detailed explanation of how concurrency control works on EF Core and examples of how to handle concurrency conflicts in your application.</span></span>
 
-<span data-ttu-id="f602a-105">Las propiedades configuradas como tokens de simultaneidad se usan para implementar el control de simultaneidad optimista.</span><span class="sxs-lookup"><span data-stu-id="f602a-105">Properties configured as concurrency tokens are used to implement optimistic concurrency control.</span></span>
+<span data-ttu-id="d5bbe-105">Las propiedades configuradas como tokens de simultaneidad se usan para implementar el control de simultaneidad optimista.</span><span class="sxs-lookup"><span data-stu-id="d5bbe-105">Properties configured as concurrency tokens are used to implement optimistic concurrency control.</span></span>
 
-## <a name="conventions"></a><span data-ttu-id="f602a-106">Convenciones</span><span class="sxs-lookup"><span data-stu-id="f602a-106">Conventions</span></span>
+## <a name="conventions"></a><span data-ttu-id="d5bbe-106">Convenciones</span><span class="sxs-lookup"><span data-stu-id="d5bbe-106">Conventions</span></span>
 
-<span data-ttu-id="f602a-107">Por convención, las propiedades nunca se configuran como tokens de simultaneidad.</span><span class="sxs-lookup"><span data-stu-id="f602a-107">By convention, properties are never configured as concurrency tokens.</span></span>
+<span data-ttu-id="d5bbe-107">Por Convención, las propiedades nunca se configuran como tokens de simultaneidad.</span><span class="sxs-lookup"><span data-stu-id="d5bbe-107">By convention, properties are never configured as concurrency tokens.</span></span>
 
-## <a name="data-annotations"></a><span data-ttu-id="f602a-108">Anotaciones de datos</span><span class="sxs-lookup"><span data-stu-id="f602a-108">Data Annotations</span></span>
+## <a name="data-annotations"></a><span data-ttu-id="d5bbe-108">Anotaciones de datos</span><span class="sxs-lookup"><span data-stu-id="d5bbe-108">Data Annotations</span></span>
 
-<span data-ttu-id="f602a-109">Puede utilizar las anotaciones de datos para configurar una propiedad como un token de simultaneidad.</span><span class="sxs-lookup"><span data-stu-id="f602a-109">You can use the Data Annotations to configure a property as a concurrency token.</span></span>
+<span data-ttu-id="d5bbe-109">Puede usar las anotaciones de datos para configurar una propiedad como un token de simultaneidad.</span><span class="sxs-lookup"><span data-stu-id="d5bbe-109">You can use the Data Annotations to configure a property as a concurrency token.</span></span>
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Samples/Concurrency.cs#ConfigureConcurrencyAnnotations)]
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Concurrency.cs#ConfigureConcurrencyAnnotations)]
 
-## <a name="fluent-api"></a><span data-ttu-id="f602a-110">API fluida</span><span class="sxs-lookup"><span data-stu-id="f602a-110">Fluent API</span></span>
+## <a name="fluent-api"></a><span data-ttu-id="d5bbe-110">API fluida</span><span class="sxs-lookup"><span data-stu-id="d5bbe-110">Fluent API</span></span>
 
-<span data-ttu-id="f602a-111">Puede usar la API Fluent para configurar una propiedad como un token de simultaneidad.</span><span class="sxs-lookup"><span data-stu-id="f602a-111">You can use the Fluent API to configure a property as a concurrency token.</span></span>
+<span data-ttu-id="d5bbe-111">Puede usar la API fluida para configurar una propiedad como un token de simultaneidad.</span><span class="sxs-lookup"><span data-stu-id="d5bbe-111">You can use the Fluent API to configure a property as a concurrency token.</span></span>
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Concurrency.cs#ConfigureConcurrencyFluent)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Concurrency.cs#ConfigureConcurrencyFluent)]
 
-## <a name="timestamprow-version"></a><span data-ttu-id="f602a-112">Versión de fila o marca de tiempo</span><span class="sxs-lookup"><span data-stu-id="f602a-112">Timestamp/row version</span></span>
+## <a name="timestamprow-version"></a><span data-ttu-id="d5bbe-112">Marca de tiempo/versión de fila</span><span class="sxs-lookup"><span data-stu-id="d5bbe-112">Timestamp/row version</span></span>
 
-<span data-ttu-id="f602a-113">Una marca de tiempo es una propiedad donde se genera un nuevo valor de la base de datos cada vez que se inserta o actualiza una fila.</span><span class="sxs-lookup"><span data-stu-id="f602a-113">A timestamp is a property where a new value is generated by the database every time a row is inserted or updated.</span></span> <span data-ttu-id="f602a-114">La propiedad también se trata como un token de simultaneidad.</span><span class="sxs-lookup"><span data-stu-id="f602a-114">The property is also treated as a concurrency token.</span></span> <span data-ttu-id="f602a-115">Esto garantiza que obtendrá una excepción si otra persona ha modificado una fila que está intentando actualizar desde que consultan los datos.</span><span class="sxs-lookup"><span data-stu-id="f602a-115">This ensures you will get an exception if anyone else has modified a row that you are trying to update since you queried for the data.</span></span>
+<span data-ttu-id="d5bbe-113">Una marca de tiempo es una propiedad donde la base de datos genera un nuevo valor cada vez que se inserta o se actualiza una fila.</span><span class="sxs-lookup"><span data-stu-id="d5bbe-113">A timestamp is a property where a new value is generated by the database every time a row is inserted or updated.</span></span> <span data-ttu-id="d5bbe-114">La propiedad también se trata como un token de simultaneidad.</span><span class="sxs-lookup"><span data-stu-id="d5bbe-114">The property is also treated as a concurrency token.</span></span> <span data-ttu-id="d5bbe-115">Esto garantiza que obtendrá una excepción si alguien más ha modificado una fila que está intentando actualizar desde que ha consultado los datos.</span><span class="sxs-lookup"><span data-stu-id="d5bbe-115">This ensures you will get an exception if anyone else has modified a row that you are trying to update since you queried for the data.</span></span>
 
-<span data-ttu-id="f602a-116">Forma de conseguirlo es responsabilidad del proveedor de base de datos que se va a usar.</span><span class="sxs-lookup"><span data-stu-id="f602a-116">How this is achieved is up to the database provider being used.</span></span> <span data-ttu-id="f602a-117">Para SQL Server, marca de tiempo se utiliza normalmente en un *byte []* propiedad, que será de instalación como un *ROWVERSION* columna en la base de datos.</span><span class="sxs-lookup"><span data-stu-id="f602a-117">For SQL Server, timestamp is usually used on a *byte[]* property, which will be setup as a *ROWVERSION* column in the database.</span></span>
+<span data-ttu-id="d5bbe-116">La forma de conseguirlo es el proveedor de base de datos que se está usando.</span><span class="sxs-lookup"><span data-stu-id="d5bbe-116">How this is achieved is up to the database provider being used.</span></span> <span data-ttu-id="d5bbe-117">Por SQL Server, la marca de tiempo se usa normalmente en una propiedad de *Byte []* , que se configurará como una columna *ROWVERSION* en la base de datos.</span><span class="sxs-lookup"><span data-stu-id="d5bbe-117">For SQL Server, timestamp is usually used on a *byte[]* property, which will be setup as a *ROWVERSION* column in the database.</span></span>
 
-### <a name="conventions"></a><span data-ttu-id="f602a-118">Convenciones</span><span class="sxs-lookup"><span data-stu-id="f602a-118">Conventions</span></span>
+### <a name="conventions"></a><span data-ttu-id="d5bbe-118">Convenciones</span><span class="sxs-lookup"><span data-stu-id="d5bbe-118">Conventions</span></span>
 
-<span data-ttu-id="f602a-119">Por convención, las propiedades nunca se configuran como marcas de tiempo.</span><span class="sxs-lookup"><span data-stu-id="f602a-119">By convention, properties are never configured as timestamps.</span></span>
+<span data-ttu-id="d5bbe-119">Por Convención, las propiedades nunca se configuran como marcas de tiempo.</span><span class="sxs-lookup"><span data-stu-id="d5bbe-119">By convention, properties are never configured as timestamps.</span></span>
 
-### <a name="data-annotations"></a><span data-ttu-id="f602a-120">Anotaciones de datos</span><span class="sxs-lookup"><span data-stu-id="f602a-120">Data Annotations</span></span>
+### <a name="data-annotations"></a><span data-ttu-id="d5bbe-120">Anotaciones de datos</span><span class="sxs-lookup"><span data-stu-id="d5bbe-120">Data Annotations</span></span>
 
-<span data-ttu-id="f602a-121">Puede usar anotaciones de datos para configurar una propiedad como una marca de tiempo.</span><span class="sxs-lookup"><span data-stu-id="f602a-121">You can use Data Annotations to configure a property as a timestamp.</span></span>
+<span data-ttu-id="d5bbe-121">Puede usar anotaciones de datos para configurar una propiedad como una marca de tiempo.</span><span class="sxs-lookup"><span data-stu-id="d5bbe-121">You can use Data Annotations to configure a property as a timestamp.</span></span>
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Samples/Timestamp.cs#ConfigureTimestampAnnotations)]
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Timestamp.cs#ConfigureTimestampAnnotations)]
 
-### <a name="fluent-api"></a><span data-ttu-id="f602a-122">API fluida</span><span class="sxs-lookup"><span data-stu-id="f602a-122">Fluent API</span></span>
+### <a name="fluent-api"></a><span data-ttu-id="d5bbe-122">API fluida</span><span class="sxs-lookup"><span data-stu-id="d5bbe-122">Fluent API</span></span>
 
-<span data-ttu-id="f602a-123">Puede usar la API Fluent para configurar una propiedad como una marca de tiempo.</span><span class="sxs-lookup"><span data-stu-id="f602a-123">You can use the Fluent API to configure a property as a timestamp.</span></span>
+<span data-ttu-id="d5bbe-123">Puede usar la API fluida para configurar una propiedad como una marca de tiempo.</span><span class="sxs-lookup"><span data-stu-id="d5bbe-123">You can use the Fluent API to configure a property as a timestamp.</span></span>
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Timestamp.cs#ConfigureTimestampFluent)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Timestamp.cs#ConfigureTimestampFluent)]
