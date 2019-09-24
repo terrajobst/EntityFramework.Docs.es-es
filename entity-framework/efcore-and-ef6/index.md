@@ -5,12 +5,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: a6b9cd22-6803-4c6c-a4d4-21147c0a81cb
 uid: efcore-and-ef6/index
-ms.openlocfilehash: ad0807a3cfd62c6c09a97df1a45134db7a538623
-ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
+ms.openlocfilehash: 3d2f72e64e6846d2d8bb6d4d507e04090287114d
+ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/20/2019
-ms.locfileid: "71149057"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71198010"
 ---
 # <a name="compare-ef-core--ef6"></a>Comparar EF Core y EF6
 
@@ -148,7 +148,7 @@ La columna EF Core indica la versión del producto en la que la característica 
 
 Considere el uso de EF Core para una nueva aplicación si se cumplen las dos condiciones siguientes:
 * La aplicación necesita las funcionalidades de .NET Core. Para obtener más información, vea [Selección entre .NET Core y .NET Framework para aplicaciones de servidor](https://docs.microsoft.com/dotnet/standard/choosing-core-framework-server).
-* EF Core es compatible con todas las características que necesita la aplicación. Si falta alguna característica que quiera, vea el [Mapa de ruta de Entity Framework Core](xref:core/what-is-new/roadmap) para averiguar si existen planes de admitirla en el futuro.
+* EF Core es compatible con todas las características que necesita la aplicación. Si falta alguna característica que quiera, vea el [Mapa de ruta de Entity Framework Core](xref:core/what-is-new/index) para averiguar si existen planes de admitirla en el futuro. 
 
 Considere el uso de EF6 si se cumplen las dos condiciones siguientes:
 * La aplicación se va a ejecutar en Windows y .NET Framework 4.0 o posterior.
