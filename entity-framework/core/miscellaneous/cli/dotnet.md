@@ -4,12 +4,12 @@ author: bricelam
 ms.author: bricelam
 ms.date: 07/11/2019
 uid: core/miscellaneous/cli/dotnet
-ms.openlocfilehash: 0278353640ea242df9e6ee5278c9dda78bfd341b
-ms.sourcegitcommit: 7b7f774a5966b20d2aed5435a672a1edbe73b6fb
+ms.openlocfilehash: 910136871cce5818b8e70a012e5132259b66e4c1
+ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/17/2019
-ms.locfileid: "69565269"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71197583"
 ---
 # <a name="entity-framework-core-tools-reference---net-cli"></a>Referencia de herramientas de Entity Framework Core: CLI de .NET
 
@@ -33,7 +33,7 @@ El procedimiento de instalación depende del tipo y la versión del proyecto:
 * `dotnet ef`debe instalarse como una herramienta global o local. La mayoría de los `dotnet ef` desarrolladores se instalarán como una herramienta global con el siguiente comando:
 
   ``` console
-  dotnet tool install --global dotnet-ef --version 3.0.0-*
+  dotnet tool install --global dotnet-ef
   ```
 
   También puede usar `dotnet ef` como herramienta local. Para usarlo como una herramienta local, restaure las dependencias de un proyecto que la declara como una dependencia de herramientas mediante un [archivo de manifiesto](https://github.com/dotnet/cli/issues/10288)de la herramienta.
@@ -50,7 +50,7 @@ El procedimiento de instalación depende del tipo y la versión del proyecto:
 
 * Instale el [SDK de .net Core](https://www.microsoft.com/net/download/core)actual. El SDK debe estar instalado incluso si dispone de la versión más reciente de Visual Studio 2017.
 
-  Esto es todo lo que se necesita para ASP.net Core 2.1 + porque `Microsoft.EntityFrameworkCore.Design` el paquete se incluye en el metapaquete [Microsoft. AspNetCore. app](/aspnet/core/fundamentals/metapackage-app).
+  Esto es todo lo que se necesita para ASP.net Core 2.1 + porque `Microsoft.EntityFrameworkCore.Design` el paquete se incluye en el [metapaquete Microsoft. AspNetCore. app](/aspnet/core/fundamentals/metapackage-app).
 
 ### <a name="ef-core-2x-not-aspnet-core"></a>EF Core 2. x (no ASP.NET Core)
 
@@ -156,7 +156,7 @@ Para especificar el entorno de ASP.NET Core proyectos, establezca la variable de
 
 ## <a name="common-options"></a>Opciones comunes
 
-|                   | Opción                            | DESCRIPCIÓN                                                                                                                                                                                                                                                   |
+|                   | Opción                            | Descripción                                                                                                                                                                                                                                                   |
 |:------------------|:----------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |                   | `--json`                          | Muestra la salida JSON.                                                                                                                                                                                                                                             |
 | <nobr>`-c`</nobr> | `--context <DBCONTEXT>`           | La clase `DbContext` que se va a usar. Nombre de clase solo o completo con espacios de nombres.  Si se omite esta opción, EF Core buscará la clase de contexto. Si hay varias clases de contexto, se requiere esta opción.                                            |
@@ -176,7 +176,7 @@ Quita la base de datos.
 
 Opciones:
 
-|                   | Opción                   | DESCRIPCIÓN                                              |
+|                   | Opción                   | Descripción                                              |
 |:------------------|:-------------------------|:---------------------------------------------------------|
 | <nobr>`-f`</nobr> | <nobr>`--force`</nobr>   | No confirme.                                           |
 |                   | <nobr>`--dry-run`</nobr> | Mostrar la base de datos que se va a quitar, pero no quitarla. |
@@ -187,7 +187,7 @@ Actualiza la base de datos a la última migración o a una migración especifica
 
 Argumentos:
 
-| Argumento      | DESCRIPCIÓN                                                                                                                                                                                                                                                     |
+| Argumento      | Descripción                                                                                                                                                                                                                                                     |
 |:--------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `<MIGRATION>` | La migración de destino. Las migraciones pueden identificarse por nombre o por identificador. El número 0 es un caso especial que significa *antes de la primera migración* y hace que se reviertan todas las migraciones. Si no se especifica ninguna migración, el comando toma como valor predeterminado la última migración. |
 
@@ -212,14 +212,14 @@ Genera código para `DbContext` los tipos de entidad y para una base de datos. P
 
 Argumentos:
 
-| Argumento       | DESCRIPCIÓN                                                                                                                                                                                                             |
+| Argumento       | Descripción                                                                                                                                                                                                             |
 |:---------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `<CONNECTION>` | Cadena de conexión a la base de datos. En el caso de los proyectos de ASP.net Core 2. x, el valor puede ser *name =\<nombre de la cadena de conexión >* . En ese caso, el nombre procede de los orígenes de configuración que se configuran para el proyecto. |
 | `<PROVIDER>`   | Proveedor que se va a usar. Normalmente, es el nombre del paquete NuGet, por ejemplo: `Microsoft.EntityFrameworkCore.SqlServer`.                                                                                           |
 
 Opciones:
 
-|                 | Opción                                   | DESCRIPCIÓN                                                                                                                                                                    |
+|                 | Opción                                   | Descripción                                                                                                                                                                    |
 |:----------------|:-----------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <nobr>-d</nobr> | `--data-annotations`                     | Use los atributos para configurar el modelo (siempre que sea posible). Si se omite esta opción, solo se usa la API fluida.                                                                |
 | `-c`            | `--context <NAME>`                       | Nombre de la `DbContext` clase que se va a generar.                                                                                                                                 |
@@ -248,13 +248,13 @@ Agrega una nueva migración.
 
 Argumentos:
 
-| Argumento | DESCRIPCIÓN                |
+| Argumento | Descripción                |
 |:---------|:---------------------------|
 | `<NAME>` | El nombre de la migración. |
 
 Opciones:
 
-|                   | Opción                             | DESCRIPCIÓN                                                                                                      |
+|                   | Opción                             | Descripción                                                                                                      |
 |:------------------|:-----------------------------------|:-----------------------------------------------------------------------------------------------------------------|
 | <nobr>`-o`</nobr> | <nobr>`--output-dir <PATH>`</nobr> | Directorio (y subespacio de nombres) que se va a usar. Las rutas de acceso son relativas al directorio del proyecto. El valor predeterminado es "migraciones". |
 
@@ -268,7 +268,7 @@ Quita la última migración (revierte los cambios de código que se realizaron p
 
 Opciones:
 
-|                   | Opción    | DESCRIPCIÓN                                                                     |
+|                   | Opción    | Descripción                                                                     |
 |:------------------|:----------|:--------------------------------------------------------------------------------|
 | <nobr>`-f`</nobr> | `--force` | Revertir la migración (revertir los cambios que se aplicaron a la base de datos). |
 
@@ -278,14 +278,14 @@ Genera un script SQL a partir de las migraciones.
 
 Argumentos:
 
-| Argumento | DESCRIPCIÓN                                                                                                                                                   |
+| Argumento | Descripción                                                                                                                                                   |
 |:---------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `<FROM>` | La migración inicial. Las migraciones pueden identificarse por nombre o por identificador. El número 0 es un caso especial que significa *antes de la primera migración*. El valor predeterminado es 0. |
 | `<TO>`   | La migración final. Tiene como valor predeterminado la última migración.                                                                                                         |
 
 Opciones:
 
-|                   | Opción            | DESCRIPCIÓN                                                        |
+|                   | Opción            | Descripción                                                        |
 |:------------------|:------------------|:-------------------------------------------------------------------|
 | <nobr>`-o`</nobr> | `--output <FILE>` | Archivo en el que se va a escribir el script.                                   |
 | `-i`              | `--idempotent`    | Generar un script que se puede usar en una base de datos en cualquier migración. |

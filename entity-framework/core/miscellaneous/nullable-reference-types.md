@@ -1,0 +1,68 @@
+---
+title: 'Trabajar con tipos de referencia que aceptan valores NULL: EF Core'
+author: roji
+ms.date: 9/9/2019
+ms.assetid: bde4e0ee-fba3-4813-a849-27049323d301
+uid: core/miscellaneous/nullable-reference-types
+ms.openlocfilehash: 1aa49f1ed518dfe4c13976cef8e868f58d12d5a3
+ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.translationtype: MT
+ms.contentlocale: es-ES
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71204406"
+---
+# <a name="working-with-nullable-reference-types"></a>Trabajar con tipos de referencia que aceptan valores NULL
+
+C#8 presentó una nueva característica denominada [tipos de referencia que aceptan valores NULL](/dotnet/csharp/tutorials/nullable-reference-types), lo que permite anotar tipos de referencia, lo que indica si es válido que contengan null o not. Si no está familiarizado con esta característica, se recomienda que se familiarice con ella leyendo los C# documentos.
+
+En esta página se presenta la compatibilidad de EF Core con tipos de referencia que aceptan valores NULL y se describen los procedimientos recomendados para trabajar con ellos.
+
+## <a name="required-and-optional-properties"></a>Propiedades obligatorias y opcionales
+
+La documentación principal sobre las propiedades obligatorias y opcionales y su interacción con tipos de referencia que aceptan valores NULL es la página de [propiedades obligatoria y opcional](xref:core/modeling/required-optional) . Se recomienda comenzar leyendo primero esa página.
+
+> [!NOTE]
+> Tenga cuidado al habilitar los tipos de referencia que aceptan valores NULL en un proyecto existente: las propiedades de tipo de referencia que se configuraron anteriormente como opcional ahora se configurarán según sea necesario, a menos que se anoten explícitamente para que acepten valores NULL. Al administrar un esquema de base de datos relacional, esto puede provocar que se generen migraciones que modifiquen la nulabilidad de la columna de la base de datos.
+
+## <a name="dbcontext-and-dbset"></a>DbContext y DbSet
+
+Cuando se habilitan los tipos de referencia que C# aceptan valores NULL, el compilador emite advertencias para cualquier propiedad no inicializada que no acepte valores NULL, ya que estos contendrían el valor null. Como resultado, la práctica común de definir un valor que no acepta valores `DbSet` null en un contexto generará ahora una advertencia. Sin embargo, EF Core siempre inicializa todas `DbSet` las propiedades en tipos derivados de DbContext, por lo que se garantiza que nunca serán null, incluso si el compilador no es consciente de esto. Por lo tanto, se recomienda mantener `DbSet` las propiedades que no aceptan valores NULL, lo que permite tener acceso a ellas sin comprobaciones nulas, y para silenciar las advertencias del compilador estableciéndolo explícitamente en NULL con la ayuda del operador null-permisivo (!):
+
+[!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/NullableReferenceTypesContext.cs?name=Context&highlight=3-4)]
+
+## <a name="non-nullable-properties-and-initialization"></a>Propiedades y inicialización que no aceptan valores NULL
+
+Las advertencias del compilador para los tipos de referencia no inicializados que no aceptan valores null también son un problema para las propiedades normales en los tipos de entidad. En el ejemplo anterior, se han evitado estas advertencias mediante el [enlace de constructor](xref:core/modeling/constructors), una característica que funciona perfectamente con propiedades que no aceptan valores NULL, lo que garantiza que siempre se inicializan. Sin embargo, en algunos escenarios, el enlace del constructor no es una opción: las propiedades de navegación, por ejemplo, no se pueden inicializar de esta manera.
+
+Las propiedades de navegación requeridas presentan una dificultad adicional: aunque un dependiente siempre existirá para una entidad de seguridad determinada, se puede cargar o no mediante una consulta determinada, dependiendo de las necesidades en ese punto del programa ([vea los distintos patrones para Cargando datos](xref:core/querying/related-data)). Al mismo tiempo, no es deseable que estas propiedades acepten valores NULL, ya que esto obligaría a tener acceso a ellas para comprobar si son NULL, incluso aunque se requieran.
+
+Una manera de tratar estos escenarios consiste en tener una propiedad que no acepte valores NULL con un [campo de respaldo](xref:core/modeling/backing-field)que acepte valores NULL:
+
+[!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/Order.cs?range=12-17)]
+
+Dado que la propiedad de navegación no admite valores NULL, se configura una navegación necesaria. y, siempre y cuando la navegación se haya cargado correctamente, se podrá acceder al dependiente a través de la propiedad. Sin embargo, si se tiene acceso a la propiedad sin cargar primero la entidad relacionada correctamente, se inicia una excepción InvalidOperationException, ya que el contrato de la API se ha utilizado incorrectamente.
+
+Como alternativa de terser, es posible simplemente inicializar la propiedad en NULL con la ayuda del operador null-permisivo (!):
+
+[!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/Order.cs?range=19)]
+
+Nunca se observará un valor nulo real excepto como resultado de un error de programación, por ejemplo, el acceso a la propiedad de navegación sin cargar correctamente la entidad relacionada.
+
+> [!NOTE]
+> Las navegaciones de colección, que contienen referencias a varias entidades relacionadas, siempre deben ser no NULL. Una colección vacía significa que no existe ninguna entidad relacionada, pero la propia lista nunca debe ser null.
+
+## <a name="navigating-and-including-nullable-relationships"></a>Navegar y incluir relaciones que aceptan valores NULL
+
+Cuando se trabaja con relaciones opcionales, es posible encontrar advertencias del compilador en las que una excepción de referencia nula real sería imposible. Cuando se traducen y ejecutan las consultas LINQ, EF Core garantiza que si no existe una entidad relacionada opcional, cualquier navegación a ella simplemente se omitirá, en lugar de producirse. Sin embargo, el compilador no es consciente de esta garantía EF Core y genera advertencias como si la consulta LINQ se ejecutara en memoria, con LINQ to Objects. Como resultado, es necesario usar el operador null-permisivo (!) para notificar al compilador que no es posible un valor null real:
+
+[!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/Program.cs?range=46)]
+
+Se produce un problema similar al incluir varios niveles de relaciones entre las navegaciones opcionales:
+
+[!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/Program.cs?range=36-39&highlight=2)]
+
+Si tiene que hacer esto mucho y los tipos de entidad en cuestión son principalmente (o exclusivamente) usados en consultas de EF Core, considere la posibilidad de hacer que las propiedades de navegación no acepten valores NULL y configurarlas como opcionales a través de la API fluida o las anotaciones de datos. Esto quitará todas las advertencias del compilador manteniendo la relación opcional; sin embargo, si las entidades se recorren fuera de EF Core, puede observar valores NULL, aunque las propiedades se anotan como que no aceptan valores NULL.
+
+## <a name="scaffolding"></a>Scaffolding
+
+[La C# característica 8 tipos de referencia que aceptan valores NULL](/dotnet/csharp/tutorials/nullable-reference-types) no se admite actualmente en técnicas de ingeniería inversa: EF Core siempre genera C# código que supone que la característica está desactivada. Por ejemplo, las columnas de texto que aceptan valores NULL se scaffolding como una propiedad `string` con el `string?`tipo, no, con la API fluida o las anotaciones de datos que se usan para configurar si una propiedad es obligatoria o no. Puede editar el código con scaffolding y reemplazarlo con anotaciones de C# nulabilidad. El seguimiento de la compatibilidad con scaffolding para tipos de referencia que aceptan valores NULL se realiza mediante el problema [#15520](https://github.com/aspnet/EntityFrameworkCore/issues/15520).

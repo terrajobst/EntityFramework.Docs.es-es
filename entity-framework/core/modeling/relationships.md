@@ -1,157 +1,157 @@
 ---
-title: Relaciones - EF Core
+title: 'Relaciones: EF Core'
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 0ff736a3-f1b0-4b58-a49c-4a7094bd6935
 uid: core/modeling/relationships
-ms.openlocfilehash: 3731d30a15222a18ad6c729e010b9bf0994c82b2
-ms.sourcegitcommit: 83c1e2fc034e5eb1fec1ebabc8d629ffcc7c0632
+ms.openlocfilehash: 1e9c62bec47263ef452c7ac425a0bb446f9371d8
+ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 06/25/2019
-ms.locfileid: "67351348"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71197657"
 ---
 # <a name="relationships"></a>Relaciones
 
-Una relación define cómo dos entidades se relacionan entre sí. En una base de datos relacional, esto se representa mediante una restricción foreign key.
+Una relación define el modo en que dos entidades se relacionan entre sí. En una base de datos relacional, se representa mediante una restricción FOREIGN KEY.
 
 > [!NOTE]  
-> La mayoría de los ejemplos de este artículo usa una relación uno a varios para mostrar los conceptos. Para obtener ejemplos de las relaciones uno a uno y varios a varios, consulte el [otros patrones de relación](#other-relationship-patterns) sección al final del artículo.
+> La mayoría de los ejemplos de este artículo usan una relación de uno a varios para demostrar los conceptos. Para obtener ejemplos de relaciones de uno a uno y de varios a varios, consulte la sección [otros patrones de relación](#other-relationship-patterns) al final del artículo.
 
 ## <a name="definition-of-terms"></a>Definición de términos
 
-Hay una serie de términos que se usan para describir relaciones
+Hay una serie de términos que se usan para describir las relaciones
 
-* **Entidad dependiente:** Se trata de la entidad que contiene las propiedades de clave externa. A veces se denomina "secundario" de la relación.
+* **Entidad dependiente:** Esta es la entidad que contiene las propiedades de clave externa. A veces se conoce como "secundario" de la relación.
 
-* **Entidad de seguridad:** Se trata de la entidad que contiene las propiedades de clave principal o alternativa. A veces se denomina el 'parent' de la relación.
+* **Entidad de entidad de seguridad:** Esta es la entidad que contiene las propiedades de clave principal/alternativa. A veces se denomina "primario" de la relación.
 
-* **Clave externa:** Las propiedades de la entidad dependiente que se usa para almacenar los valores de la propiedad de clave principal que está relacionado con la entidad.
+* **Clave externa:** Las propiedades de la entidad dependiente que se usa para almacenar los valores de la propiedad de clave principal con la que está relacionada la entidad.
 
-* **Clave de entidad de seguridad:** Las propiedades que identifica la entidad de seguridad. Esto puede ser la clave principal o una clave alternativa.
+* **Clave principal:** Las propiedades que identifican de forma única la entidad principal. Puede ser la clave principal o una clave alternativa.
 
-* **Propiedad de navegación:** Una propiedad definida en la entidad dependiente o principal que contenga una referencias a las entidades relacionadas compradoras.
+* **Propiedad de navegación:** Propiedad definida en la entidad de seguridad o dependiente que contiene una o más referencias a las entidades relacionadas.
 
-  * **Propiedad de navegación de colección:** Una propiedad de navegación que contiene referencias a muchas de las entidades relacionadas.
+  * **Propiedad de navegación de colección:** Propiedad de navegación que contiene referencias a muchas entidades relacionadas.
 
-  * **Propiedad de navegación de referencia:** Una propiedad de navegación que contiene una referencia a una única entidad relacionada.
+  * **Propiedad de navegación de referencia:** Propiedad de navegación que contiene una referencia a una sola entidad relacionada.
 
-  * **Propiedad de navegación inversa:** Al hablar de una propiedad de navegación determinado, este término hace referencia a la propiedad de navegación en el otro extremo de la relación.
+  * **Propiedad de navegación inversa:** Al discutir una propiedad de navegación determinada, este término hace referencia a la propiedad de navegación en el otro extremo de la relación.
 
-La lista de código siguiente muestra una relación de uno a varios entre `Blog` y `Post`
+En la lista de código siguiente se muestra una relación de uno a `Blog` varios entre y`Post`
 
-* `Post` es la entidad dependiente
+* `Post`es la entidad dependiente.
 
-* `Blog` es la entidad de seguridad
+* `Blog`es la entidad principal
 
-* `Post.BlogId` es la clave externa
+* `Post.BlogId`es la clave externa
 
-* `Blog.BlogId` es la clave principal (en este caso es una clave principal en lugar de una clave alternativa)
+* `Blog.BlogId`es la clave principal (en este caso, es una clave principal en lugar de una clave alternativa)
 
-* `Post.Blog` es una propiedad de navegación de referencia
+* `Post.Blog`propiedad de navegación de referencia
 
-* `Blog.Posts` es una propiedad de navegación de colección
+* `Blog.Posts`es una propiedad de navegación de colección
 
-* `Post.Blog` es la propiedad de navegación inversa de `Blog.Posts` (y viceversa)
+* `Post.Blog`es la propiedad de navegación inversa de `Blog.Posts` (y viceversa).
 
-[!code-csharp[Main](../../../samples/core/Modeling/Conventions/Samples/Relationships/Full.cs#Entities)]
+[!code-csharp[Main](../../../samples/core/Modeling/Conventions/Relationships/Full.cs#Entities)]
 
 ## <a name="conventions"></a>Convenciones
 
-Por convención, se creará una relación cuando hay una propiedad de navegación detectada en un tipo. Una propiedad se considera una propiedad de navegación si el tipo a que apunta no puede asignarse como un tipo escalar por el proveedor de base de datos actual.
+Por Convención, se creará una relación cuando se detecte una propiedad de navegación en un tipo. Una propiedad se considera una propiedad de navegación si el tipo al que señala no se puede asignar como un tipo escalar por el proveedor de base de datos actual.
 
 > [!NOTE]  
-> Las relaciones que se detectan por convención, siempre tendrá como destino la clave principal de la entidad de seguridad. Para establecer el destino de una clave alternativa, debe realizarse una configuración adicional mediante la API Fluent.
+> Las relaciones detectadas por la Convención siempre tendrán como destino la clave principal de la entidad principal. Para elegir como destino una clave alternativa, se debe realizar una configuración adicional mediante la API fluida.
 
-### <a name="fully-defined-relationships"></a>Relaciones definidas completamente
+### <a name="fully-defined-relationships"></a>Relaciones totalmente definidas
 
-El modelo más común para las relaciones es que las propiedades de navegación en ambos extremos de la relación y una propiedad de clave externa definidas en la clase de entidad dependiente.
+El patrón más común para las relaciones es tener propiedades de navegación definidas en ambos extremos de la relación y una propiedad de clave externa definida en la clase de entidad dependiente.
 
-* Si un par de propiedades de navegación se encuentra entre dos tipos, se configurarán como propiedades de navegación inversa de la misma relación.
+* Si se encuentra un par de propiedades de navegación entre dos tipos, se configurarán como propiedades de navegación inversa de la misma relación.
 
-* Si la entidad dependiente contiene una propiedad denominada `<primary key property name>`, `<navigation property name><primary key property name>`, o `<principal entity name><primary key property name>` , a continuación, se configurará como la clave externa.
+* Si la entidad dependiente contiene una propiedad denominada `<primary key property name>`, `<navigation property name><primary key property name>`o `<principal entity name><primary key property name>` , se configurará como la clave externa.
 
-[!code-csharp[Main](../../../samples/core/Modeling/Conventions/Samples/Relationships/Full.cs?name=Entities&highlight=6,15,16)]
+[!code-csharp[Main](../../../samples/core/Modeling/Conventions/Relationships/Full.cs?name=Entities&highlight=6,15,16)]
 
 > [!WARNING]  
-> Si hay varias propiedades de navegación definidas entre dos tipos (es decir, más de un par distinto de las navegaciones que señalan entre sí), a continuación, no se creará ninguna relación por convención y deberá configurarlas manualmente para identificar el modo las propiedades de navegación se empareje.
+> Si hay varias propiedades de navegación definidas entre dos tipos (es decir, más de un par de navegación distinto que apuntan entre sí), no se creará ninguna relación por Convención y tendrá que configurarlas manualmente para identificar cómo pareja de propiedades de navegación.
 
-### <a name="no-foreign-key-property"></a>Ninguna propiedad de clave externa
+### <a name="no-foreign-key-property"></a>No hay propiedad de clave externa
 
-Aunque se recomienda tener una propiedad de clave externa definida en la clase de entidad dependiente, no es necesario. Si no se encuentra ninguna propiedad de clave externa, se introducirá una propiedad de clave externa de instantáneas con el nombre `<navigation property name><principal key property name>` (consulte [reemplazar propiedades](shadow-properties.md) para obtener más información).
+Aunque se recomienda tener una propiedad de clave externa definida en la clase de entidad dependiente, no es necesario. Si no se encuentra ninguna propiedad de clave externa, se introducirá una propiedad de clave externa de `<navigation property name><principal key property name>` sombra con el nombre (vea [propiedades de sombra](shadow-properties.md) para obtener más información).
 
-[!code-csharp[Main](../../../samples/core/Modeling/Conventions/Samples/Relationships/NoForeignKey.cs?name=Entities&highlight=6,15)]
+[!code-csharp[Main](../../../samples/core/Modeling/Conventions/Relationships/NoForeignKey.cs?name=Entities&highlight=6,15)]
 
-### <a name="single-navigation-property"></a>Propiedad de navegación único
+### <a name="single-navigation-property"></a>Propiedad de navegación única
 
-Incluido sólo una propiedad de navegación (ninguna navegación inversa y ninguna propiedad de clave externa) es suficiente para tener una relación definida por convención. También puede tener una propiedad de navegación único y una propiedad de clave externa.
+Incluir solo una propiedad de navegación (sin navegación inversa y sin propiedad de clave externa) es suficiente para tener una relación definida por Convención. También puede tener una propiedad de navegación única y una propiedad de clave externa.
 
-[!code-csharp[Main](../../../samples/core/Modeling/Conventions/Samples/Relationships/OneNavigation.cs?name=Entities&highlight=6)]
+[!code-csharp[Main](../../../samples/core/Modeling/Conventions/Relationships/OneNavigation.cs?name=Entities&highlight=6)]
 
 ### <a name="cascade-delete"></a>Eliminación en cascada
 
-Por convención, la eliminación en cascada se establecerá en *Cascade* para relaciones necesarias y *ClientSetNull* para las relaciones opcionales. *CASCADE* significa que las entidades dependientes también se eliminan. *ClientSetNull* significa que las entidades dependientes que no se cargan en memoria permanecerá sin cambios y debe ser eliminado manualmente o actualiza para señalar a una entidad de seguridad válida. Para las entidades que se cargan en memoria, EF Core intentará establecer las propiedades de clave externas en null.
+Por Convención, la eliminación en cascada se establecerá en *Cascade* para las relaciones necesarias y *ClientSetNull* para las relaciones opcionales. *Cascade* significa que las entidades dependientes también se eliminan. *ClientSetNull* significa que las entidades dependientes que no se cargan en la memoria permanecerán sin cambios y deben eliminarse manualmente o actualizarse para que apunten a una entidad principal válida. En el caso de las entidades que se cargan en memoria, EF Core intentará establecer las propiedades de clave externa en NULL.
 
-Consulte la [relaciones obligatorios y opcionales](#required-and-optional-relationships) conocer la diferencia entre las relaciones necesarias y opcionales.
+Vea la sección [relaciones obligatorias y opcionales](#required-and-optional-relationships) para ver la diferencia entre las relaciones obligatorias y opcionales.
 
-Consulte [de eliminación en cascada](../saving/cascade-delete.md) para obtener más detalles sobre los diferentes de eliminación de los comportamientos y los valores predeterminados usados por convención.
+Consulte [eliminación en cascada](../saving/cascade-delete.md) para obtener más detalles sobre los distintos comportamientos de eliminación y los valores predeterminados que usa la Convención.
 
 ## <a name="data-annotations"></a>Anotaciones de datos
 
-Hay dos de las anotaciones de datos que se pueden usar para configurar las relaciones, `[ForeignKey]` y `[InverseProperty]`. Están disponibles en el `System.ComponentModel.DataAnnotations.Schema` espacio de nombres.
+Hay dos anotaciones de datos que se pueden usar para configurar relaciones, `[ForeignKey]` y. `[InverseProperty]` Están disponibles en el `System.ComponentModel.DataAnnotations.Schema` espacio de nombres.
 
 ### <a name="foreignkey"></a>[ForeignKey]
 
-Puede utilizar las anotaciones de datos para configurar la propiedad que debe usarse como la propiedad de clave externa de una relación determinada. Normalmente, esto se hace cuando la propiedad de clave externa no se detecta por convención.
+Puede usar las anotaciones de datos para configurar qué propiedad se debe usar como la propiedad de clave externa para una relación determinada. Normalmente, esto se hace cuando la Convención no detecta la propiedad de clave externa.
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Samples/Relationships/ForeignKey.cs?highlight=30)]
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Relationships/ForeignKey.cs?highlight=30)]
 
 > [!TIP]  
-> El `[ForeignKey]` anotación puede colocarse en cualquiera de las propiedades de navegación en la relación. No debe ir en la propiedad de navegación en la clase de entidad dependiente.
+> La `[ForeignKey]` anotación puede colocarse en cualquier propiedad de navegación de la relación. No es necesario que vaya a la propiedad de navegación en la clase de entidad dependiente.
 
 ### <a name="inverseproperty"></a>[InverseProperty]
 
-Puede utilizar las anotaciones de datos para configurar cómo se empareje las propiedades de navegación en las entidades dependientes y principales. Normalmente, esto se hace cuando hay más de un par de propiedades de navegación entre dos tipos de entidad.
+Puede usar las anotaciones de datos para configurar cómo se emparejan las propiedades de navegación en las entidades de entidad de seguridad y dependencias. Normalmente, esto se hace cuando hay más de un par de propiedades de navegación entre dos tipos de entidad.
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Samples/Relationships/InverseProperty.cs?highlight=33,36)]
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Relationships/InverseProperty.cs?highlight=33,36)]
 
 ## <a name="fluent-api"></a>API fluida
 
-Para configurar una relación en la API Fluent, primero debe identificar las propiedades de navegación que componen la relación. `HasOne` o `HasMany` identifica el tipo de entidad que se va a iniciar la configuración de la propiedad de navegación. A continuación, encadenar una llamada a `WithOne` o `WithMany` para identificar el panel de navegación inversa. `HasOne`/`WithOne` se usan para las propiedades de navegación de referencia y `HasMany` / `WithMany` se usan para las propiedades de navegación de colección.
+Para configurar una relación en la API fluida, empiece por identificar las propiedades de navegación que componen la relación. `HasOne`o `HasMany` identifica la propiedad de navegación en el tipo de entidad en el que va a comenzar la configuración. A continuación, encadenar `WithOne` una `WithMany` llamada a o para identificar la navegación inversa. `HasOne`/`WithOne`se utilizan para las propiedades de navegación `HasMany` de referencia y / `WithMany` se utilizan para las propiedades de navegación de colección.
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Relationships/NoForeignKey.cs?highlight=14-16)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/NoForeignKey.cs?highlight=14-16)]
 
-### <a name="single-navigation-property"></a>Propiedad de navegación único
+### <a name="single-navigation-property"></a>Propiedad de navegación única
 
-Si solo tiene una propiedad de navegación, hay sobrecargas sin parámetros de `WithOne` y `WithMany`. Esto indica que conceptualmente es una referencia o colección en el otro extremo de la relación, pero no hay ninguna propiedad de navegación incluida en la clase de entidad.
+Si solo tiene una propiedad de navegación, hay sobrecargas sin parámetros de `WithOne` y. `WithMany` Esto indica que hay conceptualmente una referencia o una colección en el otro extremo de la relación, pero no hay ninguna propiedad de navegación incluida en la clase de entidad.
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Relationships/OneNavigation.cs?highlight=14-16)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/OneNavigation.cs?highlight=14-16)]
 
 ### <a name="foreign-key"></a>Clave externa
 
-Puede usar la API Fluent para configurar la propiedad que debe usarse como la propiedad de clave externa de una relación determinada.
+Puede usar la API fluida para configurar qué propiedad se debe usar como la propiedad de clave externa para una relación determinada.
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Relationships/ForeignKey.cs?highlight=17)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ForeignKey.cs?highlight=17)]
 
-La lista de código siguiente muestra cómo configurar una clave externa compuesta.
+En la lista de código siguiente se muestra cómo configurar una clave externa compuesta.
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Relationships/CompositeForeignKey.cs?highlight=20)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/CompositeForeignKey.cs?highlight=20)]
 
-Puede utilizar la sobrecarga de la cadena de `HasForeignKey(...)` para configurar una propiedad reemplazada como una clave externa (consulte [reemplazar propiedades](shadow-properties.md) para obtener más información). Se recomienda agregar explícitamente la propiedad de la sombra para el modelo antes de usarlo como clave externa (como se muestra a continuación).
+Puede usar la sobrecarga de cadena de `HasForeignKey(...)` para configurar una propiedad Shadow como clave externa (consulte [propiedades de sombra](shadow-properties.md) para obtener más información). Se recomienda agregar explícitamente la propiedad Shadow al modelo antes de usarla como clave externa (como se muestra a continuación).
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Relationships/ShadowForeignKey.cs#Sample)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ShadowForeignKey.cs#Sample)]
 
-### <a name="without-navigation-property"></a>Sin la propiedad de navegación
+### <a name="without-navigation-property"></a>Sin propiedad de navegación
 
 No es necesario proporcionar una propiedad de navegación. Simplemente puede proporcionar una clave externa en un lado de la relación.
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Relationships/NoNavigation.cs?highlight=14-17)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/NoNavigation.cs?highlight=14-17)]
 
-### <a name="principal-key"></a>Clave de entidad de seguridad
+### <a name="principal-key"></a>Clave principal
 
-Si desea que la clave externa para hacer referencia a una propiedad que no sea la clave principal, puede usar la API Fluent para configurar la propiedad de clave principal para la relación. La propiedad que se configura como la clave principal no se realizará automáticamente configurarse como una clave alternativa (vea [claves alternativas](alternate-keys.md) para obtener más información).
+Si desea que la clave externa haga referencia a una propiedad que no sea la clave principal, puede usar la API fluida para configurar la propiedad de clave principal de la relación. La propiedad que configure como clave principal se configurará automáticamente como clave alternativa (consulte [claves alternativas](alternate-keys.md) para obtener más información).
 
-<!-- [!code-csharp[Main](samples/core/Modeling/FluentAPI/Samples/Relationships/PrincipalKey.cs?highlight=11)] -->
+<!-- [!code-csharp[Main](samples/core/Modeling/FluentAPI/Relationships/PrincipalKey.cs?highlight=11)] -->
 ``` csharp
 class MyContext : DbContext
 {
@@ -188,9 +188,9 @@ public class RecordOfSale
 }
 ```
 
-La lista de código siguiente muestra cómo configurar una clave principal compuesta.
+En la lista de código siguiente se muestra cómo configurar una clave principal compuesta.
 
-<!-- [!code-csharp[Main](samples/core/Modeling/FluentAPI/Samples/Relationships/CompositePrincipalKey.cs?highlight=11)] -->
+<!-- [!code-csharp[Main](samples/core/Modeling/FluentAPI/Relationships/CompositePrincipalKey.cs?highlight=11)] -->
 ``` csharp
 class MyContext : DbContext
 {
@@ -230,13 +230,13 @@ public class RecordOfSale
 ```
 
 > [!WARNING]  
-> El orden en el que especifica las propiedades de clave principales debe coincidir con el orden en que se especifican para la clave externa.
+> El orden en el que se especifican las propiedades de clave principal debe coincidir con el orden en que se especifican para la clave externa.
 
-### <a name="required-and-optional-relationships"></a>Relaciones necesarias y opcionales
+### <a name="required-and-optional-relationships"></a>Relaciones obligatorias y opcionales
 
-Puede usar la API Fluent para configurar si la relación es obligatorio u opcional. En última instancia, esto controla si la propiedad de clave externa es obligatorio u opcional. Esto es más útil cuando se usa una clave externa del estado de sombra. Si tiene una propiedad de clave externa en la clase de entidad, el requiredness de la relación se determina en función de si la propiedad de clave externa es obligatorio u opcional (vea [propiedades obligatorias y opcionales](required-optional.md) para obtener más información información).
+Puede usar la API fluida para configurar si la relación es obligatoria u opcional. En última instancia, controla si la propiedad de clave externa es obligatoria u opcional. Esto es muy útil cuando se usa una clave externa de estado de sombra. Si tiene una propiedad de clave externa en la clase de entidad, la necesidad de la relación se determina en función de si la propiedad de clave externa es necesaria u opcional (vea [propiedades obligatorias y opcionales](required-optional.md) para obtener más información).
 
-<!-- [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Samples/Relationships/Required.cs?highlight=11)] -->
+<!-- [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/Required.cs?highlight=11)] -->
 ``` csharp
 class MyContext : DbContext
 {
@@ -272,11 +272,11 @@ public class Post
 
 ### <a name="cascade-delete"></a>Eliminación en cascada
 
-Puede usar la API Fluent para configurar el comportamiento de eliminación en cascada para una relación determinada de forma explícita.
+Puede usar la API fluida para configurar explícitamente el comportamiento de eliminación en cascada para una relación determinada.
 
-Consulte [de eliminación en cascada](../saving/cascade-delete.md) en la sección de guardado de datos para obtener una explicación detallada de cada opción.
+Consulte [eliminación en cascada](../saving/cascade-delete.md) en la sección guardar datos para obtener una explicación detallada de cada opción.
 
-<!-- [!code-csharp[Main](samples/core/Modeling/FluentAPI/Samples/Relationships/CascadeDelete.cs?highlight=11)] -->
+<!-- [!code-csharp[Main](samples/core/Modeling/FluentAPI/Relationships/CascadeDelete.cs?highlight=11)] -->
 ``` csharp
 class MyContext : DbContext
 {
@@ -315,9 +315,9 @@ public class Post
 
 ### <a name="one-to-one"></a>Uno a uno
 
-Relaciones uno a uno tienen una propiedad de navegación de referencia en ambos lados. Siguen las mismas convenciones que relaciones uno a varios, pero un índice único se introdujo en la propiedad de clave externa para asegurarse de que solo uno dependiente está relacionado con cada entidad de seguridad.
+Una relación de uno a uno tiene una propiedad de navegación de referencia en ambos lados. Siguen las mismas convenciones que las relaciones uno a varios, pero se incluye un índice único en la propiedad de clave externa para asegurarse de que solo un dependiente esté relacionado con cada entidad de seguridad.
 
-<!-- [!code-csharp[Main](samples/core/Modeling/Conventions/Samples/Relationships/OneToOne.cs?highlight=6,15,16)] -->
+<!-- [!code-csharp[Main](samples/core/Modeling/Conventions/Relationships/OneToOne.cs?highlight=6,15,16)] -->
 ``` csharp
 public class Blog
 {
@@ -339,13 +339,13 @@ public class BlogImage
 ```
 
 > [!NOTE]  
-> EF elegirá una de las entidades en el dependiente en función de su capacidad para detectar una propiedad de clave externa. Si la entidad incorrecta se elige como el dependiente, puede usar la API Fluent para corregir este problema.
+> EF elegirá una de las entidades como dependiente en función de su capacidad para detectar una propiedad de clave externa. Si se elige la entidad equivocada como dependiente, puede usar la API fluida para corregir este problema.
 
-Al configurar la relación con la API Fluent, usa el `HasOne` y `WithOne` métodos.
+Al configurar la relación con la API fluida, se usan los `HasOne` métodos `WithOne` y.
 
-Al configurar la clave externa debe especificar el tipo de entidad dependiente: tenga en cuenta el parámetro genérico proporcionado para `HasForeignKey` en la lista siguiente. En una relación uno a varios es evidente que la entidad con la navegación de referencia es dependiente y el otro con la colección es la entidad de seguridad. Pero esto no es así en una relación uno a uno: por lo tanto, la necesidad de definirla explícitamente.
+Al configurar la clave externa, debe especificar el tipo de entidad dependiente: Observe el parámetro genérico que `HasForeignKey` se proporciona en la siguiente lista. En una relación uno a varios, es evidente que la entidad con la navegación de referencia es el dependiente y el que tiene la colección es la entidad de seguridad. Pero esto no es así en una relación uno a uno; por lo tanto, la necesidad de definirla explícitamente.
 
-<!-- [!code-csharp[Main](samples/core/Modeling/FluentAPI/Samples/Relationships/OneToOne.cs?highlight=11)] -->
+<!-- [!code-csharp[Main](samples/core/Modeling/FluentAPI/Relationships/OneToOne.cs?highlight=11)] -->
 ``` csharp
 class MyContext : DbContext
 {
@@ -382,9 +382,9 @@ public class BlogImage
 
 ### <a name="many-to-many"></a>Varios a varios
 
-Relaciones varios a varios sin una clase de entidad para representar la tabla de combinación no se admiten aún. Sin embargo, puede representar una relación varios a varios mediante la inclusión de una clase de entidad para la tabla de combinación y dos relaciones uno a varios independiente de asignación.
+Todavía no se admiten las relaciones de varios a varios sin una clase de entidad para representar la tabla de combinación. Sin embargo, puede representar una relación de varios a varios incluyendo una clase de entidad para la tabla de combinación y asignando dos relaciones uno a varios independientes.
 
-<!-- [!code-csharp[Main](samples/core/Modeling/FluentAPI/Samples/Relationships/ManyToMany.cs?highlight=11,12,13,14,16,17,18,19,39,40,41,42,43,44,45,46)] -->
+<!-- [!code-csharp[Main](samples/core/Modeling/FluentAPI/Relationships/ManyToMany.cs?highlight=11,12,13,14,16,17,18,19,39,40,41,42,43,44,45,46)] -->
 ``` csharp
 class MyContext : DbContext
 {

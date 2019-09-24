@@ -1,36 +1,36 @@
 ---
-title: Valores predeterminados - EF Core
+title: 'Valores predeterminados: EF Core'
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: e541366a-130f-47dd-9997-1b110a11febe
 uid: core/modeling/relational/default-values
-ms.openlocfilehash: 341f243ddddc345bb4236e5c34f814694b71e32a
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 0d3613606f21a78e22cfe0ee752ea982a6a17f93
+ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42996257"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71196984"
 ---
 # <a name="default-values"></a>Valores predeterminados
 
 > [!NOTE]  
 > La configuración de esta sección se aplica a bases de datos relacionales en general. Los métodos de extensión que se muestran a continuación estarán disponibles cuando instale un proveedor de base de datos relacional (debido al paquete compartido *Microsoft.EntityFrameworkCore.Relational*).
 
-El valor predeterminado de una columna es el valor que se van a insertar si se inserta una fila nueva, pero se especifica ningún valor para la columna.
+El valor predeterminado de una columna es el valor que se insertará si se inserta una nueva fila pero no se especifica ningún valor para la columna.
 
 ## <a name="conventions"></a>Convenciones
 
-Por convención, un valor predeterminado no está configurado.
+Por Convención, no se configura un valor predeterminado.
 
 ## <a name="data-annotations"></a>Anotaciones de datos
 
-No puede establecer un valor predeterminado mediante las anotaciones de datos.
+No se puede establecer un valor predeterminado mediante anotaciones de datos.
 
 ## <a name="fluent-api"></a>API fluida
 
-Puede usar la API Fluent para especificar el valor predeterminado para una propiedad.
+Puede usar la API fluida para especificar el valor predeterminado de una propiedad.
 
-<!-- [!code-csharp[Main](samples/core/relational/Modeling/FluentAPI/Samples/Relational/DefaultValue.cs?highlight=9)] -->
+<!-- [!code-csharp[Main](samples/core/relational/Modeling/FluentAPI/Relational/DefaultValue.cs?highlight=9)] -->
 ``` csharp
 class MyContext : DbContext
 {
@@ -52,9 +52,9 @@ public class Blog
 }
 ```
 
-También puede especificar un fragmento de SQL que se usa para calcular el valor predeterminado.
+También puede especificar un fragmento de SQL que se utiliza para calcular el valor predeterminado.
 
-<!-- [!code-csharp[Main](samples/core/relational/Modeling/FluentAPI/Samples/Relational/DefaultValueSql.cs?highlight=9)] -->
+<!-- [!code-csharp[Main](samples/core/relational/Modeling/FluentAPI/Relational/DefaultValueSql.cs?highlight=9)] -->
 ``` csharp
 class MyContext : DbContext
 {

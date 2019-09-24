@@ -1,29 +1,29 @@
 ---
-title: Reemplazar propiedades - EF Core
+title: 'Propiedades de sombra: EF Core'
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 75369266-d2b9-4416-b118-ed238f81f599
 uid: core/modeling/shadow-properties
-ms.openlocfilehash: 4029539f3642f539a427f5901577d4df96c00f30
-ms.sourcegitcommit: 119058fefd7f35952048f783ada68be9aa612256
+ms.openlocfilehash: 5fdc4c50c295f73d0fa5eef3518adf4d3eb95599
+ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 06/06/2019
-ms.locfileid: "66749704"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71197701"
 ---
-# <a name="shadow-properties"></a>Propiedades reemplazadas
+# <a name="shadow-properties"></a>Propiedades de sombra
 
-Reemplazar propiedades son propiedades que no estén definidas en la clase de entidad. NET, pero se han definido para ese tipo de entidad en el modelo de EF Core. El valor y el estado de estas propiedades se mantiene únicamente en el seguimiento de cambios.
+Las propiedades de sombra son propiedades que no están definidas en la clase de entidad de .NET pero que se definen para ese tipo de entidad en el modelo de EF Core. El valor y el estado de estas propiedades se mantienen únicamente en el seguimiento de cambios.
 
-Reemplazar propiedades son útiles cuando hay datos en la base de datos que no se debe exponer en los tipos de entidad asignada. Más a menudo se utilizan para las propiedades de clave externa, donde la relación entre dos entidades se representa mediante un valor de clave externa en la base de datos, pero la relación se administra en los tipos de entidad mediante propiedades de navegación entre los tipos de entidad.
+Las propiedades Shadow son útiles cuando hay datos en la base de datos que no se deben exponer en los tipos de entidad asignados. Se usan con mayor frecuencia para las propiedades de clave externa, donde la relación entre dos entidades se representa mediante un valor de clave externa en la base de datos, pero la relación se administra en los tipos de entidad mediante las propiedades de navegación entre los tipos de entidad.
 
-Los valores de propiedad de sombra, pueden obtener y cambiar a través de la `ChangeTracker` API.
+Los valores de las propiedades Shadow se pueden obtener y `ChangeTracker` cambiar a través de la API.
 
 ``` csharp
 context.Entry(myBlog).Property("LastUpdated").CurrentValue = DateTime.Now;
 ```
 
-Se pueden hacer referencia a las propiedades reemplazadas en las consultas LINQ a través de la `EF.Property` método estático.
+Se puede hacer referencia a las propiedades Shadow en consultas LINQ `EF.Property` a través del método estático.
 
 ``` csharp
 var blogs = context.Blogs
@@ -32,11 +32,11 @@ var blogs = context.Blogs
 
 ## <a name="conventions"></a>Convenciones
 
-Propiedades de instantáneas se pueden crear por convención cuando se detecta una relación, pero ninguna propiedad de clave externa se encuentra en la clase de entidad dependiente. En este caso, se introducirá una propiedad de clave externa de la sombra. La propiedad de clave externa de la sombra se denominará `<navigation property name><principal key property name>` (el panel de navegación de la entidad dependiente, que apunta a la entidad de seguridad, se usa para la nomenclatura). Si el nombre de propiedad de clave de entidad de seguridad incluye el nombre de la propiedad de navegación, entonces será el nombre `<principal key property name>`. Si no hay ninguna propiedad de navegación en la entidad dependiente, se usa el nombre del tipo de entidad de seguridad en su lugar.
+Las propiedades de sombra se pueden crear por Convención cuando se detecta una relación, pero no se encuentra ninguna propiedad de clave externa en la clase de entidad dependiente. En este caso, se introducirá una propiedad de clave externa de sombra. La propiedad Shadow Foreign Key se denominará `<navigation property name><principal key property name>` (la navegación en la entidad dependiente, que apunta a la entidad principal, se utiliza para la nomenclatura). Si el nombre de la propiedad de clave principal incluye el nombre de la propiedad de navegación, el nombre `<principal key property name>`será simplemente. Si no hay ninguna propiedad de navegación en la entidad dependiente, el nombre del tipo de entidad de seguridad se usa en su lugar.
 
-Por ejemplo, la lista de código siguiente producirá un `BlogId` propiedad sombra que se presentan a la `Post` entidad.
+Por ejemplo, la siguiente lista de código dará como resultado `BlogId` la inclusión de una propiedad Shadow `Post` en la entidad.
 
-<!-- [!code-csharp[Main](samples/core/Modeling/Conventions/Samples/ShadowForeignKey.cs)] -->
+<!-- [!code-csharp[Main](samples/core/Modeling/Conventions/ShadowForeignKey.cs)] -->
 ``` csharp
 class MyContext : DbContext
 {
@@ -64,15 +64,15 @@ public class Post
 
 ## <a name="data-annotations"></a>Anotaciones de datos
 
-No se pueden crear las propiedades reemplazadas con las anotaciones de datos.
+No se pueden crear propiedades de sombra con anotaciones de datos.
 
 ## <a name="fluent-api"></a>API fluida
 
-Puede usar la API Fluent para configurar las propiedades de la sombra. Después de haber llamado a la sobrecarga de la cadena de `Property` puede encadenar cualquiera de las llamadas de configuración que lo haría para otras propiedades.
+Puede usar la API fluida para configurar las propiedades de las instantáneas. Una vez que haya llamado a la sobrecarga `Property` de la cadena de, puede encadenar cualquiera de las llamadas de configuración que desee para otras propiedades.
 
-Si el nombre proporcionado a la `Property` método coincide con el nombre de una propiedad existente (una propiedad reemplazada o uno definido en la clase de entidad), a continuación, configurará el código de esa propiedad existente en lugar de introducir una nueva propiedad reemplazada.
+Si el nombre proporcionado al `Property` método coincide con el nombre de una propiedad existente (una propiedad Shadow o una definida en la clase de entidad), el código configurará esa propiedad existente en lugar de introducir una nueva propiedad Shadow.
 
-<!-- [!code-csharp[Main](samples/core/Modeling/FluentAPI/Samples/ShadowProperty.cs?highlight=7,8)] -->
+<!-- [!code-csharp[Main](samples/core/Modeling/FluentAPI/ShadowProperty.cs?highlight=7,8)] -->
 ``` csharp
 class MyContext : DbContext
 {

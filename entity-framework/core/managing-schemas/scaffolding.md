@@ -5,12 +5,12 @@ ms.author: bricelam
 ms.date: 11/13/2018
 ms.assetid: 6263EF7D-4989-42E6-BDEE-45DA770342FB
 uid: core/managing-schemas/scaffolding
-ms.openlocfilehash: 775a929982b9f4fb10aad9cd43bbb555ce632ad1
-ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
+ms.openlocfilehash: afe2c865305ade93dd10c8838b80c8b4177e7e8e
+ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/20/2019
-ms.locfileid: "71149018"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71197200"
 ---
 # <a name="reverse-engineering"></a>Ingeniería inversa
 
@@ -121,13 +121,12 @@ A continuación, usa la información de esquema para crear un modelo de EF Core.
 
 Por último, el modelo se usa para generar código. Las clases de tipo de entidad, la API fluida y las anotaciones de datos correspondientes son scaffolding para volver a crear el mismo modelo desde la aplicación.
 
-## <a name="what-doesnt-work"></a>Qué no funciona
+## <a name="limitations"></a>Limitaciones
 
-No todo lo relacionado con un modelo se puede representar mediante un esquema de la base de datos. Por ejemplo, la información sobre las [**jerarquías de herencia**](../modeling/inheritance.md), los [**tipos de propiedad**](../modeling/owned-entities.md)y la [**División de tablas**](../modeling/table-splitting.md) no están presentes en el esquema de la base de datos. Por este motivo, estas construcciones nunca se aplicarán a ingeniería inversa.
-
-Además, es posible que **algunos tipos de columna** no sean compatibles con el proveedor de EF Core. Estas columnas no se incluirán en el modelo.
-
-Puede definir [**tokens de simultaneidad**](../modeling/concurrency.md)en un modelo de EF Core para evitar que dos usuarios actualicen la misma entidad al mismo tiempo. Algunas bases de datos tienen un tipo especial para representar este tipo de columna (por ejemplo, rowversion en SQL Server), en cuyo caso se puede aplicar ingeniería inversa a esta información; sin embargo, no se aplicarán ingeniería inversa a otros tokens de simultaneidad.
+* No todo lo relacionado con un modelo se puede representar mediante un esquema de la base de datos. Por ejemplo, la información sobre las [**jerarquías de herencia**](../modeling/inheritance.md), los [**tipos de propiedad**](../modeling/owned-entities.md)y la [**División de tablas**](../modeling/table-splitting.md) no están presentes en el esquema de la base de datos. Por este motivo, estas construcciones nunca se aplicarán a ingeniería inversa.
+* Además, es posible que **algunos tipos de columna** no sean compatibles con el proveedor de EF Core. Estas columnas no se incluirán en el modelo.
+* Puede definir [**tokens de simultaneidad**](../modeling/concurrency.md)en un modelo de EF Core para evitar que dos usuarios actualicen la misma entidad al mismo tiempo. Algunas bases de datos tienen un tipo especial para representar este tipo de columna (por ejemplo, rowversion en SQL Server), en cuyo caso se puede aplicar ingeniería inversa a esta información; sin embargo, no se aplicarán ingeniería inversa a otros tokens de simultaneidad.
+* [La C# característica 8 tipos de referencia que aceptan valores NULL](/dotnet/csharp/tutorials/nullable-reference-types) no se admite actualmente en técnicas de ingeniería inversa: EF Core siempre genera C# código que supone que la característica está deshabilitada. Por ejemplo, las columnas de texto que aceptan valores NULL se scaffolding como una propiedad `string` con el `string?`tipo, no, con la API fluida o las anotaciones de datos que se usan para configurar si una propiedad es obligatoria o no. Puede editar el código con scaffolding y reemplazarlo con anotaciones de C# nulabilidad. El seguimiento de la compatibilidad con scaffolding para tipos de referencia que aceptan valores NULL se realiza mediante el problema [#15520](https://github.com/aspnet/EntityFrameworkCore/issues/15520).
 
 ## <a name="customizing-the-model"></a>Personalización del modelo
 
