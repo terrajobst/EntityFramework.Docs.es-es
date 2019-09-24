@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 02/23/2018
 ms.assetid: 14fffb6c-a687-4881-a094-af4a1359a296
 uid: core/providers/index
-ms.openlocfilehash: 3748496db89c110d55a0876727e33e1f3ec987d9
-ms.sourcegitcommit: 5280dcac4423acad8b440143433459b18886115b
+ms.openlocfilehash: 096d68f814e279bd224dfc50111d6576ab5eb223
+ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 04/18/2019
-ms.locfileid: "58914096"
+ms.lasthandoff: 09/20/2019
+ms.locfileid: "71149245"
 ---
 # <a name="database-providers"></a>Proveedores de bases de datos
 
@@ -21,10 +21,10 @@ Entity Framework Core puede tener acceso a muchas bases de datos diferentes a tr
 
 | Paquete NuGet                                                                                                        | Motores de base de datos compatibles | Mantenedor o proveedor                                                           | Notas o requisitos | Vínculos útiles                                                                                                                                                                                       |
 |:---------------------------------------------------------------------------------------------------------------------|:---------------------------|:------------------------------------------------------------------------------|:---------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [Microsoft.EntityFrameworkCore.SqlServer](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer)    | De SQL Server 2008 en adelante    | [Proyecto EF Core](https://github.com/aspnet/EntityFrameworkCore/) (Microsoft) |                      | [Documentación](xref:core/providers/sql-server/index)                                                                                                                                                       |
+| [Microsoft.EntityFrameworkCore.SqlServer](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer)    | De SQL Server 2012 en adelante    | [Proyecto EF Core](https://github.com/aspnet/EntityFrameworkCore/) (Microsoft) |                      | [Documentación](xref:core/providers/sql-server/index)                                                                                                                                                       |
 | [Microsoft.EntityFrameworkCore.Sqlite](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Sqlite)          | De SQLite 3.7 en adelante         | [Proyecto EF Core](https://github.com/aspnet/EntityFrameworkCore/) (Microsoft) |                      | [Documentación](xref:core/providers/sqlite/index)                                                                                                                                                           |
 | [Microsoft.EntityFrameworkCore.InMemory](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.InMemory)      | Base de datos en memoria de EF Core | [Proyecto EF Core](https://github.com/aspnet/EntityFrameworkCore/) (Microsoft) | Solo para pruebas     | [Documentación](xref:core/providers/in-memory/index)                                                                                                                                                        |
-| [Microsoft.EntityFrameworkCore.Cosmos](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Cosmos)          | API de SQL de Azure Cosmos DB    | [Proyecto EF Core](https://github.com/aspnet/EntityFrameworkCore/) (Microsoft) | Solo versión preliminar         | [blog](https://blogs.msdn.microsoft.com/dotnet/2018/10/17/announcing-entity-framework-core-2-2-preview-3/)                                                                                         |
+| [Microsoft.EntityFrameworkCore.Cosmos](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Cosmos)          | API de SQL de Azure Cosmos DB    | [Proyecto EF Core](https://github.com/aspnet/EntityFrameworkCore/) (Microsoft) |                      | [Documentación](xref:core/providers/cosmos/index)                                                                                         |
 | [Npgsql.EntityFrameworkCore.PostgreSQL](https://www.nuget.org/packages/Npgsql.EntityFrameworkCore.PostgreSQL)        | PostgreSQL                 | [Equipo de desarrollo de Npgsql](https://github.com/npgsql)                          |                      | [Documentación](http://www.npgsql.org/efcore/index.html)                                                                                                                                                    |
 | [Pomelo.EntityFrameworkCore.MySql](https://www.nuget.org/packages/Pomelo.EntityFrameworkCore.MySql)                  | MySQL, MariaDB             | [Proyecto Pomelo Foundation](https://github.com/PomeloFoundation)              |                      | [Archivo Léame](https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.MySql/blob/master/README.md)                                                                                               |
 | [Pomelo.EntityFrameworkCore.MyCat](https://www.nuget.org/packages/Pomelo.EntityFrameworkCore.MyCat)                  | Servidor MyCAT               | [Proyecto Pomelo Foundation](https://github.com/PomeloFoundation)              | Solo versión preliminar      | [Archivo Léame](https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.MyCat/blob/master/README.md)                                                                                               |
@@ -51,10 +51,6 @@ Entity Framework Core puede tener acceso a muchas bases de datos diferentes a tr
 Hemos desarrollado un proveedor de EF Core para la API de SQL en Cosmos DB.
 Será el primer proveedor de base de datos completo y orientado a documentos que hayamos elaborado, y lo aprendido en este ejercicio se traducirá en mejoras en el diseño de las futuras versiones de EF Core y, posiblemente, otros proveedores no relacionales.
 Una versión preliminar está disponible en la [galería de NuGet](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Cosmos).
-
-### <a name="oracle-first-party-provider"></a>Proveedor propio de Oracle
-El equipo de Oracle .NET ha publicado la versión beta del [proveedor de Oracle para EF Core](https://www.nuget.org/packages/Oracle.EntityFrameworkCore/).
-Dirija las preguntas sobre este proveedor, incluida la escala de tiempo de la versión, al [sitio de la comunidad de Oracle](https://community.oracle.com/).
 
 ## <a name="adding-a-database-provider-to-your-application"></a>Agregar un proveedor de bases de datos a la aplicación
 

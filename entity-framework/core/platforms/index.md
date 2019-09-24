@@ -3,35 +3,63 @@ title: Implementaciones de .NET compatibles - EF Core
 author: rowanmiller
 ms.date: 08/30/2017
 uid: core/platforms/index
-ms.openlocfilehash: 8fc25f4a35794162c92fd292990c24e977d1bf1b
-ms.sourcegitcommit: 5e11125c9b838ce356d673ef5504aec477321724
+ms.openlocfilehash: ac3cf3d0a84200bbf4ba7ec18b9115e06d1748f4
+ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/25/2018
-ms.locfileid: "50022267"
+ms.lasthandoff: 09/20/2019
+ms.locfileid: "71149221"
 ---
 # <a name="net-implementations-supported-by-ef-core"></a>Implementaciones de .NET compatibles con EF Core
 
-El objetivo es que EF Core esté disponible en cualquier ubicación en la que se pueda escribir código .NET, así que se sigue trabajando para lograrlo. Aunque la compatibilidad de EF Core en .NET Core y .NET Framework está cubierta por pruebas automatizadas y se sabe que muchas aplicaciones van a usarlo correctamente, Mono, Xamarin y UWP presentan algunos problemas.
+Queremos que EF Core esté disponible para los desarrolladores en todas las implementaciones de .NET modernas y seguimos trabajando para alcanzar ese objetivo. Aunque la compatibilidad de EF Core en .NET Core está cubierta por pruebas automatizadas y se sabe que muchas aplicaciones van a usarlo correctamente, Mono, Xamarin y UWP presentan algunos problemas.
 
 ## <a name="overview"></a>Información general
 
 En la siguiente tabla se ofrecen instrucciones para cada implementación de .NET:
 
-| Implementación de .NET                                                                                                  | Estado                                                             | Requisitos de EF Core 1.x                                                                                | Requisitos de EF Core 2.x <sup>(1)</sup>                                                                 |
-|:---------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------------|
-| **.NET Core** ([ASP.NET Core](../get-started/aspnetcore/index.md), [Consola](../get-started/netcore/index.md), etc.) | Totalmente compatible y recomendado                                    | [.NET Core SDK 1.x](https://www.microsoft.com/net/core/)                                                | [.NET Core SDK 2.x](https://www.microsoft.com/net/core/)                                                |
-| **.NET Framework** (WinForms, WPF, ASP.NET, [Consola](../get-started/full-dotnet/index.md), etc.)                    | Totalmente compatible y recomendado. EF6 también disponible <sup>(2)</sup> | .NET Framework 4.5.1                                                                                    | .NET Framework 4.6.1                                                                                    |
-| **Mono y Xamarin**                                                                                                   | En curso <sup>(3)</sup>                                         | Mono 4.6 <br/> Xamarin.iOS 10 <br/> Xamarin.Mac 3 <br/> Xamarin.Android 7                               | Mono 5.4 <br/> Xamarin.iOS 10.14 <br/> Xamarin.Mac 3.8 <br/> Xamarin.Android 7.5                        |
-| [**Plataforma universal de Windows**](../get-started/uwp/index.md)                                                        | EF Core 2.0.1 recomendado <sup>(4)</sup>                           | [Paquete .NET Core UWP 5.x](https://www.nuget.org/packages/Microsoft.NETCore.UniversalWindowsPlatform/) | [Paquete .NET Core UWP 6.x](https://www.nuget.org/packages/Microsoft.NETCore.UniversalWindowsPlatform/) |
+| EF Core                       | 1.x    | 2.x        | 3.x             |
+|:------------------------------|:-------|:-----------|:----------------|
+| .NET Standard                 | 1.3    | 2.0        | 2.1             |
+| Núcleo de .NET                     | 1.0    | 2.0        | 3.0             |
+| .NET Framework<sup>(1)</sup>  | 4.5.1  | 4.7.2      | (no se admite) |
+| Mono                          | 4.6    | 5.4        | 6.4             |
+| Xamarin.iOS<sup>(2)</sup>     | 10.0   | 10.14      | 12.16           |
+| Xamarin.Android<sup>(2)</sup> | 7.0    | 8.0        | 10.0            |
+| UWP<sup>(3)</sup>             | 10.0   | 10.0.16299 | TBD             |
+| Unity<sup>(4)</sup>           | 2018.1 | 2018.1     | TBD             |
 
-<sup>(1)</sup> EF Core 2.0 tiene como destino [.NET Standard 2.0](https://docs.microsoft.com/dotnet/standard/net-standard), por lo que requiere implementaciones de .NET que lo admitan.
+<sup>(1)</sup> Consulte la sección [.NET Framework](#net-framework) a continuación.
 
-<sup>(2)</sup> Vea [Comparar EF Core y EF6](../../efcore-and-ef6/index.md) para elegir la tecnología adecuada.
+<sup>(2)</sup> Existen problemas y limitaciones conocidas con Xamarin que pueden impedir que algunas aplicaciones desarrolladas con EF Core funcionen correctamente. Compruebe la lista de [problemas activos](https://github.com/aspnet/entityframeworkCore/issues?q=is%3Aopen+is%3Aissue+label%3Aarea-xamarin) para ver soluciones alternativas.
 
-<sup>(3)</sup> Existen problemas y limitaciones conocidas con Xamarin que pueden impedir que algunas aplicaciones desarrolladas con EF Core 2.0 funcionen correctamente. Compruebe la lista de [problemas activos](https://github.com/aspnet/entityframeworkCore/issues?q=is%3Aopen+is%3Aissue+label%3Aarea-xamarin) para ver soluciones alternativas.
+<sup>(3)</sup> Se recomienda EF Core 2.0.1 y versiones más recientes. Instale el paquete [.NET Core UWP 6.x](https://www.nuget.org/packages/Microsoft.NETCore.UniversalWindowsPlatform/). Consulte la sección [Plataforma universal de Windows](#universal-windows-platform) de este artículo.
 
-<sup>(4) </sup> Vea la sección [Plataforma universal de Windows](#universal-windows-platform) de este artículo.
+<sup>(4)</sup> Hay problemas y limitaciones conocidas con Unity. Revise la lista de [problemas activos](https://github.com/aspnet/entityframeworkCore/issues?q=is%3Aopen+is%3Aissue+label%3Aarea-unity).
+
+## <a name="net-framework"></a>.NET Framework
+
+Es posible que las aplicaciones que tengan como destino .NET Framework deban modificarse para poder trabajar con bibliotecas de .NET Standard:
+
+Edite el archivo de proyecto y asegúrese de que la siguiente entrada aparece en el grupo de propiedades inicial:
+
+``` xml
+<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+```
+
+En los proyectos de prueba, asegúrese también de que la entrada siguiente está presente:
+
+``` xml
+<GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+```
+
+Si quiere usar una versión anterior de Visual Studio, asegúrese de que [actualiza el cliente de NuGet a la versión 3.6.0](https://www.nuget.org/downloads) para poder trabajar con bibliotecas de .NET Standard 2.0.
+
+Si es posible, también se recomienda migrar de packages.config de NuGet a PackageReference. Agregue la propiedad siguiente al archivo del proyecto:
+
+``` xml
+<RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+```
 
 ## <a name="universal-windows-platform"></a>Plataforma universal de Windows
 

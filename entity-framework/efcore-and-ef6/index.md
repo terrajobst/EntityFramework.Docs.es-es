@@ -5,26 +5,26 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: a6b9cd22-6803-4c6c-a4d4-21147c0a81cb
 uid: efcore-and-ef6/index
-ms.openlocfilehash: d5fe9b388707f653fdeb2d6a5daa7215ced71c1d
-ms.sourcegitcommit: b3c2b34d5f006ee3b41d6668f16fe7dcad1b4317
+ms.openlocfilehash: ad0807a3cfd62c6c09a97df1a45134db7a538623
+ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/15/2018
-ms.locfileid: "51688724"
+ms.lasthandoff: 09/20/2019
+ms.locfileid: "71149057"
 ---
 # <a name="compare-ef-core--ef6"></a>Comparar EF Core y EF6
 
-Entity Framework es un mapeador relacional de objetos (O/RM) para .NET. En este artículo se comparan las dos versiones: Entity Framework 6 y Entity Framework Core.
+Entity Framework es un mapeador relacional de objetos (O/RM) para .NET. En este artículo se comparan ambas versiones: Entity Framework 6 y Entity Framework Core.
 
 ## <a name="entity-framework-6"></a>Entity Framework 6
 
-Entity Framework 6 (EF6) es una tecnología de acceso a datos probada. Se publicó por primera vez en 2008, como parte de .NET Framework 3.5 SP1 y Visual Studio 2008 SP1. A partir de la versión 4.1, se ha distribuido como paquete NuGet [EntityFramework](https://www.nuget.org/packages/EntityFramework/). EF6 se ejecuta en .NET Framework 4.x, lo que significa que solo lo hace en Windows. 
+Entity Framework 6 (EF6) es una tecnología de acceso a datos probada. Se publicó por primera vez en 2008, como parte de .NET Framework 3.5 SP1 y Visual Studio 2008 SP1. A partir de la versión 4.1, se ha distribuido como paquete NuGet [EntityFramework](https://www.nuget.org/packages/EntityFramework/). EF6 se ejecuta en .NET Framework 4. x y .NET Core desde la versión 3.0 en adelante.
 
 EF6 sigue siendo un producto que recibe soporte técnico para el que seguirá habiendo correcciones de errores y pequeñas mejoras.
 
 ## <a name="entity-framework-core"></a>Entity Framework Core
 
-Entity Framework Core (EF Core) es una reescritura completa de EF6 que se publicó por primera vez en 2016. Se incluye en los paquetes Nuget, el principal de los cuales es [Microsoft.EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/). EF Core es un producto multiplataforma que se puede ejecutar en .NET Core o .NET Framework.
+Entity Framework Core (EF Core) es una reescritura completa de EF6 que se publicó por primera vez en 2016. Se incluye en los paquetes Nuget, el principal de los cuales es [Microsoft.EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/). EF Core es un producto multiplataforma que se ejecuta en .NET Core.
 
 EF Core se diseñó para proporcionar una experiencia de desarrollo similar a EF6. La mayoría de las API de nivel superior siguen igual, por lo que EF Core resultará familiar para los desarrolladores que hayan usado EF6.
 
@@ -43,7 +43,7 @@ La columna EF Core indica la versión del producto en la que la característica 
 | Asignación de clase básica                                   | Sí      | 1.0                                   |
 | Constructores con parámetros                          |          | 2.1                                   |
 | Conversiones de valores de propiedad                            |          | 2.1                                   |
-| Tipos asignados sin claves (tipos de consulta)               |          | 2.1                                   |
+| Tipos asignados sin claves                             |          | 2.1                                   |
 | Convenciones                                           | Sí      | 1.0                                   |
 | Convenciones personalizadas                                    | Sí      | 1.0 (parcial)                         |
 | Anotaciones de datos                                      | Sí      | 1.0                                   |
@@ -54,22 +54,23 @@ La columna EF Core indica la versión del producto en la que la característica 
 | Propiedades de estado reemplazadas                               |          | 1.0                                   |
 | Claves alternativas                                        |          | 1.0                                   |
 | Varios a varios sin entidad de combinación                      | Sí      |                                       |
-| Generación de claves: base de datos                              | Sí      | 1.0                                   |
-| Generación de claves: cliente                                |          | 1.0                                   |
+| Generación de claves: Base de datos                              | Sí      | 1.0                                   |
+| Generación de claves: Cliente                                |          | 1.0                                   |
 | Tipos complejos/de propiedad                                   | Sí      | 2.0                                   |
 | Datos espaciales                                          | Sí      | 2.2                                   |
 | Visualización gráfica de modelo                      | Sí      |                                       |
 | Editor de modelo gráfico                                | Sí      |                                       |
-| Formato de modelo: código                                    | Sí      | 1.0                                   |
+| Formato de modelo: Código                                    | Sí      | 1.0                                   |
 | Formato de modelo: EDMX (XML)                              | Sí      |                                       |
-| Crear un modelo desde base de datos: línea de comandos              | Sí      | 1.0                                   |
-| Crear un modelo desde base de datos: asistente de VS                 | Sí      |                                       |
+| Crear modelo desde base de datos: Línea de comandos              | Sí      | 1.0                                   |
+| Crear modelo desde base de datos: Asistente de VS                 | Sí      |                                       |
 | Actualizar modelo desde base de datos                            | Parcial  |                                       |
 | Filtros de consulta global                                  |          | 2.0                                   |
 | División de tablas                                       | Sí      | 2.0                                   |
 | División de entidades                                      | Sí      |                                       |
 | Asignación de función escalar de base de datos                      | Insuficiente     | 2.0                                   |
 | Asignación de campos                                         |          | 1.1                                   |
+| Tipos de referencia que aceptan valores NULL (C# 8.0)                     |          | 3.0                                   |
 
 ### <a name="querying-data"></a>Consulta de datos
 
@@ -77,25 +78,25 @@ La columna EF Core indica la versión del producto en la que la característica 
 |:------------------------------------------------------|:---------|:--------------------------------------|
 | Consultas LINQ                                          | Sí      | 1.0 (en curso para consultas complejas) |
 | SQL generado legible                                | Insuficiente     | 1.0                                   |
-| Evaluación combinada de cliente/servidor                        |          | 1.0                                   |
 | Traslación de GroupBy                                   | Sí      | 2.1                                   |
 | Carga de datos relacionados: diligente                           | Sí      | 1.0                                   |
-| Carga de datos relacionados: carga diligente de tipo derivados |          | 2.1                                   |
-| Carga de datos relacionados: diferida                            | Sí      | 2.1                                   |
-| Carga de datos relacionados: explícita                        | Sí      | 1.1                                   |
-| Consultas SQL sin formato: tipos de entidad                         | Sí      | 1.0                                   |
-| Consultas SQL sin formato: tipos sin entidad (tipos de consulta)       | Sí      | 2.1                                   |
-| Consultas SQL sin procesar: componer con LINQ                  |          | 1.0                                   |
+| Carga de datos relacionados: Carga diligente para tipos derivados |          | 2.1                                   |
+| Carga de datos relacionados: Diferida                            | Sí      | 2.1                                   |
+| Carga de datos relacionados: Explicit                        | Sí      | 1.1                                   |
+| Consultas SQL sin formato: Tipos de entidad                         | Sí      | 1.0                                   |
+| Consultas SQL sin formato: Tipos de entidad sin llave                 | Sí      | 2.1                                   |
+| Consultas SQL sin formato: Redacción con LINQ                  |          | 1.0                                   |
 | Consultas compiladas de manera explícita                           | Insuficiente     | 2.0                                   |
 | Lenguaje de consulta basado en texto (Entity SQL)                | Sí      |                                       |
+| await foreach (C# 8.0)                                |          | 3.0                                   |
 
 ### <a name="saving-data"></a>Guardado de datos
 
 | **Característica**                                           | **EF6**  | **EF Core**                           |
 |:------------------------------------------------------|:---------|:--------------------------------------|
-| Seguimiento de cambios: instantánea                             | Sí      | 1.0                                   |
+| Seguimiento de cambios: Depurador de                             | Sí      | 1.0                                   |
 | Seguimiento de cambios: notificación                         | Sí      | 1.0                                   |
-| Seguimiento de cambios: servidores proxy                              | Sí      |                                       |
+| Seguimiento de cambios: Servidores proxy                              | Sí      |                                       |
 | Acceso al estado con seguimiento                               | Sí      | 1.0                                   |
 | Simultaneidad optimista                                | Sí      | 1.0                                   |
 | Transacciones                                          | Sí      | 1.0                                   |
@@ -123,32 +124,31 @@ La columna EF Core indica la versión del producto en la que la característica 
 | SQL Server                                            | Sí      | 1.0                                   |
 | MySQL                                                 | Sí      | 1.0                                   |
 | PostgreSQL                                            | Sí      | 1.0                                   |
-| Oracle                                                | Sí      | 1.0 <sup>(1)</sup>                    |
+| Oracle                                                | Sí      | 1.0                                   |
 | SQLite                                                | Sí      | 1.0                                   |
-| SQL Server Compact                                    | Sí      | 1.0 <sup>(2)</sup>                    |
+| SQL Server Compact                                    | Sí      | 1.0 <sup>(1)</sup>                    |
 | DB2                                                   | Sí      | 1.0                                   |
 | Firebird                                              | Sí      | 2.0                                   |
-| Jet (Microsoft Access)                                |          | 2.0 <sup>(2)</sup>                    |
+| Jet (Microsoft Access)                                |          | 2.0 <sup>(1)</sup>                    |
+| Cosmos DB                                             |          | 3.0                                   |
 | En memoria (para pruebas)                               |          | 1.0                                   |
 
-<sup>1</sup> Actualmente existe un proveedor de pago disponible para Oracle. Se está trabajando en un proveedor oficial gratuito para Oracle.
-
-<sup>2</sup> Los proveedores de SQL Server Compact y Jet solo funcionan en .NET Framework (no en .NET Core).
+<sup>1</sup> Los proveedores de SQL Server Compact y Jet solo funcionan en .NET Framework (no en .NET Core).
 
 ### <a name="net-implementations"></a>Implementaciones de .NET
 
-| **Característica**                                           | **EF6**  | **EF Core**                           |
-|:------------------------------------------------------|:---------|:--------------------------------------|
-| .NET Framework (consola, WinForms, WPF, ASP.NET)      | Sí      | 1.0                                   |
-| .NET Core (consola, ASP.NET Core)                     |          | 1.0                                   |
-| Mono y Xamarin                                        |          | 1.0 (en curso)                     |
-| UWP                                                   |          | 1.0 (en curso)                     |
+| **Característica**                                           | **EF6**            | **EF Core**                           |
+|:------------------------------------------------------|:-------------------|:--------------------------------------|
+| .NET Framework                                        | Sí                | 1.0 (se quitó en 3.0)                  |
+| Núcleo de .NET                                             | Sí (se agregó en 6.3) | 1.0                                   |
+| Mono y Xamarin                                        |                    | 1.0 (en curso)                     |
+| UWP                                                   |                    | 1.0 (en curso)                     |
 
 ## <a name="guidance-for-new-applications"></a>Guía para las aplicaciones nuevas
 
 Considere el uso de EF Core para una nueva aplicación si se cumplen las dos condiciones siguientes:
 * La aplicación necesita las funcionalidades de .NET Core. Para obtener más información, vea [Selección entre .NET Core y .NET Framework para aplicaciones de servidor](https://docs.microsoft.com/dotnet/standard/choosing-core-framework-server).
-* EF Core es compatible con todas las características que necesita la aplicación. Si falta alguna característica que quiera, vea el [Mapa de ruta de Entity Framework Core](xref:core/what-is-new/roadmap) para averiguar si existen planes de admitirla en el futuro. 
+* EF Core es compatible con todas las características que necesita la aplicación. Si falta alguna característica que quiera, vea el [Mapa de ruta de Entity Framework Core](xref:core/what-is-new/roadmap) para averiguar si existen planes de admitirla en el futuro.
 
 Considere el uso de EF6 si se cumplen las dos condiciones siguientes:
 * La aplicación se va a ejecutar en Windows y .NET Framework 4.0 o posterior.
@@ -156,7 +156,7 @@ Considere el uso de EF6 si se cumplen las dos condiciones siguientes:
 
 ## <a name="guidance-for-existing-ef6-applications"></a>Guía para las aplicaciones existentes de EF6
 
-Debido a los cambios fundamentales en EF Core, no se recomienda migrar una aplicación de EF6 a EF Core salvo que exista una razón apremiante para hacerlo. Si quiere migrar a EF Core para usar características nuevas, asegúrese de conocer sus limitaciones. Para obtener más información, vea [Portabilidad de EF6 a EF Core](porting/index.md). **La migración de EF6 a EF Core es más una portabilidad que una actualización.** 
+Debido a los cambios fundamentales en EF Core, no se recomienda migrar una aplicación de EF6 a EF Core salvo que exista una razón apremiante para hacerlo. Si quiere migrar a EF Core para usar características nuevas, asegúrese de conocer sus limitaciones. Para obtener más información, vea [Portabilidad de EF6 a EF Core](porting/index.md). **La migración de EF6 a EF Core es más una portabilidad que una actualización.**
 
 ## <a name="next-steps"></a>Pasos siguientes
 
