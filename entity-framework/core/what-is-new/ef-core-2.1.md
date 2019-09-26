@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/20/2018
 ms.assetid: 585F90A3-4D5A-4DD1-92D8-5243B14E0FEC
 uid: core/what-is-new/ef-core-2.1
-ms.openlocfilehash: 16600ccbb1194d584fae15671118d9c046f1f637
-ms.sourcegitcommit: 06073f8efde97dd5f540dbfb69f574d8380566fe
+ms.openlocfilehash: 5f97015f0228387574e3a19fb20cae1bdb403410
+ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 06/24/2019
-ms.locfileid: "67333857"
+ms.lasthandoff: 09/20/2019
+ms.locfileid: "71149179"
 ---
 # <a name="new-features-in-ef-core-21"></a>Novedades de EF Core 2.1
 
@@ -81,7 +81,7 @@ Un modelo de EF Core ahora puede incluir tipos de consulta. A diferencia de los 
 - Asignar a consultas definidas en el modelo
 - Actuar como tipo de valor devuelto en consultas `FromSql()`
 
-Consulte la [sección sobre tipos de consulta](xref:core/modeling/query-types) para obtener más información sobre el tema.
+Consulte la [sección sobre tipos de consulta](xref:core/modeling/keyless-entity-types) para obtener más información sobre el tema.
 
 ## <a name="include-for-derived-types"></a>Include en tipos derivados
 Ahora será posible especificar propiedades de navegación definidas solo en tipos derivados al escribir expresiones para el método `Include`. Para la versión fuertemente tipada de `Include`, se admite el uso de una conversión explícita o el operador `as`. Ahora también se admite hacer referencia a los nombres de propiedad de navegación definidos en tipos derivados en la versión de cadena de `Include`:

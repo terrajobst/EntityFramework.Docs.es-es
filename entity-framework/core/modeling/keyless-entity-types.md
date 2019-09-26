@@ -5,16 +5,16 @@ ms.author: ansvyryd
 ms.date: 02/26/2018
 ms.assetid: 9F4450C5-1A3F-4BB6-AC19-9FAC64292AAD
 uid: core/modeling/keyless-entity-types
-ms.openlocfilehash: b968ac9602b9aa1f1c1e3181b6b76a64394d70f0
-ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
+ms.openlocfilehash: e78b9f91fd2505de300ced7b5e73291b5d1ad3b4
+ms.sourcegitcommit: 7bc43f21e7bdd64926314ea949aae689f1911956
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/20/2019
-ms.locfileid: "71150792"
+ms.lasthandoff: 09/25/2019
+ms.locfileid: "71266772"
 ---
 # <a name="keyless-entity-types"></a>Tipos de entidad sin llave
 > [!NOTE]
-> Esta característica es nueva en EF Core 2.1. Antes de 3,0, se conocían como tipos de consulta
+> Esta característica se agregó en EF Core 2,1 bajo el nombre de los tipos de consulta. En EF Core 3,0 se cambió el nombre del concepto a tipos de entidad sin entrada.
 
 Además de los tipos de entidad normales, un modelo de EF Core puede contener _tipos de entidad_sin clave, que se pueden usar para realizar consultas de base de datos con datos que no contengan valores de clave.
 
@@ -56,7 +56,7 @@ La asignación de un tipo de entidad sin llave a un objeto de `ToTable` base `To
 En el ejemplo siguiente se muestra cómo utilizar los tipos de entidad sin entrada para consultar una vista de base de datos.
 
 > [!TIP]
-> Puede ver un [ejemplo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/QueryTypes) de este artículo en GitHub.
+> Puede ver un [ejemplo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/KeylessEntityTypes) de este artículo en GitHub.
 
 En primer lugar, definimos un modelo sencillo de Blog y Post:
 

@@ -4,19 +4,19 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 07b6680f-ffcf-412c-9857-f997486b386c
 uid: core/saving/related-data
-ms.openlocfilehash: 7349c57c0dccd3c911178641d3b34a478a4f6194
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 45c7b8e4bfa4ce7967ad76ef4a7d4818b0d3aebf
+ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994749"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71197880"
 ---
 # <a name="saving-related-data"></a>Guardado de datos relacionados
 
 Además de las entidades aisladas, también puede usar las relaciones definidas en el modelo.
 
 > [!TIP]  
-> Puede ver un [ejemplo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/RelatedData/) de este artículo en GitHub.
+> Puede ver un [ejemplo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/RelatedData/) de este artículo en GitHub.
 
 ## <a name="adding-a-graph-of-new-entities"></a>Incorporación de un grafo de entidades nuevas
 
@@ -24,7 +24,7 @@ Si crea varias entidades relacionadas, agregar una de ellas al contexto hará qu
 
 En el ejemplo siguiente, el blog y tres entradas relacionadas se insertan en la base de datos. Las entradas se buscan y agregan, porque son accesibles a través de la propiedad de navegación `Blog.Posts`.
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/RelatedData/Sample.cs#AddingGraphOfEntities)]
+[!code-csharp[Main](../../../samples/core/Saving/RelatedData/Sample.cs#AddingGraphOfEntities)]
 
 > [!TIP]  
 > Use la propiedad EntityEntry.State para establecer el estado de una sola unidad. Por ejemplo: `context.Entry(blog).State = EntityState.Modified`.
@@ -35,7 +35,7 @@ Si hace referencia a una entidad nueva desde la propiedad de navegación de una 
 
 En el ejemplo siguiente, la entidad `post` se inserta porque se agrega a la propiedad `Posts` de la entidad `blog` que se capturó de la base de datos.
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/RelatedData/Sample.cs#AddingRelatedEntity)]
+[!code-csharp[Main](../../../samples/core/Saving/RelatedData/Sample.cs#AddingRelatedEntity)]
 
 ## <a name="changing-relationships"></a>Cambio de las relaciones
 
@@ -43,7 +43,7 @@ Si cambia la propiedad de navegación de una entidad, los cambios correspondient
 
 En el ejemplo siguiente, la entidad `post` se actualiza para que pertenezca a la entidad `blog` nueva, porque su propiedad de navegación `Blog` está establecida para que apunte a `blog`. Tenga en cuenta que `blog` también se insertará en la base de datos porque se trata de una entidad nueva a la que hace referencia la propiedad de navegación de una entidad de la que el contexto (`post`) ya hace seguimiento.
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/RelatedData/Sample.cs#ChangingRelationships)]
+[!code-csharp[Main](../../../samples/core/Saving/RelatedData/Sample.cs#ChangingRelationships)]
 
 ## <a name="removing-relationships"></a>Eliminación de relaciones
 
@@ -59,4 +59,4 @@ Consulte el artículo sobre la [eliminación en cascada](cascade-delete.md) para
 
 En el ejemplo siguiente, se configura una eliminación en cascada en la relación entre `Blog` y `Post`, por lo que la entidad `post` se elimina de la base de datos.
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/RelatedData/Sample.cs#RemovingRelationships)]
+[!code-csharp[Main](../../../samples/core/Saving/RelatedData/Sample.cs#RemovingRelationships)]

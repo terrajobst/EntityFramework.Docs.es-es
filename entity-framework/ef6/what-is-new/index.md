@@ -1,14 +1,15 @@
 ---
-title: 'Novedades: EF6'
+title: Novedades de EF6
 author: divega
 ms.date: 09/12/2019
 ms.assetid: 41d1f86b-ce66-4bf2-8963-48514406fb4c
-ms.openlocfilehash: 568790d9c9bb7dd2213907bef8fa090710cd3ba0
-ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
+uid: ef6/what-is-new/index
+ms.openlocfilehash: bb7038764644682c2149a8a500f342804d01f3d2
+ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/20/2019
-ms.locfileid: "71149119"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71198041"
 ---
 # <a name="whats-new-in-ef6"></a>Novedades de EF6
 
@@ -25,7 +26,26 @@ El runtime de EF 6.3.0 para NuGet se publicó en septiembre de 2019. El objetivo
   - Se han vuelto a escribir los comandos de migración para ejecutarlos fuera de proceso y que trabajen con proyectos de estilo de SDK.
 - Compatibilidad con HierarchyId de SQL Server
 - Compatibilidad mejorada con PackageReference de Roslyn y NuGet
-- Se agregó ef6.exe para habilitar, agregar, generar scripts y aplicar migraciones desde los ensamblados. Esto reemplaza a migrate.exe.
+- Se agregó la utilidad `ef6.exe` para habilitar, agregar, generar scripts y aplicar migraciones desde los ensamblados. Esto reemplaza a `migrate.exe`
+
+### <a name="ef-designer-support"></a>Compatibilidad con el diseñador de EF
+
+Actualmente no se admite el uso del diseñador de EF directamente en proyectos de .NET Core o .NET Standard. 
+
+Puede solucionar esta limitación agregando el archivo EDMX y las clases generadas para las entidades y DbContext como archivos vinculados a un proyecto de .NET Core 3.0 o .NET Standard 2.1 en la misma solución.
+
+Los archivos vinculados tendrían el aspecto siguiente:
+
+``` csproj 
+&lt;ItemGroup&gt;
+  &lt;EntityDeploy Include="..\EdmxDesignHost\Entities.edmx" Link="Model\Entities.edmx" /&gt;
+  &lt;Compile Include="..\EdmxDesignHost\Entities.Context.cs" Link="Model\Entities.Context.cs" /&gt;
+  &lt;Compile Include="..\EdmxDesignHost\Thing.cs" Link="Model\Thing.cs" /&gt;
+  &lt;Compile Include="..\EdmxDesignHost\Person.cs" Link="Model\Person.cs" /&gt;
+&lt;/ItemGroup&gt;
+```
+
+Tenga en cuenta que el archivo EDMX está vinculado con la acción de compilación EntityDeploy. Se trata de una tarea especial de MSBuild (ahora incluida en el paquete EF 6.3) que se encarga de agregar el modelo EF en el ensamblado de destino como recursos incrustados (o de copiarlo como archivos en la carpeta de salida, en función de la configuración de procesamiento de artefactos de metadatos en EDMX). Para más información sobre cómo configurar esta configuración, consulte nuestro [ejemplo de .NET Core de EDMX](https://aka.ms/EdmxDotNetCoreSample).
 
 ## <a name="past-releases"></a>Versiones anteriores
 
