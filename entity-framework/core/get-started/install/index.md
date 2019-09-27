@@ -4,12 +4,12 @@ author: divega
 ms.date: 08/06/2017
 ms.assetid: 608cc774-c570-4809-8a3e-cd2c8446b8b2
 uid: core/get-started/install/index
-ms.openlocfilehash: eb808dd9d9b1b214947524cd83999f67be9cc0ff
-ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
+ms.openlocfilehash: 7bdedf563b7d919ba334db79af73c3eed3ba4129
+ms.sourcegitcommit: 2caec1e63f2ce1d9439ef6193df5a77da2fedd0f
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/20/2019
-ms.locfileid: "71149073"
+ms.lasthandoff: 09/26/2019
+ms.locfileid: "71317577"
 ---
 # <a name="installing-entity-framework-core"></a>Instalación de Entity Framework Core
 
@@ -17,7 +17,7 @@ ms.locfileid: "71149073"
 
 * EF Core es una biblioteca de [.NET Standard 2.1](/dotnet/standard/net-standard). Por este motivo, EF Core requiere una implementación de .NET que admita .NET Standard 2.1 para poder ejecutarse. Otras bibliotecas de .NET Standard 2.1 también pueden hacer referencia a EF Core. 
 
-* Por ejemplo, puede usar EF Core para desarrollar aplicaciones que tengan como destino .NET Core. La compilación de aplicaciones de .NET Core requiere el [SDK de .NET Core](https://dotnet.microsoft.com/download). También puede usar un entorno de desarrollo como Visual Studio, Visual Studio para Mac o Visual Studio Code. Para obtener más información, vea [Introducción a .NET Core](/dotnet/core/get-started).
+* Por ejemplo, puede usar EF Core para desarrollar aplicaciones que tengan como destino .NET Core. La compilación de aplicaciones de .NET Core requiere el [SDK de .NET Core](https://dotnet.microsoft.com/download). También puede usar un entorno de desarrollo como [Visual Studio](https://visualstudio.microsoft.com/vs), [Visual Studio para Mac](https://visualstudio.microsoft.com/vs/mac) o [Visual Studio Code](https://code.visualstudio.com). Para obtener más información, vea [Introducción a .NET Core](/dotnet/core/get-started).
 
 * Puede usar EF Core para desarrollar aplicaciones en Windows con Visual Studio. Se recomienda usar la última versión de [Visual Studio](https://visualstudio.microsoft.com/vs).
 
