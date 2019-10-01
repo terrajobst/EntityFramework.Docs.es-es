@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: ee8e14ec-2158-4c9c-96b5-118715e2ed9e
 uid: core/saving/cascade-delete
-ms.openlocfilehash: 15b7e69676ef9aeb70121fcec404c34a17e5e2bb
-ms.sourcegitcommit: 8d04a2ad98036f32ca70c77ce3040c5edb1cdf82
+ms.openlocfilehash: ec04de4eab2a28e3aa81ff27accef4fc11c83995
+ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/11/2018
-ms.locfileid: "44384844"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71197790"
 ---
 # <a name="cascade-delete"></a>Eliminación en cascada
 
@@ -38,9 +38,9 @@ En el caso de las relaciones opcionales (clave externa que admite un valor NULL)
 | Nombre del comportamiento               | Efecto en la entidad dependiente o secundaria en la memoria    | Efecto en la entidad dependiente o secundaria en la base de datos  |
 |:----------------------------|:---------------------------------------|:---------------------------------------|
 | **Cascade**                 | Las entidades se eliminan                   | Las entidades se eliminan                   |
-| **ClientSetNull** (valor predeterminado) | Las propiedades de clave externa se establecen en NULL | Ninguna                                   |
+| **ClientSetNull** (valor predeterminado) | Las propiedades de clave externa se establecen en NULL | None                                   |
 | **SetNull**                 | Las propiedades de clave externa se establecen en NULL | Las propiedades de clave externa se establecen en NULL |
-| **Restrict**                | Ninguna                                   | Ninguna                                   |
+| **Restrict**                | None                                   | None                                   |
 
 ### <a name="required-relationships"></a>Relaciones obligatorias
 En el caso de las relaciones obligatorias (clave externa que no admite un valor NULL) _no_ es posible guardar un valor de clave externa NULL, lo que tiene como resultado los efectos siguientes:
@@ -48,9 +48,9 @@ En el caso de las relaciones obligatorias (clave externa que no admite un valor 
 | Nombre del comportamiento         | Efecto en la entidad dependiente o secundaria en la memoria | Efecto en la entidad dependiente o secundaria en la base de datos |
 |:----------------------|:------------------------------------|:--------------------------------------|
 | **Cascade** (valor predeterminado) | Las entidades se eliminan                | Las entidades se eliminan                  |
-| **ClientSetNull**     | SaveChanges genera una excepción                  | Ninguna                                  |
+| **ClientSetNull**     | SaveChanges genera una excepción                  | None                                  |
 | **SetNull**           | SaveChanges genera una excepción                  | SaveChanges genera una excepción                    |
-| **Restrict**          | Ninguna                                | Ninguna                                  |
+| **Restrict**          | None                                | None                                  |
 
 En las tablas anteriores, *None* puede dar lugar a una infracción de restricción. Por ejemplo, si se elimina una entidad principal o secundaria pero no se hace ninguna acción para cambiar la clave externa de una entidad dependiente o secundaria, es probable que la base de datos genere una excepción en SaveChanges debido a una infracción de restricción externa.
 
@@ -66,13 +66,13 @@ En un nivel superior:
 > En EF Core, a diferencia de lo que ocurre en EF6, los efectos en cascada no se producen de inmediato, sino que solo cuando se llama a SaveChanges.
 
 > [!NOTE]  
-> **Cambios en EF Core 2.0:** en versiones anteriores, *Restrict* supondría que las propiedades de claves externas opcionales de las entidades dependientes con seguimiento se establezcan en NULL y que este fuese el comportamiento de eliminación predeterminado de las relaciones opcionales. En EF Core 2.0, se introdujo *ClientSetNull* para representar ese comportamiento y se transformó en el valor predeterminado de las relaciones opcionales. El comportamiento de *Restrict* se ajustó para que nunca haya efectos secundarios en las entidades dependientes.
+> **Cambios en EF Core 2.0:** en versiones anteriores, *Restrict* haría que las propiedades de claves externas opcionales de las entidades dependientes con seguimiento se establecieran en NULL y que este fuera el comportamiento de eliminación predeterminado de las relaciones opcionales. En EF Core 2.0, se introdujo *ClientSetNull* para representar ese comportamiento y se transformó en el valor predeterminado de las relaciones opcionales. El comportamiento de *Restrict* se ajustó para que nunca haya efectos secundarios en las entidades dependientes.
 
 ## <a name="entity-deletion-examples"></a>Ejemplos de eliminación de entidades
 
-El código siguiente forma parte de un [ejemplo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/CascadeDelete/) que se puede descargar y ejecutar. El ejemplo muestra qué pasa con cada comportamiento de eliminación, tanto en las relaciones opcionales como en las obligatorias, cuando se elimina una entidad primaria.
+El código siguiente forma parte de un [ejemplo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/CascadeDelete/) que se puede descargar y ejecutar. El ejemplo muestra qué pasa con cada comportamiento de eliminación, tanto en las relaciones opcionales como en las obligatorias, cuando se elimina una entidad primaria.
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/CascadeDelete/Sample.cs#DeleteBehaviorVariations)]
+[!code-csharp[Main](../../../samples/core/Saving/CascadeDelete/Sample.cs#DeleteBehaviorVariations)]
 
 Analicemos cada variación para comprender lo que sucede.
 
@@ -181,9 +181,9 @@ Analicemos cada variación para comprender lo que sucede.
 
 ## <a name="delete-orphans-examples"></a>Ejemplos de eliminación de entidades huérfanas
 
-El código siguiente forma parte de un [ejemplo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/CascadeDelete/) que se puede descargar y ejecutar. El ejemplo muestra qué sucede en cada comportamiento de eliminación, tanto para las relaciones opcionales como para las obligatorias, cuando se interrumpe la relación entre una entidad primaria o principal y sus entidades secundarias o dependientes. En este ejemplo, la relación se interrumpe al quitar las entidades dependientes o secundarias (entradas) de la propiedad de navegación de la colección en la entidad principal o primaria (blog). Sin embargo, el comportamiento es el mismo si se anula la referencia de la entidad secundaria o dependiente respecto de la entidad principal o primaria.
+El código siguiente forma parte de un [ejemplo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/CascadeDelete/) que se puede descargar y ejecutar. El ejemplo muestra qué sucede en cada comportamiento de eliminación, tanto para las relaciones opcionales como para las obligatorias, cuando se interrumpe la relación entre una entidad primaria o principal y sus entidades secundarias o dependientes. En este ejemplo, la relación se interrumpe al quitar las entidades dependientes o secundarias (entradas) de la propiedad de navegación de la colección en la entidad principal o primaria (blog). Sin embargo, el comportamiento es el mismo si se anula la referencia de la entidad secundaria o dependiente respecto de la entidad principal o primaria.
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/CascadeDelete/Sample.cs#DeleteOrphansVariations)]
+[!code-csharp[Main](../../../samples/core/Saving/CascadeDelete/Sample.cs#DeleteOrphansVariations)]
 
 Analicemos cada variación para comprender lo que sucede.
 

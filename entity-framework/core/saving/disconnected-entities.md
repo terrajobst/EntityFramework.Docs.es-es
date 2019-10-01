@@ -5,12 +5,12 @@ ms.author: avickers
 ms.date: 10/27/2016
 ms.assetid: 2533b195-d357-4056-b0e0-8698971bc3b0
 uid: core/saving/disconnected-entities
-ms.openlocfilehash: 51367d2619b1943c300f8954123f70b909ad96e7
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+ms.openlocfilehash: 070f2ad396ec21858096c29413ac80bdf8547328
+ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42994404"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71197809"
 ---
 # <a name="disconnected-entities"></a>Entidades desconectadas
 
@@ -19,7 +19,7 @@ Una DbContext realizará seguimiento automático de las entidades que se devuelv
 Sin embargo, en algunas ocasiones las entidades se consultan mediante el uso de una instancia de contexto y luego se guardan con una instancia distinta. Esto suele ocurrir en escenarios "desconectados", como una aplicación web, en los que las entidades se consultan, se envían al cliente, se modifican, se envían de vuelta al servidor en una solicitud y, a continuación, se guardan. En este caso, la segunda instancia de contexto debe saber si las entidades son nuevas (y se deben insertar) o existentes (y se deben actualizar).
 
 > [!TIP]  
-> Puede ver un [ejemplo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Saving/Disconnected/) de este artículo en GitHub.
+> Puede ver un [ejemplo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Disconnected/) de este artículo en GitHub.
 
 > [!TIP]
 > EF Core solo puede hacer seguimiento de una instancia de una entidad con un valor de clave principal determinado. La mejor manera de evitar que esto se convierta en un problema es usar un contexto de corta duración para cada unidad de trabajo de manera que el contexto empiece vacío, tenga entidades asociadas, guarde esas entidades y, luego, se elimine y descarte el contexto.
@@ -38,11 +38,11 @@ El valor de una clave generada automáticamente a menudo se puede usar para dete
 
 Resulta sencillo comprobar si una clave no se estableció cuando se conoce el tipo de entidad:
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#IsItNewSimple)]
+[!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#IsItNewSimple)]
 
 Sin embargo, EF también tiene una manera integrada de hacer esto con cualquier tipo de entidad y cualquier tipo de clave:
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#IsItNewGeneral)]
+[!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#IsItNewGeneral)]
 
 > [!TIP]  
 > Las claves se establecen tan pronto como el contexto hace seguimiento de las entidades, incluso si la entidad tiene el estado Added (Agregada). Esto resulta útil cuando se recorre un grafo de entidades y se decide qué hacer con cada una de ellas, como cuándo usar TrackGraph API. El valor de la clave solo se debe usar como se indica aquí _antes_ de cualquier llamada para hacer seguimiento de la entidad.
@@ -55,7 +55,7 @@ Es necesario algún otro mecanismo para identificar las entidades nuevas cuando 
 
 Para consulta la entidad, simplemente use el método Find:
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#IsItNewQuery)]
+[!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#IsItNewQuery)]
 
 Mostrar el código completo para pasar una marca desde un cliente va más allá del ámbito del presente documento. En una aplicación web, habitualmente significa hacer distintas solicitudes para acciones diferentes o pasar algún estado en la solicitud para luego extraerlo en el controlador.
 
@@ -63,20 +63,20 @@ Mostrar el código completo para pasar una marca desde un cliente va más allá 
 
 Cuando se sabe si es necesario o no realizar una inserción o una actualización, las acciones de agregar o actualizar se pueden usar correctamente:
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#InsertAndUpdateSingleEntity)]
+[!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#InsertAndUpdateSingleEntity)]
 
 Sin embargo, si la entidad usa valores de clave generados automáticamente, el método Update se puede usar para ambos casos:
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#InsertOrUpdateSingleEntity)]
+[!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#InsertOrUpdateSingleEntity)]
 
 Habitualmente, el método Update marca la entidad para actualización y no para inserción. Sin embargo, si la entidad tiene una clave generada automáticamente y no se estableció ningún valor de clave, la entidad se marca automáticamente para inserción.
 
 > [!TIP]  
 > Este comportamiento se introdujo en EF Core 2.0. En las versiones anteriores siempre es necesario elegir explícitamente si agregar o actualizar.
 
-Si la entidad no usa claves generadas automáticamente, la aplicación debe decidir si la entidad se debe inserta ro actualizar. Por ejemplo:
+Si la entidad no usa claves generadas automáticamente, la aplicación debe decidir si la entidad se debe insertar o actualizar: Por ejemplo:
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#InsertOrUpdateSingleEntityWithFind)]
+[!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#InsertOrUpdateSingleEntityWithFind)]
 
 Estos son los pasos:
 * Si Find devuelve un valor NULL, la base de datos todavía no contiene el blog con su identificador, por lo que llamamos a Add para marcarlo para inserción.
@@ -97,17 +97,17 @@ Como se indicó anteriormente, EF Core solo puede hacer seguimiento de una insta
 
 Un ejemplo de trabajar con grafos es insertar o actualizar un blog junto con su colección de entradas asociadas. Si las entidades del grafo se deben insertar o actualizar en su totalidad, el proceso es el mismo que se describió anteriormente para las entidades únicas. Por ejemplo, un grafo de blogs y entradas creado de esta manera:
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#CreateBlogAndPosts)]
+[!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#CreateBlogAndPosts)]
 
 se puede insertar así:
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#InsertGraph)]
+[!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#InsertGraph)]
 
 La llamada a Add marcará el blog y todas las entradas para su inserción.
 
 Del mismo modo, si es necesario actualizar todas las entidades de un grafo, se puede usar Update:
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#UpdateGraph)]
+[!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#UpdateGraph)]
 
 El blog y todas las entradas se marcarán para su actualización.
 
@@ -115,13 +115,13 @@ El blog y todas las entradas se marcarán para su actualización.
 
 Con las claves generadas automáticamente, Update se puede volver a usar tanto para inserciones como para actualizaciones, incluso si el grafo contiene una combinación de entidades que requiere inserción y las que se deben actualizar:
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#InsertOrUpdateGraph)]
+[!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#InsertOrUpdateGraph)]
 
 Update marcará una entidad en el grafo, ya sea el blog o una entrada, para inserción si no tiene establecido un valor de clave, mientras que todas las demás entidades se marcarán para actualización.
 
 Como antes, cuando no se usan claves generadas automáticamente, es posible usar una consulta y algún procesamiento:
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#InsertOrUpdateGraphWithFind)]
+[!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#InsertOrUpdateGraphWithFind)]
 
 ## <a name="handling-deletes"></a>Control de eliminaciones
 
@@ -129,12 +129,12 @@ Puede ser difícil controlar las eliminaciones porque, habitualmente, la ausenci
 
 En el caso de las eliminaciones reales, un patrón común es usar una extensión del modelo de consulta para realizar lo que esencialmente es una diferencia de grafo. Por ejemplo:
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#InsertUpdateOrDeleteGraphWithFind)]
+[!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#InsertUpdateOrDeleteGraphWithFind)]
 
 ## <a name="trackgraph"></a>TrackGraph
 
 De manera interna, Add, Attach y Update usan el recorrido de grafo con una determinación hecha para cada entidad a fin de saber si se debe marcar como Added (para inserción), Modified (para actualización), Unchanged (para no hacer nada) o Deleted (para eliminación). Este mecanismo se expone a través de TrackGraph API. Por ejemplo, supongamos que cuando el cliente envió de vuelta un grafo de entidades, estableció alguna marca en cada entidad para indicar cómo se debe controlar. Entonces se puede usar TrackGraph para procesar esta marca:
 
-[!code-csharp[Main](../../../samples/core/Saving/Saving/Disconnected/Sample.cs#TrackGraph)]
+[!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#TrackGraph)]
 
 Las marcas solo se muestran como parte de la entidad para simplificar el ejemplo. Habitualmente, las marcas serían parte de una DTO o alguno otro estado incluido en la solicitud.

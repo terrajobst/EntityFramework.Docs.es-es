@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/20/2018
 ms.assetid: 2CB5809E-0EFB-44F6-AF14-9D5BFFFBFF9D
 uid: core/what-is-new/ef-core-2.0
-ms.openlocfilehash: 28b2180e898b91d233b590b1639674a464f8c679
-ms.sourcegitcommit: 0cc9578fd49802789a00c0044b4e57325476ca2e
+ms.openlocfilehash: 781578d9de05895cdbc777aa53c3f6d6f9777869
+ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/04/2019
-ms.locfileid: "70271430"
+ms.lasthandoff: 09/20/2019
+ms.locfileid: "71149052"
 ---
 # <a name="new-features-in-ef-core-20"></a>Nuevas características de EF Core 2.0
 
@@ -36,7 +36,7 @@ Consulte la [sección sobre la división de las tablas](xref:core/modeling/table
 
 ### <a name="owned-types"></a>Tipos de propiedad
 
-Un tipo de entidad de propiedad puede compartir el mismo tipo CLR con otro tipo de entidad de propiedad, pero dado que no se puede identificar simplemente por el tipo CLR, debe haber una navegación a él desde otro tipo de entidad. La entidad que contiene la navegación definitoria es el propietario. Al consultar al propietario, los tipos de propiedad se incluyen de forma predeterminada.
+Un tipo de entidad en propiedad puede compartir el mismo tipo .NET con otro tipo de entidad en propiedad, pero, dado que no se puede identificar simplemente por el tipo .NET, debe haber una navegación a él desde otro tipo de entidad. La entidad que contiene la navegación definitoria es el propietario. Al consultar al propietario, los tipos de propiedad se incluyen de forma predeterminada.
 
 Por convención, se crea una clave principal paralela para el tipo de propiedad y se asigna a la misma tabla que el propietario mediante la división de tabla. Esto permite usar tipos de propiedad de forma similar al modo en que se usan los tipos complejos en EF6:
 
