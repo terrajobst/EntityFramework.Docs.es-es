@@ -4,12 +4,12 @@ author: rick-anderson
 ms.date: 09/17/2019
 ms.assetid: 3c88427c-20c6-42ec-a736-22d3eccd5071
 uid: core/get-started/index
-ms.openlocfilehash: 41ebdcbb3f51c914ee7befb3c1a9c0042e9b43c8
-ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.openlocfilehash: fca1b532b34e20aeea1968939af96c692d60d738
+ms.sourcegitcommit: 6c28926a1e35e392b198a8729fc13c1c1968a27b
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71196901"
+ms.lasthandoff: 10/02/2019
+ms.locfileid: "71813607"
 ---
 # <a name="getting-started-with-ef-core"></a>Introducción a EF Core
 
@@ -23,11 +23,11 @@ Puede seguir el tutorial con Visual Studio en Windows o mediante la CLI de .NET
 
 Instale el software siguiente:
 
-# <a name="net-core-clitabnetcore-cli"></a>[CLI de .NET Core](#tab/netcore-cli)
+## <a name="net-core-clitabnetcore-cli"></a>[CLI de .NET Core](#tab/netcore-cli)
 
 * [SDK de .NET Core 3.0](https://www.microsoft.com/net/download/core).
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+## <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * [Visual Studio 2019, versión 16.3 o posterior](https://www.visualstudio.com/downloads/), con esta carga de trabajo:
   * **Desarrollo multiplataforma de .NET Core** (en **Otros conjuntos de herramientas**)
@@ -36,14 +36,14 @@ Instale el software siguiente:
 
 ## <a name="create-a-new-project"></a>Crear un proyecto nuevo
 
-# <a name="net-core-clitabnetcore-cli"></a>[CLI de .NET Core](#tab/netcore-cli)
+## <a name="net-core-clitabnetcore-cli"></a>[CLI de .NET Core](#tab/netcore-cli)
 
 ``` Console
 dotnet new console -o EFGetStarted
 cd EFGetStarted
 ```
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+## <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Apertura de Visual Studio
 * Haga clic en **Crear un proyecto nuevo**
@@ -56,13 +56,13 @@ cd EFGetStarted
 
 Para instalar EF Core, instale el paquete de los proveedores de bases de datos de EF Core que quiera establecer como destino. Este tutorial usa SQLite porque se ejecuta en todas las plataformas compatibles con .NET Core. Para obtener una lista de proveedores disponibles, vea [Proveedores de bases de datos](../providers/index.md).
 
-# <a name="net-core-clitabnetcore-cli"></a>[CLI de .NET Core](#tab/netcore-cli)
+## <a name="net-core-clitabnetcore-cli"></a>[CLI de .NET Core](#tab/netcore-cli)
 
 ``` Console
 dotnet add package Microsoft.EntityFrameworkCore.Sqlite
 ```
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+## <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * **Herramientas > Administrador de paquetes NuGet > Consola del Administrador de paquetes**
 * Ejecute los comandos siguientes:
@@ -79,11 +79,11 @@ Sugerencia: También puede instalar paquetes si hace clic con el botón derecho 
 
 Defina una clase de contexto y clases de entidad que conformen el modelo.
 
-# <a name="net-core-clitabnetcore-cli"></a>[CLI de .NET Core](#tab/netcore-cli)
+## <a name="net-core-clitabnetcore-cli"></a>[CLI de .NET Core](#tab/netcore-cli)
 
 * En el directorio del proyecto, cree **Model.cs** con el código siguiente.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+## <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Haga clic con el botón derecho en el proyecto y seleccione **Agregar > Clase**
 * Escriba **Model.cs** como el nombre y haga clic en **Agregar**
@@ -101,7 +101,7 @@ Sugerencia: En una aplicación real, lo habitual sería colocar cada clase en un
 
 Los pasos siguientes usan [migraciones](xref:core/managing-schemas/migrations/index) para crear una base de datos.
 
-# <a name="net-core-clitabnetcore-cli"></a>[CLI de .NET Core](#tab/netcore-cli)
+## <a name="net-core-clitabnetcore-cli"></a>[CLI de .NET Core](#tab/netcore-cli)
 
 * Ejecute los comandos siguientes:
 
@@ -114,7 +114,7 @@ Los pasos siguientes usan [migraciones](xref:core/managing-schemas/migrations/in
 
   Esto instala [dotnet ef](../miscellaneous/cli/dotnet.md) y el paquete de diseño necesario para ejecutar el comando en un proyecto. El comando `migrations` aplica la técnica scaffolding a una migración para crear el conjunto inicial de tablas para el modelo. El comando `database update` crea la base de datos y le aplica la nueva migración.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+## <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Ejecute los comandos siguientes en la **Consola del administrador de paquetes**
 
@@ -136,13 +136,13 @@ Los pasos siguientes usan [migraciones](xref:core/managing-schemas/migrations/in
 
 ## <a name="run-the-app"></a>Ejecutar la aplicación
 
-# <a name="net-core-clitabnetcore-cli"></a>[CLI de .NET Core](#tab/netcore-cli)
+## <a name="net-core-clitabnetcore-cli"></a>[CLI de .NET Core](#tab/netcore-cli)
 
 ``` Console
 dotnet run
 ```
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+## <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Visual Studio usa un directorio de trabajo incoherente al ejecutar las aplicaciones de consola de .NET Core. (consulte [dotnet/project-system#3619](https://github.com/dotnet/project-system/issues/3619)). Esto hace que se genere una excepción: *no such table: Blogs* (No existe dicha tabla: blogs). Para actualizar el directorio de trabajo:
 
@@ -161,7 +161,7 @@ Ahora puede ejecutar la aplicación:
 
 ---
 
-# <a name="next-steps"></a>Pasos siguientes
+## <a name="next-steps"></a>Pasos siguientes
 
 * Siga el [tutorial de ASP.NET Core](/aspnet/core/data/ef-rp/intro) para usar EF Core en una aplicación web.
 * Obtenga más información sobre las [expresiones de consulta LINQ](/dotnet/csharp/programming-guide/concepts/linq/basic-linq-query-operations).
