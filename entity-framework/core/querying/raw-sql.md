@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 70aae9b5-8743-4557-9c5d-239f688bf418
 uid: core/querying/raw-sql
-ms.openlocfilehash: ebec5775770c0f1e297eaaf35bf644c605a69afc
-ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.openlocfilehash: d8f52edfdf4bd7776ab8d81185c867cbfd7bcf44
+ms.sourcegitcommit: 6c28926a1e35e392b198a8729fc13c1c1968a27b
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71197771"
+ms.lasthandoff: 10/02/2019
+ms.locfileid: "71813599"
 ---
 # <a name="raw-sql-queries"></a>Consultas SQL sin formato
 
@@ -62,7 +62,6 @@ Como alternativa a `FromSqlRaw`, puede usar `FromSqlInterpolated`, que permite e
 
 > [!NOTE]
 > Antes de la versión 3.0, `FromSqlRaw` y `FromSqlInterpolated` eran dos sobrecargas denominadas `FromSql`. Consulte la [sección de versiones anteriores](#previous-versions) para obtener más detalles.
-
 
 <!-- [!code-csharp[Main](samples/core/Querying/RawSQL/Sample.cs)] -->
 ``` csharp
@@ -172,6 +171,6 @@ Existen algunas limitaciones que debe considerar al usar las consultas SQL sin f
 
 * Tenga en cuenta que SQL Server no permite la composición en llamadas a procedimientos almacenados, por lo que cualquier intento de aplicar operadores de consulta adicionales a dicha llamada producirá un código SQL no válido. Los operadores de consulta se pueden indicar después de `AsEnumerable()` para la evaluación del cliente.
 
-# <a name="previous-versions"></a>Versiones anteriores
+## <a name="previous-versions"></a>Versiones anteriores
 
 EF Core 2.2 y las versiones anteriores tenían dos sobrecargas denominadas `FromSql`, que se comportaban de la misma manera que las sobrecargas `FromSqlRaw` y `FromSqlInterpolated` nuevas. Esto facilitaba las llamadas accidentales al método de cadena sin formato cuando la intención era llamar al método de cadena interpolada y viceversa. Esto podría resultar en consultas que no se parametrizan cuando deberían.

@@ -4,12 +4,12 @@ author: divega
 ms.date: 08/13/2017
 ms.assetid: 8BD43C8C-63D9-4F3A-B954-7BC518A1B7DB
 uid: core/miscellaneous/1x-2x-upgrade
-ms.openlocfilehash: 1222f10811914f65822a49e18522c287ece12174
-ms.sourcegitcommit: c9c3e00c2d445b784423469838adc071a946e7c9
+ms.openlocfilehash: 42e59b47f569ef6fcf72fc5bd5f94d3e9d807a24
+ms.sourcegitcommit: 6c28926a1e35e392b198a8729fc13c1c1968a27b
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 07/18/2019
-ms.locfileid: "68306502"
+ms.lasthandoff: 10/02/2019
+ms.locfileid: "71813569"
 ---
 # <a name="upgrading-applications-from-previous-versions-to-ef-core-20"></a>Actualización de las aplicaciones de las versiones anteriores a EF Core 2,0
 
@@ -94,19 +94,19 @@ El equipo de EF envía los proveedores de SQL Server y SQLite, y las versiones 2
 
 Nota: estos cambios no deben afectar a la mayoría del código de aplicación.
 
-Los identificadores de eventos de los mensajes enviados a un [ILogger](https://github.com/aspnet/Logging/blob/dev/src/Microsoft.Extensions.Logging.Abstractions/ILogger.cs) han cambiado en 2,0. Los identificadores de evento ahora son únicos en el código de EF Core. Ahora, estos mensajes también siguen el patrón estándar de registro estructurado que usa, por ejemplo, MVC.
+Los identificadores de eventos de los mensajes enviados a un [ILogger](https://docs.microsoft.com/en-us/dotnet/api/microsoft.extensions.logging.ilogger) han cambiado en 2,0. Los identificadores de evento ahora son únicos en el código de EF Core. Ahora, estos mensajes también siguen el patrón estándar de registro estructurado que usa, por ejemplo, MVC.
 
-Las categorías de registrador también han cambiado. Ahora hay un conjunto conocido de categorías a las que se accede a través de [DbLoggerCategory](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/DbLoggerCategory.cs).
+Las categorías de registrador también han cambiado. Ahora hay un conjunto conocido de categorías a las que se accede a través de [DbLoggerCategory](https://github.com/aspnet/EntityFrameworkCore/blob/rel/2.0.0/src/EFCore/DbLoggerCategory.cs).
 
-Los eventos de [DiagnosticSource](https://github.com/dotnet/corefx/blob/master/src/System.Diagnostics.DiagnosticSource/src/DiagnosticSourceUsersGuide.md) ahora usan los mismos nombres de ID. `ILogger` de evento que los mensajes correspondientes. Las cargas de evento son tipos nominales derivados de [EventData](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Diagnostics/EventData.cs).
+Los eventos de [DiagnosticSource](https://github.com/dotnet/corefx/blob/master/src/System.Diagnostics.DiagnosticSource/src/DiagnosticSourceUsersGuide.md) ahora usan los mismos nombres de ID. `ILogger` de evento que los mensajes correspondientes. Las cargas de evento son tipos nominales derivados de [EventData](https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.diagnostics.eventdata).
 
-Los identificadores de eventos, tipos de carga y categorías se documentan en las clases [CoreEventId](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Diagnostics/CoreEventId.cs) y [RelationalEventId](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore.Relational/Diagnostics/RelationalEventId.cs) .
+Los identificadores de eventos, tipos de carga y categorías se documentan en las clases [CoreEventId](https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.diagnostics.coreeventid) y [RelationalEventId](https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.diagnostics.relationaleventid) .
 
 Los identificadores también se han pasado de Microsoft. EntityFrameworkCore. Infrastructure al nuevo espacio de nombres Microsoft. EntityFrameworkCore. Diagnostics.
 
 ## <a name="ef-core-relational-metadata-api-changes"></a>Cambios de la API de metadatos relacionales EF Core
 
-EF Core 2.0 ahora compila un elemento [IModel](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/IModel.cs) diferente para cada proveedor que se va a usar. Esto suele ser transparente para la aplicación. Esto ha permitido una simplificación de las API de metadatos de nivel inferior, de modo que cualquier acceso a _conceptos de metadatos relacionales comunes_ siempre se realiza mediante una llamada a `.Relational` en lugar de a `.SqlServer`, `.Sqlite`, etc. Por ejemplo, 1.1. x código similar al siguiente:
+EF Core 2.0 ahora compila un elemento [IModel](https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.metadata.imodel) diferente para cada proveedor que se va a usar. Esto suele ser transparente para la aplicación. Esto ha permitido una simplificación de las API de metadatos de nivel inferior, de modo que cualquier acceso a _conceptos de metadatos relacionales comunes_ siempre se realiza mediante una llamada a `.Relational` en lugar de a `.SqlServer`, `.Sqlite`, etc. Por ejemplo, 1.1. x código similar al siguiente:
 
 ``` csharp
 var tableName = context.Model.FindEntityType(typeof(User)).SqlServer().TableName;
@@ -145,13 +145,13 @@ Esto crea o usa una base de datos con el nombre "base de datos". Si `UseInMemory
 
 ## <a name="read-only-api-changes"></a>Cambios de la API de solo lectura
 
-`IsReadOnlyBeforeSave`, `IsReadOnlyAfterSave`y `IsStoreGeneratedAlways` han quedado obsoletos y se han reemplazado por [BeforeSaveBehavior](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/IProperty.cs#L39) y [AfterSaveBehavior](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/IProperty.cs#L55). Estos comportamientos se aplican a cualquier propiedad (no solo a las propiedades generadas por el almacenamiento) y determinan cómo se debe usar el valor de la propiedad`BeforeSaveBehavior`al insertar en una fila de base de datos`AfterSaveBehavior`() o al actualizar una fila de base de datos existente ().
+`IsReadOnlyBeforeSave`, `IsReadOnlyAfterSave`y `IsStoreGeneratedAlways` han quedado obsoletos y se han reemplazado por [BeforeSaveBehavior](https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.metadata.iproperty.beforesavebehavior) y [AfterSaveBehavior](https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.metadata.iproperty.aftersavebehavior). Estos comportamientos se aplican a cualquier propiedad (no solo a las propiedades generadas por el almacenamiento) y determinan cómo se debe usar el valor de la propiedad`BeforeSaveBehavior`al insertar en una fila de base de datos`AfterSaveBehavior`() o al actualizar una fila de base de datos existente ().
 
-Las propiedades marcadas como [ValueGenerated. OnAddOrUpdate](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/ValueGenerated.cs) (por ejemplo, para las columnas calculadas) omitirán de forma predeterminada cualquier valor establecido actualmente en la propiedad. Esto significa que siempre se obtendrá un valor generado por el almacén independientemente de si se ha establecido o modificado algún valor en la entidad a la que se realiza el seguimiento. Esto se puede cambiar estableciendo otro diferente `Before\AfterSaveBehavior`.
+Las propiedades marcadas como [ValueGenerated. OnAddOrUpdate](https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.metadata.valuegenerated) (por ejemplo, para las columnas calculadas) omitirán de forma predeterminada cualquier valor establecido actualmente en la propiedad. Esto significa que siempre se obtendrá un valor generado por el almacén independientemente de si se ha establecido o modificado algún valor en la entidad a la que se realiza el seguimiento. Esto se puede cambiar estableciendo otro diferente `Before\AfterSaveBehavior`.
 
 ## <a name="new-clientsetnull-delete-behavior"></a>Nuevo comportamiento de eliminación de ClientSetNull
 
-En versiones anteriores, [DeleteBehavior. Restrict](https://github.com/aspnet/EntityFramework/blob/dev/src/EFCore/Metadata/DeleteBehavior.cs) tenía un comportamiento para las entidades a las que realiza un seguimiento el contexto que `SetNull` mejoró la semántica coincidente. En EF Core 2,0, se ha `ClientSetNull` introducido un nuevo comportamiento como valor predeterminado para las relaciones opcionales. Este comportamiento tiene `SetNull` semántica para las entidades a las que `Restrict` se realiza un seguimiento y el comportamiento de las bases de datos creadas mediante EF Core. En nuestra experiencia, estos son los comportamientos más previstos y útiles para las entidades de las que se realiza un seguimiento y la base de datos. `DeleteBehavior.Restrict`ahora se admite para entidades de las que se ha realizado un seguimiento cuando se establece para relaciones opcionales.
+En versiones anteriores, [DeleteBehavior. Restrict](https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.deletebehavior) tenía un comportamiento para las entidades a las que realiza un seguimiento el contexto que `SetNull` mejoró la semántica coincidente. En EF Core 2,0, se ha `ClientSetNull` introducido un nuevo comportamiento como valor predeterminado para las relaciones opcionales. Este comportamiento tiene `SetNull` semántica para las entidades a las que `Restrict` se realiza un seguimiento y el comportamiento de las bases de datos creadas mediante EF Core. En nuestra experiencia, estos son los comportamientos más previstos y útiles para las entidades de las que se realiza un seguimiento y la base de datos. `DeleteBehavior.Restrict`ahora se admite para entidades de las que se ha realizado un seguimiento cuando se establece para relaciones opcionales.
 
 ## <a name="provider-design-time-packages-removed"></a>Paquetes en tiempo de diseño del proveedor quitados
 

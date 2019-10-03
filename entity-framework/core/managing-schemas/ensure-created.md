@@ -1,25 +1,25 @@
 ---
-title: Crear y quitar API - EF Core
+title: 'Crear y quitar API: EF Core'
 author: bricelam
 ms.author: bricelam
-ms.date: 11/7/2018
-ms.openlocfilehash: 40d9e3aa0aba1bf2bc341f01dd815ed7cb7b48fa
-ms.sourcegitcommit: b3c2b34d5f006ee3b41d6668f16fe7dcad1b4317
+ms.date: 11/07/2018
+ms.openlocfilehash: 88c1403d2fae740ad78bb7c41d404b0dd91e86ae
+ms.sourcegitcommit: 6c28926a1e35e392b198a8729fc13c1c1968a27b
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/15/2018
-ms.locfileid: "51688634"
+ms.lasthandoff: 10/02/2019
+ms.locfileid: "71813444"
 ---
 # <a name="create-and-drop-apis"></a>Crear y quitar API
 
-Los métodos EnsureDeleted y de EnsureCreated proporcionan una alternativa ligera a [migraciones](migrations/index.md) para administrar el esquema de base de datos. Estos métodos son útiles en escenarios cuando los datos es transitorios y se pueden quitar cuando cambia el esquema. Por ejemplo, durante la creación de prototipos, pruebas o en las memorias caché locales.
+Los métodos EnsureCreated y EnsureDeleted proporcionan una alternativa ligera a las [migraciones](migrations/index.md) para administrar el esquema de la base de datos. Estos métodos son útiles en escenarios en los que los datos son transitorios y se pueden quitar cuando cambia el esquema. Por ejemplo, durante el prototipo, en las pruebas o en las memorias caché locales.
 
-Algunos proveedores (especialmente los que no son relacionales) no admiten las migraciones. Para estos proveedores, EnsureCreated suele ser la manera más fácil para inicializar el esquema de base de datos.
+Algunos proveedores (especialmente los no relacionales) no admiten las migraciones. Para estos proveedores, EnsureCreated suele ser la manera más fácil de inicializar el esquema de la base de datos.
 
 > [!WARNING]
-> Migraciones y EnsureCreated no funcionan bien juntos. Si usa las migraciones, no use EnsureCreated para inicializar el esquema.
+> EnsureCreated y las migraciones no funcionan bien juntos. Si utiliza migraciones, no use EnsureCreated para inicializar el esquema.
 
-Transición de EnsureCreated a las migraciones no es una experiencia sin problemas. La manera más sencilla de hacerlo es quitar la base de datos y volver a crearla mediante migraciones. Si prevé que usará las migraciones en el futuro, es mejor comenzar con las migraciones en lugar de usar EnsureCreated.
+La transición de EnsureCreated a migraciones no es una experiencia sin problemas. La manera más sencilla de hacerlo es quitar la base de datos y volver a crearla con las migraciones. Si prevé usar migraciones en el futuro, es mejor empezar con las migraciones en lugar de usar EnsureCreated.
 
 ## <a name="ensuredeleted"></a>EnsureDeleted
 
@@ -32,7 +32,7 @@ dbContext.Database.EnsureDeleted();
 
 ## <a name="ensurecreated"></a>EnsureCreated
 
-EnsureCreated creará la base de datos si no existe e inicializar el esquema de base de datos. Si existen cualquier tablas (incluidas las tablas de otra clase DbContext), el esquema no inicializarse.
+EnsureCreated creará la base de datos si no existe e inicializará el esquema de la base de datos. Si existe alguna tabla (incluidas las tablas de otra clase DbContext), el esquema no se inicializará.
 
 ``` csharp
 // Create the database if it doesn't exist
@@ -40,11 +40,11 @@ dbContext.Database.EnsureCreated();
 ```
 
 > [!TIP]
-> Versiones asincrónicas de estos métodos también están disponibles.
+> También hay disponibles versiones asincrónicas de estos métodos.
 
-## <a name="sql-script"></a>Secuencia de comandos SQL
+## <a name="sql-script"></a>Script SQL
 
-Para obtener el SQL que usa EnsureCreated, puede usar el método GenerateCreateScript.
+Para obtener el SQL que usa EnsureCreated, puede utilizar el método GenerateCreateScript.
 
 ``` csharp
 var sql = dbContext.Database.GenerateCreateScript();
@@ -52,7 +52,7 @@ var sql = dbContext.Database.GenerateCreateScript();
 
 ## <a name="multiple-dbcontext-classes"></a>Varias clases DbContext
 
-EnsureCreated solo funciona cuando no hay tablas están presentes en la base de datos. Si es necesario, puede escribir su propia comprobación para ver si se debe inicializar el esquema y el servicio IRelationalDatabaseCreator subyacente para inicializar el esquema.
+EnsureCreated solo funciona cuando no hay ninguna tabla presente en la base de datos. Si es necesario, puede escribir su propia comprobación para ver si es necesario inicializar el esquema y usar el servicio IRelationalDatabaseCreator subyacente para inicializar el esquema.
 
 ``` csharp
 // TODO: Check whether the schema needs to be initialized
