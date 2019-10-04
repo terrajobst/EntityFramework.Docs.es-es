@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: f9fb64e2-6699-4d70-a773-592918c04c19
 uid: core/querying/related-data
-ms.openlocfilehash: 4bf9598f9b7e74c2835d3926215de9a7ef4e6f96
-ms.sourcegitcommit: b2b9468de2cf930687f8b85c3ce54ff8c449f644
+ms.openlocfilehash: 4e4ba21cd099daab4db8a8f358800fde26980c14
+ms.sourcegitcommit: 6c28926a1e35e392b198a8729fc13c1c1968a27b
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/12/2019
-ms.locfileid: "70921793"
+ms.lasthandoff: 10/02/2019
+ms.locfileid: "71813588"
 ---
 # <a name="loading-related-data"></a>Carga de datos relacionados
 
@@ -30,7 +30,6 @@ Puede usar el método `Include` para especificar los datos relacionados que se i
 > [!TIP]  
 > Entity Framework Core corregirá automáticamente las propiedades de navegación para todas las entidades que se cargaron previamente en la instancia del contexto. Por tanto, incluso si los datos de una propiedad de navegación no se incluyen explícitamente, es posible que la propiedad se siga rellenando si algunas o todas las entidades relacionadas se cargaron previamente.
 
-
 Puede incluir los datos relacionados de varias relaciones en una sola consulta.
 
 [!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs#MultipleIncludes)]
@@ -40,9 +39,6 @@ Puede incluir los datos relacionados de varias relaciones en una sola consulta.
 Puede explorar en profundidad las relaciones para incluir varios niveles de datos relacionados con el método `ThenInclude`. En el ejemplo siguiente se cargan todos los blogs, las entradas relacionadas y el creador de cada entrada.
 
 [!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs#SingleThenInclude)]
-
-> [!NOTE]  
-> Las versiones actuales de Visual Studio ofrecen opciones para completar código incorrecto y pueden provocar que las expresiones correctas se marquen como errores de sintaxis cuando se use el método `ThenInclude` después de una propiedad de navegación de colección. Este es un síntoma de un error de IntelliSense al que se hace seguimiento en https://github.com/dotnet/roslyn/issues/8237. Resulta seguro ignorar estos errores de sintaxis falsos siempre que el código sea correcto y se pueda compilar de manera adecuada. 
 
 Puede encadenar varias llamadas en `ThenInclude` para continuar incluyendo más niveles de datos relacionados.
 
@@ -55,6 +51,9 @@ Puede combinar todo esto para incluir datos relacionados provenientes de varios 
 Es posible que quiera incluir varias entidades relacionadas para una de las entidades que se está incluyendo. Por ejemplo, cuando consulte `Blogs`, incluye `Posts` y luego quiere incluir tanto `Author` como `Tags` de las `Posts`. Para hacerlo, debe especificar cada inicio de ruta de acceso de inclusión en la raíz. Por ejemplo, `Blog -> Posts -> Author` y `Blog -> Posts -> Tags`. Esto no significa que vaya a obtener combinaciones redundantes; en la mayoría de los casos, EF consolidará las combinaciones al generar código SQL.
 
 [!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs#MultipleLeafIncludes)]
+
+> [!CAUTION]
+> Desde la versión 3.0.0, todas las instancias de `Include` producirán que se agregue una combinación JOIN adicional a las consultas SQL generadas por los proveedores relacionales, mientras que las versiones anteriores generaban consultas SQL adicionales. Esto puede cambiar significativamente el rendimiento de las consultas, tanto para bien como para mal. En concreto, es posible que las consultas LINQ con un número excesivamente alto de operadores `Include` deban dividirse en varias consultas LINQ independientes con el fin de evitar el problema de explosión cartesiana.
 
 ### <a name="include-on-derived-types"></a>Inclusión en tipos derivados
 
@@ -111,22 +110,7 @@ El contenido de la navegación `School` de todas las personas que son estudiante
   context.People.Include("School").ToList()
   ```
 
-### <a name="ignored-includes"></a>Inclusiones omitidas
-
-Si modifica la consulta de manera que ya no devuelva instancias del tipo de entidad con que empezó la consulta, se omiten los operadores de inclusión.
-
-En el ejemplo siguiente, los operadores de inclusión se basan en `Blog`, pero luego el operador `Select` se usa para cambiar la consulta para que devuelva un tipo anónimo. En este caso, los operadores de inclusión no tienen ningún efecto.
-
-[!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs#IgnoredInclude)]
-
-De manera predeterminada, EF Core registrará una advertencia cuando se omitan los operadores de inclusión. Consulte [Logging](../miscellaneous/logging.md) (Registro) para más información sobre cómo ver la salida de registro. Puede cambiar el comportamiento cuando se omite un operador de inclusión, ya sea para que se genere alguna excepción o para que no haga nada. Esto se hace al configurar las opciones del contexto, por lo general en `DbContext.OnConfiguring` o en `Startup.cs` si usa ASP.NET Core.
-
-[!code-csharp[Main](../../../samples/core/Querying/RelatedData/ThrowOnIgnoredInclude/BloggingContext.cs#OnConfiguring)]
-
 ## <a name="explicit-loading"></a>Carga explícita
-
-> [!NOTE]  
-> Esta característica se introdujo en EF Core 1.1.
 
 Puede cargar de manera explícita una propiedad de navegación a través de la API `DbContext.Entry(...)`.
 
@@ -148,10 +132,8 @@ También puede filtrar las entidades relacionadas que se cargan en la memoria.
 
 ## <a name="lazy-loading"></a>Carga diferida
 
-> [!NOTE]  
-> Esta característica se introdujo en EF Core 2.1.
-
 La manera más simple de usar la carga diferida es instalar el paquete [Microsoft.EntityFrameworkCore.Proxies](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Proxies/) y habilitarlo con una llamada a `UseLazyLoadingProxies`. Por ejemplo:
+
 ```csharp
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     => optionsBuilder
@@ -159,12 +141,15 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         .UseSqlServer(myConnectionString);
 ```
 O al usar AddDbContext:
+
 ```csharp
 .AddDbContext<BloggingContext>(
     b => b.UseLazyLoadingProxies()
           .UseSqlServer(myConnectionString));
 ```
+
 EF Core habilitará la carga diferida de cualquier propiedad de navegación que se pueda invalidar, es decir, debe ser `virtual` y debe estar en una clase desde la que se pueda heredar. Por ejemplo, en las entidades siguientes, las propiedades de navegación `Post.Blog` y `Blog.Posts` serán de carga diferida.
+
 ```csharp
 public class Blog
 {
@@ -183,9 +168,11 @@ public class Post
     public virtual Blog Blog { get; set; }
 }
 ```
+
 ### <a name="lazy-loading-without-proxies"></a>Carga diferida sin servidores proxy
 
 Los servidores proxy de carga diferida funcionan inyectando el servicio `ILazyLoader` en una entidad, tal como se describe en [Entity Type Constructors](../modeling/constructors.md) (Constructores de tipo de entidad). Por ejemplo:
+
 ```csharp
 public class Blog
 {
@@ -238,7 +225,9 @@ public class Post
     }
 }
 ```
+
 Esto no requiere tipos de entidad de los cuales heredar ni propiedades de navegación para ser virtual y permite que las instancias de entidad creadas con `new` se carguen de manera diferida una vez que se asocian a un contexto. Sin embargo, requiere una referencia al servicio `ILazyLoader`, que está definido en el paquete [Microsoft.EntityFrameworkCore.Abstractions](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Abstractions/). Este paquete contiene un conjunto mínimo de tipos, por lo que es muy poco el impacto al depender de él. Sin embargo, para evitar por completo depender de cualquier paquete de EF Core en los tipos de entidad, es posible insertar el método `ILazyLoader.Load` como delegado. Por ejemplo:
+
 ```csharp
 public class Blog
 {
@@ -291,7 +280,9 @@ public class Post
     }
 }
 ```
+
 El código anterior usa un método de extensión `Load` para que el uso del delegado sea un poco más limpio:
+
 ```csharp
 public static class PocoLoadingExtensions
 {
@@ -308,6 +299,7 @@ public static class PocoLoadingExtensions
     }
 }
 ```
+
 > [!NOTE]  
 > El parámetro de constructor del delegado de carga diferida se debe denominar "lazyLoader". La configuración para usar otro nombre está planificada para una versión futura.
 
