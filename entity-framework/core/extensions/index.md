@@ -4,12 +4,12 @@ author: ErikEJ
 ms.date: 01/07/2019
 ms.assetid: 14fffb6c-a687-4881-a094-af4a1359a296
 uid: core/extensions/index
-ms.openlocfilehash: 43b98c1f09a89f7e5451e28cbf2f78a2cb1040e5
-ms.sourcegitcommit: b2b9468de2cf930687f8b85c3ce54ff8c449f644
+ms.openlocfilehash: 0c9671eb77181d85cd493341cd1abf842d13fb0e
+ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/12/2019
-ms.locfileid: "70921768"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72181269"
 ---
 # <a name="ef-core-tools--extensions"></a>Herramientas y extensiones de EF Core
 
@@ -54,7 +54,7 @@ CatFactory es un motor de scaffolding para .NET Core que permite automatizar la 
 
 Entity Framework Core Generator (efg) es una herramienta de la CLI de .NET Core que permite generar modelos EF Core a partir de una base de datos existente. Es similar a `dotnet ef dbcontext scaffold`, pero también admite la [regeneración](https://efg.loresoft.com/en/latest/regeneration/) de código seguro mediante el reemplazo de la región o el análisis de los archivos de asignación. Asimismo, la herramienta permite generar modelos de vista, efectuar la validación y crear el código de los asignadores de objetos. 
 
-[Tutorial](http://www.loresoft.com/Generate-ASP-NET-Web-API)
+[Tutorial](https://www.loresoft.com/Generate-ASP-NET-Web-API)
 [Documentación](https://efg.loresoft.com/en/latest/)
 
 ## <a name="extensions"></a>Extensiones

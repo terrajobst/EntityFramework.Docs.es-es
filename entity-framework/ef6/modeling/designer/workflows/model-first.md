@@ -1,134 +1,134 @@
 ---
-title: Model First - EF6
+title: Model First EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: e1b9c319-bb8a-4417-ac94-7890f257e7f6
-ms.openlocfilehash: d429d5ea590b22c77f3f7f0bcfbd5dfc0a3e0049
-ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
+ms.openlocfilehash: 1b37805beb3d33f0b6dad2577a8abb3ea8f7b1e4
+ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/18/2018
-ms.locfileid: "46283880"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72182440"
 ---
-# <a name="model-first"></a>En primer lugar del modelo
-En este tutorial de vídeo y paso a paso proporcionan una introducción al desarrollo de Model First mediante Entity Framework. Modelo primero le permite crear un nuevo modelo con Entity Framework Designer y, a continuación, generar un esquema de base de datos del modelo. El modelo se almacena en un archivo EDMX (extensión edmx) y se puede ver y editar en el Diseñador de Entity Framework. Las clases que interactúan en la aplicación se generan automáticamente desde el archivo EDMX.
+# <a name="model-first"></a>Model First
+Este vídeo y el tutorial paso a paso proporcionan una introducción al desarrollo de Model First mediante Entity Framework. Model First permite crear un nuevo modelo mediante el Entity Framework Designer y, a continuación, generar un esquema de base de datos a partir del modelo. El modelo se almacena en un archivo EDMX (extensión. EDMX) y se puede ver y editar en el Entity Framework Designer. Las clases con las que interactúa en la aplicación se generan automáticamente a partir del archivo EDMX.
 
-## <a name="watch-the-video"></a>Vea el vídeo
-En este tutorial de vídeo y paso a paso proporcionan una introducción al desarrollo de Model First mediante Entity Framework. Modelo primero le permite crear un nuevo modelo con Entity Framework Designer y, a continuación, generar un esquema de base de datos del modelo. El modelo se almacena en un archivo EDMX (extensión edmx) y se puede ver y editar en el Diseñador de Entity Framework. Las clases que interactúan en la aplicación se generan automáticamente desde el archivo EDMX.
+## <a name="watch-the-video"></a>Ver el vídeo
+Este vídeo y el tutorial paso a paso proporcionan una introducción al desarrollo de Model First mediante Entity Framework. Model First permite crear un nuevo modelo mediante el Entity Framework Designer y, a continuación, generar un esquema de base de datos a partir del modelo. El modelo se almacena en un archivo EDMX (extensión. EDMX) y se puede ver y editar en el Entity Framework Designer. Las clases con las que interactúa en la aplicación se generan automáticamente a partir del archivo EDMX.
 
-**Presentado por**: [Rowan Miller](http://romiller.com/)
+**Presentada por**: [Rowan Miller](https://romiller.com/)
 
 **Vídeo**: [WMV](https://download.microsoft.com/download/5/B/1/5B1C338C-AFA7-4F68-B304-48BB008146EF/HDI-ITPro-MSDN-winvideo-modelfirst.wmv) | [MP4](https://download.microsoft.com/download/5/B/1/5B1C338C-AFA7-4F68-B304-48BB008146EF/HDI-ITPro-MSDN-mp4video-modelfirst.m4v) | [WMV (ZIP)](https://download.microsoft.com/download/5/B/1/5B1C338C-AFA7-4F68-B304-48BB008146EF/HDI-ITPro-MSDN-winvideo-modelfirst.zip)
 
 ## <a name="pre-requisites"></a>Requisitos previos
 
-Necesitará tener Visual Studio 2010 o Visual Studio 2012 instalado para completar este tutorial.
+Para completar este tutorial, deberá tener instalados Visual Studio 2010 o Visual Studio 2012.
 
-Si utiliza Visual Studio 2010, también necesitará tener [NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c) instalado.
+Si usa Visual Studio 2010, también debe tener instalado [NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c) .
 
 ## <a name="1-create-the-application"></a>1. Crear la aplicación
 
-Para simplificar las cosas que vamos a crear una aplicación de consola básica que usa Model First para tener acceso a datos:
+Para simplificar las cosas, vamos a crear una aplicación de consola básica que use el Model First para realizar el acceso a los datos:
 
 -   Apertura de Visual Studio
--   **Archivo -&gt; nuevo:&gt; proyecto...**
--   Seleccione **Windows** en el menú izquierdo y **aplicación de consola**
--   Escriba **ModelFirstSample** como el nombre
+-   **Proyecto de archivo &gt; nuevo-&gt;...**
+-   Seleccionar **ventanas** en el menú izquierdo y en la **aplicación de consola**
+-   Escriba **ModelFirstSample** como nombre
 -   Seleccione **Aceptar**.
 
 ## <a name="2-create-model"></a>2. Crear modelo
 
-Vamos a usar Entity Framework Designer, que se incluye como parte de Visual Studio, para crear nuestro modelo.
+Vamos a hacer uso de Entity Framework Designer, que se incluye como parte de Visual Studio, para crear nuestro modelo.
 
--   **Proyecto -&gt; Agregar nuevo elemento...**
--   Seleccione **datos** en el menú izquierdo y, a continuación, **ADO.NET Entity Data Model**
--   Escriba **BloggingModel** como el nombre y haga clic en **Aceptar**, esto inicia el Asistente para Entity Data Model
--   Seleccione **modelo vacío** y haga clic en **finalizar**
+-   **Proyecto-&gt; agregar nuevo elemento...**
+-   Seleccione **datos** en el menú de la izquierda y, a continuación, **ADO.NET Entity Data Model**
+-   Escriba **BloggingModel** como nombre y haga clic en **Aceptar**. Esto iniciará el Asistente para Entity Data Model
+-   Seleccione **modelo vacío** y haga clic en **Finalizar** .
 
-    ![Crear un modelo vacío](~/ef6/media/createemptymodel.png)
+    ![Crear modelo vacío](~/ef6/media/createemptymodel.png)
 
-Se abre el Diseñador de Entity Framework con un modelo en blanco. Ahora podemos comenzar a agregar entidades, propiedades y asociaciones en el modelo.
+El Entity Framework Designer se abre con un modelo en blanco. Ahora podemos empezar a agregar entidades, propiedades y asociaciones al modelo.
 
--   Haga doble clic en la superficie de diseño y seleccione **propiedades**
--   En el cambio de la ventana de propiedades el **Entity Container Name** a **BloggingContext**
-    *es el nombre del contexto derivado que se generarán para usted, el contexto Representa una sesión con la base de datos, lo que nos permite consultar y guardar los datos*
--   Haga doble clic en la superficie de diseño y seleccione **Add New -&gt; entidad...**
--   Escriba **Blog** como el nombre de entidad y **BlogId** como el nombre de clave y haga clic en **Aceptar**
+-   Haga clic con el botón derecho en la superficie de diseño y seleccione **propiedades** .
+-   En el ventana Propiedades cambie el **nombre del contenedor de entidades** a **BloggingContext**
+    *es el nombre del contexto derivado que se generará automáticamente, el contexto representa una sesión con la base de datos, lo que nos permite consultar y guardar datos* de
+-   Haga clic con el botón derecho en la superficie de diseño y seleccione **Agregar nueva-&gt; entidad..** .
+-   Escriba **blog** como el nombre de la entidad y **BlogId** como nombre de la clave y haga clic en **Aceptar** .
 
-    ![Agregar entidad Blog](~/ef6/media/addblogentity.png)
+    ![Agregar entidad de blog](~/ef6/media/addblogentity.png)
 
--   Haga doble clic en la nueva entidad en la superficie de diseño y seleccione **Add New -&gt; propiedad escalar**, escriba **nombre** como el nombre de la propiedad.
--   Repita este proceso para agregar un **Url** propiedad.
--   Haga doble clic en el **Url** propiedad en la superficie de diseño y seleccione **propiedades**, en el cambio de la ventana de propiedades el **Nullable** si se establece en **True** 
-     *Esto nos permite guardar un Blog en la base de datos sin asignarle una dirección Url*
--   Mediante las técnicas que acaba de aprender, agregue un **Post** entidad con un **PostId** propiedad clave
--   Agregar **título** y **contenido** las propiedades escalares del **Post** entidad
+-   Haga clic con el botón derecho en la nueva entidad en la superficie de diseño y seleccione **Agregar nuevo-&gt; propiedad escalar** **, escriba el nombre de** la propiedad.
+-   Repita este proceso para agregar una propiedad de **dirección URL** .
+-   Haga clic con el botón derecho en la propiedad **dirección URL** en la superficie de diseño y seleccione **propiedades**, en el ventana Propiedades cambie la configuración que **acepta valores NULL** a **true**
+    *esto nos permite guardar un blog en la base de datos sin asignarle una dirección URL. *
+-   Con las técnicas que acaba de aprender, agregue una entidad **post** con una propiedad de clave **PostId**
+-   Agregar propiedades escalares de **título** y de **contenido** a la entidad **post**
 
-Ahora que tenemos un par de entidades, es momento de agregar una asociación (o una relación) entre ellos.
+Ahora que tenemos un par de entidades, es el momento de agregar una asociación (o relación) entre ellas.
 
--   Haga doble clic en la superficie de diseño y seleccione **Add New -&gt; asociación...**
--   Hacer que apunte a un extremo de la relación **Blog** con una multiplicidad de **una** y el otro punto final para **Post** con una multiplicidad de **muchos** 
-     *Esto significa que un Blog tiene todas las entradas y una entrada pertenezca a un Blog*
--   Asegúrese del **agregar propiedades de clave externa a la entidad 'Post'** está activada y haga clic en **Aceptar**
+-   Haga clic con el botón secundario en la superficie de diseño y seleccione **Agregar nueva-&gt; Asociación..** .
+-   Haga que un extremo del punto de relación se ponga en **blog** con una multiplicidad de **uno** y el otro punto final para la **publicación** con una multiplicidad de **muchos**
+    ,*lo que significa que un blog tiene muchas publicaciones y una publicación pertenece a un blog* .
+-   Asegúrese de que el cuadro de la **entidad agregar propiedades de clave externa al "post"** está activado y haga clic en **Aceptar** .
 
-    ![Agregar asociación MF](~/ef6/media/addassociationmf.png)
+    ![Agregar Asociación MF](~/ef6/media/addassociationmf.png)
 
-Ahora tenemos un modelo simple que podemos usar para leer y escribir datos y generar una base de datos.
+Ahora tenemos un modelo simple en el que se puede generar una base de datos y se usa para leer y escribir datos.
 
 ![Modelo inicial](~/ef6/media/modelinitial.png)
 
 ### <a name="additional-steps-in-visual-studio-2010"></a>Pasos adicionales en Visual Studio 2010
 
-Si está trabajando en Visual Studio 2010, hay algunos pasos adicionales que debe seguir para actualizar a la versión más reciente de Entity Framework. Actualizar es importante porque proporciona acceso a una superficie de API mejorada, que es mucho más fácil de usar, así como las correcciones de errores más recientes.
+Si está trabajando en Visual Studio 2010, hay algunos pasos adicionales que debe seguir para actualizar a la versión más reciente de Entity Framework. La actualización es importante porque le proporciona acceso a una superficie de API mejorada, que es mucho más fácil de usar, así como las correcciones de errores más recientes.
 
-En primer lugar, necesitamos obtener la versión más reciente de Entity Framework en NuGet.
+En primer lugar, necesitamos obtener la versión más reciente de Entity Framework de NuGet.
 
--   **Proyecto –&gt; administrar paquetes NuGet... ** 
-     *Si no tiene el **administrar paquetes NuGet... ** opción, debe instalar la [versión más reciente de NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)*
--   Seleccione el **Online** ficha
--   Seleccione el **EntityFramework** paquete
+-   **Proyecto: &gt; administrar paquetes NuGet...** 
+    *si no tiene la opción **administrar paquetes Nuget...** debe instalar la [versión más reciente de Nuget](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c) .*
+-   Seleccione la pestaña **en línea**
+-   Seleccione el paquete **EntityFramework**
 -   Haga clic en **instalar**
 
-A continuación, se debe intercambiar nuestro modelo para generar código que hace uso de la API de DbContext, que se introdujo en versiones posteriores de Entity Framework.
+A continuación, necesitamos cambiar nuestro modelo para generar código que haga uso de la API de DbContext, que se presentó en versiones posteriores de Entity Framework.
 
--   Haga doble clic en una zona vacía del modelo de EF Designer y seleccione **Add Code Generation Item...**
--   Seleccione **plantillas en línea** desde el menú izquierdo y busque **DbContext**
--   Seleccione el EF **5.x generador de DbContext para C\#**, escriba **BloggingModel** como el nombre y haga clic en **agregar**
+-   Haga clic con el botón derecho en una zona vacía del modelo en el diseñador de EF y seleccione **Agregar elemento de generación de código..** .
+-   Seleccione **plantillas en línea** en el menú de la izquierda y busque **DbContext**
+-   Seleccione el **generador de DbContext de EF 5. x para C @ no__t-1**, escriba **BloggingModel** como nombre y haga clic en **Agregar** .
 
-    ![Plantilla de DbContext](~/ef6/media/dbcontexttemplate.png)
+    ![Plantilla DbContext](~/ef6/media/dbcontexttemplate.png)
 
 ## <a name="3-generating-the-database"></a>3. Generar la base de datos
 
-Dado que nuestro modelo, Entity Framework puede calcular un esquema de base de datos que nos permitirá almacenar y recuperar datos mediante el modelo.
+Dado nuestro modelo, Entity Framework puede calcular un esquema de base de datos que nos permitirá almacenar y recuperar datos mediante el modelo.
 
-El servidor de base de datos que se instala con Visual Studio es diferente según la versión de Visual Studio que ha instalado:
+El servidor de base de datos que se instala con Visual Studio es diferente en función de la versión de Visual Studio que haya instalado:
 
--   Si usa Visual Studio 2010 se creará una base de datos de SQL Express.
--   Si usa Visual Studio 2012, a continuación, se creará un [LocalDB](https://msdn.microsoft.com/library/hh510202(v=sql.110).aspx) base de datos.
+-   Si usa Visual Studio 2010, va a crear una base de datos de SQL Express.
+-   Si usa Visual Studio 2012, va a crear una base de datos de [LocalDB](https://msdn.microsoft.com/library/hh510202(v=sql.110).aspx) .
 
-Sigamos adelante y generar la base de datos.
+Vamos a generar la base de datos.
 
--   Haga doble clic en la superficie de diseño y seleccione **generar base de datos de modelo...**
--   Haga clic en **nueva conexión...** y especifique LocalDB o Express de SQL, según la versión de Visual Studio que está utilizando, escriba **ModelFirst.Blogging** como el nombre de la base de datos.
+-   Haga clic con el botón secundario en la superficie de diseño y seleccione **generar base de datos del modelo..** .
+-   Haga clic en **nueva conexión..** . y especifique LocalDB o SQL Express, en función de la versión de Visual Studio que use, escriba **ModelFirst. blog** como nombre de la base de datos.
 
     ![Conexión de LocalDB MF](~/ef6/media/localdbconnectionmf.png)
 
     ![Conexión de SQL Express MF](~/ef6/media/sqlexpressconnectionmf.png)
 
--   Seleccione **Aceptar** y se le solicitará si desea crear una nueva base de datos, seleccione **sí**
--   Seleccione **siguiente** y Entity Framework Designer calculará una secuencia de comandos para crear el esquema de base de datos
--   Una vez que se muestra la secuencia de comandos, haga clic en **finalizar** y se agregará al proyecto y abrir la secuencia de comandos
--   Haga doble clic en el script y seleccione **Execute**, se le pedirá que especifique la base de datos para conectarse a, especifique LocalDB o Express de SQL Server, según la versión de Visual Studio que está utilizando
+-   Seleccione **Aceptar** y se le preguntará si desea crear una nueva base de datos, seleccione **sí** .
+-   Seleccione **siguiente** y el Entity Framework Designer calculará un script para crear el esquema de la base de datos.
+-   Una vez que se muestre el script, haga clic en **Finalizar** y el script se agregará al proyecto y se abrirá.
+-   Haga clic con el botón derecho en el script y seleccione **Ejecutar**; se le pedirá que especifique la base de datos a la que se va a conectar, especifique LocalDB o SQL Server Express, en función de la versión de Visual Studio que use.
 
-## <a name="4-reading--writing-data"></a>4. Leer y escribir datos
+## <a name="4-reading--writing-data"></a>4. Lectura & escritura de datos
 
-Ahora que tenemos un modelo es el momento de usarlo para acceder a algunos datos. Las clases que vamos a usar para acceder a los datos se generan automáticamente para usted según el archivo EDMX.
+Ahora que tenemos un modelo, es el momento de usarlo para tener acceso a algunos datos. Las clases que se van a usar para obtener acceso a los datos se generan automáticamente basándose en el archivo EDMX.
 
-*Esta captura de pantalla es de Visual Studio 2012, si usa Visual Studio 2010 el BloggingModel.tt y BloggingModel.Context.tt archivos estarán directamente en el proyecto en lugar de anidan en el archivo EDMX.*
+*Esta captura de pantalla es de Visual Studio 2012, si usa Visual Studio 2010, los archivos BloggingModel.tt y BloggingModel.Context.tt estarán directamente en el proyecto en lugar de anidados en el archivo EDMX.*
 
 ![Clases generadas](~/ef6/media/generatedclasses.png)
 
-Como se muestra a continuación, implemente el método Main en Program.cs. Este código crea una nueva instancia de nuestro contexto y, a continuación, usa para insertar un nuevo Blog. A continuación, usa una consulta LINQ para recuperar todos los Blogs de la base de datos ordenado alfabéticamente por título.
+Implemente el método Main en Program.cs como se muestra a continuación. Este código crea una nueva instancia de nuestro contexto y, a continuación, la usa para insertar un nuevo blog. A continuación, usa una consulta LINQ para recuperar todos los blogs de la base de datos ordenados alfabéticamente por título.
 
 ``` csharp
 class Program
@@ -163,38 +163,38 @@ class Program
 }
 ```
 
-Ahora puede ejecutar la aplicación y probarlo.
+Ahora puede ejecutar la aplicación y probarla.
 
-```
+```console
 Enter a name for a new Blog: ADO.NET Blog
 All blogs in the database:
 ADO.NET Blog
 Press any key to exit...
 ```
 
-## <a name="5-dealing-with-model-changes"></a>5. Trabajar con los cambios del modelo
+## <a name="5-dealing-with-model-changes"></a>5. Tratamiento de los cambios de modelo
 
-Ahora es momento de realizar algunos cambios en nuestro modelo, cuando se realizan estos cambios que también es necesario para actualizar el esquema de base de datos.
+Ahora es el momento de realizar algunos cambios en nuestro modelo, cuando realizamos estos cambios también necesitamos actualizar el esquema de la base de datos.
 
-Comenzaremos por agregar una nueva entidad de usuario a nuestro modelo.
+Comenzaremos agregando una nueva entidad de usuario a nuestro modelo.
 
--   Agregue un nuevo **usuario** nombre de la entidad con **Username** como el nombre de clave y **cadena** como el tipo de propiedad para la clave
+-   Agregue un nuevo nombre de entidad de **usuario** **con el** nombre de usuario como el nombre de clave y la **cadena** como el tipo de propiedad de la clave.
 
     ![Agregar entidad de usuario](~/ef6/media/adduserentity.png)
 
--   Haga doble clic en el **Username** propiedad en la superficie de diseño y seleccione **propiedades**, cambio de las propiedades en la ventana la **MaxLength** si se establece en **50 ** 
-     *Esto restringe los datos que se pueden almacenar en el nombre de usuario y 50 caracteres*
--   Agregar un **DisplayName** propiedad escalar a la **usuario** entidad
+-   Haga clic con el botón derecho en la propiedad **username** en la superficie de diseño y seleccione **propiedades**, en el ventana Propiedades cambie la configuración de **MaxLength** a **50**
+    *esto restringe los datos que se pueden almacenar en el nombre de usuario a 50 caracteres* de
+-   Agregar una propiedad escalar **displayName** a la entidad **User**
 
-Ahora tenemos un modelo actualizado y estamos preparados actualizar la base de datos para dar cabida a nuestro nuevo tipo de entidad de usuario.
+Ahora tenemos un modelo actualizado y estamos preparados para actualizar la base de datos para dar cabida a nuestro nuevo tipo de entidad de usuario.
 
--   Haga doble clic en la superficie de diseño y seleccione **generar base de datos de modelo...** , Entity Framework calculará una secuencia de comandos para volver a crear un esquema basado en el modelo actualizado.
--   Haga clic en **finalizar**
--   Puede recibir advertencias sobre la sobrescritura de la secuencia de comandos DDL existente y las partes de asignación y almacenamiento del modelo, haga clic en **Sí** tanto estas advertencias
--   Se abre el script actualizado de SQL para crear la base de datos de  
-    *El script generado quitará todas las tablas existentes y, a continuación, volver a crear el esquema desde el principio. Esto puede funcionar para el desarrollo local, pero no es un viable para insertar los cambios en una base de datos que ya se ha implementado. Si necesita publicar los cambios en una base de datos que ya se ha implementado, deberá modificar la secuencia de comandos o usar una herramienta de comparación de esquemas para calcular un script de migración.*
--   Haga doble clic en el script y seleccione **Execute**, se le pedirá que especifique la base de datos para conectarse a, especifique LocalDB o Express de SQL Server, según la versión de Visual Studio que está utilizando
+-   Haga clic con el botón secundario en la superficie de diseño y seleccione **generar base de datos a partir del modelo...** , Entity Framework calculará un script para volver a crear un esquema basado en el modelo actualizado.
+-   Haga clic en **Finalizar**
+-   Puede recibir advertencias sobre cómo sobrescribir el script DDL existente y las partes de asignación y almacenamiento del modelo; haga clic en **sí** para ambas advertencias.
+-   El script SQL actualizado para crear la base de datos se abre automáticamente.  
+    @no__t script 0The que se genera quitará todas las tablas existentes y, a continuación, volverá a crear el esquema desde el principio. Esto puede funcionar para el desarrollo local, pero no es viable para insertar cambios en una base de datos que ya se ha implementado. Si necesita publicar cambios en una base de datos que ya se ha implementado, deberá editar el script o usar una herramienta de comparación de esquemas para calcular un script de migración. *
+-   Haga clic con el botón derecho en el script y seleccione **Ejecutar**; se le pedirá que especifique la base de datos a la que se va a conectar, especifique LocalDB o SQL Server Express, en función de la versión de Visual Studio que use.
 
 ## <a name="summary"></a>Resumen
 
-En este tutorial que analizamos el desarrollo de Model First, que nos permitió crear un modelo en el Diseñador de EF y, a continuación, generar una base de datos de ese modelo. A continuación, se usa el modelo para leer y escribir algunos datos de la base de datos. Por último, se actualizó el modelo y, a continuación, volver a crear el esquema de base de datos para que coincida con el modelo.
+En este tutorial, hemos visto Model First desarrollo, que nos permitió crear un modelo en EF Designer y, a continuación, generar una base de datos a partir de ese modelo. Después usamos el modelo para leer y escribir algunos datos de la base de datos. Por último, hemos actualizado el modelo y, a continuación, hemos recreado el esquema de la base de datos para que coincida con el modelo.

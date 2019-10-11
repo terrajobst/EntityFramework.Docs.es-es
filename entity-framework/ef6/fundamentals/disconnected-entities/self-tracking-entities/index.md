@@ -3,17 +3,17 @@ title: 'Entidades de autoseguimiento: EF6'
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 5e60f5be-7bbb-4bf8-835e-0ac808d6c84a
-ms.openlocfilehash: b098736ef47e79c916f4bf054716022d5032eee5
-ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
+ms.openlocfilehash: 3bb9759d89fbd0c10b911625aa7d0afd7747de14
+ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/18/2018
-ms.locfileid: "46283815"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72181726"
 ---
 # <a name="self-tracking-entities"></a>Entidades de autoseguimiento
 
 > [!IMPORTANT]
-> Ya no se recomienda usar la plantilla Entidades de autoseguimiento. Solo sigue estando disponible para la compatibilidad con las aplicaciones existentes. Si la aplicación necesita trabajar con gráficos desconectados de entidades, considere otras alternativas, como [Trackable Entities](http://trackableentities.github.io/), que es una tecnología similar a Entidades de autoseguimiento pero que la comunidad desarrolla de forma más activa, o escriba código personalizado mediante la API de seguimiento de cambios de bajo nivel.
+> Ya no se recomienda usar la plantilla Entidades de autoseguimiento. Solo sigue estando disponible para la compatibilidad con las aplicaciones existentes. Si la aplicación necesita trabajar con gráficos desconectados de entidades, considere otras alternativas, como [Trackable Entities](https://trackableentities.github.io/), que es una tecnología similar a Entidades de autoseguimiento pero que la comunidad desarrolla de forma más activa, o escriba código personalizado mediante la API de seguimiento de cambios de bajo nivel.
 
 En una aplicación basada en Entity Framework, el responsable de realizar el seguimiento de los cambios en los objetos es un contexto. Luego se usa el método SaveChanges para almacenar los cambios en la base de datos. Cuando se trabaja con aplicaciones de n niveles, los objetos de entidad generalmente están desconectados del contexto y es necesario decidir cómo realizar el seguimiento de los cambios y notificar esos cambios al contexto. Las entidades de autoseguimiento (STE) pueden ayudar a realizar el seguimiento de los cambios en cualquier nivel y luego reproducir estos cambios en un contexto que se vaya a guardar.  
 
@@ -21,7 +21,7 @@ Use STE solo si el contexto no está disponible en un nivel en el que se realiza
 
 Este elemento de plantilla genera dos archivos .tt (plantilla de texto):  
 
-- El archivo **\<nombreDelModelo\>.tt** genera los tipos de entidad y una clase auxiliar que contiene la lógica de seguimiento de cambios que usan las entidades de autoseguimiento y los métodos de extensión que permiten establecer el estado en las entidades de autoseguimiento.  
+- El archivo **\<nombreDelModelo\>.tt** genera los tipos de entidad y una clase del asistente que contiene la lógica de seguimiento de cambios que usan las entidades de autoseguimiento y los métodos de extensión que permiten establecer el estado en las entidades de autoseguimiento.  
 - El archivo **\<nombreDelModelo\>.Context.tt** genera un contexto derivado y una clase de extensión que contiene métodos **ApplyChanges** para las clases **ObjectContext** y **ObjectSet**. Estos métodos examinan la información del seguimiento de cambios contenida en el grafo de entidades con seguimiento propio para deducir el conjunto de operaciones que se deben realizar con el fin de guardar los cambios en la base de datos.  
 
 ## <a name="get-started"></a>Primeros pasos  
@@ -30,7 +30,7 @@ Para comenzar, visite la página [Self-Tracking Entities Walkthrough](walkthroug
 
 ## <a name="functional-considerations-when-working-with-self-tracking-entities"></a>Consideraciones funcionales al trabajar con entidades de seguimiento propio  
 > [!IMPORTANT]
-> Ya no se recomienda usar la plantilla Entidades de autoseguimiento. Solo sigue estando disponible para la compatibilidad con las aplicaciones existentes. Si la aplicación necesita trabajar con gráficos desconectados de entidades, considere otras alternativas, como [Trackable Entities](http://trackableentities.github.io/), que es una tecnología similar a Entidades de autoseguimiento pero que la comunidad desarrolla de forma más activa, o escriba código personalizado mediante la API de seguimiento de cambios de bajo nivel.
+> Ya no se recomienda usar la plantilla Entidades de autoseguimiento. Solo sigue estando disponible para la compatibilidad con las aplicaciones existentes. Si la aplicación necesita trabajar con gráficos desconectados de entidades, considere otras alternativas, como [Trackable Entities](https://trackableentities.github.io/), que es una tecnología similar a Entidades de autoseguimiento pero que la comunidad desarrolla de forma más activa, o escriba código personalizado mediante la API de seguimiento de cambios de bajo nivel.
 
 Tenga en cuenta lo siguiente al trabajar con entidades de seguimiento propio:  
 
@@ -39,7 +39,7 @@ Tenga en cuenta lo siguiente al trabajar con entidades de seguimiento propio:
 - Si envía el gráfico modificado en el cliente al servicio y luego planea seguir trabajando con el mismo gráfico en el cliente, debe iterar manualmente el gráfico y llamar al método **AcceptChanges** en cada objeto para restablecer la herramienta de seguimiento de cambios.  
 
     > Si los objetos del gráfico contienen propiedades con valores generados por la base de datos (por ejemplo, valores de identidad o simultaneidad), Entity Framework reemplaza los valores de estas propiedades por los valores generados por la base de datos después de llamar al método **SaveChanges**. Puede implementar la operación del servicio para que devuelva objetos guardados o una lista de los valores de propiedad generados de los objetos devueltos al cliente. El cliente debe reemplazar las instancias del objeto o los valores de propiedad del objeto con los objetos o los valores de propiedad devueltos desde la operación de servicio.  
-- Si se combinan gráficos de varias solicitudes de servicio, se pueden presentar objetos con valores de clave duplicada en el gráfico resultante. Entity Framework no quita los objetos con claves duplicadas cuando llama al método **ApplyChanges**, sino que produce una excepción. Para evitar tener gráficos con valores de clave duplicados, siga uno de los modelos descritos en el siguiente blog: [Self-Tracking Entities: ApplyChanges and duplicate entities](https://go.microsoft.com/fwlink/?LinkID=205119&clcid=0x409) (Entidades de autoseguimiento: ApplyChanges y entidades duplicadas).  
+- Si se combinan gráficos de varias solicitudes de servicio, se pueden presentar objetos con valores de clave duplicada en el gráfico resultante. Entity Framework no quita los objetos con claves duplicadas cuando llama al método **ApplyChanges**, sino que produce una excepción. Para evitar tener gráficos con valores de clave duplicados, siga uno de los modelos descritos en el siguiente blog: [Entidades de seguimiento propio: ApplyChanges y entidades duplicadas](https://go.microsoft.com/fwlink/?LinkID=205119&clcid=0x409).  
 - Cuando se cambia la relación entre objetos mediante el establecimiento de la propiedad de clave externa, la propiedad de navegación de referencia se establece en NULL y no se sincroniza con la entidad de seguridad adecuada en el cliente. Después de adjuntar el gráfico al contexto del objeto (por ejemplo, después de llamar al método **ApplyChanges**), se sincronizan las propiedades de clave externa y de navegación.  
 
     > No disponer de ninguna propiedad de navegación de referencia sincronizada con el objeto principal adecuado podría representar un problema si ha especificado la eliminación en cascada en la relación de clave externa. Si elimina la entidad de seguridad, la eliminación no se propagará a los objetos dependientes. Si ha especificado eliminaciones en cascada, use las propiedades de navegación para cambiar las relaciones en vez de establecer la propiedad de clave externa.  

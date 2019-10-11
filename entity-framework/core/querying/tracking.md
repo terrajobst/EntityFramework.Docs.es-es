@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: e17e060c-929f-4180-8883-40c438fbcc01
 uid: core/querying/tracking
-ms.openlocfilehash: d93be5c2b727d8fbaddd103f8f367c699ae80a7c
-ms.sourcegitcommit: b2b9468de2cf930687f8b85c3ce54ff8c449f644
+ms.openlocfilehash: 588dee012039ce5ecc83f0ecf263a4ea6ca38c29
+ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/12/2019
-ms.locfileid: "70921655"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72181986"
 ---
 # <a name="tracking-vs-no-tracking-queries"></a>Consultas de seguimiento frente a consultas de no seguimiento
 
@@ -63,7 +63,7 @@ using (var context = new BloggingContext())
 ```
 
 > [!NOTE]  
-> Las consultas de no seguimiento siguen realizando la resolución de identidad dentro de la consulta en ejecución. Si el conjunto de resultados contiene varias veces la misma entidad, se devolverá la misma instancia de la clase de entidad para cada repetición en el conjunto de resultados. Sin embargo, se usan referencias parciales para llevar un seguimiento de las entidades que ya se devolvieron. Si un resultado anterior con la misma identidad queda fuera del ámbito y se ejecuta la recolección de elementos no utilizados, puede obtener una instancia de entidad nueva. Para más información, consulte el artículo sobre el [funcionamiento de una consulta ](overview.md).
+> Las consultas de no seguimiento siguen realizando la resolución de identidad dentro de la consulta en ejecución. Si el conjunto de resultados contiene varias veces la misma entidad, se devolverá la misma instancia de la clase de entidad para cada repetición en el conjunto de resultados. Sin embargo, se usan referencias parciales para llevar un seguimiento de las entidades que ya se devolvieron. Si un resultado anterior con la misma identidad queda fuera del ámbito y se ejecuta la recolección de elementos no utilizados, puede obtener una instancia de entidad nueva. Para más información, consulte el artículo sobre el [funcionamiento de una consulta ](xref:core/querying/how-query-works).
 
 ## <a name="tracking-and-projections"></a>Seguimientos y proyecciones
 

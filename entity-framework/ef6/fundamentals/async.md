@@ -3,12 +3,12 @@ title: Consulta asincrónica y Save-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: d56e6f1d-4bd1-4b50-9558-9a30e04a8ec3
-ms.openlocfilehash: ae578976ffc88b407ef0aaa0017935005bedd093
-ms.sourcegitcommit: b2b9468de2cf930687f8b85c3ce54ff8c449f644
+ms.openlocfilehash: 0642dc13e7aa3906fa1495031c62701fc16f0192
+ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/12/2019
-ms.locfileid: "70921626"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72181845"
 ---
 # <a name="async-query-and-save"></a>Consulta asincrónica y guardar
 > [!NOTE]
@@ -30,7 +30,7 @@ Estos son algunos recursos adicionales para obtener información sobre Async:
 
 -   [Información general de Brandon Bray de Async/Await en .NET 4,5](https://blogs.msdn.com/b/dotnet/archive/2012/04/03/async-in-4-5-worth-the-await.aspx)
 -   Páginas de [programación asincrónicas](https://msdn.microsoft.com/library/hh191443.aspx) en MSDN Library
--   [Cómo crear aplicaciones Web de ASP.net mediante Async](http://channel9.msdn.com/events/teched/northamerica/2013/dev-b337) (incluye una demostración del aumento del rendimiento del servidor)
+-   [Cómo crear aplicaciones Web de ASP.net mediante Async](https://channel9.msdn.com/events/teched/northamerica/2013/dev-b337) (incluye una demostración del aumento del rendimiento del servidor)
 
 ## <a name="create-the-model"></a>Creación del modelo
 
@@ -222,12 +222,12 @@ Para obtener una lista completa de los métodos de extensión disponibles en el 
 Ahora que el código es asincrónico, podemos observar otro flujo de ejecución cuando se ejecuta el programa:
 
 1. **SaveChanges** comienza a introducir el nuevo **blog** en la base de datos  
-    *Una vez que el comando se envía a la base de datos, no se necesita más tiempo de proceso en el subproceso administrado actual. El método **PerformDatabaseOperations** devuelve (aunque no ha terminado de ejecutarse) y continúa el flujo del programa en el método Main.*
+    *Once el comando se envía a la base de datos. no se necesita más tiempo de proceso en el subproceso administrado actual. El método **PerformDatabaseOperations** devuelve (aunque no ha terminado de ejecutarse) y continúa el flujo del programa en el método Main.*
 2. **La oferta del día se escribe en la consola**  
-    *Dado que no hay más trabajo que hacer en el método Main, el subproceso administrado se bloquea en la llamada de espera hasta que se completa la operación de base de datos. Una vez que se completa, se ejecutará el resto de **PerformDatabaseOperations** .*
+    *Since no hay más trabajo que hacer en el método Main, el subproceso administrado se bloquea en la llamada de espera hasta que se completa la operación de base de datos. Una vez que se completa, se ejecutará el resto de la **PerformDatabaseOperations** .*
 3.  **SaveChanges** completado  
 4.  La consulta de todos los **blogs** se envía a la base de datos  
-    *De nuevo, el subproceso administrado es gratuito para realizar otro trabajo mientras la consulta se procesa en la base de datos. Dado que el resto de la ejecución se ha completado, el subproceso se detendrá simplemente en la llamada de espera.*
+    *Again, el subproceso administrado es gratuito para realizar otro trabajo mientras la consulta se procesa en la base de datos. Dado que el resto de la ejecución se ha completado, el subproceso se detendrá simplemente en la llamada de espera.*
 5.  Las devoluciones de consultas y los resultados se escriben en la **consola**  
 
 ![Salida asincrónica](~/ef6/media/asyncoutput.png) 

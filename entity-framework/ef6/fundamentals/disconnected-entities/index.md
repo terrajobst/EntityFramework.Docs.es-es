@@ -3,12 +3,12 @@ title: 'Trabajo con entidades desconectadas: EF6'
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 12138003-a373-4817-b1b7-724130202f5f
-ms.openlocfilehash: 11ca2a9a4161e02d32d98bf03dd4cf28545334b7
-ms.sourcegitcommit: 5e11125c9b838ce356d673ef5504aec477321724
+ms.openlocfilehash: f1ce44e7b00ec4c60a81ed850ce5c9d866495e1b
+ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/25/2018
-ms.locfileid: "50022176"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72181770"
 ---
 # <a name="working-with-disconnected-entities"></a>Trabajo con entidades desconectadas
 En una aplicación basada en Entity Framework, una clase de contexto es responsable de detectar los cambios aplicados a las entidades sometidas a seguimiento. Una llamada al método SaveChanges almacena los cambios que controla el contexto en la base de datos. Cuando se trabaja con aplicaciones de n niveles, los objetos de entidad generalmente se modifican mientras están desconectados del contexto y es necesario decidir cómo realizar el seguimiento de los cambios y notificar esos cambios al contexto. En este tema se habla de las distintas opciones disponibles cuando se usa Entity Framework con entidades desconectadas.   
@@ -30,4 +30,4 @@ El seguimiento de los cambios en gráficos arbitrarios de entidades mientras se 
 Esta plantilla se puede usar con los modelos creados mediante EF Designer, pero no con modelos de Code First. Para obtener más información, vea [Entidades de autoseguimiento](self-tracking-entities/index.md).  
 
 > [!IMPORTANT]
-> Ya no se recomienda usar la plantilla Entidades de autoseguimiento. Solo sigue estando disponible para la compatibilidad con las aplicaciones existentes. Si la aplicación necesita trabajar con gráficos desconectados de entidades, considere otras alternativas, como [Trackable Entities](http://trackableentities.github.io/), que es una tecnología similar a Entidades de autoseguimiento pero que la comunidad desarrolla de forma más activa, o escriba código personalizado mediante la API de seguimiento de cambios de bajo nivel.
+> Ya no se recomienda usar la plantilla Entidades de autoseguimiento. Solo sigue estando disponible para la compatibilidad con las aplicaciones existentes. Si la aplicación necesita trabajar con gráficos desconectados de entidades, considere otras alternativas, como [Trackable Entities](https://trackableentities.github.io/), que es una tecnología similar a Entidades de autoseguimiento pero que la comunidad desarrolla de forma más activa, o escriba código personalizado mediante la API de seguimiento de cambios de bajo nivel.

@@ -3,12 +3,12 @@ title: 'Proveedores de Entity Framework: EF6'
 author: divega
 ms.date: 06/27/2018
 ms.assetid: 7BFB7763-CD6C-4520-93A2-7B265F5FA586
-ms.openlocfilehash: f6e34d1273bd1004ce9d1610ce3613068088eb5e
-ms.sourcegitcommit: 159c2e9afed7745e7512730ffffaf154bcf2ff4a
+ms.openlocfilehash: bf07296503e4bb5d1e13f5f6f29e7118cbbde61d
+ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 02/03/2019
-ms.locfileid: "55668744"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72181685"
 ---
 # <a name="entity-framework-6-providers"></a>Proveedores de Entity Framework 6
 > [!NOTE]
@@ -21,15 +21,15 @@ Entity Framework ahora se desarrolla bajo una licencia de código abierto, por l
 Los proveedores conocidos que se han vuelto a compilar para EF6 incluyen:
 
 *   **Proveedor de Microsoft SQL Server**
-    *   Compilado a partir del [código base fuente abierto de Entity Framework](http://github.com/aspnet/EntityFramework6)
-    *   Incluido como parte del [paquete NuGet de Entity Framework](http://nuget.org/packages/EntityFramework)
+    *   Compilado a partir del [código base fuente abierto de Entity Framework](https://github.com/aspnet/EntityFramework6)
+    *   Incluido como parte del [paquete NuGet de Entity Framework](https://nuget.org/packages/EntityFramework)
 *   **Proveedor de Microsoft SQL Server Compact Edition**
-    *   Compilado a partir del [código base fuente abierto de Entity Framework](http://github.com/aspnet/EntityFramework6)
-    *   Incluido en el [paquete NuGet de EntityFramework.SqlServerCompact](http://nuget.org/packages/EntityFramework.SqlServerCompact)
-*   [**Proveedores de datos de Devart dotConnect**](http://www.devart.com/dotconnect/)
-    *   Existen proveedores de terceros de [Devart](http://www.devart.com/) para una serie de bases de datos como Oracle, MySQL, PostgreSQL, SQLite, Salesforce, DB2 y SQL Server
-*   [**Proveedores de CData Software**](http://www.cdata.com/ado/)
-    *   Existen proveedores de terceros de [CData Software](http://www.cdata.com/ado/) para una serie de almacenes de datos como Salesforce, Azure Table Storage, MySql, etc.
+    *   Compilado a partir del [código base fuente abierto de Entity Framework](https://github.com/aspnet/EntityFramework6)
+    *   Incluido en el [paquete NuGet de EntityFramework.SqlServerCompact](https://nuget.org/packages/EntityFramework.SqlServerCompact)
+*   [**Proveedores de datos de Devart dotConnect**](https://www.devart.com/dotconnect/)
+    *   Existen proveedores de terceros de [Devart](https://www.devart.com/) para una serie de bases de datos como Oracle, MySQL, PostgreSQL, SQLite, Salesforce, DB2 y SQL Server
+*   [**Proveedores de CData Software**](https://www.cdata.com/ado/)
+    *   Existen proveedores de terceros de [CData Software](https://www.cdata.com/ado/) para una serie de almacenes de datos como Salesforce, Azure Table Storage, MySql, etc.
 *   **Proveedor de Firebird**
     *   Disponible como [paquete NuGet](https://www.nuget.org/packages/EntityFramework.Firebird/)
 *   **Proveedor de Visual Fox Pro**

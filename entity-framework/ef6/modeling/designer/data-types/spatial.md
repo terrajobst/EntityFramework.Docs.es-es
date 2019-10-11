@@ -1,93 +1,93 @@
 ---
-title: 'Espacial EF6 - EF Designer:'
+title: Diseñador espacial-EF-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 06baa6e1-d680-4a95-845b-81305c87a962
-ms.openlocfilehash: 67cc6c007a4477b650e7c4875de8fac36a9ba2be
-ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
+ms.openlocfilehash: a9c54fbc14dd02ce5d4d91449a0d5f9e72f7f0f7
+ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/18/2018
-ms.locfileid: "46283763"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72182500"
 ---
-# <a name="spatial---ef-designer"></a>Espacial - EF Designer
+# <a name="spatial---ef-designer"></a>Diseñador espacial-EF
 > [!NOTE]
-> **EF5 y versiones posteriores solo** -las características, las API, etc. se describe en esta página se introdujeron en Entity Framework 5. Si usa una versión anterior, no se aplica parte o la totalidad de la información.
+> **EF5** y versiones posteriores: las características, las API, etc. que se describen en esta página se introdujeron en Entity Framework 5. Si usa una versión anterior, no se aplica parte o la totalidad de la información.
 
-El tutorial de vídeo y paso a paso muestra cómo asignar tipos espaciales con Entity Framework Designer. También se muestra cómo usar una consulta LINQ para buscar una distancia entre dos ubicaciones.
+En el tutorial de vídeo y paso a paso se muestra cómo asignar tipos espaciales con el Entity Framework Designer. También se muestra cómo usar una consulta LINQ para buscar una distancia entre dos ubicaciones.
 
-En este tutorial usará Model First para crear una nueva base de datos, pero también se puede usar el Diseñador de EF con el [Database First](~/ef6/modeling/designer/workflows/database-first.md) flujo de trabajo para asignar a una base de datos existente.
+En este tutorial se utilizará Model First para crear una nueva base de datos, pero el diseñador de EF también puede usarse con el flujo de trabajo de [Database First](~/ef6/modeling/designer/workflows/database-first.md) para asignar a una base de datos existente.
 
-Compatibilidad con tipos espaciales se introdujo en Entity Framework 5. Tenga en cuenta que para utilizar las nuevas características, como el tipo espacial, enumeraciones y funciones con valores de tabla, debe tener como destino .NET Framework 4.5. Visual Studio 2012 tiene como destino .NET 4.5 de forma predeterminada.
+La compatibilidad con tipos espaciales se presentó en Entity Framework 5. Tenga en cuenta que para usar las nuevas características, como el tipo espacial, las enumeraciones y las funciones con valores de tabla, debe tener como destino .NET Framework 4,5. Visual Studio 2012 tiene como destino .NET 4,5 de forma predeterminada.
 
-Para utilizar tipos de datos espaciales también debe usar un proveedor de Entity Framework que tiene compatibilidad espacial. Consulte [compatibilidad del proveedor con tipos espaciales](~/ef6/fundamentals/providers/spatial-support.md) para obtener más información.
+Para usar los tipos de datos espaciales, también debe usar un proveedor de Entity Framework que tenga compatibilidad espacial. Consulte [compatibilidad con proveedores para tipos espaciales](~/ef6/fundamentals/providers/spatial-support.md) para obtener más información.
 
-Hay dos tipos principales de los datos espaciales: geography y geometry. El tipo de datos geography almacena datos elípticos (por ejemplo, coordenadas GPS latitud y longitud). El tipo de datos geometry representa el sistema de coordenadas euclidiano (plano).
+Hay dos tipos de datos espaciales principales: Geography y Geometry. El tipo de datos Geography almacena los datos de datos elipsoidales (por ejemplo, las coordenadas de latitud y longitud de GPS). El tipo de datos Geometry representa el sistema de coordenadas euclidiana (plano).
 
-## <a name="watch-the-video"></a>Vea el vídeo
-Este vídeo muestra cómo asignar tipos espaciales con Entity Framework Designer. También se muestra cómo usar una consulta LINQ para buscar una distancia entre dos ubicaciones.
+## <a name="watch-the-video"></a>Ver el vídeo
+Este vídeo muestra cómo asignar tipos espaciales con el Entity Framework Designer. También se muestra cómo usar una consulta LINQ para buscar una distancia entre dos ubicaciones.
 
-**Presentado por**: Julia Kornich
+**Presentada por**: Julia Kornich
 
 **Vídeo**: [WMV](https://download.microsoft.com/download/E/C/9/EC9E6547-8983-4C1F-A919-D33210E4B213/HDI-ITPro-MSDN-winvideo-spatialwithdesigner.wmv) | [MP4](https://download.microsoft.com/download/E/C/9/EC9E6547-8983-4C1F-A919-D33210E4B213/HDI-ITPro-MSDN-mp4video-spatialwithdesigner.m4v) | [WMV (ZIP)](https://download.microsoft.com/download/E/C/9/EC9E6547-8983-4C1F-A919-D33210E4B213/HDI-ITPro-MSDN-winvideo-spatialwithdesigner.zip)
 
 ## <a name="pre-requisites"></a>Requisitos previos
 
-Necesitará tener Visual Studio 2012, Ultimate, Premium, Professional o Web Express edition instalado para completar este tutorial.
+Deberá tener instalado Visual Studio 2012, Ultimate, Premium, Professional o Web Express Edition para completar este tutorial.
 
 ## <a name="set-up-the-project"></a>Configurar el proyecto
 
 1.  Abra Visual Studio 2012
-2.  En el **archivo** menú, elija **New**y, a continuación, haga clic en **proyecto**
-3.  En el panel izquierdo, haga clic en **Visual C\#** y, a continuación, seleccione el **consola** plantilla
-4.  Escriba **SpatialEFDesigner** como el nombre del proyecto y haga clic en **Aceptar**
+2.  En el menú **archivo** , seleccione **nuevo**y, a continuación, haga clic en **proyecto** .
+3.  En el panel izquierdo, haga clic en **Visual C @ no__t-1**y, a continuación, seleccione la plantilla de **consola** .
+4.  Escriba **SpatialEFDesigner** como nombre del proyecto y haga clic en **Aceptar** .
 
 ## <a name="create-a-new-model-using-the-ef-designer"></a>Crear un nuevo modelo con EF Designer
 
-1.  Haga clic en el nombre del proyecto en el Explorador de soluciones, seleccione **agregar**y, a continuación, haga clic en **nuevo elemento**
-2.  Seleccione **datos** desde el menú de la izquierda y seleccione **ADO.NET Entity Data Model** en el panel de plantillas
-3.  Escriba **UniversityModel.edmx** para el nombre de archivo y, a continuación, haga clic en **agregar**
-4.  En la página del Asistente para Entity Data Model, seleccione **modelo vacío** en el cuadro de diálogo Elegir contenido del modelo
-5.  Haga clic en **finalizar**
+1.  Haga clic con el botón secundario en el nombre del proyecto en Explorador de soluciones, seleccione **Agregar**y, a continuación, haga clic en **nuevo elemento** .
+2.  Seleccione **datos** en el menú de la izquierda y, a continuación, seleccione **ADO.NET Entity Data Model** en el panel Plantillas.
+3.  Escriba **UniversityModel. edmx** como nombre de archivo y, a continuación, haga clic en **Agregar** .
+4.  En la página del Asistente para Entity Data Model, seleccione **modelo vacío** en el cuadro de diálogo elegir contenido del modelo.
+5.  Haga clic en **Finalizar**
 
-Entity Designer, que proporciona una superficie de diseño para modificar el modelo, se muestra.
+Se muestra el diseñador de entidades, que proporciona una superficie de diseño para editar el modelo.
 
 El asistente realiza las siguientes acciones:
 
--   Genera el archivo EnumTestModel.edmx que define el modelo conceptual, el modelo de almacenamiento y la asignación entre ellos. Establece la propiedad Metadata Artifact Processing del archivo .edmx para insertar en el ensamblado de salida para que los archivos de metadatos generados se incrustan en el ensamblado.
--   Agrega una referencia a los ensamblados siguientes: Entity Framework, System.ComponentModel.DataAnnotations y System.Data.Entity.
--   Crea los archivos UniversityModel.tt y UniversityModel.Context.tt y los agrega en el archivo .edmx. Estos archivos de plantilla T4 generarán el código que define el tipo de DbContext derivado y tipos POCO que se asignan a las entidades en el modelo edmx
+-   Genera el archivo EnumTestModel. edmx que define el modelo conceptual, el modelo de almacenamiento y la asignación entre ellos. Establece la propiedad de procesamiento de artefactos de metadatos del archivo. edmx que se va a incrustar en el ensamblado de salida para incrustar los archivos de metadatos generados en el ensamblado.
+-   Agrega una referencia a los ensamblados siguientes: EntityFramework, System. ComponentModel. DataAnnotations y System. Data. Entity.
+-   Crea archivos UniversityModel.tt y UniversityModel.Context.tt y los agrega en el archivo. edmx. Estos archivos de plantilla T4 generan el código que define el tipo derivado de DbContext y los tipos POCO que se asignan a las entidades en el modelo. edmx.
 
 ## <a name="add-a-new-entity-type"></a>Agregar un nuevo tipo de entidad
 
-1.  Haga clic en un área vacía de la superficie de diseño, seleccione **Add -&gt; entidad**, aparece el cuadro de diálogo New Entity
-2.  Especificar **Universidad** para el tipo de nombre y especificar **ID** para el nombre de propiedad de clave, deje el tipo como **Int32**
+1.  Haga clic con el botón secundario en un área vacía de la superficie de diseño, seleccione la **entidad Add-&gt;** y aparecerá el cuadro de diálogo nueva entidad.
+2.  Especifique **Universidad** como nombre de tipo y especifique **UniversityID** para el nombre de la propiedad de clave y deje el tipo como **Int32** .
 3.  Haga clic en **Aceptar**.
-4.  Haga clic en la entidad y seleccione **Add New -&gt; propiedad escalar**
+4.  Haga clic con el botón secundario en la entidad y seleccione **Agregar nueva-&gt; propiedad escalar** .
 5.  Cambiar el nombre de la nueva propiedad a **nombre**
-6.  Agregar otra propiedad escalar y cambie su nombre a **ubicación** abrir la ventana Propiedades y cambie el tipo de la nueva propiedad a **Geography**
-7.  Guardar el modelo y compile el proyecto
+6.  Agregue otra propiedad escalar y cámbiela a **Ubicación** . abra el ventana Propiedades y cambie el tipo de la nueva propiedad a **geografía** .
+7.  Guardar el modelo y compilar el proyecto
     > [!NOTE]
-    > Cuando se compila, las advertencias sobre sin asignar entidades y asociaciones pueden aparecer en la lista de errores. Puede omitir estas advertencias porque una vez que se elija Generar la base de datos del modelo, los errores desaparecerán.
+    > Al compilar, las advertencias sobre entidades y asociaciones no asignadas pueden aparecer en el Lista de errores. Puede omitir estas advertencias porque, después de elegir generar la base de datos a partir del modelo, los errores desaparecerán.
 
-## <a name="generate-database-from-model"></a>Generar la base de datos de modelo
+## <a name="generate-database-from-model"></a>Generar base de datos a partir del modelo
 
-Ahora podemos generar una base de datos que se basa en el modelo.
+Ahora se puede generar una base de datos basada en el modelo.
 
-1.  Haga clic en un espacio vacío en el Entity Designer superficie y seleccione **generar base de datos de modelo**
-2.  Haga clic en mostrará la elija el cuadro de diálogo de conexión de datos del Asistente para generar base de datos es el **nueva conexión** botón especifique **(localdb)\\mssqllocaldb** para el nombre del servidor y  **Universidad** para la base de datos y haga clic en **Aceptar**
-3.  Se abrirá, haga clic en un cuadro de diálogo que le pregunta si desea crear una nueva base de datos **Sí**.
-4.  Haga clic en **siguiente** y Asistente para crear base de datos genera el lenguaje de definición de datos (DDL) para crear una base de datos de la DDL generada se muestra en el resumen y una nota de cuadro de diálogo Configuración, el DDL no contiene una definición para un tabla que se asigna al tipo de enumeración
-5.  Haga clic en **finalizar** no ejecuta el script DDL al hacer clic en Finalizar.
-6.  El Asistente para crear base de datos hace lo siguiente: abre el **UniversityModel.edmx.sql** en T-SQL, Editor genera las secciones de esquema y asignación de almacén de EDMX archivo agrega información de la cadena de conexión al archivo App.config
-7.  Haga clic en el botón secundario del mouse en el Editor de Transact-SQL y seleccione **Execute** aparece el diálogo Conectar a servidor, escriba la información de conexión del paso 2 y haga clic en **Connect**
-8.  Para ver el esquema generado, haga doble clic en el nombre de base de datos en el Explorador de objetos de SQL Server y seleccione **actualizar**
+1.  Haga clic con el botón secundario en un espacio vacío en la superficie de Entity Designer y seleccione **generar base de datos a partir del modelo** .
+2.  Se muestra el cuadro de diálogo elegir la conexión de datos del Asistente para generar base de datos, haga clic en el botón **nueva conexión** especifique **(LocalDB) \\mssqllocaldb** para el nombre del servidor y la **Universidad** para la base de datos y haga clic en **Aceptar.**
+3.  Aparecerá un cuadro de diálogo en el que se le pregunta si desea crear una nueva base de datos, haga clic en **sí**.
+4.  Haga clic en **siguiente** y el Asistente para crear base de datos genera el lenguaje de definición de datos (DDL) para crear una base de datos. la DDL generada se muestra en el cuadro de diálogo Resumen y configuración. tenga en cuenta que el DDL no contiene una definición para una tabla que se asigna al tipo de enumeración
+5.  Haga clic en **Finalizar** al hacer clic en finalizar no se ejecuta el script DDL.
+6.  El Asistente para crear bases de datos hace lo siguiente: Abre **UniversityModel. edmx. SQL** en el editor de T-SQL genera las secciones de asignación y esquema del almacén del archivo edmx agrega información de la cadena de conexión al archivo app. config.
+7.  Haga clic con el botón secundario del mouse en el editor de T-SQL y seleccione **Ejecutar** el cuadro de diálogo conectar con el servidor, escriba la información de conexión del paso 2 y haga clic en **conectar** .
+8.  Para ver el esquema generado, haga clic con el botón derecho en el nombre de la base de datos en Explorador de objetos de SQL Server y seleccione **Actualizar** .
 
 ## <a name="persist-and-retrieve-data"></a>Conservar y recuperar datos
 
-Abra el archivo Program.cs, donde se define el método Main. Agregue el código siguiente en la función Main.
+Abra el archivo Program.cs en el que se define el método Main. Agregue el código siguiente a la función main.
 
-El código agrega dos nuevos objetos de la Universidad del contexto. Propiedades espaciales se inicializan mediante el método DbGeography.FromText. Punto de geografía que se representan como WellKnownText se pasa al método. El código, a continuación, guarda los datos. A continuación, la consulta LINQ que devuelve un objeto de la Universidad donde su ubicación es más cercana a la ubicación especificada, se genera y ejecuta.
+El código agrega dos nuevos objetos universitarios al contexto. Las propiedades espaciales se inicializan mediante el método DbGeography. FromText. El punto de geografía representado como WellKnownText se pasa al método. Después, el código guarda los datos. A continuación, se crea y se ejecuta la consulta LINQ que devuelve un objeto University donde su ubicación es más cercana a la ubicación especificada.
 
 ``` csharp
 using (var context = new UniversityModelContainer())
@@ -120,12 +120,12 @@ using (var context = new UniversityModelContainer())
 
 Compile y ejecute la aplicación. El programa produce el siguiente resultado:
 
-```
+```console
 The closest University to you is: School of Fine Art.
 ```
 
-Para ver los datos en la base de datos, haga doble clic en el nombre de base de datos en el Explorador de objetos de SQL Server y seleccione **actualizar**. A continuación, haga clic en el botón secundario del mouse en la tabla y seleccione **ver datos**.
+Para ver los datos de la base de datos, haga clic con el botón derecho en el nombre de la base de datos en Explorador de objetos de SQL Server y seleccione **Actualizar**. A continuación, haga clic con el botón secundario del mouse en la tabla y seleccione **ver datos**.
 
 ## <a name="summary"></a>Resumen
 
-En este tutorial explicamos cómo asignar tipos espaciales mediante el Diseñador de Entity Framework y cómo usar tipos espaciales en el código. 
+En este tutorial, hemos visto cómo asignar tipos espaciales mediante el Entity Framework Designer y cómo usar tipos espaciales en el código. 

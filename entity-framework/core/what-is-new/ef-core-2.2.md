@@ -4,12 +4,12 @@ author: divega
 ms.date: 11/14/2018
 ms.assetid: 998C04F3-676A-4FCF-8450-CFB0457B4198
 uid: core/what-is-new/ef-core-2.2
-ms.openlocfilehash: 79b4efc3aee23e19a9ea1deb6373b9984b77f886
-ms.sourcegitcommit: b3c2b34d5f006ee3b41d6668f16fe7dcad1b4317
+ms.openlocfilehash: 5fcf7c6dfb4d8cb7928ef974af6deb52df7c63eb
+ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/15/2018
-ms.locfileid: "51688771"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72181373"
 ---
 # <a name="new-features-in-ef-core-22"></a>Novedades de EF Core 2.2
 
@@ -21,7 +21,7 @@ EF Core 2.2 ahora admite trabajar con datos espaciales de varias bases de datos 
 
 La compatibilidad con datos espaciales se implementa como una serie de paquetes de extensión específicos del proveedor.
 Cada uno de estos paquetes contribuye a las asignaciones de tipos y métodos de NTS y los correspondientes tipos espaciales y funciones en la base de datos.
-Estas extensiones de proveedor ahora están disponibles para [SQL Server](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer.NetTopologySuite/), [SQLite](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Sqlite.NetTopologySuite/) y [PostgreSQL](https://www.nuget.org/packages/Npgsql.EntityFrameworkCore.PostgreSQL.NetTopologySuite/) (del [proyecto Npgsql](http://www.npgsql.org/)).
+Estas extensiones de proveedor ahora están disponibles para [SQL Server](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer.NetTopologySuite/), [SQLite](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Sqlite.NetTopologySuite/) y [PostgreSQL](https://www.nuget.org/packages/Npgsql.EntityFrameworkCore.PostgreSQL.NetTopologySuite/) (del [proyecto Npgsql](https://www.npgsql.org/)).
 Los tipos espaciales pueden usarse directamente con el [proveedor en memoria de EF Core](https://docs.microsoft.com/en-us/ef/core/providers/in-memory/) sin extensiones adicionales.
 
 Una vez que se instala la extensión del proveedor, puede agregar propiedades de los tipos admitidos a las entidades. Por ejemplo:

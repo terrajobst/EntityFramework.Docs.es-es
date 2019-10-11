@@ -3,20 +3,20 @@ title: 'Creación de un modelo: EF6'
 author: divega
 ms.date: 07/05/2018
 ms.assetid: 4890228E-CEA1-4595-B8AD-CA81253F8767
-ms.openlocfilehash: c02cdf0550116b703fb6436f8b0c6b064b5d1408
-ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
+ms.openlocfilehash: bd9843a93121f53518a307c9d2d43b68ae03369c
+ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/18/2018
-ms.locfileid: "46283581"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72182465"
 ---
 # <a name="creating-a-model"></a>Creación de un modelo
 
 Un modelo de EF almacena los detalles sobre cómo se asignan las propiedades y las clases de la aplicación a las columnas y las tablas de la base de datos. Hay dos formas principales de crear un modelo de EF:
 
-- **Uso de Code First**: el desarrollador escribe código para especificar el modelo. EF genera los modelos y las asignaciones en tiempo de ejecución según las clases de entidad y la configuración de modelo adicional proporcionados por el desarrollador.
+- **Usar Code First**: el desarrollador escribe código para especificar el modelo. EF genera los modelos y las asignaciones en tiempo de ejecución según las clases de entidad y la configuración de modelo adicional proporcionados por el desarrollador.
 
-- **Uso de EF Designer**: el desarrollador dibuja cuadros y líneas para especificar el modelo con EF Designer. El modelo resultante se almacena como XML en un archivo con la extensión EDMX. Los objetos de dominio de la aplicación normalmente se generan de forma automática desde el modelo conceptual.
+- **Usar EF Designer**: el desarrollador dibuja cuadros y líneas para especificar el modelo con EF Designer. El modelo resultante se almacena como XML en un archivo con la extensión EDMX. Los objetos de dominio de la aplicación normalmente se generan de forma automática desde el modelo conceptual.
 
 ## <a name="ef-workflows"></a>Flujos de trabajo de EF
 
@@ -28,11 +28,11 @@ Descubra cuál es el más adecuado en su caso:
 | **Voy a crear una nueva base de datos**          | [Use **Code First** para definir el modelo en el código y luego generar una base de datos.](~/ef6/modeling/code-first/workflows/new-database.md)           | [Use **Model First** para definir el modelo mediante cuadros y líneas y luego generar una base de datos.](~/ef6/modeling/designer/workflows/model-first.md)   |
 | **Necesito acceder a una base de datos existente** | [Use **Code First** para crear un modelo basado en código que se asigne a una base de datos existente.](~/ef6/modeling/code-first/workflows/existing-database.md) | [Use **Database First** para crear un modelo de cuadros y líneas que se asigne a una base de datos existente.](~/ef6/modeling/designer/workflows/database-first.md) |
 
-### <a name="watch-the-video-what-ef-workflow-should-i-use"></a>Vea el vídeo: What EF workflow should I use? (Qué flujo de trabajo de EF debo usar)
+### <a name="watch-the-video-what-ef-workflow-should-i-use"></a>Vea el vídeo: ¿Qué flujo de trabajo de EF debo usar?
 
 En este breve vídeo se explican las diferencias y cómo encontrar el adecuado para usted.
 
-**Presentado por**: [Rowan Miller](http://romiller.com/)
+**Presentado por**: [Rowan Miller](https://romiller.com/)
 
 ![Which Workflow Thumb](../media/whichworkflow-thumb.png) (Consejos para elegir un flujo de trabajo) [WMV](https://download.microsoft.com/download/8/F/8/8F81F4CD-3678-4229-8D79-0C63FFA3C595/HDI_ITPro_Technet_winvideo_ChoseYourWorkflow.wmv) | [MP4](https://download.microsoft.com/download/8/F/8/8F81F4CD-3678-4229-8D79-0C63FFA3C595/HDI_ITPro_Technet_mp4video_ChoseYourWorkflow.m4v) | [WMV (ZIP)](https://download.microsoft.com/download/8/F/8/8F81F4CD-3678-4229-8D79-0C63FFA3C595/HDI_ITPro_Technet_winvideo_ChoseYourWorkflow.zip)
 

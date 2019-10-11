@@ -1,19 +1,19 @@
 ---
-title: 'Consulta del diseñador procedimientos almacenados: EF6'
+title: 'Procedimientos almacenados de consulta del diseñador: EF6'
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 9554ed25-c5c1-43be-acad-5da37739697f
-ms.openlocfilehash: 04478ea1c8cd43a7ba4ee788e464992af3de7f64
-ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
+ms.openlocfilehash: 2e0092b526278597e8477d47eeb642598647bb91
+ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/18/2018
-ms.locfileid: "46283906"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72182484"
 ---
-# <a name="designer-query-stored-procedures"></a>Consulta del Diseñador de procedimientos almacenados
-En este tutorial paso a paso muestra cómo usar el Diseñador de Entity Framework (EF Designer) para importar los procedimientos almacenados en un modelo y, a continuación, llamar a los procedimientos almacenados importados para recuperar los resultados. 
+# <a name="designer-query-stored-procedures"></a>Procedimientos almacenados de consulta del diseñador
+En este tutorial paso a paso se muestra cómo usar el Entity Framework Designer (EF Designer) para importar procedimientos almacenados en un modelo y, a continuación, llamar a los procedimientos almacenados importados para recuperar los resultados. 
 
-Tenga en cuenta que Code First no admite la asignación a procedimientos almacenados o funciones. Sin embargo, puede llamar a procedimientos almacenados o funciones mediante el método System.Data.Entity.DbSet.SqlQuery. Por ejemplo:
+Tenga en cuenta que Code First no admite la asignación a funciones o procedimientos almacenados. Sin embargo, puede llamar a procedimientos almacenados o funciones mediante el método System. Data. Entity. DbSet. SqlQuery. Por ejemplo:
 ``` csharp
 var query = context.Products.SqlQuery("EXECUTE [dbo].[GetAllProducts]")`;
 ```
@@ -23,47 +23,47 @@ var query = context.Products.SqlQuery("EXECUTE [dbo].[GetAllProducts]")`;
 Para completar este tutorial, necesitará:
 
 - Una versión reciente de Visual Studio.
-- El [base de datos de ejemplo School](~/ef6/resources/school-database.md).
+- La [base de datos de ejemplo School](~/ef6/resources/school-database.md).
 
 ## <a name="set-up-the-project"></a>Configurar el proyecto
 
 -   Abra Visual Studio 2012.
--   Seleccione **archivo -&gt; nuevo:&gt; proyecto**
--   En el panel izquierdo, haga clic en **Visual C\#** y, a continuación, seleccione el **consola** plantilla.
--   Escriba **EFwithSProcsSample** como el nombre.
--   Seleccione **Aceptar**.
+-   Seleccione el **proyecto de archivo-&gt; nuevo-&gt;**
+-   En el panel izquierdo, haga clic en **Visual C @ no__t-1**y, a continuación, seleccione la plantilla de **consola** .
+-   Escriba **EFwithSProcsSample** as el nombre.
+-   Seleccione **Aceptar**.
 
 ## <a name="create-a-model"></a>Crear un modelo
 
--   Haga clic en el proyecto en el Explorador de soluciones y seleccione **Add -&gt; nuevo elemento**.
--   Seleccione **datos** desde el menú de la izquierda y seleccione **ADO.NET Entity Data Model** en el panel Plantillas.
--   Escriba **EFwithSProcsModel.edmx** para el nombre de archivo y, a continuación, haga clic en **agregar**.
--   En el cuadro de diálogo Elegir contenido del modelo, seleccione **generar desde la base de datos**y, a continuación, haga clic en **siguiente**.
--   Haga clic en **nueva conexión**.  
-    En el cuadro de diálogo Propiedades de conexión, escriba el nombre del servidor (por ejemplo, **(localdb)\\mssqllocaldb**), seleccione el método de autenticación, el tipo **School** para el nombre de la base de datos y, a continuación, Haga clic en **Aceptar**.  
-    El cuadro de diálogo Elegir la conexión de datos se actualiza con la configuración de conexión de base de datos.
--   En el cuadro de diálogo Elija los objetos de base de datos, compruebe el **tablas** casilla de verificación para seleccionar todas las tablas.  
-    Además, seleccione los siguientes procedimientos almacenados en el **procedimientos almacenados y funciones** nodo: **GetStudentGrades** y **GetDepartmentName**. 
+-   Haga clic con el botón derecho en el proyecto en Explorador de soluciones y seleccione **Agregar-&gt; nuevo elemento**.
+-   Seleccione **datos** en el menú de la izquierda y, a continuación, seleccione **ADO.NET Entity Data Model** en el panel Plantillas.
+-   Escriba **EFwithSProcsModel. edmx** como nombre de archivo y, a continuación, haga clic en **Agregar**.
+-   En el cuadro de diálogo elegir contenido del modelo, seleccione **generar desde la base de datos**y, a continuación, haga clic en **siguiente**.
+-   Haga clic en **nueva conexión**.  
+    En el cuadro de diálogo Propiedades de conexión, escriba el nombre del servidor (por ejemplo, **(LocalDB) \\mssqllocaldb**), seleccione el método de autenticación, escriba **School** for el nombre de la base de datos y, a continuación, haga clic en **Aceptar**.  
+    El cuadro de diálogo elegir la conexión de datos se actualiza con la configuración de conexión de la base de datos.
+-   En el cuadro de diálogo elija los objetos de base de datos, compruebe las **tablas** checkbox para seleccionar todas las tablas.  
+    Además, seleccione los siguientes procedimientos almacenados en el nodo **procedimientos almacenados y funciones** : **GetStudentGrades** y **GetDepartmentName**. 
 
     ![Importar](~/ef6/media/import.jpg)
 
-    *A partir de Visual Studio 2012, EF Designer admite la importación masiva de los procedimientos almacenados. El **Importar seleccionada procedimientos almacenados y funciones en el modelo de theentity** está activada de forma predeterminada.*
--   Haga clic en **Finalizar**.
+    *Starting con Visual Studio 2012 el diseñador de EF admite la importación masiva de procedimientos almacenados. La **importación de funciones y procedimientos almacenados seleccionados en el modelo de entidad** está activada de forma predeterminada.*
+-   Haga clic en **Finalizar**.
 
-De forma predeterminada, la forma del resultado de cada procedimiento almacenado importada o la función que devuelve más de una columna se convertirá automáticamente en un nuevo tipo complejo. En este ejemplo desea asignar los resultados de la **GetStudentGrades** función a la **StudentGrade** entidad y los resultados de la **GetDepartmentName** a **ninguno** (**ninguno** es el valor predeterminado).
+De forma predeterminada, la forma de resultado de cada procedimiento almacenado importado o función que devuelve más de una columna se convierte automáticamente en un nuevo tipo complejo. En este ejemplo, queremos asignar los resultados de la función **GetStudentGrades** a la entidad **StudentGrade** y los resultados de **GetDepartmentName** a **None** (**ninguno** es el valor predeterminado).
 
-Para que una importación de función devolver un tipo de entidad, las columnas devueltas por el procedimiento almacenado correspondiente deben coincidir exactamente con las propiedades escalares del tipo de entidad devuelta. Una importación de función también puede devolver colecciones de tipos simples, tipos complejos o ningún valor.
+Para que una importación de función devuelva un tipo de entidad, las columnas devueltas por el procedimiento almacenado correspondiente deben coincidir exactamente con las propiedades escalares del tipo de entidad devuelto. Una importación de función también puede devolver colecciones de tipos simples, tipos complejos o ningún valor.
 
--   Haga clic en la superficie de diseño y seleccione **Explorador de modelos**.
--   En **Explorador de modelos**, seleccione **Function Imports**y, a continuación, haga doble clic en el **GetStudentGrades** función.
--   En el cuadro de diálogo Editar importación de función, seleccione **entidades** y elija **StudentGrade**.  
-    *El **importación de función es ajustable** casilla en la parte superior de la **Function Imports** cuadro de diálogo le permitirá asignar a las funciones que admite composición. Si activa esta casilla, solo las funciones que se pueden componer (funciones con valores de tabla) se mostrarán en el **Stored Procedure / nombre de la función** lista desplegable. Si no activa esta casilla, se mostrará solo las funciones que no se pueden componer en la lista.*
+-   Haga clic con el botón secundario en la superficie de diseño y seleccione **Explorador de modelos**.
+-   En el **Explorador de modelos**, seleccione **importaciones de función**y, a continuación, haga doble clic en la función **GetStudentGrades** .
+-   En el cuadro de diálogo Editar importación de función, seleccione **entidades** And elija **StudentGrade**.  
+    en la parte superior del cuadro de diálogo de las **importaciones** de funciones, @no__t la **función de importación** de funciones de 0The, le permitirá asignar funciones que admiten composición. Si activa esta casilla, solo aparecerán las funciones que admiten composición (funciones con valores de tabla) en la lista desplegable **procedimiento almacenado o nombre de función** . Si no activa esta casilla, solo se mostrarán en la lista las funciones que no admiten composición. *
 
 ## <a name="use-the-model"></a>Usar el modelo
 
-Abra el **Program.cs** donde el **Main** se define el método. Agregue el código siguiente en la función Main.
+Abra el archivo **Program.CS** en el que se define el método **Main** . Agregue el código siguiente a la función main.
 
-El código llama a dos procedimientos almacenados: **GetStudentGrades** (devuelve **StudentGrades** especificado *StudentId*) y **GetDepartmentName** (devuelve el nombre del departamento en el parámetro de salida).  
+El código llama a dos procedimientos almacenados: **GetStudentGrades** (devuelve **StudentGrades** para el *StudentId*especificado) y **GetDepartmentName** (devuelve el nombre del Departamento en el parámetro de salida).  
 
 ``` csharp
     using (SchoolEntities context = new SchoolEntities())
@@ -89,7 +89,7 @@ El código llama a dos procedimientos almacenados: **GetStudentGrades** (devuelv
 
 Compile y ejecute la aplicación. El programa produce el siguiente resultado:
 
-```
+```console
 StudentID: 2
 Student grade: 4.00
 StudentID: 2
@@ -100,4 +100,4 @@ The department name is Engineering
 <a name="output-parameters"></a>Parámetros de salida
 -----------------
 
-Si se usan parámetros de salida, sus valores no estará disponibles hasta que se han leído completamente los resultados. Esto es debido al comportamiento subyacente de DbDataReader, vea [recuperar datos mediante DataReader](https://go.microsoft.com/fwlink/?LinkID=398589) para obtener más detalles.
+Si se utilizan parámetros de salida, sus valores no estarán disponibles hasta que los resultados se hayan leído por completo. Esto se debe al comportamiento subyacente de DbDataReader, consulte [recuperación de datos mediante un DataReader](https://go.microsoft.com/fwlink/?LinkID=398589) para obtener más detalles.

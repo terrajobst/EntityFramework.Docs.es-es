@@ -1,51 +1,51 @@
 ---
-title: Las pruebas con sus propio dobles de pruebas - EF6
+title: Pruebas con sus propias pruebas dobles-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 16a8b7c0-2d23-47f4-9cc0-e2eb2e738ca3
-ms.openlocfilehash: 9db56e28cd89084fece36c3e5a2c1b4495991d01
-ms.sourcegitcommit: 645785187ae23ddf7d7b0642c7a4da5ffb0c7f30
+ms.openlocfilehash: 4631206ae26d364e92c932857fa1970804a7a335
+ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/25/2019
-ms.locfileid: "58419736"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72181411"
 ---
-# <a name="testing-with-your-own-test-doubles"></a>Las pruebas con sus propio dobles de pruebas
+# <a name="testing-with-your-own-test-doubles"></a>Pruebas con sus propias dobles de pruebas
 > [!NOTE]
 > **Solo EF6 y versiones posteriores**: las características, las API, etc. que se tratan en esta página se han incluido a partir de Entity Framework 6. Si usa una versión anterior, no se aplica parte o la totalidad de la información.  
 
-Al escribir pruebas para la aplicación suele ser deseable para evitar llegar a la base de datos.  Entity Framework le permite conseguir esto mediante la creación de un contexto – con el comportamiento definido por las pruebas, que hace uso de datos en memoria.  
+Al escribir pruebas para la aplicación, a menudo es conveniente evitar la llegada de la base de datos.  Entity Framework le permite conseguirlo mediante la creación de un contexto, con el comportamiento definido por las pruebas, que hace uso de los datos en memoria.  
 
-## <a name="options-for-creating-test-doubles"></a>Opciones para crear los dobles de pruebas  
+## <a name="options-for-creating-test-doubles"></a>Opciones para crear dobles de pruebas  
 
-Existen dos enfoques diferentes que pueden usarse para crear una versión en memoria de su contexto.  
+Existen dos enfoques diferentes que se pueden usar para crear una versión en memoria del contexto.  
 
-- **Crear sus propio dobles de pruebas** – este enfoque implica escribir su propia implementación en memoria de su contexto y DbSets. Esto le ofrece un gran control sobre cómo se comportan las clases, pero pueden implicar escribir y poseer una cantidad razonable de código.  
-- **Usar un marco de simulación para crear los dobles de pruebas** : mediante un marco de simulación (como Moq) puede tener las implementaciones en memoria que contexto y los conjuntos creados dinámicamente en tiempo de ejecución para usted.  
+- **Crear sus propios dobles de pruebas** : este enfoque implica escribir su propia implementación en memoria de su contexto y DbSets. Esto le ofrece un gran control sobre cómo se comportan las clases, pero puede implicar la escritura y la propiedad de una cantidad de código razonable.  
+- **Usar un marco ficticio para crear dobles de pruebas** : mediante un marco ficticio (como MOQ), puede tener las implementaciones en memoria de contexto y conjuntos creados dinámicamente en tiempo de ejecución.  
 
-En este artículo tratará la creación de su propia prueba doble. Para obtener información sobre el uso de un marco de simulación vea [las pruebas con un marco de simulación](mocking.md).  
+En este artículo se tratará la creación de su propio Double de prueba. Para obtener información sobre el uso de un marco ficticio, vea [probar con un marco ficticio](mocking.md).  
 
-## <a name="testing-with-pre-ef6-versions"></a>Las pruebas con las versiones anteriores a EF6  
+## <a name="testing-with-pre-ef6-versions"></a>Pruebas con versiones anteriores a EF6  
 
-El código mostrado en este artículo es compatible con EF6. Para las pruebas con EF5 y una versión anterior, consulte [las pruebas con un contexto de imitar](http://romiller.com/2012/02/14/testing-with-a-fake-dbcontext/).  
+El código que se muestra en este artículo es compatible con EF6. Para realizar pruebas con EF5 y versiones anteriores, consulte [pruebas con un contexto falso](https://romiller.com/2012/02/14/testing-with-a-fake-dbcontext/).  
 
-## <a name="limitations-of-ef-in-memory-test-doubles"></a>Limitaciones de EF en memoria de dobles de pruebas  
+## <a name="limitations-of-ef-in-memory-test-doubles"></a>Limitaciones de los dobles de pruebas en memoria de EF  
 
-Dobles de pruebas en memoria pueden ser una buena forma de proporcionar cobertura de nivel de bits de la aplicación que usan EF de prueba unitaria. Sin embargo, al hacerlo se mediante LINQ to Objects para ejecutar consultas en datos en memoria. Esto puede provocar un comportamiento diferente que el proveedor LINQ de EF (LINQ to Entities) para traducir consultas en SQL que se ejecuta en la base de datos.  
+Los dobles de pruebas en memoria pueden ser una buena manera de proporcionar una cobertura de nivel de prueba unitaria de bits de la aplicación que usa EF. Sin embargo, al hacerlo, se usa LINQ to Objects para ejecutar consultas en los datos en memoria. Esto puede dar lugar a un comportamiento diferente al uso del proveedor LINQ (LINQ to Entities) de EF para traducir las consultas en SQL que se ejecutan en la base de datos.  
 
-Un ejemplo de esta diferencia está cargando datos relacionados. Si crea una serie de Blogs de publicaciones que cada relacionadas, a continuación, cuando se usan los datos en memoria siempre se cargarán esas entradas para cada Blog. Sin embargo, cuando se ejecuta en una base de datos solo se cargará los datos si usa el método Include.  
+Un ejemplo de este tipo de diferencia es la carga de datos relacionados. Si crea una serie de blogs en los que cada uno tiene elementos relacionados, al usar los datos en memoria, los envíos relacionados se cargarán siempre para cada blog. Sin embargo, cuando se ejecuta en una base de datos, los datos solo se cargarán si se usa el método include.  
 
-Por este motivo, se recomienda incluir siempre cierto nivel de pruebas to-end (además de las pruebas unitarias) para asegurarse de la aplicación funciona correctamente en una base de datos.  
+Por esta razón, se recomienda incluir siempre cierto nivel de pruebas de un extremo a otro (además de las pruebas unitarias) para asegurarse de que la aplicación funciona correctamente en una base de datos.  
 
-## <a name="following-along-with-this-article"></a>Siguiendo con este artículo.  
+## <a name="following-along-with-this-article"></a>Junto con este artículo  
 
-Este artículo proporcionan listas de código completo que se pueden copiar en Visual Studio para seguir el tutorial si lo desea. Es más fácil crear un **proyecto de prueba unitaria** y será necesario al destino **.NET Framework 4.5** para completar las secciones que se usa async.  
+En este artículo se proporcionan listas de código completas que se pueden copiar en Visual Studio para que se realicen a continuación, si así se desea. Es más fácil crear un **proyecto de prueba unitaria** y tendrá que tener como destino **.NET Framework 4,5** para completar las secciones que usan Async.  
 
-## <a name="creating-a-context-interface"></a>Creación de una interfaz de contexto  
+## <a name="creating-a-context-interface"></a>Crear una interfaz de contexto  
 
-Vamos a ver en las pruebas de un servicio que hace uso de EF modelo. Para poder reemplazar el contexto de EF con una versión en memoria para las pruebas, definiremos una interfaz que implementarán el contexto de EF (y su doble de memoria).
+Vamos a echar un vistazo a la prueba de un servicio que hace uso de un modelo EF. Para poder reemplazar el contexto de EF con una versión en memoria para las pruebas, vamos a definir una interfaz que implementará el contexto de EF (y el valor Double en memoria).
 
-Vamos a probar el servicio de consultar y modificar datos mediante las propiedades DbSet de nuestro contexto y también llamar a SaveChanges para insertar los cambios en la base de datos. Por lo que hemos incluido a estos miembros en la interfaz.  
+El servicio que se va a probar consultará y modificará los datos mediante las propiedades DbSet de nuestro contexto y también llamará a SaveChanges para enviar los cambios a la base de datos. Por tanto, vamos a incluir estos miembros en la interfaz.  
 
 ``` csharp
 using System.Data.Entity;
@@ -61,9 +61,9 @@ namespace TestingDemo
 }
 ```  
 
-## <a name="the-ef-model"></a>El modelo de EF  
+## <a name="the-ef-model"></a>El modelo EF  
 
-El servicio, vamos a probar hace uso de EF modelo formado por el BloggingContext y las clases de Blog y Post. Este código puede haber sido generado por el Diseñador de EF o ser un modelo de Code First.  
+El servicio que vamos a probar hace uso de un modelo EF compuesto por las clases BloggingContext y blog y post. Este código puede haber sido generado por EF Designer o ser un modelo de Code First.  
 
 ``` csharp
 using System.Collections.Generic;
@@ -98,19 +98,19 @@ namespace TestingDemo
 }
 ```  
 
-### <a name="implementing-the-context-interface-with-the-ef-designer"></a>Implementa la interfaz de contexto con EF Designer  
+### <a name="implementing-the-context-interface-with-the-ef-designer"></a>Implementar la interfaz de contexto con EF Designer  
 
 Tenga en cuenta que nuestro contexto implementa la interfaz IBloggingContext.  
 
-Si utiliza Code First, a continuación, puede editar su contexto directamente para implementar la interfaz. Si está utilizando el Diseñador de EF, a continuación, deberá editar la plantilla T4 que genera el contexto. Abra el \<model_name\>. Archivo Context.tt que está anidado bajo el archivo edmx, busque el siguiente fragmento de código y agregue en la interfaz tal como se muestra.  
+Si usa Code First, puede modificar el contexto directamente para implementar la interfaz. Si usa el diseñador de EF, tendrá que editar la plantilla T4 que genera el contexto. Abra el @no__t 0model_name @ no__t-1. Archivo Context.tt que está anidado en el archivo edmx, busque el fragmento de código siguiente y agréguelo en la interfaz como se muestra.  
 
 ``` csharp  
 <#=Accessibility.ForType(container)#> partial class <#=code.Escape(container)#> : DbContext, IBloggingContext
 ```  
 
-## <a name="service-to-be-tested"></a>Servicio va a probar  
+## <a name="service-to-be-tested"></a>Servicio que se va a probar  
 
-Para mostrar la prueba de dobles de pruebas en memoria que vamos a escribir un par de pruebas para un BlogService. El servicio es capaz de crear nuevos blogs (AddBlog) y devolver todos los Blogs ordenados por nombre (GetAllBlogs). Además de GetAllBlogs, también hemos proporcionado un método que obtendrá de forma asincrónica todos los blogs, ordenados por nombre (GetAllBlogsAsync).  
+Para demostrar las pruebas con los dobles de pruebas en memoria, vamos a escribir un par de pruebas para un BlogService. El servicio es capaz de crear nuevos blogs (AddBlog) y devolver todos los blogs ordenados por nombre (GetAllBlogs). Además de GetAllBlogs, también se proporciona un método que obtendrá de forma asincrónica todos los blogs ordenados por nombre (GetAllBlogsAsync).  
 
 ``` csharp
 using System.Collections.Generic;
@@ -159,13 +159,13 @@ namespace TestingDemo
 }
 ```  
 
-<a name="creating-the-in-memory-test-doubles"/> ## Duplica crear la prueba en memoria  
+<a name="creating-the-in-memory-test-doubles"/> # # crear los dobles de pruebas en memoria  
 
-Ahora que tenemos el modelo de EF real y el servicio que puede usarlo, es momento de crear la prueba en memoria dobles que podemos usar para realizar pruebas. Hemos creado una prueba TestContext dobles para nuestro contexto. Llegamos al elegir el comportamiento que queremos para admitir las pruebas de dobles de pruebas se va a ejecutar. En este ejemplo nos estamos captura solo el número de veces que se llama a SaveChanges, pero puede incluir la lógica que se necesita para comprobar el escenario que se está probando.  
+Ahora que tenemos el modelo de EF real y el servicio que puede usarlo, es el momento de crear el doble de prueba en memoria que se puede usar para las pruebas. Hemos creado un Double de prueba de TestContext para nuestro contexto. En la prueba, se puede elegir el comportamiento que se desea para admitir las pruebas que se van a ejecutar. En este ejemplo, vamos a capturar el número de veces que se llama a SaveChanges, pero puede incluir la lógica que se necesita para comprobar el escenario que se está probando.  
 
-También hemos creado un TestDbSet que proporciona una implementación en memoria de DbSet. Hemos proporcionado una implementación completa para todos los métodos en DbSet (excepto para buscar), pero solo tiene que implementar a los miembros que se va a usar el escenario de prueba.  
+También hemos creado un TestDbSet que proporciona una implementación en memoria de DbSet. Hemos proporcionado una implementación completa de todos los métodos de DbSet (excepto buscar), pero solo tiene que implementar los miembros que usará el escenario de prueba.  
 
-TestDbSet hace uso de otras clases de infraestructura que hemos incluido para asegurarse de que se pueden procesar las consultas asincrónicas.  
+TestDbSet usa algunas otras clases de infraestructura que hemos incluido para asegurarse de que se puedan procesar las consultas asincrónicas.  
 
 ``` csharp
 using System;
@@ -372,9 +372,9 @@ namespace TestingDemo
 }
 ```  
 
-### <a name="implementing-find"></a>Implementación de búsqueda  
+### <a name="implementing-find"></a>Implementación de Find  
 
-El método Find es difícil de implementar de forma genérica. Si necesita probar código que hace uso del método Find es más fácil crear una prueba de DbSet para cada uno de los tipos de entidad que necesitan compatibilidad con buscar. A continuación, puede escribir lógica para buscar ese tipo de entidad, como se muestra a continuación.  
+El método Find es difícil de implementar de forma genérica. Si necesita probar el código que hace uso del método Find, es más fácil crear un DbSet de prueba para cada uno de los tipos de entidad que deben admitir la búsqueda. Después, puede escribir lógica para buscar ese tipo de entidad concreto, como se muestra a continuación.  
 
 ``` csharp
 using System.Linq;
@@ -392,11 +392,11 @@ namespace TestingDemo
 }
 ```  
 
-## <a name="writing-some-tests"></a>Escritura de pruebas  
+## <a name="writing-some-tests"></a>Escribir algunas pruebas  
 
-Eso es todo lo que necesitamos hacer para comenzar a probar. La siguiente prueba crea un TestContext y, a continuación, un servicio basado en este contexto. El servicio, a continuación, se usa para crear un nuevo blog: mediante el método AddBlog. Por último, la prueba comprueba que el servicio agrega un nuevo Blog a la propiedad de Blogs del contexto y llama a SaveChanges en el contexto.  
+Eso es todo lo que necesitamos hacer para iniciar las pruebas. La prueba siguiente crea una TestContext y luego un servicio basado en este contexto. Después, el servicio se usa para crear un nuevo blog: mediante el método AddBlog. Por último, la prueba comprueba que el servicio agregó un nuevo blog a la propiedad blogs del contexto y que se llama SaveChanges en el contexto.  
 
-Esto es solo un ejemplo de los tipos de cosas que puede probar con un doble de pruebas en memoria y se puede ajustar la lógica de las dobles de pruebas y la comprobación para satisfacer sus necesidades.  
+Este es solo un ejemplo de los tipos de cosas que puede probar con una prueba en memoria Double y puede ajustar la lógica de los dobles de pruebas y la comprobación para satisfacer sus requisitos.  
 
 ``` csharp
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -424,7 +424,7 @@ namespace TestingDemo
 }
 ```  
 
-Este es otro ejemplo de una prueba - en este momento uno que realiza una consulta. La prueba se inicia mediante la creación de un contexto de prueba con algunos datos en su propiedad de Blog: tenga en cuenta que los datos no están en orden alfabético. A continuación, podemos crear un BlogService según el contexto de prueba y asegúrese de que los datos, obtenemos desde GetAllBlogs se ordenan por nombre.  
+Este es otro ejemplo de una prueba; esta vez, una que realiza una consulta. La prueba se inicia creando un contexto de prueba con algunos datos en su propiedad de blog. tenga en cuenta que los datos no están en orden alfabético. A continuación, podemos crear un BlogService basado en nuestro contexto de prueba y asegurarse de que los datos que obtenemos de GetAllBlogs estén ordenados por nombre.  
 
 ``` csharp
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -454,7 +454,7 @@ namespace TestingDemo
 }
 ```  
 
-Por último, vamos a escribir una prueba más que usa el método asincrónico para asegurarse de que se incluyen en la infraestructura de async [TestDbSet](#creating-the-in-memory-test-doubles) está trabajando.  
+Por último, vamos a escribir una prueba más que use nuestro método asincrónico para asegurarse de que la infraestructura asincrónica incluida en [TestDbSet](#creating-the-in-memory-test-doubles) funciona.  
 
 ``` csharp
 using Microsoft.VisualStudio.TestTools.UnitTesting;

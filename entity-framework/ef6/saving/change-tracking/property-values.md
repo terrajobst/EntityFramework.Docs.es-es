@@ -1,30 +1,30 @@
 ---
-title: Trabajar con valores de propiedad - EF6
+title: 'Trabajar con valores de propiedad: EF6'
 author: divega
 ms.date: 10/23/2016
 ms.assetid: e3278b4b-9378-4fdb-923d-f64d80aaae70
-ms.openlocfilehash: afde503bb4ed15fcf83a57053541cd5da8c89835
-ms.sourcegitcommit: 50521b4a2f71139e6a7210a69ac73da582ef46cf
+ms.openlocfilehash: d8a18182754980d79b71df3f227b30c4ce40366f
+ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 06/27/2019
-ms.locfileid: "67416670"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72182143"
 ---
 # <a name="working-with-property-values"></a>Trabajar con valores de propiedad
-La mayor parte, Entity Framework se encargará de seguimiento del estado, los valores originales y los valores actuales de las propiedades de las instancias de entidad. Sin embargo, puede haber algunos casos, como los escenarios desconectados - donde desea ver o manipular la información de que EF tiene acerca de las propiedades. Las técnicas que se muestran en este tema se aplican igualmente a los modelos creados con Code First y EF Designer.  
+En la mayoría de los casos, Entity Framework se encargará del seguimiento del estado, los valores originales y los valores actuales de las propiedades de las instancias de la entidad. Sin embargo, puede haber algunos casos, como escenarios desconectados, donde desea ver o manipular la información que EF tiene sobre las propiedades. Las técnicas que se muestran en este tema se aplican igualmente a los modelos creados con Code First y EF Designer.  
 
-Entity Framework realiza un seguimiento de los dos valores para cada propiedad de una entidad con seguimiento. El valor actual es, como su nombre indica, el valor actual de la propiedad de la entidad. El valor original es el valor de la propiedad que tenía cuando se consultan desde la base de datos o adjunta al contexto de la entidad.  
+Entity Framework realiza un seguimiento de dos valores para cada propiedad de una entidad de la que se ha realizado un seguimiento. El valor actual es, como el nombre indica, el valor actual de la propiedad en la entidad. El valor original es el valor que tenía la propiedad cuando la entidad se consultaba desde la base de datos o se adjuntó al contexto.  
 
-Existen dos mecanismos generales para trabajar con valores de propiedad:  
+Hay dos mecanismos generales para trabajar con valores de propiedad:  
 
-- El valor de una propiedad única puede obtenerse de una manera fuertemente tipada mediante el método de propiedad.  
-- Los valores para todas las propiedades de una entidad pueden leerse en un objeto DbPropertyValues. DbPropertyValues, a continuación, actúa como un objeto de diccionario para permitir que se puede leer y establecer los valores de propiedad. Los valores de un objeto DbPropertyValues pueden establecerse de valores en otro objeto DbPropertyValues o de los valores de otro objeto, como otra copia de la entidad o un objeto de transferencia de datos simples (DTO).  
+- El valor de una propiedad única se puede obtener de una manera fuertemente tipada mediante el método de propiedad.  
+- Los valores de todas las propiedades de una entidad se pueden leer en un objeto DbPropertyValues. A continuación, DbPropertyValues actúa como un objeto similar a un diccionario para permitir la lectura y el establecimiento de los valores de propiedad. Los valores de un objeto DbPropertyValues se pueden establecer a partir de los valores de otro objeto DbPropertyValues o de los valores de otro objeto, como otra copia de la entidad o un objeto de transferencia de datos simple (DTO).  
 
-Las secciones siguientes muestran ejemplos del uso de los mecanismos anteriores ambos.  
+En las secciones siguientes se muestran ejemplos del uso de los dos mecanismos anteriores.  
 
-## <a name="getting-and-setting-the-current-or-original-value-of-an-individual-property"></a>Obtener y establecer el valor original o actual de una propiedad individual  
+## <a name="getting-and-setting-the-current-or-original-value-of-an-individual-property"></a>Obtener y establecer el valor actual o original de una propiedad individual  
 
-El ejemplo siguiente muestra cómo se puede leer el valor actual de una propiedad y, a continuación, se establece en un nuevo valor:  
+En el ejemplo siguiente se muestra cómo se puede leer el valor actual de una propiedad y establecerla en un nuevo valor:  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -45,17 +45,17 @@ using (var context = new BloggingContext())
 }
 ```  
 
-Utilice la propiedad OriginalValue en lugar de la propiedad CurrentValue para leer o establecer el valor original.  
+Use la propiedad OriginalValue en lugar de la propiedad CurrentValue para leer o establecer el valor original.  
 
-Tenga en cuenta que el valor devuelto se escribe como "objeto" cuando se usa una cadena para especificar el nombre de propiedad. Por otro lado, el valor devuelto está fuertemente tipado si se usa una expresión lambda.  
+Tenga en cuenta que el valor devuelto se escribe como "objeto" cuando se utiliza una cadena para especificar el nombre de la propiedad. Por otro lado, el valor devuelto está fuertemente tipado si se utiliza una expresión lambda.  
 
-Establecer el valor de propiedad similar al siguiente solo marcar la propiedad como modificada si el nuevo valor es diferente del valor antiguo.  
+Al establecer el valor de la propiedad de este modo, solo se marcará la propiedad como modificada si el nuevo valor es diferente del valor anterior.  
 
-Cuando se establece un valor de propiedad de este modo el cambio se detecta automáticamente, incluso si se desactiva AutoDetectChanges.  
+Cuando se establece un valor de propiedad de esta manera, el cambio se detecta automáticamente aunque AutoDetectChanges esté desactivado.  
 
-## <a name="getting-and-setting-the-current-value-of-an-unmapped-property"></a>Obtener y establecer el valor actual de una propiedad sin asignar  
+## <a name="getting-and-setting-the-current-value-of-an-unmapped-property"></a>Obtener y establecer el valor actual de una propiedad no asignada  
 
-También se puede leer el valor actual de una propiedad que no está asignado a la base de datos. Un ejemplo de una propiedad sin asignar podría ser una propiedad RssLink en el Blog. Este valor se puede calcular basándose en la BlogId y, por tanto, no necesita almacenarse en la base de datos. Por ejemplo:  
+También se puede leer el valor actual de una propiedad que no está asignada a la base de datos. Un ejemplo de una propiedad no asignada podría ser una propiedad RssLink en el blog. Este valor se puede calcular en función de BlogId y, por tanto, no es necesario almacenarlo en la base de datos. Por ejemplo:  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -71,7 +71,7 @@ using (var context = new BloggingContext())
 
 También se puede establecer el valor actual si la propiedad expone un establecedor.  
 
-Lectura de los valores de las propiedades sin asignar es útil al realizar la validación de Entity Framework de las propiedades sin asignar. Por la misma razón se pueden leer y establecer para propiedades de entidades que no contarán actualmente por el contexto de los valores actuales. Por ejemplo:  
+Leer los valores de las propiedades sin asignar es útil al realizar Entity Framework la validación de las propiedades no asignadas. Por el mismo motivo, los valores actuales se pueden leer y establecer para las propiedades de entidades a las que el contexto no realiza un seguimiento actualmente. Por ejemplo:  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -87,11 +87,11 @@ using (var context = new BloggingContext())
 }
 ```  
 
-Tenga en cuenta que los valores originales no están disponibles para las propiedades sin asignar o de las propiedades de entidades que no se realiza el seguimiento por el contexto.  
+Tenga en cuenta que los valores originales no están disponibles para las propiedades no asignadas o para las propiedades de entidades de las que el contexto no realiza un seguimiento.  
 
 ## <a name="checking-whether-a-property-is-marked-as-modified"></a>Comprobar si una propiedad está marcada como modificada  
 
-El ejemplo siguiente muestra cómo comprobar si una propiedad individual se marca como modificado:  
+En el ejemplo siguiente se muestra cómo comprobar si una propiedad individual está marcada como modificada:  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -105,11 +105,11 @@ using (var context = new BloggingContext())
 }
 ```  
 
-Los valores de las propiedades modificadas se envían como las actualizaciones a la base de datos cuando se llama a SaveChanges.  
+Los valores de las propiedades modificadas se envían como actualizaciones a la base de datos cuando se llama a SaveChanges.  
 
 ##  <a name="marking-a-property-as-modified"></a>Marcar una propiedad como modificada  
 
-El ejemplo siguiente muestra cómo forzar una propiedad individual esté marcado como modificado:  
+En el ejemplo siguiente se muestra cómo forzar que una propiedad individual se marque como modificada:  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -123,13 +123,13 @@ using (var context = new BloggingContext())
 }
 ```  
 
-Al marcar una propiedad como modificada fuerza una actualización se puede enviar a la base de datos para la propiedad cuando se llama a SaveChanges incluso si el valor actual de la propiedad es igual que su valor original.  
+Marcar una propiedad como modificada obliga a que se envíe una actualización a la base de datos para la propiedad cuando se llama a SaveChanges incluso si el valor actual de la propiedad es el mismo que el valor original.  
 
-No es actualmente posible restablecer una propiedad individual que no se puede modificar después de que se ha marcado como modificado. Esto es algo que tenemos previsto admitir en una versión futura.  
+Actualmente no es posible restablecer una propiedad individual para que no se modifique una vez que se ha marcado como modificada. Esto es algo que tenemos previsto admitir en una versión futura.  
 
-## <a name="reading-current-original-and-database-values-for-all-properties-of-an-entity"></a>Lectura actuales, originales y los valores de la base de datos para todas las propiedades de una entidad  
+## <a name="reading-current-original-and-database-values-for-all-properties-of-an-entity"></a>Leer los valores actuales, originales y de base de datos para todas las propiedades de una entidad  
 
-El ejemplo siguiente muestra cómo leer los valores actuales, los valores originales y los valores realmente en la base de datos para todas las propiedades asignadas de una entidad.  
+En el ejemplo siguiente se muestra cómo leer los valores actuales, los valores originales y los valores reales de la base de datos para todas las propiedades asignadas de una entidad.  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -163,11 +163,11 @@ public static void PrintValues(DbPropertyValues values)
 }
 ```  
 
-Los valores actuales son los valores que contienen las propiedades de la entidad. Los valores originales son los valores que se leyeron desde la base de datos cuando la entidad se consultó. Los valores de la base de datos son los valores que estén almacenadas actualmente en la base de datos. Obtener los valores de la base de datos es útil cuando los valores de la base de datos pueden haber cambiado desde que se consultó la entidad, como cuando edita un simultáneas a la base de datos se ha realizado por otro usuario.  
+Los valores actuales son los valores que las propiedades de la entidad contienen actualmente. Los valores originales son los valores que se leyeron de la base de datos cuando se realizó la consulta de la entidad. Los valores de la base de datos son los valores que están almacenados actualmente en la base de datos. Obtener los valores de la base de datos es útil cuando los valores de la base de datos pueden haber cambiado desde la consulta de la entidad, por ejemplo, cuando otro usuario ha realizado una edición simultánea en la base de datos.  
 
-## <a name="setting-current-or-original-values-from-another-object"></a>Establecer valores originales actuales de otro objeto  
+## <a name="setting-current-or-original-values-from-another-object"></a>Establecer valores actuales o originales de otro objeto  
 
-Los valores originales de una entidad con seguimiento actuales pueden actualizarse mediante la copia de los valores de otro objeto. Por ejemplo:  
+Los valores actuales o originales de una entidad de la que se ha realizado un seguimiento se pueden actualizar mediante la copia de los valores de otro objeto. Por ejemplo:  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -196,9 +196,9 @@ public class BlogDto
 }
 ```  
 
-Ejecuta el código anterior imprimirá:  
+La ejecución del código anterior se imprimirá:  
 
-```  
+```console
 Current values:
 Property Id has value 1
 Property Name has value My Cool Blog
@@ -208,13 +208,13 @@ Property Id has value 1
 Property Name has value My Boring Blog
 ```  
 
-Esta técnica a veces se utiliza al actualizar una entidad con los valores obtenidos de una llamada de servicio o un cliente en una aplicación de n niveles. Tenga en cuenta que usa el objeto no tiene que ser del mismo tipo que la entidad siempre y cuando dicha clase tiene propiedades cuyos nombres coinciden con los de la entidad. En el ejemplo anterior, se utiliza una instancia de BlogDTO para actualizar los valores originales.  
+Esta técnica se usa a veces al actualizar una entidad con valores obtenidos de una llamada de servicio o un cliente en una aplicación de n niveles. Tenga en cuenta que el objeto utilizado no tiene que ser del mismo tipo que la entidad, siempre y cuando tenga propiedades cuyos nombres coincidan con los de la entidad. En el ejemplo anterior, se usa una instancia de BlogDTO para actualizar los valores originales.  
 
-Tenga en cuenta que solo las propiedades que se establecen en valores diferentes cuando se copian desde el otro objeto se marcará como modificada.  
+Tenga en cuenta que solo las propiedades que se establecen en valores diferentes cuando se copian del otro objeto se marcan como modificadas.  
 
-## <a name="setting-current-or-original-values-from-a-dictionary"></a>Valores de configuración originales o actuales de un diccionario  
+## <a name="setting-current-or-original-values-from-a-dictionary"></a>Establecer los valores actuales o originales de un diccionario  
 
-Los valores originales de una entidad con seguimiento actuales pueden actualizarse mediante la copia de los valores de un diccionario o alguna otra estructura de datos. Por ejemplo:  
+Los valores actuales o originales de una entidad de la que se ha realizado un seguimiento se pueden actualizar mediante la copia de los valores de un diccionario u otra estructura de datos. Por ejemplo:  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -238,11 +238,11 @@ using (var context = new BloggingContext())
 }
 ```  
 
-Utilice la propiedad OriginalValues en lugar de la propiedad CurrentValues para establecer los valores originales.  
+Use la propiedad OriginalValues en lugar de la propiedad CurrentValues para establecer los valores originales.  
 
-## <a name="setting-current-or-original-values-from-a-dictionary-using-property"></a>Valores de configuración originales o actuales de un diccionario utilizando la propiedad  
+## <a name="setting-current-or-original-values-from-a-dictionary-using-property"></a>Establecer valores actuales o originales de un diccionario mediante la propiedad  
 
-Una alternativa al uso CurrentValues o OriginalValues como se mostró anteriormente es usar el método de propiedad para establecer el valor de cada propiedad. Esto puede ser preferible cuando se necesita establecer los valores de propiedades complejas. Por ejemplo:  
+Una alternativa al uso de CurrentValues o OriginalValues, como se muestra arriba, es usar el método de propiedad para establecer el valor de cada propiedad. Esto puede ser preferible cuando es necesario establecer los valores de las propiedades complejas. Por ejemplo:  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -266,11 +266,11 @@ using (var context = new BloggingContext())
 }
 ```  
 
-En el ejemplo anterior propiedades complejas son accesibles mediante nombres con puntos. Para que conocer otras formas de obtener acceso a propiedades complejas, vea las dos secciones más adelante en este tema en concreto sobre las propiedades complejas.  
+En el ejemplo anterior se tiene acceso a las propiedades complejas mediante nombres con puntos. Para conocer otras formas de obtener acceso a propiedades complejas, vea las dos secciones más adelante en este tema específicamente sobre las propiedades complejas.  
 
-## <a name="creating-a-cloned-object-containing-current-original-or-database-values"></a>Creación de un objeto clonado que contiene los valores de base de datos, original o actual  
+## <a name="creating-a-cloned-object-containing-current-original-or-database-values"></a>Crear un objeto clonado que contenga valores actual, original o de base de datos  
 
-Devuelve el objeto de DbPropertyValues de CurrentValues, OriginalValues, o GetDatabaseValues puede usarse para crear un clon de la entidad. Este clon contendrá los valores de propiedad del objeto DbPropertyValues usado para crearlo. Por ejemplo:  
+El objeto DbPropertyValues devuelto de CurrentValues, OriginalValues o GetDatabaseValues se puede usar para crear un clon de la entidad. Este clon contendrá los valores de propiedad del objeto DbPropertyValues que se usa para crearlo. Por ejemplo:  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -281,13 +281,13 @@ using (var context = new BloggingContext())
 }
 ```  
 
-Tenga en cuenta que el objeto devuelto no es la entidad y no se realiza el seguimiento del contexto. El objeto devuelto también no tiene ninguna relación establecido en otros objetos.  
+Tenga en cuenta que el objeto devuelto no es la entidad y el contexto no realiza su seguimiento. El objeto devuelto tampoco tiene ninguna relación establecida en otros objetos.  
 
-El objeto clonado puede ser útil para resolver problemas relacionados con actualizaciones simultáneas de la base de datos, especialmente cuando se está usando una interfaz de usuario que implica el enlace de datos a los objetos de un tipo determinado.  
+El objeto clonado puede ser útil para resolver problemas relacionados con las actualizaciones simultáneas en la base de datos, especialmente cuando se usa una interfaz de usuario que implique el enlace de datos a objetos de un tipo determinado.  
 
-## <a name="getting-and-setting-the-current-or-original-values-of-complex-properties"></a>Obtener y establecer los valores originales y actuales de propiedades complejas  
+## <a name="getting-and-setting-the-current-or-original-values-of-complex-properties"></a>Obtener y establecer los valores actuales o originales de propiedades complejas  
 
-El valor de todo el objeto complejo se pueden leer y definir mediante el método de la propiedad tal y como puede ser para una propiedad primitiva. Además puede profundizar en el objeto complejo y leer o establecer propiedades de ese objeto, o incluso un objeto anidado. A continuación se muestran algunos ejemplos:  
+El valor de un objeto complejo completo se puede leer y establecer mediante el método de propiedad, tal como puede ser para una propiedad primitiva. Además, puede explorar en profundidad el objeto complejo y leer o establecer las propiedades de ese objeto, o incluso un objeto anidado. A continuación se muestran algunos ejemplos:  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -334,13 +334,13 @@ using (var context = new BloggingContext())
 }
 ```  
 
-Utilice la propiedad OriginalValue en lugar de la propiedad CurrentValue a obtener o establecer un valor original.  
+Use la propiedad OriginalValue en lugar de la propiedad CurrentValue para obtener o establecer un valor original.  
 
-Tenga en cuenta que la propiedad o el método ComplexProperty puede utilizarse para tener acceso a una propiedad compleja. Sin embargo, el método ComplexProperty debe usarse si desea profundizar en el objeto complejo con propiedades adicionales o llama ComplexProperty.  
+Tenga en cuenta que se puede utilizar la propiedad o el método ComplexProperty para tener acceso a una propiedad compleja. Sin embargo, se debe usar el método ComplexProperty si desea explorar en profundidad el objeto complejo con llamadas adicionales a propiedades o ComplexProperty.  
 
-## <a name="using-dbpropertyvalues-to-access-complex-properties"></a>Uso de DbPropertyValues para tener acceso a propiedades complejas  
+## <a name="using-dbpropertyvalues-to-access-complex-properties"></a>Usar DbPropertyValues para tener acceso a propiedades complejas  
 
-Cuando use CurrentValues, OriginalValues o GetDatabaseValues obtener original actual, o valores de la base de datos de una entidad, los valores de propiedades complejas se devuelven como objetos DbPropertyValues anidados. Estos anidar objetos puede, a continuación, usarse para obtener los valores del objeto complejo. Por ejemplo, el siguiente método imprimirá los valores de todas las propiedades, incluidos los valores de las propiedades complejas y las propiedades complejas anidadas.  
+Cuando se usa CurrentValues, OriginalValues o GetDatabaseValues para obtener todos los valores actuales, originales o de la base de datos de una entidad, los valores de las propiedades complejas se devuelven como objetos DbPropertyValues anidados. Estos objetos anidados se pueden usar para obtener valores del objeto complejo. Por ejemplo, el método siguiente imprimirá los valores de todas las propiedades, incluidos los valores de las propiedades complejas y las propiedades complejas anidadas.  
 
 ``` csharp
 public static void WritePropertyValues(string parentPropertyName, DbPropertyValues propertyValues)
@@ -362,7 +362,7 @@ public static void WritePropertyValues(string parentPropertyName, DbPropertyValu
 }
 ```  
 
-Para imprimir todos los valores de propiedad actuales del método se llamaría similar al siguiente:  
+Para imprimir todos los valores de propiedad actuales, se llamaría al método de la siguiente manera:  
 
 ``` csharp
 using (var context = new BloggingContext())
