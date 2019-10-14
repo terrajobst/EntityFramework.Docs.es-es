@@ -3,12 +3,12 @@ title: 'Introducción a Entity Framework 6: EF6'
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 66ce9113-81d2-480f-8c16-d00ec405b2f7
-ms.openlocfilehash: c25bf16bd2c39530d54b286b7743ceb83c941e4d
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: bf54879ea94e597dfeac3e4bd70571dad290dd9e
+ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489298"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72181399"
 ---
 # <a name="get-started-with-entity-framework-6"></a>Introducción a Entity Framework 6
 
@@ -20,7 +20,7 @@ En esta guía se recopilan vínculos a artículos de documentación, tutoriales 
 
   Aquí obtendrá información sobre cómo agregar Entity Framework a sus aplicaciones y, si quiere usar EF Designer, asegúrese de que lo instala en Visual Studio.
 
-* [Creación de un modelo: Code First, EF Designer y flujos de trabajo EF](~/ef6/modeling/index.md)
+* [Creación de un modelo: Code First, EF Designer y Flujos de trabajo EF](~/ef6/modeling/index.md)
 
   ¿Prefiere especificar un código de escritura de modelos de EF o líneas y cuadros de dibujo?
 ¿Va a usar EF para asignar objetos a una base de datos existente o quiere que cree una base de datos específica para los objetos?
@@ -35,7 +35,7 @@ Asegúrese de seguir el debate y vea el vídeo sobre las diferencias.
 
   Descubra cómo obtener ayuda de expertos y contribuya con sus respuestas a la comunidad.
 
-* [Colaboracion](http://github.com/aspnet/EntityFramework6/)
+* [Colaboracion](https://github.com/aspnet/EntityFramework6/)
 
   Entity Framework 6 usa un modelo de desarrollo abierto. Descubra cómo puede ayudar a asegurarse de que EF sea aún mejor en nuestro repositorio de GitHub.
 
