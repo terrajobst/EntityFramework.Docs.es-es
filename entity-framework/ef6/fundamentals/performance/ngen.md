@@ -3,12 +3,12 @@ title: Mejorar el rendimiento de inicio con NGen-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: dc6110a0-80a0-4370-8190-cea942841cee
-ms.openlocfilehash: c9b5f8a06add9133d30955e3cc97a92e9b189bdf
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.openlocfilehash: 841aec645abdb2a56076d0b70bfb2614b0acafb4
+ms.sourcegitcommit: 37d0e0fd1703467918665a64837dc54ad2ec7484
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182680"
+ms.lasthandoff: 10/16/2019
+ms.locfileid: "72445999"
 ---
 # <a name="improving-startup-performance-with-ngen"></a>Mejorar el rendimiento de inicio con NGen
 > [!NOTE]
@@ -24,22 +24,26 @@ Las observaciones empíricas muestran que las imágenes nativas de los ensamblad
 
 La función más básica de la herramienta NGen. exe es "instalar" (es decir, crear y conservar en disco) imágenes nativas para un ensamblado y todas sus dependencias directas. Aquí se muestra cómo lograr esto:  
 
-1. Abrir una ventana del símbolo del sistema como administrador  
-2. Cambie el directorio de trabajo actual a la ubicación de los ensamblados para los que desea generar imágenes nativas:  
+1. Abra una ventana del símbolo del sistema como administrador.
+2. Cambie el directorio de trabajo actual a la ubicación de los ensamblados para los que desea generar imágenes nativas:
 
-  ``` console
-    cd <*Assemblies location*>  
-  ```
-3. En función del sistema operativo y de la configuración de la aplicación, es posible que tenga que generar imágenes nativas para la arquitectura de 32 bits, la arquitectura de 64 bits o para ambas.  
+   ``` console
+   cd <*Assemblies location*>  
+   ```
 
-    Para la ejecución de 32 bits:  
-  ``` console
-    %WINDIR%\Microsoft.NET\Framework\v4.0.30319\ngen install <Assembly name>  
-  ```
-    Para la ejecución de 64 bits:
-  ``` console
-    %WINDIR%\Microsoft.NET\Framework64\v4.0.30319\ngen install <Assembly name>  
-  ```
+3. En función del sistema operativo y de la configuración de la aplicación, es posible que tenga que generar imágenes nativas para la arquitectura de 32 bits, la arquitectura de 64 bits o para ambas.
+
+   Para la ejecución de 32 bits:
+
+   ``` console
+   %WINDIR%\Microsoft.NET\Framework\v4.0.30319\ngen install <Assembly name>  
+   ```
+
+   Para la ejecución de 64 bits:
+  
+   ``` console
+   %WINDIR%\Microsoft.NET\Framework64\v4.0.30319\ngen install <Assembly name>  
+   ```
 
 > [!TIP]
 > La generación de imágenes nativas para la arquitectura equivocada es un error muy común. En caso de duda, simplemente puede generar imágenes nativas para todas las arquitecturas que se aplican al sistema operativo instalado en la máquina.  
@@ -50,9 +54,9 @@ NGen. exe también admite otras funciones, como desinstalar y mostrar las imáge
 
 Cuando se trata de decidir en qué ensamblados se van a generar imágenes nativas en una aplicación basada en EF versión 6 o versiones posteriores, debe tener en cuenta las siguientes opciones:  
 
-- **El ensamblado de tiempo de ejecución de EF principal, EntityFramework. dll**: Una aplicación típica basada en EF ejecuta una cantidad significativa de código de este ensamblado en el inicio o en el primer acceso a la base de datos. Por lo tanto, la creación de imágenes nativas de este ensamblado producirá las mayores mejoras en el rendimiento de inicio.  
-- **Cualquier ensamblado de proveedor EF que use la aplicación**: El tiempo de inicio también puede beneficiarse ligeramente de la generación de imágenes nativas. Por ejemplo, si la aplicación utiliza el proveedor de EF para SQL Server querrá generar una imagen nativa para EntityFramework. SqlServer. dll.  
-- **Los ensamblados de la aplicación y otras dependencias**: La [documentación de Ngen. exe](https://msdn.microsoft.com/library/6t9t5wcf.aspx) cubre los criterios generales para elegir en qué ensamblados se van a generar imágenes nativas y el impacto de las imágenes nativas en la seguridad, opciones avanzadas como "enlace fuerte", escenarios como el uso de imágenes nativas en la depuración y escenarios de generación de perfiles, etc.  
+- **El ensamblado de tiempo de ejecución de EF principal, EntityFramework. dll**: una aplicación basada en EF típica ejecuta una cantidad significativa de código de este ensamblado en el inicio o en el primer acceso a la base de datos. Por lo tanto, la creación de imágenes nativas de este ensamblado producirá las mayores mejoras en el rendimiento de inicio.  
+- **Cualquier ensamblado de proveedor EF usado por la aplicación**: el tiempo de inicio también puede beneficiarse ligeramente de la generación de imágenes nativas. Por ejemplo, si la aplicación utiliza el proveedor de EF para SQL Server querrá generar una imagen nativa para EntityFramework. SqlServer. dll.  
+- **Los ensamblados de la aplicación y otras dependencias**: la [documentación de Ngen. exe](https://msdn.microsoft.com/library/6t9t5wcf.aspx) cubre los criterios generales para elegir en qué ensamblados se van a generar imágenes nativas y el impacto de las imágenes nativas en la seguridad, opciones avanzadas como "Hard enlace ", escenarios como el uso de imágenes nativas en escenarios de depuración y generación de perfiles, etc.  
 
 > [!TIP]
 > Asegúrese de medir cuidadosamente el impacto del uso de imágenes nativas en el rendimiento de inicio y el rendimiento general de la aplicación y compararlas con los requisitos reales. Mientras que las imágenes nativas suelen ayudar a mejorar el rendimiento de inicio y, en algunos casos, reducir el uso de memoria, no todos los escenarios se beneficiarán de forma equitativa. Por ejemplo, en la ejecución de estado estable (es decir, una vez que todos los métodos que se usan en la aplicación se han invocado al menos una vez), el código generado por el compilador JIT puede producir de hecho un rendimiento ligeramente mejor que las imágenes nativas.  

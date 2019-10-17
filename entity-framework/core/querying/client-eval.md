@@ -4,12 +4,12 @@ author: smitpatel
 ms.date: 10/03/2019
 ms.assetid: 8b6697cc-7067-4dc2-8007-85d80503d123
 uid: core/querying/client-eval
-ms.openlocfilehash: 3d70324f0b57a0ea9b165b5140a2154001c326f4
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.openlocfilehash: 5cfb05041f04246712fb699f58b407f70a75ce92
+ms.sourcegitcommit: 37d0e0fd1703467918665a64837dc54ad2ec7484
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72181912"
+ms.lasthandoff: 10/16/2019
+ms.locfileid: "72445966"
 ---
 # <a name="client-vs-server-evaluation"></a>Evaluación de cliente frente a servidor
 
@@ -18,10 +18,10 @@ Como norma general, Entity Framework Core intenta evaluar una consulta en el ser
 > [!NOTE]
 > Antes de la versión 3.0, Entity Framework Core admitía la evaluación de cliente en cualquier parte de la consulta. Para obtener más información, vea la [sección sobre versiones anteriores](#previous-versions).
 
-## <a name="client-evaluation-in-the-top-level-projection"></a>Evaluación de cliente en la proyección de nivel superior
-
 > [!TIP]
 > Puede ver un [ejemplo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying) de este artículo en GitHub.
+
+## <a name="client-evaluation-in-the-top-level-projection"></a>Evaluación de cliente en la proyección de nivel superior
 
 En el ejemplo siguiente, se usa un método auxiliar para estandarizar las direcciones URL para blogs, que se devuelven desde una base de datos de SQL Server. Como el proveedor de SQL Server no tiene información de cómo se implementa este método, no es posible traducirlo a código SQL. Todos los demás aspectos de la consulta se evalúan en la base de datos, pero es el cliente quien pasa la `URL` devuelta mediante este método.
 

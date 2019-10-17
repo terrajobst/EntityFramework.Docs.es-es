@@ -3,12 +3,12 @@ title: Pruebas con sus propias pruebas dobles-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 16a8b7c0-2d23-47f4-9cc0-e2eb2e738ca3
-ms.openlocfilehash: 4631206ae26d364e92c932857fa1970804a7a335
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.openlocfilehash: 3d8933fb5e17f8c01f3971495a1fcdb5b8cfab57
+ms.sourcegitcommit: 37d0e0fd1703467918665a64837dc54ad2ec7484
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72181411"
+ms.lasthandoff: 10/16/2019
+ms.locfileid: "72446026"
 ---
 # <a name="testing-with-your-own-test-doubles"></a>Pruebas con sus propias dobles de pruebas
 > [!NOTE]
@@ -157,9 +157,9 @@ namespace TestingDemo
         }
     }
 }
-```  
+```
 
-<a name="creating-the-in-memory-test-doubles"/> # # crear los dobles de pruebas en memoria  
+## <a name="creating-the-in-memory-test-doubles"></a>Crear dobles de pruebas en memoria  
 
 Ahora que tenemos el modelo de EF real y el servicio que puede usarlo, es el momento de crear el doble de prueba en memoria que se puede usar para las pruebas. Hemos creado un Double de prueba de TestContext para nuestro contexto. En la prueba, se puede elegir el comportamiento que se desea para admitir las pruebas que se van a ejecutar. En este ejemplo, vamos a capturar el número de veces que se llama a SaveChanges, pero puede incluir la lógica que se necesita para comprobar el escenario que se está probando.  
 
