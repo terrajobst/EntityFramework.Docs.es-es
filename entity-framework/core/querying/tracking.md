@@ -1,100 +1,80 @@
 ---
 title: 'Consultas de seguimiento frente a consultas de no seguimiento: EF Core'
-author: rowanmiller
-ms.date: 10/27/2016
+author: smitpatel
+ms.date: 10/10/2019
 ms.assetid: e17e060c-929f-4180-8883-40c438fbcc01
 uid: core/querying/tracking
-ms.openlocfilehash: 588dee012039ce5ecc83f0ecf263a4ea6ca38c29
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.openlocfilehash: 66988f936ab75e17620398c8f21e4a32bbc950bd
+ms.sourcegitcommit: 37d0e0fd1703467918665a64837dc54ad2ec7484
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72181986"
+ms.lasthandoff: 10/16/2019
+ms.locfileid: "72445956"
 ---
-# <a name="tracking-vs-no-tracking-queries"></a><span data-ttu-id="09ef2-102">Consultas de seguimiento frente a consultas de no seguimiento</span><span class="sxs-lookup"><span data-stu-id="09ef2-102">Tracking vs. No-Tracking Queries</span></span>
+# <a name="tracking-vs-no-tracking-queries"></a><span data-ttu-id="36d34-102">Consultas de seguimiento frente a consultas de no seguimiento</span><span class="sxs-lookup"><span data-stu-id="36d34-102">Tracking vs. No-Tracking Queries</span></span>
 
-<span data-ttu-id="09ef2-103">El comportamiento de seguimiento controla si Entity Framework Core guardará o no información sobre una instancia de entidad en la herramienta de seguimiento de cambios.</span><span class="sxs-lookup"><span data-stu-id="09ef2-103">Tracking behavior controls whether or not Entity Framework Core will keep information about an entity instance in its change tracker.</span></span> <span data-ttu-id="09ef2-104">Si se hace seguimiento de una entidad, cualquier cambio detectado en ella persistirá hasta la base de datos durante `SaveChanges()`.</span><span class="sxs-lookup"><span data-stu-id="09ef2-104">If an entity is tracked, any changes detected in the entity will be persisted to the database during `SaveChanges()`.</span></span> <span data-ttu-id="09ef2-105">Entity Framework Core también corregirá las propiedades de navegación entre las entidades que se obtienen de una consulta de seguimiento y las entidades que se cargaron previamente en la instancia de DbContext.</span><span class="sxs-lookup"><span data-stu-id="09ef2-105">Entity Framework Core will also fix-up navigation properties between entities that are obtained from a tracking query and entities that were previously loaded into the DbContext instance.</span></span>
+<span data-ttu-id="36d34-103">El comportamiento de seguimiento controla si Entity Framework Core mantendrá información sobre una instancia de entidad en su herramienta de seguimiento de cambios.</span><span class="sxs-lookup"><span data-stu-id="36d34-103">Tracking behavior controls if Entity Framework Core will keep information about an entity instance in its change tracker.</span></span> <span data-ttu-id="36d34-104">Si se hace seguimiento de una entidad, cualquier cambio detectado en ella persistirá hasta la base de datos durante `SaveChanges()`.</span><span class="sxs-lookup"><span data-stu-id="36d34-104">If an entity is tracked, any changes detected in the entity will be persisted to the database during `SaveChanges()`.</span></span> <span data-ttu-id="36d34-105">EF Core también corregirá las propiedades de navegación entre las entidades de un resultado de consulta de seguimiento y las entidades que se encuentran en la herramienta de seguimiento de cambios.</span><span class="sxs-lookup"><span data-stu-id="36d34-105">EF Core will also fix up navigation properties between the entities in a tracking query result and the entities that are in the change tracker.</span></span>
+
+> [!NOTE]
+> <span data-ttu-id="36d34-106">No se realiza el seguimiento de los [tipos de entidad sin clave](xref:core/modeling/keyless-entity-types).</span><span class="sxs-lookup"><span data-stu-id="36d34-106">[Keyless entity types](xref:core/modeling/keyless-entity-types) are never tracked.</span></span> <span data-ttu-id="36d34-107">Siempre que en este artículo se mencionen los tipos de entidad, se refiere a aquellos con una clave definida.</span><span class="sxs-lookup"><span data-stu-id="36d34-107">Wherever this article mentions entity types, it refers to entity types which have a key defined.</span></span>
 
 > [!TIP]  
-> <span data-ttu-id="09ef2-106">Puede ver un [ejemplo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying) de este artículo en GitHub.</span><span class="sxs-lookup"><span data-stu-id="09ef2-106">You can view this article's [sample](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying) on GitHub.</span></span>
+> <span data-ttu-id="36d34-108">Puede ver un [ejemplo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying) de este artículo en GitHub.</span><span class="sxs-lookup"><span data-stu-id="36d34-108">You can view this article's [sample](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying) on GitHub.</span></span>
 
-## <a name="tracking-queries"></a><span data-ttu-id="09ef2-107">Consultas de seguimiento</span><span class="sxs-lookup"><span data-stu-id="09ef2-107">Tracking queries</span></span>
+## <a name="tracking-queries"></a><span data-ttu-id="36d34-109">Consultas de seguimiento</span><span class="sxs-lookup"><span data-stu-id="36d34-109">Tracking queries</span></span>
 
-<span data-ttu-id="09ef2-108">De manera predeterminada, las consultas que devuelven tipos de entidad son consultas de seguimiento.</span><span class="sxs-lookup"><span data-stu-id="09ef2-108">By default, queries that return entity types are tracking.</span></span> <span data-ttu-id="09ef2-109">Esto significa que puede hacer cambios en esas instancias de entidad y que esos cambios persisten por `SaveChanges()`.</span><span class="sxs-lookup"><span data-stu-id="09ef2-109">This means you can make changes to those entity instances and have those changes persisted by `SaveChanges()`.</span></span>
+<span data-ttu-id="36d34-110">De manera predeterminada, las consultas que devuelven tipos de entidad son consultas de seguimiento.</span><span class="sxs-lookup"><span data-stu-id="36d34-110">By default, queries that return entity types are tracking.</span></span> <span data-ttu-id="36d34-111">Esto significa que puede hacer cambios en esas instancias de entidad y que esos cambios se conservan mediante `SaveChanges()`.</span><span class="sxs-lookup"><span data-stu-id="36d34-111">Which means you can make changes to those entity instances and have those changes persisted by `SaveChanges()`.</span></span> <span data-ttu-id="36d34-112">En el ejemplo siguiente, se detectará el cambio en la clasificación de los blogs y persistirá hasta la base de datos durante `SaveChanges()`.</span><span class="sxs-lookup"><span data-stu-id="36d34-112">In the following example, the change to the blogs rating will be detected and persisted to the database during `SaveChanges()`.</span></span>
 
-<span data-ttu-id="09ef2-110">En el ejemplo siguiente, se detectará el cambio en la clasificación de los blogs y persistirá hasta la base de datos durante `SaveChanges()`.</span><span class="sxs-lookup"><span data-stu-id="09ef2-110">In the following example, the change to the blogs rating will be detected and persisted to the database during `SaveChanges()`.</span></span>
+[!code-csharp[Main](../../../samples/core/Querying/Tracking/Sample.cs#Tracking)]
 
-<!-- [!code-csharp[Main](samples/core/Querying/Tracking/Sample.cs)] -->
-``` csharp
-using (var context = new BloggingContext())
-{
-    var blog = context.Blogs.SingleOrDefault(b => b.BlogId == 1);
-    blog.Rating = 5;
-    context.SaveChanges();
-}
-```
+## <a name="no-tracking-queries"></a><span data-ttu-id="36d34-113">Consultas de no seguimiento</span><span class="sxs-lookup"><span data-stu-id="36d34-113">No-tracking queries</span></span>
 
-## <a name="no-tracking-queries"></a><span data-ttu-id="09ef2-111">Consultas de no seguimiento</span><span class="sxs-lookup"><span data-stu-id="09ef2-111">No-tracking queries</span></span>
+<span data-ttu-id="36d34-114">Las consultas de no seguimiento son útiles cuando los resultados se usan en un escenario de solo lectura.</span><span class="sxs-lookup"><span data-stu-id="36d34-114">No tracking queries are useful when the results are used in a read-only scenario.</span></span> <span data-ttu-id="36d34-115">Su ejecución es más rápida porque no es necesario configurar la información de seguimiento de cambios.</span><span class="sxs-lookup"><span data-stu-id="36d34-115">They're quicker to execute because there's no need to set up the change tracking information.</span></span> <span data-ttu-id="36d34-116">Si no necesita actualizar las entidades recuperadas de la base de datos, se debe usar una consulta de no seguimiento.</span><span class="sxs-lookup"><span data-stu-id="36d34-116">If you don't need to update the entities retrieved from the database, then a no-tracking query should be used.</span></span> <span data-ttu-id="36d34-117">Puede cambiar una consulta individual para que sea una consulta de no seguimiento.</span><span class="sxs-lookup"><span data-stu-id="36d34-117">You can swap an individual query to be no-tracking.</span></span>
 
-<span data-ttu-id="09ef2-112">Las consultas de no seguimiento son útiles cuando los resultados se usan en un escenario de solo lectura.</span><span class="sxs-lookup"><span data-stu-id="09ef2-112">No tracking queries are useful when the results are used in a read-only scenario.</span></span> <span data-ttu-id="09ef2-113">Su ejecución es más rápida porque no es necesario configurar información de seguimiento de cambios.</span><span class="sxs-lookup"><span data-stu-id="09ef2-113">They are quicker to execute because there is no need to setup change tracking information.</span></span>
+[!code-csharp[Main](../../../samples/core/Querying/Tracking/Sample.cs#NoTracking)]
 
-<span data-ttu-id="09ef2-114">Puede cambiar una consulta individual para que sea una consulta de no seguimiento:</span><span class="sxs-lookup"><span data-stu-id="09ef2-114">You can swap an individual query to be no-tracking:</span></span>
+<span data-ttu-id="36d34-118">También puede cambiar el comportamiento de seguimiento predeterminado en el nivel de instancia de contexto:</span><span class="sxs-lookup"><span data-stu-id="36d34-118">You can also change the default tracking behavior at the context instance level:</span></span>
 
-<!-- [!code-csharp[Main](samples/core/Querying/Tracking/Sample.cs?highlight=4)] -->
-``` csharp
-using (var context = new BloggingContext())
-{
-    var blogs = context.Blogs
-        .AsNoTracking()
-        .ToList();
-}
-```
+[!code-csharp[Main](../../../samples/core/Querying/Tracking/Sample.cs#ContextDefaultTrackingBehavior)]
 
-<span data-ttu-id="09ef2-115">También puede cambiar el comportamiento de seguimiento predeterminado en el nivel de instancia de contexto:</span><span class="sxs-lookup"><span data-stu-id="09ef2-115">You can also change the default tracking behavior at the context instance level:</span></span>
+## <a name="identity-resolution"></a><span data-ttu-id="36d34-119">Resolución de identidad</span><span class="sxs-lookup"><span data-stu-id="36d34-119">Identity resolution</span></span>
 
-<!-- [!code-csharp[Main](samples/core/Querying/Tracking/Sample.cs?highlight=3)] -->
-``` csharp
-using (var context = new BloggingContext())
-{
-    context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+<span data-ttu-id="36d34-120">Dado que una consulta de seguimiento usa la herramienta de seguimiento de cambios, EF Core realizará la resolución de identidades en una consulta de este tipo.</span><span class="sxs-lookup"><span data-stu-id="36d34-120">Since a tracking query uses the change tracker, EF Core will do identity resolution in a tracking query.</span></span> <span data-ttu-id="36d34-121">Al materializar una entidad, EF Core devolverá la misma instancia de entidad de la herramienta de seguimiento de cambios si ya está en proceso de seguimiento.</span><span class="sxs-lookup"><span data-stu-id="36d34-121">When materializing an entity, EF Core will return the same entity instance from the change tracker if it's already being tracked.</span></span> <span data-ttu-id="36d34-122">Si el resultado contiene la misma entidad varias veces, se devuelve la misma instancia con cada repetición.</span><span class="sxs-lookup"><span data-stu-id="36d34-122">If the result contains same entity multiple times, you get back same instance for each occurrence.</span></span> <span data-ttu-id="36d34-123">Las consultas de no seguimiento no usan la herramienta de seguimiento de cambios y no realizan la resolución de identidades.</span><span class="sxs-lookup"><span data-stu-id="36d34-123">No-tracking queries don't use the change tracker and don't do identity resolution.</span></span> <span data-ttu-id="36d34-124">Así que, se devuelve una nueva instancia de la entidad incluso cuando la misma entidad está contenida en el resultado varias veces.</span><span class="sxs-lookup"><span data-stu-id="36d34-124">So you get back new instance of entity even when the same entity is contained in the result multiple times.</span></span> <span data-ttu-id="36d34-125">Este comportamiento era diferente en las versiones anteriores a EF Core 3.0; consulte las [versiones anteriores](#previous-versions).</span><span class="sxs-lookup"><span data-stu-id="36d34-125">This behavior was different in versions before EF Core 3.0, see [previous versions](#previous-versions).</span></span>
 
-    var blogs = context.Blogs.ToList();
-}
-```
+## <a name="tracking-and-custom-projections"></a><span data-ttu-id="36d34-126">Seguimiento y proyecciones personalizadas</span><span class="sxs-lookup"><span data-stu-id="36d34-126">Tracking and custom projections</span></span>
 
-> [!NOTE]  
-> <span data-ttu-id="09ef2-116">Las consultas de no seguimiento siguen realizando la resolución de identidad dentro de la consulta en ejecución.</span><span class="sxs-lookup"><span data-stu-id="09ef2-116">No tracking queries still perform identity resolution within the executing query.</span></span> <span data-ttu-id="09ef2-117">Si el conjunto de resultados contiene varias veces la misma entidad, se devolverá la misma instancia de la clase de entidad para cada repetición en el conjunto de resultados.</span><span class="sxs-lookup"><span data-stu-id="09ef2-117">If the result set contains the same entity multiple times, the same instance of the entity class will be returned for each occurrence in the result set.</span></span> <span data-ttu-id="09ef2-118">Sin embargo, se usan referencias parciales para llevar un seguimiento de las entidades que ya se devolvieron.</span><span class="sxs-lookup"><span data-stu-id="09ef2-118">However, weak references are used to keep track of entities that have already been returned.</span></span> <span data-ttu-id="09ef2-119">Si un resultado anterior con la misma identidad queda fuera del ámbito y se ejecuta la recolección de elementos no utilizados, puede obtener una instancia de entidad nueva.</span><span class="sxs-lookup"><span data-stu-id="09ef2-119">If a previous result with the same identity goes out of scope, and garbage collection runs, you may get a new entity instance.</span></span> <span data-ttu-id="09ef2-120">Para más información, consulte el artículo sobre el [funcionamiento de una consulta ](xref:core/querying/how-query-works).</span><span class="sxs-lookup"><span data-stu-id="09ef2-120">For more information, see [How Query Works](xref:core/querying/how-query-works).</span></span>
+<span data-ttu-id="36d34-127">Incluso si el tipo de resultado de la consulta no es un tipo de entidad, EF Core seguirá realizando el seguimiento de los tipos de entidad contenidos en el resultado de forma predeterminada.</span><span class="sxs-lookup"><span data-stu-id="36d34-127">Even if the result type of the query isn't an entity type, EF Core will still track entity types contained in the result by default.</span></span> <span data-ttu-id="36d34-128">En la consulta siguiente, que devuelve un tipo anónimo, se hará seguimiento de las instancias de `Blog` en el conjunto de resultados.</span><span class="sxs-lookup"><span data-stu-id="36d34-128">In the following query, which returns an anonymous type, the instances of `Blog` in the result set will be tracked.</span></span>
 
-## <a name="tracking-and-projections"></a><span data-ttu-id="09ef2-121">Seguimientos y proyecciones</span><span class="sxs-lookup"><span data-stu-id="09ef2-121">Tracking and projections</span></span>
+[!code-csharp[Main](../../../samples/core/Querying/Tracking/Sample.cs#CustomProjection1)]
 
-<span data-ttu-id="09ef2-122">Incluso si el tipo de resultado de la consulta no es un tipo de entidad, si el resultado contiene tipos de entidad, de todos modos se hará seguimiento de estos de manera predeterminada.</span><span class="sxs-lookup"><span data-stu-id="09ef2-122">Even if the result type of the query isn't an entity type, if the result contains entity types they will still be tracked by default.</span></span> <span data-ttu-id="09ef2-123">En la consulta siguiente, que devuelve un tipo anónimo, se hará seguimiento de las instancias de `Blog` en el conjunto de resultados.</span><span class="sxs-lookup"><span data-stu-id="09ef2-123">In the following query, which returns an anonymous type, the instances of `Blog` in the result set will be tracked.</span></span>
+<span data-ttu-id="36d34-129">Si el conjunto de resultados contiene tipos de entidad que proceden de la composición LINQ, EF Core realizará un seguimiento de ellos.</span><span class="sxs-lookup"><span data-stu-id="36d34-129">If the result set contains entity types coming out from LINQ composition, EF Core will track them.</span></span>
 
-<!-- [!code-csharp[Main](samples/core/Querying/Tracking/Sample.cs?highlight=7)] -->
-``` csharp
-using (var context = new BloggingContext())
-{
-    var blog = context.Blogs
-        .Select(b =>
-            new
-            {
-                Blog = b,
-                Posts = b.Posts.Count()
-            });
-}
-```
+[!code-csharp[Main](../../../samples/core/Querying/Tracking/Sample.cs#CustomProjection2)]
 
-<span data-ttu-id="09ef2-124">Si el conjunto de resultados no contiene ningún tipo de entidad, no se realiza ningún seguimiento.</span><span class="sxs-lookup"><span data-stu-id="09ef2-124">If the result set does not contain any entity types, then no tracking is performed.</span></span> <span data-ttu-id="09ef2-125">En la consulta siguiente, que devuelve un tipo anónimo con algunos de los valores de la entidad (pero no instancias del tipo de entidad real), no se realiza ningún seguimiento.</span><span class="sxs-lookup"><span data-stu-id="09ef2-125">In the following query, which returns an anonymous type with some of the values from the entity (but no instances of the actual entity type), there is no tracking performed.</span></span>
+<span data-ttu-id="36d34-130">Si el conjunto de resultados no contiene ningún tipo de entidad, no se realiza ningún seguimiento.</span><span class="sxs-lookup"><span data-stu-id="36d34-130">If the result set doesn't contain any entity types, then no tracking is done.</span></span> <span data-ttu-id="36d34-131">En la consulta siguiente, se devuelve un tipo anónimo con algunos de los valores de la entidad (pero sin instancias del tipo de entidad real).</span><span class="sxs-lookup"><span data-stu-id="36d34-131">In the following query, we return an anonymous type with some of the values from the entity (but no instances of the actual entity type).</span></span> <span data-ttu-id="36d34-132">No hay entidades con seguimiento que procedan de la consulta.</span><span class="sxs-lookup"><span data-stu-id="36d34-132">There are no tracked entities coming out of the query.</span></span>
 
-<!-- [!code-csharp[Main](samples/core/Querying/Tracking/Sample.cs)] -->
-``` csharp
-using (var context = new BloggingContext())
-{
-    var blog = context.Blogs
-        .Select(b =>
-            new
-            {
-                Id = b.BlogId,
-                Url = b.Url
-            });
-}
-```
+[!code-csharp[Main](../../../samples/core/Querying/Tracking/Sample.cs#CustomProjection3)]
+
+ <span data-ttu-id="36d34-133">EF Core admite la evaluación del cliente en la proyección de nivel superior.</span><span class="sxs-lookup"><span data-stu-id="36d34-133">EF Core supports doing client evaluation in the top-level projection.</span></span> <span data-ttu-id="36d34-134">Si EF Core materializa una instancia de entidad para la evaluación del cliente, se realizará un seguimiento de esta.</span><span class="sxs-lookup"><span data-stu-id="36d34-134">If EF Core materializes an entity instance for client evaluation, it will be tracked.</span></span> <span data-ttu-id="36d34-135">Aquí, como se pasan entidades de `blog` al método cliente `StandardizeURL`, EF Core también realizará un seguimiento de las instancias del blog.</span><span class="sxs-lookup"><span data-stu-id="36d34-135">Here, since we're passing `blog` entities to the client method `StandardizeURL`, EF Core will track the blog instances too.</span></span>
+
+[!code-csharp[Main](../../../samples/core/Querying/Tracking/Sample.cs#ClientProjection)]
+
+[!code-csharp[Main](../../../samples/core/Querying/Tracking/Sample.cs#ClientMethod)]
+
+<span data-ttu-id="36d34-136">EF Core no realiza un seguimiento de las instancias de entidad sin clave contenidas en el resultado.</span><span class="sxs-lookup"><span data-stu-id="36d34-136">EF Core doesn't track the keyless entity instances contained in the result.</span></span> <span data-ttu-id="36d34-137">Sin embargo, sí lo hace de todas las demás instancias de tipos de entidad con clave según las reglas anteriores.</span><span class="sxs-lookup"><span data-stu-id="36d34-137">But EF Core tracks all the other instances of entity types with key according to rules above.</span></span>
+
+<span data-ttu-id="36d34-138">Algunas de las reglas anteriores funcionaban de forma diferente antes de EF Core 3.0.</span><span class="sxs-lookup"><span data-stu-id="36d34-138">Some of the above rules worked differently before EF Core 3.0.</span></span> <span data-ttu-id="36d34-139">Para más información, consulte las [versiones anteriores](#previous-versions).</span><span class="sxs-lookup"><span data-stu-id="36d34-139">For more information, see [previous versions](#previous-versions).</span></span>
+
+## <a name="previous-versions"></a><span data-ttu-id="36d34-140">Versiones anteriores</span><span class="sxs-lookup"><span data-stu-id="36d34-140">Previous versions</span></span>
+
+<span data-ttu-id="36d34-141">Antes de la versión 3.0, EF Core presentaba algunas diferencias en el modo en que se realizaba el seguimiento.</span><span class="sxs-lookup"><span data-stu-id="36d34-141">Before version 3.0, EF Core had some differences in how tracking was done.</span></span> <span data-ttu-id="36d34-142">Las diferencias destacables son las siguientes:</span><span class="sxs-lookup"><span data-stu-id="36d34-142">Notable differences are as follows:</span></span>
+
+- <span data-ttu-id="36d34-143">Como se explica en la página [Evaluación de cliente frente a servidor](xref:core/querying/client-eval), EF Core admitía la evaluación de clientes admitidos en cualquier parte de la consulta anterior antes de la versión 3.0.</span><span class="sxs-lookup"><span data-stu-id="36d34-143">As explained in [Client vs Server Evaluation](xref:core/querying/client-eval) page, EF Core supported client evaluation in any part of the query before version 3.0.</span></span> <span data-ttu-id="36d34-144">La evaluación de clientes provocaba la materialización de entidades, las cuales no formaban parte del resultado.</span><span class="sxs-lookup"><span data-stu-id="36d34-144">Client evaluation caused materialization of entities, which weren't part of the result.</span></span> <span data-ttu-id="36d34-145">Por lo tanto, EF Core analizaba el resultado para detectar de qué realizar el seguimiento. Este diseño tenía algunas diferencias, como se indica a continuación:</span><span class="sxs-lookup"><span data-stu-id="36d34-145">So EF Core analyzed the result to detect what to track. This design had certain differences as follows:</span></span>
+  - <span data-ttu-id="36d34-146">No se realizaba el seguimiento de la evaluación de clientes en la proyección, lo que provocaba la materialización pero no se devolvía la instancia de la entidad materializada.</span><span class="sxs-lookup"><span data-stu-id="36d34-146">Client evaluation in the projection, which caused materialization but didn't return the materialized entity instance wasn't tracked.</span></span> <span data-ttu-id="36d34-147">En el ejemplo siguiente no se realizaba un seguimiento de entidades `blog`.</span><span class="sxs-lookup"><span data-stu-id="36d34-147">The following example didn't track `blog` entities.</span></span>
+    [!code-csharp[Main](../../../samples/core/Querying/Tracking/Sample.cs#ClientProjection)]
+
+  - <span data-ttu-id="36d34-148">En algunos casos, EF Core no realizaba un seguimiento de los objetos que procedían de la composición LINQ.</span><span class="sxs-lookup"><span data-stu-id="36d34-148">EF Core didn't track the objects coming out of LINQ composition in certain cases.</span></span> <span data-ttu-id="36d34-149">En el ejemplo siguiente no se realizaba un seguimiento de `Post`.</span><span class="sxs-lookup"><span data-stu-id="36d34-149">The following example didn't track `Post`.</span></span>
+    [!code-csharp[Main](../../../samples/core/Querying/Tracking/Sample.cs#CustomProjection2)]
+
+- <span data-ttu-id="36d34-150">Siempre que los resultados de consulta contenían tipos de entidad sin clave, significaba que no se hacía un seguimiento de la consulta completa.</span><span class="sxs-lookup"><span data-stu-id="36d34-150">Whenever query results contained keyless entity types, the whole query was made non-tracking.</span></span> <span data-ttu-id="36d34-151">Esto quiere decir que tampoco se realizaba un seguimiento de los tipos de entidad con claves que estaban en el resultado.</span><span class="sxs-lookup"><span data-stu-id="36d34-151">That means that entity types with keys, which are in result weren't being tracked either.</span></span>
+- <span data-ttu-id="36d34-152">EF Coreó realizaba la resolución de identidades en consultas de no seguimiento.</span><span class="sxs-lookup"><span data-stu-id="36d34-152">EF Core did identity resolution in no-tracking query.</span></span> <span data-ttu-id="36d34-153">Se usaban referencias débiles para mantener el seguimiento de entidades que ya se habían devuelto.</span><span class="sxs-lookup"><span data-stu-id="36d34-153">It used weak references to keep track of entities that had already been returned.</span></span> <span data-ttu-id="36d34-154">Por lo tanto, si un conjunto de resultados contenía la misma entidad varias veces, obtenía la misma instancia para cada caso.</span><span class="sxs-lookup"><span data-stu-id="36d34-154">So if a result set contained the same entity multiples times, you would get the same instance for each occurrence.</span></span> <span data-ttu-id="36d34-155">Sin embargo, si un resultado anterior con la misma identidad se salía del ámbito y generaba un elemento no utilizado, EF Core devolvía una nueva instancia.</span><span class="sxs-lookup"><span data-stu-id="36d34-155">Though if a previous result with the same identity went out of scope and got garbage collected, EF Core returned a new instance.</span></span>
