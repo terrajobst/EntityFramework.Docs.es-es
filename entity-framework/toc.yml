@@ -175,22 +175,24 @@
           items:
             - name: Información general
               href: core/querying/index.md
-            - name: Carga de datos relacionados
-              href: core/querying/related-data.md
             - name: Evaluación de cliente frente a servidor
               href: core/querying/client-eval.md
             - name: Consultas de seguimiento frente a no seguimiento
               href: core/querying/tracking.md
-            - name: Consultas SQL sin formato
-              href: core/querying/raw-sql.md
+            - name: Operadores de consulta complejos
+              href: core/querying/complex-query-operators.md
+            - name: Carga de datos relacionados
+              href: core/querying/related-data.md
             - name: Consultas asincrónicas
               href: core/querying/async.md
-            - name: Funcionamiento de una consulta
-              href: core/querying/how-query-works.md
+            - name: Consultas SQL sin formato
+              href: core/querying/raw-sql.md
             - name: Filtros de consulta global
               href: core/querying/filters.md
             - name: Etiquetas de consulta
               href: core/querying/tags.md
+            - name: Funcionamiento de una consulta
+              href: core/querying/how-query-works.md
         - name: Guardado de datos
           items:
             - name: Información general
