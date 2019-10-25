@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: a628795e-64df-4f24-a5e8-76bc261e7ed8
 uid: core/modeling/backing-field
-ms.openlocfilehash: c3ca8bb97992c192672e8c2f2040b0de029df68d
-ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.openlocfilehash: 288440a4494117fe59d27187e24424c4d2fd44ab
+ms.sourcegitcommit: 2355447d89496a8ca6bcbfc0a68a14a0bf7f0327
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71197483"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72811878"
 ---
 # <a name="backing-fields"></a>Campos de respaldo
 
@@ -51,16 +51,12 @@ Puede configurar Cuándo EF utiliza el campo o la propiedad. Vea la [enumeració
 
 También puede crear una propiedad conceptual en el modelo que no tiene una propiedad de CLR correspondiente en la clase de entidad, sino que usa un campo para almacenar los datos en la entidad. Esto es diferente de [las propiedades de las instantáneas](shadow-properties.md), donde los datos se almacenan en el seguimiento de cambios. Normalmente se utilizaría si la clase de entidad usa métodos para obtener o establecer valores.
 
-Puede dar a EF el nombre del campo en la `Property(...)` API. Si no hay ninguna propiedad con el nombre especificado, EF buscará un campo.
+Puede dar a EF el nombre del campo en el `Property(...)` API. Si no hay ninguna propiedad con el nombre especificado, EF buscará un campo.
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/BackingFieldNoProperty.cs#Sample)]
 
-También puede asignar un nombre a la propiedad, que no sea el nombre del campo. Este nombre se usa al crear el modelo, en particular, se usará para el nombre de columna asignado a en la base de datos.
-
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/BackingFieldConceptualProperty.cs#Sample)]
-
-Cuando no hay ninguna propiedad en la clase de entidad, puede usar el `EF.Property(...)` método en una consulta LINQ para hacer referencia a la propiedad que forma conceptualmente parte del modelo.
+Cuando no hay ninguna propiedad en la clase de entidad, puede usar el método `EF.Property(...)` en una consulta LINQ para hacer referencia a la propiedad que forma conceptualmente parte del modelo.
 
 ``` csharp
-var blogs = db.blogs.OrderBy(b => EF.Property<string>(b, "Url"));
+var blogs = db.blogs.OrderBy(b => EF.Property<string>(b, "_validatedUrl"));
 ```

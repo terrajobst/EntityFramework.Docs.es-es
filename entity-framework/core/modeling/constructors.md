@@ -1,29 +1,29 @@
 ---
-title: Tipos de entidad con constructores - EF Core
+title: 'Tipos de entidad con constructores: EF Core'
 author: ajcvickers
 ms.date: 02/23/2018
 ms.assetid: 420AFFE7-B709-4A68-9149-F06F8746FB33
 uid: core/modeling/constructors
-ms.openlocfilehash: 5bf49718f02c1860871b1f4c255ec4d98fce2fc7
-ms.sourcegitcommit: 960e42a01b3a2f76da82e074f64f52252a8afecc
+ms.openlocfilehash: ddfaa8eebde388a9d3309f21b8891de593077956
+ms.sourcegitcommit: 2355447d89496a8ca6bcbfc0a68a14a0bf7f0327
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 05/08/2019
-ms.locfileid: "65405244"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72811897"
 ---
 # <a name="entity-types-with-constructors"></a>Tipos de entidad con constructores
 
 > [!NOTE]  
 > Esta característica es nueva en EF Core 2.1.
 
-A partir de EF Core 2.1, ahora es posible definir un constructor con parámetros y que EF Core llamar a este constructor al crear una instancia de la entidad. Los parámetros del constructor se pueden enlazar a propiedades asignadas o para distintos tipos de servicios que facilitan los comportamientos como la carga diferida.
+A partir de EF Core 2,1, ahora es posible definir un constructor con parámetros y EF Core llamar a este constructor al crear una instancia de la entidad. Los parámetros de constructor se pueden enlazar a propiedades asignadas o a varios tipos de servicios para facilitar comportamientos como la carga diferida.
 
 > [!NOTE]  
-> A partir de EF Core 2.1, todo el enlace de constructor es por convención. Configuración de constructores específicos para usar está prevista para una versión futura.
+> A partir de EF Core 2,1, todos los enlaces de constructor son por Convención. La configuración de constructores específicos que se va a usar está planeada para una versión futura.
 
 ## <a name="binding-to-mapped-properties"></a>Enlazar a propiedades asignadas
 
-Considere la posibilidad de un modelo de entrada de Blog/típico:
+Considere un modelo típico de blog o post:
 
 ``` csharp
 public class Blog
@@ -48,7 +48,7 @@ public class Post
 }
 ```
 
-Cuando EF Core crea instancias de estos tipos, como los resultados de una consulta, se llamar primero al constructor sin parámetros predeterminado y, a continuación, establece cada propiedad en el valor de la base de datos. Sin embargo, si EF Core busca un constructor con parámetros con los nombres de parámetro y tipos que coinciden con los de asignan propiedades y después en su lugar, llamará al constructor con parámetros con valores de esas propiedades y no establece explícitamente cada propiedad. Por ejemplo:
+Cuando EF Core crea instancias de estos tipos, como los resultados de una consulta, primero llamará al constructor sin parámetros predeterminado y, a continuación, establecerá cada propiedad en el valor de la base de datos. Sin embargo, si EF Core encuentra un constructor con parámetros con nombres de parámetros y tipos que coinciden con los de propiedades asignadas, se llamará en su lugar al constructor con parámetros con valores para esas propiedades y no establecerá cada propiedad explícitamente. Por ejemplo:
 
 ``` csharp
 public class Blog
@@ -86,19 +86,23 @@ public class Post
     public Blog Blog { get; set; }
 }
 ```
-Algunos aspectos a tener en cuenta:
-* No todas las propiedades deben tener los parámetros del constructor. Por ejemplo, no se establece la propiedad Post.Content por cualquier parámetro de constructor, por lo que EF Core establecerá después de llamar al constructor de la manera normal.
-* Los tipos de parámetro y nombres deben coincidir con los tipos de propiedad y los nombres, excepto en que las propiedades pueden ser con grafía Pascal mientras que los parámetros son mayúsculas y minúsculas camel.
-* EF Core no puede establecer las propiedades de navegación (por ejemplo, Blog o publicaciones anteriores) mediante un constructor.
-* El constructor puede ser público, privado, o tiene cualquier otro tipo de accesibilidad. Sin embargo, los proxies de carga diferida requieren que el constructor es accesible desde la clase de proxy heredada. Normalmente, esto significa que se hace público o protegido.
+
+Algunos aspectos que hay que tener en cuenta:
+
+* No todas las propiedades deben tener parámetros de constructor. Por ejemplo, la propiedad post. Content no está establecida por ningún parámetro de constructor, por lo que EF Core la establecerá después de llamar al constructor de la manera normal.
+* Los nombres y tipos de parámetros deben coincidir con los nombres y tipos de propiedad, con la excepción de que las propiedades pueden tener mayúsculas y minúsculas Pascal, mientras que los parámetros tienen mayúsculas y minúsculas Camel.
+* EF Core no pueden establecer las propiedades de navegación (como blog o publicaciones anteriores) mediante un constructor.
+* El constructor puede ser público, privado o tener cualquier otra accesibilidad. Sin embargo, los proxies de carga diferida requieren que el constructor sea accesible desde la clase de proxy heredada. Normalmente esto significa que se hace público o protegido.
 
 ### <a name="read-only-properties"></a>Propiedades de solo lectura
 
-Una vez que se establecen las propiedades mediante el constructor puede sentido hacer algunos de ellos de sólo lectura. EF Core es compatible con esto, pero hay algunas cosas a tener en cuenta:
-* No se asignan las propiedades sin establecedores por convención. (Si lo hace, suele asignar propiedades que no deberían asignarse, por ejemplo, las propiedades calculadas).
-* Utilizando los valores de clave generados automáticamente, requiere una propiedad de clave es de lectura y escritura, ya que el valor de clave debe establecerse mediante el generador de claves cuando se insertan nuevas entidades.
+Una vez que las propiedades se establecen mediante el constructor, puede tener sentido que algunas de ellas sean de solo lectura. EF Core es compatible con esto, pero hay algunas cosas que debe buscar:
 
-Una manera fácil de evitar estas situaciones es usar establecedores privados. Por ejemplo:
+* Las propiedades sin establecedores no se asignan por Convención. (Esto tiende a asignar propiedades que no deben asignarse, como las propiedades calculadas).
+* El uso de valores de clave generados automáticamente requiere una propiedad de clave que sea de lectura y escritura, ya que el valor de clave debe establecerse mediante el generador de claves al insertar nuevas entidades.
+
+Una manera sencilla de evitar estos aspectos es usar establecedores privados. Por ejemplo:
+
 ``` csharp
 public class Blog
 {
@@ -135,9 +139,10 @@ public class Post
     public Blog Blog { get; set; }
 }
 ```
-EF Core, ve una propiedad con un establecedor privado de lectura y escritura, lo que significa que todas las propiedades se asignan como antes y la clave puede ser generado por el almacén.
 
-Una alternativa al uso de establecedores privados es poner propiedades realmente de solo lectura y agregar una asignación más explícita en OnModelCreating. Del mismo modo, algunas propiedades se pueden quitar completamente y reemplaza con solo los campos. Por ejemplo, considere la posibilidad de estos tipos de entidad:
+EF Core ve una propiedad con un establecedor privado como de lectura y escritura, lo que significa que todas las propiedades se asignan como antes y la clave todavía se puede generar en el almacén.
+
+Una alternativa al uso de establecedores privados es hacer que las propiedades sean realmente de solo lectura y agregar una asignación más explícita en OnModelCreating. Del mismo modo, algunas propiedades se pueden quitar por completo y reemplazar solo por campos. Por ejemplo, considere estos tipos de entidad:
 
 ``` csharp
 public class Blog
@@ -173,7 +178,9 @@ public class Post
     public Blog Blog { get; set; }
 }
 ```
+
 Y esta configuración en OnModelCreating:
+
 ``` csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
@@ -194,26 +201,29 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
         });
 }
 ```
-Cosas a tener en cuenta:
-* La clave "property" es ahora un campo. No es un `readonly` campo para que se pueden usar claves generadas por el almacén.
-* Las demás propiedades son propiedades de solo lectura que se establece solo en el constructor.
-* Si el valor de clave principal siempre se establece por EF o leer desde la base de datos, no hay ninguna necesidad de incluirlo en el constructor. Esto deja la clave "property" como un campo sencillo y deja claro que no se debe establecer explícitamente al crear nuevos blogs o entradas.
+
+Aspectos que se deben tener en cuenta:
+
+* La clave "propiedad" es ahora un campo. No se trata de un campo de `readonly` para que se puedan usar las claves generadas por el almacén.
+* Las demás propiedades son propiedades de solo lectura establecidas solo en el constructor.
+* Si el valor de la clave principal solo se establece en EF o se lee de la base de datos, no es necesario incluirlo en el constructor. Esto deja la clave "Property" como un campo simple y deja claro que no se debe establecer explícitamente al crear nuevos blogs o publicaciones.
 
 > [!NOTE]  
-> Este código dará como resultado '169' indicando que nunca se usa el campo de advertencia del compilador. Puede omitirse dado que en realidad, EF Core está usando el campo de una manera extralinguistic.
+> Este código producirá una advertencia del compilador ' 169 ' que indica que el campo nunca se utiliza. Esto puede pasarse por alto, ya que en realidad EF Core está utilizando el campo de forma extralingüística.
 
-## <a name="injecting-services"></a>Inyección de servicios
+## <a name="injecting-services"></a>Insertar servicios
 
-EF Core también puede insertar "servicios" en el constructor de un tipo de entidad. Por ejemplo, el siguiente se puede insertar:
-* `DbContext` -la instancia de contexto actual, que también se puede escribir como su tipo derivado de DbContext
-* `ILazyLoader` -el servicio de la carga diferida, vea el [documentación de la carga diferida](../querying/related-data.md) para obtener más detalles
-* `Action<object, string>` -un delegado de la carga diferida, vea el [documentación de la carga diferida](../querying/related-data.md) para obtener más detalles
-* `IEntityType` -los metadatos de EF Core asociados con este tipo de entidad
+EF Core también puede insertar "servicios" en el constructor de un tipo de entidad. Por ejemplo, se puede insertar lo siguiente:
+
+* `DbContext`: la instancia de contexto actual, que también se puede escribir como el tipo de DbContext derivado.
+* `ILazyLoader`-el servicio de carga diferida, consulte la [documentación sobre la carga diferida](../querying/related-data.md) para obtener más detalles.
+* `Action<object, string>`: un delegado de carga diferida; consulte la [documentación sobre la carga diferida](../querying/related-data.md) para obtener más detalles.
+* `IEntityType`: los metadatos de EF Core asociados a este tipo de entidad
 
 > [!NOTE]  
-> A partir de EF Core 2.1, solo los servicios conocidos con EF Core se pueden insertar. Soporte técnico para insertar los servicios de aplicación se está considerando para una versión futura.
+> A partir de EF Core 2,1, solo se pueden insertar los servicios conocidos por EF Core. Se está considerando la compatibilidad con la inserción de servicios de aplicación en una versión futura.
 
-Por ejemplo, puede utilizarse un DbContext insertado selectivamente acceder a la base de datos para obtener información sobre las entidades relacionadas sin tener que cargar todos ellos. En el ejemplo siguiente se utiliza para obtener el número de publicaciones en un blog sin tener que cargar las entradas de esto:
+Por ejemplo, un DbContext insertado se puede usar para tener acceso de forma selectiva a la base de datos para obtener información sobre las entidades relacionadas sin cargarlas todas. En el ejemplo siguiente, se usa para obtener el número de publicaciones en un blog sin cargar las entradas:
 
 ``` csharp
 public class Blog
@@ -251,10 +261,12 @@ public class Post
     public Blog Blog { get; set; }
 }
 ```
-Algunas cosas a tener en cuenta sobre esto:
-* El constructor es privado, ya que solo se llama mediante EF Core y no hay otro constructor público para uso general.
-* El código que usa el servicio insertado (es decir, el contexto) es estable en el mismo que se va a `null` para controlar los casos donde EF Core no está creando la instancia.
-* Porque el servicio se almacena en una propiedad de lectura/escritura se restablecerá cuando la entidad está asociada a una nueva instancia de contexto.
+
+Algunos aspectos que se deben tener en cuenta:
+
+* El constructor es privado, ya que nunca lo llama EF Core, y hay otro constructor público para uso general.
+* El código que usa el servicio inyectado (es decir, el contexto) está defensivo con respecto a que se `null` controlar los casos en los que EF Core no crea la instancia.
+* Dado que el servicio se almacena en una propiedad de lectura y escritura, se restablecerá cuando la entidad se adjunte a una nueva instancia de contexto.
 
 > [!WARNING]  
-> Inyección de DbContext como esta, a menudo se considera un antipatrón puesto que asocia los tipos de entidad directamente a EF Core. Considere detenidamente todas las opciones antes de usar la inserción de un servicio similar al siguiente.
+> Inyectar DbContext como esto se suele considerar un anti-patrón, ya que une los tipos de entidad directamente a EF Core. Tenga en cuenta todas las opciones antes de usar la inserción de servicios como esta.

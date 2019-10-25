@@ -4,24 +4,24 @@ author: bricelam
 ms.author: bricelam
 ms.date: 09/16/2019
 uid: core/miscellaneous/cli/dbcontext-creation
-ms.openlocfilehash: f83d4b16227d114a1cac1514667484a908fea4ac
-ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.openlocfilehash: c36dae150085b1ab509288f6fabfdd8ed7201ca8
+ms.sourcegitcommit: 2355447d89496a8ca6bcbfc0a68a14a0bf7f0327
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71197577"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72812020"
 ---
-<a name="design-time-dbcontext-creation"></a>Creación de DbContext en tiempo de diseño
-==============================
-Algunos de los comandos de herramientas de EF Core (por ejemplo, los comandos [Migrations][1] ) requieren `DbContext` que se cree una instancia derivada en tiempo de diseño para recopilar detalles sobre los tipos de entidad de la aplicación y cómo se asignan a un esquema de base de datos. En la mayoría de los casos, es conveniente `DbContext` que el creado por tanto se configure de forma similar a como se [configuraría en tiempo de ejecución][2].
+# <a name="design-time-dbcontext-creation"></a>Creación de DbContext en tiempo de diseño
 
-Hay varias maneras en las que las herramientas intentan `DbContext`crear:
+Algunos de los comandos de herramientas de EF Core (por ejemplo, los comandos de [migración][1] ) requieren que se cree una instancia de `DbContext` derivada en tiempo de diseño para recopilar detalles sobre los tipos de entidad de la aplicación y cómo se asignan a un esquema de base de datos. En la mayoría de los casos, es conveniente que el `DbContext` creado se configure de forma similar a como se [configuraría en tiempo de ejecución][2].
 
-<a name="from-application-services"></a>De servicios de aplicación
--------------------------
+Hay varias maneras en las que las herramientas intentan crear el `DbContext`:
+
+## <a name="from-application-services"></a>De servicios de aplicación
+
 Si el proyecto de inicio usa el host de [Web ASP.net Core][3] o el [host genérico de .net Core][4], las herramientas intentan obtener el objeto DbContext del proveedor de servicios de la aplicación.
 
-En primer lugar, las herramientas intentan obtener el proveedor de `Program.CreateHostBuilder()`servicios invocando, llamando `Build()`a y `Services` , a continuación, accediendo a la propiedad.
+En primer lugar, las herramientas intentan obtener el proveedor de servicios invocando `Program.CreateHostBuilder()`, llamando a `Build()`y, a continuación, accediendo a la propiedad `Services`.
 
 ``` csharp
 public class Program
@@ -54,15 +54,15 @@ public class ApplicationDbContext : DbContext
 > [!NOTE]
 > Cuando se crea una nueva aplicación de ASP.NET Core, este enlace se incluye de forma predeterminada.
 
-El `DbContext` propio y las dependencias de su constructor deben registrarse como servicios en el proveedor de servicios de la aplicación. Esto se puede lograr fácilmente si se tiene [un constructor en `DbContext` que toma una instancia de `DbContextOptions<TContext>` como argumento][5] y usa el [ `AddDbContext<TContext>` método][6].
+El propio `DbContext` y las dependencias de su constructor deben registrarse como servicios en el proveedor de servicios de la aplicación. Esto se puede lograr fácilmente si se tiene [un constructor en el `DbContext` que toma una instancia de `DbContextOptions<TContext>` como argumento][5] y mediante el [método`AddDbContext<TContext>`][6].
 
-<a name="using-a-constructor-with-no-parameters"></a>Usar un constructor sin parámetros
---------------------------------------
-Si DbContext no se puede obtener del proveedor de servicios de aplicación, las herramientas buscan el tipo `DbContext` derivado dentro del proyecto. A continuación, intentan crear una instancia mediante un constructor sin parámetros. Este puede ser el constructor predeterminado si `DbContext` se configura mediante el [`OnConfiguring`][7] método.
+## <a name="using-a-constructor-with-no-parameters"></a>Usar un constructor sin parámetros
 
-<a name="from-a-design-time-factory"></a>Desde un generador en tiempo de diseño
---------------------------
-También puede indicar a las herramientas cómo crear su DbContext implementando la `IDesignTimeDbContextFactory<TContext>` interfaz: Si una clase que implementa esta interfaz se encuentra en el mismo proyecto que el derivado `DbContext` o en el proyecto de inicio de la aplicación, las herramientas omiten las otras formas de crear el DbContext y usar en su lugar el generador en tiempo de diseño.
+Si DbContext no se puede obtener del proveedor de servicios de aplicación, las herramientas buscan el tipo de `DbContext` derivado dentro del proyecto. A continuación, intentan crear una instancia mediante un constructor sin parámetros. Este puede ser el constructor predeterminado si el `DbContext` se configura mediante el método [`OnConfiguring`][7] .
+
+## <a name="from-a-design-time-factory"></a>Desde un generador en tiempo de diseño
+
+También puede indicar a las herramientas cómo crear su DbContext implementando la interfaz de `IDesignTimeDbContextFactory<TContext>`: Si una clase que implementa esta interfaz se encuentra en el mismo proyecto que el `DbContext` derivado o en el proyecto de inicio de la aplicación, las herramientas omiten el otro. formas de crear DbContext y usar el generador en tiempo de diseño en su lugar.
 
 ``` csharp
 using Microsoft.EntityFrameworkCore;
@@ -85,9 +85,9 @@ namespace MyProject
 ```
 
 > [!NOTE]
-> El `args` parámetro no se usa actualmente. Existe [un problema][8] al realizar el seguimiento de la capacidad de especificar argumentos en tiempo de diseño desde las herramientas.
+> El parámetro `args` no se usa actualmente. Existe [un problema][8] al realizar el seguimiento de la capacidad de especificar argumentos en tiempo de diseño desde las herramientas.
 
-Un generador en tiempo de diseño puede ser especialmente útil si necesita configurar DbContext de manera diferente para el tiempo de diseño que en tiempo de ejecución `DbContext` , si el constructor toma parámetros adicionales que no están registrados en di, si no usa di en absoluto, o si for some motivo por el que prefiere no tener `BuildWebHost` un método en la clase de `Main` la aplicación ASP.net Core.
+Un generador en tiempo de diseño puede ser especialmente útil si necesita configurar DbContext de forma diferente en tiempo de diseño que en tiempo de ejecución, si el constructor `DbContext` toma parámetros adicionales que no están registrados en DI, si no usa DI en absoluto, o si por alguna razón prefiere no tener un método `BuildWebHost` en la clase `Main` de la aplicación ASP.NET Core.
 
   [1]: xref:core/managing-schemas/migrations/index
   [2]: xref:core/miscellaneous/configuring-dbcontext

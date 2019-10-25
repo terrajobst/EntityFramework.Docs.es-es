@@ -1,22 +1,23 @@
 ---
-title: Migraciones en entornos de equipo - EF Core
+title: 'Migraciones en entornos de equipo: EF Core'
 author: bricelam
 ms.author: bricelam
 ms.date: 10/30/2017
-ms.openlocfilehash: e8ff7f468d5ab6dbd6285f1abf9199e413288d10
-ms.sourcegitcommit: dadee5905ada9ecdbae28363a682950383ce3e10
+uid: core/managing-schemas/migrations/teams
+ms.openlocfilehash: e6a1b86761a201cbcae34cced7e64f11df37a420
+ms.sourcegitcommit: 2355447d89496a8ca6bcbfc0a68a14a0bf7f0327
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/27/2018
-ms.locfileid: "42997700"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72811985"
 ---
-<a name="migrations-in-team-environments"></a>Migraciones en entornos de equipo
-===============================
-Cuando se trabaja con las migraciones en entornos de equipo, debe poner atención en el archivo de instantánea del modelo. Este archivo puede indicarle si la migración de su compañero combina sin problemas con el suyo o si tiene que resolver un conflicto, vuelva a crear la migración antes de compartirlo.
+# <a name="migrations-in-team-environments"></a>Migraciones en entornos de equipo
 
-<a name="merging"></a>Combinación
--------
-Cuando se mezclan las migraciones de sus compañeros de equipo, puede aparecer conflictos en el archivo de instantánea del modelo. Si ambos cambios están relacionados, la combinación es trivial y las dos migraciones pueden coexistir. Por ejemplo, es posible que obtenga un conflicto de combinación en la configuración de tipo de entidad customer que tiene este aspecto:
+Al trabajar con migraciones en entornos de equipo, preste especial atención al archivo de instantáneas del modelo. Este archivo puede indicarle si la migración de su compañero de equipo se combina correctamente con la suya o si necesita resolver un conflicto volviendo a crear la migración antes de compartirla.
+
+## <a name="merging"></a>Combinación
+
+Al fusionar mediante combinación las migraciones de sus compañeros de equipo, puede obtener conflictos en el archivo de instantánea del modelo. Si los dos cambios no están relacionados, la combinación es trivial y las dos migraciones pueden coexistir. Por ejemplo, puede obtener un conflicto de fusión mediante combinación en la configuración del tipo de entidad Customer, que tiene el siguiente aspecto:
 
     <<<<<<< Mine
     b.Property<bool>("Deactivated");
@@ -24,18 +25,18 @@ Cuando se mezclan las migraciones de sus compañeros de equipo, puede aparecer c
     b.Property<int>("LoyaltyPoints");
     >>>>>>> Theirs
 
-Puesto que ambas propiedades deben existir en el modelo final, complete la combinación agregando ambas propiedades. En muchos casos, el sistema de control de versiones puede combinar estos cambios automáticamente.
+Puesto que ambas propiedades deben existir en el modelo final, complete la combinación agregando ambas propiedades. En muchos casos, es posible que el sistema de control de versiones combine automáticamente estos cambios.
 
 ``` csharp
 b.Property<bool>("Deactivated");
 b.Property<int>("LoyaltyPoints");
 ```
 
-En estos casos, la migración y migración de su compañero son independientes entre sí. Dado que cualquiera de ellos podría aplicarse primero, no es necesario realizar ningún cambio adicional en la migración antes de compartirlos con su equipo.
+En estos casos, la migración y la migración de su compañero son independientes entre sí. Dado que cualquiera de ellas se podría aplicar en primer lugar, no es necesario realizar ningún cambio adicional en la migración antes de compartirla con el equipo.
 
-<a name="resolving-conflicts"></a>Resolución de conflictos
--------------------
-A veces se produzca un conflicto es true cuando se mezclan los modelos de instantánea. Por ejemplo, usted y su compañero de equipo es posible que cada uno de ellos ha cambiado el nombre la misma propiedad.
+## <a name="resolving-conflicts"></a>Resolver conflictos
+
+A veces se produce un conflicto real al combinar el modelo de instantánea de modelo. Por ejemplo, usted y su compañero de equipo pueden cambiar el nombre de la misma propiedad.
 
     <<<<<<< Mine
     b.Property<string>("Username");
@@ -43,13 +44,13 @@ A veces se produzca un conflicto es true cuando se mezclan los modelos de instan
     b.Property<string>("Alias");
     >>>>>>> Theirs
 
-Si se produce este tipo de conflicto, volver a crear la migración para resolverlo. Siga estos pasos:
+Si encuentra este tipo de conflicto, resuélvalos volviendo a crear la migración. Siga estos pasos:
 
-1. Anular la mezcla y la reversión al directorio de trabajo antes de la combinación
-2. Quitar la migración (pero mantener los cambios de modelo)
+1. Anular la combinación y revertir al directorio de trabajo antes de la fusión mediante combinación
+2. Quitar la migración (pero mantener los cambios del modelo)
 3. Combinar los cambios de su compañero en el directorio de trabajo
-4. Volver a agregar a la migración
+4. Volver a agregar la migración
 
-Una vez hecho esto, se pueden aplicar las dos migraciones en el orden correcto. La migración se aplica en primer lugar, cambiar el nombre de la columna a *Alias*, a partir de entonces la migración cambia su nombre a *Username*.
+Después de hacer esto, las dos migraciones se pueden aplicar en el orden correcto. En primer lugar, se aplica su migración, cambiando el nombre de la columna a *alias*y, a partir de ese momento, la migración lo cambia por nombre de *usuario*.
 
-La migración puede compartirse con seguridad con el resto del equipo.
+La migración puede compartirse de forma segura con el resto del equipo.
