@@ -4,18 +4,18 @@ author: divega
 ms.date: 08/06/2017
 ms.assetid: 608cc774-c570-4809-8a3e-cd2c8446b8b2
 uid: core/get-started/install/index
-ms.openlocfilehash: b4ae13ae1b22bb78c2c0407c0b3da64ee12ff2c1
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.openlocfilehash: aeb3ed1af8725ed6f92e0c0ba022a89b651bff80
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72181203"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73655597"
 ---
 # <a name="installing-entity-framework-core"></a>Instalación de Entity Framework Core
 
 ## <a name="prerequisites"></a>Requisitos previos
 
-* EF Core es una biblioteca de [.NET Standard 2.1](/dotnet/standard/net-standard). Por este motivo, EF Core requiere una implementación de .NET que admita .NET Standard 2.1 para poder ejecutarse. Otras bibliotecas de .NET Standard 2.1 también pueden hacer referencia a EF Core. 
+* EF Core es una biblioteca de [.NET Standard 2.1](/dotnet/standard/net-standard). Por este motivo, EF Core requiere una implementación de .NET que admita .NET Standard 2.1 para poder ejecutarse. Otras bibliotecas de .NET Standard 2.1 también pueden hacer referencia a EF Core.
 
 * Por ejemplo, puede usar EF Core para desarrollar aplicaciones que tengan como destino .NET Core. La compilación de aplicaciones de .NET Core requiere el [SDK de .NET Core](https://dotnet.microsoft.com/download). También puede usar un entorno de desarrollo como [Visual Studio](https://visualstudio.microsoft.com/vs), [Visual Studio para Mac](https://visualstudio.microsoft.com/vs/mac) o [Visual Studio Code](https://code.visualstudio.com). Para obtener más información, vea [Introducción a .NET Core](/dotnet/core/get-started).
 
@@ -64,6 +64,7 @@ Para obtener más información, vea [Diálogo del Administrador de paquetes NuGe
   ``` PowerShell  
   Install-Package Microsoft.EntityFrameworkCore.SqlServer
   ```
+
 * Para actualizar el proveedor, use el comando `Update-Package`.
 
 * Para especificar una versión, use el modificador `-Version`. Por ejemplo, para instalar paquetes de EF Core 2.2.0, anexe `-Version 2.2.0` a los comandos.
@@ -76,7 +77,7 @@ Puede instalar herramientas para llevar a cabo tareas relacionadas con EF Core e
 
 Existen dos conjuntos de herramientas:
 
-* Las [herramientas de la interfaz de la línea de comandos (CLI) de .NET Core](xref:core/miscellaneous/cli/dotnet) pueden usarse en Windows, Linux y macOS. Estos comandos comienzan por `dotnet ef`. 
+* Las [herramientas de la interfaz de la línea de comandos (CLI) de .NET Core](xref:core/miscellaneous/cli/dotnet) pueden usarse en Windows, Linux y macOS. Estos comandos comienzan por `dotnet ef`.
 
 * Las [herramientas de la consola del Administrador de paquetes (PMC)](xref:core/miscellaneous/cli/powershell) se ejecutan en Visual Studio (Windows). Estos comandos empiezan por un verbo. Por ejemplo: `Add-Migration`, `Update-Database`.
 
@@ -94,28 +95,28 @@ Las herramientas de la CLI de .NET Core requieren el SDK de .NET Core, tal como 
 
 Los comandos de `dotnet ef` están incluidos en las versiones actuales del SDK de .NET Core, pero es necesario instalar el paquete `Microsoft.EntityFrameworkCore.Design` para habilitarlos en un proyecto específico:
 
-``` Console 
-dotnet add package Microsoft.EntityFrameworkCore.Design 
-``` 
+``` Console
+dotnet add package Microsoft.EntityFrameworkCore.Design
+```
 
 Para las aplicaciones de ASP.NET Core, este paquete se incluye automáticamente.
 
-> [!IMPORTANT]      
+> [!IMPORTANT]
 > Use siempre la versión del paquete de herramientas que coincida con la versión principal de los paquetes en tiempo de ejecución.
 
 ### <a name="get-the-package-manager-console-tools"></a>Obtención de las herramientas de la consola del Administrador de paquetes
 
 Para obtener las herramientas de la consola del Administrador de paquetes para EF Core, instale el paquete `Microsoft.EntityFrameworkCore.Tools`. Por ejemplo, en Visual Studio:
 
-``` PowerShell  
+``` PowerShell
 Install-Package Microsoft.EntityFrameworkCore.Tools
-``` 
+```
 
 Para las aplicaciones de ASP.NET Core, este paquete se incluye automáticamente.
 
 ## <a name="upgrading-to-the-latest-ef-core"></a>Actualización a la versión más reciente de EF Core
 
-* Cuando publicamos una nueva versión de EF Core, también publicamos una nueva versión de los proveedores que forman parte del proyecto de EF Core, como, por ejemplo: Microsoft.EntityFrameworkCore.SqlServer, Microsoft.EntityFrameworkCore.Sqlite y Microsoft.EntityFrameworkCore.InMemory. Para obtener todas las mejoras, solo tiene que actualizar a la nueva versión del proveedor. 
+* Cuando publicamos una nueva versión de EF Core, también publicamos una nueva versión de los proveedores que forman parte del proyecto de EF Core, como, por ejemplo: Microsoft.EntityFrameworkCore.SqlServer, Microsoft.EntityFrameworkCore.Sqlite y Microsoft.EntityFrameworkCore.InMemory. Para obtener todas las mejoras, solo tiene que actualizar a la nueva versión del proveedor.
 
 * EF Core y los proveedores de SQL Server y en memoria están incluidos en las versiones actuales de ASP.NET Core. Para actualizar una aplicación de ASP.NET Core existente a una versión más reciente de EF Core, actualice siempre la versión de ASP.NET Core.
 
@@ -128,7 +129,7 @@ Para las aplicaciones de ASP.NET Core, este paquete se incluye automáticamente.
   * Los paquetes en tiempo de diseño del proveedor de base de datos, como `Microsoft.EntityFrameworkCore.SqlServer.Design`, ya no son necesarios ni se admiten en EF Core 2.0 y versiones posteriores, pero no se quitan automáticamente al actualizar los demás paquetes.
 
   * Las herramientas de la CLI de .NET están incluidas en el SDK de .NET desde la versión 2.1, por lo que se puede quitar la referencia a ese paquete desde el archivo del proyecto:
-    ```xml
+
+    ``` xml
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
     ```
-
