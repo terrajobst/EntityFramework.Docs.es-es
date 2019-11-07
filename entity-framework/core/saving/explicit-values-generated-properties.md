@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 3f1993c2-cdf5-425b-bac2-a2665a20322b
 uid: core/saving/explicit-values-generated-properties
-ms.openlocfilehash: d6aa9a0a9ce34e09a39026ad7ea9195b6777858c
-ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.openlocfilehash: ea469b9b7199cc767b2d0da1a5999026f938d087
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71197862"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73656255"
 ---
 # <a name="setting-explicit-values-for-generated-properties"></a>Establecimiento de valores explícitos para propiedades generadas
 
@@ -33,6 +33,7 @@ La propiedad `Employee.EmploymentStarted` está configurada para tener valores g
 [!code-csharp[Main](../../../samples/core/Saving/ExplicitValuesGenerateProperties/EmployeeContext.cs#EmploymentStarted)]
 
 El código siguiente inserta dos empleados en la base de datos.
+
 * Para el primero, no se asigna ningún valor a la propiedad `Employee.EmploymentStarted`, por lo que permanece establecido en el valor predeterminado de CLR para `DateTime`.
 * En el caso del segundo, se establece un valor explícito de `1-Jan-2000`.
 
@@ -80,6 +81,7 @@ También hay un desencadenador en la base de datos para generar valores para la 
 [!code-sql[Main](../../../samples/core/Saving/ExplicitValuesGenerateProperties/employee_UPDATE.sql)]
 
 El código siguiente aumenta el salario de ambos empleados en la base de datos.
+
 * Para el primero, no se asigna ningún valor a la propiedad `Employee.LastPayRaise`, por lo que sigue establecido en NULL.
 * Para el segundo, establecemos un valor explícito de una semana atrás (se antedata el aumento salarial).
 

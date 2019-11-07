@@ -5,12 +5,12 @@ ms.author: avickers
 ms.date: 10/27/2016
 ms.assetid: 2533b195-d357-4056-b0e0-8698971bc3b0
 uid: core/saving/disconnected-entities
-ms.openlocfilehash: 070f2ad396ec21858096c29413ac80bdf8547328
-ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.openlocfilehash: 88c3fa8ea5b8246a932f5cf21e674bc7cc71c0ea
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71197809"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73656270"
 ---
 # <a name="disconnected-entities"></a>Entidades desconectadas
 
@@ -18,11 +18,13 @@ Una DbContext realizará seguimiento automático de las entidades que se devuelv
 
 Sin embargo, en algunas ocasiones las entidades se consultan mediante el uso de una instancia de contexto y luego se guardan con una instancia distinta. Esto suele ocurrir en escenarios "desconectados", como una aplicación web, en los que las entidades se consultan, se envían al cliente, se modifican, se envían de vuelta al servidor en una solicitud y, a continuación, se guardan. En este caso, la segunda instancia de contexto debe saber si las entidades son nuevas (y se deben insertar) o existentes (y se deben actualizar).
 
-> [!TIP]  
+<!-- markdownlint-disable MD028 -->
+> [!TIP]
 > Puede ver un [ejemplo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Disconnected/) de este artículo en GitHub.
 
 > [!TIP]
 > EF Core solo puede hacer seguimiento de una instancia de una entidad con un valor de clave principal determinado. La mejor manera de evitar que esto se convierta en un problema es usar un contexto de corta duración para cada unidad de trabajo de manera que el contexto empiece vacío, tenga entidades asociadas, guarde esas entidades y, luego, se elimine y descarte el contexto.
+<!-- markdownlint-enable MD028 -->
 
 ## <a name="identifying-new-entities"></a>Identificación de unidades nuevas
 
@@ -50,8 +52,9 @@ Sin embargo, EF también tiene una manera integrada de hacer esto con cualquier 
 ### <a name="with-other-keys"></a>Con otras claves
 
 Es necesario algún otro mecanismo para identificar las entidades nuevas cuando los valores de clave no se generan automáticamente. Aquí existen dos enfoques generales:
- * Consulta para la entidad
- * Paso de una marca desde el cliente
+
+* Consulta para la entidad
+* Paso de una marca desde el cliente
 
 Para consulta la entidad, simplemente use el método Find:
 
@@ -79,6 +82,7 @@ Si la entidad no usa claves generadas automáticamente, la aplicación debe deci
 [!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#InsertOrUpdateSingleEntityWithFind)]
 
 Estos son los pasos:
+
 * Si Find devuelve un valor NULL, la base de datos todavía no contiene el blog con su identificador, por lo que llamamos a Add para marcarlo para inserción.
 * Si Find devuelve una entidad es porque existe en la base de datos y ahora el contexto hace seguimiento de esa entidad existente.
   * Luego usamos SetValues para establecer los valores de todas las propiedades de esta entidad en los valores que provienen del cliente.

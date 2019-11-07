@@ -4,16 +4,17 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: f9fb64e2-6699-4d70-a773-592918c04c19
 uid: core/querying/related-data
-ms.openlocfilehash: 4e4ba21cd099daab4db8a8f358800fde26980c14
-ms.sourcegitcommit: 6c28926a1e35e392b198a8729fc13c1c1968a27b
+ms.openlocfilehash: bfabe8fd5b0a64edd5d97baff3beab9d712f1c20
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/02/2019
-ms.locfileid: "71813588"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73654630"
 ---
 # <a name="loading-related-data"></a>Carga de datos relacionados
 
 Entity Framework Core permite usar las propiedades de navegación del modelo para cargar las entidades relacionados. Existen tres patrones de O/RM comunes que se usan para cargar los datos relacionados.
+
 * **Carga diligente** significa que los datos relacionados se cargan desde la base de datos como parte de la consulta inicial.
 * **Carga explícita** significa que los datos relacionados se cargan de manera explícita desde la base de datos más adelante.
 * **Carga diferida** significa que los datos relacionados se cargan de manera transparente desde la base de datos cuando se accede a la propiedad de navegación.
@@ -57,7 +58,7 @@ Es posible que quiera incluir varias entidades relacionadas para una de las enti
 
 ### <a name="include-on-derived-types"></a>Inclusión en tipos derivados
 
-Puede incluir datos relacionados provenientes de las navegaciones que se definen solo en un tipo derivado con `Include` y `ThenInclude`. 
+Puede incluir datos relacionados provenientes de las navegaciones que se definen solo en un tipo derivado con `Include` y `ThenInclude`.
 
 Dado el modelo siguiente:
 
@@ -95,17 +96,20 @@ public class School
 
 El contenido de la navegación `School` de todas las personas que son estudiantes se puede cargar de manera diligente mediante el uso de diversos patrones:
 
-- con conversión
+* con conversión
+
   ```csharp
   context.People.Include(person => ((Student)person).School).ToList()
   ```
 
-- con el operador `as`
+* con el operador `as`
+
   ```csharp
   context.People.Include(person => (person as Student).School).ToList()
   ```
 
-- con la sobrecarga de `Include` que toma el parámetro del tipo `string`
+* con la sobrecarga de `Include` que toma el parámetro del tipo `string`
+
   ```csharp
   context.People.Include("School").ToList()
   ```
@@ -140,6 +144,7 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         .UseLazyLoadingProxies()
         .UseSqlServer(myConnectionString);
 ```
+
 O al usar AddDbContext:
 
 ```csharp

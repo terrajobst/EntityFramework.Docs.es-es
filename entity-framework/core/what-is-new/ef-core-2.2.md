@@ -4,25 +4,26 @@ author: divega
 ms.date: 11/14/2018
 ms.assetid: 998C04F3-676A-4FCF-8450-CFB0457B4198
 uid: core/what-is-new/ef-core-2.2
-ms.openlocfilehash: 5fcf7c6dfb4d8cb7928ef974af6deb52df7c63eb
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.openlocfilehash: fb9de799753bebd7b4092cd8f4af74703dee3e45
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72181373"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73656194"
 ---
 # <a name="new-features-in-ef-core-22"></a>Novedades de EF Core 2.2
 
 ## <a name="spatial-data-support"></a>Compatibilidad con datos espaciales
 
 Los datos espaciales pueden usarse para representar la ubicación física y la forma de los objetos.
-Muchas bases de datos pueden almacenar, indexar y consultar datos espaciales de forma nativa. Entre los escenarios habituales se incluye la consulta de objetos dentro de una distancia determinada y la prueba de si un polígono contiene una ubicación determinada.
+Muchas bases de datos pueden almacenar, indexar y consultar datos espaciales de forma nativa.
+Entre los escenarios habituales se incluye la consulta de objetos dentro de una distancia determinada y la prueba de si un polígono contiene una ubicación determinada.
 EF Core 2.2 ahora admite trabajar con datos espaciales de varias bases de datos utilizando tipos de la biblioteca [ NetTopologySuite ](https://github.com/NetTopologySuite/NetTopologySuite) (NTS).
 
 La compatibilidad con datos espaciales se implementa como una serie de paquetes de extensión específicos del proveedor.
 Cada uno de estos paquetes contribuye a las asignaciones de tipos y métodos de NTS y los correspondientes tipos espaciales y funciones en la base de datos.
 Estas extensiones de proveedor ahora están disponibles para [SQL Server](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer.NetTopologySuite/), [SQLite](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Sqlite.NetTopologySuite/) y [PostgreSQL](https://www.nuget.org/packages/Npgsql.EntityFrameworkCore.PostgreSQL.NetTopologySuite/) (del [proyecto Npgsql](https://www.npgsql.org/)).
-Los tipos espaciales pueden usarse directamente con el [proveedor en memoria de EF Core](https://docs.microsoft.com/en-us/ef/core/providers/in-memory/) sin extensiones adicionales.
+Los tipos espaciales pueden usarse directamente con el [proveedor en memoria de EF Core](xref:core/providers/in-memory/index) sin extensiones adicionales.
 
 Una vez que se instala la extensión del proveedor, puede agregar propiedades de los tipos admitidos a las entidades. Por ejemplo:
 
@@ -40,7 +41,7 @@ namespace MyApp
     public Point Location { get; set; }
   }
 }
-``` 
+```
 
 Luego puede guardar entidades con datos espaciales:
 
@@ -56,6 +57,7 @@ using (var context = new MyDbContext())
     context.SaveChanges();
 }
 ```
+
 Y puede ejecutar consultas de base de datos basadas en datos y operaciones espaciales:
 
 ``` csharp
@@ -65,7 +67,7 @@ Y puede ejecutar consultas de base de datos basadas en datos y operaciones espac
       select f).Take(5).ToList();
 ```
 
-Para obtener más información sobre esta característica, consulte la [documentación sobre tipos espaciales](xref:core/modeling/spatial). 
+Para obtener más información sobre esta característica, consulte la [documentación sobre tipos espaciales](xref:core/modeling/spatial).
 
 ## <a name="collections-of-owned-entities"></a>Colecciones de entidades en propiedad
 
@@ -74,7 +76,8 @@ EF Core 2.2 extiende la capacidad de expresar la propiedad a asociaciones de uno
 La propiedad ayuda a restringir el modo en que se usan las entidades.
 
 Por ejemplo, las entidades en propiedad:
-- Solo pueden aparecer en las propiedades de navegación de otros tipos de entidad. 
+
+- Solo pueden aparecer en las propiedades de navegación de otros tipos de entidad.
 - Se cargan automáticamente, y solo se puede hacer su seguimiento por un DbContext junto con su propietario.
 
 En bases de datos relacionales, las colecciones en propiedad se asignan a tablas independientes del propietario, al igual que las asociaciones regulares de uno a varios.
@@ -112,4 +115,4 @@ FROM [Friends] AS [f]
 ORDER BY [f].[Location].STDistance(@__myLocation_0) DESC
 ```
 
-Para obtener más información, vea la [documentación de etiquetas de consulta](xref:core/querying/tags). 
+Para obtener más información, vea la [documentación de etiquetas de consulta](xref:core/querying/tags).

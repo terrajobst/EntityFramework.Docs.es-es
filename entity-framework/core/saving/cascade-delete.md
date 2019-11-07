@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: ee8e14ec-2158-4c9c-96b5-118715e2ed9e
 uid: core/saving/cascade-delete
-ms.openlocfilehash: af86383bad52c87d2874fa4f8eb247a656601312
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.openlocfilehash: 51c8b6f4517a3f87821ed1e4e2d60549e06ed39d
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182011"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73656067"
 ---
 # <a name="cascade-delete"></a>Eliminación en cascada
 
@@ -18,9 +18,11 @@ En la terminología de las bases de datos, la eliminación en cascada se usa hab
 EF Core implementa varios comportamientos de eliminación distintos y permite configurar estos comportamientos de las relaciones individuales. EF Core también implementa convenciones que configuran automáticamente útiles comportamientos de eliminación predeterminados para cada relación en función de la [obligatoriedad de la relación](../modeling/relationships.md#required-and-optional-relationships).
 
 ## <a name="delete-behaviors"></a>Comportamientos de eliminación
+
 Los comportamientos de eliminación se define en el tipo de enumerador *DeleteBehavior* y se pueden pasar a la API fluida *OnDelete* para controlar si la eliminación de una entidad principal o primaria o la interrupción de la relación con entidades dependientes o secundarias debería tener un efecto secundario en estas últimas.
 
 Hay tres acciones que EF puede llevar a cabo cuando se elimina una entidad principal o primaria o cuando se interrumpe la relación con una entidad secundaria:
+
 * Se puede eliminar la entidad secundaria o dependiente.
 * Los valores de clave externa de la entidad secundaria se pueden establecer en NULL.
 * La entidad secundaria se mantiene sin cambios.
@@ -33,6 +35,7 @@ La segunda acción mencionada, establecer un valor de clave externa en NULL, no 
 Existen cuatro comportamientos de eliminación, los que se indican en las tablas siguientes.
 
 ### <a name="optional-relationships"></a>Relaciones opcionales
+
 En el caso de las relaciones opcionales (clave externa que admite un valor NULL) _es_ posible guardar un valor de clave externa NULL, lo que tiene como resultado los efectos siguientes:
 
 | Nombre del comportamiento               | Efecto en la entidad dependiente o secundaria en la memoria    | Efecto en la entidad dependiente o secundaria en la base de datos  |
@@ -43,6 +46,7 @@ En el caso de las relaciones opcionales (clave externa que admite un valor NULL)
 | **Restrict**                | None                                   | None                                   |
 
 ### <a name="required-relationships"></a>Relaciones obligatorias
+
 En el caso de las relaciones obligatorias (clave externa que no admite un valor NULL) _no_ es posible guardar un valor de clave externa NULL, lo que tiene como resultado los efectos siguientes:
 
 | Nombre del comportamiento         | Efecto en la entidad dependiente o secundaria en la memoria | Efecto en la entidad dependiente o secundaria en la base de datos |
@@ -55,6 +59,7 @@ En el caso de las relaciones obligatorias (clave externa que no admite un valor 
 En las tablas anteriores, *None* puede dar lugar a una infracción de restricción. Por ejemplo, si se elimina una entidad principal o secundaria pero no se hace ninguna acción para cambiar la clave externa de una entidad dependiente o secundaria, es probable que la base de datos genere una excepción en SaveChanges debido a una infracción de restricción externa.
 
 En un nivel superior:
+
 * Si tiene entidades que no pueden existir sin una entidad primaria y quiere que EF se encargue de eliminar automáticamente las entidades secundarias, use *Cascade*.
   * Habitualmente, las entidades que no pueden existir sin una entidad primaria usan las relaciones obligatorias, en las que el valor predeterminado es *Cascade*.
 * Si tiene entidades que pueden tener o no una entidad primaria y quiere que EF se encargue de anular automáticamente la clave externa, use *ClientSetNull*.
@@ -107,7 +112,7 @@ Analicemos cada variación para comprender lo que sucede.
 
 ### <a name="deletebehaviorclientsetnull-or-deletebehaviorsetnull-with-required-relationship"></a>DeleteBehavior.ClientSetNull o DeleteBehavior.SetNull con relación obligatoria
 
-```console
+``` output
   After loading entities:
     Blog '1' is in state Unchanged with 2 posts referenced.
       Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
@@ -130,7 +135,7 @@ Analicemos cada variación para comprender lo que sucede.
 
 ### <a name="deletebehaviorclientsetnull-or-deletebehaviorsetnull-with-optional-relationship"></a>DeleteBehavior.ClientSetNull o DeleteBehavior.SetNull con relación opcional
 
-```console
+``` output
   After loading entities:
     Blog '1' is in state Unchanged with 2 posts referenced.
       Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
@@ -160,7 +165,7 @@ Analicemos cada variación para comprender lo que sucede.
 
 ### <a name="deletebehaviorrestrict-with-required-or-optional-relationship"></a>DeleteBehavior.Restrict con relación obligatoria u opcional
 
-```console
+``` output
   After loading entities:
     Blog '1' is in state Unchanged with 2 posts referenced.
       Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
@@ -189,7 +194,7 @@ Analicemos cada variación para comprender lo que sucede.
 
 ### <a name="deletebehaviorcascade-with-required-or-optional-relationship"></a>DeleteBehavior.Cascade con relación obligatoria u opcional
 
-```console
+``` output
   After loading entities:
     Blog '1' is in state Unchanged with 2 posts referenced.
       Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
@@ -217,7 +222,7 @@ Analicemos cada variación para comprender lo que sucede.
 
 ### <a name="deletebehaviorclientsetnull-or-deletebehaviorsetnull-with-required-relationship"></a>DeleteBehavior.ClientSetNull o DeleteBehavior.SetNull con relación obligatoria
 
-```console
+``` output
   After loading entities:
     Blog '1' is in state Unchanged with 2 posts referenced.
       Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
@@ -240,7 +245,7 @@ Analicemos cada variación para comprender lo que sucede.
 
 ### <a name="deletebehaviorclientsetnull-or-deletebehaviorsetnull-with-optional-relationship"></a>DeleteBehavior.ClientSetNull o DeleteBehavior.SetNull con relación opcional
 
-```console
+``` output
   After loading entities:
     Blog '1' is in state Unchanged with 2 posts referenced.
       Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
@@ -268,7 +273,7 @@ Analicemos cada variación para comprender lo que sucede.
 
 ### <a name="deletebehaviorrestrict-with-required-or-optional-relationship"></a>DeleteBehavior.Restrict con relación obligatoria u opcional
 
-```console
+``` output
   After loading entities:
     Blog '1' is in state Unchanged with 2 posts referenced.
       Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
