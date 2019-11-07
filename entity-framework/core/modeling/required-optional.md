@@ -4,27 +4,27 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: ddaa0a54-9f43-4c34-aae3-f95c96c69842
 uid: core/modeling/required-optional
-ms.openlocfilehash: fd9e96e6f79965e63b07c21217edd004fd5c4d54
-ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.openlocfilehash: 62b2b3f5a761c0aacece986ecd0b2dd2f958d048
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71197843"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73655665"
 ---
 # <a name="required-and-optional-properties"></a>Propiedades obligatorias y opcionales
 
-Una propiedad se considera opcional si es válida para que la contenga `null`. Si `null` no es un valor válido que se va a asignar a una propiedad, se considera que es una propiedad obligatoria.
+Una propiedad se considera opcional si es válida para que contenga `null`. Si `null` no es un valor válido que se va a asignar a una propiedad, se considera que es una propiedad obligatoria.
 
 Al asignar a un esquema de base de datos relacional, las propiedades requeridas se crean como columnas que no aceptan valores NULL y las propiedades opcionales se crean como columnas que aceptan valores NULL.
 
 ## <a name="conventions"></a>Convenciones
 
-Por Convención, una propiedad cuyo tipo .NET pueda contener NULL se configurará como opcional, mientras que las propiedades cuyo tipo .NET no puede contener valores NULL se configurarán según sea necesario. Por ejemplo, todas las propiedades con tipos de valor`int`.net `decimal`( `bool`,,, etc.) se configuran como necesario y todas las propiedades con tipos de valor `decimal?`de `bool?`.net que aceptan valores NULL (`int?`,,, etc.) son configurado como opcional.
+Por Convención, una propiedad cuyo tipo .NET pueda contener NULL se configurará como opcional, mientras que las propiedades cuyo tipo .NET no puede contener valores NULL se configurarán según sea necesario. Por ejemplo, todas las propiedades con tipos de valor .NET (`int`, `decimal`, `bool`, etc.) se configuran según sea necesario y todas las propiedades con tipos de valor .NET que aceptan valores NULL (`int?`, `decimal?`, `bool?`, etc.) se configuran como opcionales.
 
 C#8 presentó una nueva característica denominada [tipos de referencia que aceptan valores NULL](/dotnet/csharp/tutorials/nullable-reference-types), que permite anotar tipos de referencia, lo que indica si es válido para que contengan null o not. Esta característica está deshabilitada de forma predeterminada y, si está habilitada, modifica el comportamiento de EF Core de la siguiente manera:
 
-* Si los tipos de referencia que aceptan valores NULL están deshabilitados (el valor predeterminado), todas las propiedades con tipos de referencia de `string`.net se configuran como opcionales por Convención (por ejemplo,).
-* Si los tipos de referencia que aceptan valores NULL están habilitados, las propiedades C# se configurarán en función de `string?` la nulabilidad de su tipo .net `string` : se configurarán como opcionales, mientras que se configurarán según sea necesario.
+* Si los tipos de referencia que aceptan valores NULL están deshabilitados (el valor predeterminado), todas las propiedades con tipos de referencia de .NET se configuran como opcionales por Convención (por ejemplo, `string`).
+* Si los tipos de referencia que aceptan valores NULL están habilitados, las propiedades C# se configurarán en función de la nulabilidad de su tipo .net: `string?` se configurarán como opcionales, mientras que `string` se configurarán según sea necesario.
 
 En el ejemplo siguiente se muestra un tipo de entidad con propiedades obligatorias y opcionales, con la característica de referencia que acepta valores NULL deshabilitada (valor predeterminado) y habilitada:
 
@@ -53,7 +53,7 @@ Una propiedad que sería opcional por Convención se puede configurar para que s
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Required.cs?highlight=14)]
 
-# <a name="fluent-apitabfluent-api"></a>[API fluida](#tab/fluent-api) 
+# <a name="fluent-apitabfluent-api"></a>[API fluida](#tab/fluent-api)
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Required.cs?highlight=11-13)]
 

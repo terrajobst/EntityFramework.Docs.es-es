@@ -5,14 +5,14 @@ ms.author: ansvyryd
 ms.date: 04/10/2019
 ms.assetid: 0EC2CCE1-BD55-45D8-9EA9-20634987F094
 uid: core/modeling/table-splitting
-ms.openlocfilehash: 684fcfbb66debfd1b89e23c8aaf0a32909378c6b
-ms.sourcegitcommit: cbaa6cc89bd71d5e0bcc891e55743f0e8ea3393b
+ms.openlocfilehash: a3a2e5842a6c6b4b490084d205a0d44bb46c17ee
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/20/2019
-ms.locfileid: "71149183"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73656041"
 ---
-# <a name="table-splitting"></a>División de tabla
+# <a name="table-splitting"></a>División de tablas
 
 >[!NOTE]
 > Esta característica es nueva en EF Core 2,0.
@@ -25,13 +25,13 @@ Para usar la división de tablas, los tipos de entidad deben asignarse a la mism
 
 Un escenario común para la división de tablas es usar solo un subconjunto de las columnas de la tabla para un mayor rendimiento o encapsulación.
 
-En este ejemplo `Order` representa un subconjunto `DetailedOrder`de.
+En este ejemplo `Order` representa un subconjunto de `DetailedOrder`.
 
 [!code-csharp[Order](../../../samples/core/Modeling/TableSplitting/Order.cs?name=Order)]
 
 [!code-csharp[DetailedOrder](../../../samples/core/Modeling/TableSplitting/DetailedOrder.cs?name=DetailedOrder)]
 
-Además de la configuración necesaria, `Property(o => o.Status).HasColumnName("Status")` llamamos a para asignarla `DetailedOrder.Status` a la misma columna `Order.Status`que.
+Además de la configuración necesaria, llamamos `Property(o => o.Status).HasColumnName("Status")` para asignar `DetailedOrder.Status` a la misma columna que `Order.Status`.
 
 [!code-csharp[TableSplittingConfiguration](../../../samples/core/Modeling/TableSplitting/TableSplittingContext.cs?name=TableSplitting&highlight=3)]
 
@@ -40,7 +40,7 @@ Además de la configuración necesaria, `Property(o => o.Status).HasColumnName("
 
 ## <a name="usage"></a>Uso
 
-Guardar y consultar entidades mediante la división de tablas se realiza de la misma manera que otras entidades. Y, a partir de EF Core 3,0, la referencia de `null`entidad dependiente puede ser. Si todas las columnas utilizadas por la entidad dependiente son `NULL` la base de datos, no se creará ninguna instancia para ella cuando se realice la consulta. Esto también ocurre cuando todas las propiedades son opcionales y se establecen en `null`, lo que podría no ser el esperado.
+Guardar y consultar entidades mediante la división de tablas se realiza de la misma manera que otras entidades. Y a partir de EF Core 3,0 se puede `null`la referencia de entidad dependiente. Si todas las columnas utilizadas por la entidad dependiente son `NULL` es la base de datos, no se creará ninguna instancia para ella cuando se realice la consulta. Esto también ocurre cuando todas las propiedades son opcionales y se establecen en `null`, lo que podría no ser el esperado.
 
 [!code-csharp[Usage](../../../samples/core/Modeling/TableSplitting/Program.cs?name=Usage)]
 

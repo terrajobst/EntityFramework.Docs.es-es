@@ -4,12 +4,12 @@ author: bricelam
 ms.author: bricelam
 ms.date: 10/30/2017
 uid: core/managing-schemas/migrations/teams
-ms.openlocfilehash: e6a1b86761a201cbcae34cced7e64f11df37a420
-ms.sourcegitcommit: 2355447d89496a8ca6bcbfc0a68a14a0bf7f0327
+ms.openlocfilehash: 6c17c56277821159962884aef72d46c624442e20
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/23/2019
-ms.locfileid: "72811985"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73655543"
 ---
 # <a name="migrations-in-team-environments"></a>Migraciones en entornos de equipo
 
@@ -19,11 +19,13 @@ Al trabajar con migraciones en entornos de equipo, preste especial atención al 
 
 Al fusionar mediante combinación las migraciones de sus compañeros de equipo, puede obtener conflictos en el archivo de instantánea del modelo. Si los dos cambios no están relacionados, la combinación es trivial y las dos migraciones pueden coexistir. Por ejemplo, puede obtener un conflicto de fusión mediante combinación en la configuración del tipo de entidad Customer, que tiene el siguiente aspecto:
 
-    <<<<<<< Mine
-    b.Property<bool>("Deactivated");
-    =======
-    b.Property<int>("LoyaltyPoints");
-    >>>>>>> Theirs
+``` output
+<<<<<<< Mine
+b.Property<bool>("Deactivated");
+=======
+b.Property<int>("LoyaltyPoints");
+>>>>>>> Theirs
+```
 
 Puesto que ambas propiedades deben existir en el modelo final, complete la combinación agregando ambas propiedades. En muchos casos, es posible que el sistema de control de versiones combine automáticamente estos cambios.
 
@@ -38,11 +40,13 @@ En estos casos, la migración y la migración de su compañero son independiente
 
 A veces se produce un conflicto real al combinar el modelo de instantánea de modelo. Por ejemplo, usted y su compañero de equipo pueden cambiar el nombre de la misma propiedad.
 
-    <<<<<<< Mine
-    b.Property<string>("Username");
-    =======
-    b.Property<string>("Alias");
-    >>>>>>> Theirs
+``` output
+<<<<<<< Mine
+b.Property<string>("Username");
+=======
+b.Property<string>("Alias");
+>>>>>>> Theirs
+```
 
 Si encuentra este tipo de conflicto, resuélvalos volviendo a crear la migración. Siga estos pasos:
 

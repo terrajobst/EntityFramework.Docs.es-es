@@ -4,12 +4,12 @@ author: bricelam
 ms.author: bricelam
 ms.date: 09/16/2019
 uid: core/miscellaneous/cli/dbcontext-creation
-ms.openlocfilehash: c36dae150085b1ab509288f6fabfdd8ed7201ca8
-ms.sourcegitcommit: 2355447d89496a8ca6bcbfc0a68a14a0bf7f0327
+ms.openlocfilehash: f44f0648678af5a70e5171d69692bde1c1d5e0eb
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/23/2019
-ms.locfileid: "72812020"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73655524"
 ---
 # <a name="design-time-dbcontext-creation"></a>Creación de DbContext en tiempo de diseño
 
@@ -23,33 +23,7 @@ Si el proyecto de inicio usa el host de [Web ASP.net Core][3] o el [host genéri
 
 En primer lugar, las herramientas intentan obtener el proveedor de servicios invocando `Program.CreateHostBuilder()`, llamando a `Build()`y, a continuación, accediendo a la propiedad `Services`.
 
-``` csharp
-public class Program
-{
-    public static void Main(string[] args)
-        => CreateHostBuilder(args).Build().Run();
-
-    // EF Core uses this method at design time to access the DbContext
-    public static IHostBuilder CreateHostBuilder(string[] args)
-        => Host.CreateDefaultBuilder(args)
-            .ConfigureWebHostDefaults(
-                webBuilder => webBuilder.UseStartup<Startup>());
-}
-
-public class Startup
-{
-    public void ConfigureServices(IServiceCollection services)
-        => services.AddDbContext<ApplicationDbContext>();
-}
-
-public class ApplicationDbContext : DbContext
-{
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-        : base(options)
-    {
-    }
-}
-```
+[!code-csharp[Main](../../../../samples/core/Miscellaneous/CommandLine/ApplicationService.cs)]
 
 > [!NOTE]
 > Cuando se crea una nueva aplicación de ASP.NET Core, este enlace se incluye de forma predeterminada.
@@ -64,25 +38,7 @@ Si DbContext no se puede obtener del proveedor de servicios de aplicación, las 
 
 También puede indicar a las herramientas cómo crear su DbContext implementando la interfaz de `IDesignTimeDbContextFactory<TContext>`: Si una clase que implementa esta interfaz se encuentra en el mismo proyecto que el `DbContext` derivado o en el proyecto de inicio de la aplicación, las herramientas omiten el otro. formas de crear DbContext y usar el generador en tiempo de diseño en su lugar.
 
-``` csharp
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Design;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-
-namespace MyProject
-{
-    public class BloggingContextFactory : IDesignTimeDbContextFactory<BloggingContext>
-    {
-        public BloggingContext CreateDbContext(string[] args)
-        {
-            var optionsBuilder = new DbContextOptionsBuilder<BloggingContext>();
-            optionsBuilder.UseSqlite("Data Source=blog.db");
-
-            return new BloggingContext(optionsBuilder.Options);
-        }
-    }
-}
-```
+[!code-csharp[Main](../../../../samples/core/Miscellaneous/CommandLine/BloggingContextFactory.cs)]
 
 > [!NOTE]
 > El parámetro `args` no se usa actualmente. Existe [un problema][8] al realizar el seguimiento de la capacidad de especificar argumentos en tiempo de diseño desde las herramientas.

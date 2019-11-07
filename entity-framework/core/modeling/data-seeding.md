@@ -1,93 +1,97 @@
 ---
-title: Propagación de datos - EF Core
+title: 'Propagación de datos: EF Core'
 author: AndriySvyryd
 ms.author: ansvyryd
 ms.date: 11/02/2018
 ms.assetid: 3154BF3C-1749-4C60-8D51-AE86773AA116
 uid: core/modeling/data-seeding
-ms.openlocfilehash: 1c450b142573368d043430f55a3144b6696a8691
-ms.sourcegitcommit: b4a5ed177b86bf7f81602106dab6b4acc18dfc18
+ms.openlocfilehash: 0b11b6b3104b74e09c60c9c455e22f164df493c7
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 01/15/2019
-ms.locfileid: "54316639"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73655761"
 ---
 # <a name="data-seeding"></a>Propagación de datos
 
-Propagación de datos es el proceso de rellenar una base de datos con un conjunto inicial de datos.
+La propagación de datos es el proceso de rellenar una base de datos con un conjunto inicial de datos.
 
-Hay varias maneras de que esto puede realizarse en EF Core:
+Hay varias maneras de lograrlo en EF Core:
+
 * Datos de inicialización del modelo
 * Personalización de la migración manual
-* Lógica de inicialización personalizado
+* Lógica de inicialización personalizada
 
 ## <a name="model-seed-data"></a>Datos de inicialización del modelo
 
 > [!NOTE]
 > Esta característica es nueva en EF Core 2.1.
 
-A diferencia de en EF6 en EF Core, la propagación de datos puede asociarse con un tipo de entidad como parte de la configuración del modelo. A continuación, EF Core [migraciones](xref:core/managing-schemas/migrations/index) puede calcular automáticamente qué insertar, actualizar o eliminar la necesidad de las operaciones que se aplicará al actualizar la base de datos a una nueva versión del modelo.
+A diferencia de EF6, en EF Core, la propagación de datos se puede asociar a un tipo de entidad como parte de la configuración del modelo. A continuación, las [migraciones](xref:core/managing-schemas/migrations/index) de EF Core pueden calcular automáticamente las operaciones de inserción, actualización o eliminación que se deben aplicar al actualizar la base de datos a una nueva versión del modelo.
 
 > [!NOTE]
-> Las migraciones solo considera que los cambios en el modelo al determinar qué operación debe realizarse para obtener los datos de inicialización en el estado deseado. Por lo tanto es posible que se perderán los cambios en los datos que se realiza fuera de las migraciones o se producirá un error.
+> Las migraciones solo tienen en cuenta los cambios del modelo al determinar qué operación se debe realizar para obtener los datos de inicialización en el estado deseado. Por lo tanto, es posible que se pierdan los cambios realizados en los datos fuera de las migraciones o se produzca un error.
 
-Por ejemplo, se configurarán los datos de inicialización para un `Blog` en `OnModelCreating`:
+Por ejemplo, se configurarán los datos de inicialización de una `Blog` en `OnModelCreating`:
 
 [!code-csharp[BlogSeed](../../../samples/core/Modeling/DataSeeding/DataSeedingContext.cs?name=BlogSeed)]
 
-Para agregar las entidades que tienen una relación de los valores de clave externos debe especificarse:
+Para agregar entidades que tienen una relación, es necesario especificar los valores de clave externa:
 
 [!code-csharp[PostSeed](../../../samples/core/Modeling/DataSeeding/DataSeedingContext.cs?name=PostSeed)]
 
-Si el tipo de entidad tiene propiedades en una clase anónima puede utilizarse para proporcionar los valores de estado de sombra:
+Si el tipo de entidad tiene propiedades en el estado de sombra, se puede usar una clase anónima para proporcionar los valores:
 
 [!code-csharp[AnonymousPostSeed](../../../samples/core/Modeling/DataSeeding/DataSeedingContext.cs?name=AnonymousPostSeed)]
 
-Propiedad de entidad tipos pueden propagarse de forma similar:
+Los tipos de entidad de propiedad se pueden inicializar de una manera similar:
 
 [!code-csharp[OwnedTypeSeed](../../../samples/core/Modeling/DataSeeding/DataSeedingContext.cs?name=OwnedTypeSeed)]
 
-Consulte la [proyecto de ejemplo completa](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Modeling/DataSeeding) para obtener más contexto.
+Vea el [proyecto de ejemplo completo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Modeling/DataSeeding) para obtener más contexto.
 
-Una vez que los datos se ha agregado al modelo, [migraciones](xref:core/managing-schemas/migrations/index) debe usarse para aplicar los cambios.
+Una vez que se han agregado los datos al modelo, se deben usar las [migraciones](xref:core/managing-schemas/migrations/index) para aplicar los cambios.
 
 > [!TIP]
-> Si tiene que aplicar las migraciones como parte de una implementación automatizada, puede [crear un script SQL](xref:core/managing-schemas/migrations/index#generate-sql-scripts) que puede obtener una vista previa antes de la ejecución.
+> Si necesita aplicar las migraciones como parte de una implementación automatizada, puede [crear un script SQL](xref:core/managing-schemas/migrations/index#generate-sql-scripts) que se pueda obtener como vista previa antes de la ejecución.
 
-Como alternativa, puede usar `context.Database.EnsureCreated()` para crear una nueva base de datos que contiene los datos de inicialización, por ejemplo, para una base de datos de prueba o cuando se usa el proveedor en memoria o cualquier base de datos sin relación. Observe que si ya existe la base de datos, `EnsureCreated()` ninguno, se actualizará los datos de esquema ni el valor de inicialización de la base de datos. Bases de datos relacionales no debería llamar a `EnsureCreated()` si tiene previsto usar migraciones.
+Como alternativa, puede usar `context.Database.EnsureCreated()` para crear una nueva base de datos que contenga los datos de inicialización, por ejemplo, para una base de datos de prueba o cuando se usa el proveedor en memoria o cualquier base de datos que no sea de relación. Tenga en cuenta que si la base de datos ya existe, `EnsureCreated()` no actualizará el esquema ni los datos de inicialización en la base de datos. En el caso de las bases de datos relacionales, no debe llamar a `EnsureCreated()` si tiene previsto usar las migraciones.
 
 ### <a name="limitations-of-model-seed-data"></a>Limitaciones de los datos de inicialización del modelo
 
-Las migraciones se administra este tipo de datos de inicialización y la secuencia de comandos para actualizar los datos que ya está en la base de datos se debe generar sin necesidad de conectarse a la base de datos. Esto impone algunas restricciones:
-* El valor de clave principal debe especificarse incluso si se genera normalmente por la base de datos. Se utilizará para detectar cambios en los datos entre las migraciones.
-* Previamente los datos inicializados se quitará si se cambia la clave principal de ninguna manera.
+Este tipo de datos de inicialización se administra mediante migraciones y el script para actualizar los datos que ya están en la base de datos debe generarse sin necesidad de conectarse a la base de datos. Esto impone algunas restricciones:
 
-Por lo tanto, esta característica resulta especialmente útil para datos estáticos que no se espera que cambie fuera de las migraciones y no dependen de cualquier otra cosa en la base de datos, por ejemplo los códigos postales.
+* El valor de clave principal debe especificarse incluso si la base de datos lo genera normalmente. Se usará para detectar los cambios de datos entre las migraciones.
+* Los datos previamente inicializados se quitarán si se cambia la clave principal de cualquier manera.
 
-Si su escenario incluye alguno de los siguientes, se recomienda usar lógica de inicialización personalizadas descrita en la última sección:
-* Datos temporales para las pruebas
-* Datos que dependen de estado de la base de datos
-* Datos que tengan valores de clave que va a generar la base de datos, incluidas las entidades que utilizan las claves alternativas como la identidad
-* Datos que requiere la transformación personalizada (que no está controlado por [conversiones de valor](xref:core/modeling/value-conversions)), por ejemplo, algunos algoritmos de hash de contraseña
-* Datos que requieren las llamadas a API externa, como la creación de usuarios y roles de ASP.NET Core Identity
+Por lo tanto, esta característica es muy útil para los datos estáticos que no se espera que cambien fuera de las migraciones y no depende de nada más en la base de datos, por ejemplo códigos postales.
+
+Si el escenario incluye alguno de los siguientes, se recomienda usar la lógica de inicialización personalizada que se describe en la última sección:
+
+* Datos temporales para pruebas
+* Datos que dependen del estado de la base de datos
+* Datos que necesitan que la base de datos genere valores clave, incluidas las entidades que usan claves alternativas como identidad.
+* Datos que requieren una transformación personalizada (que no se controlan mediante [conversiones de valores](xref:core/modeling/value-conversions)), como algunas operaciones hash de contraseñas.
+* Datos que requieren llamadas a la API externa, como ASP.NET Core roles de identidad y la creación de usuarios
 
 ## <a name="manual-migration-customization"></a>Personalización de la migración manual
 
-Cuando se agrega una migración los cambios a los datos especificados con `HasData` se transforman en llamadas a `InsertData()`, `UpdateData()`, y `DeleteData()`. Una manera de solucionar algunas de las limitaciones de `HasData` es agregar manualmente estas llamadas o [operaciones personalizadas](xref:core/managing-schemas/migrations/operations) para la migración en su lugar.
+Cuando se agrega una migración, los cambios en los datos especificados con `HasData` se transforman en llamadas a `InsertData()`, `UpdateData()`y `DeleteData()`. Una manera de resolver algunas de las limitaciones de `HasData` es agregar manualmente estas llamadas o [operaciones personalizadas](xref:core/managing-schemas/migrations/operations) a la migración.
 
 [!code-csharp[CustomInsert](../../../samples/core/Modeling/DataSeeding/Migrations/20181102235626_Initial.cs?name=CustomInsert)]
 
-## <a name="custom-initialization-logic"></a>Lógica de inicialización personalizado
+## <a name="custom-initialization-logic"></a>Lógica de inicialización personalizada
 
-Una manera sencilla y eficaz para realizar la propagación de datos es usar [ `DbContext.SaveChanges()` ](xref:core/saving/index) antes de la aplicación principal lógica comienza la ejecución.
+Una manera sencilla y eficaz de realizar la propagación de datos es usar [`DbContext.SaveChanges()`](xref:core/saving/index) antes de que la lógica de la aplicación principal comience la ejecución.
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataSeeding/Program.cs?name=CustomSeeding)]
 
 > [!WARNING]
-> El código de propagación no debe formar parte de la ejecución de aplicación normal ya que esto puede causar problemas de simultaneidad cuando varias instancias se ejecutan y también podría requerir que las aplicaciones deben tener permiso para modificar el esquema de base de datos.
+> El código de propagación no debe formar parte de la ejecución normal de la aplicación, ya que esto puede provocar problemas de simultaneidad cuando se ejecutan varias instancias y también requeriría que la aplicación tuviera permiso para modificar el esquema de la base de datos.
 
-Dependiendo de las restricciones de la implementación se puede ejecutar el código de inicialización de maneras diferentes:
-* Ejecutar la aplicación de inicialización localmente
-* Implementación de la aplicación de inicialización con la aplicación principal, invocar la rutina de inicialización y deshabilitación o eliminación de la aplicación de la inicialización.
+En función de las restricciones de la implementación, el código de inicialización se puede ejecutar de diferentes maneras:
 
-Normalmente, esto puede automatizarse mediante [perfiles de publicación](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/visual-studio-publish-profiles).
+* Ejecución local de la aplicación de inicialización
+* Implementar la aplicación de inicialización con la aplicación principal, invocar la rutina de inicialización y deshabilitar o quitar la aplicación de inicialización.
+
+Normalmente, esto se puede automatizar mediante el uso de [perfiles de publicación](/aspnet/core/host-and-deploy/visual-studio-publish-profiles).

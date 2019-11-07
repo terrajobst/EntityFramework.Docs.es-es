@@ -5,12 +5,12 @@ ms.author: bricelam
 ms.date: 11/01/2018
 ms.assetid: 2BDE29FC-4161-41A0-841E-69F51CCD9341
 uid: core/modeling/spatial
-ms.openlocfilehash: cced53edadb890e4e86753ec2628218ffc4d1d5b
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.openlocfilehash: 335d4f3a601624f7c994b7dcacefe4ef6798beb3
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72181390"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73655609"
 ---
 # <a name="spatial-data"></a>Datos espaciales
 
@@ -101,7 +101,7 @@ var currentLocation = geometryFactory.CreatePoint(-122.121512, 47.6739882);
 
 ### <a name="longitude-and-latitude"></a>Longitud y latitud
 
-Las coordenadas en NTS están en términos de valores X e y. Para representar la longitud y la latitud, use X para longitud e y para latitud. Tenga en cuenta que esto es **hacia atrás** desde el formato `latitude, longitude` en el que normalmente se ven estos valores.
+Las coordenadas en NTS están en términos de valores X e y. Para representar la longitud y la latitud, use X para longitud e y para latitud. Tenga en cuenta que esto es **hacia atrás** desde el formato de `latitude, longitude` en el que normalmente se ven estos valores.
 
 ### <a name="srid-ignored-during-client-operations"></a>SRID omitido durante las operaciones de cliente
 
@@ -213,7 +213,7 @@ Si usa SQL Server, hay algunos aspectos adicionales que debe tener en cuenta.
 
 ### <a name="geography-or-geometry"></a>Geografía o geometría
 
-De forma predeterminada, las propiedades espaciales se asignan a las columnas `geography` en SQL Server. Para usar `geometry`, [Configure el tipo de columna](xref:core/modeling/relational/data-types) en el modelo.
+De forma predeterminada, las propiedades espaciales se asignan a `geography` columnas en SQL Server. Para usar `geometry`, [Configure el tipo de columna](xref:core/modeling/relational/data-types) en el modelo.
 
 ### <a name="geography-polygon-rings"></a>Anillos de polígono de geografía
 
@@ -221,7 +221,7 @@ Cuando se usa el tipo de columna `geography`, SQL Server impone requisitos adici
 
 ### <a name="fullglobe"></a>FullGlobe
 
-SQL Server tiene un tipo de geometría no estándar para representar todo el globo terráqueo al usar el tipo de columna `geography`. También tiene una forma de representar polígonos basados en el globo completo (sin un anillo exterior). Ninguno de ellos es compatible con NTS.
+SQL Server tiene un tipo de geometría no estándar para representar todo el globo terráqueo cuando se usa el tipo de columna `geography`. También tiene una forma de representar polígonos basados en el globo completo (sin un anillo exterior). Ninguno de ellos es compatible con NTS.
 
 > [!WARNING]
 > Los FullGlobe y los polígonos basados en ellos no son compatibles con NTS.
@@ -271,7 +271,7 @@ Geometry. AsBinary () | ✔ | ✔ | ✔ | ✔
 Geometry. astext () | ✔ | ✔ | ✔ | ✔
 Geometry. Boundary | ✔ | | ✔ | ✔
 Geometry. Buffer (Double) | ✔ | ✔ | ✔ | ✔
-Geometry. Buffer (Double, int) | | | ✔
+Geometry. Buffer (Double, int) | | | ✔ | ✔
 Geometry. centroide | ✔ | | ✔ | ✔
 Geometry. Contains (Geometry) | ✔ | ✔ | ✔ | ✔
 Geometry. ConvexHull () | ✔ | ✔ | ✔ | ✔
@@ -287,17 +287,17 @@ Geometry. EqualsExact (Geometry) | | | | ✔
 Geometry. EqualsTopologically (Geometry) | ✔ | ✔ | ✔ | ✔
 Geometry. GeometryType | ✔ | ✔ | ✔ | ✔
 Geometry. GetGeometryN (int) | ✔ | | ✔ | ✔
-Geometry. InteriorPoint | ✔ | | ✔
+Geometry. InteriorPoint | ✔ | | ✔ | ✔
 Geometry. Intersection (Geometry) | ✔ | ✔ | ✔ | ✔
 Geometry. Intersects (Geometry) | ✔ | ✔ | ✔ | ✔
 Geometry. IsEmpty | ✔ | ✔ | ✔ | ✔
 Geometry. IsSimple | ✔ | | ✔ | ✔
 Geometry. IsValid | ✔ | ✔ | ✔ | ✔
-Geometry. IsWithinDistance (Geometry, Double) | ✔ | | ✔
+Geometry. IsWithinDistance (Geometry, Double) | ✔ | | ✔ | ✔
 Geometry. length | ✔ | ✔ | ✔ | ✔
 Geometry. NumGeometries | ✔ | ✔ | ✔ | ✔
 Geometry. NumPoints | ✔ | ✔ | ✔ | ✔
-Geometry. OgcGeometryType | ✔ | ✔ | ✔
+Geometry. OgcGeometryType | ✔ | ✔ | ✔ | ✔
 Geometry. superpone (Geometry) | ✔ | ✔ | ✔ | ✔
 Geometry. PointOnSurface | ✔ | | ✔ | ✔
 Geometry. Relate (Geometry, String) | ✔ | | ✔ | ✔
@@ -307,7 +307,7 @@ Geometry. SymmetricDifference (Geometry) | ✔ | ✔ | ✔ | ✔
 Geometry. ToBinary () | ✔ | ✔ | ✔ | ✔
 Geometry. ToText () | ✔ | ✔ | ✔ | ✔
 Geometry. toques (Geometry) | ✔ | | ✔ | ✔
-Geometry. Union () | | | ✔
+Geometry. Union () | | | ✔ | ✔
 Geometry. Union (Geometry) | ✔ | ✔ | ✔ | ✔
 Geometry. Within (Geometry) | ✔ | ✔ | ✔ | ✔
 GeometryCollection. Count | ✔ | ✔ | ✔ | ✔
