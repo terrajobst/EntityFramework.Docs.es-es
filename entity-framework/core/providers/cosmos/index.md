@@ -1,16 +1,16 @@
 ---
 title: 'Proveedor de Azure Cosmos DB: EF Core'
+description: Documentación del proveedor de bases de datos que permite usar Entity Framework Core con SQL API de Azure Cosmos DB
 author: AndriySvyryd
 ms.author: ansvyryd
-ms.date: 09/12/2019
-ms.assetid: 28264681-4486-4891-888c-be5e4ade24f1
+ms.date: 11/05/2019
 uid: core/providers/cosmos/index
-ms.openlocfilehash: 96686256bb93f5828bb21fed167eb57812806390
-ms.sourcegitcommit: 6c28926a1e35e392b198a8729fc13c1c1968a27b
+ms.openlocfilehash: 6cac695288d9ba84968b7fab6361f55e9b51be67
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/02/2019
-ms.locfileid: "71813546"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73656087"
 ---
 # <a name="ef-core-azure-cosmos-db-provider"></a>Proveedor de Azure Cosmos DB para EF Core
 
@@ -19,19 +19,22 @@ ms.locfileid: "71813546"
 
 Este proveedor de base de datos permite usar Entity Framework Core con Azure Cosmos DB. Este proveedor se mantiene como parte del [proyecto Entity Framework Core](https://github.com/aspnet/EntityFrameworkCore).
 
-Se recomienda encarecidamente que se familiarice con la [documentación sobre Azure Cosmos DB](https://docs.microsoft.com/en-us/azure/cosmos-db/introduction) antes de leer esta sección.
+Se recomienda encarecidamente que se familiarice con la [documentación sobre Azure Cosmos DB](/azure/cosmos-db/introduction) antes de leer esta sección.
+
+>[!NOTE]
+> Este proveedor solo funciona con SQL API de Azure Cosmos DB.
 
 ## <a name="install"></a>Instalar
 
 Instale el [paquete NuGet Microsoft.EntityFrameworkCore.Cosmos](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Cosmos/).
 
-# <a name="net-core-clitabdotnet-core-cli"></a>[CLI de .NET Core](#tab/dotnet-core-cli)
+## <a name="net-core-clitabdotnet-core-cli"></a>[CLI de .NET Core](#tab/dotnet-core-cli)
 
 ``` console
 dotnet add package Microsoft.EntityFrameworkCore.Cosmos
 ```
 
-# <a name="visual-studiotabvs"></a>[Visual Studio](#tab/vs)
+## <a name="visual-studiotabvs"></a>[Visual Studio](#tab/vs)
 
 ``` powershell
 Install-Package Microsoft.EntityFrameworkCore.Cosmos
@@ -44,12 +47,12 @@ Install-Package Microsoft.EntityFrameworkCore.Cosmos
 > [!TIP]  
 > Puede ver en [GitHub un ejemplo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Cosmos) de este artículo.
 
-Al igual que para otros proveedores, el primer paso es llamar a `UseCosmos`:
+Al igual que para otros proveedores, el primer paso es llamar a [UseCosmos](/dotnet/api/Microsoft.EntityFrameworkCore.CosmosDbContextOptionsExtensions.UseCosmos):
 
 [!code-csharp[Configuration](../../../../samples/core/Cosmos/ModelBuilding/OrderContext.cs?name=Configuration)]
 
 > [!WARNING]
-> El punto de conexión y la clave aquí se codifican de forma rígida por motivos de simplicidad pero, en una aplicación de producción, se deben [almacenar de manera segura](https://docs.microsoft.com/aspnet/core/security/app-secrets#secret-manager).
+> El punto de conexión y la clave aquí se codifican de forma rígida por motivos de simplicidad pero, en una aplicación de producción, se deben [almacenar de manera segura](/aspnet/core/security/app-secrets#secret-manager).
 
 En este ejemplo, `Order` es una entidad sencilla con una referencia al [tipo en propiedad](../../modeling/owned-entities.md) `StreetAddress`.
 
@@ -62,23 +65,40 @@ La acción de guardar y consultar datos sigue el patrón de EF normal:
 [!code-csharp[HelloCosmos](../../../../samples/core/Cosmos/ModelBuilding/Sample.cs?name=HelloCosmos)]
 
 > [!IMPORTANT]
-> Llamar a `EnsureCreated` es necesario para crear las colecciones requeridas e insertar los [datos de inicialización](../../modeling/data-seeding.md) si están presentes en el modelo. Sin embargo, se debe llamar a `EnsureCreated` solo durante la implementación y no durante la operación normal, porque podría provocar problemas de rendimiento.
+> Llamar a [EnsureCreatedAsync](/dotnet/api/Microsoft.EntityFrameworkCore.Storage.IDatabaseCreator.EnsureCreatedAsync) es necesario para crear los contenedores necesarios e insertar los [datos de inicialización](../../modeling/data-seeding.md) si están presentes en el modelo. Sin embargo, se debe llamar a `EnsureCreatedAsync` solo durante la implementación y no durante la operación normal, porque podría provocar problemas de rendimiento.
 
-## <a name="cosmos-specific-model-customization"></a>Personalización del modelo específico para Cosmos
+## <a name="cosmos-specific-model-customization"></a>Personalización del modelo específico de Cosmos
 
-De manera predeterminada, todos los tipos de entidad están asignados al mismo contenedor, con un nombre que depende del contexto derivado (`"OrderContext"` en este caso). Para cambiar el nombre del contenedor predeterminado, use `HasDefaultContainer`:
+De manera predeterminada, todos los tipos de entidad están asignados al mismo contenedor, con un nombre que depende del contexto derivado (`"OrderContext"` en este caso). Para cambiar el nombre de contenedor predeterminado, use [HasDefaultContainer](/dotnet/api/Microsoft.EntityFrameworkCore.CosmosModelBuilderExtensions.HasDefaultContainer):
 
 [!code-csharp[DefaultContainer](../../../../samples/core/Cosmos/ModelBuilding/OrderContext.cs?name=DefaultContainer)]
 
-Para asignar un tipo de entidad a un contenedor distinto, use `ToContainer`:
+Para asignar un tipo de entidad a un contenedor distinto, use [ToContainer](/dotnet/api/Microsoft.EntityFrameworkCore.CosmosEntityTypeBuilderExtensions.ToContainer):
 
 [!code-csharp[Container](../../../../samples/core/Cosmos/ModelBuilding/OrderContext.cs?name=Container)]
 
 Para identificar el tipo de entidad que un elemento determinado representa, EF Core agrega un valor de discriminador incluso si no hay tipos de entidad derivados. El nombre y el valor del discriminador [se pueden modificar](../../modeling/inheritance.md).
 
+Si ningún otro tipo de entidad se va a almacenar en el mismo contenedor, se puede quitar el discriminador mediante la llamada a [HasNoDiscriminator](/dotnet/api/Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder.HasNoDiscriminator):
+
+[!code-csharp[NoDiscriminator](../../../../samples/core/Cosmos/ModelBuilding/OrderContext.cs?name=NoDiscriminator)]
+
+### <a name="partition-keys"></a>Claves de partición
+
+De forma predeterminada, EF Core creará contenedores con la clave de partición establecida en `"__partitionKey"` sin proporcionarle ningún valor al insertar elementos. Sin embargo, para sacar el máximo partido a las funcionalidades de rendimiento de Azure Cosmos, se debe usar una [clave de partición seleccionada cuidadosamente](/azure/cosmos-db/partition-data). Se puede configurar mediante la llamada a [HasPartitionKey](/dotnet/api/Microsoft.EntityFrameworkCore.CosmosEntityTypeBuilderExtensions.HasPartitionKey):
+
+[!code-csharp[PartitionKey](../../../../samples/core/Cosmos/ModelBuilding/OrderContext.cs?name=PartitionKey)]
+
+>[!NOTE]
+>La propiedad de clave de partición puede ser de cualquier tipo, siempre y cuando se [convierta en una cadena](xref:core/modeling/value-conversions).
+
+Una vez configurada, la propiedad de clave de partición siempre debe tener un valor distinto de NULL. Al emitir una consulta, se puede agregar una condición para que sea una partición única.
+
+[!code-csharp[PartitionKey](../../../../samples/core/Cosmos/ModelBuilding/Sample.cs?name=PartitionKey)]
+
 ## <a name="embedded-entities"></a>Entidades insertadas
 
-En Cosmos, las entidades en propiedad se insertan en el mismo elemento que el propietario. Para cambiar el nombre de una propiedad, use `ToJsonProperty`:
+En Cosmos, las entidades en propiedad se insertan en el mismo elemento que el propietario. Para cambiar el nombre de una propiedad, use [ToJsonProperty](/dotnet/api/Microsoft.EntityFrameworkCore.CosmosEntityTypeBuilderExtensions.ToJsonProperty):
 
 [!code-csharp[PropertyNames](../../../../samples/core/Cosmos/ModelBuilding/OrderContext.cs?name=PropertyNames)]
 
@@ -87,12 +107,11 @@ Con esta configuración, el pedido del ejemplo anterior se almacena de esta mane
 ``` json
 {
     "Id": 1,
-    "Discriminator": "Order",
+    "PartitionKey": "1",
     "TrackingNumber": null,
-    "id": "Order|1",
+    "id": "1",
     "Address": {
         "ShipsToCity": "London",
-        "Discriminator": "StreetAddress",
         "ShipsToStreet": "221 B Baker St"
     },
     "_rid": "6QEKAM+BOOABAAAAAAAAAA==",
@@ -121,12 +140,10 @@ Se conservarán de esta manera:
     "ShippingCenters": [
         {
             "City": "Phoenix",
-            "Discriminator": "StreetAddress",
             "Street": "500 S 48th Street"
         },
         {
             "City": "Anaheim",
-            "Discriminator": "StreetAddress",
             "Street": "5650 Dolly Ave"
         }
     ],
@@ -158,18 +175,18 @@ Este es el JSON resultante:
 ``` json
 {
     "Id": 1,
-    "Discriminator": "Order",
-    "TrackingNumber": null,
-    "id": "Order|1",
-    "Address": {
-        "ShipsToCity": "London",
-        "Discriminator": "StreetAddress",
-        "ShipsToStreet": "3 Abbey Road"
-    },
-    "_rid": "6QEKAM+BOOABAAAAAAAAAA==",
-    "_self": "dbs/6QEKAA==/colls/6QEKAM+BOOA=/docs/6QEKAM+BOOABAAAAAAAAAA==/",
-    "_etag": "\"00000000-0000-0000-683c-8f7ac48f01d5\"",
+    "Discriminator": "Distributor",
+    "id": "Distributor|1",
+    "ShippingCenters": [
+        {
+            "City": "Phoenix",
+            "Street": "500 S 48th Street"
+        }
+    ],
+    "_rid": "JBwtAN8oNYEBAAAAAAAAAA==",
+    "_self": "dbs/JBwtAA==/colls/JBwtAN8oNYE=/docs/JBwtAN8oNYEBAAAAAAAAAA==/",
+    "_etag": "\"00000000-0000-0000-9377-d7a1ae7c01d5\"",
     "_attachments": "attachments/",
-    "_ts": 1568163739
+    "_ts": 1572917100
 }
 ```

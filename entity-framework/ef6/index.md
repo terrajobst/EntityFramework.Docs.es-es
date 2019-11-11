@@ -4,12 +4,12 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 8ae74d63-6bad-4686-b325-bbf9d68f3743
 uid: ef6/index
-ms.openlocfilehash: 9561a7c4b645896cb4e248cb094c6954ed4bcdf1
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.openlocfilehash: 28a13879416a52cbe8035c23013f16390c75c4c9
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72181423"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73656180"
 ---
 # <a name="entity-framework-6"></a>Entity Framework 6
 Entity Framework 6 (EF6) es un asignador relacional de objetos (O/RM) probado para .NET con muchos años de desarrollo de características y estabilización.
@@ -17,11 +17,11 @@ Entity Framework 6 (EF6) es un asignador relacional de objetos (O/RM) probado pa
 Como O/RM, EF6 reduce la discordancia de impedancia entre los mundos relacionales y orientados a objetos, lo que permite a los desarrolladores escribir aplicaciones que interactúan con datos almacenados en bases de datos relacionales con objetos .NET fuertemente tipados que representan el dominio de la aplicación, y eliminar la necesidad de una gran parte del código de "mecánica" de acceso de datos que normalmente deben escribir.
 
 EF6 implementa muchas características de O/RM populares:
-- Asignación de clases de entidad [POCO](~/ef6/resources/glossary.md#poco) que no dependen de ningún tipo de EF
+- Asignación de clases de entidad [POCO](xref:ef6/resources/glossary#poco) que no dependen de ningún tipo de EF
 - Seguimiento de cambios automático
 - Resolución de identidad y unidad de trabajo
 - Carga diligente, diferida y explícita
-- Traducción de consultas fuertemente tipadas con LINQ (Language Integrated Query)
+- Traducción de consultas fuertemente tipadas con [LINQ (Language Integrated Query)](https://aka.ms/AA6hsvu)
 - Capacidades de asignación enriquecidas que incluyen compatibilidad con:
   - Relaciones de uno a uno, de uno a varios y entre varios
   - Herencia (tabla por jerarquía, tabla por tipo y tabla por clase concreta)
@@ -31,7 +31,7 @@ EF6 implementa muchas características de O/RM populares:
 - Una experiencia "Code First" para crear modelos de entidad mediante la escritura de código.
 - Los modelos pueden generarse a partir de bases de datos existentes y luego editarse manualmente, o bien se pueden crear desde cero y luego usarse para generar nuevas bases de datos.
 - Integración con modelos de aplicación de .NET Framework, incluido ASP.NET, y mediante enlace de datos, con WPF y WinForms.
-- Conectividad de base de datos basada en ADO.NET y varios proveedores disponibles para conectarse a SQL Server, Oracle, MySQL, SQLite, PostgreSQL, DB2, etc.
+- Conectividad de base de datos basada en ADO.NET y varios [proveedores](xref:ef6/fundamentals/providers/index) disponibles para conectarse a SQL Server, Oracle, MySQL, SQLite, PostgreSQL, DB2, etc.
 
 ## <a name="should-i-use-ef6-or-ef-core"></a>¿Debo usar EF6 o EF Core?
 
@@ -40,11 +40,11 @@ EF Core es una reescritura completa y contiene muchas características nuevas qu
 Considere el uso de EF Core en las aplicaciones nuevas si el conjunto de características se ajusta a los requisitos.
 En [Comparar EF Core y EF6](xref:efcore-and-ef6/index) se examina el proceso de elección más detalladamente.
 
-## <a name="get-startedef6get-startedmd"></a>[Primeros pasos](~/ef6/get-started.md)
+## <a name="get-startedxrefef6get-started"></a>[Primeros pasos](xref:ef6/get-started)
 
-Agregue el paquete NuGet de EntityFramework al proyecto o instale Entity Framework Tools para Visual Studio. Luego, vea vídeos, lea tutoriales y consulte documentación avanzada, que le ayudarán a sacar el máximo partido de EF6.
+Agregue el paquete NuGet de EntityFramework al proyecto o instale [Entity Framework Tools para Visual Studio](https://aka.ms/AA6i8c5). Luego, vea vídeos, lea tutoriales y consulte documentación avanzada, que le ayudarán a sacar el máximo partido de EF6.
 
 ## <a name="past-entity-framework-versions"></a>Versiones anteriores de Entity Framework
 
 Esta es la documentación de la versión más reciente de Entity Framework 6, aunque la mayor parte también se aplica a las versiones anteriores.
-Vea [Novedades](~/ef6/what-is-new/index.md) y [Versiones anteriores](~/ef6/what-is-new/past-releases.md) para obtener una lista completa de las versiones de EF y las características incluidas.
+Vea [Novedades](xref:ef6/what-is-new/index) y [Versiones anteriores](xref:ef6/what-is-new/past-releases) para obtener una lista completa de las versiones de EF y las características incluidas.

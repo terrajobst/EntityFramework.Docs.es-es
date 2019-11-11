@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/19/2019
 ms.assetid: 2EBE2CCC-E52D-483F-834C-8877F5EB0C0C
 uid: core/what-is-new/ef-core-3.0/index
-ms.openlocfilehash: ccfb8259c70cf8706a06eb3b22b9541224c3b9bb
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.openlocfilehash: 24368b4c87e785e779b3f2b2f10de19766451c9b
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182079"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73656228"
 ---
 # <a name="new-features-in-entity-framework-core-30"></a>Características nuevas de Entity Framework Core 3.0
 
@@ -17,7 +17,7 @@ En la lista siguiente se incluyen las principales características nuevas de EF 
 
 Como versión principal, EF Core 3.0 también presenta varios [cambios importantes](xref:core/what-is-new/ef-core-3.0/breaking-changes), que son mejoras en la API que podrían afectar negativamente a las aplicaciones existentes.  
 
-## <a name="linq-overhaul"></a>Revisión de LINQ 
+## <a name="linq-overhaul"></a>Revisión de LINQ
 
 LINQ permite escribir consultas a la base de datos en el lenguaje .NET que prefiera, con lo que se aprovecha la información de tipo enriquecido para ofrecer la comprobación de IntelliSense y de tipos en tiempo de compilación.
 Pero LINQ también permite escribir un número ilimitado de consultas complicadas que contienen expresiones arbitrarias (llamadas a métodos u operaciones).
@@ -26,6 +26,7 @@ Cómo controlar todas esas combinaciones es el principal desafío para los prove
 En EF Core 3,0, hemos rediseñado nuestro proveedor LINQ para habilitar la conversión de más patrones de consulta en SQL, la generación de consultas eficientes en más casos y la prevención de que las consultas ineficaces no se detecten. El nuevo proveedor LINQ es la base sobre la que podremos ofrecer nuevas funcionalidades de consulta y mejoras de rendimiento en futuras versiones, sin interrumpir las aplicaciones y los proveedores de datos existentes.
 
 ### <a name="restricted-client-evaluation"></a>Evaluación de cliente restringida
+
 El cambio de diseño más importante tiene que ver con la forma en que manejamos las expresiones LINQ que no se pueden convertir a parámetros ni traducir a SQL.
 
 En las versiones anteriores, EF Core identificada qué partes de una consulta se podían traducir a SQL y ejecutaba el resto de la consulta en el cliente.
@@ -34,8 +35,7 @@ Este tipo de ejecución en el lado cliente es una opción interesante en algunas
 Por ejemplo, si EF Core 2.2 no podía traducir un predicado en una llamada a `Where()`, ejecutaba una instrucción SQL sin filtro, transfería todas las filas de la base de datos y luego las filtraba en memoria:
 
 ``` csharp
-var specialCustomers = 
-  context.Customers
+var specialCustomers = context.Customers
     .Where(c => c.Name.StartsWith(n) && IsSpecialCustomer(c));
 ```
 
@@ -44,12 +44,11 @@ Esta operación puede ser aceptable si la base de datos contiene pocas filas, pe
 En EF Core 3.0 hemos restringido la evaluación de cliente para que solo suceda en la proyección de nivel superior (fundamentalmente, la última llamada a `Select()`).
 Cuando EF Core 3.0 detecta expresiones que no se pueden traducir en ningún otro lugar de la consulta, produce una excepción en tiempo de ejecución.
 
-Para evaluar una condición de predicado en el cliente como en el ejemplo anterior, los desarrolladores ahora tienen que cambiar explícitamente la evaluación de la consulta a LINQ to Objects: 
+Para evaluar una condición de predicado en el cliente como en el ejemplo anterior, los desarrolladores ahora tienen que cambiar explícitamente la evaluación de la consulta a LINQ to Objects:
 
 ``` csharp
-var specialCustomers =
-  context.Customers
-    .Where(c => c.Name.StartsWith(n)) 
+var specialCustomers = context.Customers
+    .Where(c => c.Name.StartsWith(n))
     .AsEnumerable() // switches to LINQ to Objects
     .Where(c => IsSpecialCustomer(c));
 ```
@@ -58,11 +57,11 @@ Consulte la [documentación sobre cambios importantes](xref:core/what-is-new/ef-
 
 ### <a name="single-sql-statement-per-linq-query"></a>Instrucción SQL única por consulta LINQ
 
-Otro aspecto del diseño que cambió significativamente en la versión 3.0 es que ahora siempre se genera una única instrucción SQL por cada consulta LINQ. En versiones anteriores, se usaba para generar varias instrucciones SQL en ciertos casos, como para traducir llamadas `Include()` en las propiedades de navegación de la colección, y para traducir las consultas que seguían determinados patrones con subconsultas. Aunque en algunos casos esto era conveniente, y para `Include()` incluso ayudaba a evitar el envío de datos redundantes a través de la conexión, la implementación era compleja, daba lugar a algunos comportamientos extremadamente ineficientes (consultas N+1) y había situaciones en las que el los datos devueltos a través de múltiples consultas podían ser incoherentes.
+Otro aspecto del diseño que cambió significativamente en la versión 3.0 es que ahora siempre se genera una única instrucción SQL por cada consulta LINQ. En versiones anteriores, se usaba para generar varias instrucciones SQL en ciertos casos, llamadas `Include()` traducidas en las propiedades de navegación de la colección y consultas traducidas que seguían determinados patrones con subconsultas. Aunque en ocasiones este diseño resultaba práctico y, en el caso de `Include()`, incluso ayudaba a evitar el envío de datos redundantes a través de la conexión, la implementación era compleja y se producían algunos comportamientos considerablemente ineficaces (consultas N+1). Había situaciones en las que los datos devueltos en varias consultas eran incoherentes en potencia.
 
 De forma similar a la evaluación del cliente, si EF Core 3.0 no puede convertir una consulta LINQ en una única instrucción SQL, se inicia una excepción en tiempo de ejecución. Pero hicimos que EF Core fuera capaz de traducir muchos de los patrones comunes que solían generar varias consultas en una sola consulta con JOIN.
 
-## <a name="cosmos-db-support"></a>Compatibilidad con Cosmos DB 
+## <a name="cosmos-db-support"></a>Compatibilidad con Cosmos DB
 
 Con el proveedor de Cosmos DB para EF Core, los desarrolladores que están familiarizados con el modelo de programación de EF puedan usar fácilmente Azure Cosmos DB como base de datos de aplicación. El objetivo es hacer que algunas de las ventajas de Cosmos DB, como la distribución global, la disponibilidad "AlwaysOn", la escalabilidad elástica y la baja latencia, sean aún más accesibles para los desarrolladores de .NET. El proveedor habilita la mayoría de las características de EF Core, como el seguimiento automático de cambios, LINQ y conversiones de valores, en comparación con SQL API de Cosmos DB.
 
@@ -77,20 +76,20 @@ EF Core 3.0 aprovecha varias [características nuevas de C# 8.0](https://docs.
 Los resultados de la consulta asincrónica se exponen ahora mediante la nueva interfaz de `await foreach` estándar y se pueden usar con `IAsyncEnumerable<T>`.
 
 ``` csharp
-var orders = 
-  from o in context.Orders
-  where o.Status == OrderStatus.Pending
-  select o;
+var orders =
+    from o in context.Orders
+    where o.Status == OrderStatus.Pending
+    select o;
 
 await foreach(var o in orders.AsAsyncEnumerable())
 {
-  Process(o);
-} 
+    Process(o);
+}
 ```
 
 Consulte las [transmisiones asíncronas en la documentación de C#](https://docs.microsoft.com/dotnet/csharp/whats-new/csharp-8#asynchronous-streams) para más detalles.
 
-### <a name="nullable-reference-types"></a>Tipos de referencia que aceptan valores NULL 
+### <a name="nullable-reference-types"></a>Tipos de referencia que aceptan valores NULL
 
 Cuando esta nueva característica está habilitada en el código, EF Core examina la nulabilidad de las propiedades de tipo de referencia y la aplica a las columnas y relaciones correspondientes en la base de datos: las propiedades de los tipos de referencia no anulables se tratan como si tuvieran el atributo de anotación de datos `[Required]`.
 
@@ -99,10 +98,10 @@ Por ejemplo, en la clase siguiente, las propiedades marcadas como de tipo `strin
 ``` csharp
 public class Customer
 {
-  public int Id { get; set; }
-  public string FirstName { get; set; }
-  public string LastName { get; set; }
-  public string? MiddleName { get; set; }
+    public int Id { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public string? MiddleName { get; set; }
 }
 ```
 
@@ -110,38 +109,39 @@ Consulte [Trabajar con tipos de referencia que aceptan valores NULL](xref:core/m
 
 ## <a name="interception-of-database-operations"></a>Intercepción de operaciones de bases de datos
 
-La nueva API de intercepción en EF Core 3.0 permite proporcionar una lógica personalizada que se invoca automáticamente cada vez que se producen operaciones de base de datos de bajo nivel como parte del funcionamiento normal de EF Core. Por ejemplo, al abrir conexiones, confirmar transacciones o ejecutar comandos. 
+La nueva API de intercepción en EF Core 3.0 permite proporcionar una lógica personalizada que se invoca automáticamente cada vez que se producen operaciones de base de datos de bajo nivel como parte del funcionamiento normal de EF Core. Por ejemplo, al abrir conexiones, confirmar transacciones o ejecutar comandos.
 
-De manera similar a las características de intercepción que existían en EF 6, los interceptores le permiten interceptar operaciones antes o después de que sucedan. Cuando las intercepta antes de que sucedan, puede omitir la ejecución y proporcionar resultados alternativos de la lógica de intercepción. 
+De manera similar a las características de intercepción que existían en EF 6, los interceptores le permiten interceptar operaciones antes o después de que sucedan. Cuando las intercepta antes de que sucedan, puede omitir la ejecución y proporcionar resultados alternativos de la lógica de intercepción.
 
 Por ejemplo, para manipular el texto del comando, puede crear `IDbCommandInterceptor`:
 
-``` csharp 
+``` csharp
 public class HintCommandInterceptor : DbCommandInterceptor
 {
-  public override InterceptionResult ReaderExecuting(
-    DbCommand command, 
-    CommandEventData eventData, 
-    InterceptionResult result)
-  {
-    // Manipulate the command text, etc. here...
-    command.CommandText += " OPTION (OPTIMIZE FOR UNKNOWN)";
-    return result;
-  }
+    public override InterceptionResult ReaderExecuting(
+        DbCommand command,
+        CommandEventData eventData,
+        InterceptionResult result)
+    {
+        // Manipulate the command text, etc. here...
+        command.CommandText += " OPTION (OPTIMIZE FOR UNKNOWN)";
+        return result;
+    }
 }
-``` 
+```
 
 Y registrarlo con su  `DbContext`:
 
 ``` csharp
 services.AddDbContext(b => b
-  .UseSqlServer(connectionString)
-  .AddInterceptors(new HintCommandInterceptor()));
+    .UseSqlServer(connectionString)
+    .AddInterceptors(new HintCommandInterceptor()));
 ```
 
 ## <a name="reverse-engineering-of-database-views"></a>Ingeniería inversa de vistas de base de datos
 
-El nombre de los tipos de consulta, que representan datos que pueden leerse de la base de datos pero no actualizarse, se ha cambiado a [tipos de entidad sin clave](xref:core/modeling/keyless-entity-types). Como son una excelente opción para asignar vistas de bases de datos en la mayoría de los escenarios, EF Core ahora crea automáticamente tipos de entidades sin clave cuando se invierten las vistas de bases de datos de ingeniería.
+El nombre de los tipos de consulta, que representan datos que pueden leerse de la base de datos pero no actualizarse, se ha cambiado a [tipos de entidad sin clave](xref:core/modeling/keyless-entity-types).
+Como son una excelente opción para asignar vistas de bases de datos en la mayoría de los escenarios, EF Core ahora crea automáticamente tipos de entidades sin clave cuando se invierten las vistas de bases de datos de ingeniería.
 
 Por ejemplo, con la [herramienta de línea de comandos dotnet ef](xref:core/miscellaneous/cli/dotnet), puede escribir:
 
@@ -154,16 +154,16 @@ Y la herramienta ahora anulará automáticamente los tipos de scaffold para vist
 ``` csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
-  modelBuilder.Entity<Names>(entity =>
-  {
-    entity.HasNoKey();
-    entity.ToView("Names");
-  });
+    modelBuilder.Entity<Names>(entity =>
+    {
+        entity.HasNoKey();
+        entity.ToView("Names");
+    });
 
-  modelBuilder.Entity<Things>(entity =>
-  {
-    entity.HasNoKey();
-  });
+    modelBuilder.Entity<Things>(entity =>
+    {
+        entity.HasNoKey();
+    });
 }
 ```
 
@@ -191,9 +191,10 @@ public class OrderDetails
 
 ## <a name="ef-63-on-net-core"></a>EF 6.3 en .NET Core
 
-Esta no es realmente una característica de EF Core 3.0, pero creemos que es importante para muchos de nuestros clientes actuales. 
+Esta no es realmente una característica de EF Core 3.0, pero creemos que es importante para muchos de nuestros clientes actuales.
 
-Entendemos que muchas aplicaciones existentes utilizan versiones anteriores de EF y que portarlas a EF Core solo para aprovechar las ventajas de .NET Core puede requerir un esfuerzo considerable. Por ese motivo, decidimos portar a la versión más reciente de EF 6 para que se ejecute en .NET Core 3.0. 
+Entendemos que muchas aplicaciones existentes utilizan versiones anteriores de EF y que portarlas a EF Core solo para aprovechar las ventajas de .NET Core puede requerir un esfuerzo considerable.
+Por ese motivo, decidimos portar a la versión más reciente de EF 6 para que se ejecute en .NET Core 3.0.
 
 Para más detalles, consulte [Novedades de EF 6](xref:ef6/what-is-new/index).
 

@@ -4,18 +4,19 @@ author: rowanmiller
 ms.date: 02/23/2018
 ms.assetid: 14fffb6c-a687-4881-a094-af4a1359a296
 uid: core/providers/index
-ms.openlocfilehash: 24b633d17347c7749a02dee1c04c310c2677ff8c
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.openlocfilehash: 0995c2cb403cf4f0db1462f1e3446a13563a1064
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72181349"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73654816"
 ---
 # <a name="database-providers"></a>Proveedores de bases de datos
 
 Entity Framework Core puede tener acceso a muchas bases de datos diferentes a través de bibliotecas de complementos denominadas proveedores de bases de datos.
 
 ## <a name="current-providers"></a>Proveedores actuales
+
 > [!IMPORTANT]  
 > Los proveedores de EF Core se componen de una serie de orígenes. No todos los proveedores se mantienen como parte del [proyecto Entity Framework Core](https://github.com/aspnet/EntityFrameworkCore). Al considerar un proveedor, evalúe la calidad, las licencias, el soporte técnico, etc. a fin de asegurarse de que satisface los requisitos. Además, asegúrese de revisar la documentación de cada proveedor para obtener información detallada de compatibilidad de versiones.
 
@@ -43,18 +44,19 @@ Entity Framework Core puede tener acceso a muchas bases de datos diferentes a tr
 | [Devart.Data.PostgreSql.EFCore](https://www.nuget.org/packages/Devart.Data.PostgreSql.EFCore/)                       | De PostgreSQL 8.0 en adelante     | [DevArt](https://www.devart.com/)                                             | Pagado                 | [Documentación](https://www.devart.com/dotconnect/postgresql/docs/)                                                                                                                                         |
 | [Devart.Data.SQLite.EFCore](https://www.nuget.org/packages/Devart.Data.SQLite.EFCore/)                               | De SQLite 3 en adelante           | [DevArt](https://www.devart.com/)                                             | Pagado                 | [Documentación](https://www.devart.com/dotconnect/sqlite/docs/)                                                                                                                                             |
 | [Devart.Data.MySql.EFCore](https://www.nuget.org/packages/Devart.Data.MySql.EFCore/)                                 | De MySQL 5 en adelante            | [DevArt](https://www.devart.com/)                                             | Pagado                 | [Documentación](https://www.devart.com/dotconnect/mysql/docs/)                                                                                                                                              |
+| [FileContextCore](https://www.nuget.org/packages/FileContextCore/)                                 | Almacena datos en archivos.            | [Morris Janatzek](https://github.com/morrisjdev)                                             | Con fines de desarrollo.                 | [Archivo Léame](https://github.com/morrisjdev/FileContextCore/blob/master/README.md)                                                                                                                                              |
 
 ## <a name="adding-a-database-provider-to-your-application"></a>Agregar un proveedor de bases de datos a la aplicación
 
 La mayoría de los proveedores de bases de datos para EF Core se distribuyen como paquetes NuGet y se pueden instalar siguiendo estos pasos:
 
-# <a name="net-core-clitabdotnet-core-cli"></a>[CLI de .NET Core](#tab/dotnet-core-cli)
+## <a name="net-core-clitabdotnet-core-cli"></a>[CLI de .NET Core](#tab/dotnet-core-cli)
 
 ``` console
 dotnet add package provider_package_name
 ```
 
-# <a name="visual-studiotabvs"></a>[Visual Studio](#tab/vs)
+## <a name="visual-studiotabvs"></a>[Visual Studio](#tab/vs)
 
 ``` powershell
 install-package provider_package_name
