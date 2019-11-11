@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 09/26/2018
 ms.assetid: de2e34cd-659b-4cab-b5ed-7a979c6bf120
 uid: core/querying/how-query-works
-ms.openlocfilehash: bc085755f39b1288f092a8b2df892c1bf82a89f1
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.openlocfilehash: ba0d68469530e6272ffbb51946d7856122a261c7
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72186243"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73656244"
 ---
 # <a name="how-queries-work"></a>Funcionamiento de las consultas
 
@@ -33,13 +33,14 @@ A continuación se muestra información general de alto nivel del proceso por el
       * Si es así, se devuelve la entidad existente <sup>(1)</sup>.
       * En caso contrario, se crea y devuelve una entidad nueva.
 
-<sup>(1)</sup> Las consultas sin seguimiento usan referencias parciales para llevar un seguimiento de las entidades que ya se devolvieron. Si un resultado anterior con la misma identidad queda fuera del ámbito y se ejecuta la recolección de elementos no utilizados, puede obtener una instancia de entidad nueva.
+<sup>(1)</sup> Las consultas sin seguimiento usan referencias parciales para realizar el seguimiento de las entidades que ya se han devuelto. Si un resultado anterior con la misma identidad queda fuera del ámbito y se ejecuta la recolección de elementos no utilizados, puede obtener una instancia de entidad nueva.
 
 ## <a name="when-queries-are-executed"></a>Cuándo se ejecutan las consultas
 
 Cuando llama a los operadores LINQ, simplemente crea una representación de la consulta en memoria. La consulta solo se envía a la base de datos cuando se usan los resultados.
 
 Las operaciones más comunes que generan que la consulta se envíe a la base de datos son:
+
 * La iteración de los resultados en un bucle `for`
 * El uso de un operador como `ToList`, `ToArray`, `Single`, `Count`
 * El enlace de datos de los resultados de una consulta a una interfaz de usuario
