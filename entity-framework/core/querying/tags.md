@@ -4,19 +4,20 @@ author: divega
 ms.date: 11/14/2018
 ms.assetid: 73C7A627-C8E9-452D-9CD5-AFCC8FEFE395
 uid: core/querying/tags
-ms.openlocfilehash: 3a4d516cab5836c659e42d825c4f1bf89355d671
-ms.sourcegitcommit: b3c2b34d5f006ee3b41d6668f16fe7dcad1b4317
+ms.openlocfilehash: e8415b237df45ce652dcd152013f4f12a992aed7
+ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/15/2018
-ms.locfileid: "51688770"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73654832"
 ---
 # <a name="query-tags"></a>Etiquetas de consulta
+
 > [!NOTE]
 > Esta característica es nueva en EF Core 2.2.
 
 Esta característica ayuda a establecer la correlación de las consultas LINQ en el código con las consultas SQL generadas capturadas en los registros.
-El usuario anota una consulta LINQ con el nuevo método `TagWith()`: 
+El usuario anota una consulta LINQ con el nuevo método `TagWith()`:
 
 ``` csharp
   var nearestFriends =
@@ -49,7 +50,7 @@ IQueryable<T> Limit<T>(IQueryable<T> source, int limit) =>
     source.TagWith("Limit").Take(limit);
 ```
 
-La siguiente consulta:   
+La siguiente consulta:
 
 ``` csharp
 var results = Limit(GetNearestFriends(myLocation), 25).ToList();
@@ -92,5 +93,6 @@ ORDER BY [f].[Location].STDistance(@__myLocation_0) DESC
 ```
 
 ## <a name="known-limitations"></a>Limitaciones conocidas
+
 **Las etiquetas de consulta no se pueden parametrizar:** EF Core siempre trata las etiquetas de consulta de la consulta LINQ como literales de cadena que se incluyen en el código SQL generado.
 Las consultas compiladas que toman las etiquetas de consulta como parámetros no están permitidas.
