@@ -261,11 +261,11 @@ El código de intercepción se crea en torno al concepto de interfaces de interc
 
 ### <a name="the-interception-context"></a>El contexto de interceptación  
 
-Si se examinan los métodos definidos en cualquiera de las interfaces del interceptor, es evidente que cada llamada recibe un objeto de tipo DbInterceptionContext o algún tipo derivado de este, como DbCommandInterceptionContext @ no__t-0 @ no__t-1. Este objeto contiene información contextual sobre la acción que está llevando a cabo EF. Por ejemplo, si la acción se realiza en nombre de un DbContext, el DbContext se incluye en el DbInterceptionContext. De forma similar, para los comandos que se ejecutan de forma asincrónica, la marca IsAsync se establece en DbCommandInterceptionContext.  
+Si se examinan los métodos definidos en cualquiera de las interfaces del interceptor, es evidente que cada llamada recibe un objeto de tipo DbInterceptionContext o algún tipo derivado de este, como DbCommandInterceptionContext\<\>. Este objeto contiene información contextual sobre la acción que está llevando a cabo EF. Por ejemplo, si la acción se realiza en nombre de un DbContext, el DbContext se incluye en el DbInterceptionContext. De forma similar, para los comandos que se ejecutan de forma asincrónica, la marca IsAsync se establece en DbCommandInterceptionContext.  
 
 ### <a name="result-handling"></a>Control de resultados  
 
-La clase DbCommandInterceptionContext @ no__t-0 @ no__t-1 contiene las propiedades denominados result, OriginalResult, Exception y OriginalException. Estas propiedades se establecen en NULL/Zero para las llamadas a los métodos de interceptación a los que se llama antes de que se ejecute la operación, es decir, para... Ejecutar métodos. Si la operación se ejecuta y se realiza correctamente, result y OriginalResult se establecen en el resultado de la operación. Estos valores se pueden observar en los métodos de interceptación a los que se llama después de que se haya ejecutado la operación, es decir, en... Métodos ejecutados. Del mismo modo, si se produce la operación, se establecerán las propiedades Exception y OriginalException.  
+La clase DbCommandInterceptionContext\<\> contiene una propiedad denominada result, OriginalResult, Exception y OriginalException. Estas propiedades se establecen en NULL/Zero para las llamadas a los métodos de interceptación a los que se llama antes de que se ejecute la operación, es decir, para... Ejecutar métodos. Si la operación se ejecuta y se realiza correctamente, result y OriginalResult se establecen en el resultado de la operación. Estos valores se pueden observar en los métodos de interceptación a los que se llama después de que se haya ejecutado la operación, es decir, en... Métodos ejecutados. Del mismo modo, si se produce la operación, se establecerán las propiedades Exception y OriginalException.  
 
 #### <a name="suppressing-execution"></a>Suprimir la ejecución  
 
@@ -297,7 +297,7 @@ DbInterception.Add(new NLogCommandInterceptor());
 
 Los interceptores también se pueden registrar en el nivel de dominio de aplicación mediante el mecanismo de configuración basado en código DbConfiguration.  
 
-### <a name="example-logging-to-nlog"></a>Ejemplo: Registro en NLog  
+### <a name="example-logging-to-nlog"></a>Ejemplo: registro en NLog  
 
 Vamos a reunir todo esto en un ejemplo que usa IDbCommandInterceptor y [NLog](https://nlog-project.org/) para:  
 

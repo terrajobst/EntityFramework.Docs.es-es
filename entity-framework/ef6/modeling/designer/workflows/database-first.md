@@ -16,9 +16,9 @@ Este vídeo y el tutorial paso a paso proporcionan una introducción al desarrol
 ## <a name="watch-the-video"></a>Ver el vídeo
 Este vídeo proporciona una introducción al desarrollo de Database First mediante Entity Framework. Database First permite aplicar ingeniería inversa a un modelo a partir de una base de datos existente. El modelo se almacena en un archivo EDMX (extensión. EDMX) y se puede ver y editar en el Entity Framework Designer. Las clases con las que interactúa en la aplicación se generan automáticamente a partir del archivo EDMX.
 
-**Presentada por**: [Rowan Miller](https://romiller.com/)
+**Presentado por**: [Rowan Miller](https://romiller.com/)
 
-**Vídeo**: [WMV](https://download.microsoft.com/download/8/F/0/8F0B5F63-4939-4DC8-A726-FF139B37F8D8/HDI-ITPro-MSDN-winvideo-databasefirst.wmv) | [MP4](https://download.microsoft.com/download/8/F/0/8F0B5F63-4939-4DC8-A726-FF139B37F8D8/HDI-ITPro-MSDN-mp4video-databasefirst.m4v) | [WMV (ZIP)](https://download.microsoft.com/download/8/F/0/8F0B5F63-4939-4DC8-A726-FF139B37F8D8/HDI-ITPro-MSDN-winvideo-databasefirst.zip)
+**Vídeo**: [wmv](https://download.microsoft.com/download/8/F/0/8F0B5F63-4939-4DC8-A726-FF139B37F8D8/HDI-ITPro-MSDN-winvideo-databasefirst.wmv) | [MP4](https://download.microsoft.com/download/8/F/0/8F0B5F63-4939-4DC8-A726-FF139B37F8D8/HDI-ITPro-MSDN-mp4video-databasefirst.m4v) | [WMV (zip)](https://download.microsoft.com/download/8/F/0/8F0B5F63-4939-4DC8-A726-FF139B37F8D8/HDI-ITPro-MSDN-winvideo-databasefirst.zip)
 
 ## <a name="pre-requisites"></a>Requisitos previos
 
@@ -28,7 +28,7 @@ Si usa Visual Studio 2010, también debe tener instalado [NuGet](https://visuals
 
  
 
-## <a name="1-create-an-existing-database"></a>1. Crear una base de datos existente
+## <a name="1-create-an-existing-database"></a>1. crear una base de datos existente
 
 Normalmente, cuando el destino es una base de datos existente, ya se creará, pero para este tutorial es necesario crear una base de datos para tener acceso a.
 
@@ -41,9 +41,9 @@ El servidor de base de datos que se instala con Visual Studio es diferente en fu
 
 Vamos a generar la base de datos.
 
--   Apertura de Visual Studio
--   **View-&gt; Explorador de servidores**
--   Haga clic con el botón derecho en **conexiones de datos-&gt; agregar conexión...**
+-   Abra Visual Studio
+-   **Explorador de servidores de&gt; de vista**
+-   Haga clic con el botón derecho en **conexiones de datos:&gt; agregar conexión...**
 -   Si no se ha conectado a una base de datos desde Explorador de servidores antes de que tenga que seleccionar Microsoft SQL Server como origen de datos
 
     ![Seleccionar origen de datos](~/ef6/media/selectdatasource.png)
@@ -79,19 +79,19 @@ CREATE TABLE [dbo].[Posts] (
 );
 ```
 
-## <a name="2-create-the-application"></a>2. Crear la aplicación
+## <a name="2-create-the-application"></a>2. crear la aplicación
 
 Para simplificar las cosas, vamos a crear una aplicación de consola básica que use el Database First para realizar el acceso a los datos:
 
--   Apertura de Visual Studio
--   **Proyecto de archivo &gt; nuevo-&gt;...**
+-   Abra Visual Studio
+-   **Archivo-&gt; nuevo proyecto de&gt;...**
 -   Seleccionar **ventanas** en el menú izquierdo y en la **aplicación de consola**
 -   Escriba **DatabaseFirstSample** como nombre
 -   Seleccione **Aceptar**.
 
  
 
-## <a name="3-reverse-engineer-model"></a>3. Modelo de ingeniería inversa
+## <a name="3-reverse-engineer-model"></a>3. modelo de ingeniería inversa
 
 Vamos a hacer uso de Entity Framework Designer, que se incluye como parte de Visual Studio, para crear nuestro modelo.
 
@@ -123,8 +123,8 @@ Si está trabajando en Visual Studio 2010, hay algunos pasos adicionales que deb
 
 En primer lugar, necesitamos obtener la versión más reciente de Entity Framework de NuGet.
 
--   **Proyecto: &gt; administrar paquetes NuGet...** 
-    *si no tiene la opción **administrar paquetes Nuget...** debe instalar la [versión más reciente de Nuget](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c) .*
+-   **Proyecto:&gt; administrar paquetes NuGet...** 
+    *si no tiene la opción **administrar paquetes Nuget...** , debe instalar la [versión más reciente de Nuget](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c) .*
 -   Seleccione la pestaña **en línea**
 -   Seleccione el paquete **EntityFramework**
 -   Haga clic en **instalar**
@@ -133,13 +133,13 @@ A continuación, necesitamos cambiar nuestro modelo para generar código que hag
 
 -   Haga clic con el botón derecho en una zona vacía del modelo en el diseñador de EF y seleccione **Agregar elemento de generación de código..** .
 -   Seleccione **plantillas en línea** en el menú de la izquierda y busque **DbContext**
--   Seleccione el **generador de DbContext de EF 5. x para C @ no__t-1**, escriba **BloggingModel** como nombre y haga clic en **Agregar** .
+-   Seleccione el **generador de DbContext de EF 5. x para C\#** , escriba **BloggingModel** como nombre y haga clic en **Agregar** .
 
     ![Plantilla DbContext](~/ef6/media/dbcontexttemplate.png)
 
  
 
-## <a name="4-reading--writing-data"></a>4. Lectura & escritura de datos
+## <a name="4-reading--writing-data"></a>4. leer & escribir datos
 
 Ahora que tenemos un modelo, es el momento de usarlo para tener acceso a algunos datos. Las clases que se van a usar para obtener acceso a los datos se generan automáticamente basándose en el archivo EDMX.
 
@@ -194,7 +194,7 @@ Press any key to exit...
 ```
  
 
-## <a name="5-dealing-with-database-changes"></a>5. Trabajar con cambios en la base de datos
+## <a name="5-dealing-with-database-changes"></a>5. trabajar con cambios en la base de datos
 
 Ahora es el momento de realizar algunos cambios en el esquema de la base de datos, cuando realizamos estos cambios también necesitamos actualizar nuestro modelo para reflejar los cambios.
 
@@ -215,7 +215,7 @@ Ahora que se ha actualizado el esquema, es el momento de actualizar el modelo co
 
 -   Haga clic con el botón derecho en una zona vacía del modelo en el diseñador de EF y seleccione "actualizar modelo desde base de datos". se iniciará el Asistente para actualización.
 -   En la pestaña agregar del Asistente para actualización, active la casilla situada junto a tablas, lo que indica que queremos agregar nuevas tablas del esquema.
-    @no__t pestaña actualizar 0The muestra las tablas existentes en el modelo en las que se comprobarán los cambios durante la actualización. Las pestañas eliminar muestran las tablas que se han quitado del esquema y que también se quitarán del modelo como parte de la actualización. La información de estas dos pestañas se detecta automáticamente y se proporciona solo con fines informativos, no se puede cambiar la configuración. *
+    *La pestaña actualizar muestra las tablas existentes en el modelo en las que se comprobarán los cambios durante la actualización. Las pestañas eliminar muestran las tablas que se han quitado del esquema y que también se quitarán del modelo como parte de la actualización. La información de estas dos pestañas se detecta automáticamente y se proporciona solo con fines informativos, no se puede cambiar la configuración.*
 
     ![Asistente para actualizar](~/ef6/media/refreshwizard.png)
 

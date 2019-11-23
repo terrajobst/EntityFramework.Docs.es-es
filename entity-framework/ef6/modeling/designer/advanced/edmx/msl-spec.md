@@ -81,7 +81,7 @@ En el ejemplo siguiente se muestra un elemento **alias** que define un alias, `c
 
 El elemento **AssociationEnd** del lenguaje de especificación de asignaciones (MSL) se utiliza cuando las funciones de modificación de un tipo de entidad en el modelo conceptual se asignan a los procedimientos almacenados en la base de datos subyacente. Si un procedimiento almacenado de modificación toma un parámetro cuyo valor se mantiene en una propiedad de asociación, el elemento **AssociationEnd** asigna el valor de la propiedad al parámetro. Para obtener más información, vea el ejemplo siguiente.
 
-Para obtener más información sobre la asignación de funciones de modificación de tipos de entidad a procedimientos almacenados, vea ModificationFunctionMapping (elemento) (MSL) y Walkthrough: Asignar una entidad a procedimientos almacenados.
+Para obtener más información sobre la asignación de funciones de modificación de tipos de entidad a procedimientos almacenados, vea ModificationFunctionMapping (elemento) (MSL) y Walkthrough: asignar una entidad a procedimientos almacenados.
 
 El elemento **AssociationEnd** puede tener los siguientes elementos secundarios:
 
@@ -146,7 +146,7 @@ Para asignar la función de actualización de la entidad `Course` a este procedi
  </AssociationSetMapping>
 ```
 
-En el código siguiente se muestra el elemento **AssociationEnd** que se usa para asignar la propiedad **departmentId** de la Asociación **FK @ no__t-3Course @ no__t-4Department** al procedimiento almacenado **UpdateCourse** (al que la función de actualización del El tipo de entidad **Course** está asignado):
+En el código siguiente se muestra el elemento **AssociationEnd** que se usa para asignar la propiedad **departmentId** de la Asociación de **FK\_Course\_Department** al procedimiento almacenado **UpdateCourse** (al que se asigna la función de actualización del tipo de entidad **Course** ):
 
 ``` xml
  <EntitySetMapping Name="Courses">
@@ -182,7 +182,7 @@ En el código siguiente se muestra el elemento **AssociationEnd** que se usa par
 
 El elemento **AssociationSetMapping** del lenguaje de especificación de asignaciones (MSL) define la asignación entre una asociación en el modelo conceptual y las columnas de tabla en la base de datos subyacente.
 
-Las asociaciones del modelo conceptual son tipos cuyas propiedades representan columnas de clave primaria y clave externa de la base de datos subyacente. El elemento **AssociationSetMapping** utiliza dos elementos EndProperty para definir las asignaciones entre las propiedades de tipo de asociación y las columnas de la base de datos. Puede colocar condiciones en estas asignaciones con el elemento condition. Asigne las funciones de inserción, actualización y eliminación para las asociaciones a los procedimientos almacenados en la base de datos con el elemento ModificationFunctionMapping. Defina las asignaciones de solo lectura entre las asociaciones y las columnas de la tabla mediante una Entity SQL cadena en un elemento QueryView.
+Las asociaciones del modelo conceptual son tipos cuyas propiedades representan columnas de clave primaria y clave externa de la base de datos subyacente. El elemento **AssociationSetMapping** utiliza dos elementos EndProperty para definir las asignaciones entre las propiedades de tipo de asociación y las columnas de la base de datos. Puede definir condiciones en estas asignaciones con el elemento Condition. Asigne las funciones de inserción, actualización y eliminación para las asociaciones a procedimientos almacenados de la base de datos mediante el elemento ModificationFunctionMapping. Defina las asignaciones de solo lectura entre las asociaciones y las columnas de la tabla mediante una Entity SQL cadena en un elemento QueryView.
 
 > [!NOTE]
 > Si se define una restricción referencial para una asociación en el modelo conceptual, no es necesario asignar la asociación con un elemento **AssociationSetMapping** . Si hay un elemento **AssociationSetMapping** para una asociación que tiene una restricción referencial, se omitirán las asignaciones definidas en el elemento **AssociationSetMapping** . Para obtener más información, vea ReferentialConstraint (elemento) (CSDL).
@@ -200,13 +200,13 @@ En la tabla siguiente se describen los atributos que se pueden aplicar al elemen
 
 | Nombre de atributo     | Es necesario | Valor                                                                                       |
 |:-------------------|:------------|:--------------------------------------------------------------------------------------------|
-| **Name**           | Sí         | El nombre del conjunto de asociaciones del modelo conceptual que se está asignando.                      |
+| **Nombre**           | Sí         | El nombre del conjunto de asociaciones del modelo conceptual que se está asignando.                      |
 | **TypeName**       | No          | El nombre completo, calificado con el espacio de nombres, del tipo de asociación del modelo conceptual que se está asignando. |
 | **StoreEntitySet** | No          | El nombre de la tabla que se está asignando.                                                 |
 
 ### <a name="example"></a>Ejemplo
 
-En el ejemplo siguiente se muestra un elemento **AssociationSetMapping** en el que el conjunto de asociaciones **FK @ no__t-2Course @ no__t-3Department** del modelo conceptual se asigna a la tabla **Course** en la base de datos. Las asignaciones entre las propiedades de tipo de asociación y las columnas de tabla se especifican en los elementos secundarios **EndProperty** .
+En el ejemplo siguiente se muestra un elemento **AssociationSetMapping** en el que el **curso de FK\_\_** Asociación de Departamento establecida en el modelo conceptual se asigna a la tabla **Course** en la base de datos. Las asignaciones entre las propiedades de tipo de asociación y las columnas de tabla se especifican en los elementos secundarios **EndProperty** .
 
 ``` xml
  <AssociationSetMapping Name="FK_Course_Department"
@@ -223,7 +223,7 @@ En el ejemplo siguiente se muestra un elemento **AssociationSetMapping** en el q
 
 ## <a name="complexproperty-element-msl"></a>ComplexProperty (Elemento) (MSL)
 
-Un elemento **ComplexProperty** en el lenguaje de especificación de asignaciones (MSL) define la asignación entre una propiedad de tipo complejo en un tipo de entidad del modelo conceptual y las columnas de la tabla en la base de datos subyacente. Las asignaciones de columna de propiedades se especifican en los elementos de ScalarProperty secundarios.
+Un elemento **ComplexProperty** en el lenguaje de especificación de asignaciones (MSL) define la asignación entre una propiedad de tipo complejo en un tipo de entidad del modelo conceptual y las columnas de la tabla en la base de datos subyacente. Las asignaciones entre columnas y propiedades se especifican en elementos secundarios ScalarProperty.
 
 El elemento de propiedad **complexType** puede tener los siguientes elementos secundarios:
 
@@ -238,12 +238,12 @@ En la tabla siguiente se describen los atributos aplicables al elemento **Comple
 
 | Nombre de atributo | Es necesario | Valor                                                                                            |
 |:---------------|:------------|:-------------------------------------------------------------------------------------------------|
-| **Name**       | Sí         | El nombre de la propiedad compleja de un tipo de entidad del modelo conceptual que se está asignando. |
+| **Nombre**       | Sí         | El nombre de la propiedad compleja de un tipo de entidad del modelo conceptual que se está asignando. |
 | **TypeName**   | No          | El nombre completo, calificado con el espacio de nombres, del tipo de propiedad del modelo conceptual.                              |
 
 ### <a name="example"></a>Ejemplo
 
-El ejemplo siguiente se basa en el modelo School. El siguiente tipo complejo se ha agregado al modelo conceptual:
+El siguiente ejemplo se basa en el modelo School. El siguiente tipo complejo se ha agregado al modelo conceptual:
 
 ``` xml
  <ComplexType Name="FullName">
@@ -291,7 +291,7 @@ En el siguiente MSL se muestra el elemento **ComplexProperty** que se usa para a
 
 ## <a name="complextypemapping-element-msl"></a>ComplexTypeMapping (Elemento) (MSL)
 
-El elemento **ComplexTypeMapping** del lenguaje de especificación de asignaciones (MSL) es un elemento secundario del elemento ResultMapping y define la asignación entre una importación de función en el modelo conceptual y un procedimiento almacenado en la base de datos subyacente cuando lo siguiente son true:
+El elemento **ComplexTypeMapping** del lenguaje de especificación de asignaciones (MSL) es un elemento secundario del elemento ResultMapping y define la asignación entre una importación de función en el modelo conceptual y un procedimiento almacenado en la base de datos subyacente cuando se cumplen las condiciones siguientes:
 
 -   La importación de función devuelve un tipo complejo conceptual.
 -   Los nombres de las columnas devueltas por el procedimiento almacenado no coinciden exactamente con los nombres de las propiedades en el tipo complejo.
@@ -382,7 +382,7 @@ En la tabla siguiente se describen los atributos aplicables al elemento **Condit
 | **ColumnName** | No          | El nombre de la columna de la tabla cuyo valor se utiliza para evaluar la condición.                                                                                                                                                                                                                   |
 | **IsNull**     | No          | **True** o **false**. Si el valor es **true** y el valor de la columna es **null**, o si el valor es **false** y el valor de la columna no es **null**, la condición es true. De lo contrario, la condición es falsa. <br/> Los atributos **IsNull** y **Value** no se pueden usar al mismo tiempo. |
 | **Valor**      | No          | El valor con el que se compara el valor de la columna. Si los valores son los mismos, la condición es verdadera. De lo contrario, la condición es falsa. <br/> Los atributos **IsNull** y **Value** no se pueden usar al mismo tiempo.                                                                       |
-| **Name**       | No          | El nombre de la propiedad de entidad del modelo conceptual cuyo valor se utiliza para evaluar la condición. <br/> Este atributo no es aplicable si el elemento **Condition** se usa dentro de un elemento FunctionImportMapping.                                                                           |
+| **Nombre**       | No          | El nombre de la propiedad de entidad del modelo conceptual cuyo valor se utiliza para evaluar la condición. <br/> Este atributo no es aplicable si el elemento **Condition** se usa dentro de un elemento FunctionImportMapping.                                                                           |
 
 ### <a name="example"></a>Ejemplo
 
@@ -544,7 +544,7 @@ El ejemplo siguiente se basa en el modelo School y muestra el elemento **DeleteF
 
 ## <a name="endproperty-element-msl"></a>EndProperty (Elemento) (MSL)
 
-El elemento **EndProperty** del lenguaje de especificación de asignaciones (MSL) define la asignación entre un extremo o una función de modificación de una asociación del modelo conceptual y la base de datos subyacente. La asignación de columna de propiedades se especifica en un elemento de ScalarProperty secundario.
+El elemento **EndProperty** del lenguaje de especificación de asignaciones (MSL) define la asignación entre un extremo o una función de modificación de una asociación del modelo conceptual y la base de datos subyacente. La asignación entre columnas y propiedades se especifica en un elemento secundario ScalarProperty.
 
 Cuando se utiliza un elemento **EndProperty** para definir la asignación para el final de una asociación del modelo conceptual, es un elemento secundario de un elemento AssociationSetMapping. Cuando el elemento **EndProperty** se utiliza para definir la asignación para una función de modificación de una asociación del modelo conceptual, es un elemento secundario de un elemento InsertFunction o un elemento InsertFunction.
 
@@ -562,7 +562,7 @@ En la tabla siguiente se describen los atributos aplicables al elemento **EndPro
 
 ### <a name="example"></a>Ejemplo
 
-En el ejemplo siguiente se muestra un elemento **AssociationSetMapping** en el que la Asociación **FK @ no__t-2Course @ no__t-3Department** del modelo conceptual se asigna a la tabla **Course** en la base de datos. Las asignaciones entre las propiedades de tipo de asociación y las columnas de tabla se especifican en los elementos secundarios **EndProperty** .
+En el ejemplo siguiente se muestra un elemento **AssociationSetMapping** en el que la Asociación de **FK\_Course\_Department** del modelo conceptual está asignada a la tabla **Course** de la base de datos. Las asignaciones entre las propiedades de tipo de asociación y las columnas de tabla se especifican en los elementos secundarios **EndProperty** .
 
 ``` xml
  <AssociationSetMapping Name="FK_Course_Department"
@@ -630,11 +630,11 @@ En la tabla siguiente se describen los atributos que se pueden aplicar al elemen
 |:--------------------------|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **StorageModelContainer** | Sí         | El nombre del contenedor de entidades del modelo de almacenamiento que se está asignando.                                                                                                                                                                                     |
 | **CdmEntityContainer**    | Sí         | El nombre del contenedor de entidades del modelo conceptual que se está asignando.                                                                                                                                                                                  |
-| **GenerateUpdateViews**   | No          | **True** o **false**. Si **es false**, no se genera ninguna vista de actualización. Este atributo debe establecerse en **false** si tiene una asignación de solo lectura que no sería válida porque los datos no pueden realizar una operación de ida y vuelta correctamente. <br/> El valor predeterminado es **true**. |
+| **GenerateUpdateViews**   | No          | **True** o **false**. Si **es false**, no se genera ninguna vista de actualización. Este atributo debe establecerse en **false** si tiene una asignación de solo lectura que no sería válida porque los datos no pueden realizar una operación de ida y vuelta correctamente. <br/> El valor predeterminado es **True**. |
 
 ### <a name="example"></a>Ejemplo
 
-En el ejemplo siguiente se muestra un elemento **EntityContainerMapping** que asigna el contenedor **SchoolModelEntities** (el contenedor de entidades del modelo conceptual) al contenedor **SchoolModelStoreContainer** (la entidad del modelo de almacenamiento contenedor):
+En el ejemplo siguiente se muestra un elemento **EntityContainerMapping** que asigna el contenedor **SchoolModelEntities** (el contenedor de entidades del modelo conceptual) al contenedor **SchoolModelStoreContainer** (el contenedor de entidades del modelo de almacenamiento):
 
 ``` xml
  <EntityContainerMapping StorageEntityContainer="SchoolModelStoreContainer"
@@ -665,7 +665,7 @@ En el ejemplo siguiente se muestra un elemento **EntityContainerMapping** que as
 
 ## <a name="entitysetmapping-element-msl"></a>EntitySetMapping (Elemento) (MSL)
 
-El elemento **EntitySetMapping** del lenguaje de especificación de asignaciones (MSL) asigna todos los tipos de un conjunto de entidades del modelo conceptual a los conjuntos de entidades del modelo de almacenamiento. Un conjunto de entidades en el modelo conceptual es un contenedor lógico para instancias de entidades del mismo tipo (y tipos derivados). Un conjunto de entidades en el modelo de almacenamiento representa una tabla o una vista en la base de datos subyacente. El conjunto de entidades del modelo conceptual se especifica mediante el valor del atributo **Name** del elemento **EntitySetMapping** . La tabla o vista asignada a se especifica mediante el atributo **StoreEntitySet** en cada elemento MappingFragment secundario o en el propio elemento **EntitySetMapping** .
+El elemento **EntitySetMapping** del lenguaje de especificación de asignaciones (MSL) asigna todos los tipos de un conjunto de entidades del modelo conceptual a los conjuntos de entidades del modelo de almacenamiento. Un conjunto de entidades del modelo conceptual es un contenedor lógico para instancias de entidades del mismo tipo (y tipos derivados). Un conjunto de entidades del modelo de almacenamiento representa una tabla o vista de la base de datos subyacente. El conjunto de entidades del modelo conceptual se especifica mediante el valor del atributo **Name** del elemento **EntitySetMapping** . La tabla o vista asignada a se especifica mediante el atributo **StoreEntitySet** en cada elemento MappingFragment secundario o en el propio elemento **EntitySetMapping** .
 
 El elemento **EntitySetMapping** puede tener los siguientes elementos secundarios:
 
@@ -679,7 +679,7 @@ En la tabla siguiente se describen los atributos que se pueden aplicar al elemen
 
 | Nombre de atributo           | Es necesario | Valor                                                                                                                                                                                                                         |
 |:-------------------------|:------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Name**                 | Sí         | El nombre del conjunto de entidades del modelo conceptual que se está asignando.                                                                                                                                                             |
+| **Nombre**                 | Sí         | El nombre del conjunto de entidades del modelo conceptual que se está asignando.                                                                                                                                                             |
 | **TypeName** **1**       | No          | El nombre del tipo de entidad del modelo conceptual que se está asignando.                                                                                                                                                            |
 | **StoreEntitySet** **1** | No          | El nombre del conjunto de entidades del modelo de almacenamiento al que se está asignando.                                                                                                                                                             |
 | **MakeColumnsDistinct**  | No          | **True** o **false** , dependiendo de si solo se devuelven filas distintas. <br/> Si este atributo se establece en **true**, el atributo **GenerateUpdateViews** del elemento EntityContainerMapping debe establecerse en **false**. |
@@ -721,9 +721,9 @@ En el ejemplo siguiente se muestra un elemento **EntitySetMapping** que asigna t
 
 ## <a name="entitytypemapping-element-msl"></a>EntityTypeMapping (Elemento) (MSL)
 
-El elemento **EntityTypeMapping** del lenguaje de especificación de asignaciones (MSL) define la asignación entre un tipo de entidad en el modelo conceptual y las tablas o vistas de la base de datos subyacente. Para obtener información sobre los tipos de entidad del modelo conceptual y las tablas o vistas de base de datos subyacentes, vea EntityType (elemento) (CSDL) y EntitySet (SSDL). El tipo de entidad del modelo conceptual que se está asignando se especifica mediante el atributo **TypeName** del elemento **EntityTypeMapping** . La tabla o vista que se está asignando se especifica mediante el atributo **StoreEntitySet** del elemento MappingFragment secundario.
+El elemento **EntityTypeMapping** del lenguaje de especificación de asignaciones (MSL) define la asignación entre un tipo de entidad en el modelo conceptual y las tablas o vistas de la base de datos subyacente. Para obtener información sobre los tipos de entidad del modelo conceptual y las tablas o vistas de la base de datos subyacente, vea EntityType (Elemento) (CSDL) y EntitySet (Elemento) (SSDL). El tipo de entidad del modelo conceptual que se está asignando se especifica mediante el atributo **TypeName** del elemento **EntityTypeMapping** . La tabla o vista que se está asignando se especifica mediante el atributo **StoreEntitySet** del elemento MappingFragment secundario.
 
-El elemento secundario ModificationFunctionMapping se puede usar para asignar las funciones de inserción, actualización o eliminación de tipos de entidad a procedimientos almacenados en la base de datos.
+El elemento secundario ModificationFunctionMapping se puede utilizar para asignar las funciones de inserción, actualización o eliminación de tipos de entidad a procedimientos almacenados de la base de datos.
 
 El elemento **EntityTypeMapping** puede tener los siguientes elementos secundarios:
 
@@ -783,7 +783,7 @@ En el ejemplo siguiente se muestra un elemento EntitySetMapping con dos elemento
 
 ### <a name="example"></a>Ejemplo
 
-En el ejemplo siguiente se muestra la asignación de una jerarquía de tipos en la que el tipo raíz es abstracto. Tenga en cuenta el uso de la sintaxis `IsOfType` para los atributos **TypeName** .
+En el ejemplo siguiente se muestra la asignación de una jerarquía de tipos en la que el tipo raíz es abstracto. Tenga en cuenta el uso de la sintaxis de `IsOfType` para los atributos **TypeName** .
 
 ``` xml
  <EntitySetMapping Name="People">
@@ -836,7 +836,7 @@ En la tabla siguiente se describen los atributos aplicables al elemento **Functi
 
 ### <a name="example"></a>Ejemplo
 
-El ejemplo siguiente se basa en el modelo School. Considere la siguiente función en el modelo de almacenamiento:
+El siguiente ejemplo se basa en el modelo School. Considere la siguiente función en el modelo de almacenamiento:
 
 ``` xml
  <Function Name="GetStudentGrades" Aggregate="false"
@@ -989,7 +989,7 @@ El elemento de asignación puede tener los elementos secundarios siguientes (en 
 -   Alias (cero o más)
 -   EntityContainerMapping (exactamente uno)
 
-Los nombres de los tipos de modelos conceptuales y de almacenamiento a los que se hace referencia en MSL deben estar calificados con sus respectivos nombres de espacios de nombres. Para obtener información sobre el nombre del espacio de nombres del modelo conceptual, vea elemento Schema (CSDL). Para obtener información sobre el nombre del espacio de nombres del modelo de almacenamiento, vea schema (elemento) (SSDL). Los alias para los espacios de nombres que se usan en MSL se pueden definir con el elemento alias.
+Los nombres de los tipos de modelos conceptuales y de almacenamiento a los que se hace referencia en MSL deben estar calificados con sus respectivos nombres de espacios de nombres. Para obtener información sobre el nombre del espacio de nombres del modelo conceptual, vea elemento Schema (CSDL). Para obtener información sobre el nombre del espacio de nombres del modelo de almacenamiento, vea schema (elemento) (SSDL). Los alias para los espacios de nombres que se utilizan en MSL se pueden definir con el elemento Alias.
 
 ### <a name="applicable-attributes"></a>Atributos aplicables
 
@@ -1036,7 +1036,7 @@ En el ejemplo siguiente se muestra un elemento de **asignación** basado en part
 
 ## <a name="mappingfragment-element-msl"></a>MappingFragment (Elemento) (MSL)
 
-El elemento **MappingFragment** del lenguaje de especificación de asignaciones (MSL) define la asignación entre las propiedades de un tipo de entidad del modelo conceptual y una tabla o vista en la base de datos. Para obtener información sobre los tipos de entidad del modelo conceptual y las tablas o vistas de base de datos subyacentes, vea EntityType (elemento) (CSDL) y EntitySet (SSDL). El **MappingFragment** puede ser un elemento secundario del elemento EntityTypeMapping o el elemento EntitySetMapping.
+El elemento **MappingFragment** del lenguaje de especificación de asignaciones (MSL) define la asignación entre las propiedades de un tipo de entidad del modelo conceptual y una tabla o vista en la base de datos. Para obtener información sobre los tipos de entidad del modelo conceptual y las tablas o vistas de la base de datos subyacente, vea EntityType (Elemento) (CSDL) y EntitySet (Elemento) (SSDL). El **MappingFragment** puede ser un elemento secundario del elemento EntityTypeMapping o el elemento EntitySetMapping.
 
 El elemento **MappingFragment** puede tener los siguientes elementos secundarios:
 
@@ -1193,7 +1193,7 @@ En el ejemplo siguiente se muestra la asignación del conjunto de asociaciones p
 
 ## <a name="queryview-element-msl"></a>QueryView (Elemento) (MSL)
 
-El elemento **QueryView** del lenguaje de especificación de asignaciones (MSL) define una asignación de solo lectura entre un tipo de entidad o una asociación en el modelo conceptual y una tabla en la base de datos subyacente. La asignación se define con una consulta Entity SQL que se evalúa con el modelo de almacenamiento y se expresa el conjunto de resultados en términos de una entidad o asociación en el modelo conceptual. Dado que las vistas de consulta son de solo lectura, no puede utilizar los comandos de actualización estándar para actualizar los tipos que se definen mediante vistas de consulta. Puede realizar las actualizaciones de estos tipos utilizando funciones de modificación. Para obtener más información, vea el artículo sobre cómo Asignar funciones de modificación a procedimientos almacenados.
+El elemento **QueryView** del lenguaje de especificación de asignaciones (MSL) define una asignación de solo lectura entre un tipo de entidad o una asociación en el modelo conceptual y una tabla en la base de datos subyacente. La asignación se define con una consulta Entity SQL que se evalúa con el modelo de almacenamiento y se expresa el conjunto de resultados en términos de una entidad o asociación en el modelo conceptual. Dado que las vistas de consulta son de solo lectura, no puede utilizar los comandos de actualización estándar para actualizar los tipos que se definen mediante vistas de consulta. Puede realizar las actualizaciones de estos tipos utilizando funciones de modificación. Para obtener más información, vea cómo: asignar funciones de modificación a procedimientos almacenados.
 
 > [!NOTE]
 > En el elemento **QueryView** , no se admiten Entity SQL expresiones que contengan **GroupBy**, agregados de grupo o propiedades de navegación.
@@ -1253,7 +1253,7 @@ Dado que la consulta solo devuelve un subconjunto de los miembros del tipo **Dep
 
 ### <a name="example"></a>Ejemplo
 
-En el ejemplo siguiente se muestra el elemento **QueryView** como elemento secundario de un elemento **AssociationSetMapping** y se define una asignación de solo lectura para la Asociación `FK_Course_Department` del modelo School.
+En el ejemplo siguiente se muestra el elemento **QueryView** como elemento secundario de un elemento **AssociationSetMapping** y se define una asignación de solo lectura para la Asociación de `FK_Course_Department` en el modelo School.
 
 ``` xml
  <EntityContainerMapping StorageEntityContainer="SchoolModelStoreContainer"
@@ -1315,7 +1315,7 @@ Las consideraciones siguientes se aplican al definir las vistas de consulta para
 
 ## <a name="resultbinding-element-msl"></a>ResultBinding (Elemento) (MSL)
 
-El elemento **ResultBinding** del lenguaje de especificación de asignaciones (MSL) asigna los valores de columna devueltos por los procedimientos almacenados a las propiedades de entidad del modelo conceptual cuando las funciones de modificación de tipo de entidad se asignan a los procedimientos almacenados en el base de datos subyacente. Por ejemplo, cuando un procedimiento almacenado de inserción devuelve el valor de una columna de identidad, el elemento **ResultBinding** asigna el valor devuelto a una propiedad de tipo de entidad en el modelo conceptual.
+El elemento **ResultBinding** del lenguaje de especificación de asignaciones (MSL) asigna los valores de columna devueltos por los procedimientos almacenados a las propiedades de entidad del modelo conceptual cuando las funciones de modificación de tipo de entidad se asignan a los procedimientos almacenados en la base de datos subyacente. Por ejemplo, cuando un procedimiento almacenado de inserción devuelve el valor de una columna de identidad, el elemento **ResultBinding** asigna el valor devuelto a una propiedad de tipo de entidad en el modelo conceptual.
 
 El elemento **ResultBinding** puede ser secundario del elemento InsertFunction o del elemento UpdateFunction.
 
@@ -1327,7 +1327,7 @@ En la tabla siguiente se describen los atributos aplicables al elemento **Result
 
 | Nombre de atributo | Es necesario | Valor                                                                         |
 |:---------------|:------------|:------------------------------------------------------------------------------|
-| **Name**       | Sí         | El nombre de la propiedad de entidad del modelo conceptual que se está asignando. |
+| **Nombre**       | Sí         | El nombre de la propiedad de entidad del modelo conceptual que se está asignando. |
 | **ColumnName** | Sí         | El nombre de la columna que se está asignando.                                          |
 
 ### <a name="example"></a>Ejemplo
@@ -1479,16 +1479,16 @@ En la tabla siguiente se describen los atributos que se pueden aplicar cuando el
 
 | Nombre de atributo | Es necesario | Valor                                                           |
 |:---------------|:------------|:----------------------------------------------------------------|
-| **Name**       | Sí         | El nombre de la propiedad del modelo conceptual que se está asignando. |
+| **Nombre**       | Sí         | El nombre de la propiedad del modelo conceptual que se está asignando. |
 | **ColumnName** | Sí         | El nombre de la columna de tabla que se está asociando.              |
 
 En la tabla siguiente se describen los atributos aplicables al elemento **ScalarProperty** cuando se utiliza para asignar una propiedad del modelo conceptual a un parámetro de procedimiento almacenado:
 
 | Nombre de atributo    | Es necesario | Valor                                                                                                                                           |
 |:------------------|:------------|:------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Name**          | Sí         | El nombre de la propiedad del modelo conceptual que se está asignando.                                                                                 |
+| **Nombre**          | Sí         | El nombre de la propiedad del modelo conceptual que se está asignando.                                                                                 |
 | **ParameterName** | Sí         | El nombre del parámetro que se está asignando.                                                                                                 |
-| **Versión**       | No          | **Actual** o **original** , dependiendo de si el valor actual o el valor original de la propiedad se deben usar para las comprobaciones de simultaneidad. |
+| **Version**       | No          | **Actual** o **original** , dependiendo de si el valor actual o el valor original de la propiedad se deben usar para las comprobaciones de simultaneidad. |
 
 ### <a name="example"></a>Ejemplo
 

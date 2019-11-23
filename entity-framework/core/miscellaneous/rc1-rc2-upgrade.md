@@ -17,7 +17,7 @@ En este artículo se proporcionan instrucciones para mover una aplicación compi
 
 ## <a name="package-names-and-versions"></a>Nombres y versiones de los paquetes
 
-Entre RC1 y RC2, cambiamos de "Entity Framework 7" a "Entity Framework Core". Puede leer más sobre los motivos del cambio en [esta publicación de Scott Hanselman](https://www.hanselman.com/blog/ASPNET5IsDeadIntroducingASPNETCore10AndNETCore10.aspx). Debido a este cambio, los nombres de los paquetes cambiaron de `EntityFramework.*` a `Microsoft.EntityFrameworkCore.*` y nuestras versiones de @no__t 2 a `1.0.0-rc2-final` (o `1.0.0-preview1-final` para las herramientas).
+Entre RC1 y RC2, cambiamos de "Entity Framework 7" a "Entity Framework Core". Puede leer más sobre los motivos del cambio en [esta publicación de Scott Hanselman](https://www.hanselman.com/blog/ASPNET5IsDeadIntroducingASPNETCore10AndNETCore10.aspx). Debido a este cambio, los nombres de los paquetes cambiaron de `EntityFramework.*` a `Microsoft.EntityFrameworkCore.*` y nuestras versiones de `7.0.0-rc1-final` a `1.0.0-rc2-final` (o `1.0.0-preview1-final` para las herramientas).
 
 **Tendrá que quitar por completo los paquetes RC1 y, a continuación, instalar los RC2.** Esta es la asignación para algunos paquetes comunes.
 
@@ -35,11 +35,11 @@ Entre RC1 y RC2, cambiamos de "Entity Framework 7" a "Entity Framework Core". Pu
 
 ## <a name="namespaces"></a>Espacios de nombres
 
-Junto con los nombres de paquete, los espacios de nombres cambiaron de `Microsoft.Data.Entity.*` a `Microsoft.EntityFrameworkCore.*`. Puede controlar este cambio con la búsqueda y el reemplazo de `using Microsoft.Data.Entity` con `using Microsoft.EntityFrameworkCore`.
+Junto con los nombres de paquete, los espacios de nombres cambiaron de `Microsoft.Data.Entity.*` a `Microsoft.EntityFrameworkCore.*`. Puede controlar este cambio con una búsqueda/reemplazo de `using Microsoft.Data.Entity` con `using Microsoft.EntityFrameworkCore`.
 
 ## <a name="table-naming-convention-changes"></a>Cambios en la Convención de nomenclatura de tablas
 
-Un cambio funcional significativo que se llevó a cabo en RC2 era usar el nombre de la propiedad `DbSet<TEntity>` para una entidad determinada como el nombre de tabla al que se asigna, en lugar de simplemente el nombre de clase. Puede leer más sobre este cambio en [el problema del anuncio relacionado](https://github.com/aspnet/Announcements/issues/167).
+Un cambio funcional significativo que se llevó a cabo en RC2 era usar el nombre de la propiedad `DbSet<TEntity>` de una entidad determinada como el nombre de tabla al que se asigna, en lugar de simplemente el nombre de clase. Puede leer más sobre este cambio en [el problema del anuncio relacionado](https://github.com/aspnet/Announcements/issues/167).
 
 En el caso de las aplicaciones RC1 existentes, se recomienda agregar el código siguiente al principio del método `OnModelCreating` para mantener la estrategia de nomenclatura RC1:
 
@@ -54,7 +54,7 @@ Si desea adoptar la nueva estrategia de nomenclatura, se recomienda completar co
 
 ## <a name="adddbcontext--startupcs-changes-aspnet-core-projects-only"></a>AddDbContext/Startup.cs cambia (solo proyectos de ASP.NET Core)
 
-En RC1, tenía que agregar Entity Framework servicios al proveedor de servicios de aplicación-en `Startup.ConfigureServices(...)`:
+En RC1, tenía que agregar Entity Framework servicios al proveedor de servicios de la aplicación `Startup.ConfigureServices(...)`:
 
 ``` csharp
 services.AddEntityFramework()
@@ -81,7 +81,7 @@ public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
 
 ## <a name="passing-in-an-iserviceprovider"></a>Pasar un IServiceProvider
 
-Si tiene código RC1 que pasa un `IServiceProvider` al contexto, ahora se ha pasado a `DbContextOptions`, en lugar de ser un parámetro de constructor independiente. Use `DbContextOptionsBuilder.UseInternalServiceProvider(...)` para establecer el proveedor de servicios.
+Si tiene código RC1 que pasa un `IServiceProvider` al contexto, ahora se mueve a `DbContextOptions`, en lugar de ser un parámetro de constructor independiente. Utilice `DbContextOptionsBuilder.UseInternalServiceProvider(...)` para establecer el proveedor de servicios.
 
 ### <a name="testing"></a>Pruebas
 
@@ -103,9 +103,9 @@ services.AddEntityFrameworkSqlServer()
 
 ## <a name="dnx-commands--net-cli-aspnet-core-projects-only"></a>Comandos de DNX = CLI de .NET > (solo para proyectos de ASP.NET Core)
 
-Si anteriormente usó los comandos `dnx ef` para los proyectos de ASP.NET 5, ahora se han pasado a comandos `dotnet ef`. Todavía se aplica la misma sintaxis de comando. Puede usar `dotnet ef --help` para obtener información sobre la sintaxis.
+Si anteriormente usó los comandos `dnx ef` para proyectos de ASP.NET 5, ahora se han pasado a `dotnet ef` comandos. Todavía se aplica la misma sintaxis de comando. Puede usar `dotnet ef --help` para obtener información sobre la sintaxis.
 
-La forma en que se registran los comandos ha cambiado en RC2, debido a que DNX se ha reemplazado por la CLI de .NET. Los comandos se registran ahora en una sección `tools` de `project.json`:
+La forma en que se registran los comandos ha cambiado en RC2, debido a que DNX se ha reemplazado por la CLI de .NET. Los comandos se registran ahora en una sección `tools` en `project.json`:
 
 ``` json
 "tools": {

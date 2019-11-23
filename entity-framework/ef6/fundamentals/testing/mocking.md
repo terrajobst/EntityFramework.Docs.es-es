@@ -84,7 +84,7 @@ namespace TestingDemo
 
 Tenga en cuenta que las propiedades de DbSet en el contexto se marcan como virtuales. Esto permitirá que el marco ficticio se derive de nuestro contexto e invalide estas propiedades con una implementación ficticia.  
 
-Si usa Code First, puede editar las clases directamente. Si usa el diseñador de EF, tendrá que editar la plantilla T4 que genera el contexto. Abra el @no__t 0model_name @ no__t-1. Archivo Context.tt que está anidado en el archivo edmx, busque el fragmento de código siguiente y agregue la palabra clave virtual como se muestra.  
+Si usa Code First, puede editar las clases directamente. Si usa el diseñador de EF, tendrá que editar la plantilla T4 que genera el contexto. Abra el\>de model_name de \<. Archivo Context.tt que está anidado en el archivo edmx, busque el fragmento de código siguiente y agregue la palabra clave virtual como se muestra.  
 
 ``` csharp
 public string DbSet(EntitySet entitySet)
@@ -150,7 +150,7 @@ namespace TestingDemo
 
 ## <a name="testing-non-query-scenarios"></a>Probar escenarios que no son de consulta  
 
-Eso es todo lo que necesitamos hacer para empezar a probar los métodos que no son de consulta. La prueba siguiente usa MOQ para crear un contexto. Después crea un DbSet @ no__t-0Blog @ no__t-1 y lo conecta para que se devuelva desde la propiedad blogs del contexto. Después, el contexto se usa para crear un nuevo BlogService que se usa para crear un nuevo blog: mediante el método AddBlog. Por último, la prueba comprueba que el servicio agregó un nuevo blog y se llama SaveChanges en el contexto.  
+Eso es todo lo que necesitamos hacer para empezar a probar los métodos que no son de consulta. La prueba siguiente usa MOQ para crear un contexto. Después crea un\> de blog de DbSet\<y lo conecta para que se devuelva desde la propiedad blogs del contexto. Después, el contexto se usa para crear un nuevo BlogService que se usa para crear un nuevo blog: mediante el método AddBlog. Por último, la prueba comprueba que el servicio agregó un nuevo blog y se llama SaveChanges en el contexto.  
 
 ``` csharp
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -182,7 +182,7 @@ namespace TestingDemo
 
 ## <a name="testing-query-scenarios"></a>Probar escenarios de consulta  
 
-Para poder ejecutar consultas en nuestra prueba de DbSet doble, es necesario configurar una implementación de IQueryable. El primer paso es crear algunos datos en memoria: usamos List @ no__t-0Blog @ no__t-1. A continuación, creamos un contexto y DBSet @ no__t-0Blog @ no__t-1 y, a continuación, conectamos la implementación de IQueryable para el DbSet, simplemente delegamos en el LINQ to Objects proveedor que funciona con List @ no__t-2T @ no__t-3.  
+Para poder ejecutar consultas en nuestra prueba de DbSet doble, es necesario configurar una implementación de IQueryable. El primer paso es crear algunos datos en memoria: usamos una lista\<blog\>. A continuación, creamos un contexto y DBSet\<blog\>, a continuación, conectaremos la implementación de IQueryable para DbSet: simplemente están delegando en el proveedor de LINQ to Objects que funciona con la lista\<T\>.  
 
 A continuación, podemos crear un BlogService basado en los dobles de pruebas y asegurarse de que los datos que se obtienen de GetAllBlogs se ordenan por nombre.  
 
@@ -235,7 +235,7 @@ Entity Framework 6 presentó un conjunto de métodos de extensión que se pueden
 
 Dado que Entity Framework consultas usan LINQ, los métodos de extensión se definen en IQueryable y IEnumerable. Sin embargo, dado que solo están diseñados para usarse con Entity Framework puede recibir el siguiente error si intenta utilizarlos en una consulta LINQ que no es una consulta de Entity Framework:
 
-> IQueryable de origen no implementa IDbAsyncEnumerable @ no__t-0. Solo los orígenes que implementan IDbAsyncEnumerable se pueden usar para las operaciones asincrónicas de Entity Framework. Para obtener más información [, vea http://go.microsoft.com/fwlink/?LinkId=287068](https://go.microsoft.com/fwlink/?LinkId=287068).  
+> IQueryable de origen no implementa IDbAsyncEnumerable{0}. Solo los orígenes que implementan IDbAsyncEnumerable se pueden usar para las operaciones asincrónicas de Entity Framework. Para obtener más información, consulte [http://go.microsoft.com/fwlink/?LinkId=287068](https://go.microsoft.com/fwlink/?LinkId=287068).  
 
 Mientras que los métodos asincrónicos solo se admiten cuando se ejecuta en una consulta EF, puede que desee usarlos en la prueba unitaria cuando se ejecuta en una prueba en memoria Double de un DbSet.  
 

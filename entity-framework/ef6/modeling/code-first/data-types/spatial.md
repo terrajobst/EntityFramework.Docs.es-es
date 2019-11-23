@@ -29,7 +29,7 @@ Este vídeo muestra cómo asignar tipos espaciales con Entity Framework Code Fir
 
 **Presentada por**: Julia Kornich
 
-**Vídeo**: [WMV](https://download.microsoft.com/download/9/1/3/913EA17E-6F97-41D8-A4FE-805A0D83D26A/HDI-ITPro-MSDN-winvideo-spatialwithcodefirst.wmv) | [MP4](https://download.microsoft.com/download/9/1/3/913EA17E-6F97-41D8-A4FE-805A0D83D26A/HDI-ITPro-MSDN-mp4video-spatialwithcodefirst.m4v) | [WMV (ZIP)](https://download.microsoft.com/download/9/1/3/913EA17E-6F97-41D8-A4FE-805A0D83D26A/HDI-ITPro-MSDN-winvideo-spatialwithcodefirst.zip)
+**Vídeo**: [wmv](https://download.microsoft.com/download/9/1/3/913EA17E-6F97-41D8-A4FE-805A0D83D26A/HDI-ITPro-MSDN-winvideo-spatialwithcodefirst.wmv) | [MP4](https://download.microsoft.com/download/9/1/3/913EA17E-6F97-41D8-A4FE-805A0D83D26A/HDI-ITPro-MSDN-mp4video-spatialwithcodefirst.m4v) | [WMV (zip)](https://download.microsoft.com/download/9/1/3/913EA17E-6F97-41D8-A4FE-805A0D83D26A/HDI-ITPro-MSDN-winvideo-spatialwithcodefirst.zip)
 
 ## <a name="pre-requisites"></a>Requisitos previos
 
@@ -39,7 +39,7 @@ Deberá tener instalado Visual Studio 2012, Ultimate, Premium, Professional o We
 
 1.  Abra Visual Studio 2012
 2.  En el menú **archivo** , seleccione **nuevo**y, a continuación, haga clic en **proyecto** .
-3.  En el panel izquierdo, haga clic en **Visual C @ no__t-1**y, a continuación, seleccione la plantilla de **consola** .
+3.  En el panel izquierdo, haga clic en **Visual C\#** y, a continuación, seleccione la plantilla de **consola** .
 4.  Escriba **SpatialCodeFirst** como nombre del proyecto y haga clic en **Aceptar** .
 
 ## <a name="define-a-new-model-using-code-first"></a>Definir un nuevo modelo mediante Code First
@@ -67,7 +67,7 @@ public class University
 
 ## <a name="define-the-dbcontext-derived-type"></a>Definir el tipo derivado de DbContext
 
-Además de definir entidades, debe definir una clase que derive de DbContext y exponga las propiedades DbSet @ no__t-0TEntity @ no__t-1. Las propiedades DbSet @ no__t-0TEntity @ no__t-1 permiten que el contexto sepa qué tipos desea incluir en el modelo.
+Además de definir entidades, debe definir una clase que derive de DbContext y exponga las propiedades de DbSet&lt;de la carpa&gt;. Las propiedades de DbSet&lt;la&gt; de la carpa permiten que el contexto sepa qué tipos desea incluir en el modelo.
 
 Una instancia del tipo derivado de DbContext administra los objetos de entidad durante el tiempo de ejecución, lo que incluye el rellenado de objetos con datos de una base de datos, el seguimiento de cambios y la persistencia de datos en la base de datos.
 
@@ -144,7 +144,7 @@ Tenga en cuenta que si realiza cambios en el modelo una vez creada la base de da
 
 Para ver la base de datos y los datos, haga lo siguiente:
 
-1.  En el menú principal de Visual Studio 2012, seleccione **ver** - @ no__t-2 **Explorador de objetos de SQL Server**.
+1.  En el menú principal de Visual Studio 2012, seleccione **ver** -&gt; **Explorador de objetos de SQL Server**.
 2.  Si LocalDB no está en la lista de servidores, haga clic con el botón secundario del mouse en **SQL Server** y seleccione **Agregar SQL Server** usar la **autenticación de Windows** predeterminada para conectarse a la instancia de LocalDB.
 3.  Expandir el nodo LocalDB
 4.  Desdoblar la carpeta **bases** de datos para ver la nueva base de datos y examinar la tabla **universidades**

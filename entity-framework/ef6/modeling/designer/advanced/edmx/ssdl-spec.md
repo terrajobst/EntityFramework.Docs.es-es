@@ -27,7 +27,7 @@ Las versiones de SSDL se diferencian por los espacios de nombres XML.
 
 ## <a name="association-element-ssdl"></a>Association (Elemento) (SSDL)
 
-Un elemento **Association** en el lenguaje de definición de esquemas de almacenamiento (SSDL) especifica las columnas de tabla que participan en una restricción FOREIGN KEY en la base de datos subyacente. Dos elementos end secundarios obligatorios especifican las tablas en los extremos de la asociación y la multiplicidad en cada extremo. Un elemento ReferentialConstraint opcional especifica los extremos principal y dependiente de la asociación, así como las columnas participantes. Si no hay ningún elemento **ReferentialConstraint** , se debe usar un elemento AssociationSetMapping para especificar las asignaciones de columnas para la asociación.
+Un elemento **Association** en el lenguaje de definición de esquemas de almacenamiento (SSDL) especifica las columnas de tabla que participan en una restricción FOREIGN KEY en la base de datos subyacente. Dos elementos End secundarios necesarios especifican las tablas de los extremos de la asociación y la multiplicidad en cada extremo. Un elemento ReferentialConstraint opcional especifica los extremos principal y dependiente de la asociación así como las columnas participantes. Si no hay ningún elemento **ReferentialConstraint** , se debe usar un elemento AssociationSetMapping para especificar las asignaciones de columnas para la asociación.
 
 El elemento **Association** puede tener los elementos secundarios siguientes (en el orden mostrado):
 
@@ -42,14 +42,14 @@ En la tabla siguiente se describen los atributos que se pueden aplicar al elemen
 
 | Nombre de atributo | Es necesario | Valor                                                                            |
 |:---------------|:------------|:---------------------------------------------------------------------------------|
-| **Name**       | Sí         | El nombre de la restricción de clave externa correspondiente de la base de datos subyacente. |
+| **Nombre**       | Sí         | El nombre de la restricción de clave externa correspondiente de la base de datos subyacente. |
 
 > [!NOTE]
 > Se puede aplicar cualquier número de atributos de anotación (atributos XML personalizados) al elemento **Association** . Sin embargo, es posible que los atributos personalizados no pertenezcan a ningún espacio de nombres XML reservado para SSDL. Dos atributos personalizados cualesquiera no pueden tener nombres completos idénticos.
 
 ### <a name="example"></a>Ejemplo
 
-En el ejemplo siguiente se muestra un elemento **Association** que usa un elemento **ReferentialConstraint** para especificar las columnas que participan en la restricción de clave externa **FK @ no__t-3CustomerOrders** :
+En el ejemplo siguiente se muestra un elemento **Association** que utiliza un elemento **ReferentialConstraint** para especificar las columnas que participan en la restricción de clave externa de **FK\_CustomerOrders** :
 
 ``` xml
  <Association Name="FK_CustomerOrders">
@@ -72,9 +72,9 @@ En el ejemplo siguiente se muestra un elemento **Association** que usa un elemen
 
 ## <a name="associationset-element-ssdl"></a>AssociationSet (Elemento) (SSDL)
 
-El elemento **AssociationSet** en el lenguaje de definición de esquemas de almacenamiento (SSDL) representa una restricción de clave externa entre dos tablas en la base de datos subyacente. Las columnas de la tabla que participan en la restricción Foreign Key se especifican en un elemento Association. El elemento **Association** que corresponde a un elemento **AssociationSet** determinado se especifica en el atributo **Association** del elemento **AssociationSet** .
+El elemento **AssociationSet** en el lenguaje de definición de esquemas de almacenamiento (SSDL) representa una restricción de clave externa entre dos tablas en la base de datos subyacente. Las columnas de la tabla que participan en la restricción de clave externa se especifican en un elemento Association. El elemento **Association** que corresponde a un elemento **AssociationSet** determinado se especifica en el atributo **Association** del elemento **AssociationSet** .
 
-Los conjuntos de asociaciones SSDL se asignan a los conjuntos de asociaciones CSDL mediante un elemento AssociationSetMapping. Sin embargo, si la Asociación CSDL para un conjunto de asociaciones CSDL determinado se define mediante un elemento ReferentialConstraint, no es necesario ningún elemento **AssociationSetMapping** correspondiente. En este caso, si hay un elemento **AssociationSetMapping** , las asignaciones que define se reemplazarán por el elemento **ReferentialConstraint** .
+Los conjuntos de asociaciones SSDL están asignados a conjuntos de asociaciones CSDL mediante un elemento AssociationSetMapping. Sin embargo, si la Asociación CSDL para un conjunto de asociaciones CSDL determinado se define mediante un elemento ReferentialConstraint, no es necesario ningún elemento **AssociationSetMapping** correspondiente. En este caso, si hay un elemento **AssociationSetMapping** , las asignaciones que define se reemplazarán por el elemento **ReferentialConstraint** .
 
 El elemento **AssociationSet** puede tener los elementos secundarios siguientes (en el orden mostrado):
 
@@ -88,7 +88,7 @@ En la tabla siguiente se describen los atributos que se pueden aplicar al elemen
 
 | Nombre de atributo  | Es necesario | Valor                                                                                                |
 |:----------------|:------------|:-----------------------------------------------------------------------------------------------------|
-| **Name**        | Sí         | El nombre de la restricción de clave externa representada por el conjunto de asociaciones.                          |
+| **Nombre**        | Sí         | El nombre de la restricción de clave externa representada por el conjunto de asociaciones.                          |
 | **Asociación** | Sí         | El nombre de la asociación que define las columnas que participan en la restricción de clave externa. |
 
 > [!NOTE]
@@ -96,7 +96,7 @@ En la tabla siguiente se describen los atributos que se pueden aplicar al elemen
 
 ### <a name="example"></a>Ejemplo
 
-En el ejemplo siguiente se muestra un elemento **AssociationSet** que representa la restricción foreign Key `FK_CustomerOrders` en la base de datos subyacente:
+En el ejemplo siguiente se muestra un elemento **AssociationSet** que representa la restricción de clave externa `FK_CustomerOrders` en la base de datos subyacente:
 
 ``` xml
  <AssociationSet Name="FK_CustomerOrders"
@@ -206,7 +206,7 @@ En la tabla siguiente se describen los atributos que se pueden aplicar al elemen
 
 ### <a name="example"></a>Ejemplo
 
-En el ejemplo siguiente se muestra un elemento Association que utiliza un elemento **ReferentialConstraint** para especificar las columnas que participan en la restricción de clave externa **FK @ no__t-2CustomerOrders** . El elemento **dependiente** especifica la columna **CustomerID** de la tabla **Order** como el extremo dependiente de la restricción.
+En el ejemplo siguiente se muestra un elemento Association que utiliza un elemento **ReferentialConstraint** para especificar las columnas que participan en la restricción de clave externa de **FK\_CustomerOrders** . El elemento **dependiente** especifica la columna **CustomerID** de la tabla **Order** como el extremo dependiente de la restricción.
 
 ``` xml
  <Association Name="FK_CustomerOrders">
@@ -233,8 +233,8 @@ El elemento **Documentation** del lenguaje de definición de esquemas de almacen
 
 El elemento **Documentation** puede tener los elementos secundarios siguientes (en el orden mostrado):
 
--   **Resumen**: Breve descripción del elemento primario. (cero o un elemento).
--   **LongDescription**: Una descripción amplia del elemento primario. (cero o un elemento).
+-   **Summary**: breve descripción del elemento primario. (cero o un elemento).
+-   **LongDescription**: una descripción amplia del elemento primario. (cero o un elemento).
 
 ### <a name="applicable-attributes"></a>Atributos aplicables
 
@@ -278,16 +278,16 @@ En la tabla siguiente se describen los atributos que se pueden aplicar al elemen
 
 | Nombre de atributo   | Es necesario | Valor                                                                                                                                                                                                                                                                                                                                                                                      |
 |:-----------------|:------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Tipo**         | Sí         | Nombre completo del conjunto de entidades SSDL que está al final de la restricción FOREIGN KEY.                                                                                                                                                                                                                                                                                          |
+| **Type**         | Sí         | El nombre completo del conjunto de entidades SSDL que está en el extremo de la restricción de clave externa.                                                                                                                                                                                                                                                                                          |
 | **Role**         | No          | El valor del atributo **role** en el elemento principal o dependiente del elemento ReferentialConstraint correspondiente (si se usa).                                                                                                                                                                                                                                             |
-| **Multiplicidad** | Sí         | **1**, **0.. 1**o **\*** dependiendo del número de filas que pueden estar al final de la restricción FOREIGN KEY. <br/> **1** indica que existe exactamente una fila en el extremo de la restricción de clave externa. <br/> **0.. 1** indica que hay cero o una fila en el extremo de la restricción de clave externa. <br/> **\*** indica que hay cero, una o más filas en el extremo de la restricción de clave externa. |
+| **Multiplicidad** | Sí         | **1**, **0.. 1**o **\*** en función del número de filas que pueden estar al final de la restricción FOREIGN KEY. <br/> **1** indica que existe exactamente una fila en el extremo de la restricción de clave externa. <br/> **0.. 1** indica que hay cero o una fila en el extremo de la restricción de clave externa. <br/> **\*** indica que hay cero, una o más filas en el extremo de la restricción de clave externa. |
 
 > [!NOTE]
 > Se puede aplicar cualquier número de atributos de anotación (atributos XML personalizados) al elemento **final** . Sin embargo, es posible que los atributos personalizados no pertenezcan a ningún espacio de nombres XML reservado para CSDL. Dos atributos personalizados cualesquiera no pueden tener nombres completos idénticos.
 
 #### <a name="example"></a>Ejemplo
 
-En el ejemplo siguiente se muestra un elemento **Association** que define la restricción de clave externa **FK @ no__t-2CustomerOrders** . Los valores de **multiplicidad** especificados en cada elemento **final** indican que muchas filas de la tabla **Orders** se pueden asociar a una fila de la tabla **Customers** , pero solo se puede asociar una fila de la tabla **Customers** a una fila en la tabla **Orders** . Además, el elemento **aldelete** indica que todas las filas de la tabla **Orders** que hacen referencia a una fila determinada de la tabla **Customers** se eliminarán si se elimina la fila de la tabla **Customers** .
+En el ejemplo siguiente se muestra un elemento **Association** que define la restricción de clave externa de **FK\_CustomerOrders** . Los valores de **multiplicidad** especificados en cada elemento **final** indican que muchas filas de la tabla **Orders** se pueden asociar a una fila de la tabla **Customers** , pero solo se puede asociar una fila de la tabla **Customers** a una fila de la tabla **Orders** . Además, el elemento **aldelete** indica que todas las filas de la tabla **Orders** que hacen referencia a una fila determinada de la tabla **Customers** se eliminarán si se elimina la fila de la tabla **Customers** .
 
 ``` xml
  <Association Name="FK_CustomerOrders">
@@ -323,7 +323,7 @@ En la tabla siguiente se describen los atributos que se pueden aplicar al elemen
 
 | Nombre de atributo | Es necesario | Valor                                                                                                                  |
 |:---------------|:------------|:-----------------------------------------------------------------------------------------------------------------------|
-| **#A4**  | Sí         | Nombre del conjunto de entidades SSDL que está al final de la restricción FOREIGN KEY.                                      |
+| **#A4**  | Sí         | El nombre del conjunto de entidades SSDL que está en el extremo de la restricción de clave externa.                                      |
 | **Role**       | No          | El valor de uno de los atributos de **rol** especificados en un elemento **final** del elemento Association correspondiente. |
 
 > [!NOTE]
@@ -351,7 +351,7 @@ En el ejemplo siguiente se muestra un elemento **EntityContainer** con un elemen
 
 ## <a name="entitycontainer-element-ssdl"></a>EntityContainer (Elemento) (SSDL)
 
-Un elemento **EntityContainer** en el lenguaje de definición de esquemas de almacenamiento (SSDL) describe la estructura del origen de datos subyacente en una aplicación Entity Framework: Los conjuntos de entidades SSDL (definidos en los elementos EntitySet) representan las tablas de una base de datos, los tipos de entidad SSDL (definidos en los elementos EntityType) representan las filas de una tabla, y los conjuntos de asociaciones (definidos en los elementos AssociationSet) representan restricciones de clave externa en un base. Un contenedor de entidades del modelo de almacenamiento se asigna a un contenedor de entidades del modelo conceptual a través del elemento EntityContainerMapping.
+Un elemento **EntityContainer** en el lenguaje de definición de esquemas de almacenamiento (SSDL) describe la estructura del origen de datos subyacente en una aplicación Entity Framework: los conjuntos de entidades SSDL (definidos en elementos EntitySet) representan las tablas de una base de datos, los tipos de entidad SSDL (definidos en los elementos EntityType) representan las filas de una tabla, y los conjuntos de asociaciones (definidos en los elementos AssociationSet) Un contenedor de entidades del modelo de almacenamiento se asigna a un contenedor de entidades del modelo de conceptual a través del elemento EntityContainerMapping.
 
 Un elemento **EntityContainer** puede tener cero o un elemento de documentación. Si hay un elemento de **documentación** , debe preceder a todos los demás elementos secundarios.
 
@@ -367,7 +367,7 @@ En la tabla siguiente se describen los atributos que se pueden aplicar al elemen
 
 | Nombre de atributo | Es necesario | Valor                                                                   |
 |:---------------|:------------|:------------------------------------------------------------------------|
-| **Name**       | Sí         | Nombre del contenedor de entidades. Este nombre no puede contener puntos (.). |
+| **Nombre**       | Sí         | Nombre del contenedor de entidades. Este nombre no puede contener puntos (.). |
 
 > [!NOTE]
 > Se puede aplicar cualquier número de atributos de anotación (atributos XML personalizados) al elemento **EntityContainer** . Sin embargo, es posible que los atributos personalizados no pertenezcan a ningún espacio de nombres XML reservado para SSDL. Dos atributos personalizados cualesquiera no pueden tener nombres completos idénticos.
@@ -394,7 +394,7 @@ En el ejemplo siguiente se muestra un elemento **EntityContainer** que define do
 
 ## <a name="entityset-element-ssdl"></a>EntitySet (Elemento) (SSDL)
 
-Un elemento **EntitySet** en el lenguaje de definición de esquemas de almacenamiento (SSDL) representa una tabla o una vista en la base de datos subyacente. Un elemento EntityType en SSDL representa una fila de la tabla o vista. El atributo **EntityType** de un elemento **EntitySet** especifica el tipo de entidad SSDL determinado que representa las filas de un conjunto de entidades SSDL. La asignación entre un conjunto de entidades CSDL y un conjunto de entidades SSDL se especifica en un elemento EntitySetMapping.
+Un elemento **EntitySet** en el lenguaje de definición de esquemas de almacenamiento (SSDL) representa una tabla o una vista en la base de datos subyacente. Un elemento EntityType de SSDL representa una fila de la tabla o vista. El atributo **EntityType** de un elemento **EntitySet** especifica el tipo de entidad SSDL determinado que representa las filas de un conjunto de entidades SSDL. La asignación entre un conjunto de entidades CSDL y un conjunto de entidades SSDL se especifica en un elemento EntitySetMapping.
 
 El elemento **EntitySet** puede tener los elementos secundarios siguientes (en el orden mostrado):
 
@@ -407,11 +407,11 @@ El elemento **EntitySet** puede tener los elementos secundarios siguientes (en e
 En la tabla siguiente se describen los atributos que se pueden aplicar al elemento **EntitySet** .
 
 > [!NOTE]
-> Algunos atributos (que no se enumeran aquí) pueden estar calificados con el alias de **almacén** . Este atributo lo usa el Asistente para actualizar modelo al actualizar un modelo.
+> Algunos atributos (que no se enumeran aquí) pueden estar calificados con el alias de **almacén** . El Asistente para actualizar modelo utiliza estos atributos al actualizar un modelo.
 
 | Nombre de atributo | Es necesario | Valor                                                                                    |
 |:---------------|:------------|:-----------------------------------------------------------------------------------------|
-| **Name**       | Sí         | Nombre del conjunto de entidades.                                                              |
+| **Nombre**       | Sí         | Nombre del conjunto de entidades.                                                              |
 | **EntityType** | Sí         | El nombre completo del tipo de entidad para el que el conjunto de entidades contiene las instancias. |
 | **Esquema**     | No          | El esquema de base de datos.                                                                     |
 | **Table**      | No          | La tabla de base de datos.                                                                      |
@@ -441,7 +441,7 @@ En el ejemplo siguiente se muestra un elemento **EntityContainer** que tiene dos
 
 ## <a name="entitytype-element-ssdl"></a>EntityType (Elemento) (SSDL)
 
-Un elemento **EntityType** en el lenguaje de definición de esquemas de almacenamiento (SSDL) representa una fila de una tabla o vista de la base de datos subyacente. Un elemento EntitySet en SSDL representa la tabla o vista en la que se producen las filas. El atributo **EntityType** de un elemento **EntitySet** especifica el tipo de entidad SSDL determinado que representa las filas de un conjunto de entidades SSDL. La asignación entre un tipo de entidad SSDL y un tipo de entidad CSDL se especifica en un elemento EntityTypeMapping.
+Un elemento **EntityType** en el lenguaje de definición de esquemas de almacenamiento (SSDL) representa una fila de una tabla o vista de la base de datos subyacente. Un elemento EntitySet de SSDL representa la tabla o vista donde están las filas. El atributo **EntityType** de un elemento **EntitySet** especifica el tipo de entidad SSDL determinado que representa las filas de un conjunto de entidades SSDL. La asignación entre un tipo de entidad SSDL y un tipo de entidad CSDL se especifica en un elemento EntityTypeMapping.
 
 El elemento **EntityType** puede tener los elementos secundarios siguientes (en el orden mostrado):
 
@@ -455,7 +455,7 @@ En la tabla siguiente se describen los atributos que se pueden aplicar al elemen
 
 | Nombre de atributo | Es necesario | Valor                                                                                                                                                                  |
 |:---------------|:------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Name**       | Sí         | Nombre del tipo de entidad. Este valor normalmente es igual que el nombre de la tabla en la que el tipo de entidad representa una fila. Este valor no puede contener ningún punto (.). |
+| **Nombre**       | Sí         | Nombre del tipo de entidad. Este valor normalmente es igual que el nombre de la tabla en la que el tipo de entidad representa una fila. Este valor no puede contener ningún punto (.). |
 
 > [!NOTE]
 > Se puede aplicar cualquier número de atributos de anotación (atributos XML personalizados) al elemento **EntityType** . Sin embargo, es posible que los atributos personalizados no pertenezcan a ningún espacio de nombres XML reservado para SSDL. Dos atributos personalizados cualesquiera no pueden tener nombres completos idénticos.
@@ -499,11 +499,11 @@ Los procedimientos almacenados que se especifican en el modelo de almacenamiento
 En la tabla siguiente se describen los atributos que se pueden aplicar al elemento de **función** .
 
 > [!NOTE]
-> Algunos atributos (que no se enumeran aquí) pueden estar calificados con el alias de **almacén** . Este atributo lo usa el Asistente para actualizar modelo al actualizar un modelo.
+> Algunos atributos (que no se enumeran aquí) pueden estar calificados con el alias de **almacén** . El Asistente para actualizar modelo utiliza estos atributos al actualizar un modelo.
 
 | Nombre de atributo             | Es necesario | Valor                                                                                                                                                                                                              |
 |:---------------------------|:------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Name**                   | Sí         | Nombre del procedimiento almacenado.                                                                                                                                                                                  |
+| **Nombre**                   | Sí         | Nombre del procedimiento almacenado.                                                                                                                                                                                  |
 | **ReturnType**             | No          | El tipo de valor devuelto del procedimiento almacenado.                                                                                                                                                                           |
 | **Aggregate**              | No          | **True** si el procedimiento almacenado devuelve un valor agregado; en caso contrario, **false**.                                                                                                                                  |
 | **BuiltIn**                | No          | **True** si la función es una función integrada<sup>1</sup> ; en caso contrario, **false**.                                                                                                                                  |
@@ -590,7 +590,7 @@ En la tabla siguiente se describen los atributos que se pueden aplicar al elemen
 
 ### <a name="example"></a>Ejemplo
 
-En el ejemplo siguiente se muestra un elemento **Association** que define la restricción de clave externa **FK @ no__t-2CustomerOrders** . El elemento **aldelete** indica que se eliminarán todas las filas de la tabla **Orders** que hagan referencia a una fila determinada de la tabla **Customers** si se elimina la fila de la tabla **Customers** .
+En el ejemplo siguiente se muestra un elemento **Association** que define la restricción de clave externa de **FK\_CustomerOrders** . El elemento **aldelete** indica que se eliminarán todas las filas de la tabla **Orders** que hagan referencia a una fila determinada de la tabla **Customers** si se elimina la fila de la tabla **Customers** .
 
 ``` xml
  <Association Name="FK_CustomerOrders">
@@ -626,8 +626,8 @@ En la tabla siguiente se describen los atributos que se pueden aplicar al elemen
 
 | Nombre de atributo | Es necesario | Valor                                                                                                                                                                                                                           |
 |:---------------|:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Name**       | Sí         | Nombre del parámetro.                                                                                                                                                                                                      |
-| **Tipo**       | Sí         | Tipo del parámetro.                                                                                                                                                                                                             |
+| **Nombre**       | Sí         | Nombre del parámetro.                                                                                                                                                                                                      |
+| **Type**       | Sí         | Tipo del parámetro.                                                                                                                                                                                                             |
 | **Modo**       | No          | **In**, **out**o **INOUT** dependiendo de si el parámetro es un parámetro de entrada, de salida o de entrada/salida.                                                                                                                |
 | **MaxLength**  | No          | Longitud máxima permitida del parámetro.                                                                                                                                                                                            |
 | **Precisión**  | No          | Precisión del parámetro.                                                                                                                                                                                                 |
@@ -676,7 +676,7 @@ En la tabla siguiente se describen los atributos que se pueden aplicar al elemen
 
 ### <a name="example"></a>Ejemplo
 
-En el ejemplo siguiente se muestra un elemento Association que utiliza un elemento **ReferentialConstraint** para especificar las columnas que participan en la restricción de clave externa **FK @ no__t-2CustomerOrders** . El elemento **principal** especifica la columna **CustomerID** de la tabla **Customer** como el extremo principal de la restricción.
+En el ejemplo siguiente se muestra un elemento Association que utiliza un elemento **ReferentialConstraint** para especificar las columnas que participan en la restricción de clave externa de **FK\_CustomerOrders** . El elemento **principal** especifica la columna **CustomerID** de la tabla **Customer** como el extremo principal de la restricción.
 
 ``` xml
  <Association Name="FK_CustomerOrders">
@@ -709,8 +709,8 @@ En la tabla siguiente se describen los atributos que se pueden aplicar al elemen
 
 | Nombre de atributo            | Es necesario | Valor                                                                                                                                                                                                                           |
 |:--------------------------|:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Name**                  | Sí         | El nombre de la columna correspondiente.                                                                                                                                                                                           |
-| **Tipo**                  | Sí         | El tipo de la columna correspondiente.                                                                                                                                                                                           |
+| **Nombre**                  | Sí         | El nombre de la columna correspondiente.                                                                                                                                                                                           |
+| **Type**                  | Sí         | El tipo de la columna correspondiente.                                                                                                                                                                                           |
 | **Acepta valores NULL**              | No          | **True** (valor predeterminado) o **false** , dependiendo de si la columna correspondiente puede tener un valor null.                                                                                                                  |
 | **DefaultValue**          | No          | El valor predeterminado de la columna correspondiente.                                                                                                                                                                                  |
 | **MaxLength**             | No          | La longitud máxima de la columna correspondiente.                                                                                                                                                                                 |
@@ -747,8 +747,8 @@ En el ejemplo siguiente se muestra un elemento **EntityType** con dos elementos 
 
 El elemento **PropertyRef** en el lenguaje de definición de esquemas de almacenamiento (SSDL) hace referencia a una propiedad definida en un elemento EntityType para indicar que la propiedad realizará uno de los roles siguientes:
 
--   Formar parte de la clave principal de la tabla que el **EntityType** representa. Se pueden usar uno o varios elementos **PropertyRef** para definir una clave principal. Para obtener más información, vea Key (elemento).
--   Ser el extremo dependiente o principal de una restricción referencial. Para obtener más información, vea ReferentialConstraint (elemento).
+-   Formar parte de la clave principal de la tabla que el **EntityType** representa. Se pueden usar uno o varios elementos **PropertyRef** para definir una clave principal. Para obtener más información, vea Key (Elemento).
+-   Ser el extremo dependiente o principal de una restricción referencial. Para obtener más información, vea ReferentialConstraint (Elemento).
 
 El elemento **PropertyRef** solo puede tener los siguientes elementos secundarios:
 
@@ -761,7 +761,7 @@ En la tabla siguiente se describen los atributos que se pueden aplicar al elemen
 
 | Nombre de atributo | Es necesario | Valor                                |
 |:---------------|:------------|:-------------------------------------|
-| **Name**       | Sí         | Nombre de la propiedad a la que se hace referencia. |
+| **Nombre**       | Sí         | Nombre de la propiedad a la que se hace referencia. |
 
 > [!NOTE]
 > Se puede aplicar cualquier número de atributos de anotación (atributos XML personalizados) al elemento **PropertyRef** . Sin embargo, es posible que los atributos personalizados no pertenezcan a ningún espacio de nombres XML reservado para CSDL. Dos atributos personalizados cualesquiera no pueden tener nombres completos idénticos.
@@ -786,7 +786,7 @@ En el ejemplo siguiente se muestra un elemento **PropertyRef** que se usa para d
 
 ## <a name="referentialconstraint-element-ssdl"></a>ReferentialConstraint (Elemento) (SSDL)
 
-El elemento **ReferentialConstraint** del lenguaje de definición de esquemas de almacenamiento (SSDL) representa una restricción de clave externa (también denominada restricción de integridad referencial) en la base de datos subyacente. Los extremos principal y dependiente de la restricción se especifican mediante los elementos secundarios principales y dependientes, respectivamente. Se hace referencia a las columnas que participan en los extremos principal y dependiente con elementos PropertyRef.
+El elemento **ReferentialConstraint** del lenguaje de definición de esquemas de almacenamiento (SSDL) representa una restricción de clave externa (también denominada restricción de integridad referencial) en la base de datos subyacente. Los extremos principal y dependiente de la restricción se especifican mediante los elementos secundarios Principal y Dependent, respectivamente. La referencia a las columnas que participan en los extremos principal y dependiente se realiza mediante elementos PropertyRef.
 
 El elemento **ReferentialConstraint** es un elemento secundario opcional del elemento Association. Si no se utiliza un elemento **ReferentialConstraint** para asignar la restricción FOREIGN KEY especificada en el elemento **Association** , se debe usar un elemento AssociationSetMapping para hacerlo.
 
@@ -803,7 +803,7 @@ Se puede aplicar cualquier número de atributos de anotación (atributos XML per
 
 ### <a name="example"></a>Ejemplo
 
-En el ejemplo siguiente se muestra un elemento **Association** que usa un elemento **ReferentialConstraint** para especificar las columnas que participan en la restricción de clave externa **FK @ no__t-3CustomerOrders** :
+En el ejemplo siguiente se muestra un elemento **Association** que utiliza un elemento **ReferentialConstraint** para especificar las columnas que participan en la restricción de clave externa de **FK\_CustomerOrders** :
 
 ``` xml
  <Association Name="FK_CustomerOrders">
@@ -866,7 +866,7 @@ Un elemento **RowType** es el elemento secundario del elemento **CollectionType*
 
 Un elemento **RowType** puede tener los siguientes elementos secundarios:
 
-- Propiedad (uno o más)  
+- Property (uno o varios)  
 
 ### <a name="example"></a>Ejemplo
 
@@ -910,8 +910,8 @@ En la tabla siguiente se describen los atributos que se pueden aplicar al elemen
 
 | Nombre de atributo            | Es necesario | Valor                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 |:--------------------------|:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Espacio de nombres**             | Sí         | El espacio de nombres del modelo de almacenamiento. El valor del atributo **namespace** se usa para formar el nombre completo de un tipo. Por ejemplo, si un **EntityType** denominado *Customer* está en el espacio de nombres ExampleModel. Store, el nombre completo del **EntityType** es ExampleModel. Store. Customer. <br/> Las siguientes cadenas no se pueden usar como valor para el atributo de **espacio de nombres** : **Sistema**, **transitorio**o **EDM**. El valor del atributo **namespace** no puede ser el mismo que el valor del atributo **namespace** del elemento Schema de CSDL. |
-| **Alias**                 | No          | Un identificador usado en lugar del nombre del espacio de nombres. Por ejemplo, si un **EntityType** denominado *Customer* está en el espacio de nombres ExampleModel. Store y el valor del atributo **alias** es *StorageModel*, puede usar StorageModel. Customer como nombre completo del  **EntityType.**                                                                                                                                                                                                                                                                                    |
+| **Espacio de nombres**             | Sí         | El espacio de nombres del modelo de almacenamiento. El valor del atributo **namespace** se usa para formar el nombre completo de un tipo. Por ejemplo, si un **EntityType** denominado *Customer* está en el espacio de nombres ExampleModel. Store, el nombre completo del **EntityType** es ExampleModel. Store. Customer. <br/> Las siguientes cadenas no se pueden usar como el valor del atributo **namespace** : **System**, **Transient**o **EDM**. El valor del atributo **namespace** no puede ser el mismo que el valor del atributo **namespace** del elemento Schema de CSDL. |
+| **Alias**                 | No          | Un identificador usado en lugar del nombre del espacio de nombres. Por ejemplo, si un **EntityType** denominado *Customer* está en el espacio de nombres ExampleModel. Store y el valor del atributo **alias** es *StorageModel*, puede usar StorageModel. Customer como nombre completo del **EntityType.**                                                                                                                                                                                                                                                                                    |
 | **Proveedor**              | Sí         | El proveedor de datos.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | **ProviderManifestToken** | Sí         | Un token que indica al proveedor qué manifiesto del proveedor debe devolver. No se define ningún formato para el token. El proveedor define los valores para el token. Para obtener información sobre los tokens del manifiesto del proveedor de SQL Server, vea SqlClient para Entity Framework.                                                                                                                                                                                                                                                                                                                        |
 
@@ -1064,7 +1064,7 @@ En el ejemplo siguiente se muestra un elemento EntityType que tiene un elemento 
 
 ## <a name="facets-ssdl"></a>Facetas (SSDL)
 
-Las facetas del lenguaje de definición de esquemas de almacenamiento (SSDL) representan restricciones en los tipos de columna que se especifican en los elementos de propiedad. Las caras se implementan como atributos XML en los elementos de **propiedad** .
+Las facetas del lenguaje de definición de esquema de almacenamiento (SSDL) representan restricciones sobre los tipos de columna que se especifican en elementos Property. Las caras se implementan como atributos XML en los elementos de **propiedad** .
 
 En la tabla siguiente se describen las facetas que se admiten en SSDL:
 

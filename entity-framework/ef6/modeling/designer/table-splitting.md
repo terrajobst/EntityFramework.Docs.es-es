@@ -32,7 +32,7 @@ En este tutorial se usa Visual Studio 2012.
 
 -   Abra Visual Studio 2012.
 -   En el menú **Archivo** , elija **Nuevo**y haga clic en **Proyecto**.
--   En el panel izquierdo, haga clic en\#Visual C y, a continuación, seleccione la plantilla aplicación de consola.
+-   En el panel izquierdo, haga clic en Visual C\#y, a continuación, seleccione la plantilla aplicación de consola.
 -   Escriba **TableSplittingSample** como nombre del proyecto y haga clic en **Aceptar**.
 
 ## <a name="create-a-model-based-on-the-school-database"></a>Creación de un modelo basado en la base de datos School
@@ -41,12 +41,12 @@ En este tutorial se usa Visual Studio 2012.
 -   Seleccione **datos** en el menú de la izquierda y, a continuación, seleccione **ADO.NET Entity Data Model** en el panel Plantillas.
 -   Escriba **TableSplittingModel. edmx** como nombre de archivo y, a continuación, haga clic en **Agregar**.
 -   En el cuadro de diálogo elegir contenido del modelo, seleccione **generar desde la base de datos**y, a continuación, haga clic en **siguiente.**
--   Haga clic en nueva conexión. En el cuadro de diálogo Propiedades de conexión, escriba el nombre del servidor (por ejemplo, **(LocalDB)\\mssqllocaldb**), seleccione el método de autenticación, escriba **School** como nombre de la base de datos y, a continuación, haga clic en **Aceptar**.
+-   Haga clic en nueva conexión. En el cuadro de diálogo Propiedades de conexión, escriba el nombre del servidor (por ejemplo, **LocalDB)\\mssqllocaldb**), seleccione el método de autenticación, escriba **School** para el nombre de la base de datos y, a continuación, haga clic en **Aceptar**.
     El cuadro de diálogo elegir la conexión de datos se actualiza con la configuración de conexión de la base de datos.
--   En el cuadro de diálogo elija los objetos de base de datos, desactive el nodo **tablas** y Compruebe la tabla **Person** . Esto agregará la tabla especificada al modelo **School** .
+-   En el cuadro de diálogo elija los objetos de base de datos, desactive las **tablas** nodo y Compruebe la tabla **Person** . Esto agregará la tabla especificada al modelo **School** .
 -   Haga clic en **Finalizar**.
 
-Se muestra el diseñador de entidades, que proporciona una superficie de diseño para editar el modelo. Todos los objetos que seleccionó en el cuadro de diálogo **Elija los objetos** de base de datos se agregan al modelo.
+Se muestra el diseñador de entidades, que proporciona una superficie de diseño para editar el modelo. Todos los objetos que seleccionó en el cuadro de diálogo **Elija los objetos de base de datos** se agregan al modelo.
 
 ## <a name="map-two-entities-to-a-single-table"></a>Asignación de dos entidades a una sola tabla
 
@@ -56,21 +56,21 @@ En esta sección dividirá la entidad **Person** en dos entidades y, a continuac
 > La entidad **Person** no contiene propiedades que puedan contener grandes cantidades de datos. simplemente se usa como ejemplo.
 
 -   Haga clic con el botón secundario en un área vacía de la superficie de diseño, seleccione **Agregar nuevo**y haga clic en **entidad**.
-    Aparecerá el cuadro de diálogo **nueva entidad** .
+    Aparecerá el cuadro de diálogo nuevo de **entidades** .
 -   Escriba **HireInfo** para el **nombre de entidad** y **PersonID** para el nombre de la **propiedad de clave** .
 -   Haga clic en **Aceptar**.
 -   Se crea y se muestra un nuevo tipo de entidad en la superficie de diseño.
 -   Seleccione la propiedad **HireDate** del tipo de entidad **Person** y presione las teclas **Ctrl + X** .
 -   Seleccione la entidad **HireInfo** y presione las teclas **Ctrl + V** .
 -   Cree una asociación entre **Person** y **HireInfo**. Para ello, haga clic con el botón secundario en un área vacía de la superficie de diseño, seleccione **Agregar nuevo**y haga clic en **Asociación**.
--   Aparece el cuadro de diálogo **Agregar Asociación** . El nombre de **PersonHireInfo** se proporciona de forma predeterminada.
+-   Aparece el cuadro de diálogo Agregar de **Asociación** . El nombre de **PersonHireInfo** se proporciona de forma predeterminada.
 -   Especifique Multiplicity **1 (uno)** en ambos extremos de la relación.
 -   Haga clic en **Aceptar**.
 
-El paso siguiente requiere la ventana **detalles** de la asignación. Si no puede ver esta ventana, haga clic con el botón secundario en la superficie de diseño y seleccione detalles de la **asignación**.
+El paso siguiente requiere la ventana detalles de la **asignación** . Si no puede ver esta ventana, haga clic con el botón secundario en la superficie de diseño y seleccione detalles de la **asignación**.
 
--   Seleccione el tipo de entidad **HireInfo** y haga clic **&lt;en agregar una&gt;tabla o vista** en la ventana **detalles** de la asignación.
--   Seleccione **persona** en la  **&lt;lista desplegable agregar una&gt;tabla o vista**. La lista contiene tablas o vistas a las que se puede asignar la entidad seleccionada.
+-   Seleccione el tipo de entidad **HireInfo** y haga clic en **&lt;agregar una tabla o vista&gt;**  en la ventana detalles de la **asignación** .
+-   Seleccione **persona** en la lista desplegable **&lt;agregar una tabla o vista&gt;** campo . La lista contiene tablas o vistas a las que se puede asignar la entidad seleccionada.
     Las propiedades adecuadas deben estar asignadas de forma predeterminada.
 
     ![Asignación](~/ef6/media/mapping.png)

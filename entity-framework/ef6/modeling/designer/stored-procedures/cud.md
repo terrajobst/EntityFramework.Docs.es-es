@@ -12,7 +12,7 @@ ms.locfileid: "71813563"
 ---
 # <a name="designer-cud-stored-procedures"></a>Procedimientos almacenados CUD del diseñador
 
-Este tutorial paso a paso muestra cómo asignar las operaciones Create @ no__t-0insert, Update y Delete (CUD) de un tipo de entidad a los procedimientos almacenados mediante el Entity Framework Designer (EF Designer).  De forma predeterminada, el Entity Framework genera automáticamente las instrucciones SQL para las operaciones CUD, pero también puede asignar procedimientos almacenados a estas operaciones.  
+Este tutorial paso a paso muestra cómo asignar las operaciones de creación\\inserción, actualización y eliminación (CUD) de un tipo de entidad a procedimientos almacenados mediante el Entity Framework Designer (EF Designer).  De forma predeterminada, el Entity Framework genera automáticamente las instrucciones SQL para las operaciones CUD, pero también puede asignar procedimientos almacenados a estas operaciones.  
 
 Tenga en cuenta que Code First no admite la asignación a funciones o procedimientos almacenados. Sin embargo, puede llamar a procedimientos almacenados o funciones mediante el método System. Data. Entity. DbSet. SqlQuery. Por ejemplo:
 
@@ -24,10 +24,10 @@ var query = context.Products.SqlQuery("EXECUTE [dbo].[GetAllProducts]");
 
 Al asignar las operaciones CUD a los procedimientos almacenados, se aplican las consideraciones siguientes:
 
-- Si va a asignar una de las operaciones de CUD a un procedimiento almacenado, asígnela todas. Si no asigna los tres, se producirá un error en las operaciones no asignadas si se ejecutan y se producirá una **UpdateException** will.
+- Si va a asignar una de las operaciones de CUD a un procedimiento almacenado, asígnela todas. Si no asigna los tres, se producirá un error en las operaciones no asignadas si se ejecutan y se producirá una  **UpdateException** .
 - Debe asignar todos los parámetros del procedimiento almacenado a las propiedades de la entidad.
-- Si el servidor genera el valor de clave principal para la fila insertada, debe volver a asignar este valor a la propiedad clave de la entidad. En el ejemplo siguiente, el procedimiento **InsertPerson** stored devuelve la clave principal recién creada como parte del conjunto de resultados del procedimiento almacenado. La clave principal se asigna a la clave de entidad (**PersonID**) mediante los **enlaces de resultados &lt;Add @ no__t-3** FEATURE del diseñador de EF.
-- Las llamadas a procedimientos almacenados se asignan 1:1 con las entidades del modelo conceptual. Por ejemplo, si implementa una jerarquía de herencia en el modelo conceptual y, a continuación, asigna los procedimientos almacenados CUD para las entidades **primaria** (base) y **secundaria** (derivada), al guardar los cambios **secundarios** solo se llamará al **elemento secundario**' s procedimientos almacenados, no desencadenará las llamadas a procedimientos almacenados del **elemento primario**.
+- Si el servidor genera el valor de clave principal para la fila insertada, debe volver a asignar este valor a la propiedad clave de la entidad. En el ejemplo siguiente, el procedimiento almacenado **InsertPerson** devuelve la clave principal recién creada como parte del conjunto de resultados del procedimiento almacenado. La clave principal se asigna a la clave de entidad (**PersonID**) mediante el **&lt;agregar enlaces de resultados&gt;** característica del diseñador de EF.
+- Las llamadas a procedimientos almacenados se asignan 1:1 con las entidades del modelo conceptual. Por ejemplo, si implementa una jerarquía de herencia en el modelo conceptual y, a continuación, asigna los procedimientos almacenados CUD para las entidades **primaria** (base) y **secundaria** (derivada), al guardar los cambios **secundarios** solo se llamará a los procedimientos almacenados del **elemento secundario**, no se desencadenarán las llamadas a procedimientos almacenados del **elemento primario**.
 
 ## <a name="prerequisites"></a>Requisitos previos
 
@@ -39,20 +39,20 @@ Para completar este tutorial, necesitará:
 ## <a name="set-up-the-project"></a>Configurar el proyecto
 
 - Abra Visual Studio 2012.
-- Seleccione el **proyecto de archivo-&gt; nuevo-&gt;**
-- En el panel izquierdo, haga clic en **Visual C @ no__t-1**y, a continuación, seleccione la plantilla de **consola** .
-- Escriba **CUDSProcsSample** as el nombre.
+- Seleccionar **archivo-&gt; nuevo-&gt; proyecto**
+- En el panel izquierdo, haga clic en **Visual C\#** y, a continuación, seleccione la plantilla de **consola** .
+- Escriba **CUDSProcsSample** como nombre.
 - Seleccione **Aceptar**.
 
 ## <a name="create-a-model"></a>Crear un modelo
 
-- Haga clic con el botón derecho en el nombre del proyecto en Explorador de soluciones y seleccione **Agregar-&gt; nuevo elemento**.
+- Haga clic con el botón derecho en el nombre del proyecto en Explorador de soluciones y seleccione **agregar&gt; nuevo elemento**.
 - Seleccione **datos** en el menú de la izquierda y, a continuación, seleccione **ADO.NET Entity Data Model** en el panel Plantillas.
 - Escriba **CUDSProcs. edmx** como nombre de archivo y, a continuación, haga clic en **Agregar**.
 - En el cuadro de diálogo elegir contenido del modelo, seleccione **generar desde la base de datos**y, a continuación, haga clic en **siguiente**.
-- Haga clic en **nueva conexión**. En el cuadro de diálogo Propiedades de conexión, escriba el nombre del servidor (por ejemplo, **(LocalDB)\\mssqllocaldb**), seleccione el método de autenticación, escriba **School** como nombre de la base de datos y, a continuación, haga clic en **Aceptar**.
+- Haga clic en **nueva conexión**. En el cuadro de diálogo Propiedades de conexión, escriba el nombre del servidor (por ejemplo, **LocalDB)\\mssqllocaldb**), seleccione el método de autenticación, escriba **School** para el nombre de la base de datos y, a continuación, haga clic en **Aceptar**.
     El cuadro de diálogo elegir la conexión de datos se actualiza con la configuración de conexión de la base de datos.
-- En el cuadro de diálogo elija los objetos de base de datos, en las **tablas** node, seleccione la tabla **Person** .
+- En el cuadro de diálogo elija los objetos de base de datos, en el nodo **tablas** , seleccione la tabla **Person** .
 - Además, seleccione los siguientes procedimientos almacenados en el nodo **procedimientos almacenados y funciones** : **DeletePerson**, **InsertPerson**y **UpdatePerson**.
 - A partir de Visual Studio 2012, el diseñador de EF admite la importación masiva de procedimientos almacenados. La **importación de funciones y procedimientos almacenados seleccionados en el modelo de entidad** está activada de forma predeterminada. Como en este ejemplo tenemos procedimientos almacenados que insertan, actualizan y eliminan tipos de entidad, no queremos importarlos y desactivarán esta casilla.
 
@@ -63,30 +63,30 @@ Para completar este tutorial, necesitará:
 
 ## <a name="map-the-person-entity-to-stored-procedures"></a>Asignar la entidad Person a procedimientos almacenados
 
-- Haga clic con el botón secundario en el tipo **Person** entity y seleccione **asignación de procedimiento almacenado**.
-- Las asignaciones de procedimientos almacenados aparecen en los **detalles de asignación** window.
-- Haga clic en **&lt;Select Insertar función @ no__t-2**.
+- Haga clic con el botón secundario en la **persona** tipo de entidad y seleccione **asignación de procedimiento almacenado**.
+- Las asignaciones de procedimientos almacenados aparecen en la ventana detalles de la **asignación** .
+- Haga clic en **&lt;seleccionar Insertar función&gt;** .
     El campo se convierte en una lista desplegable de los procedimientos almacenados del modelo de almacenamiento que se puede asignar a tipos de entidad del modelo conceptual.
-    Seleccione **InsertPerson** from en la lista desplegable.
-- Aparecen las asignaciones predeterminadas entre los parámetros de procedimiento almacenado y las propiedades de entidad. Tenga en cuenta que las flechas indican la dirección de asignación: Los valores de propiedad se proporcionan a los parámetros de procedimiento almacenado.
-- Haga clic en **&lt;Add resultado Binding @ no__t-2**.
-- Escriba **NewPersonID**, el nombre del parámetro devuelto por el procedimiento **InsertPerson** stored. Asegúrese de no escribir espacios iniciales ni finales.
+    Seleccione **InsertPerson** de la lista desplegable.
+- Aparecen las asignaciones predeterminadas entre los parámetros de procedimiento almacenado y las propiedades de entidad. Observe que las flechas indican la dirección de la asignación: se proporcionan valores de propiedad como parámetros de procedimiento almacenado.
+- Haga clic en **&lt;agregar&gt;de enlace de resultados **.
+- Escriba **NewPersonID**, el nombre del parámetro devuelto por el procedimiento almacenado **InsertPerson** . Asegúrese de no escribir espacios iniciales ni finales.
 - Presione **entrar**.
-- De forma predeterminada, **NewPersonID** is se asigna a la clave de entidad **PersonID**. Tenga en cuenta que una flecha indica la dirección de la asignación: El valor de la columna de resultados se proporciona a la propiedad.
+- De forma predeterminada, **NewPersonID** se asigna a la clave de entidad **PersonID**. Observe que una flecha indica la dirección de la asignación: el valor de la columna de resultado se proporciona para la propiedad.
 
     ![Detalles de la asignación](~/ef6/media/mappingdetails.png)
 
-- Haga clic en **&lt;Select Update function @ no__t-2** And seleccione **UpdatePerson** from la lista desplegable resultante.
+- Haga clic en **&lt;seleccione Actualizar función&gt;**  y seleccione **UpdatePerson** en la lista desplegable resultante.
 - Aparecen las asignaciones predeterminadas entre los parámetros de procedimiento almacenado y las propiedades de entidad.
-- Haga clic en **&lt;Select Delete function @ no__t-2** And select **DeletePerson** from la lista desplegable resultante.
+- Haga clic en **&lt;seleccionar eliminar función&gt;**  y seleccione **DeletePerson** en la lista desplegable resultante.
 - Aparecen las asignaciones predeterminadas entre los parámetros de procedimiento almacenado y las propiedades de entidad.
 
-Las operaciones de inserción, actualización y eliminación del tipo **Person** entity ahora están asignadas a procedimientos almacenados.
+Las operaciones de inserción, actualización y eliminación de la **persona** tipo de entidad ahora están asignadas a procedimientos almacenados.
 
 Si desea habilitar la comprobación de simultaneidad al actualizar o eliminar una entidad con procedimientos almacenados, use una de las siguientes opciones:
 
-- Use un parámetro de **salida** para devolver el número de filas afectadas del procedimiento almacenado y compruebe el **parámetro de filas afectadas** checkbox junto al nombre del parámetro. Si el valor devuelto es cero cuando se llama a la operación, se produce una  [**OptimisticConcurrencyException**](https://msdn.microsoft.com/library/system.data.optimisticconcurrencyexception.aspx) will.
-- Active la casilla **usar valor original** junto a una propiedad que quiera usar para la comprobación de simultaneidad. Cuando se intenta realizar una actualización, se usará el valor de la propiedad que se leyó originalmente de la base de datos al escribir datos de nuevo en la base de datos. Si el valor no coincide con el valor de la base de datos, se produce una **OptimisticConcurrencyException** will.
+- Use un parámetro de **salida** para devolver el número de filas afectadas del procedimiento almacenado y active las casillas de los **parámetros afectados** de las filas junto al nombre del parámetro. Si el valor devuelto es cero cuando se llama a la operación, se producirá una   [**OptimisticConcurrencyException**](https://msdn.microsoft.com/library/system.data.optimisticconcurrencyexception.aspx) .
+- Active la casilla **usar valor original** junto a una propiedad que quiera usar para la comprobación de simultaneidad. Cuando se intenta realizar una actualización, se usará el valor de la propiedad que se leyó originalmente de la base de datos al escribir datos de nuevo en la base de datos. Si el valor no coincide con el valor de la base de datos, se producirá una **OptimisticConcurrencyException** .
 
 ## <a name="use-the-model"></a>Usar el modelo
 

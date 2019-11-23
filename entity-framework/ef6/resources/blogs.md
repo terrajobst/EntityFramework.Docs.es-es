@@ -15,7 +15,7 @@ Además de la documentación del producto, estos blogs pueden ser una fuente de 
 
 ## <a name="ef-team-blogs"></a>Blogs del equipo de EF
 
-- Blog de [.NET: Entity Framework @ no__t-0
+- [Blog de .NET: etiqueta Entity Framework](https://blogs.msdn.microsoft.com/dotnet/tag/entity-framework/)
 - [Blog de ADO.NET (ya no está en uso)](https://blogs.msdn.microsoft.com/adonet/)
 - [Blog de diseño de EF (ya no está en uso)](https://blogs.msdn.microsoft.com/efdesign/)
 
