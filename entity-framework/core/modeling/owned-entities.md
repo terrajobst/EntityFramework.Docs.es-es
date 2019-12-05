@@ -1,29 +1,29 @@
 ---
-title: 'Tipos de entidad de propiedad: EF Core'
+title: Propiedad de tipos de entidad - EF Core
+description: Cómo configurar tipos de entidad o agregados de propiedad al usar Entity Framework Core
 author: AndriySvyryd
 ms.author: ansvyryd
-ms.date: 02/26/2018
-ms.assetid: 2B0BADCE-E23E-4B28-B8EE-537883E16DF3
+ms.date: 11/06/2019
 uid: core/modeling/owned-entities
-ms.openlocfilehash: a0665bfa27134b8dc3eba854ff3f7b1af4b69217
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.openlocfilehash: 7b6d1b3bccbfceb85f03a580ba03a45984d29c74
+ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73655934"
+ms.lasthandoff: 12/04/2019
+ms.locfileid: "74824595"
 ---
 # <a name="owned-entity-types"></a>Tipos de entidad en propiedad
 
 > [!NOTE]
 > Esta característica es nueva en EF Core 2,0.
 
-EF Core permite modelar tipos de entidad que solo pueden aparecer en las propiedades de navegación de otros tipos de entidad. Se denominan _tipos de entidad de propiedad_. La entidad que contiene un tipo de entidad propiedad es su _propietario_.
+EF Core permite a tipos de entidad del modelo que sólo pueden aparecer en las propiedades de navegación de otros tipos de entidad. Se denominan _tipos de entidad de propiedad_. La entidad que contiene un tipo de entidad propiedad es su _propietario_.
 
-Las entidades propiedad son esencialmente parte del propietario y no pueden existir sin ella, son conceptualmente similares a los [agregados](https://martinfowler.com/bliki/DDD_Aggregate.html).
+Las entidades propiedad son esencialmente parte del propietario y no pueden existir sin ella, son conceptualmente similares a los [agregados](https://martinfowler.com/bliki/DDD_Aggregate.html). Esto significa que el tipo de propiedad es por definición en el lado dependiente de la relación con el propietario.
 
 ## <a name="explicit-configuration"></a>Configuración explícita
 
-Los tipos de entidad de propiedad nunca se incluyen en EF Core en el modelo por Convención. Puede usar el método `OwnsOne` en `OnModelCreating` o anotar el tipo con `OwnedAttribute` (novedad en EF Core 2,1) para configurar el tipo como un tipo de propiedad.
+Propiedad de entidad tipos nunca se incluyen por EF Core en el modelo por convención. Puede usar el método `OwnsOne` en `OnModelCreating` o anotar el tipo con `OwnedAttribute` (novedad en EF Core 2,1) para configurar el tipo como un tipo de propiedad.
 
 En este ejemplo, `StreetAddress` es un tipo sin propiedad de identidad. Se usa como propiedad del tipo Order para especificar la dirección de envío de un pedido en concreto.
 
@@ -74,23 +74,26 @@ Para configurar una llamada PK diferente `HasKey`:
 [!code-csharp[OwnsMany](../../../samples/core/Modeling/OwnedEntities/OwnedEntityContext.cs?name=OwnsMany)]
 
 > [!NOTE]
-> Antes de que el método EF Core 3,0 `WithOwner()` no existiera, se debe quitar esta llamada.
+> Antes de que el método EF Core 3,0 `WithOwner()` no existiera, se debe quitar esta llamada. Además, la clave principal no se detectó automáticamente, por lo que siempre se especificó.
 
 ## <a name="mapping-owned-types-with-table-splitting"></a>Asignar tipos de propiedad con división de tabla
 
 Cuando se usan bases de datos relacionales, de forma predeterminada, los tipos de propiedad de propiedad se asignan a la misma tabla que el propietario. Esto requiere dividir la tabla en dos: se usarán algunas columnas para almacenar los datos del propietario, y algunas columnas se utilizarán para almacenar los datos de la entidad propiedad. Se trata de una característica común conocida como [División de tablas](table-splitting.md).
 
-De forma predeterminada, EF Core asignará el nombre a las columnas de la base de datos para las propiedades del tipo de entidad propiedad que sigue el patrón _Navigation_OwnedEntityProperty_. Por lo tanto, las propiedades de `StreetAddress` aparecerán en la tabla "Orders" con los nombres "ShippingAddress_Street" y "ShippingAddress_City".
+De forma predeterminada, EF Core asignará el nombre a las columnas de la base de datos para las propiedades del tipo de entidad propiedad que sigue al patrón _Navigation_OwnedEntityProperty_. Por lo tanto, las propiedades de `StreetAddress` aparecerán en la tabla ' Orders ' con los nombres ' ShippingAddress_Street ' y ' ShippingAddress_City '.
 
 Puede usar el método `HasColumnName` para cambiar el nombre de esas columnas:
 
 [!code-csharp[ColumnNames](../../../samples/core/Modeling/OwnedEntities/OwnedEntityContext.cs?name=ColumnNames)]
 
+> [!NOTE]
+> La mayoría de los métodos de configuración de tipo de entidad normales, como [Ignore](/dotnet/api/microsoft.entityframeworkcore.metadata.builders.ownednavigationbuilder.ignore) , se pueden llamar de la misma manera.
+
 ## <a name="sharing-the-same-net-type-among-multiple-owned-types"></a>Compartir el mismo tipo .NET entre varios tipos de propiedad
 
 Un tipo de entidad de propiedad puede ser del mismo tipo de .NET que otro tipo de entidad de propiedad, por lo que es posible que el tipo .NET no sea suficiente para identificar un tipo de propiedad.
 
-En esos casos, la propiedad que apunta del propietario a la entidad propiedad se convierte en la _navegación de definición_ del tipo de entidad de propiedad. Desde la perspectiva de EF Core, la navegación de definición forma parte de la identidad del tipo junto con el tipo .NET.
+En esos casos, la propiedad que apunta del propietario a la entidad propiedad se convierte en la _navegación de definición_ del tipo de entidad de propiedad. Desde la perspectiva del EF Core, la definición de la navegación es parte de la identidad del tipo junto con el tipo de .NET.
 
 Por ejemplo, en la siguiente clase `ShippingAddress` y `BillingAddress` son ambos del mismo tipo .NET, `StreetAddress`:
 
@@ -106,6 +109,8 @@ En este ejemplo `OrderDetails` posee `BillingAddress` y `ShippingAddress`, que s
 
 [!code-csharp[OrderStatus](../../../samples/core/Modeling/OwnedEntities/OrderStatus.cs?name=OrderStatus)]
 
+Cada navegación a un tipo de propiedad define un tipo de entidad independiente con una configuración completamente independiente.
+
 Además de los tipos de propiedad anidados, un tipo de propiedad puede hacer referencia a una entidad normal, puede ser el propietario o una entidad distinta, siempre y cuando la entidad propiedad esté en el lado dependiente. Esta funcionalidad establece tipos de entidad de propiedad además de tipos complejos en EF6.
 
 [!code-csharp[OrderDetails](../../../samples/core/Modeling/OwnedEntities/OrderDetails.cs?name=OrderDetails)]
@@ -114,15 +119,17 @@ Es posible encadenar el método `OwnsOne` en una llamada fluida para configurar 
 
 [!code-csharp[OwnsOneNested](../../../samples/core/Modeling/OwnedEntities/OwnedEntityContext.cs?name=OwnsOneNested)]
 
-Observe la llamada `WithOwner` utilizada para configurar la propiedad de navegación que señala hacia atrás en el propietario.
+Observe la llamada `WithOwner` utilizada para configurar la propiedad de navegación que señala hacia atrás en el propietario. Para configurar una navegación al tipo de entidad Owner que no forma parte de la relación de propiedad `WithOwner()` se debe llamar a sin ningún argumento.
 
-Es posible lograr el resultado mediante `OwnedAttribute` en `OrderDetails` y `StreetAdress`.
+Es posible lograr el resultado mediante `OwnedAttribute` en `OrderDetails` y `StreetAddress`.
 
 ## <a name="storing-owned-types-in-separate-tables"></a>Almacenar tipos de propiedad en tablas independientes
 
 Además, a diferencia de los tipos complejos de EF6, los tipos de propiedad se pueden almacenar en una tabla independiente del propietario. Para invalidar la Convención que asigna un tipo de propiedad a la misma tabla que el propietario, puede llamar simplemente a `ToTable` y proporcionar un nombre de tabla diferente. En el ejemplo siguiente se asignará `OrderDetails` y sus dos direcciones a una tabla independiente de `DetailedOrder`:
 
 [!code-csharp[OwnsOneTable](../../../samples/core/Modeling/OwnedEntities/OwnedEntityContext.cs?name=OwnsOneTable)]
+
+También es posible usar el `TableAttribute` para lograr esto, pero tenga en cuenta que esto produciría un error si hay varias navegaciones al tipo de propiedad, ya que en ese caso se asignarían varios tipos de entidad a la misma tabla.
 
 ## <a name="querying-owned-types"></a>Consultar tipos de propiedad
 
@@ -141,7 +148,7 @@ Algunas de estas limitaciones son fundamentales para el funcionamiento de los ti
 
 ### <a name="current-shortcomings"></a>Deficiencias actuales
 
-- No se admiten las jerarquías de herencia que incluyen tipos de entidad de propiedad.
+- Los tipos de entidad de propiedad no pueden tener jerarquías de herencia
 - Las navegaciones de referencia a tipos de entidad de propiedad no pueden ser null a menos que se asignen explícitamente a una tabla independiente del propietario.
 - Los distintos propietarios no pueden compartir instancias de tipos de entidad con propiedad (este es un escenario conocido para objetos de valor que no se pueden implementar mediante tipos de entidad de propiedad)
 

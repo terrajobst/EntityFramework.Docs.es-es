@@ -1,16 +1,16 @@
 ---
 title: 'División de tablas: EF Core'
+description: Cómo configurar la división de tablas mediante Entity Framework Core
 author: AndriySvyryd
 ms.author: ansvyryd
 ms.date: 04/10/2019
-ms.assetid: 0EC2CCE1-BD55-45D8-9EA9-20634987F094
 uid: core/modeling/table-splitting
-ms.openlocfilehash: a3a2e5842a6c6b4b490084d205a0d44bb46c17ee
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.openlocfilehash: 0e48c516de43cdc2b54c56f1a96f5e01f9fbbbc4
+ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73656041"
+ms.lasthandoff: 12/04/2019
+ms.locfileid: "74824555"
 ---
 # <a name="table-splitting"></a>División de tablas
 
@@ -19,7 +19,7 @@ ms.locfileid: "73656041"
 
 EF Core permite asignar dos o más entidades a una sola fila. Esto se denomina _División de tablas_ o _uso compartido de tablas_.
 
-## <a name="configuration"></a>Configuración
+## <a name="configuration"></a>Configuración de
 
 Para usar la división de tablas, los tipos de entidad deben asignarse a la misma tabla, tener las claves principales asignadas a las mismas columnas y al menos una relación configurada entre la clave principal de un tipo de entidad y otra en la misma tabla.
 
@@ -38,7 +38,7 @@ Además de la configuración necesaria, llamamos `Property(o => o.Status).HasCol
 > [!TIP]
 > Vea el [proyecto de ejemplo completo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Modeling/TableSplitting) para obtener más contexto.
 
-## <a name="usage"></a>Uso
+## <a name="usage"></a>Usage
 
 Guardar y consultar entidades mediante la división de tablas se realiza de la misma manera que otras entidades. Y a partir de EF Core 3,0 se puede `null`la referencia de entidad dependiente. Si todas las columnas utilizadas por la entidad dependiente son `NULL` es la base de datos, no se creará ninguna instancia para ella cuando se realice la consulta. Esto también ocurre cuando todas las propiedades son opcionales y se establecen en `null`, lo que podría no ser el esperado.
 

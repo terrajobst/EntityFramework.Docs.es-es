@@ -1,15 +1,15 @@
 ---
 title: 'Relaciones: EF Core'
-author: rowanmiller
-ms.date: 10/27/2016
-ms.assetid: 0ff736a3-f1b0-4b58-a49c-4a7094bd6935
+description: Cómo configurar relaciones entre tipos de entidad al utilizar Entity Framework Core
+author: AndriySvyryd
+ms.date: 11/21/2019
 uid: core/modeling/relationships
-ms.openlocfilehash: 1e59ce9e19c12aa5564bc8467dcfcb3be8ee8996
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.openlocfilehash: 452169c902d56fda0a65a5c2846a9b42c80640fd
+ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73655671"
+ms.lasthandoff: 12/04/2019
+ms.locfileid: "74824762"
 ---
 # <a name="relationships"></a>Relaciones
 
@@ -26,19 +26,23 @@ Hay una serie de términos que se usan para describir las relaciones
 
 * **Entidad de entidad** de seguridad: Esta es la entidad que contiene las propiedades de clave principal/alternativa. A veces se denomina "primario" de la relación.
 
-* **Clave externa:** Las propiedades de la entidad dependiente que se usa para almacenar los valores de la propiedad de clave principal con la que está relacionada la entidad.
+* **Clave externa:** Propiedades de la entidad dependiente que se usan para almacenar los valores de clave principal para la entidad relacionada.
 
-* **Clave principal:** Las propiedades que identifican de forma única la entidad principal. Puede ser la clave principal o una clave alternativa.
+* **Clave principal:** Propiedades que identifican de forma única la entidad principal. Puede ser la clave principal o una clave alternativa.
 
-* **Propiedad de navegación:** Propiedad definida en la entidad de seguridad o dependiente que contiene una o más referencias a las entidades relacionadas.
+* **Propiedad de navegación:** Propiedad definida en la entidad principal o dependiente que hace referencia a la entidad relacionada.
 
   * **Propiedad de navegación de colección:** Propiedad de navegación que contiene referencias a muchas entidades relacionadas.
 
   * **Propiedad de navegación de referencia:** Propiedad de navegación que contiene una referencia a una sola entidad relacionada.
 
   * **Propiedad de navegación inversa:** Al discutir una propiedad de navegación determinada, este término hace referencia a la propiedad de navegación en el otro extremo de la relación.
+  
+* **Relación que hace referencia a sí misma:** Una relación en la que los tipos de entidad dependiente y principal son iguales.
 
-En la lista de código siguiente se muestra una relación de uno a varios entre `Blog` y `Post`
+En el código siguiente se muestra una relación de uno a varios entre `Blog` y `Post`
+
+[!code-csharp[Main](../../../samples/core/Modeling/Conventions/Relationships/Full.cs#Entities)]
 
 * `Post` es la entidad dependiente
 
@@ -54,11 +58,9 @@ En la lista de código siguiente se muestra una relación de uno a varios entre 
 
 * `Post.Blog` es la propiedad de navegación inversa de `Blog.Posts` (y viceversa)
 
-[!code-csharp[Main](../../../samples/core/Modeling/Conventions/Relationships/Full.cs#Entities)]
-
 ## <a name="conventions"></a>Convenciones
 
-Por Convención, se creará una relación cuando se detecte una propiedad de navegación en un tipo. Una propiedad se considera una propiedad de navegación si el tipo al que señala no se puede asignar como un tipo escalar por el proveedor de base de datos actual.
+De forma predeterminada, se creará una relación cuando se detecte una propiedad de navegación en un tipo. Una propiedad se considera una propiedad de navegación si el tipo al que señala no se puede asignar como un tipo escalar por el proveedor de base de datos actual.
 
 > [!NOTE]  
 > Las relaciones detectadas por la Convención siempre tendrán como destino la clave principal de la entidad principal. Para elegir como destino una clave alternativa, se debe realizar una configuración adicional mediante la API fluida.
@@ -69,24 +71,42 @@ El patrón más común para las relaciones es tener propiedades de navegación d
 
 * Si se encuentra un par de propiedades de navegación entre dos tipos, se configurarán como propiedades de navegación inversa de la misma relación.
 
-* Si la entidad dependiente contiene una propiedad denominada `<primary key property name>`, `<navigation property name><primary key property name>`o `<principal entity name><primary key property name>`, se configurará como la clave externa.
+* Si la entidad dependiente contiene una propiedad con un nombre que es uno de estos patrones, se configurará como la clave externa:
+  * `<navigation property name><principal key property name>`
+  * `<navigation property name>Id`
+  * `<principal entity name><principal key property name>`
+  * `<principal entity name>Id`
 
 [!code-csharp[Main](../../../samples/core/Modeling/Conventions/Relationships/Full.cs?name=Entities&highlight=6,15,16)]
 
-> [!WARNING]  
-> Si hay varias propiedades de navegación definidas entre dos tipos (es decir, más de un par de navegación distinto que apuntan entre sí), no se creará ninguna relación por Convención y tendrá que configurarlas manualmente para identificar cómo pareja de propiedades de navegación.
+En este ejemplo, las propiedades resaltadas se usarán para configurar la relación.
+
+> [!NOTE]
+> Si la propiedad es la clave principal o es de un tipo no compatible con la clave principal, no se configurará como clave externa.
+
+> [!NOTE]
+> Antes de EF Core 3,0 la propiedad denominada exactamente igual que la propiedad de clave principal [también coincidía con la clave externa](https://github.com/aspnet/EntityFrameworkCore/issues/13274) .
 
 ### <a name="no-foreign-key-property"></a>No hay propiedad de clave externa
 
-Aunque se recomienda tener una propiedad de clave externa definida en la clase de entidad dependiente, no es necesario. Si no se encuentra ninguna propiedad de clave externa, se introducirá una propiedad de clave externa de sombra con el nombre `<navigation property name><principal key property name>` (consulte [propiedades de sombra](shadow-properties.md) para obtener más información).
+Aunque se recomienda tener una propiedad de clave externa definida en la clase de entidad dependiente, no es necesario. Si no se encuentra ninguna propiedad de clave externa, se introducirá una [propiedad de clave externa de sombra](shadow-properties.md) con el nombre `<navigation property name><principal key property name>` o `<principal entity name><principal key property name>` si no hay ninguna navegación presente en el tipo dependiente.
 
 [!code-csharp[Main](../../../samples/core/Modeling/Conventions/Relationships/NoForeignKey.cs?name=Entities&highlight=6,15)]
+
+En este ejemplo, la clave externa de la sombra se `BlogId` porque, si se antepone el nombre de navegación, sería redundante.
+
+> [!NOTE]
+> Si ya existe una propiedad con el mismo nombre, el nombre de la propiedad Shadow tendrá como sufijo un número.
 
 ### <a name="single-navigation-property"></a>Propiedad de navegación única
 
 Incluir solo una propiedad de navegación (sin navegación inversa y sin propiedad de clave externa) es suficiente para tener una relación definida por Convención. También puede tener una propiedad de navegación única y una propiedad de clave externa.
 
 [!code-csharp[Main](../../../samples/core/Modeling/Conventions/Relationships/OneNavigation.cs?name=Entities&highlight=6)]
+
+### <a name="limitations"></a>Limitaciones
+
+Cuando hay varias propiedades de navegación definidas entre dos tipos (es decir, más de un par de navegaciones que apuntan entre sí), las relaciones representadas por las propiedades de navegación son ambiguas. Tendrá que configurarlos manualmente para resolver la ambigüedad.
 
 ### <a name="cascade-delete"></a>Eliminación en cascada
 
@@ -96,30 +116,27 @@ Vea la sección [relaciones obligatorias y opcionales](#required-and-optional-re
 
 Consulte [eliminación en cascada](../saving/cascade-delete.md) para obtener más detalles sobre los distintos comportamientos de eliminación y los valores predeterminados que usa la Convención.
 
-## <a name="data-annotations"></a>Anotaciones de datos
+## <a name="manual-configuration"></a>Configuración manual
 
-Hay dos anotaciones de datos que se pueden usar para configurar relaciones, `[ForeignKey]` y `[InverseProperty]`. Están disponibles en el espacio de nombres `System.ComponentModel.DataAnnotations.Schema`.
+#### <a name="fluent-apitabfluent-api"></a>[API fluida](#tab/fluent-api)
 
-### <a name="foreignkey"></a>ForeignKey
+Para configurar una relación en la API fluida, empiece por identificar las propiedades de navegación que componen la relación. `HasOne` o `HasMany` identifica la propiedad de navegación en el tipo de entidad en el que se está iniciando la configuración. A continuación, encadenar una llamada a `WithOne` o `WithMany` para identificar la navegación inversa. `HasOne`/`WithOne` se utilizan para las propiedades de navegación de referencia y `HasMany`/`WithMany` se utilizan para las propiedades de navegación de la colección.
 
-Puede usar las anotaciones de datos para configurar qué propiedad se debe usar como la propiedad de clave externa para una relación determinada. Normalmente, esto se hace cuando la Convención no detecta la propiedad de clave externa.
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/NoForeignKey.cs?highlight=14-16)]
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Relationships/ForeignKey.cs?highlight=30)]
-
-> [!TIP]  
-> La anotación `[ForeignKey]` se puede colocar en cualquier propiedad de navegación de la relación. No es necesario que vaya a la propiedad de navegación en la clase de entidad dependiente.
-
-### <a name="inverseproperty"></a>[InverseProperty]
+#### <a name="data-annotationstabdata-annotations"></a>[Anotaciones de datos](#tab/data-annotations)
 
 Puede usar las anotaciones de datos para configurar cómo se emparejan las propiedades de navegación en las entidades de entidad de seguridad y dependencias. Normalmente, esto se hace cuando hay más de un par de propiedades de navegación entre dos tipos de entidad.
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Relationships/InverseProperty.cs?highlight=33,36)]
 
-## <a name="fluent-api"></a>API fluida
+> [!NOTE]
+> Solo puede utilizar [required] en las propiedades de la entidad dependiente para afectar a la necesidad de la relación. [Obligatorio] en la navegación de la entidad principal normalmente se omite, pero puede hacer que la entidad se convierta en la dependiente.
 
-Para configurar una relación en la API fluida, empiece por identificar las propiedades de navegación que componen la relación. `HasOne` o `HasMany` identifica la propiedad de navegación en el tipo de entidad en el que se está iniciando la configuración. A continuación, encadenar una llamada a `WithOne` o `WithMany` para identificar la navegación inversa. `HasOne`/`WithOne` se utilizan para las propiedades de navegación de referencia y `HasMany`/`WithMany` se utilizan para las propiedades de navegación de la colección.
+> [!NOTE]
+> Las anotaciones de datos `[ForeignKey]` y `[InverseProperty]` están disponibles en el espacio de nombres `System.ComponentModel.DataAnnotations.Schema`. `[Required]` está disponible en el espacio de nombres `System.ComponentModel.DataAnnotations`.
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/NoForeignKey.cs?highlight=14-16)]
+---
 
 ### <a name="single-navigation-property"></a>Propiedad de navegación única
 
@@ -129,11 +146,27 @@ Si solo tiene una propiedad de navegación, hay sobrecargas sin parámetros de `
 
 ### <a name="foreign-key"></a>Clave externa
 
+#### <a name="fluent-apitabfluent-api"></a>[API fluida](#tab/fluent-api)
+
 Puede usar la API fluida para configurar qué propiedad se debe usar como la propiedad de clave externa para una relación determinada.
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ForeignKey.cs?highlight=17)]
 
-En la lista de código siguiente se muestra cómo configurar una clave externa compuesta.
+#### <a name="data-annotationstabdata-annotations"></a>[Anotaciones de datos](#tab/data-annotations)
+
+Puede usar las anotaciones de datos para configurar qué propiedad se debe usar como la propiedad de clave externa para una relación determinada. Normalmente, esto se hace cuando la Convención no detecta la propiedad de clave externa.
+
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Relationships/ForeignKey.cs?highlight=30)]
+
+> [!TIP]  
+> La anotación `[ForeignKey]` se puede colocar en cualquier propiedad de navegación de la relación. No es necesario que vaya a la propiedad de navegación en la clase de entidad dependiente.
+
+> [!NOTE]
+> No es necesario que la propiedad especificada mediante `[ForeignKey]` en una propiedad de navegación exista en el tipo dependiente. En este caso, el nombre especificado se utilizará para crear una clave externa de sombra.
+
+---
+
+En el código siguiente se muestra cómo configurar una clave externa compuesta.
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/CompositeForeignKey.cs?highlight=20)]
 
@@ -149,11 +182,11 @@ No es necesario proporcionar una propiedad de navegación. Simplemente puede pro
 
 ### <a name="principal-key"></a>Clave principal
 
-Si desea que la clave externa haga referencia a una propiedad que no sea la clave principal, puede usar la API fluida para configurar la propiedad de clave principal de la relación. La propiedad que configure como clave principal se configurará automáticamente como clave alternativa (consulte [claves alternativas](alternate-keys.md) para obtener más información).
+Si desea que la clave externa haga referencia a una propiedad que no sea la clave principal, puede usar la API fluida para configurar la propiedad de clave principal de la relación. La propiedad que se configura como clave principal se configurará automáticamente como una [clave alternativa](alternate-keys.md).
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/PrincipalKey.cs?name=PrincipalKey&highlight=11)]
 
-En la lista de código siguiente se muestra cómo configurar una clave principal compuesta.
+En el código siguiente se muestra cómo configurar una clave principal compuesta.
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/CompositePrincipalKey.cs?name=Composite&highlight=11)]
 
@@ -166,11 +199,14 @@ Puede usar la API fluida para configurar si la relación es obligatoria u opcion
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/Required.cs?name=Required&highlight=11)]
 
+> [!NOTE]
+> La llamada a `IsRequired(false)` también hace que la propiedad de clave externa sea opcional a menos que esté configurada de otro modo.
+
 ### <a name="cascade-delete"></a>Eliminación en cascada
 
 Puede usar la API fluida para configurar explícitamente el comportamiento de eliminación en cascada para una relación determinada.
 
-Consulte [eliminación en cascada](../saving/cascade-delete.md) en la sección guardar datos para obtener una explicación detallada de cada opción.
+Consulte la [eliminación en cascada](../saving/cascade-delete.md) para obtener una explicación detallada de cada opción.
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/CascadeDelete.cs?name=CascadeDelete&highlight=11)]
 
