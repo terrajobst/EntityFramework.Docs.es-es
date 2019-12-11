@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/20/2018
 ms.assetid: 2CB5809E-0EFB-44F6-AF14-9D5BFFFBFF9D
 uid: core/what-is-new/ef-core-2.0
-ms.openlocfilehash: 72393e96c195af1df5a169025ca2ce7a7acb16bb
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.openlocfilehash: 83f6b819409d502dba17a678d44a0746a4a77f4b
+ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73656220"
+ms.lasthandoff: 12/04/2019
+ms.locfileid: "74824879"
 ---
 # <a name="new-features-in-ef-core-20"></a>Nuevas características de EF Core 2.0
 
@@ -91,12 +91,12 @@ public class BloggingContext : DbContext
     {
         modelBuilder.Entity<Post>().HasQueryFilter(
             p => !p.IsDeleted
-            && p.TenantId == this.TenantId );
+            && p.TenantId == this.TenantId);
     }
 }
 ```
 
-Se define un filtro de nivel de modelo que implementa los servicios multiinquilino y la eliminación temporal para instancias del tipo de entidad `Post`. Observe el uso de una propiedad de nivel de instancia DbContext: `TenantId`. Los filtros de nivel de modelo usan el valor de la instancia de contexto correcta (es decir, la instancia de contexto que está ejecutando la consulta).
+Se define un filtro de nivel de modelo que implementa los servicios multiinquilino y la eliminación temporal para instancias del tipo de entidad `Post`. Observe el uso de una propiedad de nivel de instancia `DbContext`: `TenantId`. Los filtros de nivel de modelo usan el valor de la instancia de contexto correcta (es decir, la instancia de contexto que está ejecutando la consulta).
 
 Los filtros se pueden deshabilitar para consultas LINQ individuales mediante el operador IgnoreQueryFilters().
 
@@ -119,7 +119,7 @@ public class BloggingContext : DbContext
     [DbFunction]
     public static int PostReadCount(int blogId)
     {
-        throw new Exception();
+        throw new NotImplementedException();
     }
 }
 ```
@@ -135,9 +135,9 @@ var query =
 
 Algunas observaciones:
 
-- Por convención, el nombre del método se usa como nombre de una función (en este caso una función definida por el usuario) al generar el SQL, pero puede invalidar el nombre y el esquema durante el registro del método.
+- Por convención, el nombre del método se usa como nombre de una función (en este caso una función definida por el usuario) al generar el código SQL, pero puede invalidar el nombre y el esquema durante el registro del método.
 - Actualmente solo se admiten las funciones escalares.
-- Debe crear la función asignada en la base de datos. La migraciones de EF Core no se encargan de crearla
+- Debe crear la función asignada en la base de datos. La migraciones de EF Core no se encargarán de crearla.
 
 ### <a name="self-contained-type-configuration-for-code-first"></a>Configuración de tipo independiente para Code First
 
@@ -146,11 +146,11 @@ En EF6 era posible encapsular la configuración de Code First de un tipo de enti
 ``` csharp
 class CustomerConfiguration : IEntityTypeConfiguration<Customer>
 {
-  public void Configure(EntityTypeBuilder<Customer> builder)
-  {
-     builder.HasKey(c => c.AlternateKey);
-     builder.Property(c => c.Name).HasMaxLength(200);
-   }
+    public void Configure(EntityTypeBuilder<Customer> builder)
+    {
+        builder.HasKey(c => c.AlternateKey);
+        builder.Property(c => c.Name).HasMaxLength(200);
+    }
 }
 
 ...
