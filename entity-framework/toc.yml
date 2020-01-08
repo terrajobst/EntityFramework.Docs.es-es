@@ -79,18 +79,14 @@
           items:
             - name: Información general
               href: core/modeling/index.md
-            - name: Inclusión y exclusión de tipos
-              href: core/modeling/included-types.md
-            - name: Inclusión y exclusión de propiedades
-              href: core/modeling/included-properties.md
-            - name: Claves (principales)
+            - name: Tipos de entidad
+              href: core/modeling/entity-types.md
+            - name: Propiedades de entidad
+              href: core/modeling/entity-properties.md
+            - name: Teclas
               href: core/modeling/keys.md
             - name: Valores generados
               href: core/modeling/generated-properties.md
-            - name: Propiedades obligatorias y opcionales
-              href: core/modeling/required-optional.md
-            - name: Longitud máxima
-              href: core/modeling/max-length.md
             - name: Tokens de simultaneidad
               href: core/modeling/concurrency.md
             - name: Propiedades reemplazadas
@@ -99,10 +95,10 @@
               href: core/modeling/relationships.md
             - name: Índices
               href: core/modeling/indexes.md
-            - name: Claves alternativas
-              href: core/modeling/alternate-keys.md
             - name: Herencia
               href: core/modeling/inheritance.md
+            - name: Secuencias
+              href: core/modeling/sequences.md
             - name: Campos de respaldo
               href: core/modeling/backing-field.md
             - name: Conversiones de valores
@@ -119,36 +115,13 @@
               href: core/modeling/keyless-entity-types.md
             - name: Alternancia de modelos con el mismo DbContext
               href: core/modeling/dynamic-model.md
-            - name: Datos espaciales (GIS)
+            - name: Datos espaciales
+              displayName: GIS
               href: core/modeling/spatial.md
             - name: Modelado de bases de datos relacionales
               items:
                 - name: Información general
                   href: core/modeling/relational/index.md
-                - name: Asignación de tabla
-                  href: core/modeling/relational/tables.md
-                - name: Asignación de columna
-                  href: core/modeling/relational/columns.md
-                - name: Tipos de datos
-                  href: core/modeling/relational/data-types.md
-                - name: Claves principales
-                  href: core/modeling/relational/primary-keys.md
-                - name: Esquema predeterminado
-                  href: core/modeling/relational/default-schema.md
-                - name: Columnas calculadas
-                  href: core/modeling/relational/computed-columns.md
-                - name: Secuencias
-                  href: core/modeling/relational/sequences.md
-                - name: Valores predeterminados
-                  href: core/modeling/relational/default-values.md
-                - name: Índices
-                  href: core/modeling/relational/indexes.md
-                - name: Restricciones de clave externa
-                  href: core/modeling/relational/fk-constraints.md
-                - name: Claves alternativas (restricciones únicas)
-                  href: core/modeling/relational/unique-constraints.md
-                - name: Herencia (base de datos relacional)
-                  href: core/modeling/relational/inheritance.md
         - name: Administración de esquemas de base de datos
           items:
             - name: Información general
@@ -465,7 +438,7 @@
                       href: ef6/modeling/designer/advanced/defining-query.md
                     - name: Varios conjuntos de resultados
                       href: ef6/modeling/designer/advanced/multiple-result-sets.md
-                    - name: Table-Valued Functions
+                    - name: Funciones con valores de tabla
                       href: ef6/modeling/designer/advanced/tvfs.md
                 - name: Métodos abreviados de teclado
                   href: ef6/modeling/designer/keyboard-shortcuts.md

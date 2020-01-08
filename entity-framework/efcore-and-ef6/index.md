@@ -5,12 +5,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: a6b9cd22-6803-4c6c-a4d4-21147c0a81cb
 uid: efcore-and-ef6/index
-ms.openlocfilehash: 9fe4905de5bd81fce083d620724b7fad4c6dd11b
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.openlocfilehash: 62f7da64bbb6289edd38b877af71fc126e03d0f6
+ms.sourcegitcommit: 32c51c22988c6f83ed4f8e50a1d01be3f4114e81
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182044"
+ms.lasthandoff: 12/27/2019
+ms.locfileid: "75502294"
 ---
 # <a name="compare-ef-core--ef6"></a>Comparar EF Core y EF6
 
@@ -30,7 +30,7 @@ EF Core se diseñó para proporcionar una experiencia de desarrollo similar a EF
 
 ## <a name="feature-comparison"></a>Comparación de características
 
-EF Core ofrece características nuevas que no se implementarán en EF6 (como [claves alternativas](xref:core/modeling/alternate-keys), [actualizaciones por lotes](xref:core/what-is-new/ef-core-1.0#relational-batching-of-statements) y [evaluación combinada de clientes y bases de datos en consultas LINQ](xref:core/querying/client-eval). Aunque como se trata de un nuevo código base, también carece de algunas características de EF6.
+EF Core ofrece características nuevas que no se implementarán en EF6 (como [claves alternativas](xref:core/modeling/keys#alternate-keys), [actualizaciones por lotes](xref:core/what-is-new/ef-core-1.0#relational-batching-of-statements) y [evaluación combinada de clientes y bases de datos en consultas LINQ](xref:core/querying/client-eval). Aunque como se trata de un nuevo código base, también carece de algunas características de EF6.
 
 En las tablas siguientes se comparan las características disponibles en EF Core y EF6. Es una comparación general que no muestra todas las características ni explica las diferencias entre la misma característica en las distintas versiones de EF.
 
@@ -81,7 +81,7 @@ La columna EF Core indica la versión del producto en la que la característica 
 | Traslación de GroupBy                                   | Sí      | 2.1                                   |
 | Carga de datos relacionados: diligente                           | Sí      | 1.0                                   |
 | Carga de datos relacionados: Carga diligente para tipos derivados |          | 2.1                                   |
-| Carga de datos relacionados: Diferida                            | Sí      | 2.1                                   |
+| Carga de datos relacionados: Vago                            | Sí      | 2.1                                   |
 | Carga de datos relacionados: Explicit                        | Sí      | 1.1                                   |
 | Consultas SQL sin formato: Tipos de entidad                         | Sí      | 1.0                                   |
 | Consultas SQL sin formato: Tipos de entidad sin llave                 | Sí      | 2.1                                   |
@@ -140,7 +140,7 @@ La columna EF Core indica la versión del producto en la que la característica 
 | **Característica**                                           | **EF6**            | **EF Core**                           |
 |:------------------------------------------------------|:-------------------|:--------------------------------------|
 | .NET Framework                                        | Sí                | 1.0 (se quitó en 3.0)                  |
-| Núcleo de .NET                                             | Sí (se agregó en 6.3) | 1.0                                   |
+| .NET Core                                             | Sí (se agregó en 6.3) | 1.0                                   |
 | Mono y Xamarin                                        |                    | 1.0 (en curso)                     |
 | UWP                                                   |                    | 1.0 (en curso)                     |
 
