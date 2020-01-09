@@ -5,12 +5,12 @@ ms.author: bricelam
 ms.date: 11/01/2018
 ms.assetid: 2BDE29FC-4161-41A0-841E-69F51CCD9341
 uid: core/modeling/spatial
-ms.openlocfilehash: 335d4f3a601624f7c994b7dcacefe4ef6798beb3
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.openlocfilehash: 8dae1ab949c77ffa08904b12a5716b729e6913a1
+ms.sourcegitcommit: 32c51c22988c6f83ed4f8e50a1d01be3f4114e81
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73655609"
+ms.lasthandoff: 12/27/2019
+ms.locfileid: "75502245"
 ---
 # <a name="spatial-data"></a>Datos espaciales
 
@@ -19,7 +19,7 @@ ms.locfileid: "73655609"
 
 Los datos espaciales representan la ubicación física y la forma de los objetos. Muchas bases de datos proporcionan compatibilidad con este tipo de datos, por lo que se puede indizar y consultar junto con otros datos. Entre los escenarios comunes se incluyen las consultas de objetos dentro de una distancia determinada desde una ubicación o la selección del objeto cuyo borde contiene una ubicación determinada. EF Core admite la asignación a tipos de datos espaciales mediante la biblioteca espacial [NetTopologySuite](https://github.com/NetTopologySuite/NetTopologySuite) .
 
-## <a name="installing"></a>Instalación
+## <a name="installing"></a>Instalar
 
 Para usar los datos espaciales con EF Core, debe instalar el paquete NuGet de soporte adecuado. El paquete que necesita instalar depende del proveedor que esté usando.
 
@@ -48,12 +48,12 @@ optionsBuilder.UseSqlServer(
 
 Hay varios tipos de datos espaciales. El tipo que use dependerá de los tipos de formas que desee permitir. Esta es la jerarquía de tipos NTS que puede usar para las propiedades del modelo. Están ubicados en el espacio de nombres `NetTopologySuite.Geometries`.
 
-* Geometry
+* Geometría
   * Punto
   * LineString
   * Polígono
   * GeometryCollection
-    * Point
+    * MultiPoint
     * MultiLineString
     * MultiPolygon
 
@@ -213,7 +213,7 @@ Si usa SQL Server, hay algunos aspectos adicionales que debe tener en cuenta.
 
 ### <a name="geography-or-geometry"></a>Geografía o geometría
 
-De forma predeterminada, las propiedades espaciales se asignan a `geography` columnas en SQL Server. Para usar `geometry`, [Configure el tipo de columna](xref:core/modeling/relational/data-types) en el modelo.
+De forma predeterminada, las propiedades espaciales se asignan a `geography` columnas en SQL Server. Para usar `geometry`, [Configure el tipo de columna](xref:core/modeling/entity-properties#column-data-types) en el modelo.
 
 ### <a name="geography-polygon-rings"></a>Anillos de polígono de geografía
 
@@ -232,7 +232,7 @@ A continuación se muestra información adicional para los usuarios que usan SQL
 
 ### <a name="installing-spatialite"></a>Instalación de SpatiaLite
 
-En Windows, la biblioteca nativa de mod_spatialite se distribuye como una dependencia del paquete NuGet. Otras plataformas deben instalarse por separado. Esto se suele hacer mediante un administrador de paquetes de software. Por ejemplo, puede usar APT en Ubuntu y homebrew en MacOS.
+En Windows, la biblioteca de mod_spatialite nativa se distribuye como una dependencia del paquete NuGet. Otras plataformas deben instalarse por separado. Esto se suele hacer mediante un administrador de paquetes de software. Por ejemplo, puede usar APT en Ubuntu y homebrew en MacOS.
 
 ``` sh
 # Ubuntu

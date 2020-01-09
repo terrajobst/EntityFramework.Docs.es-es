@@ -4,12 +4,12 @@ author: roji
 ms.date: 09/09/2019
 ms.assetid: bde4e0ee-fba3-4813-a849-27049323d301
 uid: core/miscellaneous/nullable-reference-types
-ms.openlocfilehash: 055f492214596506ce2c28485ade359d175c4ac2
-ms.sourcegitcommit: 37d0e0fd1703467918665a64837dc54ad2ec7484
+ms.openlocfilehash: 0d05902566b6b166f1267915d9f698ed29dff588
+ms.sourcegitcommit: 32c51c22988c6f83ed4f8e50a1d01be3f4114e81
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/16/2019
-ms.locfileid: "72445897"
+ms.lasthandoff: 12/27/2019
+ms.locfileid: "75502072"
 ---
 # <a name="working-with-nullable-reference-types"></a>Trabajar con tipos de referencia que aceptan valores NULL
 
@@ -19,7 +19,7 @@ En esta página se presenta la compatibilidad de EF Core con tipos de referencia
 
 ## <a name="required-and-optional-properties"></a>Propiedades obligatorias y opcionales
 
-La documentación principal sobre las propiedades obligatorias y opcionales y su interacción con tipos de referencia que aceptan valores NULL es la página de [propiedades obligatoria y opcional](xref:core/modeling/required-optional) . Se recomienda comenzar leyendo primero esa página.
+La documentación principal sobre las propiedades obligatorias y opcionales y su interacción con tipos de referencia que aceptan valores NULL es la página de [propiedades obligatoria y opcional](xref:core/modeling/entity-properties#required-and-optional-properties) . Se recomienda comenzar leyendo primero esa página.
 
 > [!NOTE]
 > Tenga cuidado al habilitar los tipos de referencia que aceptan valores NULL en un proyecto existente: las propiedades de tipo de referencia que se configuraron anteriormente como opcional ahora se configurarán según sea necesario, a menos que se anoten explícitamente para que acepten valores NULL. Al administrar un esquema de base de datos relacional, esto puede provocar que se generen migraciones que modifiquen la nulabilidad de la columna de la base de datos.

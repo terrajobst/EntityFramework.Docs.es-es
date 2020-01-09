@@ -1,41 +1,65 @@
 ---
 title: 'Índices: EF Core'
-author: rowanmiller
-ms.date: 10/27/2016
+author: roji
+ms.date: 12/16/2019
 ms.assetid: 85b92003-b692-417d-ac1d-76d40dce664b
 uid: core/modeling/indexes
-ms.openlocfilehash: d1b5cd6853cd24f7e1aa3aace2f0a3455c657cc1
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.openlocfilehash: 810fccc0c6b035f515107601b245811f7b4118a6
+ms.sourcegitcommit: 32c51c22988c6f83ed4f8e50a1d01be3f4114e81
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73655696"
+ms.lasthandoff: 12/27/2019
+ms.locfileid: "75502141"
 ---
 # <a name="indexes"></a>Índices
 
 Los índices son un concepto común en muchos almacenes de datos. Aunque su implementación en el almacén de datos puede variar, se usan para realizar búsquedas basadas en una columna (o conjunto de columnas) más eficaces.
 
-## <a name="conventions"></a>Convenciones
+Los índices no se pueden crear con anotaciones de datos. Puede usar la API fluida para especificar un índice en una sola columna de la siguiente manera:
 
-Por Convención, se crea un índice en cada propiedad (o conjunto de propiedades) que se usa como clave externa.
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Index.cs?name=Index&highlight=4)]
 
-## <a name="data-annotations"></a>Anotaciones de datos
+También puede especificar un índice en más de una columna:
 
-Los índices no se pueden crear con anotaciones de datos.
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IndexComposite.cs?name=Composite&highlight=4)]
 
-## <a name="fluent-api"></a>API fluida
+> [!NOTE]
+> Por Convención, se crea un índice en cada propiedad (o conjunto de propiedades) que se usa como clave externa.
+>
+> EF Core solo admite un índice por conjunto de propiedades distinto. Si usa la API fluida para configurar un índice en un conjunto de propiedades que ya tiene definido un índice, ya sea por Convención o por configuración anterior, cambiará la definición de ese índice. Esto resulta útil si desea seguir configurando un índice creado por la Convención.
 
-Puede usar la API fluida para especificar un índice en una sola propiedad. De forma predeterminada, los índices no son únicos.
+## <a name="index-uniqueness"></a>Unicidad del índice
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Index.cs?name=Index&highlight=7,8)]
+De forma predeterminada, los índices no son únicos: se permite que varias filas tengan los mismos valores para el conjunto de columnas del índice. Puede crear un índice único como se indica a continuación:
 
-También puede especificar que un índice debe ser único, lo que significa que dos entidades no pueden tener los mismos valores para las propiedades especificadas.
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IndexUnique.cs?name=IndexUnique&highlight=5)]
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IndexUnique.cs?name=ModelBuilder&highlight=3)]
+Si se intenta insertar más de una entidad con los mismos valores para el conjunto de columnas del índice, se producirá una excepción.
 
-También puede especificar un índice en más de una columna.
+## <a name="index-name"></a>Nombre del índice
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IndexComposite.cs?name=Composite&highlight=7,8)]
+Por Convención, los índices creados en una base de datos relacional se denominan `IX_<type name>_<property name>`. En el caso de los índices compuestos, `<property name>` se convierte en una lista de nombres de propiedad separados por guiones bajos.
 
-> [!TIP]  
-> Solo hay un índice por cada conjunto de propiedades. Si usa la API fluida para configurar un índice en un conjunto de propiedades que ya tiene definido un índice, ya sea por Convención o por configuración anterior, cambiará la definición de ese índice. Esto resulta útil si desea seguir configurando un índice creado por la Convención.
+Puede usar la API fluida para establecer el nombre del índice creado en la base de datos:
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IndexName.cs?name=IndexName&highlight=5)]
+
+## <a name="index-filter"></a>Filtro de índice
+
+Algunas bases de datos relacionales permiten especificar un índice parcial o filtrado. Esto permite indizar solo un subconjunto de los valores de una columna, reduciendo el tamaño del índice y mejorando el rendimiento y el uso del espacio en disco. Para obtener más información sobre SQL Server los índices filtrados, [vea la documentación](https://docs.microsoft.com/sql/relational-databases/indexes/create-filtered-indexes)de.
+
+Puede usar la API fluida para especificar un filtro en un índice, proporcionado como una expresión SQL:
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IndexFilter.cs?name=IndexFilter&highlight=5)]
+
+Al usar el proveedor de SQL Server EF agrega un filtro de `'IS NOT NULL'` para todas las columnas que aceptan valores NULL que forman parte de un índice único. Para invalidar esta Convención, puede proporcionar un valor `null`.
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IndexNoFilter.cs?name=IndexNoFilter&highlight=6)]
+
+## <a name="included-columns"></a>Columnas incluidas
+
+Algunas bases de datos relacionales permiten configurar un conjunto de columnas que se incluyen en el índice, pero que no forman parte de su "clave". Esto puede mejorar significativamente el rendimiento de las consultas cuando todas las columnas de la consulta se incluyen en el índice como columnas de clave o sin clave, ya que no es necesario tener acceso a la tabla en sí. Para obtener más información sobre SQL Server columnas incluidas, [vea la documentación](https://docs.microsoft.com/sql/relational-databases/indexes/create-indexes-with-included-columns)de.
+
+En el ejemplo siguiente, la columna `Url` forma parte de la clave de índice, por lo que cualquier filtrado de consultas en esa columna puede utilizar el índice. Pero además, las consultas que solo tienen acceso a las columnas `Title` y `PublishedOn` no tendrán que acceder a la tabla y se ejecutarán de forma más eficaz:
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IndexInclude.cs?name=IndexInclude&highlight=5-9)]
