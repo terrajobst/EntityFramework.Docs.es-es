@@ -3,12 +3,12 @@ title: 'Cambios importantes en EF Core 3.0: EF Core'
 author: ajcvickers
 ms.date: 12/03/2019
 uid: core/what-is-new/ef-core-3.0/breaking-changes
-ms.openlocfilehash: d614103169837238810fabd0a8889043c851ef14
-ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
+ms.openlocfilehash: cac166e9e194e512de7d730d27c061e6deaf5191
+ms.sourcegitcommit: 32c51c22988c6f83ed4f8e50a1d01be3f4114e81
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 12/04/2019
-ms.locfileid: "74824865"
+ms.lasthandoff: 12/27/2019
+ms.locfileid: "75502232"
 ---
 # <a name="breaking-changes-included-in-ef-core-30"></a>Cambios importantes incluidos en EF Core 3.0
 
@@ -273,7 +273,7 @@ Las invocaciones de `FromSql` se deben mover para que estén directamente en el 
 
 **Comportamiento anterior**
 
-Antes de EF Core 3.0, se usaba la misma instancia de la entidad para cada aparición de una entidad con un tipo e identificador determinados. Este comportamiento coincide con el de las consultas de seguimiento. Por ejemplo, esta consulta:
+Antes de EF Core 3.0, se usaba la misma instancia de la entidad para cada aparición de una entidad con un tipo e identificador determinados. Este comportamiento coincide con el de las consultas de seguimiento. Ejemplo
 
 ```csharp
 var results = context.Products.Include(e => e.Category).AsNoTracking().ToList();
@@ -389,11 +389,11 @@ Por ejemplo, como resultado de la llamada a `context.Remove()` para eliminar una
 
 **Por qué**
 
-Este cambio se ha realizado para mejorar la experiencia en escenarios de auditoría y enlace de datos donde es importante comprender qué entidades se van a eliminar _antes_ de llamar a `SaveChanges`.
+Este cambio se ha realizado para mejorar la experiencia en escenarios de auditoría y enlace de datos, donde es importante comprender qué entidades se van a eliminar _antes_ de llamar a `SaveChanges`.
 
 **Mitigaciones**
 
-El comportamiento anterior se puede restaurar mediante opciones de `context.ChangedTracker`.
+El comportamiento anterior se puede restaurar mediante opciones de `context.ChangeTracker`.
 Por ejemplo:
 
 ```csharp
@@ -1632,7 +1632,7 @@ Este paquete solo está destinado a usarse en tiempo de diseño. Las aplicacione
 
 **Mitigaciones**
 
-Si tiene que hacer referencia a este paquete para invalidar el comportamiento en tiempo de diseño de EF Core, puede actualizar los metadatos de elementos PackageReference del proyecto. Si se hace referencia al paquete de manera transitiva a través de Microsoft.EntityFrameworkCore.Tools, tendrá que agregar una PackageReference explícita al paquete para cambiar sus metadatos.
+Si tiene que hacer referencia a este paquete para invalidar el comportamiento en tiempo de diseño de EF Core, puede actualizar los metadatos de elementos PackageReference del proyecto.
 
 ``` xml
 <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.0.0">
@@ -1641,6 +1641,8 @@ Si tiene que hacer referencia a este paquete para invalidar el comportamiento en
   <!--<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>-->
 </PackageReference>
 ```
+
+Si se hace referencia al paquete de manera transitiva a través de Microsoft.EntityFrameworkCore.Tools, tendrá que agregar una PackageReference explícita al paquete para cambiar sus metadatos. Este tipo de referencia explícita debe agregarse a cualquier proyecto que requiera los tipos de paquete.
 
 <a name="SQLitePCL"></a>
 
