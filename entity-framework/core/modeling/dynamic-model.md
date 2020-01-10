@@ -1,26 +1,34 @@
 ---
 title: Alternar entre varios modelos con el mismo tipo de DbContext EF Core
 author: AndriySvyryd
-ms.date: 12/10/2017
+ms.date: 01/03/2020
 ms.assetid: 3154BF3C-1749-4C60-8D51-AE86773AA116
 uid: core/modeling/dynamic-model
-ms.openlocfilehash: 034076b1595894e80b98467354f6c9f139bd7426
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.openlocfilehash: 156d5666cbd9352b274ddc70c99704ca62aeb1fd
+ms.sourcegitcommit: 4e86f01740e407ff25e704a11b1f7d7e66bfb2a6
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73655726"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75781136"
 ---
 # <a name="alternating-between-multiple-models-with-the-same-dbcontext-type"></a>Alternar entre varios modelos con el mismo tipo DbContext
 
-El modelo compilado en `OnModelCreating` podría usar una propiedad en el contexto para cambiar el modo en que se compila el modelo. Por ejemplo, podría usarse para excluir una determinada propiedad:
+El modelo integrado `OnModelCreating` puede utilizar una propiedad en el contexto para cambiar la forma en que se compila el modelo. Por ejemplo, supongamos que desea configurar una entidad de forma diferente en función de alguna propiedad:
 
-[!code-csharp[Main](../../../samples/core/DynamicModel/DynamicContext.cs?name=Class)]
+[!code-csharp[Main](../../../samples/core/Modeling/DynamicModel/DynamicContext.cs?name=OnModelCreating)]
+
+Desafortunadamente, este código no funcionaría tal cual, ya que EF crea el modelo y se ejecuta `OnModelCreating` una sola vez, con lo que se almacena en caché el resultado por motivos de rendimiento. Sin embargo, puede enlazar con el mecanismo de almacenamiento en caché del modelo para que EF tenga en cuenta la propiedad que genera distintos modelos.
 
 ## <a name="imodelcachekeyfactory"></a>IModelCacheKeyFactory
 
-Sin embargo, si ha intentado hacer lo anterior sin realizar más cambios, obtendrá el mismo modelo cada vez que se cree un nuevo contexto para cualquier valor de `IgnoreIntProperty`. Esto se debe a que el mecanismo de almacenamiento en caché del modelo EF usa para mejorar el rendimiento mediante la invocación solo de `OnModelCreating` una vez y el almacenamiento en caché del modelo.
+EF utiliza el `IModelCacheKeyFactory` para generar claves de caché para los modelos; de forma predeterminada, EF supone que para un tipo de contexto dado, el modelo será el mismo, por lo que la implementación predeterminada de este servicio devuelve una clave que solo contiene el tipo de contexto. Para generar diferentes modelos a partir del mismo tipo de contexto, debe reemplazar el servicio `IModelCacheKeyFactory` con la implementación correcta. la clave generada se comparará con otras claves del modelo mediante el método `Equals`, teniendo en cuenta todas las variables que afectan al modelo:
 
-De forma predeterminada, EF presupone que en cualquier tipo de contexto dado el modelo será el mismo. Para ello, la implementación predeterminada de `IModelCacheKeyFactory` devuelve una clave que solo contiene el tipo de contexto. Para cambiar esto, debe reemplazar el servicio `IModelCacheKeyFactory`. La nueva implementación debe devolver un objeto que se pueda comparar con otras claves del modelo mediante el método `Equals` que tiene en cuenta todas las variables que afectan al modelo:
+La siguiente implementación tiene en cuenta el `IgnoreIntProperty` al generar una clave de caché del modelo:
 
-[!code-csharp[Main](../../../samples/core/DynamicModel/DynamicModelCacheKeyFactory.cs?name=Class)]
+[!code-csharp[Main](../../../samples/core/Modeling/DynamicModel/DynamicModelCacheKeyFactory.cs?name=DynamicModel)]
+
+Por último, registre la nueva `IModelCacheKeyFactory` en el `OnConfiguring`de contexto:
+
+[!code-csharp[Main](../../../samples/core/Modeling/DynamicModel/DynamicContext.cs?name=OnConfiguring)]
+
+Vea el [proyecto de ejemplo completo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Modeling/DynamicModel) para obtener más contexto.

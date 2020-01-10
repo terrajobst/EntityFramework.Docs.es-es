@@ -5,17 +5,14 @@ author: AndriySvyryd
 ms.author: ansvyryd
 ms.date: 11/06/2019
 uid: core/modeling/owned-entities
-ms.openlocfilehash: 7b6d1b3bccbfceb85f03a580ba03a45984d29c74
-ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
+ms.openlocfilehash: 30b91b6e66b6c0f516d1ba12485304b52770cbef
+ms.sourcegitcommit: 4e86f01740e407ff25e704a11b1f7d7e66bfb2a6
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 12/04/2019
-ms.locfileid: "74824595"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75781240"
 ---
 # <a name="owned-entity-types"></a>Tipos de entidad en propiedad
-
-> [!NOTE]
-> Esta característica es nueva en EF Core 2,0.
 
 EF Core permite a tipos de entidad del modelo que sólo pueden aparecer en las propiedades de navegación de otros tipos de entidad. Se denominan _tipos de entidad de propiedad_. La entidad que contiene un tipo de entidad propiedad es su _propietario_.
 
@@ -56,7 +53,7 @@ Para entender cómo EF Core realiza el seguimiento de estos objetos, es útil sa
 
 Para configurar una colección de tipos de propiedad, use `OwnsMany` en `OnModelCreating`.
 
-Los tipos de propiedad necesitan una clave principal. Si no hay buenas propiedades candidatas en el tipo .NET, EF Core puede intentar crear una. Sin embargo, cuando los tipos de propiedad se definen a través de una colección, no basta con crear simplemente una propiedad Shadow que actúe como clave externa en el propietario y la clave principal de la instancia de propiedad, como hacemos con `OwnsOne`: puede haber varias instancias de tipo de propiedad para cada una de ellas. propietario y, por lo tanto, la clave del propietario no es suficiente para proporcionar una identidad única para cada instancia de propiedad.
+Los tipos de propiedad necesitan una clave principal. Si no hay buenas propiedades candidatas en el tipo .NET, EF Core puede intentar crear una. Sin embargo, cuando los tipos de propiedad se definen a través de una colección, no basta con crear simplemente una propiedad Shadow que actúe como clave externa en el propietario y la clave principal de la instancia de propiedad, como hacemos para `OwnsOne`: puede haber varias instancias de tipo de propiedad para cada propietario y, por lo tanto, la clave del propietario no es suficiente para proporcionar una identidad única para cada instancia de
 
 Las dos soluciones más directas son:
 

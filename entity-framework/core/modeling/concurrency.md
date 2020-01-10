@@ -1,15 +1,15 @@
 ---
 title: 'Tokens de simultaneidad: EF Core'
-author: rowanmiller
-ms.date: 03/03/2018
+author: AndriySvyryd
+ms.date: 01/03/2020
 ms.assetid: bc8b1cb0-befe-4b67-8004-26e6c5f69385
 uid: core/modeling/concurrency
-ms.openlocfilehash: db768c1de99000be91d33764ccd3c3924237f8bb
-ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.openlocfilehash: 8a5f3aa09c2a83d5be0998a11ef2ee8100437514
+ms.sourcegitcommit: 4e86f01740e407ff25e704a11b1f7d7e66bfb2a6
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71197450"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75781149"
 ---
 # <a name="concurrency-tokens"></a>Tokens de simultaneidad
 
@@ -18,40 +18,30 @@ ms.locfileid: "71197450"
 
 Las propiedades configuradas como tokens de simultaneidad se usan para implementar el control de simultaneidad optimista.
 
-## <a name="conventions"></a>Convenciones
+## <a name="configuration"></a>Configuración de
 
-Por Convención, las propiedades nunca se configuran como tokens de simultaneidad.
+### <a name="data-annotationstabdata-annotations"></a>[Anotaciones de datos](#tab/data-annotations)
 
-## <a name="data-annotations"></a>Anotaciones de datos
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Concurrency.cs?name=Concurrency&highlight=5)]
 
-Puede usar las anotaciones de datos para configurar una propiedad como un token de simultaneidad.
+### <a name="fluent-apitabfluent-api"></a>[API fluida](#tab/fluent-api)
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Concurrency.cs#ConfigureConcurrencyAnnotations)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Concurrency.cs?name=Concurrency&highlight=5)]
 
-## <a name="fluent-api"></a>API fluida
+***
 
-Puede usar la API fluida para configurar una propiedad como un token de simultaneidad.
+## <a name="timestamprowversion"></a>Marca de tiempo/rowversion
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Concurrency.cs#ConfigureConcurrencyFluent)]
+Timestamp/rowversion es una propiedad para la cual la base de datos genera automáticamente un nuevo valor cada vez que se inserta o se actualiza una fila. La propiedad también se trata como un token de simultaneidad, lo que garantiza que se obtiene una excepción si una fila que se está actualizando ha cambiado desde que se realizó la consulta. Los detalles precisos dependen del proveedor de base de datos utilizado; por SQL Server, normalmente se utiliza una propiedad *Byte []* , que se configurará como una columna *ROWVERSION* en la base de datos.
 
-## <a name="timestamprow-version"></a>Marca de tiempo/versión de fila
+Puede configurar una propiedad para que sea una marca de tiempo o rowversion como se indica a continuación:
 
-Una marca de tiempo es una propiedad donde la base de datos genera un nuevo valor cada vez que se inserta o se actualiza una fila. La propiedad también se trata como un token de simultaneidad. Esto garantiza que obtendrá una excepción si alguien más ha modificado una fila que está intentando actualizar desde que ha consultado los datos.
+### <a name="data-annotationstabdata-annotations"></a>[Anotaciones de datos](#tab/data-annotations)
 
-La forma de conseguirlo es el proveedor de base de datos que se está usando. Por SQL Server, la marca de tiempo se usa normalmente en una propiedad de *Byte []* , que se configurará como una columna *ROWVERSION* en la base de datos.
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Timestamp.cs?name=Timestamp&highlight=7)]
 
-### <a name="conventions"></a>Convenciones
+### <a name="fluent-apitabfluent-api"></a>[API fluida](#tab/fluent-api)
 
-Por Convención, las propiedades nunca se configuran como marcas de tiempo.
+[! code-CSharp [Main] (.. /.. /.. /samples/core/Modeling/FluentAPI/Timestamp.cs? Name = timestamp & resalte = 9, 17]
 
-### <a name="data-annotations"></a>Anotaciones de datos
-
-Puede usar anotaciones de datos para configurar una propiedad como una marca de tiempo.
-
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Timestamp.cs#ConfigureTimestampAnnotations)]
-
-### <a name="fluent-api"></a>API fluida
-
-Puede usar la API fluida para configurar una propiedad como una marca de tiempo.
-
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Timestamp.cs#ConfigureTimestampFluent)]
+***
