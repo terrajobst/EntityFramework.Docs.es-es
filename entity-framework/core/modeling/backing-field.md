@@ -4,58 +4,58 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: a628795e-64df-4f24-a5e8-76bc261e7ed8
 uid: core/modeling/backing-field
-ms.openlocfilehash: 288440a4494117fe59d27187e24424c4d2fd44ab
-ms.sourcegitcommit: 2355447d89496a8ca6bcbfc0a68a14a0bf7f0327
+ms.openlocfilehash: 20cf9dc9b0d556f29680bce588bcbdc4ea48fa74
+ms.sourcegitcommit: f2a38c086291699422d8b28a72d9611d1b24ad0d
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/23/2019
-ms.locfileid: "72811878"
+ms.lasthandoff: 01/16/2020
+ms.locfileid: "76124384"
 ---
 # <a name="backing-fields"></a>Campos de respaldo
 
-> [!NOTE]  
-> Esta característica es nueva en EF Core 1,1.
+Los campos de respaldo permiten a EF leer o escribir en un campo en lugar de una propiedad. Esto puede ser útil cuando se usa la encapsulación en la clase para restringir el uso de y/o mejorar la semántica en torno al acceso a los datos por código de aplicación, pero el valor debe leerse o escribirse en la base de datos sin usar esas restricciones o mejoras.
 
-Los campos de respaldo permiten a EF leer o escribir en un campo en lugar de una propiedad. Esto puede ser útil cuando se usa la encapsulación en la clase para restringir el uso de y/o mejorar la semántica en torno al acceso a los datos por código de aplicación, pero el valor debe leerse o escribirse en la base de datos sin usar esas restricciones mejoras.
+## <a name="basic-configuration"></a>Configuración básica
 
-## <a name="conventions"></a>Convenciones
-
-Por Convención, se detectarán los campos siguientes como campos de respaldo para una propiedad determinada (que se muestra en orden de prioridad). Los campos solo se detectan para las propiedades que se incluyen en el modelo. Para obtener más información sobre las propiedades que se incluyen en el modelo, vea [incluir & excluyendo las propiedades](included-properties.md).
+Por Convención, se detectarán los campos siguientes como campos de respaldo para una propiedad determinada (que se muestra en orden de prioridad). 
 
 * `_<camel-cased property name>`
 * `_<property name>`
 * `m_<camel-cased property name>`
 * `m_<property name>`
 
+En el ejemplo siguiente, la propiedad `Url` está configurada para tener `_url` como campo de respaldo:
+
 [!code-csharp[Main](../../../samples/core/Modeling/Conventions/BackingField.cs#Sample)]
 
-Cuando se configura un campo de respaldo, EF escribirá directamente en ese campo al materializar instancias de entidad de la base de datos (en lugar de usar el establecedor de propiedad). Si EF necesita leer o escribir el valor en otros momentos, usará la propiedad si es posible. Por ejemplo, si EF necesita actualizar el valor de una propiedad, usará el establecedor de la propiedad si se ha definido uno. Si la propiedad es de solo lectura, se escribirá en el campo.
+Tenga en cuenta que los campos de respaldo solo se detectan para las propiedades que se incluyen en el modelo. Para obtener más información sobre las propiedades que se incluyen en el modelo, vea [incluir & excluyendo las propiedades](included-properties.md).
 
-## <a name="data-annotations"></a>Anotaciones de datos
+También puede configurar los campos de respaldo explícitamente, por ejemplo, si el nombre del campo no se corresponde con las convenciones anteriores:
 
-Los campos de respaldo no se pueden configurar con anotaciones de datos.
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/BackingField.cs?name=BackingField&highlight=5)]
 
-## <a name="fluent-api"></a>API fluida
+## <a name="field-and-property-access"></a>Acceso a campos y propiedades
 
-Puede usar la API fluida para configurar un campo de respaldo para una propiedad.
+De forma predeterminada, EF siempre leerá y escribirá en el campo de respaldo, suponiendo que se haya configurado correctamente, y que nunca usará la propiedad. Sin embargo, EF también admite otros patrones de acceso. Por ejemplo, en el ejemplo siguiente se indica a EF que escriba en el campo de respaldo solo mientras materializa y use la propiedad en todos los demás casos:
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/BackingField.cs#Sample)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/BackingFieldAccessMode.cs?name=BackingFieldAccessMode&highlight=6)]
 
-### <a name="controlling-when-the-field-is-used"></a>Controlar cuándo se usa el campo
+Vea la [enumeración PropertyAccessMode](https://docs.microsoft.com/dotnet/api/microsoft.entityframeworkcore.propertyaccessmode) para obtener el conjunto completo de opciones admitidas.
 
-Puede configurar Cuándo EF utiliza el campo o la propiedad. Vea la [enumeración PropertyAccessMode](https://docs.microsoft.com/dotnet/api/microsoft.entityframeworkcore.propertyaccessmode) para ver las opciones admitidas.
+> [!NOTE]
+> Con EF Core 3,0, el modo de acceso de propiedad predeterminado cambió de `PreferFieldDuringConstruction` a `PreferField`.
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/BackingFieldAccessMode.cs#Sample)]
+## <a name="field-only-properties"></a>Propiedades de solo campo
 
-### <a name="fields-without-a-property"></a>Campos sin propiedad
+También puede crear una propiedad conceptual en el modelo que no tiene una propiedad de CLR correspondiente en la clase de entidad, sino que usa un campo para almacenar los datos en la entidad. Esto es diferente de [las propiedades de las instantáneas](shadow-properties.md), donde los datos se almacenan en el seguimiento de cambios, en lugar de en el tipo CLR de la entidad. Las propiedades de solo campo se utilizan normalmente cuando la clase de entidad usa métodos en lugar de propiedades para obtener o establecer valores, o en casos en los que los campos no se deben exponer en absoluto en el modelo de dominio (por ejemplo, las claves principales).
 
-También puede crear una propiedad conceptual en el modelo que no tiene una propiedad de CLR correspondiente en la clase de entidad, sino que usa un campo para almacenar los datos en la entidad. Esto es diferente de [las propiedades de las instantáneas](shadow-properties.md), donde los datos se almacenan en el seguimiento de cambios. Normalmente se utilizaría si la clase de entidad usa métodos para obtener o establecer valores.
-
-Puede dar a EF el nombre del campo en el `Property(...)` API. Si no hay ninguna propiedad con el nombre especificado, EF buscará un campo.
+Puede configurar una propiedad de solo campo proporcionando un nombre en la API de `Property(...)`:
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/BackingFieldNoProperty.cs#Sample)]
 
-Cuando no hay ninguna propiedad en la clase de entidad, puede usar el método `EF.Property(...)` en una consulta LINQ para hacer referencia a la propiedad que forma conceptualmente parte del modelo.
+EF intentará buscar una propiedad CLR con el nombre especificado o un campo si no se encuentra una propiedad. Si no se encuentra ninguna propiedad ni un campo, se configurará una propiedad Shadow en su lugar.
+
+Es posible que tenga que hacer referencia a una propiedad de solo campo desde las consultas LINQ, pero estos campos suelen ser privados. Puede usar el método `EF.Property(...)` en una consulta LINQ para hacer referencia al campo:
 
 ``` csharp
 var blogs = db.blogs.OrderBy(b => EF.Property<string>(b, "_validatedUrl"));

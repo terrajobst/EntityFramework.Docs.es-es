@@ -4,12 +4,12 @@ author: roji
 ms.date: 09/09/2019
 ms.assetid: bde4e0ee-fba3-4813-a849-27049323d301
 uid: core/miscellaneous/nullable-reference-types
-ms.openlocfilehash: 0d05902566b6b166f1267915d9f698ed29dff588
-ms.sourcegitcommit: 32c51c22988c6f83ed4f8e50a1d01be3f4114e81
+ms.openlocfilehash: c16a475c363320cd18804a4efe78ccae1ae22f0d
+ms.sourcegitcommit: f2a38c086291699422d8b28a72d9611d1b24ad0d
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 12/27/2019
-ms.locfileid: "75502072"
+ms.lasthandoff: 01/16/2020
+ms.locfileid: "76124358"
 ---
 # <a name="working-with-nullable-reference-types"></a>Trabajar con tipos de referencia que aceptan valores NULL
 
@@ -38,9 +38,9 @@ Las propiedades de navegación requeridas presentan una dificultad adicional: au
 
 Una manera de tratar estos escenarios consiste en tener una propiedad que no acepte valores NULL con un [campo de respaldo](xref:core/modeling/backing-field)que acepte valores NULL:
 
-[!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/Order.cs?range=12-17)]
+[!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/Order.cs?range=10-17)]
 
-Dado que la propiedad de navegación no admite valores NULL, se configura una navegación necesaria. y, siempre y cuando la navegación se haya cargado correctamente, se podrá acceder al dependiente a través de la propiedad. Sin embargo, si se tiene acceso a la propiedad sin cargar primero la entidad relacionada correctamente, se inicia una excepción InvalidOperationException, ya que el contrato de la API se ha utilizado incorrectamente.
+Dado que la propiedad de navegación no admite valores NULL, se configura una navegación necesaria. y, siempre y cuando la navegación se haya cargado correctamente, se podrá acceder al dependiente a través de la propiedad. Sin embargo, si se tiene acceso a la propiedad sin cargar primero la entidad relacionada correctamente, se inicia una excepción InvalidOperationException, ya que el contrato de la API se ha utilizado incorrectamente. Tenga en cuenta que EF debe configurarse para tener acceso siempre al campo de respaldo y no a la propiedad, ya que se basa en poder leer el valor aunque no se haya establecido. Consulte la documentación sobre [los campos de respaldo](xref:core/modeling/backing-field) para ver cómo hacerlo y considere la posibilidad de especificar `PropertyAccessMode.Field` para asegurarse de que la configuración es correcta.
 
 Como alternativa de terser, es posible simplemente inicializar la propiedad en NULL con la ayuda del operador null-permisivo (!):
 
@@ -63,6 +63,7 @@ Se produce un problema similar al incluir varios niveles de relaciones entre las
 
 Si tiene que hacer esto mucho y los tipos de entidad en cuestión son principalmente (o exclusivamente) usados en consultas de EF Core, considere la posibilidad de hacer que las propiedades de navegación no acepten valores NULL y configurarlas como opcionales a través de la API fluida o las anotaciones de datos. Esto quitará todas las advertencias del compilador manteniendo la relación opcional; sin embargo, si las entidades se recorren fuera de EF Core, puede observar valores NULL, aunque las propiedades se anotan como que no aceptan valores NULL.
 
-## <a name="scaffolding"></a>Scaffolding
+## <a name="limitations"></a>Limitaciones
 
-[La C# característica 8 tipos de referencia que aceptan valores NULL](/dotnet/csharp/tutorials/nullable-reference-types) no se admite actualmente en ingeniería inversa: EF Core C# siempre genera código que supone que la característica está desactivada. Por ejemplo, las columnas de texto que aceptan valores NULL se scaffolding como una propiedad con el tipo `string`, no `string?`, con la API fluida o las anotaciones de datos que se usan para configurar si una propiedad es obligatoria o no. Puede editar el código con scaffolding y reemplazarlo con anotaciones de C# nulabilidad. El seguimiento de la compatibilidad con scaffolding para tipos de referencia que aceptan valores NULL se realiza mediante el problema [#15520](https://github.com/aspnet/EntityFrameworkCore/issues/15520).
+* La ingeniería inversa no admite C# [ C# actualmente 8 tipos de referencia que aceptan valores NULL (NRTs)](/dotnet/csharp/tutorials/nullable-reference-types): EF Core siempre genera código que supone que la característica está desactivada. Por ejemplo, las columnas de texto que aceptan valores NULL se scaffolding como una propiedad con el tipo `string`, no `string?`, con la API fluida o las anotaciones de datos que se usan para configurar si una propiedad es obligatoria o no. Puede editar el código con scaffolding y reemplazarlo con anotaciones de C# nulabilidad. El seguimiento de la compatibilidad con scaffolding para tipos de referencia que aceptan valores NULL se realiza mediante el problema [#15520](https://github.com/aspnet/EntityFrameworkCore/issues/15520).
+* La superficie de la API pública de EF Core todavía no se ha anotado para la nulabilidad (la API pública es "null-desconocen"), lo que a veces es difícil de usar cuando la característica NRT está activada. Esto incluye principalmente los operadores Async LINQ expuestos por EF Core, como [FirstOrDefaultAsync](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.firstordefaultasync#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_FirstOrDefaultAsync__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Threading_CancellationToken_). Tenemos previsto abordar esto para la versión 5,0.
