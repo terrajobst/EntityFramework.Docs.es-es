@@ -3,12 +3,12 @@ title: 'Filtros de consulta global: EF Core'
 author: anpete
 ms.date: 11/03/2017
 uid: core/querying/filters
-ms.openlocfilehash: c9bbb8a5889834ea078ddb7e432863b3d0cf2ffe
-ms.sourcegitcommit: 0cc9578fd49802789a00c0044b4e57325476ca2e
+ms.openlocfilehash: f4ee9b77411290249e763f9cb8492eea61803e91
+ms.sourcegitcommit: f2a38c086291699422d8b28a72d9611d1b24ad0d
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/04/2019
-ms.locfileid: "70271455"
+ms.lasthandoff: 01/16/2020
+ms.locfileid: "76124397"
 ---
 # <a name="global-query-filters"></a>Filtros de consulta global
 
@@ -55,5 +55,4 @@ Los filtros se pueden deshabilitar para consultas LINQ individuales mediante el 
 
 Los filtros de consulta global tienen las limitaciones siguientes:
 
-* Los filtros no pueden contener referencias a las propiedades de navegación.
 * Solo se pueden definir filtros para el tipo de entidad raíz de una jerarquía de herencia.
