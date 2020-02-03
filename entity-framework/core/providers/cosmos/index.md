@@ -5,12 +5,12 @@ author: AndriySvyryd
 ms.author: ansvyryd
 ms.date: 11/05/2019
 uid: core/providers/cosmos/index
-ms.openlocfilehash: 6903aab4911f7478afe3d8987a791ae1c5ccebce
-ms.sourcegitcommit: 32c51c22988c6f83ed4f8e50a1d01be3f4114e81
+ms.openlocfilehash: 7451ce6e8d5d7078b3f56a6865aa7698e6fc63ca
+ms.sourcegitcommit: b3cf5d2e3cb170b9916795d1d8c88678269639b1
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 12/27/2019
-ms.locfileid: "75502219"
+ms.lasthandoff: 01/30/2020
+ms.locfileid: "76888127"
 ---
 # <a name="ef-core-azure-cosmos-db-provider"></a>Proveedor de Azure Cosmos DB para EF Core
 
@@ -52,7 +52,7 @@ Al igual que para otros proveedores, el primer paso es llamar a [UseCosmos](/dot
 [!code-csharp[Configuration](../../../../samples/core/Cosmos/ModelBuilding/OrderContext.cs?name=Configuration)]
 
 > [!WARNING]
-> El punto de conexión y la clave aquí se codifican de forma rígida por motivos de simplicidad pero, en una aplicación de producción, se deben [almacenar de manera segura](/aspnet/core/security/app-secrets#secret-manager).
+> El punto de conexión y la clave se codifican aquí de forma rígida por motivos de simplicidad pero, en una aplicación de producción, se deben [almacenar de manera segura](/aspnet/core/security/app-secrets#secret-manager).
 
 En este ejemplo, `Order` es una entidad sencilla con una referencia al [tipo owned](../../modeling/owned-entities.md) `StreetAddress`.
 

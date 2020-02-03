@@ -21,7 +21,7 @@
           href: core/index.md
         - name: Versiones y planeamiento
           items:
-            - name: Información general
+            - name: Versiones actuales y planeadas (plan de desarrollo)
               href: core/what-is-new/index.md
             - name: Proceso de planeamiento de versiones
               href: core/what-is-new/release-planning.md

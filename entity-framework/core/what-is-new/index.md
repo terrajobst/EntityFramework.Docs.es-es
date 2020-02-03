@@ -1,15 +1,15 @@
 ---
 title: Versiones y planeamiento de EF Core
 author: ajcvickers
-ms.date: 01/14/2020
+ms.date: 01/29/2020
 ms.assetid: C21F89EE-FB08-4ED9-A2A0-76CB7656E6E4
 uid: core/what-is-new/index
-ms.openlocfilehash: 8d74c24021fd62c5c5d944eaf3973b344fdb1e9c
-ms.sourcegitcommit: f2a38c086291699422d8b28a72d9611d1b24ad0d
+ms.openlocfilehash: 0704b624a50d0736fefbb5633e9e7e657499a703
+ms.sourcegitcommit: b3cf5d2e3cb170b9916795d1d8c88678269639b1
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 01/16/2020
-ms.locfileid: "76124410"
+ms.lasthandoff: 01/30/2020
+ms.locfileid: "76888074"
 ---
 # <a name="ef-core-releases-and-planning"></a>Versiones y planeamiento de EF Core
 
@@ -35,18 +35,32 @@ Consulte la [Directiva de compatibilidad de .NET](https://dotnet.microsoft.com/p
 * Las actualizaciones de la versión principal (por ejemplo, de EF Core 2 a EF Core 3) suelen tener cambios importantes. Se recomienda realizar pruebas exhaustivas al cambiar de una versión principal a otra. Use los vínculos de cambios importantes anteriores para obtener información sobre cómo abordar los cambios importantes.
 * Las actualizaciones de versiones secundarias no suelen contener cambios importantes. No obstante, sigue siendo aconsejable realizar pruebas exhaustivas, ya que las nuevas características pueden introducir regresiones.
 
+## <a name="release-planning-and-schedules"></a>Programación y planeación de versiones
+
+Las versiones de EF Core siguen la [programación de envío de .NET Core](https://github.com/dotnet/core/blob/master/roadmap.md).
+
+Normalmente, las versiones de revisión se envían mensualmente, pero tienen un largo plazo.
+Estamos trabajando para mejorar esto.
+
+Vea el [proceso de planeamiento de versiones](release-planning.md) para obtener más información sobre cómo decidimos qué enviar en cada versión.
+Por lo general, no hacemos un planeamiento detallado más allá de la siguiente versión principal o secundaria.
+
 ## <a name="ef-core-50"></a>EF Core 5.0
 
-Las versiones de EF Core siguen la [programación de envío de .NET Core](https://github.com/dotnet/core/blob/master/roadmap.md). La siguiente versión estable planeada es **EF Core 5.0**, programada para noviembre de 2020.
+La siguiente versión estable planeada es **EF Core 5.0**, programada para noviembre de 2020.
 
 Se ha creado un [plan de alto nivel para EF Core 5.0](ef-core-5.0/plan.md) siguiendo el [proceso de planeamiento de versiones](release-planning.md) documentado.
 
-Sus comentarios sobre la planeación son importantes. La mejor manera de indicar la importancia de un problema es votar (pulgar) por ese problema en GitHub. Estos datos se introducen en el proceso de planeación de la próxima versión.
+Sus comentarios sobre la planeación son importantes.
+La mejor manera de indicar la importancia de un problema es votar (pulgar arriba 👍) por ese problema en GitHub.
+Estos datos se introducen en el proceso de planeación de la próxima versión.
 
 ### <a name="get-it-now"></a>¡Obténgalo ahora!
 
 Los paquetes de EF Core 5.0 están **disponibles ahora** como [compilaciones diarias](https://github.com/aspnet/AspNetCore/blob/master/docs/DailyBuilds.md). 
 
-Usar las compilaciones diarias es una excelente manera de encontrar problemas y proporcionar comentarios lo antes posible. Cuanto antes recibamos esos comentarios, más probable será que puedan procesarse antes de la siguiente versión oficial. Dedicamos grandes esfuerzos a cuidar el estado de las compilaciones diarias, como demuestran las más de 55 000 pruebas por plataforma que llevamos a cabo para cada compilación.
+Usar las compilaciones diarias es una excelente manera de encontrar problemas y proporcionar comentarios lo antes posible.
+Cuanto antes recibamos esos comentarios, más probable será que puedan procesarse antes de la siguiente versión oficial.
+Dedicamos grandes esfuerzos a cuidar el estado de las compilaciones diarias, como demuestran las más de 56 000 pruebas por plataforma que llevamos a cabo para cada compilación.
 
 Los paquetes de versión preliminar se enviarán a NuGet a lo largo del año.
