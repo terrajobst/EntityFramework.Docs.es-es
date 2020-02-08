@@ -19,9 +19,9 @@
       items:
         - name: Información general
           href: core/index.md
-        - name: Versiones y planeamiento
+        - name: Versiones y planeamiento (plan de desarrollo)
           items:
-            - name: Versiones actuales y planeadas (plan de desarrollo)
+            - name: Versiones actuales y planeadas
               href: core/what-is-new/index.md
             - name: Proceso de planeamiento de versiones
               href: core/what-is-new/release-planning.md
@@ -29,6 +29,8 @@
               items:
                 - name: Plan de alto nivel
                   href: core/what-is-new/ef-core-5.0/plan.md
+                - name: Novedades
+                  href: core/what-is-new/ef-core-5.0/whatsnew.md
             - name: EF Core 3.0
               items:
                 - name: Características nuevas
