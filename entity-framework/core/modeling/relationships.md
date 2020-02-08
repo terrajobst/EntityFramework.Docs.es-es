@@ -4,12 +4,12 @@ description: Cómo configurar relaciones entre tipos de entidad al utilizar Enti
 author: AndriySvyryd
 ms.date: 11/21/2019
 uid: core/modeling/relationships
-ms.openlocfilehash: 6b3e0636bfa266b78baafe1b6e318c9707294560
-ms.sourcegitcommit: 32c51c22988c6f83ed4f8e50a1d01be3f4114e81
+ms.openlocfilehash: 6d68e813cec6c989e8e4cb848f8740489645c65c
+ms.sourcegitcommit: 89567d08c9d8bf9c33bb55a62f17067094a4065a
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 12/27/2019
-ms.locfileid: "75502193"
+ms.lasthandoff: 02/06/2020
+ms.locfileid: "77051412"
 ---
 # <a name="relationships"></a>Relaciones
 
@@ -26,9 +26,9 @@ Hay una serie de términos que se usan para describir las relaciones
 
 * **Entidad de entidad** de seguridad: Esta es la entidad que contiene las propiedades de clave principal/alternativa. A veces se denomina "primario" de la relación.
 
-* **Clave externa:** Propiedades de la entidad dependiente que se usan para almacenar los valores de clave principal para la entidad relacionada.
-
 * **Clave principal:** Propiedades que identifican de forma única la entidad principal. Puede ser la clave principal o una clave alternativa.
+
+* **Clave externa:** Propiedades de la entidad dependiente que se usan para almacenar los valores de clave principal para la entidad relacionada.
 
 * **Propiedad de navegación:** Propiedad definida en la entidad principal o dependiente que hace referencia a la entidad relacionada.
 
@@ -48,9 +48,9 @@ En el código siguiente se muestra una relación de uno a varios entre `Blog` y 
 
 * `Blog` es la entidad principal
 
-* `Post.BlogId` es la clave externa
-
 * `Blog.BlogId` es la clave principal (en este caso, es una clave principal en lugar de una clave alternativa)
+
+* `Post.BlogId` es la clave externa
 
 * `Post.Blog` es una propiedad de navegación de referencia
 
