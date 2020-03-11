@@ -61,7 +61,7 @@
               href: core/get-started/index.md
             - name: Instalación de EF Core
               href: core/get-started/install/index.md
-            - name: Tutorial de ASP.NET Core >>
+            - name: "Tutorial de ASP.NET\_Core >>"
               href: /aspnet/core/data/ef-rp/intro
         - name: Aspectos básicos
           items:
@@ -69,7 +69,7 @@
               href: core/miscellaneous/connection-strings.md
             - name: Registro
               href: core/miscellaneous/logging.md
-            - name: Resistencia de las conexiones
+            - name: Resistencia de conexión
               href: core/miscellaneous/connection-resiliency.md
             - name: Pruebas
               items:
@@ -144,17 +144,17 @@
                   href: core/managing-schemas/migrations/providers.md
                 - name: Tabla de historial personalizada
                   href: core/managing-schemas/migrations/history-table.md
-            - name: Crear y quitar API
+            - name: Creación y eliminación de API
               href: core/managing-schemas/ensure-created.md
-            - name: Ingeniería inversa (scaffolding)
+            - name: Utilización de técnicas de ingeniería inversa (scaffolding)
               href: core/managing-schemas/scaffolding.md
-        - name: Consulta de datos
+        - name: Consultar datos
           items:
             - name: Información general
               href: core/querying/index.md
-            - name: Evaluación de cliente frente a servidor
+            - name: Diferencias entre la evaluación de cliente y servidor
               href: core/querying/client-eval.md
-            - name: Consultas de seguimiento frente a no seguimiento
+            - name: Diferencias entre seguimiento y sin seguimiento
               href: core/querying/tracking.md
             - name: Operadores de consulta complejos
               href: core/querying/complex-query-operators.md
@@ -168,9 +168,9 @@
               href: core/querying/filters.md
             - name: Etiquetas de consulta
               href: core/querying/tags.md
-            - name: Funcionamiento de una consulta
+            - name: Funcionamiento de las consultas
               href: core/querying/how-query-works.md
-        - name: Guardado de datos
+        - name: Guardar datos
           items:
             - name: Información general
               href: core/saving/index.md
@@ -262,7 +262,7 @@
               href: ef6/fundamentals/install.md
             - name: Trabajar con DbContext
               href: ef6/fundamentals/working-with-dbcontext.md
-            - name: Introducción a las relaciones
+            - name: Descripción de las relaciones
               href: ef6/fundamentals/relationships.md
             - name: Consulta asincrónica y guardado
               href: ef6/fundamentals/async.md
@@ -270,15 +270,15 @@
               items:
                 - name: Basada en código
                   href: ef6/fundamentals/configuring/code-based.md
-                - name: Archivo de configuración
+                - name: Archivo config
                   href: ef6/fundamentals/configuring/config-file.md
                 - name: Cadenas de conexión
                   href: ef6/fundamentals/configuring/connection-strings.md
                 - name: Resolución de dependencias
                   href: ef6/fundamentals/configuring/dependency-resolution.md
-            - name: Administración de las conexiones
+            - name: Administración de conexiones
               href: ef6/fundamentals/connection-management.md
-            - name: Resistencia de las conexiones
+            - name: Resistencia de conexión
               items:
                 - name: Lógica de reintento
                   href: ef6/fundamentals/connection-resiliency/retry-logic.md
@@ -294,7 +294,7 @@
               items:
                 - name: Información general
                   href: ef6/fundamentals/disconnected-entities/index.md
-                - name: Entidades de seguimiento propio
+                - name: Entidades de autoseguimiento
                   items:
                     - name: Información general
                       href: ef6/fundamentals/disconnected-entities/self-tracking-entities/index.md
@@ -324,7 +324,7 @@
               items:
                 - name: Uso de la simulación
                   href: ef6/fundamentals/testing/mocking.md
-                - name: Escritura de duplicados de pruebas propias
+                - name: Escritura de duplicados de pruebas propios
                   href: ef6/fundamentals/testing/writing-test-doubles.md
                 - name: Capacidad de prueba con EF4 (artículo)
                   href: ef6/fundamentals/testing/testability-article.md
@@ -364,7 +364,7 @@
                       href: ef6/modeling/code-first/fluent/relationships.md
                     - name: Tipos y propiedades
                       href: ef6/modeling/code-first/fluent/types-and-properties.md
-                    - name: "Uso en Visual\_Basic"
+                    - name: Uso en Visual Basic
                       href: ef6/modeling/code-first/fluent/vb.md
                     - name: Asignación de procedimientos almacenados
                       href: ef6/modeling/code-first/fluent/cud-stored-procedures.md
@@ -374,7 +374,7 @@
                       href: ef6/modeling/code-first/migrations/index.md
                     - name: Migraciones automáticas
                       href: ef6/modeling/code-first/migrations/automatic.md
-                    - name: Trabajar con bases de datos existentes
+                    - name: Trabajo con bases de datos existentes
                       href: ef6/modeling/code-first/migrations/existing-database.md
                     - name: Personalización del historial de migraciones
                       href: ef6/modeling/code-first/migrations/history-customization.md
@@ -404,7 +404,7 @@
                       href: ef6/modeling/designer/entity-splitting.md
                     - name: División de tablas
                       href: ef6/modeling/designer/table-splitting.md
-                - name: Asignaciones heredadas
+                - name: Asignaciones de herencia
                   items:
                     - name: Tabla por jerarquía
                       href: ef6/modeling/designer/inheritance/tph.md
@@ -420,7 +420,7 @@
                   href: ef6/modeling/designer/relationships.md
                 - name: Varios diagramas
                   href: ef6/modeling/designer/multiple-diagrams.md
-                - name: Selección de la versión de runtime
+                - name: Selección de la versión del entorno de ejecución
                   href: ef6/modeling/designer/select-runtime-version.md
                 - name: Generación de código
                   items:
@@ -446,7 +446,7 @@
                       href: ef6/modeling/designer/advanced/tvfs.md
                 - name: Métodos abreviados de teclado
                   href: ef6/modeling/designer/keyboard-shortcuts.md
-        - name: Consulta de datos
+        - name: Consultar datos
           items:
             - name: Información general
               href: ef6/querying/index.md
@@ -454,13 +454,13 @@
               href: ef6/querying/load-method.md
             - name: Datos locales
               href: ef6/querying/local-data.md
-            - name: Seguimiento y no seguimiento de consultas
+            - name: Consultas de seguimiento y no seguimiento
               href: ef6/querying/no-tracking.md
             - name: Uso de consultas SQL sin formato
               href: ef6/querying/raw-sql.md
             - name: Consulta de datos relacionados
               href: ef6/querying/related-data.md
-        - name: Guardado de datos
+        - name: Guardar datos
           items:
             - name: Información general
               href: ef6/saving/index.md
@@ -472,9 +472,9 @@
                   href: ef6/saving/change-tracking/entity-state.md
                 - name: Valores de propiedades
                   href: ef6/saving/change-tracking/property-values.md
-            - name: Administrar los conflictos de simultaneidad
+            - name: Control de conflictos de simultaneidad
               href: ef6/saving/concurrency.md
-            - name: Uso de las transacciones
+            - name: Uso de transacciones
               href: ef6/saving/transactions.md
             - name: Validación de datos
               href: ef6/saving/validation.md
@@ -547,4 +547,4 @@
                     - name: Ruso
                       href: ef6/resources/licenses/ef6/rus.md
         - name: Referencia de la API de EF6 >>
-          href: 'https://docs.microsoft.com/dotnet/api/?view=entity-framework-6.2.0'
+          href: /dotnet/api/?view=entity-framework-6.2.0
