@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 36591d8f-36e1-4835-8a51-90f34f633d1e
 ms.openlocfilehash: e5a91af73bab9d45b0f1f4242ce503c6b6f407f6
-ms.sourcegitcommit: 159c2e9afed7745e7512730ffffaf154bcf2ff4a
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 02/03/2019
-ms.locfileid: "55668706"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78413310"
 ---
 # <a name="code-first-migrations"></a>Migraciones de Code First
 Migraciones de Code First es la manera recomendada de desarrollar el esquema de base de datos de la aplicación si usa el flujo de trabajo de Code First. Migraciones proporciona un conjunto de herramientas que permiten:
@@ -96,7 +96,7 @@ Es hora de realizar más cambios en el modelo.
     public string Url { get; set; }
 ```
 
-Si volviera a ejecutar la aplicación de nuevo, aparecería una excepción InvalidOperationException con el texto *El modelo que respalda el contexto 'BlogContext' ha cambiado desde que se creó la base de datos. Considere la posibilidad de usar Migraciones de Code First para actualizar la base de datos (* [*http://go.microsoft.com/fwlink/?LinkId=238269*](https://go.microsoft.com/fwlink/?LinkId=238269)*).*
+Si volviera a ejecutar la aplicación de nuevo, aparecería una excepción InvalidOperationException con el texto *El modelo que respalda el contexto 'BlogContext' ha cambiado desde que se creó la base de datos. Considere la posibilidad de usar Migraciones de Code First para actualizar la base de datos (* [ *http://go.microsoft.com/fwlink/?LinkId=238269* ](https://go.microsoft.com/fwlink/?LinkId=238269) *).*
 
 Como sugiere la excepción, es hora de empezar a usar Migraciones de Code First. El primer paso es habilitar las migraciones para el contexto.
 
@@ -298,7 +298,7 @@ Si quiere revertir a una base de datos vacía, puede usar el comando **Update-Da
 
 Si otro desarrollador quiere estos cambios en su equipo, puede sincronizar una vez que se protejan los cambios en el control de código fuente. Cuando tenga las nuevas migraciones, puede ejecutar el comando Update-Database para que los cambios se apliquen localmente. Pero si queremos enviar estos cambios a un servidor de prueba y, finalmente, a producción, probablemente querremos un script SQL que podamos pasar al DBA.
 
--   Ejecute el comando **Update-Database**, pero esta vez especifique la marca **–Script** para que los cambios se escriban en un script en lugar de aplicarse. También se especifican una migración de origen y de destino para las que generar el script. Queremos un script que abarque desde una base de datos vacía (**$InitialDatabase**) a la versión más reciente (migración **AddPostAbstract**).
+-   Ejecute el comando **Update-Database**, pero esta vez especifique la marca **–Script** para que los cambios se escriban en un script en lugar de aplicarse. También se especifican una migración de origen y de destino para las que generar el script. Queremos un script que abarque desde una base de datos vacía ( **$InitialDatabase**) a la versión más reciente (migración **AddPostAbstract**).
     *Si no se especifica una migración de destino, Migraciones usa la última migración como destino. Si no se especifica una migración de origen, Migraciones usa el estado actual de la base de datos.*
 -   Ejecute el comando **Update-Database -Script -SourceMigration: $InitialDatabase -TargetMigration: AddPostAbstract** en la consola del Administrador de paquetes.
 

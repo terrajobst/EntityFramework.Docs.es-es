@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 56e00fa2-f9f0-48b3-8006-f8266ca7e74b
 ms.openlocfilehash: e4e99a86e7c273682c85eba06042af9a2a837d12
-ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/18/2018
-ms.locfileid: "46283867"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78413290"
 ---
 # <a name="designer-code-generation-templates"></a>Plantillas de generación de código del diseñador
 Cuando se crea un modelo con Entity Framework Designer, las clases y el contexto derivado se generan automáticamente. Además de la generación de código predeterminada, también se proporcionan una serie de plantillas que pueden usarse para personalizar el código que se genera. Estas plantillas se proporcionan como plantillas de texto T4, lo que permite personalizarlas en caso necesario.
@@ -30,11 +30,11 @@ El equipo de Entity Framework proporciona las siguientes plantillas:
 
 Esta plantilla genera clases de entidad POCO simples y un contexto que se deriva de DbContext mediante EF6.
 Es la plantilla recomendada, a menos que tenga motivos para usar una de las otras plantillas que se indican a continuación.
-También es la plantilla de generación de código que se obtiene de forma predeterminada cuando se usan versiones recientes de Visual Studio (Visual Studio 2013 y versiones posteriores): cuando se crea un nuevo modelo, se usa esta plantilla de forma predeterminada y los archivos T4 (.tt) se anidan en el archivo .edmx.
+También es la plantilla de generación de código que se obtiene de forma predeterminada si se usan versiones recientes de Visual Studio (de Visual Studio 2013 en adelante): Al crear un modelo, se usa esta plantilla de forma predeterminada y los archivos T4 (.tt) se anidados bajo el archivo .edmx.
 
 #### <a name="older-versions-of-visual-studio"></a>Versiones anteriores de Visual Studio
-- **Visual Studio 2012:** para obtener las plantillas **EF 6.x DbContextGenerator**, tiene que instalar la versión más reciente de **Entity Framework Tools para Visual Studio**: vea la página [Get Entity Framework](~/ef6/fundamentals/install.md) (Obtener Entity Framework) para obtener más información.
-- **Visual Studio 2010:** las plantillas **EF 6.x DbContextGenerator** no están disponibles para Visual Studio 2010.
+- **Visual Studio 2012:** para obtener las plantillas **DbContextGenerator de EF 6.x**, tiene que instalar la versión más reciente de **Entity Framework Tools para Visual Studio**: vea la página [Obtener Entity Framework](~/ef6/fundamentals/install.md) para más información.
+- **Visual Studio 2010:** las plantillas **DbContextGenerator de EF 6.x** no están disponibles para Visual Studio 2010.
 
 #### <a name="dbcontext-generator-for-ef-5x"></a>Generador de DbContext para EF 5.x
 
@@ -145,7 +145,7 @@ Tiene que seleccionar la pestaña **Online** al agregar la plantilla para descar
 
 ### <a name="what-are-the-web-sites-templates"></a>Qué son las plantillas "Sitios web"
 
-Las plantillas "Sitios web" (es decir, **Generador de DbContext para EF 5.x para sitios web de C\#**) se usan en proyectos de sitio web creados con **Archivo -&gt; Nuevo -&gt; Sitio web...**. Son distintas a las aplicaciones web, creadas con **Archivo -&gt; Nuevo -&gt; Proyecto...** , que usan las plantillas estándar. Se proporcionan plantillas independientes porque así lo exige el sistema de plantilla de elemento de Visual Studio.
+Las plantillas "Sitios web" (es decir, **Generador de DbContext para EF 5.x para sitios web de C\#** ) se usan en proyectos de sitio web creados con **Archivo -&gt; Nuevo -&gt; Sitio web...** . Son distintas a las aplicaciones web, creadas con **Archivo -&gt; Nuevo -&gt; Proyecto...** , que usan las plantillas estándar. Se proporcionan plantillas independientes porque así lo exige el sistema de plantilla de elemento de Visual Studio.
 
 ## <a name="using-a-template"></a>Uso de una plantilla
 
@@ -159,15 +159,15 @@ Si ya ha instalado la plantilla que quiere usar (o estaba incluida en Visual Stu
 
 Si aún no tiene instalada la plantilla, seleccione **Online** en el menú izquierdo y busque la plantilla que quiere.
 
-![Buscar](~/ef6/media/search.png) 
+![Buscar](~/ef6/media/search.png) 
 
 Si usa Visual Studio 2012, los nuevos archivos .tt aparecen anidados en el archivo .edmx.*
 
 > [!NOTE]
-> En el caso de los modelos creados en Visual Studio 2012, tiene que eliminar las plantillas usadas para la generación de código predeterminada; si no lo hace, se generarán clases y contexto duplicados. Los archivos predeterminados son **&lt;nombreDelModelo&gt;.tt** y **&lt;nombreDelModelo&gt;.context.tt**. 
+> En el caso de los modelos creados en Visual Studio 2012, tiene que eliminar las plantillas usadas para la generación de código predeterminada; si no lo hace, se generarán clases y contexto duplicados. Los archivos predeterminados son **&lt;nombreDelModelo&gt;.tt** y **&lt;nombreDelModelo&gt;.context.tt**. 
 
 ![Plantillas de VS2012](~/ef6/media/vs2012-templates.png)
 
-Si usa Visual Studio 2010, los archivos tt se agregan directamente al proyecto.  
+Si usa Visual Studio 2010, los archivos tt se agregan directamente al proyecto.  
 
 ![Plantillas de VS2010](~/ef6/media/vs2010-templates.png)
