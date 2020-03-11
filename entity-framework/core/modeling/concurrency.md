@@ -5,42 +5,42 @@ ms.date: 01/03/2020
 ms.assetid: bc8b1cb0-befe-4b67-8004-26e6c5f69385
 uid: core/modeling/concurrency
 ms.openlocfilehash: bfeb611f222f7195fe22d920b452b40cc4addf90
-ms.sourcegitcommit: f2a38c086291699422d8b28a72d9611d1b24ad0d
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 01/16/2020
-ms.locfileid: "76124371"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78414624"
 ---
-# <a name="concurrency-tokens"></a><span data-ttu-id="f8252-102">Tokens de simultaneidad</span><span class="sxs-lookup"><span data-stu-id="f8252-102">Concurrency Tokens</span></span>
+# <a name="concurrency-tokens"></a><span data-ttu-id="7b0a8-102">Tokens de simultaneidad</span><span class="sxs-lookup"><span data-stu-id="7b0a8-102">Concurrency Tokens</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="f8252-103">En esta página se documenta cómo configurar los tokens de simultaneidad.</span><span class="sxs-lookup"><span data-stu-id="f8252-103">This page documents how to configure concurrency tokens.</span></span> <span data-ttu-id="f8252-104">Vea [controlar los conflictos de simultaneidad](../saving/concurrency.md) para obtener una explicación detallada de cómo funciona el control de simultaneidad en EF Core y ejemplos de cómo controlar los conflictos de simultaneidad en la aplicación.</span><span class="sxs-lookup"><span data-stu-id="f8252-104">See [Handling Concurrency Conflicts](../saving/concurrency.md) for a detailed explanation of how concurrency control works on EF Core and examples of how to handle concurrency conflicts in your application.</span></span>
+> <span data-ttu-id="7b0a8-103">En esta página se documenta cómo configurar los tokens de simultaneidad.</span><span class="sxs-lookup"><span data-stu-id="7b0a8-103">This page documents how to configure concurrency tokens.</span></span> <span data-ttu-id="7b0a8-104">Vea [controlar los conflictos de simultaneidad](../saving/concurrency.md) para obtener una explicación detallada de cómo funciona el control de simultaneidad en EF Core y ejemplos de cómo controlar los conflictos de simultaneidad en la aplicación.</span><span class="sxs-lookup"><span data-stu-id="7b0a8-104">See [Handling Concurrency Conflicts](../saving/concurrency.md) for a detailed explanation of how concurrency control works on EF Core and examples of how to handle concurrency conflicts in your application.</span></span>
 
-<span data-ttu-id="f8252-105">Las propiedades configuradas como tokens de simultaneidad se usan para implementar el control de simultaneidad optimista.</span><span class="sxs-lookup"><span data-stu-id="f8252-105">Properties configured as concurrency tokens are used to implement optimistic concurrency control.</span></span>
+<span data-ttu-id="7b0a8-105">Las propiedades configuradas como tokens de simultaneidad se usan para implementar el control de simultaneidad optimista.</span><span class="sxs-lookup"><span data-stu-id="7b0a8-105">Properties configured as concurrency tokens are used to implement optimistic concurrency control.</span></span>
 
-## <a name="configuration"></a><span data-ttu-id="f8252-106">Configuración de</span><span class="sxs-lookup"><span data-stu-id="f8252-106">Configuration</span></span>
+## <a name="configuration"></a><span data-ttu-id="7b0a8-106">Configuración</span><span class="sxs-lookup"><span data-stu-id="7b0a8-106">Configuration</span></span>
 
-### <a name="data-annotationstabdata-annotations"></a>[<span data-ttu-id="f8252-107">Anotaciones de datos</span><span class="sxs-lookup"><span data-stu-id="f8252-107">Data Annotations</span></span>](#tab/data-annotations)
+### <a name="data-annotations"></a>[<span data-ttu-id="7b0a8-107">Anotaciones de datos</span><span class="sxs-lookup"><span data-stu-id="7b0a8-107">Data Annotations</span></span>](#tab/data-annotations)
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Concurrency.cs?name=Concurrency&highlight=5)]
 
-### <a name="fluent-apitabfluent-api"></a>[<span data-ttu-id="f8252-108">API fluida</span><span class="sxs-lookup"><span data-stu-id="f8252-108">Fluent API</span></span>](#tab/fluent-api)
+### <a name="fluent-api"></a>[<span data-ttu-id="7b0a8-108">API fluida</span><span class="sxs-lookup"><span data-stu-id="7b0a8-108">Fluent API</span></span>](#tab/fluent-api)
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Concurrency.cs?name=Concurrency&highlight=5)]
 
 ***
 
-## <a name="timestamprowversion"></a><span data-ttu-id="f8252-109">Marca de tiempo/rowversion</span><span class="sxs-lookup"><span data-stu-id="f8252-109">Timestamp/rowversion</span></span>
+## <a name="timestamprowversion"></a><span data-ttu-id="7b0a8-109">Marca de tiempo/rowversion</span><span class="sxs-lookup"><span data-stu-id="7b0a8-109">Timestamp/rowversion</span></span>
 
-<span data-ttu-id="f8252-110">Timestamp/rowversion es una propiedad para la cual la base de datos genera automáticamente un nuevo valor cada vez que se inserta o se actualiza una fila.</span><span class="sxs-lookup"><span data-stu-id="f8252-110">A timestamp/rowversion is a property for which a new value is automatically generated by the database every time a row is inserted or updated.</span></span> <span data-ttu-id="f8252-111">La propiedad también se trata como un token de simultaneidad, lo que garantiza que se obtiene una excepción si una fila que se está actualizando ha cambiado desde que se realizó la consulta.</span><span class="sxs-lookup"><span data-stu-id="f8252-111">The property is also treated as a concurrency token, ensuring that you get an exception if a row you are updating has changed since you queried it.</span></span> <span data-ttu-id="f8252-112">Los detalles precisos dependen del proveedor de base de datos utilizado; por SQL Server, normalmente se utiliza una propiedad *Byte []* , que se configurará como una columna *ROWVERSION* en la base de datos.</span><span class="sxs-lookup"><span data-stu-id="f8252-112">The precise details depend on the database provider being used; for SQL Server, a *byte[]* property is usually used, which will be set up as a *ROWVERSION* column in the database.</span></span>
+<span data-ttu-id="7b0a8-110">Timestamp/rowversion es una propiedad para la cual la base de datos genera automáticamente un nuevo valor cada vez que se inserta o se actualiza una fila.</span><span class="sxs-lookup"><span data-stu-id="7b0a8-110">A timestamp/rowversion is a property for which a new value is automatically generated by the database every time a row is inserted or updated.</span></span> <span data-ttu-id="7b0a8-111">La propiedad también se trata como un token de simultaneidad, lo que garantiza que se obtiene una excepción si una fila que se está actualizando ha cambiado desde que se realizó la consulta.</span><span class="sxs-lookup"><span data-stu-id="7b0a8-111">The property is also treated as a concurrency token, ensuring that you get an exception if a row you are updating has changed since you queried it.</span></span> <span data-ttu-id="7b0a8-112">Los detalles precisos dependen del proveedor de base de datos utilizado; por SQL Server, normalmente se utiliza una propiedad *Byte []* , que se configurará como una columna *ROWVERSION* en la base de datos.</span><span class="sxs-lookup"><span data-stu-id="7b0a8-112">The precise details depend on the database provider being used; for SQL Server, a *byte[]* property is usually used, which will be set up as a *ROWVERSION* column in the database.</span></span>
 
-<span data-ttu-id="f8252-113">Puede configurar una propiedad para que sea una marca de tiempo o rowversion como se indica a continuación:</span><span class="sxs-lookup"><span data-stu-id="f8252-113">You can configure a property to be a timestamp/rowversion as follows:</span></span>
+<span data-ttu-id="7b0a8-113">Puede configurar una propiedad para que sea una marca de tiempo o rowversion como se indica a continuación:</span><span class="sxs-lookup"><span data-stu-id="7b0a8-113">You can configure a property to be a timestamp/rowversion as follows:</span></span>
 
-### <a name="data-annotationstabdata-annotations"></a>[<span data-ttu-id="f8252-114">Anotaciones de datos</span><span class="sxs-lookup"><span data-stu-id="f8252-114">Data Annotations</span></span>](#tab/data-annotations)
+### <a name="data-annotations"></a>[<span data-ttu-id="7b0a8-114">Anotaciones de datos</span><span class="sxs-lookup"><span data-stu-id="7b0a8-114">Data Annotations</span></span>](#tab/data-annotations)
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Timestamp.cs?name=Timestamp&highlight=7)]
 
-### <a name="fluent-apitabfluent-api"></a>[<span data-ttu-id="f8252-115">API fluida</span><span class="sxs-lookup"><span data-stu-id="f8252-115">Fluent API</span></span>](#tab/fluent-api)
+### <a name="fluent-api"></a>[<span data-ttu-id="7b0a8-115">API fluida</span><span class="sxs-lookup"><span data-stu-id="7b0a8-115">Fluent API</span></span>](#tab/fluent-api)
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Timestamp.cs?name=Timestamp&highlight=9,17)]
 
