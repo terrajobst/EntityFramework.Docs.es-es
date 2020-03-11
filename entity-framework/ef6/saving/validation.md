@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 77d6a095-c0d0-471e-80b9-8f9aea6108b2
 ms.openlocfilehash: 2c5e6f1b3f60862124bafcac42e8859a7591f8e6
-ms.sourcegitcommit: 2355447d89496a8ca6bcbfc0a68a14a0bf7f0327
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/23/2019
-ms.locfileid: "72812150"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78414372"
 ---
 # <a name="data-validation"></a>Validación de datos
 > [!NOTE]
@@ -158,7 +158,7 @@ A diferencia de la validación proporcionada por la API fluida, el resultado de 
 
 ![Ilustración 2](~/ef6/media/figure02.png)
 
-## <a name="dbcontextvalidateentity"></a>DbContext. ValidateEntity
+## <a name="dbcontextvalidateentity"></a>DbContext.ValidateEntity
 
 `DbContext` tiene un método reemplazable denominado `ValidateEntity`. Cuando llame a `SaveChanges`, Entity Framework llamará a este método para cada entidad de su caché cuyo estado no sea `Unchanged`. Puede colocar la lógica de validación directamente aquí o incluso usar este método para llamar a, por ejemplo, el método `Blog.Validate` agregado en la sección anterior.
 

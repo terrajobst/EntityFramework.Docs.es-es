@@ -4,11 +4,11 @@ author: divega
 ms.date: 06/27/2018
 ms.assetid: 066832F0-D51B-4655-8BE7-C983C557E0E4
 ms.openlocfilehash: 8bda3f51e8934f2add862c30e60f1185f068c515
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72181611"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78416010"
 ---
 # <a name="the-entity-framework-6-provider-model"></a>Modelo de proveedor de Entity Framework 6
 
@@ -16,7 +16,7 @@ El modelo de proveedor de Entity Framework permite utilizar Entity Framework con
 
 Algunos cambios fueron necesarios para la manera en que EF interactúa con los proveedores para permitir que EF se libere bajo una licencia de código abierto. Estos cambios requieren la regeneración de los proveedores de EF en los ensamblados de EF6 junto con los nuevos mecanismos de registro del proveedor.
 
-## <a name="rebuilding"></a>Volver a generar
+## <a name="rebuilding"></a>Regeneración
 
 Con EF6, el código principal que anteriormente formaba parte de la .NET Framework se envía ahora como ensamblados fuera de banda (OOB). Puede encontrar información sobre cómo compilar aplicaciones en EF6 en la página [actualizar aplicaciones para EF6](~/ef6/what-is-new/upgrading-to-ef6.md) . También será necesario volver a generar los proveedores mediante estas instrucciones.
 
@@ -28,7 +28,7 @@ Un proveedor de EF es realmente una colección de servicios específicos del pro
 
 ### <a name="dbproviderfactory"></a>DbProviderFactory
 
-EF depende de tener un tipo derivado de [System. Data. Common. DbProviderFactory](https://msdn.microsoft.com/library/system.data.common.dbproviderfactory.aspx) para realizar todo el acceso a la base de datos de bajo nivel. DbProviderFactory no es realmente parte de EF, sino que es una clase en el .NET Framework que sirve un punto de entrada para los proveedores de ADO.NET que puede usarse en EF, otros o directamente mediante una aplicación para obtener instancias de conexiones, comandos, parámetros y otras abstracciones de ADO.NET de un modo independiente del proveedor. Puede encontrar más información sobre DbProviderFactory en la [documentación de MSDN para ADO.net](https://msdn.microsoft.com/library/a6cd7c08.aspx).
+EF depende de tener un tipo derivado de [System. Data. Common. DbProviderFactory](https://msdn.microsoft.com/library/system.data.common.dbproviderfactory.aspx) para realizar todo el acceso a la base de datos de bajo nivel. DbProviderFactory no es realmente parte de EF, sino que es una clase en el .NET Framework que sirve un punto de entrada para los proveedores de ADO.NET que puede usarse en EF, otro o, o directamente mediante una aplicación, para obtener instancias de conexiones, comandos, parámetros y otras abstracciones de ADO.NET de un modo independiente del proveedor. Puede encontrar más información sobre DbProviderFactory en la [documentación de MSDN para ADO.net](https://msdn.microsoft.com/library/a6cd7c08.aspx).
 
 ### <a name="dbproviderservices"></a>DbProviderServices
 
@@ -36,7 +36,7 @@ EF depende de tener un tipo derivado de DbProviderServices para proporcionar fun
 
 Puede encontrar más información sobre la funcionalidad fundamental de una implementación de DbProviderServices en [MSDN](https://msdn.microsoft.com/library/ee789835.aspx). Sin embargo, tenga en cuenta que, en el momento de escribir esta información, no se actualiza para EF6, aunque la mayoría de los conceptos siguen siendo válidos. Las implementaciones de SQL Server y SQL Server Compact de DbProviderServices también se protegen en el [código base de código abierto](https://github.com/aspnet/EntityFramework6/) y pueden servir como referencias útiles para otras implementaciones.
 
-En versiones anteriores de EF, la implementación de DbProviderServices que se va a usar se obtuvo directamente de un proveedor ADO.NET. Esto se realiza mediante la conversión de DbProviderFactory a IServiceProvider y la llamada al método GetService. Este es el proveedor de EF estrechamente acoplado al DbProviderFactory. Este acoplamiento bloqueó EF para que no se moviera fuera del .NET Framework y, por tanto, para EF6, este acoplamiento estrecho se ha eliminado y ahora se ha registrado una implementación de DbProviderServices directamente en el archivo de configuración de la aplicación o en el código la configuración como se describe más detalladamente en la sección _registro de DbProviderServices_ .
+En versiones anteriores de EF, la implementación de DbProviderServices que se va a usar se obtuvo directamente de un proveedor ADO.NET. Esto se realiza mediante la conversión de DbProviderFactory a IServiceProvider y la llamada al método GetService. Este es el proveedor de EF estrechamente acoplado al DbProviderFactory. Este acoplamiento ha bloqueado EF para que no se mueva fuera del .NET Framework y, por tanto, para EF6 se ha quitado este acoplamiento estricto y ahora se ha registrado una implementación de DbProviderServices directamente en el archivo de configuración de la aplicación o en la configuración basada en código, tal y como se describe más detalladamente en la sección _registrar DbProviderServices_ que se muestra a continuación.
 
 ## <a name="additional-services"></a>Servicios adicionales
 
@@ -62,7 +62,7 @@ Se trata de un servicio opcional que permite usar migraciones de EF para la gene
 
 ### <a name="funcdbconnection-string-historycontextfactory"></a>FUNC < DbConnection, String, HistoryContextFactory >
 
-Se trata de un servicio opcional que permite a un proveedor configurar la asignación de HistoryContext a la tabla `__MigrationHistory` utilizada por las migraciones de EF. HistoryContext es un DbContext de Code First y se puede configurar mediante la API fluida normal para cambiar aspectos como el nombre de la tabla y las especificaciones de asignación de columnas. La implementación predeterminada de este servicio devuelta por EF para todos los proveedores puede funcionar para un servidor de base de datos determinado si ese proveedor admite todas las asignaciones predeterminadas de tabla y columna. En tal caso, no es necesario que el proveedor proporcione una implementación de este servicio.
+Se trata de un servicio opcional que permite a un proveedor configurar la asignación de HistoryContext a la tabla de `__MigrationHistory` utilizada por las migraciones de EF. HistoryContext es un DbContext de Code First y se puede configurar mediante la API fluida normal para cambiar aspectos como el nombre de la tabla y las especificaciones de asignación de columnas. La implementación predeterminada de este servicio devuelta por EF para todos los proveedores puede funcionar para un servidor de base de datos determinado si ese proveedor admite todas las asignaciones predeterminadas de tabla y columna. En tal caso, no es necesario que el proveedor proporcione una implementación de este servicio.
 
 ### <a name="idbproviderfactoryresolver"></a>IDbProviderFactoryResolver
 

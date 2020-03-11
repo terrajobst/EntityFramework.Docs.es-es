@@ -3,17 +3,17 @@ title: 'Code First a una base de datos existente: EF6'
 author: divega
 ms.date: 10/23/2016
 ms.assetid: a7e60b74-973d-4480-868f-500a3899932e
-ms.openlocfilehash: 61980bbd1f236f496a9d4fd92aa52264f1454615
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.openlocfilehash: 0a51f826422d7e2bff33b968605eace1e754c425
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182617"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78415602"
 ---
 # <a name="code-first-to-an-existing-database"></a>Code First a una base de datos existente
 Este vídeo y el tutorial paso a paso proporcionan una introducción al desarrollo de Code First que tiene como destino una base de datos existente. Code First permite definir el modelo mediante clases de C\# o VB.Net. Opcionalmente, se puede realizar una configuración adicional mediante atributos en las clases y propiedades o mediante una API fluida.
 
-## <a name="watch-the-video"></a>Ver el vídeo
+## <a name="watch-the-video"></a>Visualización del vídeo
 Este vídeo [ahora está disponible en Channel 9](https://channel9.msdn.com/blogs/ef/code-first-to-existing-database-ef6-1-onwards-).
 
 ## <a name="pre-requisites"></a>Requisitos previos
@@ -28,7 +28,7 @@ Normalmente, cuando el destino es una base de datos existente, ya se creará, pe
 
 Vamos a generar la base de datos.
 
--   Abra Visual Studio
+-   Abra Visual Studio.
 -   **Explorador de servidores de&gt; de vista**
 -   Haga clic con el botón derecho en **conexiones de datos:&gt; agregar conexión...**
 -   Si no se ha conectado a una base de datos desde **Explorador de servidores** antes de que tenga que seleccionar **Microsoft SQL Server** como origen de datos
@@ -72,9 +72,9 @@ VALUES ('.NET Framework Blog', 'http://blogs.msdn.com/dotnet/')
 
 ## <a name="2-create-the-application"></a>2. crear la aplicación
 
-Para simplificar las cosas, vamos a crear una aplicación de consola básica que use Code First para realizar el acceso a los datos:
+Para simplificar las cosas, crearemos una aplicación de consola básica que use Code First para realizar el acceso a los datos:
 
--   Abra Visual Studio
+-   Abra Visual Studio.
 -   **Archivo-&gt; nuevo proyecto de&gt;...**
 -   Seleccionar **ventanas** en el menú izquierdo y en la **aplicación de consola**
 -   Escriba **CodeFirstExistingDatabaseSample** como nombre
@@ -84,7 +84,7 @@ Para simplificar las cosas, vamos a crear una aplicación de consola básica que
 
 ## <a name="3-reverse-engineer-model"></a>3. modelo de ingeniería inversa
 
-Vamos a usar el Entity Framework Tools para que Visual Studio nos ayude a generar código inicial para asignarlo a la base de datos. Estas herramientas solo generan código que también podría escribir manualmente si lo prefiere.
+Usaremos el Entity Framework Tools para Visual Studio, que nos ayudará a generar código inicial para asignarlo a la base de datos. Estas herramientas solo generan código que también podría escribir manualmente si lo prefiere.
 
 -   **Proyecto-&gt; agregar nuevo elemento...**
 -   Seleccione **datos** en el menú de la izquierda y, a continuación, **ADO.NET Entity Data Model**

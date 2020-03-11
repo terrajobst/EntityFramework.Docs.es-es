@@ -1,20 +1,20 @@
 ---
-title: Resolución de dependencias - EF6
+title: 'Resolución de dependencias: EF6'
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 32d19ac6-9186-4ae1-8655-64ee49da55d0
 ms.openlocfilehash: 6082124481f5795bbcb62fff2bb6a58ecdcb48e4
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490966"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78414798"
 ---
 # <a name="dependency-resolution"></a>Resolución de dependencias
 > [!NOTE]
 > **Solo EF6 y versiones posteriores**: las características, las API, etc. que se tratan en esta página se han incluido a partir de Entity Framework 6. Si usa una versión anterior, no se aplica parte o la totalidad de la información.  
 
-A partir de EF6, Entity Framework contiene un mecanismo general para la obtención de las implementaciones de servicios que necesita. Es decir, cuando EF usa una instancia de algunas interfaces o clases base se le pedirá para una implementación concreta de la interfaz o clase base a utilizar. Esto se logra mediante el uso de la interfaz de IDbDependencyResolver:  
+A partir de EF6, Entity Framework contiene un mecanismo de uso general para obtener implementaciones de servicios que requiere. Es decir, cuando EF usa una instancia de algunas interfaces o clases base, solicitará una implementación concreta de la interfaz o la clase base que se va a usar. Esto se logra mediante el uso de la interfaz IDbDependencyResolver:  
 
 ``` csharp
 public interface IDbDependencyResolver
@@ -23,186 +23,186 @@ public interface IDbDependencyResolver
 }
 ```  
 
-El método GetService llama normalmente a EF y se controla mediante una implementación de IDbDependencyResolver proporcionada por EF o la aplicación. Cuando se llama, el argumento de tipo es el tipo de clase base o de interfaz del servicio que se solicita, y el objeto de clave es null o un objeto que proporciona información contextual sobre el servicio solicitado.  
+EF normalmente llama al método GetService y se controla mediante una implementación de IDbDependencyResolver proporcionada por EF o por la aplicación. Cuando se llama, el argumento de tipo es la interfaz o el tipo de clase base del servicio que se solicita, y el objeto de clave es null o un objeto que proporciona información contextual sobre el servicio solicitado.  
 
-A menos que se indique lo contrario cualquier objeto devuelto debe ser seguro para subprocesos ya que se puede usar como un singleton. En muchos casos, que el objeto devuelto es una fábrica en cuyo caso la fábrica misma debe ser seguro para subprocesos, pero el objeto devuelto desde el generador no necesita ser seguro para subprocesos ya que se solicita una nueva instancia de la factoría para cada usuario.
+A menos que se indique lo contrario, cualquier objeto devuelto debe ser seguro para subprocesos, ya que se puede utilizar como singleton. En muchos casos, el objeto devuelto es un generador, en cuyo caso el propio generador debe ser seguro para subprocesos, pero no es necesario que el objeto devuelto por el generador sea seguro para subprocesos, ya que se solicita una nueva instancia desde el generador para cada uso.
 
-En este artículo no contiene información detallada sobre cómo implementar IDbDependencyResolver, pero en su lugar, actúa como una referencia para los tipos de servicio (es decir, los tipos de clase base y la interfaz) para que EF llama a GetService y la semántica del objeto clave para cada una de ellas llamadas.
+En este artículo no se incluyen detalles completos sobre cómo implementar IDbDependencyResolver, sino que actúa como referencia para los tipos de servicio (es decir, la interfaz y los tipos de clase base) para los que EF llama a GetService y la semántica del objeto de clave para cada uno de estos llama.
 
-## <a name="systemdataentityidatabaseinitializertcontext"></a>System.Data.Entity.IDatabaseInitializer < TContext\>  
+## <a name="systemdataentityidatabaseinitializertcontext"></a>System. Data. Entity. IDatabaseInitializer < TContext\>  
 
-**Versión introducida**: EF6.0.0  
+**Versión introducida**: EF 6.0.0  
 
-**Objeto devuelto**: un inicializador de base de datos para el tipo de contexto determinado  
+**Objeto devuelto**: inicializador de base de datos para el tipo de contexto especificado  
 
-**Clave**: no usar; será null  
+**Clave**: no se utiliza; será null  
 
-## <a name="funcsystemdataentitymigrationssqlmigrationsqlgenerator"></a>Func < System.Data.Entity.Migrations.Sql.MigrationSqlGenerator\>  
+## <a name="funcsystemdataentitymigrationssqlmigrationsqlgenerator"></a>FUNC < System. Data. Entity. Migrations. SQL. MigrationSqlGenerator\>  
 
-**Versión introducida**: EF6.0.0
+**Versión introducida**: EF 6.0.0
 
-**Objeto devuelto**: un generador para crear un generador de SQL que se puede usar para las migraciones y otras acciones que provocan una base de datos que se creará, como la creación de la base de datos con inicializadores de base de datos.  
+**Objeto devuelto**: generador para crear un generador de SQL que se puede usar para las migraciones y otras acciones que hacen que se cree una base de datos, como la creación de bases de datos con inicializadores de base de datos.  
 
-**Clave**: una cadena que contiene el nombre invariable del proveedor ADO.NET especificando el tipo de base de datos para el que se generarán SQL. Por ejemplo, se devuelve el generador SQL de SQL Server para la clave "System.Data.SqlClient".  
-
->[!NOTE]
-> Para obtener más detalles sobre los servicios relacionados con el proveedor en EF6, consulte el [modelo de proveedor de EF6](~/ef6/fundamentals/providers/provider-model.md) sección.  
-
-## <a name="systemdataentitycorecommondbproviderservices"></a>System.Data.Entity.Core.Common.DbProviderServices  
-
-**Versión introducida**: EF6.0.0  
-
-**Objeto devuelto**: proveedor de EF de la que se usará para un nombre invariable del proveedor especificado  
-
-**Clave**: una cadena que contiene el nombre invariable del proveedor ADO.NET especificando el tipo de base de datos para el que se necesita un proveedor. Por ejemplo, se devuelve el proveedor de SQL Server para la clave "System.Data.SqlClient".  
+**Key**: una cadena que contiene el nombre invariable del proveedor ADO.net que especifica el tipo de base de datos para el que se generará SQL. Por ejemplo, se devuelve el generador de SQL Server SQL para la clave "System. Data. SqlClient".  
 
 >[!NOTE]
-> Para obtener más detalles sobre los servicios relacionados con el proveedor en EF6, consulte el [modelo de proveedor de EF6](~/ef6/fundamentals/providers/provider-model.md) sección.  
+> Para obtener más información sobre los servicios relacionados con el proveedor en EF6, consulte la sección [modelo de proveedor EF6](~/ef6/fundamentals/providers/provider-model.md) .  
 
-## <a name="systemdataentityinfrastructureidbconnectionfactory"></a>System.Data.Entity.Infrastructure.IDbConnectionFactory  
+## <a name="systemdataentitycorecommondbproviderservices"></a>System. Data. Entity. Core. Common. DbProviderServices  
 
-**Versión introducida**: EF6.0.0  
+**Versión introducida**: EF 6.0.0  
 
-**Objeto devuelto**: el generador de conexiones que se usará cuando EF crea una conexión de base de datos por convención. Es decir, cuando no hay conexión o la cadena de conexión se concede a EF y ninguna cadena de conexión puede encontrarse en el archivo app.config o web.config, este servicio se usa para crear una conexión por convención. Cambiar el generador de conexiones puede permitir que EF que use un tipo diferente de la base de datos (por ejemplo, SQL Server Compact Edition) de forma predeterminada.  
+**Objeto devuelto**: el proveedor EF que se va a usar para un nombre invariable de proveedor determinado  
 
-**Clave**: no usar; será null  
-
->[!NOTE]
-> Para obtener más detalles sobre los servicios relacionados con el proveedor en EF6, consulte el [modelo de proveedor de EF6](~/ef6/fundamentals/providers/provider-model.md) sección.  
-
-## <a name="systemdataentityinfrastructureimanifesttokenservice"></a>System.Data.Entity.Infrastructure.IManifestTokenService  
-
-**Versión introducida**: EF6.0.0  
-
-**Objeto devuelto**: un servicio que puede generar un token del manifiesto del proveedor de una conexión. Este servicio se usa normalmente de dos maneras. En primer lugar, puede usarse para evitar la conexión a la base de datos al generar un modelo Code First. En segundo lugar, puede usarse para forzar que Code First para crear un modelo para una versión específica de la base de datos: por ejemplo, para forzar un modelo para SQL Server 2005, aunque a veces se usa SQL Server 2008.  
-
-**Duración del objeto**: Singleton--el mismo objeto puede ser usa varias veces y al mismo tiempo que diferentes subprocesos  
-
-**Clave**: no usar; será null  
-
-## <a name="systemdataentityinfrastructureidbproviderfactoryservice"></a>System.Data.Entity.Infrastructure.IDbProviderFactoryService  
-
-**Versión introducida**: EF6.0.0  
-
-**Objeto devuelto**: un servicio que puede obtener un generador del proveedor de una conexión determinada. En .NET 4.5, el proveedor es públicamente accesible desde la conexión. En .NET 4 la implementación predeterminada de este servicio utiliza la parte de la heurística para buscar el proveedor de búsqueda de coincidencias. Si estos fallan, a continuación, una nueva implementación de este servicio se puede registrar para proporcionar una resolución adecuada.  
-
-**Clave**: no usar; será null  
-
-## <a name="funcdbcontext-systemdataentityinfrastructureidbmodelcachekey"></a>Func < DbContext, System.Data.Entity.Infrastructure.IDbModelCacheKey\>  
-
-**Versión introducida**: EF6.0.0  
-
-**Objeto devuelto**: un generador que se generará una clave de caché del modelo para un contexto determinado. De forma predeterminada, EF almacena en caché un modelo por tipo de DbContext y proveedor. Una implementación diferente de este servicio puede utilizarse para agregar otra información, como el nombre del esquema, a la clave de caché.  
-
-**Clave**: no usar; será null  
-
-## <a name="systemdataentityspatialdbspatialservices"></a>System.Data.Entity.Spatial.DbSpatialServices  
-
-**Versión introducida**: EF6.0.0  
-
-**Objeto devuelto**: proveedor espacial un EF que agrega compatibilidad para el proveedor EF básico para tipos espaciales geography y geometry.  
-
-**Clave**: DbSptialServices se le pide de dos maneras. En primer lugar, específicos del proveedor de servicios espaciales se solicitan con un objeto DbProviderInfo (que contiene todos los idiomas token de manifiesto y nombre) como clave. En segundo lugar, se pueden solicitar DbSpatialServices sin la clave. Esto se utiliza para resolver el "global espacial proveedor" que se usa al crear tipos de DbGeography o DbGeometry independientes.  
+**Key**: una cadena que contiene el nombre invariable del proveedor ADO.net que especifica el tipo de base de datos para el que se necesita un proveedor. Por ejemplo, se devuelve el proveedor de SQL Server para la clave "System. Data. SqlClient".  
 
 >[!NOTE]
-> Para obtener más detalles sobre los servicios relacionados con el proveedor en EF6, consulte el [modelo de proveedor de EF6](~/ef6/fundamentals/providers/provider-model.md) sección.  
+> Para obtener más información sobre los servicios relacionados con el proveedor en EF6, consulte la sección [modelo de proveedor EF6](~/ef6/fundamentals/providers/provider-model.md) .  
 
-## <a name="funcsystemdataentityinfrastructureidbexecutionstrategy"></a>Func < System.Data.Entity.Infrastructure.IDbExecutionStrategy\>  
+## <a name="systemdataentityinfrastructureidbconnectionfactory"></a>System. Data. Entity. Infrastructure. IDbConnectionFactory  
 
-**Versión introducida**: EF6.0.0  
+**Versión introducida**: EF 6.0.0  
 
-**Objeto devuelto**: un generador para crear un servicio que permite a un proveedor implementar reintentos u otro comportamiento cuando se ejecutan las consultas y comandos en la base de datos. Si no se proporciona ninguna implementación, a continuación, EF simplemente ejecutará los comandos y propagar cualquier excepción producida. Este servicio sirve para proporcionar una directiva de reintento que resulta especialmente útil cuando se ejecuta en servidores de base de datos en la nube como SQL Azure para SQL Server.  
+**Objeto devuelto**: el generador de conexión que se usará cuando EF cree una conexión de base de datos por Convención. Es decir, cuando no se proporciona ninguna conexión o cadena de conexión a EF, y no se encuentra ninguna cadena de conexión en App. config o Web. config, este servicio se usa para crear una conexión por Convención. Cambiar el generador de conexiones puede permitir que EF use otro tipo de base de datos (por ejemplo, SQL Server Compact Edition) de forma predeterminada.  
 
-**Clave**: ExecutionStrategyKey un objeto que contiene el nombre invariable del proveedor y, opcionalmente, un nombre de servidor para el que se usará la estrategia de ejecución.  
-
->[!NOTE]
-> Para obtener más detalles sobre los servicios relacionados con el proveedor en EF6, consulte el [modelo de proveedor de EF6](~/ef6/fundamentals/providers/provider-model.md) sección.  
-
-## <a name="funcdbconnection-string-systemdataentitymigrationshistoryhistorycontext"></a>Func < DbConnection, cadena, System.Data.Entity.Migrations.History.HistoryContext\>  
-
-**Versión introducida**: EF6.0.0  
-
-**Objeto devuelto**: un generador que permite a un proveedor configurar la asignación de HistoryContext para el `__MigrationHistory` tabla usada por migraciones de EF. HistoryContext es un primer DbContext de código y se puede configurar mediante la API fluida normal para cambiar cosas como el nombre de la tabla y las especificaciones de asignación de columna.  
-
-**Clave**: no usar; será null  
+**Clave**: no se utiliza; será null  
 
 >[!NOTE]
-> Para obtener más detalles sobre los servicios relacionados con el proveedor en EF6, consulte el [modelo de proveedor de EF6](~/ef6/fundamentals/providers/provider-model.md) sección.  
+> Para obtener más información sobre los servicios relacionados con el proveedor en EF6, consulte la sección [modelo de proveedor EF6](~/ef6/fundamentals/providers/provider-model.md) .  
 
-## <a name="systemdatacommondbproviderfactory"></a>System.Data.Common.DbProviderFactory  
+## <a name="systemdataentityinfrastructureimanifesttokenservice"></a>System. Data. Entity. Infrastructure. IManifestTokenService  
 
-**Versión introducida**: EF6.0.0  
+**Versión introducida**: EF 6.0.0  
 
-**Objeto devuelto**: proveedor de ADO.NET de la que se usará para un nombre invariable del proveedor especificado.  
+**Objeto devuelto**: un servicio que puede generar un token del manifiesto del proveedor a partir de una conexión. Este servicio se usa normalmente de dos maneras. En primer lugar, se puede usar para evitar Code First conectarse a la base de datos al compilar un modelo. En segundo lugar, se puede usar para forzar Code First para generar un modelo para una versión de base de datos específica, por ejemplo, para forzar un modelo para SQL Server 2005 incluso si se usa a veces SQL Server 2008.  
 
-**Clave**: una cadena que contiene el nombre invariable del proveedor ADO.NET  
+**Duración del objeto**: singleton: el mismo objeto se puede usar varias veces y simultáneamente en diferentes subprocesos  
+
+**Clave**: no se utiliza; será null  
+
+## <a name="systemdataentityinfrastructureidbproviderfactoryservice"></a>System. Data. Entity. Infrastructure. IDbProviderFactoryService  
+
+**Versión introducida**: EF 6.0.0  
+
+**Objeto devuelto**: un servicio que puede obtener un generador de proveedores de una conexión determinada. En .NET 4,5, el proveedor es accesible públicamente desde la conexión. En .NET 4, la implementación predeterminada de este servicio usa algunas heurísticas para encontrar el proveedor coincidente. Si se produce un error, se puede registrar una nueva implementación de este servicio para proporcionar una solución adecuada.  
+
+**Clave**: no se utiliza; será null  
+
+## <a name="funcdbcontext-systemdataentityinfrastructureidbmodelcachekey"></a>FUNC < DbContext, System. Data. Entity. Infrastructure. IDbModelCacheKey\>  
+
+**Versión introducida**: EF 6.0.0  
+
+**Objeto devuelto**: un generador que generará una clave de caché del modelo para un contexto determinado. De forma predeterminada, EF almacena en caché un modelo por tipo DbContext por proveedor. Se puede usar una implementación diferente de este servicio para agregar otra información, como el nombre de esquema, a la clave de caché.  
+
+**Clave**: no se utiliza; será null  
+
+## <a name="systemdataentityspatialdbspatialservices"></a>System. Data. Entity. Spatial. DbSpatialServices  
+
+**Versión introducida**: EF 6.0.0  
+
+**Objeto devuelto**: un proveedor espacial de EF que agrega compatibilidad con el proveedor de EF básico para los tipos espaciales Geography y Geometry.  
+
+**Clave**: DbSptialServices se solicita de dos maneras. En primer lugar, se solicitan servicios espaciales específicos del proveedor mediante un objeto DbProviderInfo (que contiene el nombre invariable y el token del manifiesto) como clave. En segundo lugar, se puede solicitar a DbSpatialServices sin clave. Se usa para resolver el "proveedor espacial global", que se usa al crear tipos independientes de DbGeography o DbGeometry.  
 
 >[!NOTE]
-> Este servicio no es suele cambiar directamente ya que la implementación predeterminada usa el registro del proveedor ADO.NET normal. Para obtener más detalles sobre los servicios relacionados con el proveedor en EF6, consulte el [modelo de proveedor de EF6](~/ef6/fundamentals/providers/provider-model.md) sección.  
+> Para obtener más información sobre los servicios relacionados con el proveedor en EF6, consulte la sección [modelo de proveedor EF6](~/ef6/fundamentals/providers/provider-model.md) .  
 
-## <a name="systemdataentityinfrastructureiproviderinvariantname"></a>System.Data.Entity.Infrastructure.IProviderInvariantName  
+## <a name="funcsystemdataentityinfrastructureidbexecutionstrategy"></a>FUNC < System. Data. Entity. Infrastructure. IDbExecutionStrategy\>  
 
-**Versión introducida**: EF6.0.0  
+**Versión introducida**: EF 6.0.0  
 
-**Objeto devuelto**: un servicio que se usa para determinar un nombre invariable del proveedor para un tipo determinado de DbProviderFactory. La implementación predeterminada de este servicio utiliza el registro del proveedor ADO.NET. Esto significa que si no está registrado el proveedor de ADO.NET de la manera normal porque se está resolviendo DbProviderFactory con EF, a continuación, también será necesario resolver este servicio.  
+**Objeto devuelto**: generador para crear un servicio que permite a un proveedor implementar reintentos u otro comportamiento cuando las consultas y los comandos se ejecutan en la base de datos. Si no se proporciona ninguna implementación, EF simplemente ejecutará los comandos y propagará las excepciones que se produzcan. Por SQL Server este servicio se utiliza para proporcionar una directiva de reintentos que es especialmente útil cuando se ejecuta en servidores de bases de datos basados en la nube, como SQL Azure.  
 
-**Clave**: instancia The DbProviderFactory para el que se requiere un nombre invariable.  
+**Key**: un objeto ExecutionStrategyKey que contiene el nombre invariable del proveedor y, opcionalmente, un nombre de servidor para el que se usará la estrategia de ejecución.  
 
 >[!NOTE]
-> Para obtener más detalles sobre los servicios relacionados con el proveedor en EF6, consulte el [modelo de proveedor de EF6](~/ef6/fundamentals/providers/provider-model.md) sección.  
+> Para obtener más información sobre los servicios relacionados con el proveedor en EF6, consulte la sección [modelo de proveedor EF6](~/ef6/fundamentals/providers/provider-model.md) .  
 
-## <a name="systemdataentitycoremappingviewgenerationiviewassemblycache"></a>System.Data.Entity.Core.Mapping.ViewGeneration.IViewAssemblyCache  
+## <a name="funcdbconnection-string-systemdataentitymigrationshistoryhistorycontext"></a>FUNC < DbConnection, String, System. Data. Entity. Migrations. History. HistoryContext\>  
 
-**Versión introducida**: EF6.0.0  
+**Versión introducida**: EF 6.0.0  
 
-**Objeto devuelto**: una memoria caché de los ensamblados que contienen las vistas generadas previamente. Un reemplazo se utiliza normalmente para que EF sepa qué ensamblados contienen las vistas generadas previamente sin tener que realizar ninguna detección.  
+**Objeto devuelto**: un generador que permite a un proveedor configurar la asignación de HistoryContext a la tabla `__MigrationHistory` utilizada por las migraciones de EF. HistoryContext es un DbContext de Code First y se puede configurar mediante la API fluida normal para cambiar aspectos como el nombre de la tabla y las especificaciones de asignación de columnas.  
 
-**Clave**: no usar; será null  
+**Clave**: no se utiliza; será null  
 
-## <a name="systemdataentityinfrastructurepluralizationipluralizationservice"></a>System.Data.Entity.Infrastructure.Pluralization.IPluralizationService
+>[!NOTE]
+> Para obtener más información sobre los servicios relacionados con el proveedor en EF6, consulte la sección [modelo de proveedor EF6](~/ef6/fundamentals/providers/provider-model.md) .  
 
-**Versión introducida**: EF6.0.0  
+## <a name="systemdatacommondbproviderfactory"></a>System. Data. Common. DbProviderFactory  
 
-**Objeto devuelto**: un servicio utilizado por EF Pluralizar y en singular los nombres. De forma predeterminada, se usa un servicio de pluralización de inglés.  
+**Versión introducida**: EF 6.0.0  
 
-**Clave**: no usar; será null  
+**Objeto devuelto**: el proveedor ADO.net que se va a usar para un nombre invariable de proveedor determinado.  
 
-## <a name="systemdataentityinfrastructureinterceptionidbinterceptor"></a>System.Data.Entity.Infrastructure.Interception.IDbInterceptor  
+**Key**: una cadena que contiene el nombre invariable del proveedor ADO.net  
 
-**Versión introducida**: EF6.0.0
+>[!NOTE]
+> Normalmente, este servicio no se cambia directamente, ya que la implementación predeterminada usa el registro del proveedor ADO.NET normal. Para obtener más información sobre los servicios relacionados con el proveedor en EF6, consulte la sección [modelo de proveedor EF6](~/ef6/fundamentals/providers/provider-model.md) .  
 
-**Los objetos devueltos**: cualquier interceptores que se deben registrar cuando se inicia la aplicación. Tenga en cuenta que estos objetos se solicitan mediante la llamada GetServices y todos los interceptores devueltos por cualquier resolución de dependencia se registra.
+## <a name="systemdataentityinfrastructureiproviderinvariantname"></a>System. Data. Entity. Infrastructure. IProviderInvariantName  
 
-**Clave**: no usar; será null.  
+**Versión introducida**: EF 6.0.0  
 
-## <a name="funcsystemdataentitydbcontext-actionstring-systemdataentityinfrastructureinterceptiondatabaselogformatter"></a>Func < System.Data.Entity.DbContext, acción < cadena\>, System.Data.Entity.Infrastructure.Interception.DatabaseLogFormatter\>  
+**Objeto devuelto**: un servicio que se utiliza para determinar un nombre invariable de proveedor para un tipo determinado de DbProviderFactory. La implementación predeterminada de este servicio utiliza el registro del proveedor ADO.NET. Esto significa que si el proveedor ADO.NET no está registrado de la manera normal porque EF está resolviendo DbProviderFactory, también será necesario para resolver este servicio.  
 
-**Versión introducida**: EF6.0.0  
+**Key**: la instancia de DbProviderFactory para la que se requiere un nombre invariable.  
 
-**Objeto devuelto**: un generador que se usará para crear el formateador de registro de base de datos que se usa cuando el contexto. Propiedad Database.Log se establece en el contexto especificado.  
+>[!NOTE]
+> Para obtener más información sobre los servicios relacionados con el proveedor en EF6, consulte la sección [modelo de proveedor EF6](~/ef6/fundamentals/providers/provider-model.md) .  
 
-**Clave**: no usar; será null.  
+## <a name="systemdataentitycoremappingviewgenerationiviewassemblycache"></a>System. Data. Entity. Core. Mapping. ViewGeneration. IViewAssemblyCache  
 
-## <a name="funcsystemdataentitydbcontext"></a>Func < System.Data.Entity.DbContext\>  
+**Versión introducida**: EF 6.0.0  
 
-**Versión introducida**: EF6.1.0  
+**Objeto devuelto**: memoria caché de los ensamblados que contienen las vistas generadas previamente. Un reemplazo se usa normalmente para permitir que EF sepa qué ensamblados contienen vistas generadas previamente sin realizar ninguna detección.  
 
-**Objeto devuelto**: un generador que se usará para crear instancias de contexto para las migraciones cuando el contexto no tiene un constructor sin parámetros accesible.  
+**Clave**: no se utiliza; será null  
 
-**Clave**: objeto el tipo para el tipo de DbContext derivada para el que se necesita un generador.  
+## <a name="systemdataentityinfrastructurepluralizationipluralizationservice"></a>System. Data. Entity. Infrastructure. pluralización. IPluralizationService
 
-## <a name="funcsystemdataentitycoremetadataedmimetadataannotationserializer"></a>Func < System.Data.Entity.Core.Metadata.Edm.IMetadataAnnotationSerializer\>  
+**Versión introducida**: EF 6.0.0  
 
-**Versión introducida**: EF6.1.0  
+**Objeto devuelto**: un servicio utilizado por EF para pluralar y singularar los nombres. De forma predeterminada, se usa un servicio de pluralización en inglés.  
 
-**Objeto devuelto**: un generador que se usará para crear los serializadores para la serialización de anotaciones personalizadas fuertemente tipada de modo que se pueden serializar y desterilized en XML para su uso en migraciones de Code First.  
+**Clave**: no se utiliza; será null  
 
-**Clave**: el nombre de la anotación que se va a serializar o deserializar.  
+## <a name="systemdataentityinfrastructureinterceptionidbinterceptor"></a>System. Data. Entity. Infrastructure. intercepción. IDbInterceptor  
 
-## <a name="funcsystemdataentityinfrastructuretransactionhandler"></a>Func < System.Data.Entity.Infrastructure.TransactionHandler\>  
+**Versión introducida**: EF 6.0.0
 
-**Versión introducida**: EF6.1.0  
+**Objetos devueltos**: todos los interceptores que se deben registrar cuando se inicia la aplicación. Tenga en cuenta que estos objetos se solicitan mediante la llamada a GetServices y todos los interceptores devueltos por cualquier solucionador de dependencias se registrarán.
 
-**Objeto devuelto**: un generador que se usará para crear controladores para las transacciones para que se puede aplicar un tratamiento especial para situaciones como el control de errores de confirmación.  
+**Clave**: no se utiliza; será null.  
 
-**Clave**: ExecutionStrategyKey un objeto que contiene el nombre invariable del proveedor y, opcionalmente, un nombre de servidor para el que se usará el controlador de la transacción.  
+## <a name="funcsystemdataentitydbcontext-actionstring-systemdataentityinfrastructureinterceptiondatabaselogformatter"></a>FUNC < System. Data. Entity. DbContext, Action < cadena\>, System. Data. Entity. Infrastructure. intercepción. DatabaseLogFormatter\>  
+
+**Versión introducida**: EF 6.0.0  
+
+**Objeto devuelto**: un generador que se usará para crear el formateador del registro de base de datos que se utilizará cuando el contexto. La propiedad Database. log está establecida en el contexto especificado.  
+
+**Clave**: no se utiliza; será null.  
+
+## <a name="funcsystemdataentitydbcontext"></a>FUNC < System. Data. Entity. DbContext\>  
+
+**Versión introducida**: EF 6.1.0  
+
+**Objeto devuelto**: un generador que se usará para crear instancias de contexto para las migraciones cuando el contexto no tenga un constructor sin parámetros accesible.  
+
+**Key**: el objeto de tipo para el tipo de DbContext derivado para el que se necesita un generador.  
+
+## <a name="funcsystemdataentitycoremetadataedmimetadataannotationserializer"></a>FUNC < System. Data. Entity. Core. Metadata. Edm. IMetadataAnnotationSerializer\>  
+
+**Versión introducida**: EF 6.1.0  
+
+**Objeto devuelto**: un generador que se utilizará para crear serializadores para la serialización de anotaciones personalizadas fuertemente tipadas de modo que se puedan serializar y desesterilizar en XML para su uso en migraciones de Code First.  
+
+**Key**: nombre de la anotación que se va a serializar o deserializar.  
+
+## <a name="funcsystemdataentityinfrastructuretransactionhandler"></a>FUNC < System. Data. Entity. Infrastructure. TransactionHandler\>  
+
+**Versión introducida**: EF 6.1.0  
+
+**Objeto devuelto**: un generador que se usará para crear controladores para las transacciones, de modo que se pueda aplicar un control especial para situaciones como el control de errores de confirmación.  
+
+**Key**: un objeto ExecutionStrategyKey que contiene el nombre invariable del proveedor y, opcionalmente, un nombre de servidor para el que se usará el controlador de transacciones.  

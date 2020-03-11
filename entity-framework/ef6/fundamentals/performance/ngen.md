@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: dc6110a0-80a0-4370-8190-cea942841cee
 ms.openlocfilehash: 841aec645abdb2a56076d0b70bfb2614b0acafb4
-ms.sourcegitcommit: 37d0e0fd1703467918665a64837dc54ad2ec7484
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/16/2019
-ms.locfileid: "72445999"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78416094"
 ---
 # <a name="improving-startup-performance-with-ngen"></a>Mejorar el rendimiento de inicio con NGen
 > [!NOTE]
@@ -24,7 +24,7 @@ Las observaciones empíricas muestran que las imágenes nativas de los ensamblad
 
 La función más básica de la herramienta NGen. exe es "instalar" (es decir, crear y conservar en disco) imágenes nativas para un ensamblado y todas sus dependencias directas. Aquí se muestra cómo lograr esto:  
 
-1. Abra una ventana del símbolo del sistema como administrador.
+1. Abra una ventana de símbolo del sistema como administrador.
 2. Cambie el directorio de trabajo actual a la ubicación de los ensamblados para los que desea generar imágenes nativas:
 
    ``` console
@@ -56,7 +56,7 @@ Cuando se trata de decidir en qué ensamblados se van a generar imágenes nativa
 
 - **El ensamblado de tiempo de ejecución de EF principal, EntityFramework. dll**: una aplicación basada en EF típica ejecuta una cantidad significativa de código de este ensamblado en el inicio o en el primer acceso a la base de datos. Por lo tanto, la creación de imágenes nativas de este ensamblado producirá las mayores mejoras en el rendimiento de inicio.  
 - **Cualquier ensamblado de proveedor EF usado por la aplicación**: el tiempo de inicio también puede beneficiarse ligeramente de la generación de imágenes nativas. Por ejemplo, si la aplicación utiliza el proveedor de EF para SQL Server querrá generar una imagen nativa para EntityFramework. SqlServer. dll.  
-- **Los ensamblados de la aplicación y otras dependencias**: la [documentación de Ngen. exe](https://msdn.microsoft.com/library/6t9t5wcf.aspx) cubre los criterios generales para elegir en qué ensamblados se van a generar imágenes nativas y el impacto de las imágenes nativas en la seguridad, opciones avanzadas como "Hard enlace ", escenarios como el uso de imágenes nativas en escenarios de depuración y generación de perfiles, etc.  
+- **Los ensamblados de la aplicación y otras dependencias**: la [documentación de Ngen. exe](https://msdn.microsoft.com/library/6t9t5wcf.aspx) cubre los criterios generales para elegir en qué ensamblados se van a generar imágenes nativas y el impacto de las imágenes nativas en la seguridad, opciones avanzadas como "enlace fuerte", escenarios como el uso de imágenes nativas en escenarios de depuración y generación de perfiles, etc.  
 
 > [!TIP]
 > Asegúrese de medir cuidadosamente el impacto del uso de imágenes nativas en el rendimiento de inicio y el rendimiento general de la aplicación y compararlas con los requisitos reales. Mientras que las imágenes nativas suelen ayudar a mejorar el rendimiento de inicio y, en algunos casos, reducir el uso de memoria, no todos los escenarios se beneficiarán de forma equitativa. Por ejemplo, en la ejecución de estado estable (es decir, una vez que todos los métodos que se usan en la aplicación se han invocado al menos una vez), el código generado por el compilador JIT puede producir de hecho un rendimiento ligeramente mejor que las imágenes nativas.  

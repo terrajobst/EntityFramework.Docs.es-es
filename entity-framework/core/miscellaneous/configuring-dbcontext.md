@@ -5,11 +5,11 @@ ms.date: 10/27/2016
 ms.assetid: d7a22b5a-4c5b-4e3b-9897-4d7320fcd13f
 uid: core/miscellaneous/configuring-dbcontext
 ms.openlocfilehash: 3ab90d46b7a4476044e5ea38eaf04f995708e7bf
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73655803"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78414162"
 ---
 # <a name="configuring-a-dbcontext"></a>Configuración de un DbContext
 
@@ -17,9 +17,9 @@ En este artículo se muestran los patrones básicos para configurar un `DbContex
 
 ## <a name="design-time-dbcontext-configuration"></a>Configuración de DbContext en tiempo de diseño
 
-EF Core herramientas en tiempo de diseño, como las [migraciones](xref:core/managing-schemas/migrations/index) , deben ser capaces de detectar y crear una instancia de trabajo de un tipo `DbContext` con el fin de recopilar detalles sobre los tipos de entidad de la aplicación y cómo se asignan a un esquema de base de datos. Este proceso puede ser automático siempre que la herramienta pueda crear fácilmente el `DbContext` de manera que se configurará de forma similar a como se configuraría en tiempo de ejecución.
+EF Core herramientas en tiempo de diseño como las [migraciones](xref:core/managing-schemas/migrations/index) deben ser capaces de detectar y crear una instancia de trabajo de un tipo de `DbContext` para recopilar detalles sobre los tipos de entidad de la aplicación y cómo se asignan a un esquema de base de datos. Este proceso puede ser automático siempre y cuando la herramienta pueda crear fácilmente el `DbContext` de manera que se configurará de forma similar a como se configuraría en tiempo de ejecución.
 
-Aunque cualquier patrón que proporcione la información de configuración necesaria al `DbContext` puede funcionar en tiempo de ejecución, las herramientas que requieren el uso de un `DbContext` en tiempo de diseño solo pueden funcionar con un número limitado de patrones. Estos se describen con más detalle en la sección [creación de contexto en tiempo de diseño](xref:core/miscellaneous/cli/dbcontext-creation) .
+Aunque cualquier patrón que proporcione la información de configuración necesaria para el `DbContext` puede funcionar en tiempo de ejecución, las herramientas que requieren el uso de un `DbContext` en tiempo de diseño solo pueden funcionar con un número limitado de patrones. Estos se describen con más detalle en la sección [creación de contexto en tiempo de diseño](xref:core/miscellaneous/cli/dbcontext-creation) .
 
 ## <a name="configuring-dbcontextoptions"></a>Configuración de DbContextOptions
 
@@ -30,7 +30,7 @@ Aunque cualquier patrón que proporcione la información de configuración neces
 - Cualquier selector de comportamiento opcional de nivel de proveedor, normalmente también encadenado dentro de la llamada al método de selección de proveedor.
 - Los selectores de comportamiento de EF Core general, normalmente encadenados después o antes del método de selector de proveedor
 
-En el ejemplo siguiente se configura el `DbContextOptions` para usar el proveedor de SQL Server, una conexión contenida en la variable `connectionString`, un tiempo de espera de comando de nivel de proveedor y un selector de comportamiento de EF Core que hace que todas las consultas se ejecuten en la `DbContext` [sin seguimiento](xref:core/querying/tracking#no-tracking-queries) de forma predeterminada:
+En el ejemplo siguiente se configura el `DbContextOptions` para utilizar el proveedor de SQL Server, una conexión contenida en la variable `connectionString`, un tiempo de espera de comando de nivel de proveedor y un selector de comportamiento de EF Core que hace que todas las consultas ejecutadas en el `DbContext` [sin seguimiento](xref:core/querying/tracking#no-tracking-queries) de forma predeterminada:
 
 ``` csharp
 optionsBuilder
@@ -41,13 +41,13 @@ optionsBuilder
 > [!NOTE]  
 > Los métodos de selector de proveedor y otros métodos de selector de comportamiento mencionados anteriormente son métodos de extensión en `DbContextOptions` o clases de opciones específicas del proveedor. Para tener acceso a estos métodos de extensión, puede que necesite tener un espacio de nombres (normalmente `Microsoft.EntityFrameworkCore`) en el ámbito e incluir dependencias de paquetes adicionales en el proyecto.
 
-Se puede proporcionar el `DbContextOptions` al `DbContext` invalidando el método `OnConfiguring` o externamente a través de un argumento de constructor.
+El `DbContextOptions` se puede proporcionar al `DbContext` invalidando el método de `OnConfiguring` o externamente a través de un argumento de constructor.
 
 Si se usan ambos, `OnConfiguring` se aplica en último lugar y puede sobrescribir las opciones proporcionadas al argumento del constructor.
 
 ### <a name="constructor-argument"></a>Argumento de constructor
 
-El constructor puede aceptar simplemente un `DbContextOptions` como se indica a continuación:
+El constructor simplemente puede aceptar un `DbContextOptions` como se indica a continuación:
 
 ``` csharp
 public class BloggingContext : DbContext
@@ -77,9 +77,9 @@ using (var context = new BloggingContext(optionsBuilder.Options))
 
 ### <a name="onconfiguring"></a>Configuración
 
-También puede inicializar el `DbContextOptions` en el propio contexto. Aunque puede usar esta técnica para la configuración básica, normalmente tendrá que obtener determinados detalles de configuración del exterior, por ejemplo, una cadena de conexión de base de datos. Esto puede hacerse con una API de configuración o con cualquier otro medio.
+También puede inicializar la `DbContextOptions` dentro del propio contexto. Aunque puede usar esta técnica para la configuración básica, normalmente tendrá que obtener determinados detalles de configuración del exterior, por ejemplo, una cadena de conexión de base de datos. Esto puede hacerse con una API de configuración o con cualquier otro medio.
 
-Para inicializar `DbContextOptions` en el contexto, invalide el método `OnConfiguring` y llame a los métodos en el `DbContextOptionsBuilder` proporcionado:
+Para inicializar `DbContextOptions` dentro del contexto, invalide el método `OnConfiguring` y llame a los métodos en el `DbContextOptionsBuilder`proporcionado:
 
 ``` csharp
 public class BloggingContext : DbContext
@@ -166,7 +166,7 @@ var options = serviceProvider.GetService<DbContextOptions<BloggingContext>>();
 
 ## <a name="avoiding-dbcontext-threading-issues"></a>Evitar problemas de subprocesos DbContext
 
-Entity Framework Core no admite varias operaciones en paralelo que se ejecutan en la misma instancia de `DbContext`. Esto incluye la ejecución paralela de consultas asincrónicas y cualquier uso simultáneo explícito de varios subprocesos. Por lo tanto, las llamadas asincrónicas siempre `await` de forma inmediata, o utilizan instancias de `DbContext` independientes para las operaciones que se ejecutan en paralelo.
+Entity Framework Core no admite varias operaciones paralelas que se ejecutan en la misma instancia de `DbContext`. Esto incluye la ejecución paralela de consultas asincrónicas y cualquier uso simultáneo explícito de varios subprocesos. Por lo tanto, siempre `await` llamadas asincrónicas inmediatamente, o bien usar instancias de `DbContext` independientes para las operaciones que se ejecutan en paralelo.
 
 Cuando EF Core detecta un intento de usar una instancia de `DbContext` simultáneamente, verá un `InvalidOperationException` con un mensaje similar al siguiente:
 
@@ -174,21 +174,21 @@ Cuando EF Core detecta un intento de usar una instancia de `DbContext` simultán
 
 Cuando el acceso simultáneo no se detecta, puede dar lugar a un comportamiento indefinido, a bloqueos de la aplicación y a daños en los datos.
 
-Hay errores comunes que pueden provocar involuntariamente el acceso simultáneo a la misma instancia de `DbContext`:
+Hay errores comunes que pueden provocar involuntariamente el acceso simultáneo en la misma instancia de `DbContext`:
 
 ### <a name="forgetting-to-await-the-completion-of-an-asynchronous-operation-before-starting-any-other-operation-on-the-same-dbcontext"></a>Se olvida esperar la finalización de una operación asincrónica antes de iniciar cualquier otra operación en el mismo DbContext
 
-Los métodos asincrónicos permiten a EF Core iniciar las operaciones que tienen acceso a la base de datos sin bloqueos. Pero si un llamador no espera la finalización de uno de estos métodos y continúa realizando otras operaciones en el `DbContext`, el estado de `DbContext` puede ser, (y probablemente, estará dañado).
+Los métodos asincrónicos permiten a EF Core iniciar las operaciones que tienen acceso a la base de datos sin bloqueos. Pero si el autor de la llamada no espera la finalización de uno de estos métodos y continúa realizando otras operaciones en el `DbContext`, el estado de la `DbContext` puede ser (y probablemente estará) dañado.
 
 Esperar siempre EF Core métodos asincrónicos inmediatamente.  
 
 ### <a name="implicitly-sharing-dbcontext-instances-across-multiple-threads-via-dependency-injection"></a>Compartir instancias de DbContext implícitamente entre varios subprocesos mediante la inserción de dependencias
 
-El método [de extensión `AddDbContext`](https://docs.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkservicecollectionextensions.adddbcontext) registra los tipos `DbContext` con una [duración de ámbito](https://docs.microsoft.com/aspnet/core/fundamentals/dependency-injection#service-lifetimes) de forma predeterminada.
+El método de extensión [`AddDbContext`](https://docs.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkservicecollectionextensions.adddbcontext) registra los tipos de `DbContext` con una [duración de ámbito](https://docs.microsoft.com/aspnet/core/fundamentals/dependency-injection#service-lifetimes) de forma predeterminada.
 
 Esto es seguro contra problemas de acceso simultáneos en ASP.NET Core aplicaciones porque solo hay un subproceso que ejecuta cada solicitud de cliente en un momento dado, y dado que cada solicitud obtiene un ámbito de inyección de dependencia independiente (y, por tanto, una instancia de `DbContext` independiente).
 
-Sin embargo, cualquier código que ejecute explícitamente varios subprocesos en paralelo debe asegurarse de que no se tenga acceso a las instancias `DbContext` simultáneamente.
+Sin embargo, cualquier código que ejecute explícitamente varios subprocesos en paralelo debe asegurarse de que no se tenga acceso a las instancias de `DbContext` simultáneamente.
 
 Mediante la inserción de dependencias, esto se puede lograr registrando el contexto como ámbito y creando ámbitos (mediante `IServiceScopeFactory`) para cada subproceso, o registrando el `DbContext` como transitorio (mediante la sobrecarga de `AddDbContext` que toma un parámetro `ServiceLifetime`).
 

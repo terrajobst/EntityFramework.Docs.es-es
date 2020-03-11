@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: d6d5a465-6434-45fa-855d-5eb48c61a2ea
 ms.openlocfilehash: 07eb605f0d39f0c1bcfe781540525180f0dd0b22
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72181673"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78416082"
 ---
 # <a name="performance-considerations-for-ef-4-5-and-6"></a>Consideraciones de rendimiento para EF 4, 5 y 6
 Por David Obando, Eric Dettinger y otros
@@ -104,12 +104,12 @@ Si realiza modificaciones manualmente en los archivos de esquema para el modelo,
 
 También puede usar EDMGen para generar vistas para un archivo EDMX: el tema de MSDN al que se hace referencia anteriormente describe cómo agregar un evento anterior a la compilación para hacer esto, pero esto es complicado y hay algunos casos en los que no es posible. Generalmente, es más fácil usar una plantilla T4 para generar las vistas cuando el modelo se encuentra en un archivo edmx.
 
-El blog del equipo ADO.NET tiene una entrada de blog que describe cómo utilizar una plantilla T4 para la generación de vistas ( \<http://blogs.msdn.com/b/adonet/archive/2008/06/20/how-to-use-a-t4-template-for-view-generation.aspx>). Esta publicación incluye una plantilla que se puede descargar y agregar al proyecto. La plantilla se escribió para la primera versión de Entity Framework, por lo que no se garantiza que funcionen con las versiones más recientes de Entity Framework. Sin embargo, puede descargar un conjunto más actualizado de plantillas de generación de vistas para Entity Framework 4 y 5from la galería de Visual Studio:
+El blog del equipo de ADO.NET tiene una publicación que describe cómo usar una plantilla T4 para la generación de vistas (\<http://blogs.msdn.com/b/adonet/archive/2008/06/20/how-to-use-a-t4-template-for-view-generation.aspx>). Esta publicación incluye una plantilla que se puede descargar y agregar al proyecto. La plantilla se escribió para la primera versión de Entity Framework, por lo que no se garantiza que funcionen con las versiones más recientes de Entity Framework. Sin embargo, puede descargar un conjunto más actualizado de plantillas de generación de vistas para Entity Framework 4 y 5from la galería de Visual Studio:
 
 -   VB.NET: \<http://visualstudiogallery.msdn.microsoft.com/118b44f2-1b91-4de2-a584-7a680418941d>
 -   C\#: \<http://visualstudiogallery.msdn.microsoft.com/ae7730ce-ddab-470f-8456-1b313cd2c44d>
 
-Si usa Entity Framework 6 puede obtener la vista por plantillas T4 de generación de la Galería de Visual Studio en \<http://visualstudiogallery.msdn.microsoft.com/18a7db90-6705-4d19-9dd1-0a6c23d0751f>.
+Si usa Entity Framework 6, puede obtener las plantillas T4 de la generación de vistas de la galería de Visual Studio en \<http://visualstudiogallery.msdn.microsoft.com/18a7db90-6705-4d19-9dd1-0a6c23d0751f>.
 
 ### <a name="24-reducing-the-cost-of-view-generation"></a>2,4 reducir el costo de la generación de vistas
 
@@ -137,8 +137,8 @@ Si tiene un modelo de Code First grande, el uso de asociaciones independientes t
 
 | Al usar      | Haga esto                                                                                                                                                                                                                                                                                                                              |
 |:----------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Diseñador de entidades | Después de agregar una asociación entre dos entidades, asegúrese de que tiene una restricción referencial. Las restricciones referenciales indican a Entity Framework que utilicen claves externas en lugar de asociaciones independientes. Para obtener más información, visite \<http://blogs.msdn.com/b/efdesign/archive/2009/03/16/foreign-keys-in-the-entity-framework.aspx>. |
-| EDMGen          | Al usar EDMGen para generar los archivos de la base de datos, las claves externas se respetan y se agregan al modelo como tal. Para obtener más información sobre las distintas opciones que se expone de forma EDMGen visite [http://msdn.microsoft.com/library/bb387165.aspx](https://msdn.microsoft.com/library/bb387165.aspx).                           |
+| Entity Designer | Después de agregar una asociación entre dos entidades, asegúrese de que tiene una restricción referencial. Las restricciones referenciales indican a Entity Framework que utilicen claves externas en lugar de asociaciones independientes. Para obtener más detalles, visite \<http://blogs.msdn.com/b/efdesign/archive/2009/03/16/foreign-keys-in-the-entity-framework.aspx>. |
+| EDMGen          | Al usar EDMGen para generar los archivos de la base de datos, las claves externas se respetan y se agregan al modelo como tal. Para obtener más información sobre las distintas opciones expuestas por EDMGen, visite [http://msdn.microsoft.com/library/bb387165.aspx](https://msdn.microsoft.com/library/bb387165.aspx).                           |
 | Code First      | Vea la sección "Convención de relación" del tema [code First convenciones](~/ef6/modeling/code-first/conventions/built-in.md) para obtener información sobre cómo incluir propiedades de clave externa en objetos dependientes cuando se usa Code First.                                                                                              |
 
 #### <a name="242-moving-your-model-to-a-separate-assembly"></a>2.4.2 mover el modelo a un ensamblado independiente
@@ -175,7 +175,7 @@ Find usa el valor de la clave principal para intentar buscar una entidad de la q
 
 Se debe tener en cuenta el rendimiento al usar la búsqueda. De forma predeterminada, las invocaciones a este método desencadenarán una validación de la memoria caché de objetos para detectar los cambios que aún están pendientes de confirmación en la base de datos. Este proceso puede resultar muy caro si hay un gran número de objetos en la memoria caché de objetos o en un gráfico de objetos grande que se va a agregar a la memoria caché de objetos, pero también se puede deshabilitar. En algunos casos, es posible que perciba un orden de magnitud de diferencia en la llamada al método Find cuando se deshabilitan los cambios de detección automática. Todavía se percibe un segundo orden de magnitud cuando el objeto realmente está en la memoria caché en lugar de cuando el objeto tiene que recuperarse de la base de datos. A continuación se muestra un gráfico de ejemplo con medidas tomadas con algunos de nuestros microbenchmarks, expresados en milisegundos, con una carga de 5000 entidades:
 
-.Net ![4,5 escala logarítmica](~/ef6/media/net45logscale.png ".net 4,5-escala logarítmica")
+![Escala logarítmica de .NET 4,5](~/ef6/media/net45logscale.png ".NET 4,5: escala logarítmica")
 
 Ejemplo de búsqueda con cambios de detección automática deshabilitados:
 
@@ -244,11 +244,11 @@ Para demostrar el efecto del almacenamiento en caché del plan de consulta en el
 
 ##### <a name="3231-test-results"></a>Resultados de pruebas 3.2.3.1
 
-| Probar                                                                   | EF5 sin caché | EF5 en caché | EF6 sin caché | EF6 en caché |
+| Prueba                                                                   | EF5 sin caché | EF5 en caché | EF6 sin caché | EF6 en caché |
 |:-----------------------------------------------------------------------|:-------------|:-----------|:-------------|:-----------|
 | Enumerar todas las consultas de 18723                                          | 124          | 125.4      | 124.3        | 125.3      |
-| Evitar el rastreo (solo las primeras 800, independientemente de la complejidad)  | 41.7         | 5.5        | 40.5         | 5.4        |
-| Solo las consultas de AggregatingSubtotals (178 en total, lo que evita el barrido) | 39,5         | 4.5        | 38.1         | 4.6        |
+| Evitar el rastreo (solo las primeras 800, independientemente de la complejidad)  | 41.7         | 5.5        | 40,5         | 5.4        |
+| Solo las consultas de AggregatingSubtotals (178 en total, lo que evita el barrido) | 39,5         | 4.5.        | 38.1         | 4.6        |
 
 *Todo el tiempo en segundos.*
 
@@ -396,7 +396,7 @@ La Entity Framework también admite el almacenamiento en caché de metadatos. Es
 4.  La ItemCollection se comprueba periódicamente para su uso. Si se determina que no se ha tenido acceso recientemente a un área de trabajo, se marcará para su limpieza en el siguiente barrido de caché.
 5.  Simplemente la creación de EntityConnection hará que se cree una memoria caché de metadatos (aunque las colecciones de elementos que contengan no se inicializarán hasta que se abra la conexión). Esta área de trabajo permanecerá en memoria hasta que el algoritmo de almacenamiento en caché determine que no está en uso.
 
-Customer Advisory Team ha escrito una entrada de blog que describe que contiene una referencia a un objeto ItemCollection con el fin de evitar la "degradación" al usar los modelos grandes: \<http://blogs.msdn.com/b/appfabriccat/archive/2010/10/22/metadataworkspace-reference-in-wcf-services.aspx>.
+El equipo de asesoramiento al cliente ha escrito una entrada de blog que describe la conservación de una referencia a un ItemCollection para evitar la "degradación" al utilizar modelos grandes: \<http://blogs.msdn.com/b/appfabriccat/archive/2010/10/22/metadataworkspace-reference-in-wcf-services.aspx>.
 
 #### <a name="342-the-relationship-between-metadata-caching-and-query-plan-caching"></a>3.4.2 la relación entre almacenamiento en caché de metadatos y almacenamiento en caché del plan de consulta
 
@@ -411,7 +411,7 @@ Esta implementación del almacenamiento en caché de segundo nivel es una funcio
 #### <a name="351-additional-references-for-results-caching-with-the-wrapping-provider"></a>3.5.1 referencias adicionales para el almacenamiento en caché de resultados con el proveedor de ajuste
 
 -   Julia Lerman ha escrito un artículo de MSDN "almacenamiento en caché de segundo nivel en Entity Framework y Windows Azure" que incluye cómo actualizar el proveedor de empaquetado de ejemplo para usar el almacenamiento en caché de Windows Server AppFabric: [https://msdn.microsoft.com/magazine/hh394143.aspx](https://msdn.microsoft.com/magazine/hh394143.aspx)
--   Si trabaja con Entity Framework 5, el blog del equipo tiene una entrada de blog que describe cómo empezar a funcionar con el proveedor de almacenamiento en caché para Entity Framework 5: \<http://blogs.msdn.com/b/adonet/archive/2010/09/13/ef-caching-with-jarek-kowalski-s-provider.aspx>. También incluye una plantilla T4 para ayudar a automatizar la adición del almacenamiento en caché de segundo nivel al proyecto.
+-   Si está trabajando con Entity Framework 5, el blog del equipo tiene una publicación en la que se describe cómo hacer todo lo que se ejecuta con el proveedor de almacenamiento en caché para Entity Framework 5: \<http://blogs.msdn.com/b/adonet/archive/2010/09/13/ef-caching-with-jarek-kowalski-s-provider.aspx>. También incluye una plantilla T4 para ayudar a automatizar la adición del almacenamiento en caché de segundo nivel al proyecto.
 
 ## <a name="4-autocompiled-queries"></a>4 consultas compiladas
 
@@ -424,7 +424,7 @@ Entity Framework detecta cuándo es necesario volver a compilar una consulta y l
 -   Cambio de MergeOption asociado a la consulta. No se usará la consulta almacenada en caché, sino que el compilador del plan se ejecutará de nuevo y el plan recién creado se almacenará en caché.
 -   Cambiar el valor de ContextOptions. UseCSharpNullComparisonBehavior. Tiene el mismo efecto que cambiar MergeOption.
 
-Otras condiciones pueden impedir que la consulta use la memoria caché. Algunos ejemplos comunes son:
+Otras condiciones pueden impedir que la consulta use la memoria caché. Los ejemplos comunes son:
 
 -   Usar IEnumerable&lt;T&gt;. Contiene&lt;&gt;(valor T).
 -   Usar funciones que generan consultas con constantes.
@@ -647,14 +647,14 @@ Entity Framework ofrece varias maneras de consultar. Echaremos un vistazo a las 
 var q = context.Products.Where(p => p.Category.CategoryName == "Beverages");
 ```
 
-**Pros**
+**Ventajas**
 
 -   Adecuado para las operaciones CUD.
 -   Objetos completamente materializados.
 -   Más sencillo de escribir con la sintaxis integrada en el lenguaje de programación.
 -   Buen rendimiento.
 
-**Iconos**
+**Desventajas**
 
 -   Ciertas restricciones técnicas, como:
     -   Los patrones que usan DefaultIfEmpty para consultas de combinación externas dan como resultado consultas más complejas que las instrucciones de combinación externa simples en Entity SQL.
@@ -676,13 +676,13 @@ var q = context.Products.AsNoTracking()
                         .Where(p => p.Category.CategoryName == "Beverages");
 ```
 
-**Pros**
+**Ventajas**
 
 -   Rendimiento mejorado con respecto a las consultas LINQ normales.
 -   Objetos completamente materializados.
 -   Más sencillo de escribir con la sintaxis integrada en el lenguaje de programación.
 
-**Iconos**
+**Desventajas**
 
 -   No es adecuado para las operaciones de CUD.
 -   Ciertas restricciones técnicas, como:
@@ -703,13 +703,13 @@ Esta consulta en particular no especifica explícitamente que sea NoTracking, pe
 ObjectQuery<Product> products = context.Products.Where("it.Category.CategoryName = 'Beverages'");
 ```
 
-**Pros**
+**Ventajas**
 
 -   Adecuado para las operaciones CUD.
 -   Objetos completamente materializados.
 -   Admite el almacenamiento en caché del plan de consulta.
 
-**Iconos**
+**Desventajas**
 
 -   Incluye cadenas de consulta textual que son más propensas a errores del usuario que las construcciones de consulta integradas en el lenguaje.
 
@@ -728,11 +728,11 @@ using (EntityDataReader reader = cmd.ExecuteReader(CommandBehavior.SequentialAcc
 }
 ```
 
-**Pros**
+**Ventajas**
 
 -   Admite el almacenamiento en caché del plan de consulta en .NET 4,0 (el almacenamiento en caché del plan es compatible con todos los demás tipos de consulta en .NET 4,5).
 
-**Iconos**
+**Desventajas**
 
 -   Incluye cadenas de consulta textual que son más propensas a errores del usuario que las construcciones de consulta integradas en el lenguaje.
 -   No es adecuado para las operaciones de CUD.
@@ -764,13 +764,13 @@ var beverages = context.ExecuteStoreQuery<Product>(
 );
 ```
 
-**Pros**
+**Ventajas**
 
 -   Rendimiento generalmente más rápido, ya que se omite el compilador del plan.
 -   Objetos completamente materializados.
 -   Adecuado para las operaciones de CUD cuando se usa desde DbSet.
 
-**Iconos**
+**Desventajas**
 
 -   La consulta es de texto y propenso a errores.
 -   La consulta está asociada a un back-end específico mediante la semántica del almacén en lugar de la semántica conceptual.
@@ -787,13 +787,13 @@ private static readonly Func<NorthwindEntities, string, IQueryable<Product>> pro
 var q = context.InvokeProductsForCategoryCQ("Beverages");
 ```
 
-**Pros**
+**Ventajas**
 
 -   Proporciona una mejora del rendimiento del 7% sobre las consultas LINQ normales.
 -   Objetos completamente materializados.
 -   Adecuado para las operaciones CUD.
 
-**Iconos**
+**Desventajas**
 
 -   Mayor complejidad y sobrecarga de programación.
 -   La mejora del rendimiento se pierde cuando se compone de una consulta compilada.
@@ -803,7 +803,7 @@ var q = context.InvokeProductsForCategoryCQ("Beverages");
 
 Los microbenchmarks simples en los que no se ha agotado el tiempo de creación del contexto se han puesto en la prueba. Se ha medido la consulta de 5000 veces para un conjunto de entidades sin almacenamiento en caché en un entorno controlado. Estos números se deben realizar con una advertencia: no reflejan los números reales generados por una aplicación, sino que son una medición muy precisa de la cantidad de una diferencia de rendimiento que se produce cuando se comparan diferentes opciones de consulta. manzanas a manzanas, excepto el costo de crear un nuevo contexto.
 
-| EF  | Probar                                 | Tiempo (MS) | Memoria   |
+| EF  | Prueba                                 | Tiempo (MS) | Memoria   |
 |:----|:-------------------------------------|:----------|:---------|
 | EF5 | ObjectContext (ESQL)                   | 2414      | 38801408 |
 | EF5 | Consulta de ObjectContext para LINQ             | 2692      | 38277120 |
@@ -825,7 +825,7 @@ Los microbenchmarks son muy sensibles a los pequeños cambios en el código. En 
 
 Para comparar el rendimiento real de las distintas opciones de consulta, hemos creado 5 variaciones de pruebas independientes en las que usamos una opción de consulta diferente para seleccionar todos los productos cuyo nombre de categoría sea "bebidas". Cada iteración incluye el costo de crear el contexto y el costo de materializar todas las entidades devueltas. 10 iteraciones se ejecutan de vez en cuando, antes de tomar la suma de 1000 iteraciones con tiempo. Los resultados que se muestran son el promedio de ejecución de 5 ejecuciones de cada prueba. Para obtener más información, vea el Apéndice B, que incluye el código de la prueba.
 
-| EF  | Probar                                        | Tiempo (MS) | Memoria   |
+| EF  | Prueba                                        | Tiempo (MS) | Memoria   |
 |:----|:--------------------------------------------|:----------|:---------|
 | EF5 | ObjectContext (comando de entidad)                | 621       | 39350272 |
 | EF5 | Consulta SQL DbContext en la base de datos             | 825       | 37519360 |
@@ -871,15 +871,15 @@ Otra consideración de rendimiento al usar Entity Framework es la estrategia de 
 
 Si el modelo utiliza la herencia de TPT, las consultas que se generan serán más complejas que las que se generan con las otras estrategias de herencia, lo que puede dar lugar a tiempos de ejecución más largos en el almacén.  Por lo general, se tarda más tiempo en generar consultas en un modelo TPT y materializar los objetos resultantes.
 
-Vea las "Consideraciones de rendimiento al usar la herencia de TPT (tabla por tipo) en Entity Framework" entrada de blog MSDN: \<http://blogs.msdn.com/b/adonet/archive/2010/08/17/performance-considerations-when-using-tpt-table-per-type-inheritance-in-the-entity-framework.aspx>.
+Vea la herencia "consideraciones de rendimiento al usar TPT (tabla por tipo)" en la Entity Framework "entrada del blog de MSDN: \<http://blogs.msdn.com/b/adonet/archive/2010/08/17/performance-considerations-when-using-tpt-table-per-type-inheritance-in-the-entity-framework.aspx>.
 
 #### <a name="711-avoiding-tpt-in-model-first-or-code-first-applications"></a>7.1.1 evitar la aplicación de la Model First o Code First aplicaciones
 
 Al crear un modelo sobre una base de datos existente que tiene un esquema TPT, no tiene muchas opciones. Pero al crear una aplicación mediante Model First o Code First, debe evitar la herencia de TPT por cuestiones de rendimiento.
 
-Al usar Model First en el Asistente de Entity Designer, obtendrá el TPT para cualquier herencia del modelo. Si desea cambiar a una estrategia de herencia de TPH con Model First, puede usar el "Entity Designer Database Generation Power Pack" disponible desde la Galería de Visual Studio ( \<http://visualstudiogallery.msdn.microsoft.com/df3541c3-d833-4b65-b942-989e7ec74c87/>).
+Al usar Model First en el Asistente de Entity Designer, obtendrá el TPT para cualquier herencia del modelo. Si desea cambiar a una estrategia de herencia de TPH con Model First, puede usar "Entity Designer Database Generation Power Pack" disponible en la galería de Visual Studio (\<http://visualstudiogallery.msdn.microsoft.com/df3541c3-d833-4b65-b942-989e7ec74c87/>).
 
-Cuando se usa Code First para configurar la asignación de un modelo con herencia, EF usará TPH de forma predeterminada, por lo que todas las entidades de la jerarquía de herencia se asignarán a la misma tabla. Consulte la sección "Asignar con la API Fluent" del artículo "La código primero en entidad Framework4.1" en MSDN Magazine ( [http://msdn.microsoft.com/magazine/hh126815.aspx](https://msdn.microsoft.com/magazine/hh126815.aspx)) para obtener más detalles.
+Cuando se usa Code First para configurar la asignación de un modelo con herencia, EF usará TPH de forma predeterminada, por lo que todas las entidades de la jerarquía de herencia se asignarán a la misma tabla. Consulte la sección "asignación con la API fluida" del artículo "Code First en Entity Framework 4.1" en MSDN Magazine ( [http://msdn.microsoft.com/magazine/hh126815.aspx](https://msdn.microsoft.com/magazine/hh126815.aspx)) para obtener más detalles.
 
 ### <a name="72-upgrading-from-ef4-to-improve-model-generation-time"></a>7,2 actualización de EF4 para mejorar el tiempo de generación de modelos
 
@@ -899,7 +899,7 @@ Merece la pena tener en cuenta que cuando se genera el SSDL, la carga se emplea 
 
 ### <a name="73-splitting-large-models-with-database-first-and-model-first"></a>7,3 dividir modelos grandes con Database First y Model First
 
-A medida que aumenta el tamaño del modelo, la superficie del diseñador se vuelve abarrotada y difícil de usar. Normalmente consideramos que un modelo con más de 300 entidades es demasiado grande para usar eficazmente el diseñador. Entrada de blog siguiente describe varias opciones para dividir los modelos grandes: \<http://blogs.msdn.com/b/adonet/archive/2008/11/25/working-with-large-models-in-entity-framework-part-2.aspx>.
+A medida que aumenta el tamaño del modelo, la superficie del diseñador se vuelve abarrotada y difícil de usar. Normalmente consideramos que un modelo con más de 300 entidades es demasiado grande para usar eficazmente el diseñador. En la siguiente entrada de blog se describen varias opciones para dividir modelos grandes: \<http://blogs.msdn.com/b/adonet/archive/2008/11/25/working-with-large-models-in-entity-framework-part-2.aspx>.
 
 La publicación se escribió para la primera versión de Entity Framework, pero los pasos se siguen aplicando.
 
@@ -915,7 +915,7 @@ Al establecer el campo ContextTypeName también se evita un problema funcional e
 
 Entity Framework le permite utilizar clases de datos personalizadas junto con su modelo de datos sin realizar ninguna modificación en las clases de datos. Esto significa que podrá utilizar objetos CLR "antiguos" (POCO), tales como objetos de dominio existentes, con el modelo de datos. Estas clases de datos POCO (también conocidas como objetos que ignoran la persistencia), que se asignan a las entidades que se definen en un modelo de datos, admiten la mayoría de los mismos comportamientos de consulta, inserción, actualización y eliminación que los tipos de entidad generados por las herramientas de Entity Data Model.
 
-Entity Framework también puede crear clases de proxy derivadas de los tipos POCO, que se usan cuando se desea habilitar características como la carga diferida y el seguimiento de cambios automático en entidades POCO. Las clases POCO deben cumplir ciertos requisitos para permitir que Entity Framework utilizar servidores proxy, como se describe aquí: [http://msdn.microsoft.com/library/dd468057.aspx](https://msdn.microsoft.com/library/dd468057.aspx).
+Entity Framework también puede crear clases de proxy derivadas de los tipos POCO, que se usan cuando se desea habilitar características como la carga diferida y el seguimiento de cambios automático en entidades POCO. Las clases POCO deben cumplir ciertos requisitos para permitir que Entity Framework use servidores proxy, como se describe aquí: [http://msdn.microsoft.com/library/dd468057.aspx](https://msdn.microsoft.com/library/dd468057.aspx).
 
 Los proxies de seguimiento de oportunidades enviarán una notificación al administrador de estado de objetos cada vez que se cambie el valor de cualquiera de las propiedades de las entidades, por lo que Entity Framework conoce el estado real de las entidades todo el tiempo. Esto se hace agregando eventos de notificación al cuerpo de los métodos de establecedor de las propiedades y haciendo que el administrador de estado de objetos procese dichos eventos. Tenga en cuenta que la creación de una entidad de proxy normalmente será más costosa que crear una entidad POCO que no sea de proxy debido al conjunto agregado de eventos creados por Entity Framework.
 
@@ -1141,7 +1141,7 @@ Al igual que con la carga diferida, el compromiso será más consultas para carg
 
 Actualmente, Entity Framework no admite la carga diferida de propiedades escalares o complejas. Sin embargo, en los casos en los que tiene una tabla que incluye un objeto grande, como un BLOB, puede usar la división de tablas para separar las propiedades grandes en una entidad independiente. Por ejemplo, supongamos que tiene una tabla de productos que incluye una columna de foto varbinary. Si no necesita tener acceso a esta propiedad con frecuencia en las consultas, puede usar la división de tablas para traer solo las partes de la entidad que necesite normalmente. La entidad que representa la foto del producto solo se cargará cuando lo necesite explícitamente.
 
-Un buen recurso que se muestra cómo habilitar la división de tablas es "Tabla dividir en Entity Framework" entrada de blog de Gil Fink: \<http://blogs.microsoft.co.il/blogs/gilf/archive/2009/10/13/table-splitting-in-entity-framework.aspx>.
+Un buen recurso que muestra cómo habilitar la división de tablas es la entrada de blog "división de tablas en Entity Framework" de Gil Fink: \<http://blogs.microsoft.co.il/blogs/gilf/archive/2009/10/13/table-splitting-in-entity-framework.aspx>.
 
 ## <a name="9-other-considerations"></a>9 otras consideraciones
 
@@ -1179,7 +1179,7 @@ finally
 }
 ```
 
-Antes de desactivar AutoDetectChanges, es conveniente comprender que esto podría hacer que Entity Framework pierda su capacidad de realizar un seguimiento de determinada información sobre los cambios que se están llevando a cabo en las entidades. Si se trata de forma incorrecta, puede provocar incoherencias de datos en la aplicación. Para obtener más información sobre cómo desactivar AutoDetectChanges, lea \<http://blog.oneunicorn.com/2012/03/12/secrets-of-detectchanges-part-3-switching-off-automatic-detectchanges/>.
+Antes de desactivar AutoDetectChanges, es conveniente comprender que esto podría hacer que Entity Framework pierda su capacidad de realizar un seguimiento de determinada información sobre los cambios que se están llevando a cabo en las entidades. Si se trata de forma incorrecta, puede provocar incoherencias de datos en la aplicación. Para obtener más información sobre la desactivación de AutoDetectChanges, lea \<http://blog.oneunicorn.com/2012/03/12/secrets-of-detectchanges-part-3-switching-off-automatic-detectchanges/>.
 
 ### <a name="93-context-per-request"></a>9,3 contexto por solicitud
 
@@ -1226,7 +1226,7 @@ En la consulta de ejemplo anterior, la diferencia de rendimiento era inferior al
 
 Entity Framework 6 presentó la compatibilidad con operaciones asincrónicas cuando se ejecutan en .NET 4,5 o versiones posteriores. En su mayor parte, las aplicaciones que tienen contención relacionada con la e/s beneficiarán al máximo el uso de las operaciones asincrónicas de consulta y guardado. Si la aplicación no se ve afectada por la contención de e/s, el uso de Async hará que, en los mejores casos, se ejecute sincrónicamente y devuelva el resultado en la misma cantidad de tiempo que una llamada sincrónica, o en el peor de los casos, simplemente postergue la ejecución a una tarea asincrónica y agregue Tim adicionales e a la finalización de su escenario.
 
-Para obtener información sobre el trabajo de programación asincrónico que le ayudarán a decidir si async mejorará el rendimiento de la aplicación visita [http://msdn.microsoft.com/library/hh191443.aspx](https://msdn.microsoft.com/library/hh191443.aspx). Para obtener más información sobre el uso de operaciones asincrónicas en Entity Framework, consulte [Async Query and Save](~/ef6/fundamentals/async.md
+Para obtener información sobre cómo funciona la programación asincrónica que le ayudará a decidir si Async mejorará el rendimiento de la aplicación, visite [http://msdn.microsoft.com/library/hh191443.aspx](https://msdn.microsoft.com/library/hh191443.aspx). Para obtener más información sobre el uso de operaciones asincrónicas en Entity Framework, consulte [Async Query and Save](~/ef6/fundamentals/async.md
 ).
 
 ### <a name="96-ngen"></a>NGEN 9,6
@@ -1247,17 +1247,17 @@ Al elegir usar EDMX frente a Code First, es importante saber que la flexibilidad
 
 ### <a name="101-using-the-visual-studio-profiler"></a>10,1 uso del generador de perfiles de Visual Studio
 
-Si tiene problemas de rendimiento con el Entity Framework, puede usar un generador de perfiles como el que está integrado en Visual Studio para ver dónde está gastando su aplicación su tiempo. Esta es la herramienta que se usa para generar los gráficos circulares en la entrada de blog "Explorar el rendimiento de ADO.NET Entity Framework - parte 1" ( \<http://blogs.msdn.com/b/adonet/archive/2008/02/04/exploring-the-performance-of-the-ado-net-entity-framework-part-1.aspx>) que muestre en Entity Framework emplea tiempo durante las consultas en frío y calientes.
+Si tiene problemas de rendimiento con el Entity Framework, puede usar un generador de perfiles como el que está integrado en Visual Studio para ver dónde está gastando su aplicación su tiempo. Esta es la herramienta que se usa para generar los gráficos circulares en la entrada de blog "Exploring the Performance of the ADO.NET Entity Framework-Part 1" (\<http://blogs.msdn.com/b/adonet/archive/2008/02/04/exploring-the-performance-of-the-ado-net-entity-framework-part-1.aspx>) que muestran dónde Entity Framework dedica su tiempo durante las consultas en frío y en caliente.
 
-La entrada de blog "Entity Framework de generación de perfiles con el generador de perfiles de Visual Studio 2010 Profiler" escrita por el equipo de asesoramiento de datos y modelado de clientes muestra un ejemplo real de cómo usaba el generador de perfiles para investigar un problema de rendimiento.  \<http://blogs.msdn.com/b/dmcat/archive/2010/04/30/profiling-entity-framework-using-the-visual-studio-2010-profiler.aspx>. Esta entrada se escribió para una aplicación Windows. Si tiene que generar perfiles de una aplicación Web, las herramientas del Windows performance Recorder (WPR) y del analizador de rendimiento de Windows (WPA) pueden funcionar mejor que si se trabajaran desde Visual Studio. WPR y WPA son parte del Kit de herramientas de rendimiento de Windows que se incluye con el Windows Assessment and Deployment Kit ( [http://www.microsoft.com/download/details.aspx?id=39982 ](https://www.microsoft.com/download/details.aspx?id=39982)).
+La entrada de blog "Entity Framework de generación de perfiles con el generador de perfiles de Visual Studio 2010 Profiler" escrita por el equipo de asesoramiento de datos y modelado de clientes muestra un ejemplo real de cómo usaba el generador de perfiles para investigar un problema de rendimiento.  \<http://blogs.msdn.com/b/dmcat/archive/2010/04/30/profiling-entity-framework-using-the-visual-studio-2010-profiler.aspx>. Esta entrada se escribió para una aplicación Windows. Si tiene que generar perfiles de una aplicación Web, las herramientas del Windows performance Recorder (WPR) y del analizador de rendimiento de Windows (WPA) pueden funcionar mejor que si se trabajaran desde Visual Studio. WPR y WPA forman parte del kit de herramientas de rendimiento de Windows que se incluye con Windows Assessment and Deployment Kit ( [http://www.microsoft.com/download/details.aspx?id=39982](https://www.microsoft.com/download/details.aspx?id=39982)).
 
 ### <a name="102-applicationdatabase-profiling"></a>10,2 generación de perfiles de aplicación/base de datos
 
 Herramientas como el generador de perfiles integrado en Visual Studio le indica dónde dedica tiempo la aplicación.  Existe otro tipo de generador de perfiles que realiza el análisis dinámico de la aplicación en ejecución, ya sea en producción o en preproducción en función de las necesidades, y busca errores comunes y antipatrones de acceso a la base de datos.
 
-Dos generadores de perfiles comercialmente disponibles son el Profiler de Entity Framework ( \<http://efprof.com>) y ORMProfiler ( \<http://ormprofiler.com>).
+Dos perfiles disponibles comercialmente son Entity Framework Profiler (\<http://efprof.com>) y ORMProfiler (\<http://ormprofiler.com>).
 
-Si la aplicación es una aplicación MVC que usa Code First, puede usar MiniProfiler de StackExchange. Scott Hanselman describe esta herramienta en su blog en: \<http://www.hanselman.com/blog/NuGetPackageOfTheWeek9ASPNETMiniProfilerFromStackExchangeRocksYourWorld.aspx>.
+Si la aplicación es una aplicación MVC que usa Code First, puede usar MiniProfiler de StackExchange. Scott Hanselman describe esta herramienta en el blog de: \<http://www.hanselman.com/blog/NuGetPackageOfTheWeek9ASPNETMiniProfilerFromStackExchangeRocksYourWorld.aspx>.
 
 Para más información sobre la generación de perfiles de la actividad de base de datos de la aplicación, consulte el artículo de MSDN Magazine de Julie Lerman titulado [actividad de base de datos de generación de perfiles en el Entity Framework](https://msdn.microsoft.com/magazine/gg490349.aspx).
 
@@ -1288,7 +1288,7 @@ Si desea habilitar el registro de base de datos sin volver a compilar y usa Enti
   </interceptors>
 ```
 
-Para obtener más información sobre cómo agregar un registro sin volver a compilar vaya a \<http://blog.oneunicorn.com/2014/02/09/ef-6-1-turning-on-logging-without-recompiling/>.
+Para obtener más información sobre cómo agregar registro sin volver a compilar, vaya a \<http://blog.oneunicorn.com/2014/02/09/ef-6-1-turning-on-logging-without-recompiling/>.
 
 ## <a name="11-appendix"></a>11 Apéndice
 

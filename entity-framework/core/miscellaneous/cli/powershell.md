@@ -5,11 +5,11 @@ ms.author: bricelam
 ms.date: 09/18/2018
 uid: core/miscellaneous/cli/powershell
 ms.openlocfilehash: a9ce6d5b5f36a72e3715a9de787f1f00e989a58c
-ms.sourcegitcommit: 2355447d89496a8ca6bcbfc0a68a14a0bf7f0327
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/23/2019
-ms.locfileid: "72811904"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78414204"
 ---
 # <a name="entity-framework-core-tools-reference---package-manager-console-in-visual-studio"></a>Referencia de herramientas de Entity Framework Core: consola del administrador de paquetes en Visual Studio
 
@@ -66,7 +66,7 @@ Actualice las herramientas ejecutando el siguiente comando en la **consola del a
 Update-Package Microsoft.EntityFrameworkCore.Tools
 ```
 
-### <a name="verify-the-installation"></a>Comprobar la instalación
+### <a name="verify-the-installation"></a>Comprobación de la instalación
 
 Ejecute este comando para comprobar que las herramientas están instaladas:
 
@@ -186,7 +186,7 @@ Parámetros:
 
 | Parámetro                          | Descripción                                                                                                                                                                                                                                                             |
 |:-----------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <nobr>-Connection \<cadena ></nobr> | Cadena de conexión a la base de datos. En el caso de los proyectos de ASP.NET Core 2. x, el valor puede ser *Name =\<nombre de la cadena de conexión >* . En ese caso, el nombre procede de los orígenes de configuración que se configuran para el proyecto. Este es un parámetro posicional y es obligatorio. |
+| <nobr>-Connection \<cadena ></nobr> | La cadena de conexión a la base de datos. En el caso de los proyectos de ASP.NET Core 2. x, el valor puede ser *Name =\<nombre de la cadena de conexión >* . En ese caso, el nombre procede de los orígenes de configuración que se configuran para el proyecto. Este es un parámetro posicional y es obligatorio. |
 | <nobr>-Provider \<cadena ></nobr>   | Proveedor que se va a usar. Normalmente, es el nombre del paquete de NuGet, por ejemplo: `Microsoft.EntityFrameworkCore.SqlServer`. Este es un parámetro posicional y es obligatorio.                                                                                           |
 | -OutputDir \<cadena >               | Directorio en el que se colocarán los archivos. Las rutas de acceso son relativas al directorio del proyecto.                                                                                                                                                                                             |
 | -ContextDir \<cadena >              | Directorio en el que se va a colocar el archivo de `DbContext`. Las rutas de acceso son relativas al directorio del proyecto.                                                                                                                                                                              |

@@ -1,38 +1,38 @@
 ---
-title: Procedimientos almacenados con varios conjuntos de resultados - EF6
+title: 'Procedimientos almacenados con varios conjuntos de resultados: EF6'
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 1b3797f9-cd3d-4752-a55e-47b84b399dc1
 ms.openlocfilehash: 098ed88ba52e211965baf3660f0e51bd74c71efd
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489315"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78415458"
 ---
 # <a name="stored-procedures-with-multiple-result-sets"></a>Procedimientos almacenados con varios conjuntos de resultados
-En ocasiones, al usar almacenados establecen procedimientos deberá devolver más de un resultado. Este escenario se usa habitualmente para reducir el número de la base de datos de ciclos de ida y necesarios para crear una sola pantalla. Antes de EF5, Entity Framework permitiría que el procedimiento almacenado que se llame, pero solo devuelve el primer resultado establecido en el código de llamada.
+A veces, al utilizar procedimientos almacenados, deberá devolver más de un conjunto de resultados. Este escenario se usa normalmente para reducir el número de recorridos de ida y vuelta de base de datos necesarios para crear una sola pantalla. Antes de EF5, Entity Framework permitiría que se llamara al procedimiento almacenado, pero solo devolvería el primer conjunto de resultados al código de llamada.
 
-En este artículo le mostrará dos maneras en que puede usar para tener acceso a más de un conjunto de resultados desde un procedimiento almacenado en Entity Framework. Una que usa solo código y funciona con tanto código primero y EF Designer y otra que sólo funciona con EF Designer. Las herramientas y soporte API para esto deben mejorar en futuras versiones de Entity Framework.
+En este artículo se muestran dos formas de usar para tener acceso a más de un conjunto de resultados de un procedimiento almacenado en Entity Framework. Una que usa solo código y funciona con Code First y el diseñador de EF y otro que solo funciona con EF Designer. Las herramientas y la compatibilidad con API para esto deberían mejorar en versiones futuras de Entity Framework.
 
 ## <a name="model"></a>Modelo
 
-Los ejemplos de este artículo usan un Blog básico y modelo publicaciones donde un blog tiene todas las entradas y la entrada pertenece a un blog único. Usaremos un procedimiento almacenado en la base de datos que devuelve todos los blogs y publicaciones, algo parecido a esto:
+En los ejemplos de este artículo se usa un blog básico y un modelo de publicaciones en el que un blog tiene muchas publicaciones y una publicación pertenece a un solo blog. Usaremos un procedimiento almacenado en la base de datos que devuelva todos los blogs y publicaciones, algo parecido a esto:
 
 ``` SQL
     CREATE PROCEDURE [dbo].[GetAllBlogsAndPosts]
     AS
-        SELECT * FROM dbo.Blogs
-        SELECT * FROM dbo.Posts
+        SELECT * FROM dbo.Blogs
+        SELECT * FROM dbo.Posts
 ```
 
-## <a name="accessing-multiple-result-sets-with-code"></a>Acceso a los resultados de varios conjuntos con código
+## <a name="accessing-multiple-result-sets-with-code"></a>Obtener acceso a varios conjuntos de resultados con código
 
-Podemos ejecutar código de uso para emitir un comando SQL sin procesar para ejecutar el procedimiento almacenado. La ventaja de este enfoque es que funciona con tanto código primero y EF Designer.
+Podemos ejecutar usar código para emitir un comando SQL sin formato para ejecutar nuestro procedimiento almacenado. La ventaja de este enfoque es que funciona tanto con Code First como con el diseñador EF.
 
-Para obtener resultados múltiples establece el espacio de trabajo que es necesario colocar a la API de ObjectContext por mediante la interfaz de clase IObjectContextAdapter.
+Para conseguir que funcionen varios conjuntos de resultados, es necesario colocarlos en la API de ObjectContext mediante la interfaz IObjectContextAdapter.
 
-Una vez que tenemos un ObjectContext, a continuación, podemos usar el método Translate para traducir los resultados de nuestro procedimiento almacenado en las entidades que pueden controlarse y utilizar en EF como normal. Ejemplo de código siguiente muestra esto en acción.
+Una vez que tenemos un ObjectContext, podemos usar el método translate para traducir los resultados de nuestro procedimiento almacenado en entidades que se pueden seguir y usar en EF como normal. En el ejemplo de código siguiente se muestra esto en acción.
 
 ``` csharp
     using (var db = new BloggingContext())
@@ -82,33 +82,33 @@ Una vez que tenemos un ObjectContext, a continuación, podemos usar el método T
     }
 ```
 
-El método Translate acepta el lector que se ha recibido cuando se ejecutan el procedimiento, un nombre de EntitySet y un MergeOption. El nombre de EntitySet será el mismo que la propiedad DbSet en su contexto derivado. La enumeración MergeOption controla cómo se controlan los resultados si la misma entidad ya existe en la memoria.
+El método translate acepta el lector que se ha recibido cuando se ejecuta el procedimiento, un nombre de EntitySet y un MergeOption. El nombre de EntitySet será el mismo que el de la propiedad DbSet en el contexto derivado. La enumeración MergeOption controla cómo se administran los resultados si la misma entidad ya existe en la memoria.
 
-Aquí se recorrer en iteración la colección de blogs antes de que llamamos NextResult, esto es importante, dado el código anterior porque el primer conjunto de resultados debe consumirse antes de pasar al siguiente conjunto de resultados.
+Aquí se recorre en iteración la colección de blogs antes de que se llame a NextResult, lo que es importante con el código anterior, ya que se debe consumir el primer conjunto de resultados antes de pasar al siguiente conjunto de resultados.
 
-Una vez que traducen los dos métodos se llaman, a continuación, las entidades Blog y Post se realiza un seguimiento por EF del mismo modo que cualquier otra entidad por lo que se puede modificar o eliminar y guarda como normal.
-
->[!NOTE]
-> EF no tiene ninguna asignación en cuenta cuando crea entidades mediante el método Translate. Simplemente coincidirá con nombres de columna en el conjunto de resultados con los nombres de propiedad en las clases.
+Una vez que se llama a los dos métodos de traducción, EF realiza el seguimiento de las entidades blog y post de la misma manera que cualquier otra entidad, por lo que se puede modificar o eliminar y guardar como normal.
 
 >[!NOTE]
-> Que si la carga diferida está habilitada, tiene acceso a la propiedad de publicaciones en una de las entidades blog, a continuación, EF se conecte a la base de datos para cargar de forma diferida todas las publicaciones, aunque ya se han cargado todas ellas. Esto es porque EF no puede saber si han cargado todas las publicaciones o si hay más en la base de datos. Si desea evitar este problema, deberá deshabilitar la carga diferida.
+> EF no tiene en cuenta ninguna asignación al crear entidades mediante el método translate. Simplemente coincidentes con los nombres de columna del conjunto de resultados con los nombres de propiedad de las clases.
+
+>[!NOTE]
+> Si tiene habilitada la carga diferida, el acceso a la propiedad postes en una de las entidades del blog, EF se conectará a la base de datos para cargar de forma diferida todas las publicaciones, aunque ya se hayan cargado todas. Esto se debe a que EF no puede saber si ha cargado o no todas las publicaciones o si hay más en la base de datos. Si desea evitar esto, tendrá que deshabilitar la carga diferida.
 
 ## <a name="multiple-result-sets-with-configured-in-edmx"></a>Varios conjuntos de resultados con configurado en EDMX
 
 >[!NOTE]
-> Debe tener como destino .NET Framework 4.5 para que pueda configurar varios conjuntos de resultados en EDMX. Si tiene como destino .NET 4.0, puede usar el método basado en código que se muestra en la sección anterior.
+> Debe tener como destino .NET Framework 4,5 para poder configurar varios conjuntos de resultados en EDMX. Si el destino es .NET 4,0, puede usar el método basado en código que se muestra en la sección anterior.
 
-Si usa el Diseñador de EF, también puede modificar el modelo para que sepa sobre los distintos conjuntos de resultados que se devolverán. Algo que debe conocer antes de mano es que las herramientas no son resultados múltiples establece compatible con, por lo que deberá modificar manualmente el archivo edmx. Editar el archivo edmx que esto funcionará, pero también interrumpirá la validación del modelo en Visual Studio. Por lo que si la validación del modelo siempre obtendrá errores.
+Si usa el diseñador de EF, también puede modificar el modelo para que conozca los diferentes conjuntos de resultados que se devolverán. Lo que hay que saber antes de la mano es que las herramientas no tienen un conjunto de resultados múltiple, por lo que tendrá que editar manualmente el archivo edmx. La edición del archivo edmx como este funcionará, pero también interrumpirá la validación del modelo en VS. Por lo tanto, si valida el modelo, siempre se producirán errores.
 
--   Para ello, deberá agregar el procedimiento almacenado al modelo como lo haría para una consulta de conjunto de resultados único.
--   Una vez que esto tiene que haga clic con el botón derecho en el modelo y seleccione **abrir con...** a continuación, **Xml**
+-   Para ello, debe agregar el procedimiento almacenado al modelo como lo haría para una sola consulta de conjunto de resultados.
+-   Una vez hecho esto, debe hacer clic con el botón derecho en el modelo y seleccionar **abrir con.** a continuación, **XML**
 
     ![Abrir como](~/ef6/media/openas.png)
 
-Una vez que tenga el modelo que se abrió como XML, deberá hacer lo siguiente:
+Una vez que tenga el modelo abierto como XML, debe realizar los siguientes pasos:
 
--   Busque la importación de función y de tipo compleja en el modelo:
+-   Busque el tipo complejo y la importación de función en el modelo:
 
 ``` xml
     <!-- CSDL content -->
@@ -131,10 +131,10 @@ Una vez que tenga el modelo que se abrió como XML, deberá hacer lo siguiente:
     </edmx:ConceptualModels>
 ```
 
- 
+ 
 
 -   Quitar el tipo complejo
--   Actualizar la importación de función para que asigna a las entidades, en nuestro caso que tendrá un aspecto similar al siguiente:
+-   Actualice la importación de la función para que se asigne a las entidades; en nuestro caso, tendrá un aspecto similar al siguiente:
 
 ``` xml
     <FunctionImport Name="GetAllBlogsAndPosts">
@@ -143,7 +143,7 @@ Una vez que tenga el modelo que se abrió como XML, deberá hacer lo siguiente:
     </FunctionImport>
 ```
 
-Esto indica que el modelo que el procedimiento almacenado devolverá dos colecciones, una de las entradas de blog y una de las entradas de la publicación.
+Esto indica al modelo que el procedimiento almacenado devolverá dos colecciones, una de las entradas del blog y una de las entradas post.
 
 -   Busque el elemento de asignación de función:
 
@@ -168,7 +168,7 @@ Esto indica que el modelo que el procedimiento almacenado devolverá dos colecci
     </edmx:Mappings>
 ```
 
--   Reemplace la asignación de resultado por uno para cada entidad que se devuelve como el siguiente:
+-   Reemplace la asignación de resultados por una para cada entidad que se va a devolver, como la siguiente:
 
 ``` xml
     <ResultMapping>
@@ -188,9 +188,9 @@ Esto indica que el modelo que el procedimiento almacenado devolverá dos colecci
     </ResultMapping>
 ```
 
-También es posible asignar los conjuntos de resultados a los tipos complejos, como el que se crean de forma predeterminada. Para ello cree un nuevo tipo complejo, en lugar de quitarlos y usar los tipos complejos en cualquier lugar que hubiera usado los nombres de entidad en los ejemplos anteriores.
+También es posible asignar los conjuntos de resultados a tipos complejos, como el que se crea de forma predeterminada. Para ello, cree un nuevo tipo complejo, en lugar de quitarlos, y use los tipos complejos en todos los lugares en los que haya usado los nombres de entidad en los ejemplos anteriores.
 
-Una vez que se han cambiado estas asignaciones, a continuación, puede guardar el modelo y ejecute el siguiente código para usar el procedimiento almacenado:
+Una vez que se hayan cambiado estas asignaciones, puede guardar el modelo y ejecutar el código siguiente para usar el procedimiento almacenado:
 
 ``` csharp
     using (var db = new BlogEntities())
@@ -214,8 +214,8 @@ Una vez que se han cambiado estas asignaciones, a continuación, puede guardar e
 ```
 
 >[!NOTE]
-> Si edita manualmente el archivo edmx para el modelo se sobrescribirán si alguna vez se regenera el modelo de la base de datos.
+> Si edita manualmente el archivo edmx para el modelo, se sobrescribirá si alguna vez vuelve a generar el modelo desde la base de datos.
 
 ## <a name="summary"></a>Resumen
 
-Aquí hemos mostrado dos métodos diferentes de obtener acceso a varios resultados se establece mediante Entity Framework. Ambos son igualmente válidos según la situación y las preferencias y debe elegir lo que parece más adecuado para sus circunstancias. Está previsto que la compatibilidad con resultados múltiples conjuntos de serán mejorado en futuras versiones de Entity Framework y que realizar los pasos de este documento ya no será necesario.
+Aquí hemos mostrado dos métodos diferentes para tener acceso a varios conjuntos de resultados mediante Entity Framework. Ambos son igualmente válidos en función de su situación y preferencias, y debe elegir el que mejor se adapte a sus circunstancias. Se prevé que la compatibilidad con varios conjuntos de resultados se mejorará en versiones futuras de Entity Framework y que ya no será necesario realizar los pasos descritos en este documento.

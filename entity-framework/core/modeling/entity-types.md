@@ -6,11 +6,11 @@ ms.date: 12/03/2019
 ms.assetid: cbe6935e-2679-4b77-8914-a8d772240cf1
 uid: core/modeling/entity-types
 ms.openlocfilehash: b3d9ad753637d021d9aa52965da38091ae690f77
-ms.sourcegitcommit: 32c51c22988c6f83ed4f8e50a1d01be3f4114e81
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 12/27/2019
-ms.locfileid: "75502418"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78414582"
 ---
 # <a name="entity-types"></a>Tipos de entidad
 
@@ -32,27 +32,27 @@ En el ejemplo de código siguiente, se incluyen todos los tipos:
 
 Si no desea incluir un tipo en el modelo, puede excluirlo:
 
-### <a name="data-annotationstabdata-annotations"></a>[Anotaciones de datos](#tab/data-annotations)
+### <a name="data-annotations"></a>[Anotaciones de datos](#tab/data-annotations)
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/IgnoreType.cs?name=IgnoreType&highlight=1)]
 
-### <a name="fluent-apitabfluent-api"></a>[API fluida](#tab/fluent-api)
+### <a name="fluent-api"></a>[API fluida](#tab/fluent-api)
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IgnoreType.cs?name=IgnoreType&highlight=3)]
 
 ***
 
-## <a name="table-name"></a>Nombre de tabla
+## <a name="table-name"></a>Nombre de la tabla
 
 Por Convención, cada tipo de entidad se configurará para asignarse a una tabla de base de datos con el mismo nombre que la propiedad DbSet que expone la entidad. Si no existe ningún DbSet para la entidad especificada, se utiliza el nombre de clase.
 
 Puede configurar manualmente el nombre de la tabla:
 
-### <a name="data-annotationstabdata-annotations"></a>[Anotaciones de datos](#tab/data-annotations)
+### <a name="data-annotations"></a>[Anotaciones de datos](#tab/data-annotations)
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/TableName.cs?Name=TableName&highlight=1)]
 
-### <a name="fluent-apitabfluent-api"></a>[API fluida](#tab/fluent-api)
+### <a name="fluent-api"></a>[API fluida](#tab/fluent-api)
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/TableName.cs?Name=TableName&highlight=3-4)]
 
@@ -64,11 +64,11 @@ Al utilizar una base de datos relacional, las tablas se crean por Convención en
 
 Puede configurar las tablas que se van a crear en un esquema específico de la siguiente manera:
 
-### <a name="data-annotationstabdata-annotations"></a>[Anotaciones de datos](#tab/data-annotations)
+### <a name="data-annotations"></a>[Anotaciones de datos](#tab/data-annotations)
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/TableNameAndSchema.cs?name=TableNameAndSchema&highlight=1)]
 
-### <a name="fluent-apitabfluent-api"></a>[API fluida](#tab/fluent-api)
+### <a name="fluent-api"></a>[API fluida](#tab/fluent-api)
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/TableNameAndSchema.cs?name=TableNameAndSchema&highlight=3-4)]
 

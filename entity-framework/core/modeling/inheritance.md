@@ -6,11 +6,11 @@ ms.author: ansvyryd
 ms.date: 10/27/2016
 uid: core/modeling/inheritance
 ms.openlocfilehash: 507854e3acc0347adee612e516b3e2e0b10f55cf
-ms.sourcegitcommit: 32c51c22988c6f83ed4f8e50a1d01be3f4114e81
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 12/27/2019
-ms.locfileid: "75502178"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78414630"
 ---
 # <a name="inheritance"></a>Herencia
 
@@ -31,7 +31,7 @@ Puede incluir tipos en el modelo exponiendo un DbSet para cada tipo en la jerarq
 
 Este modelo se asignará al siguiente esquema de la base de datos (tenga en cuenta la columna *discriminada* creada implícitamente, que identifica qué tipo de *blog* se almacena en cada fila):
 
-![image](_static/inheritance-tph-data.png)
+![imagen](_static/inheritance-tph-data.png)
 
 >[!NOTE]
 > Las columnas de la base de datos se convierten en NULL automáticamente según sea necesario al usar la asignación TPH. Por ejemplo, la columna *RssUrl* admite valores NULL porque las instancias de *blog* normales no tienen esa propiedad.

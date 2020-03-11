@@ -1,33 +1,33 @@
 ---
-title: Convenciones de código personalizado First - EF6
+title: 'Convenciones de Code First personalizado: EF6'
 author: divega
 ms.date: 10/23/2016
 ms.assetid: dd2bdbd9-ae9e-470a-aeb8-d0ba160499b7
 ms.openlocfilehash: cfd7f7cad532dca5227793c04d7d91e977ea5e4e
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489849"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78415896"
 ---
-# <a name="custom-code-first-conventions"></a>Primera convenciones de código personalizado
+# <a name="custom-code-first-conventions"></a>Convenciones de Code First personalizadas
 > [!NOTE]
 > **Solo EF6 y versiones posteriores**: las características, las API, etc. que se tratan en esta página se han incluido a partir de Entity Framework 6. Si usa una versión anterior, no se aplica parte o la totalidad de la información.
 
-Cuando se usa el modelo se calcula a partir de sus clases mediante un conjunto de convenciones de Code First. El valor predeterminado [convenciones de Code First](~/ef6/modeling/code-first/conventions/built-in.md) determinar aspectos como la que propiedad pasa a ser la clave principal de una entidad, el nombre de la tabla que se asigna a una entidad y qué precisión y escala de una columna decimal tiene de forma predeterminada.
+Al utilizar Code First el modelo se calcula a partir de las clases mediante un conjunto de convenciones. Las [convenciones de Code First](~/ef6/modeling/code-first/conventions/built-in.md) predeterminadas determinan aspectos como la propiedad que se convierte en la clave principal de una entidad, el nombre de la tabla a la que se asigna una entidad y la precisión y escala que una columna decimal tiene de forma predeterminada.
 
-A veces estas convenciones predeterminadas no son ideales para el modelo, y tendrá que trabajar en torno a ellas mediante la configuración de muchas entidades individuales mediante las anotaciones de datos o la API Fluent. Convenciones de Code First personalizadas le permiten definir sus propias convenciones que proporcionan los valores predeterminados de configuración para el modelo. En este tutorial, se explorará los diferentes tipos de convenciones personalizadas y cómo crear cada uno de ellos.
+A veces, estas convenciones predeterminadas no son ideales para el modelo y debe solucionarse configurando muchas entidades individuales mediante anotaciones de datos o la API fluida. Las convenciones de Code First personalizadas le permiten definir sus propias convenciones que proporcionan valores predeterminados de configuración para el modelo. En este tutorial, exploraremos los distintos tipos de convenciones personalizadas y cómo crear cada una de ellas.
 
 
-## <a name="model-based-conventions"></a>Convenciones de modelo
+## <a name="model-based-conventions"></a>Convenciones basadas en modelos
 
-Esta página cubre la API DbModelBuilder para convenciones personalizadas. Esta API debería ser suficiente para la creación de la mayoría de convenciones personalizadas. Sin embargo, es también la capacidad para crear convenciones basadas en modelos - convenciones que manipulan el modelo final una vez que se crea, para controlar escenarios avanzados. Para obtener más información, consulte [convenciones basadas en modelos](~/ef6/modeling/code-first/conventions/model.md).
+En esta página se tratan las convenciones personalizadas de la API de DbModelBuilder. Esta API debe ser suficiente para la creación de la mayoría de las convenciones personalizadas. Sin embargo, también existe la posibilidad de crear convenciones basadas en modelos: convenciones que manipulan el modelo final una vez que se crea: para controlar escenarios avanzados. Para obtener más información, vea [convenciones basadas en modelos](~/ef6/modeling/code-first/conventions/model.md).
 
- 
+ 
 
 ## <a name="our-model"></a>Nuestro modelo
 
-Comenzaremos por definir un modelo simple que podemos usar con las convenciones. Agregue las siguientes clases al proyecto.
+Comencemos por definir un modelo simple que podamos usar con nuestras convenciones. Agregue las clases siguientes al proyecto.
 
 ``` csharp
     using System;
@@ -62,13 +62,13 @@ Comenzaremos por definir un modelo simple que podemos usar con las convenciones.
     }
 ```
 
- 
+ 
 
 ## <a name="introducing-custom-conventions"></a>Introducción a las convenciones personalizadas
 
-Vamos a escribir una convención que se configura ninguna propiedad clave como clave principal para su tipo de entidad con nombre.
+Vamos a escribir una Convención que configura cualquier propiedad denominada clave para que sea la clave principal de su tipo de entidad.
 
-Las convenciones están habilitadas en el generador de modelos, que se puede acceder mediante la invalidación de OnModelCreating en el contexto. Actualice la clase ProductContext como sigue:
+Las convenciones se habilitan en el generador de modelos, al que se puede tener acceso invalidando OnModelCreating en el contexto. Actualice la clase ProductContext como se indica a continuación:
 
 ``` csharp
     public class ProductContext : DbContext
@@ -89,9 +89,9 @@ Las convenciones están habilitadas en el generador de modelos, que se puede acc
     }
 ```
 
-Ahora, cualquier propiedad en nuestro modelo de clave con nombre será configurada como la clave principal de cualquier entidad su parte.
+Ahora, cualquier propiedad de nuestro modelo denominado Key se configurará como la clave principal de la entidad de la que forma parte.
 
-También se puede hacer las convenciones más específico mediante el filtrado en el tipo de propiedad que vamos a configurar:
+También podríamos hacer que nuestras convenciones sean más específicas filtrando por el tipo de propiedad que vamos a configurar:
 
 ``` csharp
     modelBuilder.Properties<int>()
@@ -99,9 +99,9 @@ También se puede hacer las convenciones más específico mediante el filtrado e
                 .Configure(p => p.IsKey());
 ```
 
-Esto configurará todas las propiedades que se denomina clave para que sea la principal clave de su entidad, pero sólo si se trata de un entero.
+Esto configurará todas las propiedades que se llaman clave como la clave principal de su entidad, pero solo si son un entero.
 
-Una característica del método IsKey interesante es que es aditiva. Lo que significa que si se llama IsKey en varias propiedades y que todos pasará a formar parte de una clave compuesta. Para esto tenerse en cuenta es que al especificar varias propiedades para una clave también debe especificar un orden de esas propiedades. Puede hacerlo mediante una llamada a la HasColumnOrder como el método siguiente:
+Una característica interesante del método IsKey es que es aditiva. Lo que significa que si llama a IsKey en varias propiedades y se convertirán en parte de una clave compuesta. La única ADVERTENCIA es que, cuando se especifican varias propiedades para una clave, también se debe especificar un orden para esas propiedades. Para ello, puede llamar al método HasColumnOrder como se indica a continuación:
 
 ``` csharp
     modelBuilder.Properties<int>()
@@ -113,24 +113,24 @@ Una característica del método IsKey interesante es que es aditiva. Lo que sign
                 .Configure(x => x.IsKey().HasColumnOrder(2));
 ```
 
-Este código configurará los tipos en nuestro modelo de tener una clave compuesta que consta de la columna de clave de tipo int y la columna de nombre de cadena. Si observamos el modelo en el diseñador sería similar al siguiente:
+Este código configurará los tipos de nuestro modelo para tener una clave compuesta que consta de la columna de clave int y la columna de nombre de cadena. Si vemos el modelo en el diseñador, tendría el siguiente aspecto:
 
 ![Clave compuesta](~/ef6/media/compositekey.png)
 
-Otro ejemplo de convenciones de la propiedad es configurar todas las propiedades de fecha y hora en mi modelo para asignar al tipo datetime2 en SQL Server en lugar de fecha y hora. Puede lograr esto con lo siguiente:
+Otro ejemplo de convenciones de propiedad consiste en configurar todas las propiedades de fecha y hora de mi modelo para que se asignen al tipo datetime2 en SQL Server en lugar de DateTime. Puede conseguirlo con lo siguiente:
 
 ``` csharp
     modelBuilder.Properties<DateTime>()
                 .Configure(c => c.HasColumnType("datetime2"));
 ```
 
- 
+ 
 
-## <a name="convention-classes"></a>Clases de convención
+## <a name="convention-classes"></a>Clases de Convención
 
-Otra manera de definir las convenciones es usar una clase de convención para encapsular la convención. Cuando se usa una clase de convención de crear un tipo que hereda de la clase convención en el espacio de nombres System.Data.Entity.ModelConfiguration.Conventions.
+Otra forma de definir convenciones es usar una clase de Convención para encapsular la Convención. Cuando se usa una clase de Convención, se crea un tipo que hereda de la clase de Convención en el espacio de nombres System. Data. Entity. ModelConfiguration. Conventions.
 
-Podemos crear una clase de convención con la convención de datetime2 que se mostraba anteriormente haciendo lo siguiente:
+Se puede crear una clase de Convención con la Convención datetime2 que se mostró anteriormente haciendo lo siguiente:
 
 ``` csharp
     public class DateTime2Convention : Convention
@@ -143,7 +143,7 @@ Podemos crear una clase de convención con la convención de datetime2 que se mo
     }
 ```
 
-Para indicar a EF que use esta convención de que agregarlo a la colección de convenciones en OnModelCreating, que si ha seguido todo el tutorial tendrá un aspecto similar al siguiente:
+Para indicar a EF que use esta Convención, agréguelo a la colección de convenciones en OnModelCreating, que si ha estado siguiendo con el tutorial tendrá el siguiente aspecto:
 
 ``` csharp
     protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -156,13 +156,13 @@ Para indicar a EF que use esta convención de que agregarlo a la colección de c
     }
 ```
 
-Como puede ver, agregar una instancia de nuestra convención a la colección de convenciones. Heredar de convención proporciona una manera cómoda de agrupar y compartir convenciones entre equipos o proyectos. Por ejemplo, podría tener una biblioteca de clases con un conjunto común de todas las organizaciones proyectos usen las convenciones.
+Como puede ver, agregamos una instancia de nuestra Convención a la colección de convenciones. Heredar de la Convención proporciona una manera cómoda de agrupar y compartir convenciones entre equipos o proyectos. Por ejemplo, podría tener una biblioteca de clases con un conjunto común de convenciones que usan todos los proyectos de la organización.
 
- 
+ 
 
 ## <a name="custom-attributes"></a>Atributos personalizados
 
-Es otro excelente uso de convenciones habilitar nuevos atributos que se usará al configurar un modelo. Para ilustrar esto, vamos a crear un atributo que podemos usar para marcar las propiedades de cadena como no Unicode.
+Otro gran uso de convenciones es habilitar nuevos atributos que se van a usar al configurar un modelo. Para ilustrar esto, vamos a crear un atributo que se puede usar para marcar las propiedades de cadena como no Unicode.
 
 ``` csharp
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
@@ -171,7 +171,7 @@ Es otro excelente uso de convenciones habilitar nuevos atributos que se usará a
     }
 ```
 
-Ahora, vamos a crear una convención para aplicar este atributo a nuestro modelo:
+Ahora, vamos a crear una Convención para aplicar este atributo a nuestro modelo:
 
 ``` csharp
     modelBuilder.Properties()
@@ -179,13 +179,13 @@ Ahora, vamos a crear una convención para aplicar este atributo a nuestro modelo
                 .Configure(c => c.IsUnicode(false));
 ```
 
-Con esta convención, podemos agregar el atributo no Unicode a cualquiera de nuestras propiedades de cadena, lo que significa que la columna de la base de datos se almacenarán como varchar en lugar de nvarchar.
+Con esta Convención, podemos agregar el atributo NonUnicode a cualquiera de nuestras propiedades de cadena, lo que significa que la columna de la base de datos se almacenará como varchar en lugar de nvarchar.
 
-Hay que destacar sobre esta convención es si coloca el atributo no Unicode en algo distinto de una propiedad de cadena, a continuación, se producirá una excepción. Para hacerlo porque no se puede configurar IsUnicode en cualquier tipo distinto de una cadena. Si esto ocurre, entonces puede hacer su convención de más específico, para que filtra todo lo que no es una cadena.
+Una cuestión que hay que tener en cuenta sobre esta Convención es que si coloca el atributo NonUnicode en un valor distinto de una propiedad de cadena, se producirá una excepción. Esto se debe a que no se puede configurar IsUnicode en ningún tipo que no sea una cadena. Si esto ocurre, puede hacer que la Convención sea más específica, de modo que filtre cualquier cosa que no sea una cadena.
 
-Aunque la convención anterior funciona para definir atributos personalizados, hay otra API que puede ser mucho más fácil de usar, especialmente cuando desee usar las propiedades de la clase de atributo.
+Aunque la Convención anterior funciona para definir atributos personalizados, hay otra API que puede ser mucho más fácil de usar, especialmente cuando se desea usar propiedades de la clase de atributo.
 
-En este ejemplo, vamos a actualizar el atributo y cámbielo a un atributo IsUnicode, por lo que este aspecto:
+En este ejemplo, vamos a actualizar el atributo y cambiarlo a un atributo IsUnicode, de modo que tenga este aspecto:
 
 ``` csharp
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
@@ -200,7 +200,7 @@ En este ejemplo, vamos a actualizar el atributo y cámbielo a un atributo IsUnic
     }
 ```
 
-Una vez que tenemos esto, podemos establecer un valor booleano en el atributo para indicar a la convención o no una propiedad debe ser Unicode. Podríamos hacer esto en la convención que ya tenemos mediante el acceso a la ClrProperty de la clase de configuración similar al siguiente:
+Una vez hecho esto, podemos establecer un valor bool en nuestro atributo para indicar a la Convención si una propiedad debe ser Unicode o no. Podríamos hacer esto en la Convención que ya hemos tenido acceso a la ClrProperty de la clase de configuración de la siguiente manera:
 
 ``` csharp
     modelBuilder.Properties()
@@ -208,7 +208,7 @@ Una vez que tenemos esto, podemos establecer un valor booleano en el atributo pa
                 .Configure(c => c.IsUnicode(c.ClrPropertyInfo.GetCustomAttribute<IsUnicode>().Unicode));
 ```
 
-Esto es bastante fácil, pero hay una manera más concisa de conseguir esto mediante el uso de la necesidad de método de la API de convenciones. La necesidad de método tiene un parámetro de tipo Func&lt;PropertyInfo, T&gt; que acepta PropertyInfo igual que el lugar en el método, pero se espera que devuelva un objeto. Si el objeto devuelto es null, a continuación, la propiedad no se configurarán, lo que significa que puede filtrar las propiedades con él como Where, pero es diferente que también se captura el objeto devuelto y pasarlo al método Configure. Esto funciona del modo siguiente:
+Esto es bastante sencillo, pero hay una manera más concisa de lograrlo mediante el uso del método Having de la API de convenciones. El método having tiene un parámetro de tipo FUNC&lt;PropertyInfo, T&gt; que acepta el PropertyInfo igual que el método Where, pero se espera que devuelva un objeto. Si el objeto devuelto es null, la propiedad no se configurará, lo que significa que puede filtrar las propiedades con ella como Where, pero es diferente en que también capturará el objeto devuelto y lo pasará al método configure. Esto funciona de la siguiente manera:
 
 ``` csharp
     modelBuilder.Properties()
@@ -216,15 +216,15 @@ Esto es bastante fácil, pero hay una manera más concisa de conseguir esto medi
                 .Configure((config, att) => config.IsUnicode(att.Unicode));
 ```
 
-Los atributos personalizados no son la única razón para usar la necesidad de método, es útil en cualquier lugar que necesita para razonar sobre algo que se va a filtrar al configurar los tipos o las propiedades.
+Los atributos personalizados no son la única razón para usar el método Having, es útil en cualquier lugar en el que sea necesario saber sobre algo que está filtrando al configurar los tipos o las propiedades.
 
- 
+ 
 
 ## <a name="configuring-types"></a>Configuración de tipos
 
-Hasta ahora, todas las convenciones han para las propiedades, pero hay otra área de las convenciones de API para configurar los tipos en el modelo. La experiencia es similar a las convenciones que hemos visto hasta ahora, pero las opciones de configuración interior estará en la entidad en lugar de la propiedad de nivel.
+Hasta ahora, todas nuestras convenciones se han realizado para propiedades, pero hay otra área de la API de convenciones para configurar los tipos en el modelo. La experiencia es similar a las convenciones que hemos encontrado hasta ahora, pero las opciones incluidas en configurar estarán en la entidad en lugar de en el nivel de propiedad.
 
-Una de las cosas que las convenciones de nivel de tipo pueden ser muy útiles para cambiar la convención de nomenclatura de tabla, para asignar a un esquema existente que difiere del valor predeterminado EF o para crear una nueva base de datos con una convención de nomenclatura diferente. Para hacer esto en primer lugar necesitamos un método que puede aceptar el TypeInfo para un tipo en nuestro modelo y devolver cuál debe ser el nombre de tabla para ese tipo:
+Una de las cosas que las convenciones de nivel de tipo pueden ser realmente útiles para es cambiar la Convención de nomenclatura de tablas, ya sea para asignar a un esquema existente que difiere del valor predeterminado de EF o para crear una nueva base de datos con una Convención de nomenclatura diferente. Para ello, primero necesitamos un método que pueda aceptar TypeInfo para un tipo en nuestro modelo y que devuelva el nombre de tabla de ese tipo:
 
 ``` csharp
     private string GetTableName(Type type)
@@ -235,20 +235,20 @@ Una de las cosas que las convenciones de nivel de tipo pueden ser muy útiles pa
     }
 ```
 
-Este método toma un tipo y devuelve una cadena que se usa en minúsculas, con caracteres de subrayado en lugar de CamelCase. En nuestro modelo, esto significa que la clase ProductCategory se asignará a una tabla denominada product\_categoría en lugar de ProductCategories.
+Este método toma un tipo y devuelve una cadena que usa minúsculas con carácter de subrayado en lugar de CamelCase. En nuestro modelo, esto significa que la clase ProductCategory se asignará a una tabla denominada Product\_categoría en lugar de a ProductCategories.
 
-Una vez que tenemos ese método podemos llamarlo en una convención similar al siguiente:
+Una vez que tenemos ese método, podemos llamarlo en una Convención similar a la siguiente:
 
 ``` csharp
     modelBuilder.Types()
                 .Configure(c => c.ToTable(GetTableName(c.ClrType)));
 ```
 
-Esta convención configura todos los tipos en nuestro modelo para asignar al nombre de tabla que se devuelve desde el método GetTableName. Esta convención es el equivalente a llamar al método ToTable para cada entidad en el modelo mediante la API Fluent.
+Esta Convención configura todos los tipos de nuestro modelo para que se asignen al nombre de tabla que se devuelve desde nuestro método GetTableName. Esta Convención es equivalente a llamar al método ToTable para cada entidad del modelo mediante la API fluida.
 
-Una cosa a tener en cuenta acerca de esto es que cuando se llama a EF ToTable tendrá la cadena que se proporciona como el nombre de tabla exacto, sin cambios de la pluralización que lo haría normalmente al determinar los nombres de tabla. Por el nombre de tabla desde nuestra convención es producto\_categoría en lugar de producto\_categorías. Podemos resolver en nuestra convención mediante una llamada al servicio de pluralización nosotros mismos.
+Un aspecto que se debe tener en cuenta es que, cuando se llama a ToTable EF, toma la cadena que se proporciona como el nombre exacto de la tabla, sin la pluralización que normalmente haría al determinar los nombres de tabla. Esta es la razón por la que el nombre de la tabla de nuestra Convención es\_categoría del producto en lugar de las categorías Product\_. Podemos resolver esto en nuestra Convención realizando una llamada al servicio de pluralización por nuestra parte.
 
-En el siguiente código se usará el [resolución de dependencia](~/ef6/fundamentals/configuring/dependency-resolution.md) característica agregada en EF6 para recuperar el servicio de pluralización que usaría EF y Pluralizar el nombre de la tabla.
+En el código siguiente, usaremos la característica de [resolución de dependencias](~/ef6/fundamentals/configuring/dependency-resolution.md) agregada en EF6 para recuperar el servicio de pluralización que EF habría usado y pluralando el nombre de la tabla.
 
 ``` csharp
     private string GetTableName(Type type)
@@ -264,11 +264,11 @@ En el siguiente código se usará el [resolución de dependencia](~/ef6/fundamen
 ```
 
 > [!NOTE]
-> La versión genérica de GetService es un método de extensión en el espacio de nombres System.Data.Entity.Infrastructure.DependencyResolution, debe agregar un mediante la instrucción a su contexto con el fin de usarlo.
+> La versión genérica de GetService es un método de extensión en el espacio de nombres System. Data. Entity. Infrastructure. DependencyResolution; tendrá que agregar una instrucción using al contexto para poder usarlo.
 
 ### <a name="totable-and-inheritance"></a>ToTable y herencia
 
-Otro aspecto importante de ToTable es que si se asigna explícitamente un tipo a una tabla determinada, a continuación, puede modificar la estrategia de asignación que va a usar EF. Si se llama a ToTable para todos los tipos en una jerarquía de herencia, pasando el nombre de tipo como el nombre de la tabla como hicimos anteriormente, a continuación, cambiará la estrategia de asignación de tabla por jerarquía (TPH) predeterminada a la tabla por tipo (TPT). La mejor manera de describir esto es un ejemplo concreto de whith:
+Otro aspecto importante de ToTable es que si asigna explícitamente un tipo a una tabla determinada, puede modificar la estrategia de asignación que utilizará EF. Si llama a ToTable para cada tipo de una jerarquía de herencia, pasando el nombre de tipo como el nombre de la tabla como hicimos anteriormente, cambiará la estrategia de asignación predeterminada de tabla por jerarquía (TPH) a tabla por tipo (TPT). La mejor manera de describir esto es whith un ejemplo concreto:
 
 ``` csharp
     public class Employee
@@ -283,27 +283,27 @@ Otro aspecto importante de ToTable es que si se asigna explícitamente un tipo a
     }
 ```
 
-De forma predeterminada el empleado y administrador se asignan a la misma tabla (empleados) en la base de datos. La tabla contendrá los empleados y los administradores de una columna discriminadora que le indicará qué tipo de instancia se almacena en cada fila. Se trata de la asignación de TPH porque no hay una sola tabla para la jerarquía. Sin embargo, si se llama a ToTable en ambos classe, a continuación, cada tipo en su lugar, asignará a su propia tabla, también conocido como TPT, ya que cada tipo tiene su propia tabla.
+De forma predeterminada, tanto el empleado como el administrador están asignados a la misma tabla (empleados) en la base de datos. La tabla contendrá empleados y directivos con una columna de discriminador que le indicará qué tipo de instancia se almacena en cada fila. Esta es la asignación TPH, ya que hay una sola tabla para la jerarquía. Sin embargo, si llama a ToTable en ambos Classe, cada tipo se asignará a su propia tabla, también conocida como TPT, ya que cada tipo tiene su propia tabla.
 
 ``` csharp
     modelBuilder.Types()
                 .Configure(c=>c.ToTable(c.ClrType.Name));
 ```
 
-El código anterior se asignará a una estructura de tabla con el siguiente aspecto:
+El código anterior se asignará a una estructura de tabla similar a la siguiente:
 
 ![Ejemplo de TPT](~/ef6/media/tptexample.jpg)
 
-Puede evitar este problema y mantener la asignación de TPH de forma predeterminada, en un par de formas:
+Puede evitar esto y mantener la asignación de TPH predeterminada de dos maneras:
 
 1.  Llame a ToTable con el mismo nombre de tabla para cada tipo de la jerarquía.
-2.  Llame a ToTable solo en la clase base de la jerarquía, en nuestro ejemplo, este sería el empleado.
+2.  Llame a ToTable solo en la clase base de la jerarquía, en el ejemplo que sería Employee.
 
- 
+ 
 
 ## <a name="execution-order"></a>Orden de ejecución
 
-Convenciones de operan en una última manera wins, igual que la API Fluent. Esto significa que si escribe dos convenciones que configuran la misma opción de la misma propiedad y, a continuación, la última de ellas para ejecutar wins. Por ejemplo, en el código siguiente se establece la longitud máxima de todas las cadenas en 500, pero, a continuación, configure todas las propiedades que se llama nombre del modelo que tiene una longitud máxima de 250.
+Las convenciones funcionan en la última manera de WINS, igual que la API fluida. Esto significa que, si escribe dos convenciones que configuran la misma opción de la misma propiedad, la última que se ejecuta gana. Por ejemplo, en el código que aparece debajo de la longitud máxima de todas las cadenas se establece en 500, pero después se configuran todas las propiedades denominadas nombre del modelo para que tengan una longitud máxima de 250.
 
 ``` csharp
     modelBuilder.Properties<string>()
@@ -314,23 +314,23 @@ Convenciones de operan en una última manera wins, igual que la API Fluent. Esto
                 .Configure(c => c.HasMaxLength(250));
 ```
 
-Dado que la convención para establecer la longitud máxima en 250 es posterior a la que todas las cadenas se establece en 500, todas las propiedades que se denomina nombre de nuestro modelo tendrá una longitud máxima de 250 mientras otras cadenas, como descripciones, sería 500. Convenciones de uso de esta manera significa que puede proporcionar una convención general para tipos o propiedades en el modelo y, a continuación, override a la de los subconjuntos que son diferentes.
+Dado que la Convención para establecer la longitud máxima en 250 es después de la que establece todas las cadenas en 500, todas las propiedades denominadas Name en nuestro modelo tendrán una MaxLength de 250 mientras que cualquier otra cadena, como descripciones, sería 500. El uso de convenciones de esta manera significa que puede proporcionar una Convención General para tipos o propiedades en el modelo y, a continuación, reemplazarlos para subconjuntos que son diferentes.
 
-La API Fluent y las anotaciones de datos pueden usarse también para reemplazar una convención en casos concretos. En nuestro ejemplo anterior si hubiéramos utilizado la API Fluent para establecer la longitud máxima de una propiedad, a continuación, podríamos haber colocamos lo antes o después de la convención, porque tendrán prioridad en la API Fluent más específica a través de la convención de configuración más generales.
+La API fluida y las anotaciones de datos también se pueden usar para invalidar una Convención en casos concretos. En el ejemplo anterior, si hubiéramos usado la API fluida para establecer la longitud máxima de una propiedad, podríamos haber colocado antes o después de la Convención, ya que la API fluida más específica ganará más allá de la Convención de configuración más general.
 
- 
+ 
 
 ## <a name="built-in-conventions"></a>Convenciones integradas
 
-Dado que las convenciones personalizadas podrían verse afectadas por las convenciones de Code First de forma predeterminada, puede ser útil agregar convenciones que se ejecuten antes o después de otra convención. Para ello puede utilizar los métodos de AddBefore y AddAfter del conjunto de convenciones en DbContext derivada. El código siguiente agregaría la clase convención que creamos anteriormente, por lo que se ejecute antes de la compilación en la convención de detección de las claves.
+Dado que las convenciones personalizadas podrían verse afectadas por las convenciones de Code First predeterminadas, puede ser útil agregar convenciones para que se ejecuten antes o después de otra convención. Para ello, puede usar los métodos AddBefore y AddAfter de la colección Conventions en su DbContext derivado. El código siguiente agregaría la clase de Convención que hemos creado anteriormente para que se ejecute antes de la Convención de detección de claves integrada.
 
 ``` csharp
     modelBuilder.Conventions.AddBefore<IdKeyDiscoveryConvention>(new DateTime2Convention());
 ```
 
-Esto va a ser más útil al agregar las convenciones que se deben ejecutar antes o después de las convenciones integradas, una lista de las convenciones integradas puede encontrarse aquí: [System.Data.Entity.ModelConfiguration.Conventions Namespace](https://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx) .
+Este será el más utilizado al agregar convenciones que deban ejecutarse antes o después de las convenciones integradas. puede encontrar una lista de las convenciones integradas aquí: [System. Data. Entity. ModelConfiguration. Conventions (espacio de nombres](https://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx)).
 
-También puede quitar las convenciones que no desee aplicadas al modelo. Para quitar una convención, use el método Remove. Este es un ejemplo de la eliminación de la PluralizingTableNameConvention.
+También puede quitar las convenciones que no desea que se apliquen al modelo. Para quitar una Convención, use el método Remove. Este es un ejemplo de cómo quitar el PluralizingTableNameConvention.
 
 ``` csharp
     protected override void OnModelCreating(DbModelBuilder modelBuilder)

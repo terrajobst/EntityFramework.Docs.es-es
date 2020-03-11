@@ -4,16 +4,16 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: e1b9c319-bb8a-4417-ac94-7890f257e7f6
 ms.openlocfilehash: 1b37805beb3d33f0b6dad2577a8abb3ea8f7b1e4
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182440"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78414960"
 ---
 # <a name="model-first"></a>Model First
 Este vídeo y el tutorial paso a paso proporcionan una introducción al desarrollo de Model First mediante Entity Framework. Model First permite crear un nuevo modelo mediante el Entity Framework Designer y, a continuación, generar un esquema de base de datos a partir del modelo. El modelo se almacena en un archivo EDMX (extensión. EDMX) y se puede ver y editar en el Entity Framework Designer. Las clases con las que interactúa en la aplicación se generan automáticamente a partir del archivo EDMX.
 
-## <a name="watch-the-video"></a>Ver el vídeo
+## <a name="watch-the-video"></a>Visualización del vídeo
 Este vídeo y el tutorial paso a paso proporcionan una introducción al desarrollo de Model First mediante Entity Framework. Model First permite crear un nuevo modelo mediante el Entity Framework Designer y, a continuación, generar un esquema de base de datos a partir del modelo. El modelo se almacena en un archivo EDMX (extensión. EDMX) y se puede ver y editar en el Entity Framework Designer. Las clases con las que interactúa en la aplicación se generan automáticamente a partir del archivo EDMX.
 
 **Presentado por**: [Rowan Miller](https://romiller.com/)
@@ -30,7 +30,7 @@ Si usa Visual Studio 2010, también debe tener instalado [NuGet](https://visuals
 
 Para simplificar las cosas, vamos a crear una aplicación de consola básica que use el Model First para realizar el acceso a los datos:
 
--   Abra Visual Studio
+-   Abra Visual Studio.
 -   **Archivo-&gt; nuevo proyecto de&gt;...**
 -   Seleccionar **ventanas** en el menú izquierdo y en la **aplicación de consola**
 -   Escriba **ModelFirstSample** como nombre
@@ -87,7 +87,7 @@ En primer lugar, necesitamos obtener la versión más reciente de Entity Framewo
     *si no tiene la opción **administrar paquetes Nuget...** , debe instalar la [versión más reciente de Nuget](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c) .*
 -   Seleccione la pestaña **en línea**
 -   Seleccione el paquete **EntityFramework**
--   Haga clic en **instalar**
+-   Haga clic en **Instalar**.
 
 A continuación, necesitamos cambiar nuestro modelo para generar código que haga uso de la API de DbContext, que se presentó en versiones posteriores de Entity Framework.
 
@@ -189,7 +189,7 @@ Comenzaremos agregando una nueva entidad de usuario a nuestro modelo.
 Ahora tenemos un modelo actualizado y estamos preparados para actualizar la base de datos para dar cabida a nuestro nuevo tipo de entidad de usuario.
 
 -   Haga clic con el botón secundario en la superficie de diseño y seleccione **generar base de datos a partir del modelo...** , Entity Framework calculará un script para volver a crear un esquema basado en el modelo actualizado.
--   Haga clic en **Finalizar**
+-   Haga clic en **Finish** (Finalizar).
 -   Puede recibir advertencias sobre cómo sobrescribir el script DDL existente y las partes de asignación y almacenamiento del modelo; haga clic en **sí** para ambas advertencias.
 -   El script SQL actualizado para crear la base de datos se abre automáticamente.  
     *El script que se genera quitará todas las tablas existentes y, a continuación, volverá a crear el esquema desde el principio. Esto puede funcionar para el desarrollo local, pero no es viable para insertar cambios en una base de datos que ya se ha implementado. Si necesita publicar cambios en una base de datos que ya se ha implementado, deberá editar el script o usar una herramienta de comparación de esquemas para calcular un script de migración.*

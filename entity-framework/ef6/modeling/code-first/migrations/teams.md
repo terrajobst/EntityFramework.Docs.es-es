@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 4c2d9a95-de6f-4e97-9738-c1f8043eff69
 ms.openlocfilehash: b3c4c35d636caf4ddd251dd78e026587abc57d42
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182610"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78415614"
 ---
 # <a name="code-first-migrations-in-team-environments"></a>Migraciones de Code First en entornos de equipo
 > [!NOTE]
@@ -111,7 +111,7 @@ El día de la suerte para Developer \#1 a medida que se producen para enviar sus
 
 Ahora es el momento de enviar el desarrollador \#2. No son tan afortunados. Dado que otra persona ha enviado cambios desde que se sincronizaron, deberán desplegar los cambios y mezclar. Es posible que el sistema de control de código fuente pueda fusionar mediante combinación automáticamente los cambios en el nivel de código, ya que son muy sencillos. El estado del repositorio local del desarrollador \#2 después de la sincronización se muestra en el gráfico siguiente. 
 
-![Obtener](~/ef6/media/pull.png)
+![Extracción](~/ef6/media/pull.png)
 
 En esta fase, el desarrollador \#2 puede ejecutar **Update-Database** , que detectará la nueva migración de **AddRating** (que no se ha aplicado a la base de datos de Developer \#2) y la aplicará. Ahora se agrega la columna **clasificación** a la tabla **blogs** y la base de datos está sincronizada con el modelo.
 

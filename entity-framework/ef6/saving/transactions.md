@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 0d0f1824-d781-4cb3-8fda-b7eaefced1cd
 ms.openlocfilehash: 7030dc675993339f72c935f6b430cead85fecb7f
-ms.sourcegitcommit: c9c3e00c2d445b784423469838adc071a946e7c9
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 07/18/2019
-ms.locfileid: "68306519"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78416244"
 ---
 # <a name="working-with-transactions"></a>Trabajar con transacciones
 > [!NOTE]
@@ -32,21 +32,21 @@ Sin embargo, algunos usuarios requieren un mayor control sobre sus transacciones
 
 ## <a name="how-the-apis-work"></a>Cómo funcionan las API  
 
-Antes de EF6 Entity Framework insista en abrir la propia conexión de base de datos (se produjo una excepción si se pasa una conexión que ya estaba abierta). Puesto que una transacción solo se puede iniciar en una conexión abierta, esto significaba que la única forma en que un usuario podía encapsular varias operaciones en una transacción era usar [TransactionScope](https://msdn.microsoft.com/library/system.transactions.transactionscope.aspx) o usar la propiedad **ObjectContext. Connection** e iniciar llamar a **Open ()** y **BeginTransaction ()** directamente en el objeto **EntityConnection** devuelto. Además, las llamadas API que contacten con la base de datos generarán un error si hubiera iniciado una transacción en la conexión de base de datos subyacente por su cuenta.  
+Antes de EF6 Entity Framework insista en abrir la propia conexión de base de datos (se produjo una excepción si se pasa una conexión que ya estaba abierta). Puesto que una transacción solo se puede iniciar en una conexión abierta, esto significaba que la única forma en que un usuario podía encapsular varias operaciones en una transacción era usar [TransactionScope](https://msdn.microsoft.com/library/system.transactions.transactionscope.aspx) o usar la propiedad **ObjectContext. Connection** y comenzar a llamar a **Open ()** y **BeginTransaction ()** directamente en el objeto **EntityConnection** devuelto. Además, las llamadas API que contacten con la base de datos generarán un error si hubiera iniciado una transacción en la conexión de base de datos subyacente por su cuenta.  
 
 > [!NOTE]
 > La limitación de aceptar solo conexiones cerradas se quitó en Entity Framework 6. Para obtener más información, consulte [Administración de conexiones](~/ef6/fundamentals/connection-management.md).  
 
 A partir de EF6, el marco de trabajo ahora proporciona:  
 
-1. **Database. BeginTransaction ()** : Método más sencillo para que un usuario inicie y complete transacciones en un DbContext existente, lo que permite combinar varias operaciones dentro de la misma transacción y, por lo tanto, todas confirmadas o todas se revierten como una. También permite al usuario especificar más fácilmente el nivel de aislamiento para la transacción.  
+1. **Database. BeginTransaction ()** : método más sencillo para que un usuario inicie y complete transacciones en un DbContext existente, lo que permite combinar varias operaciones dentro de la misma transacción y, por lo tanto, todas confirmadas o revertidas como una. También permite al usuario especificar más fácilmente el nivel de aislamiento para la transacción.  
 2. **Database. UseTransaction ()** : permite que DbContext use una transacción que se inició fuera del Entity Framework.  
 
 ### <a name="combining-several-operations-into-one-transaction-within-the-same-context"></a>Combinar varias operaciones en una transacción dentro del mismo contexto  
 
 **Database. BeginTransaction ()** tiene dos invalidaciones: una que toma un [IsolationLevel](https://msdn.microsoft.com/library/system.data.isolationlevel.aspx) explícito y otra que no toma ningún argumento y usa el valor de IsolationLevel predeterminado del proveedor de base de datos subyacente. Ambas invalidaciones devuelven un objeto **DbContextTransaction** que proporciona los métodos **Commit ()** y **Rollback ()** que realizan la confirmación y reversión en la transacción del almacén subyacente.  
 
-La **DbContextTransaction** está pensada para ser eliminada una vez que se ha confirmado o revertido. Una manera fácil de lograrlo es **usar (...) {...}** sintaxis que llamará automáticamente a **Dispose ()** cuando se complete el bloque Using:  
+La **DbContextTransaction** está pensada para ser eliminada una vez que se ha confirmado o revertido. Una manera fácil de lograrlo es **usar (...) {.** ..} sintaxis que llamará automáticamente a **Dispose ()** cuando se complete el bloque Using:  
 
 ``` csharp
 using System;
@@ -178,18 +178,18 @@ Verá una excepción de Database. UseTransaction () si pasa una transacción cua
 
 En esta sección se describe cómo interactúan las transacciones anteriores con:  
 
-- Resistencia de conexión  
+- Resistencia de la conexión  
 - Métodos asincrónicos  
 - Transacciones TransactionScope  
 
-### <a name="connection-resiliency"></a>Resistencia de las conexiones  
+### <a name="connection-resiliency"></a>Resistencia de conexión  
 
-La nueva característica de resistencia de conexión no funciona con las transacciones iniciadas por el usuario. Para obtener más información, consulte reintento de [estrategias de ejecución](~/ef6/fundamentals/connection-resiliency/retry-logic.md#user-initiated-transactions-are-not-supported).  
+La nueva característica de resistencia de conexión no funciona con las transacciones iniciadas por el usuario. Para obtener más información, consulte [reintento de estrategias de ejecución](~/ef6/fundamentals/connection-resiliency/retry-logic.md#user-initiated-transactions-are-not-supported).  
 
 ### <a name="asynchronous-programming"></a>Programación asincrónica  
 
-El enfoque descrito en las secciones anteriores no necesita más opciones ni valores de configuración para trabajar con los [métodos](~/ef6/fundamentals/async.md
-)de consulta y guardado asíncronos. Pero tenga en cuenta que, en función de lo que haga dentro de los métodos asincrónicos, esto puede dar lugar a transacciones de ejecución prolongada, lo que a su vez puede provocar interbloqueos o bloqueos que son incorrectos para el rendimiento de la aplicación global.  
+El enfoque descrito en las secciones anteriores no necesita más opciones ni valores de configuración para trabajar con los [métodos de consulta y guardado asíncronos](~/ef6/fundamentals/async.md
+). Pero tenga en cuenta que, en función de lo que haga dentro de los métodos asincrónicos, esto puede dar lugar a transacciones de ejecución prolongada, lo que a su vez puede provocar interbloqueos o bloqueos que son incorrectos para el rendimiento de la aplicación global.  
 
 ### <a name="transactionscope-transactions"></a>Transacciones TransactionScope  
 

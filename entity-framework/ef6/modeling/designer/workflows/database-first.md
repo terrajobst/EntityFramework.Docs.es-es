@@ -4,16 +4,16 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: cc6ffdb3-388d-4e79-a201-01ec2577c949
 ms.openlocfilehash: d40cff4ddccf43a394ef4f244653372a5a89b05a
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182447"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78415176"
 ---
 # <a name="database-first"></a>Database First
 Este vídeo y el tutorial paso a paso proporcionan una introducción al desarrollo de Database First mediante Entity Framework. Database First permite aplicar ingeniería inversa a un modelo a partir de una base de datos existente. El modelo se almacena en un archivo EDMX (extensión. EDMX) y se puede ver y editar en el Entity Framework Designer. Las clases con las que interactúa en la aplicación se generan automáticamente a partir del archivo EDMX.
 
-## <a name="watch-the-video"></a>Ver el vídeo
+## <a name="watch-the-video"></a>Visualización del vídeo
 Este vídeo proporciona una introducción al desarrollo de Database First mediante Entity Framework. Database First permite aplicar ingeniería inversa a un modelo a partir de una base de datos existente. El modelo se almacena en un archivo EDMX (extensión. EDMX) y se puede ver y editar en el Entity Framework Designer. Las clases con las que interactúa en la aplicación se generan automáticamente a partir del archivo EDMX.
 
 **Presentado por**: [Rowan Miller](https://romiller.com/)
@@ -41,7 +41,7 @@ El servidor de base de datos que se instala con Visual Studio es diferente en fu
 
 Vamos a generar la base de datos.
 
--   Abra Visual Studio
+-   Abra Visual Studio.
 -   **Explorador de servidores de&gt; de vista**
 -   Haga clic con el botón derecho en **conexiones de datos:&gt; agregar conexión...**
 -   Si no se ha conectado a una base de datos desde Explorador de servidores antes de que tenga que seleccionar Microsoft SQL Server como origen de datos
@@ -83,7 +83,7 @@ CREATE TABLE [dbo].[Posts] (
 
 Para simplificar las cosas, vamos a crear una aplicación de consola básica que use el Database First para realizar el acceso a los datos:
 
--   Abra Visual Studio
+-   Abra Visual Studio.
 -   **Archivo-&gt; nuevo proyecto de&gt;...**
 -   Seleccionar **ventanas** en el menú izquierdo y en la **aplicación de consola**
 -   Escriba **DatabaseFirstSample** como nombre
@@ -127,7 +127,7 @@ En primer lugar, necesitamos obtener la versión más reciente de Entity Framewo
     *si no tiene la opción **administrar paquetes Nuget...** , debe instalar la [versión más reciente de Nuget](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c) .*
 -   Seleccione la pestaña **en línea**
 -   Seleccione el paquete **EntityFramework**
--   Haga clic en **instalar**
+-   Haga clic en **Instalar**.
 
 A continuación, necesitamos cambiar nuestro modelo para generar código que haga uso de la API de DbContext, que se presentó en versiones posteriores de Entity Framework.
 

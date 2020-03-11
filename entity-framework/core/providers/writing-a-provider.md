@@ -4,19 +4,19 @@ author: anmiller
 ms.date: 10/27/2016
 ms.assetid: 1165e2ec-e421-43fc-92ab-d92f9ab3c494
 uid: core/providers/writing-a-provider
-ms.openlocfilehash: 9d52a8581772cc5405e94966fa7ebdff4128c252
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.openlocfilehash: 2d9e4a6cdfda80d7dfcfb6e7bf0480eb49f8e057
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73654777"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78414810"
 ---
 # <a name="writing-a-database-provider"></a>Escritura de un proveedor de base de datos
 
 Para obtener información sobre cómo escribir un proveedor de bases de datos de Entity Framework Core, consulte para [que pueda escribir un proveedor de EF Core](https://blog.oneunicorn.com/2016/11/11/so-you-want-to-write-an-ef-core-provider/) por [Arthur Vickers](https://github.com/ajcvickers).
 
 > [!NOTE]
-> Estos envíos no se han actualizado desde EF Core 1,1 y ha habido cambios significativos desde que se produjo el [error 681](https://github.com/aspnet/EntityFramework.Docs/issues/681) al realizar un seguimiento de las actualizaciones de esta documentación.
+> Estos envíos no se han actualizado desde EF Core 1,1 y ha habido cambios significativos desde que se produjo el [error 681](https://github.com/dotnet/EntityFramework.Docs/issues/681) al realizar un seguimiento de las actualizaciones de esta documentación.
 
 La EF Core código base es de código abierto y contiene varios proveedores de bases de datos que se pueden utilizar como referencia. Puede encontrar el código fuente en <https://github.com/aspnet/EntityFrameworkCore>. También puede ser útil examinar el código para proveedores de terceros de uso frecuente, como [Npgsql](https://github.com/npgsql/Npgsql.EntityFrameworkCore.PostgreSQL), [Pomelo MySQL](https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.MySql)y [SQL Server Compact](https://github.com/ErikEJ/EntityFramework.SqlServerCompact). En concreto, estos proyectos se configuran para extender desde y ejecutar pruebas funcionales que publicamos en NuGet. Se recomienda encarecidamente este tipo de instalación.
 

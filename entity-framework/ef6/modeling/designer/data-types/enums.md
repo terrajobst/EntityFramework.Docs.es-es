@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: c6ae6d8f-1ace-47db-ad47-b1718f1ba082
 ms.openlocfilehash: 92a763b84a04d3ce7ec0853ef2a4852356cf7997
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182520"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78415356"
 ---
 # <a name="enum-support---ef-designer"></a>Compatibilidad con la enumeración: EF Designer
 > [!NOTE]
@@ -46,7 +46,7 @@ Deberá tener instalado Visual Studio 2012, Ultimate, Premium, Professional o We
 2.  Seleccione **datos** en el menú de la izquierda y, a continuación, seleccione **ADO.NET Entity Data Model** en el panel Plantillas.
 3.  Escriba **EnumTestModel. edmx** como nombre de archivo y, a continuación, haga clic en **Agregar** .
 4.  En la página del Asistente para Entity Data Model, seleccione **modelo vacío** en el cuadro de diálogo elegir contenido del modelo.
-5.  Haga clic en **Finalizar**
+5.  Haga clic en **Finish** (Finalizar).
 
 Se muestra el diseñador de entidades, que proporciona una superficie de diseño para editar el modelo.
 
@@ -60,7 +60,7 @@ El asistente realiza las siguientes acciones:
 
 1.  Haga clic con el botón secundario en un área vacía de la superficie de diseño, seleccione **agregar&gt; entidad**, aparecerá el cuadro de diálogo nueva entidad.
 2.  Especifique **Department** como nombre de tipo y especifique **departmentId** como nombre de la propiedad de clave y deje el tipo como **Int32** .
-3.  Haga clic en **Aceptar**.
+3.  Haga clic en **Aceptar**
 4.  Haga clic con el botón derecho en la entidad y seleccione **Agregar nueva&gt; propiedad escalar** .
 5.  Cambiar el nombre de la nueva propiedad a **nombre**
 6.  Cambie el tipo de la nueva propiedad a **Int32** (de forma predeterminada, la nueva propiedad es de tipo cadena) para cambiar el tipo, abra el ventana Propiedades y cambie la propiedad Type a **Int32** .

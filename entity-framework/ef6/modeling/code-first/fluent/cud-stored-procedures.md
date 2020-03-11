@@ -1,24 +1,24 @@
 ---
-title: 'Primera inserción de código, actualizar y eliminar procedimientos almacenados: EF6'
+title: 'Code First procedimientos almacenados de inserción, actualización y eliminación: EF6'
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 9a7ae7f9-4072-4843-877d-506dd7eef576
 ms.openlocfilehash: bfc56671814aec1965ac054ff901297e5cdbbecb
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489627"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78415776"
 ---
-# <a name="code-first-insert-update-and-delete-stored-procedures"></a>Primera inserción de código, actualizar y eliminar procedimientos almacenados
+# <a name="code-first-insert-update-and-delete-stored-procedures"></a>Code First procedimientos almacenados de inserción, actualización y eliminación
 > [!NOTE]
 > **Solo EF6 y versiones posteriores**: las características, las API, etc. que se tratan en esta página se han incluido a partir de Entity Framework 6. Si usa una versión anterior, no se aplica parte o la totalidad de la información.  
 
-De forma predeterminada, Code First configurará todas las entidades para realizar la inserción, actualización y eliminación de comandos mediante acceso directo a tablas. A partir de EF6, puede configurar el modelo de Code First para utilizar procedimientos almacenados para algunas o todas las entidades del modelo.  
+De forma predeterminada, Code First configurará todas las entidades para que realicen los comandos de inserción, actualización y eliminación mediante el acceso directo a tablas. A partir de EF6, puede configurar el modelo de Code First para que use procedimientos almacenados para algunas o todas las entidades del modelo.  
 
 ## <a name="basic-entity-mapping"></a>Asignación de entidad básica  
 
-Puede optar por usar procedimientos almacenados para insertar, actualizar y eliminar mediante la API Fluent.  
+Puede optar por usar procedimientos almacenados para INSERT, Update y DELETE mediante la API fluida.  
 
 ``` csharp
 modelBuilder
@@ -26,17 +26,17 @@ modelBuilder
   .MapToStoredProcedures();
 ```  
 
-Esto hará que Code First usar algunas convenciones para crear la forma esperada de los procedimientos almacenados en la base de datos.  
+Esto hará que Code First utilice algunas convenciones para generar la forma esperada de los procedimientos almacenados en la base de datos.  
 
-- Tres procedimientos denominado  **\<type_name\>_Insertar**,  **\<type_name\>_actualizar** y  **\<tipo_ nombre\>_Eliminar** (por ejemplo, Blog_Insert, Blog_Update y Blog_Delete).  
-- Los nombres de parámetro corresponden a los nombres de propiedad.  
+- Tres procedimientos almacenados denominados **\<type_name\>_Insert**, **\<** type_name\>_Update y **\<** type_name\>_Delete (por ejemplo, Blog_Insert, Blog_Update y Blog_Delete).  
+- Los nombres de parámetro se corresponden con los nombres de propiedad.  
   > [!NOTE]
-  > Si usa HasColumnName() o el atributo de columna para cambiar el nombre de la columna para una propiedad determinada, a continuación, este nombre se usa para los parámetros en lugar del nombre de propiedad.  
-- **El procedimiento almacenado insert** tendrá un parámetro para cada propiedad, excepto aquellos marcados como almacén generado (identidad o calculadas). El procedimiento almacenado debe devolver un conjunto de resultados con una columna para cada propiedad del almacén generado.  
-- **La actualización de procedimiento almacenado** tendrá un parámetro para cada propiedad, excepto aquellos marcados con un modelo generado de almacén de 'Computed'. Algunos tokens de simultaneidad que requieren un parámetro del valor original, consulte el *Tokens de simultaneidad* sección para obtener más información. El procedimiento almacenado debe devolver un conjunto de resultados con una columna para cada propiedad calculada.  
-- **La eliminación de procedimiento almacenado** debe tener un parámetro para el valor de clave de la entidad (o varios parámetros, si la entidad tiene una clave compuesta). Además, el procedimiento de eliminación también debe tener parámetros para cualquier clave externa de la asociación independiente en la tabla de destino (relaciones que no tienen propiedades de clave externa correspondientes declaradas en la entidad). Algunos tokens de simultaneidad que requieren un parámetro del valor original, consulte el *Tokens de simultaneidad* sección para obtener más información.  
+  > Si usa HasColumnName () o el atributo de columna para cambiar el nombre de la columna de una propiedad determinada, este nombre se utiliza para los parámetros en lugar del nombre de la propiedad.  
+- **El procedimiento almacenado Insert** tendrá un parámetro para cada propiedad, a excepción de los marcados como almacenamiento generado (identidad o calculado). El procedimiento almacenado debe devolver un conjunto de resultados con una columna para cada propiedad generada por el almacén.  
+- **El procedimiento almacenado de actualización** tendrá un parámetro para cada propiedad, excepto aquellos marcados con un modelo generado por un almacén de ' Calculated '. Algunos tokens de simultaneidad requieren un parámetro para el valor original; vea la sección *tokens de simultaneidad* a continuación para obtener más información. El procedimiento almacenado debe devolver un conjunto de resultados con una columna para cada propiedad calculada.  
+- **El procedimiento almacenado Delete** debe tener un parámetro para el valor de clave de la entidad (o varios parámetros si la entidad tiene una clave compuesta). Además, el procedimiento de eliminación también debe tener parámetros para cualquier clave externa de asociación independiente en la tabla de destino (relaciones que no tienen las propiedades de clave externa correspondientes declaradas en la entidad). Algunos tokens de simultaneidad requieren un parámetro para el valor original; vea la sección *tokens de simultaneidad* a continuación para obtener más información.  
 
-Uso de la clase siguiente como ejemplo:  
+Use la siguiente clase como ejemplo:  
 
 ``` csharp
 public class Blog  
@@ -47,7 +47,7 @@ public class Blog
 }
 ```  
 
-El valor predeterminado serían procedimientos almacenados:  
+Los procedimientos almacenados predeterminados serían:  
 
 ``` SQL
 CREATE PROCEDURE [dbo].[Blog_Insert]  
@@ -77,9 +77,9 @@ AS
 
 ### <a name="overriding-the-defaults"></a>Reemplazar los valores predeterminados  
 
-Puede invalidar la totalidad o parte de lo que se ha configurado de forma predeterminada.  
+Puede invalidar parte o todo lo que se configuró de forma predeterminada.  
 
-Puede cambiar el nombre de uno o más procedimientos almacenados. Este ejemplo cambia el nombre del procedimiento almacenado update solo.  
+Puede cambiar el nombre de uno o más procedimientos almacenados. En este ejemplo se cambia el nombre del procedimiento almacenado de actualización únicamente.  
 
 ``` csharp
 modelBuilder  
@@ -88,7 +88,7 @@ modelBuilder
     s.Update(u => u.HasName("modify_blog")));
 ```  
 
-Este ejemplo cambia el nombre de los tres procedimientos almacenados.  
+En este ejemplo se cambia el nombre de los tres procedimientos almacenados.  
 
 ``` csharp
 modelBuilder  
@@ -99,7 +99,7 @@ modelBuilder
      .Insert(i => i.HasName("insert_blog")));
 ```  
 
-En estos ejemplos están encadenadas unas las llamadas, pero también puede usar la sintaxis de bloque de expresión lambda.  
+En estos ejemplos, las llamadas se encadenan entre sí, pero también puede usar la sintaxis de bloque lambda.  
 
 ``` csharp
 modelBuilder  
@@ -112,7 +112,7 @@ modelBuilder
     });
 ```  
 
-Este ejemplo cambia el nombre del parámetro para la propiedad BlogId en el procedimiento almacenado de actualización.  
+En este ejemplo se cambia el nombre del parámetro de la propiedad BlogId en el procedimiento almacenado de actualización.  
 
 ``` csharp
 modelBuilder  
@@ -121,7 +121,7 @@ modelBuilder
     s.Update(u => u.Parameter(b => b.BlogId, "blog_id")));
 ```  
 
-Estas llamadas están encadenadas y que admite composición. Este es un ejemplo que cambia el nombre de los tres procedimientos almacenados y sus parámetros.  
+Estas llamadas son todas encadenables y que admiten composición. Este es un ejemplo en el que se cambia el nombre de los tres procedimientos almacenados y sus parámetros.  
 
 ``` csharp
 modelBuilder  
@@ -138,7 +138,7 @@ modelBuilder
                    .Parameter(b => b.Url, "blog_url")));
 ```  
 
-También puede cambiar el nombre de las columnas del conjunto de resultados que contiene los valores de la base de datos generada.  
+También puede cambiar el nombre de las columnas del conjunto de resultados que contiene los valores generados por la base de datos.  
 
 ``` csharp
 modelBuilder
@@ -160,11 +160,11 @@ BEGIN
 END
 ```  
 
-## <a name="relationships-without-a-foreign-key-in-the-class-independent-associations"></a>Relaciones sin una clave externa de la clase (asociaciones independientes)  
+## <a name="relationships-without-a-foreign-key-in-the-class-independent-associations"></a>Relaciones sin una clave externa en la clase (asociaciones independientes)  
 
-Cuando una propiedad de clave externa se incluye en la definición de clase, se puede cambiar el nombre del parámetro correspondiente en la misma manera que cualquier otra propiedad. Cuando existe una relación sin una propiedad de clave externa en la clase, el nombre de parámetro predeterminado es  **\<navigation_property_name\>_\<primary_key_name\>**.  
+Cuando se incluye una propiedad de clave externa en la definición de clase, se puede cambiar el nombre del parámetro correspondiente de la misma manera que cualquier otra propiedad. Cuando existe una relación sin una propiedad de clave externa en la clase, el nombre del parámetro predeterminado es **\<navigation_property_name\>_\<primary_key_name** \>.  
 
-Por ejemplo, las siguientes definiciones de clase dará como resultado un parámetro Blog_BlogId que se espera en los procedimientos almacenados para insertar y actualizar entradas.  
+Por ejemplo, las siguientes definiciones de clase darían lugar a la espera de un parámetro Blog_BlogId en los procedimientos almacenados para insertar y actualizar las entradas.  
 
 ``` csharp
 public class Blog  
@@ -188,7 +188,7 @@ public class Post
 
 ### <a name="overriding-the-defaults"></a>Reemplazar los valores predeterminados  
 
-Puede cambiar los parámetros para las claves externas que no están incluidos en la clase proporcionando la ruta de acceso a la propiedad de clave principal para el método de parámetro.  
+Puede cambiar los parámetros de las claves externas que no están incluidas en la clase proporcionando la ruta de acceso a la propiedad de clave principal al método de parámetro.  
 
 ``` csharp
 modelBuilder
@@ -197,7 +197,7 @@ modelBuilder
     s.Insert(i => i.Parameter(p => p.Blog.BlogId, "blog_id")));
 ```  
 
-Si no tiene una propiedad de navegación en la entidad dependiente (como) No hay ninguna propiedad Post.Blog), a continuación, puede usar el método de asociación para identificar el otro extremo de la relación y, a continuación, configure los parámetros que corresponden a cada una de las propiedades de clave.  
+Si no tiene una propiedad de navegación en la entidad dependiente (es decir, no se puede usar el método Association para identificar el otro extremo de la relación y, después, configurar los parámetros correspondientes a cada una de las propiedades de clave.  
 
 ``` csharp
 modelBuilder
@@ -210,15 +210,15 @@ modelBuilder
 
 ## <a name="concurrency-tokens"></a>Tokens de simultaneidad  
 
-Update y delete que se almacenan los procedimientos también tendrá que tratar con la simultaneidad:  
+Los procedimientos almacenados de actualización y eliminación también pueden necesitar tratar la simultaneidad:  
 
-- Si la entidad contiene los tokens de simultaneidad, el procedimiento almacenado puede tener opcionalmente un parámetro de salida que devuelve el número de filas actualizados o eliminados (filas afectadas). Esta clase de parámetro debe configurarse mediante el método RowsAffectedParameter.  
-De forma predeterminada EF usa el valor devuelto de ExecuteNonQuery para determinar cuántas filas afectadas. Especificar un parámetro de salida de filas afectadas es útil si realiza cualquier lógica en el procedimiento almacenado que daría como resultado el valor devuelto de ExecuteNonQuery es incorrecta (desde la perspectiva de EF) al final de la ejecución.  
-- Cada simultaneidad token existe será un parámetro denominado  **\<property_name\>_Original** (por ejemplo, Timestamp_Original). Este objeto se pasa el valor original de esta propiedad, el valor cuando se consultan desde la base de datos.  
-    - Los tokens de simultaneidad que se calculan de la base de datos: por ejemplo, las marcas de tiempo: tendrá sólo un parámetro de valor original.  
-    - Propiedades calculadas no que se establecen como tokens de simultaneidad también tendrá un parámetro para el nuevo valor en el procedimiento de actualización. Esto usa las convenciones de nomenclatura descritas para los nuevos valores. Un ejemplo de un token de este tipo sería utilizar URL de un Blog como un token de simultaneidad, el nuevo valor es necesario porque esto se puede actualizar a un nuevo valor por el código (a diferencia de un token de marca de tiempo que solo se actualiza la base de datos).  
+- Si la entidad contiene tokens de simultaneidad, el procedimiento almacenado puede tener opcionalmente un parámetro de salida que devuelve el número de filas actualizadas o eliminadas (filas afectadas). Este tipo de parámetro se debe configurar mediante el método RowsAffectedParameter.  
+De forma predeterminada, EF usa el valor devuelto por ExecuteNonQuery para determinar el número de filas afectadas. La especificación de un parámetro de salida de filas afectado es útil si se realiza cualquier lógica en el procedimiento almacenado, lo que daría lugar a que el valor devuelto de ExecuteNonQuery fuera incorrecto (desde la perspectiva del EF) al final de la ejecución.  
+- Para cada token de simultaneidad habrá un parámetro denominado **\<property_name\>_Original** (por ejemplo, Timestamp_Original). Se pasará el valor original de esta propiedad, que es el valor cuando se consulta desde la base de datos.  
+    - Los tokens de simultaneidad calculados por la base de datos, como las marcas de tiempo, solo tendrán un parámetro de valor original.  
+    - Las propiedades no calculadas que se establecen como tokens de simultaneidad también tendrán un parámetro para el nuevo valor en el procedimiento de actualización. Utiliza las convenciones de nomenclatura ya descritas para los nuevos valores. Un ejemplo de este tipo de token sería usar la dirección URL de un blog como un token de simultaneidad, el nuevo valor es necesario porque puede actualizarse a un nuevo valor por el código (a diferencia de un token de marca de tiempo que solo se actualiza en la base de datos).  
 
-Este es un ejemplo de clase y actualizar el procedimiento almacenado con un token de simultaneidad de marca de tiempo.  
+Esta es una clase de ejemplo y un procedimiento almacenado de actualización con un token de simultaneidad de marca de tiempo.  
 
 ``` csharp
 public class Blog  
@@ -243,7 +243,7 @@ AS
   WHERE BlogId = @BlogId AND [Timestamp] = @Timestamp_Original
 ```  
 
-Este es un ejemplo de clase y actualizar el procedimiento almacenado con el token de simultaneidad no calculadas.  
+A continuación se muestra una clase de ejemplo y un procedimiento almacenado de actualización con un token de simultaneidad no calculado.  
 
 ``` csharp
 public class Blog  
@@ -269,7 +269,7 @@ AS
 
 ### <a name="overriding-the-defaults"></a>Reemplazar los valores predeterminados  
 
-Si lo desea, puede introducir un parámetro de filas afectadas.  
+Opcionalmente, puede introducir un parámetro de filas afectadas.  
 
 ``` csharp
 modelBuilder  
@@ -278,7 +278,7 @@ modelBuilder
     s.Update(u => u.RowsAffectedParameter("rows_affected")));
 ```  
 
-Para los tokens de simultaneidad de base de datos calculada: donde se pasa sólo el valor original: solo puede usar el mecanismo de cambio de nombre de parámetro estándar para cambiar el nombre del parámetro del valor original.  
+En el caso de tokens de simultaneidad calculados de base de datos, donde solo se pasa el valor original, solo puede usar el mecanismo de cambio de nombre de parámetros estándar para cambiar el nombre del parámetro para el valor original.  
 
 ``` csharp
 modelBuilder  
@@ -287,7 +287,7 @@ modelBuilder
     s.Update(u => u.Parameter(b => b.Timestamp, "blog_timestamp")));
 ```  
 
-Para los tokens de simultaneidad no calculada, donde tanto el valor original y nuevo se pasa: puede usar una sobrecarga del parámetro que le permite proporcionar un nombre para cada parámetro.  
+En el caso de los tokens de simultaneidad no calculados, donde se pasan tanto el valor original como el nuevo, puede utilizar una sobrecarga de parámetro que le permita proporcionar un nombre para cada parámetro.  
 
 ``` csharp
 modelBuilder
@@ -295,9 +295,9 @@ modelBuilder
  .MapToStoredProcedures(s => s.Update(u => u.Parameter(b => b.Url, "blog_url", "blog_original_url")));
 ```  
 
-## <a name="many-to-many-relationships"></a>Muchos a muchos relaciones  
+## <a name="many-to-many-relationships"></a>Relaciones de varios a varios  
 
-Vamos a usar las clases siguientes como ejemplo en esta sección.  
+Usaremos las clases siguientes como ejemplo en esta sección.  
 
 ``` csharp
 public class Post  
@@ -318,7 +318,7 @@ public class Tag
 }
 ```  
 
-Varios a muchas relaciones pueden asignarse a procedimientos almacenados con la siguiente sintaxis.  
+Las relaciones de varios a varios se pueden asignar a procedimientos almacenados con la siguiente sintaxis.  
 
 ``` csharp
 modelBuilder  
@@ -328,12 +328,12 @@ modelBuilder
   .MapToStoredProcedures();
 ```  
 
-Si no se proporciona ninguna otra configuración, a continuación, la forma de procedimiento almacenado siguiente se usa de forma predeterminada.  
+Si no se proporciona ninguna otra configuración, se utiliza de forma predeterminada la siguiente forma de procedimiento almacenado.  
 
-- Dos procedimientos denominados almacenados  **\<type_one\>\<type_two\>_Insertar** y  **\<type_one\>\<type_two \>_Eliminar** (por ejemplo, PostTag_Insert y PostTag_Delete).  
-- Los parámetros serán los valores de clave para cada tipo. El nombre de cada parámetro que se va a **\<type_name\>_\<property_name\>** (por ejemplo, Post_PostId y Tag_TagId).
+- Dos procedimientos almacenados denominados **\<type_one\>\<type_two\>_Insert** y **\<** type_one\>\<type_two\>_Delete (por ejemplo, PostTag_Insert y PostTag_Delete).  
+- Los parámetros serán los valores de clave de cada tipo. Nombre de cada parámetro que se va **\<type_name\>_\<property_name**\>(por ejemplo, Post_PostId y Tag_TagId).
 
-Éstos son ejemplos de insertar y actualizar los procedimientos almacenados.  
+Estos son los procedimientos almacenados de inserción y actualización de ejemplo.  
 
 ``` SQL
 CREATE PROCEDURE [dbo].[PostTag_Insert]  
@@ -352,7 +352,7 @@ AS
 
 ### <a name="overriding-the-defaults"></a>Reemplazar los valores predeterminados  
 
-El procedimiento y nombres de parámetro se pueden configurar de forma similar a los procedimientos almacenado de entidad.  
+Los nombres de parámetros y procedimientos se pueden configurar de forma similar a los procedimientos almacenados de entidad.  
 
 ``` csharp
 modelBuilder  

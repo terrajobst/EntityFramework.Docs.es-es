@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: d617aed1-15f2-48a9-b187-186991c666e3
 ms.openlocfilehash: 018f480c1f0f1e74fc9f7a8950a6880e96f1facc
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182652"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78415788"
 ---
 # <a name="spatial---code-first"></a>Code First espacial
 > [!NOTE]
@@ -24,7 +24,7 @@ Para usar los tipos de datos espaciales, también debe usar un proveedor de Enti
 
 Hay dos tipos de datos espaciales principales: Geography y Geometry. El tipo de datos Geography almacena los datos de datos elipsoidales (por ejemplo, las coordenadas de latitud y longitud de GPS). El tipo de datos Geometry representa el sistema de coordenadas euclidiana (plano).
 
-## <a name="watch-the-video"></a>Ver el vídeo
+## <a name="watch-the-video"></a>Visualización del vídeo
 Este vídeo muestra cómo asignar tipos espaciales con Entity Framework Code First. También se muestra cómo usar una consulta LINQ para buscar una distancia entre dos ubicaciones.
 
 **Presentada por**: Julia Kornich
@@ -76,7 +76,7 @@ Los tipos DbContext y DbSet se definen en el ensamblado EntityFramework. Se agre
 1.  En Explorador de soluciones, haga clic con el botón derecho en el nombre del proyecto.
 2.  Seleccione **administrar paquetes NuGet..** .
 3.  En el cuadro de diálogo administrar paquetes NuGet, seleccione la pestaña **en línea** y elija el paquete **EntityFramework** .
-4.  Haga clic en **instalar**
+4.  Haga clic en **Instalar**.
 
 Tenga en cuenta que, además del ensamblado EntityFramework, también se agrega una referencia al ensamblado System. ComponentModel. DataAnnotations.
 

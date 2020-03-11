@@ -4,17 +4,17 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: f6e35c6d-45b7-4258-be1d-87c1bb67438d
 uid: core/miscellaneous/logging
-ms.openlocfilehash: 1a3863ee5f508c1fd393d4ec2c25c46ab8634f00
-ms.sourcegitcommit: 32c51c22988c6f83ed4f8e50a1d01be3f4114e81
+ms.openlocfilehash: e8adc39ec01ff75112b03446a488df6199cc7041
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 12/27/2019
-ms.locfileid: "75502102"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78414090"
 ---
 # <a name="logging"></a>Registro
 
 > [!TIP]  
-> Puede ver un [ejemplo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Logging) de este artículo en GitHub.
+> Puede ver un [ejemplo](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Logging) de este artículo en GitHub.
 
 ## <a name="aspnet-core-applications"></a>Aplicaciones de ASP.NET Core
 
@@ -33,11 +33,11 @@ El registro de EF Core requiere un ILoggerFactory que se configura a su vez con 
 
 Después de instalar los paquetes adecuados, la aplicación debe crear una instancia singleton/global de un LoggerFactory. Por ejemplo, mediante el registrador de consola:
 
-### <a name="version-30tabv3"></a>[Versión 3,0](#tab/v3)
+### <a name="version-3x"></a>[Versión 3.x](#tab/v3)
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/Logging/Logging/BloggingContext.cs#DefineLoggerFactory)]
 
-### <a name="version-2xtabv2"></a>[Versión 2.x](#tab/v2)
+### <a name="version-2x"></a>[Versión 2.x](#tab/v2)
 
 > [!NOTE]
 > En el ejemplo de código siguiente se usa un constructor de `ConsoleLoggerProvider` que ha quedado obsoleto en la versión 2,2 y se ha reemplazado en 3,0. Es seguro omitir y suprimir las advertencias al usar 2,2.
@@ -60,11 +60,11 @@ Esta instancia singleton/global se debe registrar con EF Core en el `DbContextOp
 
 La aplicación puede controlar lo que se registra mediante la configuración de un filtro en el ILoggerProvider. Por ejemplo:
 
-### <a name="version-30tabv3"></a>[Versión 3,0](#tab/v3)
+### <a name="version-3x"></a>[Versión 3.x](#tab/v3)
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/Logging/Logging/BloggingContextWithFiltering.cs#DefineLoggerFactory)]
 
-### <a name="version-2xtabv2"></a>[Versión 2.x](#tab/v2)
+### <a name="version-2x"></a>[Versión 2.x](#tab/v2)
 
 > [!NOTE]
 > En el ejemplo de código siguiente se usa un constructor de `ConsoleLoggerProvider` que ha quedado obsoleto en la versión 2,2 y se ha reemplazado en 3,0. Es seguro omitir y suprimir las advertencias al usar 2,2.

@@ -6,17 +6,17 @@ ms.date: 11/13/2018
 ms.assetid: 6263EF7D-4989-42E6-BDEE-45DA770342FB
 uid: core/managing-schemas/scaffolding
 ms.openlocfilehash: 1ba9352d261f1c131b0d70f8cdad2128d9afaefe
-ms.sourcegitcommit: 7a709ce4f77134782393aa802df5ab2718714479
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 12/04/2019
-ms.locfileid: "74824467"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78414240"
 ---
 # <a name="reverse-engineering"></a>Ingeniería inversa
 
 La ingeniería inversa es el proceso de scaffolding de las clases de tipo de entidad y una clase DbContext basada en un esquema de base de datos. Puede realizarse mediante el comando `Scaffold-DbContext` de las herramientas de la consola del administrador de paquetes EF Core (PMC) o el comando `dotnet ef dbcontext scaffold` de las herramientas de la interfaz de la línea de comandos (CLI) de .NET.
 
-## <a name="installing"></a>Instalar
+## <a name="installing"></a>Instalación
 
 Antes de la ingeniería inversa, deberá instalar las herramientas de [PMC](xref:core/miscellaneous/cli/powershell) (solo en Visual Studio) o las [herramientas](xref:core/miscellaneous/cli/dotnet)de la CLI. Vea los vínculos para obtener más información.
 
@@ -113,7 +113,7 @@ Scaffold-DbContext ... -ContextDir Data -OutputDir Models
 dotnet ef dbcontext scaffold ... --context-dir Data --output-dir Models
 ```
 
-## <a name="how-it-works"></a>Cómo funciona
+## <a name="how-it-works"></a>Funcionamiento
 
 La ingeniería inversa comienza leyendo el esquema de la base de datos. Lee información acerca de las tablas, columnas, restricciones e índices.
 

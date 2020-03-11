@@ -1,52 +1,52 @@
 ---
-title: Compatibilidad con enum - Code First – EF6
+title: Compatibilidad con enum-Code First-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 77a42501-27c9-4f4b-96df-26c128021467
 ms.openlocfilehash: 1cecbf7065367deb3d202977fe39187bd907d824
-ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/18/2018
-ms.locfileid: "46283725"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78415794"
 ---
-# <a name="enum-support---code-first"></a>Compatibilidad con enum - Code First
+# <a name="enum-support---code-first"></a>Compatibilidad con enum-Code First
 > [!NOTE]
-> **EF5 y versiones posteriores solo** -las características, las API, etc. se describe en esta página se introdujeron en Entity Framework 5. Si usa una versión anterior, no se aplica parte o la totalidad de la información.
+> **EF5** y versiones posteriores: las características, las API, etc. que se describen en esta página se introdujeron en Entity Framework 5. Si usa una versión anterior, no se aplica parte o la totalidad de la información.
 
-En este tutorial de vídeo y paso a paso muestra cómo usar los tipos de enumeración con Entity Framework Code First. También se muestra cómo usar las enumeraciones en una consulta LINQ.
+Este tutorial de vídeo y paso a paso muestra cómo utilizar tipos de enumeración con Entity Framework Code First. También se muestra cómo usar las enumeraciones en una consulta LINQ.
 
-En este tutorial utilizará Code First para crear una nueva base de datos, pero también puede usar [Code First para asignar a una base de datos](~/ef6/modeling/code-first/workflows/existing-database.md).
+En este tutorial se utilizará Code First para crear una nueva base de datos, pero también puede usar [code First para asignarla a una base de datos existente](~/ef6/modeling/code-first/workflows/existing-database.md).
 
-Compatibilidad de la enumeración se introdujo en Entity Framework 5. Para usar las nuevas características como enumeraciones, tipos de datos espaciales y funciones con valores de tabla, debe tener como destino .NET Framework 4.5. Visual Studio 2012 tiene como destino .NET 4.5 de forma predeterminada.
+La compatibilidad con la enumeración se presentó en Entity Framework 5. Para usar las nuevas características, como las enumeraciones, los tipos de datos espaciales y las funciones con valores de tabla, debe tener como destino .NET Framework 4,5. Visual Studio 2012 tiene como destino .NET 4,5 de forma predeterminada.
 
-En Entity Framework, una enumeración puede tener los siguientes tipos subyacentes: **bytes**, **Int16**, **Int32**, **Int64** , o **SByte**.
+En Entity Framework, una enumeración puede tener los siguientes tipos subyacentes: **byte**, **Int16**, **Int32**, **Int64** o **SByte**.
 
-## <a name="watch-the-video"></a>Vea el vídeo
-Este vídeo muestra cómo usar los tipos de enumeración con Entity Framework Code First. También se muestra cómo usar las enumeraciones en una consulta LINQ.
+## <a name="watch-the-video"></a>Visualización del vídeo
+En este vídeo se muestra cómo utilizar tipos de enumeración con Code First de Entity Framework. También se muestra cómo usar las enumeraciones en una consulta LINQ.
 
-**Presentado por**: Julia Kornich
+**Presentada por**: Julia Kornich
 
-**Vídeo**: [WMV](https://download.microsoft.com/download/A/5/8/A583DEE8-FD5C-47EE-A4E1-966DDF39D1DA/HDI-ITPro-MSDN-winvideo-enumwithcodefirst.wmv) | [MP4](https://download.microsoft.com/download/A/5/8/A583DEE8-FD5C-47EE-A4E1-966DDF39D1DA/HDI-ITPro-MSDN-mp4video-enumwithcodefirst.m4v) | [WMV (ZIP)](https://download.microsoft.com/download/A/5/8/A583DEE8-FD5C-47EE-A4E1-966DDF39D1DA/HDI-ITPro-MSDN-winvideo-enumwithcodefirst.zip)
+**Vídeo**: [wmv](https://download.microsoft.com/download/A/5/8/A583DEE8-FD5C-47EE-A4E1-966DDF39D1DA/HDI-ITPro-MSDN-winvideo-enumwithcodefirst.wmv) | [MP4](https://download.microsoft.com/download/A/5/8/A583DEE8-FD5C-47EE-A4E1-966DDF39D1DA/HDI-ITPro-MSDN-mp4video-enumwithcodefirst.m4v) | [WMV (zip)](https://download.microsoft.com/download/A/5/8/A583DEE8-FD5C-47EE-A4E1-966DDF39D1DA/HDI-ITPro-MSDN-winvideo-enumwithcodefirst.zip)
 
 ## <a name="pre-requisites"></a>Requisitos previos
 
-Necesitará tener Visual Studio 2012, Ultimate, Premium, Professional o Web Express edition instalado para completar este tutorial.
+Deberá tener instalado Visual Studio 2012, Ultimate, Premium, Professional o Web Express Edition para completar este tutorial.
 
- 
+ 
 
 ## <a name="set-up-the-project"></a>Configurar el proyecto
 
 1.  Abra Visual Studio 2012
-2.  En el **archivo** menú, elija **New**y, a continuación, haga clic en **proyecto**
-3.  En el panel izquierdo, haga clic en **Visual C\#** y, a continuación, seleccione el **consola** plantilla
-4.  Escriba **EnumCodeFirst** como el nombre del proyecto y haga clic en **Aceptar**
+2.  En el menú **archivo** , seleccione **nuevo**y, a continuación, haga clic en **proyecto** .
+3.  En el panel izquierdo, haga clic en **Visual C\#** y, a continuación, seleccione la plantilla de **consola** .
+4.  Escriba **EnumCodeFirst** como nombre del proyecto y haga clic en **Aceptar** .
 
-## <a name="define-a-new-model-using-code-first"></a>Definir un modelo nuevo mediante Code First
+## <a name="define-a-new-model-using-code-first"></a>Definir un nuevo modelo mediante Code First
 
-Cuando usando desarrollo Code First suele comenzar mediante la escritura de las clases de .NET Framework que definen el modelo conceptual (dominio). El código siguiente define la clase de departamento.
+Al usar Code First desarrollo, normalmente comienza por escribir .NET Framework clases que definen el modelo conceptual (de dominio). El código siguiente define la clase Department.
 
-El código también define la enumeración DepartmentNames. De forma predeterminada, la enumeración es de **int** tipo. La propiedad Name de la clase departamento es del tipo DepartmentNames.
+El código también define la enumeración DepartmentNames. De forma predeterminada, la enumeración es de tipo **int** . La propiedad Name de la clase Department es del tipo DepartmentNames.
 
 Abra el archivo Program.cs y pegue las siguientes definiciones de clase.
 
@@ -65,22 +65,22 @@ public partial class Department
     public decimal Budget { get; set; }
 }
 ```
- 
+ 
 
-## <a name="define-the-dbcontext-derived-type"></a>Definir la clase DbContext tipo derivado
+## <a name="define-the-dbcontext-derived-type"></a>Definir el tipo derivado de DbContext
 
-Además de definir las entidades, debe definir una clase que deriva de DbContext y expone DbSet&lt;TEntity&gt; propiedades. La clase DbSet&lt;TEntity&gt; propiedades que el contexto sepan qué tipos van a incluir en el modelo.
+Además de definir entidades, debe definir una clase que derive de DbContext y exponga las propiedades de DbSet&lt;de la carpa&gt;. Las propiedades de DbSet&lt;la&gt; de la carpa permiten que el contexto sepa qué tipos desea incluir en el modelo.
 
-Una instancia del tipo derivado de DbContext administra los objetos entidad durante el tiempo de ejecución, que incluye rellenar objetos con los datos de una base de datos, cambie el seguimiento y almacenar datos a la base de datos.
+Una instancia del tipo derivado de DbContext administra los objetos de entidad durante el tiempo de ejecución, lo que incluye el rellenado de objetos con datos de una base de datos, el seguimiento de cambios y la persistencia de datos en la base de datos.
 
-Los tipos de DbContext y DbSet se definen en el ensamblado de Entity Framework. Se agregará una referencia a este archivo DLL mediante el paquete EntityFramework NuGet.
+Los tipos DbContext y DbSet se definen en el ensamblado EntityFramework. Se agregará una referencia a este archivo DLL mediante el paquete NuGet EntityFramework.
 
-1.  En el Explorador de soluciones, haga doble clic en el nombre del proyecto.
-2.  Seleccione **administrar paquetes NuGet...**
-3.  En el cuadro de diálogo Administrar paquetes de NuGet, seleccione el **Online** pestaña y elija el **EntityFramework** paquete.
-4.  Haga clic en **instalar**
+1.  En Explorador de soluciones, haga clic con el botón derecho en el nombre del proyecto.
+2.  Seleccione **administrar paquetes NuGet..** .
+3.  En el cuadro de diálogo administrar paquetes NuGet, seleccione la pestaña **en línea** y elija el paquete **EntityFramework** .
+4.  Haga clic en **Instalar**.
 
-Tenga en cuenta que el ensamblado de Entity Framework, además de las referencias a ensamblados System.ComponentModel.DataAnnotations y System.Data.Entity se agregan también.
+Tenga en cuenta que, además del ensamblado EntityFramework, también se agregan las referencias a los ensamblados System. ComponentModel. DataAnnotations y System. Data. Entity.
 
 En la parte superior del archivo Program.cs, agregue la siguiente instrucción using:
 
@@ -88,7 +88,7 @@ En la parte superior del archivo Program.cs, agregue la siguiente instrucción u
 using System.Data.Entity;
 ```
 
-En el archivo Program.cs, agregue la definición del contexto. 
+En Program.cs, agregue la definición de contexto. 
 
 ``` csharp
 public partial class EnumTestContext : DbContext
@@ -96,11 +96,11 @@ public partial class EnumTestContext : DbContext
     public DbSet<Department> Departments { get; set; }
 }
 ```
- 
+ 
 
 ## <a name="persist-and-retrieve-data"></a>Conservar y recuperar datos
 
-Abra el archivo Program.cs, donde se define el método Main. Agregue el código siguiente en la función Main. El código agrega un nuevo objeto de departamento en el contexto. A continuación, guarda los datos. El código también ejecuta una consulta LINQ que devuelve un departamento donde el nombre es DepartmentNames.English.
+Abra el archivo Program.cs en el que se define el método Main. Agregue el código siguiente a la función main. El código agrega un nuevo objeto Department al contexto. Después guarda los datos. El código también ejecuta una consulta LINQ que devuelve un departamento en el que el nombre es DepartmentNames. English.
 
 ``` csharp
 using (var context = new EnumTestContext())
@@ -125,22 +125,22 @@ Compile y ejecute la aplicación. El programa produce el siguiente resultado:
 ``` csharp
 DepartmentID: 1 Name: English
 ```
- 
+ 
 
-## <a name="view-the-generated-database"></a>Vista de la base de datos generado
+## <a name="view-the-generated-database"></a>Ver la base de datos generada
 
-Al ejecutar la aplicación por primera vez, Entity Framework crea una base de datos. Dado que tenemos instalado Visual Studio 2012, se creará la base de datos en la instancia de LocalDB. De forma predeterminada, Entity Framework los nombres de la base de datos después del nombre completo del contexto derivado (para este ejemplo, es **EnumCodeFirst.EnumTestContext**). Las siguientes veces que se usará la base de datos existente.  
+Al ejecutar la aplicación por primera vez, el Entity Framework crea una base de datos automáticamente. Dado que tenemos instalado Visual Studio 2012, la base de datos se creará en la instancia de LocalDB. De forma predeterminada, el Entity Framework nombra la base de datos después del nombre completo del contexto derivado (para este ejemplo, que es **EnumCodeFirst. EnumTestContext**). Las veces posteriores en las que se utilizará la base de datos existente.  
 
-Tenga en cuenta que si realiza cualquier cambio en el modelo una vez creada la base de datos, debe usar migraciones de Code First para actualizar el esquema de base de datos. Consulte [Code First para una base de datos](~/ef6/modeling/code-first/workflows/new-database.md) para obtener un ejemplo del uso de las migraciones.
+Tenga en cuenta que si realiza cambios en el modelo una vez creada la base de datos, debe utilizar Migraciones de Code First para actualizar el esquema de la base de datos. Vea [code First en una nueva base de datos](~/ef6/modeling/code-first/workflows/new-database.md) para obtener un ejemplo del uso de las migraciones.
 
-Para ver la base de datos y los datos, realice lo siguiente:
+Para ver la base de datos y los datos, haga lo siguiente:
 
-1.  En el menú principal de Visual Studio 2012, seleccione **vista**  - &gt; **Explorador de objetos de SQL Server**.
-2.  Si LocalDB no está en la lista de servidores, haga clic en el botón secundario del mouse en **SQL Server** y seleccione **agregar SQL Server** Use el valor predeterminado **Windows autenticación** para conectarse a la Instancia de LocalDB
-3.  Expanda el nodo de LocalDB
-4.  Expandir el **bases de datos** carpeta para ver la nueva base de datos y busque el **departamento** tabla tenga en cuenta que Code First no crea una tabla que asigna al tipo de enumeración
-5.  Para ver los datos, haga doble clic en la tabla y seleccione **ver datos**
+1.  En el menú principal de Visual Studio 2012, seleccione **ver** -&gt; **Explorador de objetos de SQL Server**.
+2.  Si LocalDB no está en la lista de servidores, haga clic con el botón secundario del mouse en **SQL Server** y seleccione **Agregar SQL Server** usar la **autenticación de Windows** predeterminada para conectarse a la instancia de LocalDB.
+3.  Expandir el nodo LocalDB
+4.  Desabra la carpeta **bases** de datos para ver la nueva base de datos y vaya a la tabla **Department** . tenga en cuenta que Code First no crea una tabla que se asigne al tipo de enumeración
+5.  Para ver los datos, haga clic con el botón derecho en la tabla y seleccione **ver datos** .
 
 ## <a name="summary"></a>Resumen
 
-En este tutorial analizamos cómo usar los tipos de enumeración con Entity Framework Code First. 
+En este tutorial, hemos visto cómo usar los tipos de enumeración con Entity Framework Code First. 

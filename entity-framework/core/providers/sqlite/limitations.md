@@ -5,11 +5,11 @@ ms.date: 04/09/2017
 ms.assetid: 94ab4800-c460-4caa-a5e8-acdfee6e6ce2
 uid: core/providers/sqlite/limitations
 ms.openlocfilehash: 2f80dc195265787318ac4925dd937da45ffad011
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72179768"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78414762"
 ---
 # <a name="sqlite-ef-core-database-provider-limitations"></a>Limitaciones del proveedor de bases de datos de SQLite EF Core
 
@@ -34,7 +34,7 @@ SQLite no admite de forma nativa los siguientes tipos de datos. EF Core puede le
 
 En lugar de `DateTimeOffset`, se recomienda usar valores DateTime. Al controlar varias zonas horarias, recomendamos convertir los valores a UTC antes de guardar y, a continuación, volver a convertirlos a la zona horaria adecuada.
 
-El tipo `Decimal` proporciona un alto nivel de precisión. Sin embargo, si no necesita ese nivel de precisión, se recomienda usar Double en su lugar. Puede usar un [convertidor de valores](../../modeling/value-conversions.md) para seguir usando decimal en las clases.
+El tipo de `Decimal` proporciona un alto nivel de precisión. Sin embargo, si no necesita ese nivel de precisión, se recomienda usar Double en su lugar. Puede usar un [convertidor de valores](../../modeling/value-conversions.md) para seguir usando decimal en las clases.
 
 ``` csharp
 modelBuilder.Entity<MyEntity>()
@@ -46,7 +46,7 @@ modelBuilder.Entity<MyEntity>()
 
 El motor de base de datos de SQLite no es compatible con una serie de operaciones de esquema que son compatibles con la mayoría de las demás bases de datos relacionales. Si intenta aplicar una de las operaciones no admitidas a una base de datos de SQLite, se producirá una `NotSupportedException`.
 
-| Operación            | Realizar? | Requiere versión |
+| Operación            | Se admite? | Requiere versión |
 |:---------------------|:-----------|:-----------------|
 | AddColumn            | ✔          | 1.0              |
 | AddForeignKey        | ✗          |                  |

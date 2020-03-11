@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: c8417e18-a2ee-499c-9ce9-2a48cc5b468a
 ms.openlocfilehash: c359d8d32a88049213fd5e98e99fe49d7e3121a3
-ms.sourcegitcommit: d01fc19aa42ca34c3bebccbc96ee26d06fcecaa2
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/16/2019
-ms.locfileid: "71005487"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78414468"
 ---
 # <a name="loading-related-entities"></a>Carga de entidades relacionadas
 
@@ -102,7 +102,7 @@ public class Blog
 
 ### <a name="turn-lazy-loading-off-for-serialization"></a>Desactivación de la carga diferida para la serialización
 
-La carga diferida y la serialización no se combinan bien y, si no tiene cuidado, puede finalizar la consulta de toda la base de datos, solo porque está habilitada la carga diferida. La mayoría de los serializadores funcionan mediante el acceso a cada propiedad en una instancia de un tipo. El acceso de propiedad desencadena la carga diferida, por lo que se serializan más entidades. En esas entidades se tiene acceso a las propiedades de, e incluso se cargan más entidades. Se recomienda desactivar la carga diferida antes de serializar una entidad. En las secciones siguientes se muestra cómo hacerlo.
+La carga diferida y la serialización no se combinan bien y, si no tiene cuidado, puede finalizar la consulta de toda la base de datos, solo porque está habilitada la carga diferida. La mayoría de los serializadores funcionan mediante el acceso a cada propiedad en una instancia de un tipo. El acceso de propiedad desencadena la carga diferida, por lo que se serializan más entidades. En esas entidades se tiene acceso a las propiedades de, e incluso se cargan más entidades. Se recomienda desactivar la carga diferida antes de serializar una entidad. Se muestra cómo hacerlo en las secciones siguientes.
 
 ### <a name="turning-off-lazy-loading-for-specific-navigation-properties"></a>Desactivar la carga diferida para propiedades de navegación específicas
 

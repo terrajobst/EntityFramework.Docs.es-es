@@ -1,19 +1,19 @@
 ---
-title: Consultas de no seguimiento - EF6
+title: 'Consultas sin seguimiento: EF6'
 author: divega
 ms.date: 10/23/2016
 ms.assetid: f80ac260-c2dc-484d-94a3-3424fd862f8b
 ms.openlocfilehash: 44d58e14a2550bd08a8edd68b467237f6f5b5978
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490131"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78414480"
 ---
 # <a name="no-tracking-queries"></a>consultas de no seguimiento
-A veces es posible que desee obtener entidades de una consulta, pero no tiene esas entidades se realiza el seguimiento del contexto. Esto puede producir un mejor rendimiento cuando se consulta para un gran número de entidades en escenarios de solo lectura. Las técnicas que se muestran en este tema se aplican igualmente a los modelos creados con Code First y EF Designer.  
+En ocasiones, es posible que desee obtener las entidades de una consulta, pero el contexto no puede realizar el seguimiento de esas entidades. Esto puede dar lugar a un mejor rendimiento cuando se consulta un gran número de entidades en escenarios de solo lectura. Las técnicas que se muestran en este tema se aplican igualmente a los modelos creados con Code First y EF Designer.  
 
-Un nuevo método de extensión AsNoTracking permite cualquier consulta que se ejecutará en este modo. Por ejemplo:  
+Un nuevo método de extensión AsNoTracking permite ejecutar cualquier consulta de esta manera. Por ejemplo:  
 
 ``` csharp
 using (var context = new BloggingContext())

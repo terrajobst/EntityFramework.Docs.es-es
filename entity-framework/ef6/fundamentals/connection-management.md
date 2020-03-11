@@ -1,19 +1,19 @@
 ---
-title: Administración de la conexión - EF6
+title: 'Administración de conexiones: EF6'
 author: divega
 ms.date: 10/23/2016
 ms.assetid: ecaa5a27-b19e-4bf9-8142-a3fb00642270
 ms.openlocfilehash: a6352bbbc38c38bd5f30536736ec969056df2c7d
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489341"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78414870"
 ---
 # <a name="connection-management"></a>Administración de conexiones
-Esta página describe el comportamiento de Entity Framework con respecto al pasar las conexiones de contexto y la funcionalidad de la **Database.Connection.Open()** API.  
+En esta página se describe el comportamiento de Entity Framework con respecto a cómo pasar conexiones al contexto y la funcionalidad de la API **Database. Connection. Open ()** .  
 
-## <a name="passing-connections-to-the-context"></a>Conexiones de pasar al contexto  
+## <a name="passing-connections-to-the-context"></a>Pasar conexiones al contexto  
 
 ### <a name="behavior-for-ef5-and-earlier-versions"></a>Comportamiento de EF5 y versiones anteriores  
 
@@ -24,12 +24,12 @@ public DbContext(DbConnection existingConnection, bool contextOwnsConnection)
 public DbContext(DbConnection existingConnection, DbCompiledModel model, bool contextOwnsConnection)
 ```  
 
-Es posible usar estas pero tiene que solucionar un par de limitaciones:  
+Es posible utilizarlos, pero tiene que solucionar un par de limitaciones:  
 
-1. Si se pasa una conexión abierta a cualquiera de estos, a continuación, la primera vez que el marco intenta usarlo que se produce una excepción InvalidOperationException que dice que volver a no puede abrir una conexión ya abierta.  
-2. La marca contextOwnsConnection se interpreta como si se debe desechar la conexión del almacén subyacente cuando se desecha el contexto. Sin embargo, independientemente de ese valor, siempre se cierra la conexión del almacén cuando se desecha el contexto. Por lo que si tiene más de un DbContext con la misma conexión de cualquier contexto se elimine en primer lugar cerrará la conexión (de forma similar si ha mezclado una conexión ADO.NET existente con una clase DbContext, DbContext siempre cerrará la conexión cuando se elimina) .  
+1. Si pasa una conexión abierta a cualquiera de estas, la primera vez que el marco intenta utilizarla, se produce una excepción InvalidOperationException que indica que no puede volver a abrir una conexión que ya está abierta.  
+2. La marca contextOwnsConnection se interpreta para indicar si la conexión del almacén subyacente debe desecharse cuando se desecha el contexto. Sin embargo, independientemente de esa configuración, la conexión del almacén siempre se cierra cuando se desecha el contexto. Por lo tanto, si tiene más de un DbContext con la misma conexión, el contexto que se elimine primero cerrará la conexión (de forma similar si ha mezclado una conexión ADO.NET existente con un DbContext, DbContext siempre cerrará la conexión cuando se elimine). .  
 
-Es posible evitar la primera limitación anteriormente pasando una conexión cerrada y sólo se ejecuta código que se abre una vez que se han creado todos los contextos:  
+Es posible solucionar la primera limitación anterior si se pasa una conexión cerrada y solo se ejecuta código que la abriría una vez que se han creado todos los contextos:  
 
 ``` csharp
 using System.Collections.Generic;
@@ -71,11 +71,11 @@ namespace ConnectionManagementExamples
 }
 ```  
 
-La segunda limitación significa simplemente que necesita no elimine ninguno de los objetos DbContext hasta que esté listo para la conexión a punto de cerrarse.  
+La segunda limitación solo significa que debe abstenerse de desechar cualquier objeto DbContext hasta que esté listo para que se cierre la conexión.  
 
 ### <a name="behavior-in-ef6-and-future-versions"></a>Comportamiento en EF6 y versiones futuras  
 
-En EF6 y versiones futuras DbContext tiene el mismos dos constructores, pero ya no requiere que se cierra la conexión que se pasó al constructor cuando se recibe. Así que ahora es posible:  
+En EF6 y versiones futuras, DbContext tiene los mismos dos constructores, pero ya no requiere que la conexión pasada al constructor se cierre cuando se reciba. Por lo tanto, ahora es posible:  
 
 ``` csharp
 using System.Collections.Generic;
@@ -123,24 +123,24 @@ namespace ConnectionManagementExamples
 }
 ```  
 
-También la marca contextOwnsConnection ahora controla si la conexión es tanto cierra y se elimina cuando se desecha DbContext. Por lo que en el ejemplo anterior no se cierra la conexión cuando el contexto es eliminado (línea 32) como sucedía en versiones anteriores de EF, sino cuando se elimina la propia conexión (línea 40).  
+Además, la marca contextOwnsConnection controla ahora si la conexión se cierra y se desecha cuando se desecha el DbContext. Por lo tanto, en el ejemplo anterior, la conexión no se cierra cuando el contexto se desecha (línea 32) tal y como se encontraba en versiones anteriores de EF, sino cuando se desecha la propia conexión (línea 40).  
 
-Desde luego resulta todavía posible para la clase DbContext para tomar el control de la conexión (solo el conjunto contextOwnsConnection en true o use uno de los otros constructores) si se desea.  
+Por supuesto, sigue siendo posible que DbContext tome el control de la conexión (solo tiene que establecer contextOwnsConnection en true o usar uno de los otros constructores) si así lo desea.  
 
 > [!NOTE]
-> Hay algunas consideraciones adicionales cuando se usan transacciones con este nuevo modelo. Para obtener información detallada, consulte [trabajar con transacciones](~/ef6/saving/transactions.md).  
+> Existen algunas consideraciones adicionales al usar transacciones con este nuevo modelo. Para obtener más información, consulte [trabajar con transacciones](~/ef6/saving/transactions.md).  
 
-## <a name="databaseconnectionopen"></a>Database.Connection.Open()  
+## <a name="databaseconnectionopen"></a>Database. Connection. Open ()  
 
 ### <a name="behavior-for-ef5-and-earlier-versions"></a>Comportamiento de EF5 y versiones anteriores  
 
-En EF5 y versiones anteriores, hay un error que el **ObjectContext.Connection.State** no se ha actualizado para reflejar el estado real de la conexión del almacén subyacente. Por ejemplo, si ejecuta el código siguiente se puede devolver el estado **cerrado** , aunque en realidad subyacentes de la conexión del almacén es **abierto**.  
+En EF5 y versiones anteriores hay un error que indica que **ObjectContext. Connection. State** no se actualizó para reflejar el verdadero estado de la conexión del almacén subyacente. Por ejemplo, si ejecutó el código siguiente, se puede devolver el estado **cerrado** aunque de hecho la conexión del almacén subyacente esté **abierta**.  
 
 ``` csharp
 ((IObjectContextAdapter)context).ObjectContext.Connection.State
 ```  
 
-Por separado, si abre la conexión de base de datos mediante una llamada a Database.Connection.Open() será abierto hasta la próxima vez que ejecute una consulta o llamar a cualquier cosa que requiere una conexión de base de datos (por ejemplo, SaveChanges()) pero después que subyacente almacén se cerrará la conexión. El contexto se luego vuelva a abrir y volver a cerrar la conexión siempre que se requiere otra operación de base de datos:  
+Por separado, si abre la conexión de base de datos mediante una llamada a Database. Connection. Open (), se abrirá hasta la próxima vez que ejecute una consulta o llame a cualquier elemento que requiera una conexión de base de datos (por ejemplo, SaveChanges ()) pero después de que el almacén subyacente la conexión se cerrará. El contexto volverá a abrir y a cerrar la conexión cada vez que se requiera otra operación de base de datos:  
 
 ``` csharp
 using System;
@@ -186,12 +186,12 @@ namespace ConnectionManagementExamples
 
 ### <a name="behavior-in-ef6-and-future-versions"></a>Comportamiento en EF6 y versiones futuras  
 
-Para EF6 y versiones futuras hemos tomado el enfoque que si elige el código de llamada para abrir la conexión mediante el contexto de la llamada. Database.Connection.Open(), a continuación, se tiene una buena razón para hacerlo y supone que el marco de trabajo que desea un control sobre la apertura y cierre de la conexión y ya no se cerrará automáticamente la conexión.  
+En el caso de EF6 y versiones futuras, hemos tomado el enfoque que es si el código de llamada elige abrir la conexión llamando al contexto. Database. Connection. Open () tiene una buena razón para hacerlo y el marco asumirá que desea tener el control sobre la apertura y el cierre de la conexión y dejará de cerrar la conexión automáticamente.  
 
 > [!NOTE]
-> Esto puede dañar las conexiones que están abiertas para por lo que use mucho tiempo con cuidado.  
+> Esto puede dar lugar a conexiones que están abiertas durante mucho tiempo, por lo que debe usarse con cuidado.  
 
-También hemos actualizado el código para que ObjectContext.Connection.State ahora realiza un seguimiento del estado de la conexión subyacente correctamente.  
+También se actualizó el código para que ObjectContext. Connection. State ahora realiza un seguimiento del estado de la conexión subyacente correctamente.  
 
 ``` csharp
 using System;

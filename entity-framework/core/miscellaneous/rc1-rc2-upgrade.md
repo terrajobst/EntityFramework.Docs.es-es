@@ -5,11 +5,11 @@ ms.date: 10/27/2016
 ms.assetid: 6d75b229-cc79-4d08-88cd-3a1c1b24d88f
 uid: core/miscellaneous/rc1-rc2-upgrade
 ms.openlocfilehash: 887b7cd539b9c0f5a680398f5039757420228710
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72181285"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78414114"
 ---
 # <a name="upgrading-from-ef-core-10-rc1-to-10-rc2"></a>Actualización de EF Core 1,0 RC1 a 1,0 RC2
 
@@ -83,7 +83,7 @@ public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
 
 Si tiene código RC1 que pasa un `IServiceProvider` al contexto, ahora se mueve a `DbContextOptions`, en lugar de ser un parámetro de constructor independiente. Utilice `DbContextOptionsBuilder.UseInternalServiceProvider(...)` para establecer el proveedor de servicios.
 
-### <a name="testing"></a>Pruebas
+### <a name="testing"></a>Prueba
 
 El escenario más común para hacerlo era controlar el ámbito de una base de datos inmemory al realizar las pruebas. Vea el artículo sobre las [pruebas](testing/index.md) actualizadas para obtener un ejemplo de cómo hacerlo con RC2.
 

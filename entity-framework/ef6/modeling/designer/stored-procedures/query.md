@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 9554ed25-c5c1-43be-acad-5da37739697f
 ms.openlocfilehash: 2e0092b526278597e8477d47eeb642598647bb91
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182484"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78415206"
 ---
 # <a name="designer-query-stored-procedures"></a>Procedimientos almacenados de consulta del diseñador
 En este tutorial paso a paso se muestra cómo usar el Entity Framework Designer (EF Designer) para importar procedimientos almacenados en un modelo y, a continuación, llamar a los procedimientos almacenados importados para recuperar los resultados. 
@@ -18,7 +18,7 @@ Tenga en cuenta que Code First no admite la asignación a funciones o procedimie
 var query = context.Products.SqlQuery("EXECUTE [dbo].[GetAllProducts]")`;
 ```
 
-## <a name="prerequisites"></a>Requisitos previos
+## <a name="prerequisites"></a>Prerequisites
 
 Para completar este tutorial, necesitará:
 
@@ -31,9 +31,9 @@ Para completar este tutorial, necesitará:
 -   Seleccionar **archivo-&gt; nuevo-&gt; proyecto**
 -   En el panel izquierdo, haga clic en **Visual C\#** y, a continuación, seleccione la plantilla de **consola** .
 -   Escriba **EFwithSProcsSample** como nombre.
--   Seleccione **Aceptar**.
+-   Seleccione  **Aceptar**.
 
-## <a name="create-a-model"></a>Crear un modelo
+## <a name="create-a-model"></a>Creación de un modelo
 
 -   Haga clic con el botón derecho en el proyecto en Explorador de soluciones y seleccione **agregar&gt; nuevo elemento**.
 -   Seleccione **datos** en el menú de la izquierda y, a continuación, seleccione **ADO.NET Entity Data Model** en el panel Plantillas.

@@ -4,79 +4,79 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: b95db5c8-de8d-43bd-9ccc-5df6a5e25e1b
 ms.openlocfilehash: e78b927a147143629ac5b73e23edf439ba6d0264
-ms.sourcegitcommit: 269c8a1a457a9ad27b4026c22c4b1a76991fb360
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/18/2018
-ms.locfileid: "46283620"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78415122"
 ---
 # <a name="multiple-diagrams-per-model"></a>Varios diagramas por modelo
 > [!NOTE]
-> **EF5 y versiones posteriores solo** -las características, las API, etc. se describe en esta página se introdujeron en Entity Framework 5. Si usa una versión anterior, no se aplica parte o la totalidad de la información.
+> **EF5** y versiones posteriores: las características, las API, etc. que se describen en esta página se introdujeron en Entity Framework 5. Si usa una versión anterior, no se aplica parte o la totalidad de la información.
 
-Esta página y el vídeo se muestra cómo dividir un modelo en varios diagramas mediante el Diseñador de Entity Framework (EF Designer). Es posible que desee usar esta característica cuando el modelo se vuelve demasiado grande para ver o editar.
+En este vídeo y en la página se muestra cómo dividir un modelo en varios diagramas mediante el Entity Framework Designer (EF Designer). Es posible que desee usar esta característica cuando el modelo sea demasiado grande para verlo o editarlo.
 
-En versiones anteriores de EF Designer podría tener sólo un diagrama por el archivo EDMX. A partir de Visual Studio 2012, puede utilizar el Diseñador de EF para dividir el archivo EDMX en varios diagramas.
+En versiones anteriores del diseñador de EF solo podía tener un diagrama por el archivo EDMX. A partir de Visual Studio 2012, puede usar el diseñador de EF para dividir el archivo EDMX en varios diagramas.
 
-## <a name="watch-the-video"></a>Vea el vídeo
-Este vídeo muestra cómo dividir un modelo en varios diagramas mediante el Diseñador de Entity Framework (EF Designer). Es posible que desee usar esta característica cuando el modelo se vuelve demasiado grande para ver o editar.
+## <a name="watch-the-video"></a>Visualización del vídeo
+En este vídeo se muestra cómo dividir un modelo en varios diagramas mediante el Entity Framework Designer (EF Designer). Es posible que desee usar esta característica cuando el modelo sea demasiado grande para verlo o editarlo.
 
-**Presentado por**: Julia Kornich
+**Presentada por**: Julia Kornich
 
-**Vídeo**: [WMV](https://download.microsoft.com/download/5/C/2/5C2B52AB-5532-426F-B078-1E253341B5FA/HDI-ITPro-MSDN-winvideo-multiplediagrams.wmv) | [MP4](https://download.microsoft.com/download/5/C/2/5C2B52AB-5532-426F-B078-1E253341B5FA/HDI-ITPro-MSDN-mp4video-multiplediagrams.m4v) | [WMV (ZIP)](https://download.microsoft.com/download/5/C/2/5C2B52AB-5532-426F-B078-1E253341B5FA/HDI-ITPro-MSDN-winvideo-multiplediagrams.zip)
+**Vídeo**: [wmv](https://download.microsoft.com/download/5/C/2/5C2B52AB-5532-426F-B078-1E253341B5FA/HDI-ITPro-MSDN-winvideo-multiplediagrams.wmv) | [MP4](https://download.microsoft.com/download/5/C/2/5C2B52AB-5532-426F-B078-1E253341B5FA/HDI-ITPro-MSDN-mp4video-multiplediagrams.m4v) | [WMV (zip)](https://download.microsoft.com/download/5/C/2/5C2B52AB-5532-426F-B078-1E253341B5FA/HDI-ITPro-MSDN-winvideo-multiplediagrams.zip)
 
 ## <a name="ef-designer-overview"></a>Información general del diseñador EF
 
-Cuando se crea un modelo usando el Asistente del Diseñador de EF Entity Data Model, se crea un archivo .edmx y se agrega a la solución. Este archivo define la forma de las entidades y cómo se asignan a la base de datos.
+Al crear un modelo mediante el Asistente para Entity Data Model del diseñador de EF, se crea un archivo. edmx y se agrega a la solución. Este archivo define la forma de las entidades y cómo se asignan a la base de datos.
 
-EF Designer consta de los siguientes componentes:
+El diseñador de EF consta de los siguientes componentes:
 
--   Una superficie de diseño visual para modificar el modelo. Puede crear, modificar o eliminar entidades y asociaciones.
--   Un **Explorador de modelos** ventana que proporciona vistas de árbol del modelo.  Las entidades y sus asociaciones se encuentran en el *\[ModelName\]* carpeta. Las tablas de base de datos y restricciones que se encuentran en el  *\[ModelName\]*. Carpeta de Store.
--   Un **detalles de Mapping** ventana para ver y editar asignaciones. Puede asignar tipos de entidad o asociaciones a tablas, columnas y procedimientos almacenados de base de datos. 
+-   Superficie de diseño visual para editar el modelo. Puede crear, modificar o eliminar entidades y asociaciones.
+-   Una ventana de del **Explorador de modelos** que proporciona vistas de árbol del modelo.  Las entidades y sus asociaciones se encuentran en la carpeta *\[ModelName\]* . Las tablas y restricciones de base de datos se encuentran en el *\]\[modelname* . Carpeta de almacenamiento.
+-   Una ventana de **detalles de asignación** para ver y editar asignaciones. Puede asignar tipos de entidad o asociaciones a tablas, columnas y procedimientos almacenados de base de datos. 
 
-Cuando finalice el Asistente para Entity Data Model, se abre automáticamente la ventana de superficie de diseño visual. Si el Explorador de modelos no está visible, haga clic en la principal superficie de diseño y seleccione **Explorador de modelos**.
+La ventana superficie de diseño visual se abre automáticamente cuando finaliza el Asistente para Entity Data Model. Si el explorador de modelos no está visible, haga clic con el botón secundario en la superficie de diseño principal y seleccione **Explorador de modelos**.
 
-Captura de pantalla siguiente muestra un archivo .edmx abierto en EF Designer. La captura de pantalla muestra la superficie de diseño visual (a la izquierda) y el **Explorador de modelos** ventana (a la derecha).
+En la captura de pantalla siguiente se muestra un archivo. edmx abierto en el diseñador de EF. En la captura de pantalla se muestra la superficie de diseño visual (a la izquierda) y la ventana del **Explorador de modelos** (a la derecha).
 
-![Diseñador de EF 2](~/ef6/media/efdesigner2.png)
+![EF Designer 2](~/ef6/media/efdesigner2.png)
 
-Para deshacer una operación que se realiza en EF Designer, haga clic en Ctrl-Z.
+Para deshacer una operación realizada en EF Designer, haga clic en Ctrl + Z.
 
 ## <a name="working-with-diagrams"></a>Trabajar con diagramas
 
-De forma predeterminada el Diseñador de EF crea un diagrama llamado Diagram1. Si tiene un diagrama con un gran número de entidades y asociaciones, se enlazarán más conveniente dividirla lógicamente. A partir de Visual Studio 2012, puede ver el modelo conceptual en varios diagramas.   
+De forma predeterminada, el diseñador de EF crea un diagrama denominado Diagram1. Si tiene un diagrama con un gran número de entidades y asociaciones, lo más conveniente es dividirlos lógicamente. A partir de Visual Studio 2012, puede ver el modelo conceptual en varios diagramas.   
 
-A medida que agrega nuevos diagramas aparecen en la carpeta de diagramas en la ventana Explorador de modelos. Para cambiar el nombre de un diagrama: seleccione el diagrama en la ventana Explorador de modelos, haga clic una vez en el nombre y escriba el nuevo nombre.  También puede haga clic en el nombre del diagrama y seleccione **cambiar el nombre**.
+A medida que agrega nuevos diagramas, aparecen en la carpeta diagramas de la ventana Explorador de modelos. Para cambiar el nombre de un diagrama: seleccione el diagrama en la ventana Explorador de modelos, haga clic en una vez en el nombre y escriba el nuevo nombre.  También puede hacer clic con el botón secundario en el nombre del diagrama y seleccionar **cambiar nombre**.
 
-El nombre del diagrama se muestra junto al nombre del archivo .edmx, en el editor de Visual Studio. Por ejemplo Model1.edmx\[Diagram1\].
+El nombre del diagrama se muestra junto al nombre del archivo. edmx en el editor de Visual Studio. Por ejemplo, Model1. edmx\[Diagram1\].
 
-![Nombrediagrama](~/ef6/media/diagramname.png)
+![DiagramName](~/ef6/media/diagramname.png)
 
-El contenido de diagramas (forma y color de las entidades y asociaciones) se almacena en el. archivo edmx.diagram. Para ver este archivo, seleccione el Explorador de soluciones y expandir el archivo .edmx. 
+El contenido de los diagramas (forma y color de las entidades y asociaciones) se almacena en el archivo. edmx. diagram. Para ver este archivo, seleccione Explorador de soluciones y desdoblar el archivo. edmx. 
 
 ![DiagramFiles](~/ef6/media/diagramfiles.png)
 
-No debe editar el. edmx.diagram archivos manualmente, el contenido de este archivo quizás se sobrescriben con EF Designer.
- 
-## <a name="splitting-entities-and-associations-into-a-new-diagram"></a>División de entidades y asociaciones en un nuevo diagrama
+No debe modificar manualmente el archivo. edmx. Diagram, es posible que el contenido de este archivo se sobrescriba con el diseñador de EF.
+ 
+## <a name="splitting-entities-and-associations-into-a-new-diagram"></a>Dividir entidades y asociaciones en un nuevo diagrama
 
-Puede seleccionar las entidades en el diagrama existente (mantenga presionada MAYÚS para seleccionar varias entidades). Haga clic en el botón secundario del mouse y seleccione **mover al nuevo diagrama**. Se crea el nuevo diagrama y las entidades seleccionadas y sus asociaciones se mueven al diagrama.
+Puede seleccionar entidades en el diagrama existente (mantenga presionada la tecla Mayús para seleccionar varias entidades). Haga clic con el botón secundario del mouse y seleccione **ir al nuevo diagrama**. Se crea el nuevo diagrama y las entidades seleccionadas y sus asociaciones se mueven al diagrama.
 
-Como alternativa, puede haga clic en la carpeta de diagramas en el Explorador de modelos y seleccione **Agregar nuevo diagrama.** A continuación, puede arrastrar y colocar las entidades desde la carpeta tipos de entidad en el Explorador de modelos a la superficie de diseño.
+Como alternativa, puede hacer clic con el botón secundario en la carpeta diagramas del explorador de modelos y seleccionar **Agregar nuevo diagrama.** Después, puede arrastrar y colocar entidades desde la carpeta tipos de entidad del explorador de modelos hasta la superficie de diseño.
 
-También puede cortar o copiar las entidades (mediante las teclas Ctrl-X o presione Ctrl-C) de un diagrama y pegar (con clave CTRL+v) en el otro. Si el diagrama en el que va a pegar una entidad ya contiene una entidad con el mismo nombre, se creará una nueva entidad y se agregan al modelo.  Por ejemplo: diagrama2 contiene la entidad Department. A continuación, pegar otro departamento en diagrama2. La entidad Department1 se crea y agrega al modelo conceptual.   
+También puede cortar o copiar entidades (con las teclas Ctrl-X o Ctrl + C) de un diagrama y pegar (mediante la tecla Ctrl-V) en la otra. Si el diagrama en el que pega una entidad ya contiene una entidad con el mismo nombre, se creará una nueva entidad y se agregará al modelo.  Por ejemplo: Diagram2 contiene la entidad Department. A continuación, pegue otro departamento en Diagram2. La entidad Department1 se crea y se agrega al modelo conceptual.   
 
-Para incluir las entidades relacionadas en un diagrama, haga clic la entidad y seleccione **relacionados incluyen**. Esto hará una copia de las entidades relacionadas y asociaciones en el diagrama especificado.
+Para incluir entidades relacionadas en un diagrama, haga clic en la entidad y seleccione **incluir relacionados**. Esto hará que se realice una copia de las entidades y asociaciones relacionadas en el diagrama especificado.
 
-## <a name="changing-the-color-of-entities"></a>Cambiar el Color de las entidades
+## <a name="changing-the-color-of-entities"></a>Cambiar el color de las entidades
 
 Además de dividir un modelo en varios diagramas, también puede cambiar los colores de las entidades.
 
-Para cambiar el color, seleccione una entidad (o varias entidades) en la superficie de diseño. A continuación, haga clic en el botón secundario del mouse y seleccione **propiedades**. En la ventana Propiedades, seleccione la **Color de relleno** propiedad. Especifique el color con un nombre de color válidos (por ejemplo, rojo) o un RGB válido (por ejemplo, 255, 128, 128). 
+Para cambiar el color, seleccione una entidad (o varias entidades) en la superficie de diseño. A continuación, haga clic con el botón secundario del mouse y seleccione **propiedades**. En el ventana Propiedades, seleccione la propiedad **color de relleno** . Especifique el color mediante un nombre de color válido (por ejemplo, rojo) o un RGB válido (por ejemplo, 255, 128, 128). 
 
 ![Color](~/ef6/media/color.png)
 
 ## <a name="summary"></a>Resumen
 
-En este tema hemos examinado cómo dividir un modelo en varios diagramas y también cómo especificar un color diferente para una entidad mediante el Diseñador de Entity Framework. 
+En este tema, hemos examinado cómo dividir un modelo en varios diagramas y cómo especificar un color diferente para una entidad mediante el Entity Framework Designer. 

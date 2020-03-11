@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: b21207c9-1d95-4aa3-ae05-bc5fe300dab0
 ms.openlocfilehash: 9bd644461f50a7eff1006cb8866ca9a3b08b6b8d
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72181710"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78416148"
 ---
 # <a name="self-tracking-entities-walkthrough"></a>Tutorial de entidades de seguimiento propio
 > [!IMPORTANT]
@@ -42,7 +42,7 @@ El servidor de base de datos que se instala con Visual Studio es diferente en fu
 
 Vamos a generar la base de datos.
 
--   Abra Visual Studio
+-   Abra Visual Studio.
 -   **Explorador de servidores de&gt; de vista**
 -   Haga clic con el botón derecho en **conexiones de datos:&gt; agregar conexión...**
 -   Si no se ha conectado a una base de datos desde Explorador de servidores antes de que tenga que seleccionar **Microsoft SQL Server** como origen de datos
@@ -271,7 +271,7 @@ Necesitamos una referencia de servicio a nuestro servicio WCF
 
 Ahora podemos escribir código para consumir el servicio.
 
--   Abra **Program.CS** y reemplace el contenido por el código siguiente.
+-   Abra el archivo **Program.cs** y sustituya el contenido por el código siguiente:
 
 ``` csharp
     using STESample.ConsoleTest.BloggingService;

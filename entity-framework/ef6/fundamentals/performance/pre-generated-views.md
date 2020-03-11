@@ -1,43 +1,43 @@
 ---
-title: Vistas de asignación generados previamente - EF6
+title: 'Vistas de asignación previamente generadas: EF6'
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 917ba9c8-6ddf-4631-ab8c-c4fb378c2fcd
 ms.openlocfilehash: 1fda9fe9638adce9b24a6b81aa081effeb0def81
-ms.sourcegitcommit: c568d33214fc25c76e02c8529a29da7a356b37b4
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/30/2018
-ms.locfileid: "47459531"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78416034"
 ---
-# <a name="pre-generated-mapping-views"></a>Vistas de asignación generados previamente
-Antes de Entity Framework puede ejecutar una consulta o guardar los cambios en el origen de datos, debe generar un conjunto de vistas de asignación para tener acceso a la base de datos. Estas vistas de asignación son un conjunto de instrucción de Entity SQL que representan la base de datos de forma abstracta y forman parte de los metadatos que se almacena en caché por dominio de aplicación. Si crea varias instancias del mismo contexto en el mismo dominio de aplicación, volverá a usar las vistas de asignación de los metadatos almacenados en caché en lugar de volver a generarlos. Porque la generación de vistas de asignación es una parte significativa del costo total de la ejecución de la primera consulta, Entity Framework permite generar previamente las vistas de asignación e incluirlos en el proyecto compilado. Para obtener más información, consulte [consideraciones de rendimiento (Entity Framework)](~/ef6/fundamentals/performance/perf-whitepaper.md).
+# <a name="pre-generated-mapping-views"></a>Vistas de asignación generadas previamente
+Antes de que el Entity Framework pueda ejecutar una consulta o guardar cambios en el origen de datos, debe generar un conjunto de vistas de asignación para tener acceso a la base de datos. Estas vistas de asignación son un conjunto de Entity SQL instrucción que representa la base de datos de forma abstracta y forman parte de los metadatos que se almacenan en caché por dominio de aplicación. Si crea varias instancias del mismo contexto en el mismo dominio de aplicación, volverán a usar las vistas de asignación de los metadatos almacenados en caché en lugar de volver a generarlas. Dado que la generación de la vista de asignación es una parte significativa del costo total de ejecutar la primera consulta, el Entity Framework permite generar previamente vistas de asignación e incluirlas en el proyecto compilado. Para obtener más información, vea  [consideraciones de rendimiento (Entity Framework)](~/ef6/fundamentals/performance/perf-whitepaper.md).
 
-## <a name="generating-mapping-views-with-the-ef-power-tools-community-edition"></a>Generar vistas con la edición Community EF Power Tools de asignación
+## <a name="generating-mapping-views-with-the-ef-power-tools-community-edition"></a>Generación de vistas de asignación con EF Power Tools Community Edition
 
-Para generar previamente las vistas más sencillo es usar el [EF Power Tools Community Edition](https://marketplace.visualstudio.com/items?itemName=ErikEJ.EntityFramework6PowerToolsCommunityEdition). Una vez que tenga instaladas las herramientas de alimentación tendrá una opción de menú para generar vistas, como sigue.
+La manera más sencilla de generar vistas previamente es usar la [edición de EF Power Tools Community Edition](https://marketplace.visualstudio.com/items?itemName=ErikEJ.EntityFramework6PowerToolsCommunityEdition). Una vez que tenga instaladas las herramientas avanzadas, tendrá una opción de menú para generar vistas, como se indica a continuación.
 
--   Para **Code First** modelos haga doble clic en el archivo de código que contiene la clase DbContext.
--   Para **EF Designer** modelos haga doble clic en el archivo EDMX.
+-   En el caso de los modelos de **code First** , haga clic con el botón derecho en el archivo de código que contiene la clase DbContext.
+-   En el caso de los modelos **EF Designer** , haga clic con el botón derecho en el archivo EDMX.
 
 ![generar vistas](~/ef6/media/generateviews.png)
 
-Una vez que finalice el proceso, tendrá una clase similar a lo siguiente genera
+Una vez finalizado el proceso, tendrá una clase similar a la siguiente generada
 
 ![Vistas generadas](~/ef6/media/generatedviews.png)
 
-Ahora cuando se ejecuta la aplicación EF utilizará esta clase para cargar las vistas según sea necesario. Si cambia el modelo y no volver a generar la clase EF producirá una excepción.
+Ahora, cuando ejecute la aplicación EF, utilizará esta clase para cargar las vistas según sea necesario. Si el modelo cambia y no vuelve a generar esta clase, EF producirá una excepción.
 
-## <a name="generating-mapping-views-from-code---ef6-onwards"></a>La generación de vistas de asignación de código - EF6 y versiones posteriores
+## <a name="generating-mapping-views-from-code---ef6-onwards"></a>Generar vistas de asignación desde código-EF6 en adelante
 
-La otra forma de generar vistas es usar las API que ofrece EF. Al usar este método que tiene la libertad para serializar las vistas pero desee, pero también tiene que cargar las vistas usted mismo.
+La otra forma de generar vistas es usar las API que proporciona EF. Al usar este método, tiene la libertad de serializar las vistas de la manera que desee, pero también debe cargar las vistas por su cuenta.
 
 > [!NOTE]
-> **EF6 y versiones posteriores solo** -las API que se muestra en esta sección se introdujeron en Entity Framework 6. Si usa una versión anterior que no se aplica esta información.
+> **EF6** y versiones posteriores: las API que se muestran en esta sección se introdujeron en Entity Framework 6. Si usa una versión anterior, esta información no se aplica.
 
-### <a name="generating-views"></a>Generación de vistas
+### <a name="generating-views"></a>Generar vistas
 
-Las API para generar vistas están en la clase System.Data.Entity.Core.Mapping.StorageMappingItemCollection. Puede recuperar un StorageMappingCollection para un contexto mediante el MetadataWorkspace de un ObjectContext. Si usa la API de DbContext más reciente, a continuación, puede tener acceso a esta mediante el uso de la clase IObjectContextAdapter como aparece a continuación, en este código, tenemos una instancia de DbContext derivada llama a dbContext:
+Las API para generar vistas se encuentran en la clase System. Data. Entity. Core. Mapping. StorageMappingItemCollection. Puede recuperar un StorageMappingCollection para un contexto mediante el MetadataWorkspace de un ObjectContext. Si usa la API DbContext más reciente, puede acceder a ella con IObjectContextAdapter como se muestra a continuación, en este código tenemos una instancia de DbContext derivado denominada dbContext:
 
 ``` csharp
     var objectContext = ((IObjectContextAdapter) dbContext).ObjectContext;
@@ -45,31 +45,31 @@ Las API para generar vistas están en la clase System.Data.Entity.Core.Mapping.S
                                                                         .GetItemCollection(DataSpace.CSSpace);
 ```
 
-Una vez que StorageMappingItemCollection, a continuación, puede obtener acceso a los métodos GenerateViews y ComputeMappingHashValue.
+Una vez que tenga el StorageMappingItemCollection, puede obtener acceso a los métodos GenerateViews y ComputeMappingHashValue.
 
 ``` csharp
     public Dictionary\<EntitySetBase, DbMappingView> GenerateViews(IList<EdmSchemaError> errors)
     public string ComputeMappingHashValue()
 ```
 
-El primer método crea un diccionario con una entrada para cada vista en la asignación de contenedor. El segundo método calcula un valor hash para la asignación de contenedor único y se utiliza en tiempo de ejecución para validar que el modelo no ha cambiado desde que se han generado previamente las vistas. Invalidaciones de los dos métodos se proporcionan para escenarios complejos que implican varias asignaciones de contenedor.
+El primer método crea un diccionario con una entrada para cada vista de la asignación de contenedor. El segundo método calcula un valor hash para la asignación de un solo contenedor y se utiliza en tiempo de ejecución para validar que el modelo no ha cambiado desde que se generaron previamente las vistas. Se proporcionan invalidaciones de los dos métodos para escenarios complejos que implican varias asignaciones de contenedor.
 
-Al generar las vistas que se llame al método GenerateViews y, a continuación, escribir el EntitySetBase y DbMappingView resultante. También deberá almacenar el hash generado por el método ComputeMappingHashValue.
+Al generar vistas, llamará al método GenerateViews y, a continuación, escribirá el EntitySetBase resultante y DbMappingView. También necesitará almacenar el hash generado por el método ComputeMappingHashValue.
 
-### <a name="loading-views"></a>Vistas de carga
+### <a name="loading-views"></a>Cargando vistas
 
-Para cargar las vistas generadas por el método GenerateViews, puede proporcionar EF con una clase que hereda de la clase abstracta DbMappingViewCache. DbMappingViewCache especifica dos métodos que debe implementar:
+Para cargar las vistas generadas por el método GenerateViews, puede proporcionar EF con una clase que herede de la clase abstracta DbMappingViewCache. DbMappingViewCache especifica dos métodos que debe implementar:
 
 ``` csharp
     public abstract string MappingHashValue { get; }
     public abstract DbMappingView GetView(EntitySetBase extent);
 ```
 
-La propiedad MappingHashValue debe devolver el valor hash generado por el método ComputeMappingHashValue. Cuando EF se va a pedir las vistas primero generará y comparar el valor hash del modelo con el hash devuelto por esta propiedad. Si no coinciden con EF producirá una excepción EntityCommandCompilationException.
+La propiedad MappingHashValue debe devolver el hash generado por el método ComputeMappingHashValue. Cuando EF vaya a pedir las vistas, primero generará y comparará el valor hash del modelo con el hash devuelto por esta propiedad. Si no coinciden, EF producirá una excepción EntityCommandCompilationException.
 
-El método GetView aceptará un EntitySetBase y deberá devolver un DbMappingVIew que contiene el EntitySql que se generó para el que estaba asociado con el EntitySetBase determinado en el diccionario generado por el método GenerateViews. Si pide EF una vista que no tiene, a continuación, GetView debe devolver null.
+El método GetView (aceptará un EntitySetBase y tendrá que devolver un DbMappingVIew que contenga el EntitySql generado para que se asoció con el EntitySetBase determinado en el Diccionario generado por el método GenerateViews. Si EF solicita una vista que no tiene, GetView (debe devolver null.
 
-El siguiente es un extracto de la DbMappingViewCache que se genera con las herramientas avanzadas, como se describió anteriormente, en la que vemos una manera de almacenar y recuperar el EntitySql necesario.
+A continuación se muestra un extracto del DbMappingViewCache que se genera con las herramientas avanzadas, como se ha descrito anteriormente, en él vemos una forma de almacenar y recuperar el EntitySql necesario.
 
 ``` csharp
     public override string MappingHashValue
@@ -117,10 +117,10 @@ El siguiente es un extracto de la DbMappingViewCache que se genera con las herra
     }
 ```
 
-Para que use EF su DbMappingViewCache agrega utilice el DbMappingViewCacheTypeAttribute, especificar el contexto que se crearon para. En el código siguiente se asocia el BlogContext con la clase MyMappingViewCache.
+Para que EF use el DbMappingViewCache que agregue, use el DbMappingViewCacheTypeAttribute, especificando el contexto para el que se creó. En el código siguiente se asocia el BlogContext con la clase MyMappingViewCache.
 
 ``` csharp
     [assembly: DbMappingViewCacheType(typeof(BlogContext), typeof(MyMappingViewCache))]
 ```
 
-Para escenarios más complejos, las instancias de caché de la vista asignación pueden proporcionarse mediante la especificación de un generador de caché de vista de asignación. Esto puede hacerse mediante la implementación de la clase abstracta System.Data.Entity.Infrastructure.MappingViews.DbMappingViewCacheFactory. La instancia de la fábrica de caché de vistas de asignación que se utiliza se puede recuperar o establecer mediante el StorageMappingItemCollection.MappingViewCacheFactoryproperty.
+En escenarios más complejos, se pueden proporcionar las instancias de la vista de la caché de vistas mediante la especificación de un generador de caché de vista de asignación. Esto se puede hacer implementando la clase abstracta System. Data. Entity. Infrastructure. MappingViews. DbMappingViewCacheFactory. La instancia del generador de caché de la vista de asignación que se usa se puede recuperar o establecer mediante StorageMappingItemCollection. MappingViewCacheFactoryproperty.

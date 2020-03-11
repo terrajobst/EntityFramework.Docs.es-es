@@ -5,11 +5,11 @@ ms.date: 02/23/2018
 ms.assetid: 420AFFE7-B709-4A68-9149-F06F8746FB33
 uid: core/modeling/constructors
 ms.openlocfilehash: ddfaa8eebde388a9d3309f21b8891de593077956
-ms.sourcegitcommit: 2355447d89496a8ca6bcbfc0a68a14a0bf7f0327
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/23/2019
-ms.locfileid: "72811897"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78414654"
 ---
 # <a name="entity-types-with-constructors"></a>Tipos de entidad con constructores
 
@@ -87,7 +87,7 @@ public class Post
 }
 ```
 
-Algunos aspectos que hay que tener en cuenta:
+Cosas que tener en cuenta:
 
 * No todas las propiedades deben tener parámetros de constructor. Por ejemplo, la propiedad post. Content no está establecida por ningún parámetro de constructor, por lo que EF Core la establecerá después de llamar al constructor de la manera normal.
 * Los nombres y tipos de parámetros deben coincidir con los nombres y tipos de propiedad, con la excepción de que las propiedades pueden tener mayúsculas y minúsculas Pascal, mientras que los parámetros tienen mayúsculas y minúsculas Camel.
@@ -202,7 +202,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 }
 ```
 
-Aspectos que se deben tener en cuenta:
+Cosas que hay que tener en cuenta:
 
 * La clave "propiedad" es ahora un campo. No se trata de un campo de `readonly` para que se puedan usar las claves generadas por el almacén.
 * Las demás propiedades son propiedades de solo lectura establecidas solo en el constructor.

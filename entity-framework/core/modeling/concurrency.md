@@ -5,11 +5,11 @@ ms.date: 01/03/2020
 ms.assetid: bc8b1cb0-befe-4b67-8004-26e6c5f69385
 uid: core/modeling/concurrency
 ms.openlocfilehash: bfeb611f222f7195fe22d920b452b40cc4addf90
-ms.sourcegitcommit: f2a38c086291699422d8b28a72d9611d1b24ad0d
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 01/16/2020
-ms.locfileid: "76124371"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78414624"
 ---
 # <a name="concurrency-tokens"></a>Tokens de simultaneidad
 
@@ -18,13 +18,13 @@ ms.locfileid: "76124371"
 
 Las propiedades configuradas como tokens de simultaneidad se usan para implementar el control de simultaneidad optimista.
 
-## <a name="configuration"></a>Configuración de
+## <a name="configuration"></a>Configuración
 
-### <a name="data-annotationstabdata-annotations"></a>[Anotaciones de datos](#tab/data-annotations)
+### <a name="data-annotations"></a>[Anotaciones de datos](#tab/data-annotations)
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Concurrency.cs?name=Concurrency&highlight=5)]
 
-### <a name="fluent-apitabfluent-api"></a>[API fluida](#tab/fluent-api)
+### <a name="fluent-api"></a>[API fluida](#tab/fluent-api)
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Concurrency.cs?name=Concurrency&highlight=5)]
 
@@ -36,11 +36,11 @@ Timestamp/rowversion es una propiedad para la cual la base de datos genera autom
 
 Puede configurar una propiedad para que sea una marca de tiempo o rowversion como se indica a continuación:
 
-### <a name="data-annotationstabdata-annotations"></a>[Anotaciones de datos](#tab/data-annotations)
+### <a name="data-annotations"></a>[Anotaciones de datos](#tab/data-annotations)
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Timestamp.cs?name=Timestamp&highlight=7)]
 
-### <a name="fluent-apitabfluent-api"></a>[API fluida](#tab/fluent-api)
+### <a name="fluent-api"></a>[API fluida](#tab/fluent-api)
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Timestamp.cs?name=Timestamp&highlight=9,17)]
 

@@ -6,13 +6,13 @@ ms.author: ansvyryd
 ms.date: 11/06/2019
 uid: core/modeling/keys
 ms.openlocfilehash: abd65a5ea079a49fd7a3bbc84a9337f6ee19fab1
-ms.sourcegitcommit: 32c51c22988c6f83ed4f8e50a1d01be3f4114e81
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 12/27/2019
-ms.locfileid: "75502011"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78413994"
 ---
-# <a name="keys"></a>Keys
+# <a name="keys"></a>Claves
 
 Una clave actúa como identificador único para cada instancia de la entidad. La mayoría de las entidades de EF tienen una sola clave, que se asigna al concepto de una *clave principal* en las bases de datos relacionales (para entidades sin claves, vea [entidades](xref:core/modeling/keyless-entity-types)sin clave). Las entidades pueden tener claves adicionales más allá de la clave principal (consulte [claves alternativas](#alternate-keys) para obtener más información).
 
@@ -25,11 +25,11 @@ Por Convención, una propiedad denominada `Id` o `<type name>Id` se configurará
 
 Puede configurar una única propiedad para que sea la clave principal de una entidad, como se indica a continuación:
 
-## <a name="data-annotationstabdata-annotations"></a>[Anotaciones de datos](#tab/data-annotations)
+## <a name="data-annotations"></a>[Anotaciones de datos](#tab/data-annotations)
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/KeySingle.cs?name=KeySingle&highlight=3)]
 
-## <a name="fluent-apitabfluent-api"></a>[API fluida](#tab/fluent-api)
+## <a name="fluent-api"></a>[API fluida](#tab/fluent-api)
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/KeySingle.cs?name=KeySingle&highlight=4)]
 

@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: a4af4b1a-40f4-48cc-b2e0-fa8f5d9d5419
 ms.openlocfilehash: b20d1f99f1da9c53a8a164fccc461e07d19c879d
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182543"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78415476"
 ---
 # <a name="ssdl-specification"></a>Especificación SSDL
 El lenguaje de definición de esquemas de almacenamiento (SSDL) es un lenguaje basado en XML que describe el modelo de almacenamiento de una aplicación Entity Framework.
@@ -40,7 +40,7 @@ El elemento **Association** puede tener los elementos secundarios siguientes (en
 
 En la tabla siguiente se describen los atributos que se pueden aplicar al elemento **Association** .
 
-| Nombre de atributo | Es necesario | Valor                                                                            |
+| Nombre del atributo | Es obligatorio | Value                                                                            |
 |:---------------|:------------|:---------------------------------------------------------------------------------|
 | **Nombre**       | Sí         | El nombre de la restricción de clave externa correspondiente de la base de datos subyacente. |
 
@@ -86,7 +86,7 @@ El elemento **AssociationSet** puede tener los elementos secundarios siguientes 
 
 En la tabla siguiente se describen los atributos que se pueden aplicar al elemento **AssociationSet** .
 
-| Nombre de atributo  | Es necesario | Valor                                                                                                |
+| Nombre del atributo  | Es obligatorio | Value                                                                                                |
 |:----------------|:------------|:-----------------------------------------------------------------------------------------------------|
 | **Nombre**        | Sí         | El nombre de la restricción de clave externa representada por el conjunto de asociaciones.                          |
 | **Asociación** | Sí         | El nombre de la asociación que define las columnas que participan en la restricción de clave externa. |
@@ -197,9 +197,9 @@ El elemento **dependiente** puede tener los elementos secundarios siguientes (en
 
 En la tabla siguiente se describen los atributos que se pueden aplicar al elemento **dependiente** .
 
-| Nombre de atributo | Es necesario | Valor                                                                                                                                                       |
+| Nombre del atributo | Es obligatorio | Value                                                                                                                                                       |
 |:---------------|:------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Role**       | Sí         | El mismo valor que el atributo **role** (si se usa) del elemento end correspondiente; de lo contrario, el nombre de la tabla que contiene la columna de referencia. |
+| **Rol**       | Sí         | El mismo valor que el atributo **role** (si se usa) del elemento end correspondiente; de lo contrario, el nombre de la tabla que contiene la columna de referencia. |
 
 > [!NOTE]
 > Se puede aplicar cualquier número de atributos de anotación (atributos XML personalizados) al elemento **dependiente** . Sin embargo, es posible que los atributos personalizados no pertenezcan a ningún espacio de nombres XML reservado para CSDL. Dos atributos personalizados cualesquiera no pueden tener nombres completos idénticos.
@@ -276,10 +276,10 @@ Un elemento **End** puede tener los elementos secundarios siguientes (en el orde
 
 En la tabla siguiente se describen los atributos que se pueden aplicar al elemento **End** cuando es el elemento secundario de un elemento **Association** .
 
-| Nombre de atributo   | Es necesario | Valor                                                                                                                                                                                                                                                                                                                                                                                      |
+| Nombre del atributo   | Es obligatorio | Value                                                                                                                                                                                                                                                                                                                                                                                      |
 |:-----------------|:------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Type**         | Sí         | El nombre completo del conjunto de entidades SSDL que está en el extremo de la restricción de clave externa.                                                                                                                                                                                                                                                                                          |
-| **Role**         | No          | El valor del atributo **role** en el elemento principal o dependiente del elemento ReferentialConstraint correspondiente (si se usa).                                                                                                                                                                                                                                             |
+| **Tipo**         | Sí         | El nombre completo del conjunto de entidades SSDL que está en el extremo de la restricción de clave externa.                                                                                                                                                                                                                                                                                          |
+| **Rol**         | No          | El valor del atributo **role** en el elemento principal o dependiente del elemento ReferentialConstraint correspondiente (si se usa).                                                                                                                                                                                                                                             |
 | **Multiplicidad** | Sí         | **1**, **0.. 1**o **\*** en función del número de filas que pueden estar al final de la restricción FOREIGN KEY. <br/> **1** indica que existe exactamente una fila en el extremo de la restricción de clave externa. <br/> **0.. 1** indica que hay cero o una fila en el extremo de la restricción de clave externa. <br/> **\*** indica que hay cero, una o más filas en el extremo de la restricción de clave externa. |
 
 > [!NOTE]
@@ -321,10 +321,10 @@ Un elemento **End** puede tener los elementos secundarios siguientes (en el orde
 
 En la tabla siguiente se describen los atributos que se pueden aplicar al elemento **End** cuando es el elemento secundario de un elemento **AssociationSet** .
 
-| Nombre de atributo | Es necesario | Valor                                                                                                                  |
+| Nombre del atributo | Es obligatorio | Value                                                                                                                  |
 |:---------------|:------------|:-----------------------------------------------------------------------------------------------------------------------|
 | **#A4**  | Sí         | El nombre del conjunto de entidades SSDL que está en el extremo de la restricción de clave externa.                                      |
-| **Role**       | No          | El valor de uno de los atributos de **rol** especificados en un elemento **final** del elemento Association correspondiente. |
+| **Rol**       | No          | El valor de uno de los atributos de **rol** especificados en un elemento **final** del elemento Association correspondiente. |
 
 > [!NOTE]
 > Se puede aplicar cualquier número de atributos de anotación (atributos XML personalizados) al elemento **final** . Sin embargo, es posible que los atributos personalizados no pertenezcan a ningún espacio de nombres XML reservado para CSDL. Dos atributos personalizados cualesquiera no pueden tener nombres completos idénticos.
@@ -365,7 +365,7 @@ Un elemento **EntityContainer** puede tener cero o más de los elementos secunda
 
 En la tabla siguiente se describen los atributos que se pueden aplicar al elemento **EntityContainer** .
 
-| Nombre de atributo | Es necesario | Valor                                                                   |
+| Nombre del atributo | Es obligatorio | Value                                                                   |
 |:---------------|:------------|:------------------------------------------------------------------------|
 | **Nombre**       | Sí         | Nombre del contenedor de entidades. Este nombre no puede contener puntos (.). |
 
@@ -409,9 +409,9 @@ En la tabla siguiente se describen los atributos que se pueden aplicar al elemen
 > [!NOTE]
 > Algunos atributos (que no se enumeran aquí) pueden estar calificados con el alias de **almacén** . El Asistente para actualizar modelo utiliza estos atributos al actualizar un modelo.
 
-| Nombre de atributo | Es necesario | Valor                                                                                    |
+| Nombre del atributo | Es obligatorio | Value                                                                                    |
 |:---------------|:------------|:-----------------------------------------------------------------------------------------|
-| **Nombre**       | Sí         | Nombre del conjunto de entidades.                                                              |
+| **Nombre**       | Sí         | El nombre del conjunto de entidades.                                                              |
 | **EntityType** | Sí         | El nombre completo del tipo de entidad para el que el conjunto de entidades contiene las instancias. |
 | **Esquema**     | No          | El esquema de base de datos.                                                                     |
 | **Table**      | No          | La tabla de base de datos.                                                                      |
@@ -453,9 +453,9 @@ El elemento **EntityType** puede tener los elementos secundarios siguientes (en 
 
 En la tabla siguiente se describen los atributos que se pueden aplicar al elemento **EntityType** .
 
-| Nombre de atributo | Es necesario | Valor                                                                                                                                                                  |
+| Nombre del atributo | Es obligatorio | Value                                                                                                                                                                  |
 |:---------------|:------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Nombre**       | Sí         | Nombre del tipo de entidad. Este valor normalmente es igual que el nombre de la tabla en la que el tipo de entidad representa una fila. Este valor no puede contener ningún punto (.). |
+| **Nombre**       | Sí         | El nombre del tipo de entidad. Este valor normalmente es igual que el nombre de la tabla en la que el tipo de entidad representa una fila. Este valor no puede contener ningún punto (.). |
 
 > [!NOTE]
 > Se puede aplicar cualquier número de atributos de anotación (atributos XML personalizados) al elemento **EntityType** . Sin embargo, es posible que los atributos personalizados no pertenezcan a ningún espacio de nombres XML reservado para SSDL. Dos atributos personalizados cualesquiera no pueden tener nombres completos idénticos.
@@ -501,11 +501,11 @@ En la tabla siguiente se describen los atributos que se pueden aplicar al elemen
 > [!NOTE]
 > Algunos atributos (que no se enumeran aquí) pueden estar calificados con el alias de **almacén** . El Asistente para actualizar modelo utiliza estos atributos al actualizar un modelo.
 
-| Nombre de atributo             | Es necesario | Valor                                                                                                                                                                                                              |
+| Nombre del atributo             | Es obligatorio | Value                                                                                                                                                                                                              |
 |:---------------------------|:------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Nombre**                   | Sí         | Nombre del procedimiento almacenado.                                                                                                                                                                                  |
 | **ReturnType**             | No          | El tipo de valor devuelto del procedimiento almacenado.                                                                                                                                                                           |
-| **Aggregate**              | No          | **True** si el procedimiento almacenado devuelve un valor agregado; en caso contrario, **false**.                                                                                                                                  |
+| **Agregada**              | No          | **True** si el procedimiento almacenado devuelve un valor agregado; en caso contrario, **false**.                                                                                                                                  |
 | **BuiltIn**                | No          | **True** si la función es una función integrada<sup>1</sup> ; en caso contrario, **false**.                                                                                                                                  |
 | **StoreFunctionName**      | No          | Nombre del procedimiento almacenado.                                                                                                                                                                                  |
 | **NiladicFunction**        | No          | **True** si la función es una función niládicas<sup>2</sup> ; De lo contrario, **false** .                                                                                                                                   |
@@ -581,7 +581,7 @@ Un elemento **aldelete** puede tener los elementos secundarios siguientes (en el
 
 En la tabla siguiente se describen los atributos que se pueden aplicar al elemento **aleliminar** .
 
-| Nombre de atributo | Es necesario | Valor                                                                                               |
+| Nombre del atributo | Es obligatorio | Value                                                                                               |
 |:---------------|:------------|:----------------------------------------------------------------------------------------------------|
 | **Acción**     | Sí         | **Cascade** o **None**. (El valor **restringido** es válido, pero tiene el mismo comportamiento que **ninguno**). |
 
@@ -624,14 +624,14 @@ El elemento **Parameter** puede tener los elementos secundarios siguientes (en e
 
 En la tabla siguiente se describen los atributos que se pueden aplicar al elemento **Parameter** .
 
-| Nombre de atributo | Es necesario | Valor                                                                                                                                                                                                                           |
+| Nombre del atributo | Es obligatorio | Value                                                                                                                                                                                                                           |
 |:---------------|:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Nombre**       | Sí         | Nombre del parámetro.                                                                                                                                                                                                      |
-| **Type**       | Sí         | Tipo del parámetro.                                                                                                                                                                                                             |
+| **Nombre**       | Sí         | El nombre del parámetro.                                                                                                                                                                                                      |
+| **Tipo**       | Sí         | El tipo de parámetro.                                                                                                                                                                                                             |
 | **Modo**       | No          | **In**, **out**o **INOUT** dependiendo de si el parámetro es un parámetro de entrada, de salida o de entrada/salida.                                                                                                                |
 | **MaxLength**  | No          | Longitud máxima permitida del parámetro.                                                                                                                                                                                            |
-| **Precisión**  | No          | Precisión del parámetro.                                                                                                                                                                                                 |
-| **Escalar**      | No          | Escala del parámetro.                                                                                                                                                                                                     |
+| **Precisión**  | No          | La precisión del parámetro.                                                                                                                                                                                                 |
+| **Escala**      | No          | La escala del parámetro.                                                                                                                                                                                                     |
 | **SRID**       | No          | Identificador de referencia del sistema espacial. Válido solo para los parámetros de los tipos espaciales. Para obtener más información, vea [SRID](https://en.wikipedia.org/wiki/SRID) y [SRID (SQL Server)](https://msdn.microsoft.com/library/bb964707.aspx). |
 
 > [!NOTE]
@@ -667,9 +667,9 @@ El elemento **principal** puede tener los elementos secundarios siguientes (en e
 
 En la tabla siguiente se describen los atributos que se pueden aplicar al elemento **principal** .
 
-| Nombre de atributo | Es necesario | Valor                                                                                                                                                      |
+| Nombre del atributo | Es obligatorio | Value                                                                                                                                                      |
 |:---------------|:------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Role**       | Sí         | El mismo valor que el atributo **role** (si se usa) del elemento end correspondiente; de lo contrario, el nombre de la tabla que contiene la columna a la que se hace referencia. |
+| **Rol**       | Sí         | El mismo valor que el atributo **role** (si se usa) del elemento end correspondiente; de lo contrario, el nombre de la tabla que contiene la columna a la que se hace referencia. |
 
 > [!NOTE]
 > Se puede aplicar cualquier número de atributos de anotación (atributos XML personalizados) al elemento **principal** . Sin embargo, es posible que los atributos personalizados no pertenezcan a ningún espacio de nombres XML reservado para CSDL. Dos atributos personalizados cualesquiera no pueden tener nombres completos idénticos.
@@ -707,18 +707,18 @@ Un elemento **Property** no puede tener elementos secundarios.
 
 En la tabla siguiente se describen los atributos que se pueden aplicar al elemento **Property** .
 
-| Nombre de atributo            | Es necesario | Valor                                                                                                                                                                                                                           |
+| Nombre del atributo            | Es obligatorio | Value                                                                                                                                                                                                                           |
 |:--------------------------|:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Nombre**                  | Sí         | El nombre de la columna correspondiente.                                                                                                                                                                                           |
-| **Type**                  | Sí         | El tipo de la columna correspondiente.                                                                                                                                                                                           |
-| **Acepta valores NULL**              | No          | **True** (valor predeterminado) o **false** , dependiendo de si la columna correspondiente puede tener un valor null.                                                                                                                  |
+| **Tipo**                  | Sí         | El tipo de la columna correspondiente.                                                                                                                                                                                           |
+| **Admisión de valores NULL**              | No          | **True** (valor predeterminado) o **false** , dependiendo de si la columna correspondiente puede tener un valor null.                                                                                                                  |
 | **DefaultValue**          | No          | El valor predeterminado de la columna correspondiente.                                                                                                                                                                                  |
 | **MaxLength**             | No          | La longitud máxima de la columna correspondiente.                                                                                                                                                                                 |
 | **FixedLength**           | No          | **True** o **false** , dependiendo de si el valor de columna correspondiente se almacenará como una cadena de longitud fija.                                                                                                              |
 | **Precisión**             | No          | La precisión de la columna correspondiente.                                                                                                                                                                                      |
-| **Escalar**                 | No          | La escala de la columna correspondiente.                                                                                                                                                                                          |
+| **Escala**                 | No          | La escala de la columna correspondiente.                                                                                                                                                                                          |
 | **Unicode**               | No          | **True** o **false** , dependiendo de si el valor de columna correspondiente se almacenará como una cadena Unicode.                                                                                                                   |
-| **Intercalación**             | No          | Cadena que especifica la secuencia de intercalación que se va a usar en el origen de datos.                                                                                                                                                   |
+| **Intercalación**             | No          | Cadena que especifica la secuencia de intercalación que se usará en el origen de datos.                                                                                                                                                   |
 | **SRID**                  | No          | Identificador de referencia del sistema espacial. Solo es válido para las propiedades de los tipos espaciales. Para obtener más información, vea [SRID](https://en.wikipedia.org/wiki/SRID) y [SRID (SQL Server)](https://msdn.microsoft.com/library/bb964707.aspx). |
 | **StoreGeneratedPattern** | No          | **None**, **Identity** (si el valor de la columna correspondiente es una identidad que se genera en la base de datos) o **calculado** (si el valor de la columna correspondiente se calcula en la base de datos). No es válido para las propiedades RowType. |
 
@@ -759,7 +759,7 @@ El elemento **PropertyRef** solo puede tener los siguientes elementos secundario
 
 En la tabla siguiente se describen los atributos que se pueden aplicar al elemento **PropertyRef** .
 
-| Nombre de atributo | Es necesario | Valor                                |
+| Nombre del atributo | Es obligatorio | Value                                |
 |:---------------|:------------|:-------------------------------------|
 | **Nombre**       | Sí         | Nombre de la propiedad a la que se hace referencia. |
 
@@ -908,11 +908,11 @@ Un espacio de nombres del modelo de almacenamiento es diferente del espacio de n
 
 En la tabla siguiente se describen los atributos que se pueden aplicar al elemento **Schema** .
 
-| Nombre de atributo            | Es necesario | Valor                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| Nombre del atributo            | Es obligatorio | Value                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 |:--------------------------|:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Espacio de nombres**             | Sí         | El espacio de nombres del modelo de almacenamiento. El valor del atributo **namespace** se usa para formar el nombre completo de un tipo. Por ejemplo, si un **EntityType** denominado *Customer* está en el espacio de nombres ExampleModel. Store, el nombre completo del **EntityType** es ExampleModel. Store. Customer. <br/> Las siguientes cadenas no se pueden usar como el valor del atributo **namespace** : **System**, **Transient**o **EDM**. El valor del atributo **namespace** no puede ser el mismo que el valor del atributo **namespace** del elemento Schema de CSDL. |
 | **Alias**                 | No          | Un identificador usado en lugar del nombre del espacio de nombres. Por ejemplo, si un **EntityType** denominado *Customer* está en el espacio de nombres ExampleModel. Store y el valor del atributo **alias** es *StorageModel*, puede usar StorageModel. Customer como nombre completo del **EntityType.**                                                                                                                                                                                                                                                                                    |
-| **Proveedor**              | Sí         | El proveedor de datos.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| **Proveedor**              | Sí         | Proveedor de datos.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | **ProviderManifestToken** | Sí         | Un token que indica al proveedor qué manifiesto del proveedor debe devolver. No se define ningún formato para el token. El proveedor define los valores para el token. Para obtener información sobre los tokens del manifiesto del proveedor de SQL Server, vea SqlClient para Entity Framework.                                                                                                                                                                                                                                                                                                                        |
 
 ### <a name="example"></a>Ejemplo
@@ -1074,5 +1074,5 @@ En la tabla siguiente se describen las facetas que se admiten en SSDL:
 | **FixedLength** | Especifica si la longitud del valor de la columna puede variar.                                                                                                                                                                                                  |
 | **MaxLength**   | Especifica la longitud máxima del valor de la columna.                                                                                                                                                                                                           |
 | **Precisión**   | Para las propiedades de tipo **decimal**, especifica el número de dígitos que puede tener un valor de propiedad. Para las propiedades de tipo **Time**, **DateTime**y **DateTimeOffset**, especifica el número de dígitos para la parte fraccionaria de los segundos del valor de la columna. |
-| **Escalar**       | Especifica el número de dígitos que puede haber a la derecha del separador de decimales para el valor de la columna.                                                                                                                                                                      |
+| **Escala**       | Especifica el número de dígitos que puede haber a la derecha del separador de decimales para el valor de la columna.                                                                                                                                                                      |
 | **Unicode**     | Indica si el valor de la columna está almacenado como Unicode.                                                                                                                                                                                                    |

@@ -1,103 +1,103 @@
 ---
-title: Herencia de TPH diseñador - EF6
+title: 'Herencia TPH del diseñador: EF6'
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 72d26a8e-20ab-4500-bd13-394a08e73394
 ms.openlocfilehash: 43ba34a98c3960a7a3052a00e2ed2751c2f2b121
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45490134"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78415236"
 ---
-# <a name="designer-tph-inheritance"></a>Herencia de TPH Diseñador
-En este tutorial paso a paso muestra cómo implementar la herencia de tabla por jerarquía (TPH) en el modelo conceptual con Entity Framework Designer (Diseñador de EF). Herencia de TPH emplea una tabla de base de datos para mantener los datos para todos los tipos de entidad en una jerarquía de herencia.
+# <a name="designer-tph-inheritance"></a>Herencia TPH del diseñador
+En este tutorial paso a paso se muestra cómo implementar la herencia de tabla por jerarquía (TPH) en el modelo conceptual con el Entity Framework Designer (EF Designer). La herencia TPH utiliza una tabla de base de datos para mantener los datos de todos los tipos de entidad en una jerarquía de herencia.
 
-En este tutorial se asignará la tabla Person a tres tipos de entidad: persona (el tipo base), Student (que se deriva de persona) e Instructor (que se deriva de persona). Crearemos un modelo conceptual de la base de datos (Database First) y, a continuación, modificar el modelo para implementar la herencia de TPH con EF Designer.
+En este tutorial asignaremos la tabla Person a tres tipos de entidad: person (el tipo base), Student (derive de person) y instructor (derive de person). Vamos a crear un modelo conceptual a partir de la base de datos (Database First) y, a continuación, modificar el modelo para implementar la herencia TPH mediante el diseñador de EF.
 
-Es posible asignar a una herencia de TPH con Model First, pero tendría que escribir su propio flujo de trabajo de generación de base de datos que es compleja. A continuación, podría asignar este flujo de trabajo la **flujo de trabajo de generación de base de datos** propiedad en EF Designer. Una alternativa más sencilla es usar Code First.
+Es posible asignar una herencia TPH mediante Model First pero tendría que escribir su propio flujo de trabajo de generación de base de datos, que es complejo. A continuación, asignaría este flujo de trabajo a la propiedad **flujo de trabajo de generación de base de datos** en el diseñador de EF. Una alternativa más sencilla es usar Code First.
 
 ## <a name="other-inheritance-options"></a>Otras opciones de herencia
 
-Tabla por tipo (TPT) es otro tipo de herencia en el que las tablas independientes en la base de datos se asignan a entidades que participan en la herencia.  Para obtener información acerca de cómo asignar la herencia de tabla por tipo con EF Designer, vea [herencia de TPT de EF Designer](~/ef6/modeling/designer/inheritance/tpt.md).
+Tabla por tipo (TPT) es otro tipo de herencia en la que las tablas independientes de la base de datos se asignan a las entidades que participan en la herencia.  Para obtener información sobre cómo asignar la herencia de tabla por tipo con el diseñador de EF, consulte [herencia del diseñador de EF](~/ef6/modeling/designer/inheritance/tpt.md).
 
-Herencia de tipo de tabla por concreto (TPC) y modelos de herencia mixto son compatibles con el tiempo de ejecución de Entity Framework, pero no son compatibles con EF Designer. Si desea usar TPC o herencia mixta, tiene dos opciones: usar Code First o editar manualmente el archivo EDMX. Si decide trabajar con el archivo EDMX, la ventana de detalles de asignación se colocará en "modo seguro" y no podrá usar el diseñador para cambiar las asignaciones.
+El tiempo de ejecución de Entity Framework admite la herencia de tipo de tabla por hormigón (TPC) y los modelos de herencia mixto, pero no son compatibles con el diseñador de EF. Si desea utilizar la herencia de TPC o mixta, tiene dos opciones: usar Code First o editar manualmente el archivo EDMX. Si decide trabajar con el archivo EDMX, la ventana detalles de la asignación se colocará en "modo seguro" y no podrá usar el diseñador para cambiar las asignaciones.
 
-## <a name="prerequisites"></a>Requisitos previos
+## <a name="prerequisites"></a>Prerequisites
 
 Para completar este tutorial, necesitará:
 
 - Una versión reciente de Visual Studio.
-- El [base de datos de ejemplo School](~/ef6/resources/school-database.md).
+- La [base de datos de ejemplo School](~/ef6/resources/school-database.md).
 
 ## <a name="set-up-the-project"></a>Configurar el proyecto
 
 -   Abra Visual Studio 2012.
--   Seleccione **archivo -&gt; nuevo:&gt; proyecto**
--   En el panel izquierdo, haga clic en **Visual C\#** y, a continuación, seleccione el **consola** plantilla.
--   Escriba **TPHDBFirstSample** como el nombre.
--   Seleccione **Aceptar**.
+-   Seleccionar **archivo-&gt; nuevo-&gt; proyecto**
+-   En el panel izquierdo, haga clic en **Visual C\#** y, a continuación, seleccione la plantilla de **consola** .
+-   Escriba **TPHDBFirstSample** como nombre.
+-   Seleccione  **Aceptar**.
 
-## <a name="create-a-model"></a>Crear un modelo
+## <a name="create-a-model"></a>Creación de un modelo
 
--   Haga clic en el nombre del proyecto en el Explorador de soluciones y seleccione **Add -&gt; nuevo elemento**.
--   Seleccione **datos** desde el menú de la izquierda y seleccione **ADO.NET Entity Data Model** en el panel Plantillas.
--   Escriba **TPHModel.edmx** para el nombre de archivo y, a continuación, haga clic en **agregar**.
--   En el cuadro de diálogo Elegir contenido del modelo, seleccione **generar desde la base de datos**y, a continuación, haga clic en **siguiente**.
--   Haga clic en **nueva conexión**.
-    En el cuadro de diálogo Propiedades de conexión, escriba el nombre del servidor (por ejemplo, **(localdb)\\mssqllocaldb**), seleccione el método de autenticación, el tipo **School** para el nombre de la base de datos y, a continuación, Haga clic en **Aceptar**.
-    El cuadro de diálogo Elegir la conexión de datos se actualiza con la configuración de conexión de base de datos.
--   En el cuadro de diálogo Elija los objetos de base de datos en el nodo tablas, seleccione el **persona** tabla.
--   Haga clic en **Finalizar**.
+-   Haga clic con el botón derecho en el nombre del proyecto en Explorador de soluciones y seleccione **agregar&gt; nuevo elemento**.
+-   Seleccione **datos** en el menú de la izquierda y, a continuación, seleccione **ADO.NET Entity Data Model** en el panel Plantillas.
+-   Escriba **TPHModel. edmx** como nombre de archivo y, a continuación, haga clic en **Agregar**.
+-   En el cuadro de diálogo elegir contenido del modelo, seleccione **generar desde la base de datos**y, a continuación, haga clic en **siguiente**.
+-   Haga clic en **nueva conexión**.
+    En el cuadro de diálogo Propiedades de conexión, escriba el nombre del servidor (por ejemplo, **LocalDB)\\mssqllocaldb**), seleccione el método de autenticación, escriba **School** para el nombre de la base de datos y, a continuación, haga clic en **Aceptar**.
+    El cuadro de diálogo elegir la conexión de datos se actualiza con la configuración de conexión de la base de datos.
+-   En el cuadro de diálogo elija los objetos de base de datos, en el nodo tablas, seleccione la tabla **Person** .
+-   Haga clic en **Finalizar**.
 
-Entity Designer, que proporciona una superficie de diseño para modificar el modelo, se muestra. Todos los objetos que seleccionó en el cuadro de diálogo Elija los objetos de base de datos se agregan al modelo.
+Se muestra el diseñador de entidades, que proporciona una superficie de diseño para editar el modelo. Todos los objetos que seleccionó en el cuadro de diálogo elija los objetos de base de datos se agregan al modelo.
 
-Que es el modo **persona** tabla busca en la base de datos.
+Este es el aspecto de la tabla **Person** en la base de datos.
 
-![Tabla Person](~/ef6/media/persontable.png) 
+![Tabla Person](~/ef6/media/persontable.png) 
 
 ## <a name="implement-table-per-hierarchy-inheritance"></a>Implementar la herencia de tabla por jerarquía
 
-El **persona** tabla tiene el **discriminador** columna, que puede tener uno de dos valores: "Student" e "Instructor". Dependiendo del valor el **persona** tabla se asignará a la **estudiante** entidad o la **Instructor** entidad. El **persona** tabla también tiene dos columnas, **HireDate** y **EnrollmentDate**, que debe ser **que acepta valores NULL** porque no puede ser una persona un Student e instructor al mismo tiempo (al menos no en este tutorial).
+La tabla **Person** tiene la columna **Discriminator** , que puede tener uno de dos valores: "Student" y "instructor". En función del valor, la tabla **Person** se asignará a la entidad **Student** o a la entidad **instructor** . La tabla **Person** también tiene dos columnas, **HireDate** y **EnrollmentDate**, que deben **admitir valores NULL** porque una persona no puede ser Student ni un instructor al mismo tiempo (al menos no en este tutorial).
 
 ### <a name="add-new-entities"></a>Agregar nuevas entidades
 
--   Agregar una nueva entidad.
-    Para ello, haga doble clic en un área vacía de la superficie de diseño de Entity Framework Designer y seleccione **Add -&gt;entidad**.
--   Tipo **Instructor** para el **nombre de entidad** y seleccione **persona** en la lista desplegable para la **tipo Base**.
--   Haga clic en **Aceptar**.
--   Agregue otra nueva entidad. Tipo **estudiante** para el **nombre de entidad** y seleccione **persona** en la lista desplegable para la **tipo Base**.
+-   Agregue una nueva entidad.
+    Para ello, haga clic con el botón secundario en un espacio vacío de la superficie de diseño del Entity Framework Designer y seleccione **agregar&gt;entidad**.
+-   Escriba **Instructor** para el **nombre de entidad** y seleccione **Person** en la lista desplegable del **tipo base**.
+-   Haga clic en  **Aceptar**.
+-   Agregue otra entidad nueva. Escriba **Student** para el **nombre de entidad** y seleccione **Person** en la lista desplegable del **tipo base**.
 
-Se agregaron dos nuevos tipos de entidad a la superficie de diseño. Una flecha señala desde los nuevos tipos de entidad a la **persona** tipo de entidad; esto indica que **persona** es el tipo base para los nuevos tipos de entidad.
+Se han agregado dos nuevos tipos de entidad a la superficie de diseño. Una flecha señala desde los nuevos tipos de entidad hasta la **persona** tipo de entidad; Esto indica que **Person** es el tipo base para los nuevos tipos de entidad.
 
--   Haga clic en el **HireDate** propiedad de la **persona** entidad. Seleccione **cortar** (o utilizar la tecla Ctrl-X).
--   Haga clic en el **Instructor** entidad y seleccione **pegar** (o utilizar la tecla Ctrl-V).
--   Haga clic en el **HireDate** propiedad y seleccione **propiedades**.
--   En el **propiedades** ventana, establezca el **Nullable** propiedad **false**.
--   Haga clic en el **EnrollmentDate** propiedad de la **persona** entidad. Seleccione **cortar** (o utilizar la tecla Ctrl-X).
--   Haga clic en el **estudiante** entidad y seleccione **pegar (o clave de uso de la combinación Ctrl-V).**
--   Seleccione el **EnrollmentDate** propiedad y establezca el **Nullable** propiedad **false**.
--   Seleccione el **persona** tipo de entidad. En el **propiedades** ventana, establezca su **abstracta** propiedad **true**.
--   Eliminar el **discriminador** propiedad desde **persona**. En la sección siguiente, se explica el motivo debe eliminarse.
+-   Haga clic con el botón secundario en la propiedad **HireDate** de la entidad  **Person** . Seleccione **cortar** (o use la tecla Ctrl-X).
+-   Haga clic con el botón secundario en la entidad del **instructor** y seleccione **pegar** (o use la tecla Ctrl-V).
+-   Haga clic con el botón secundario en la propiedad **HireDate** y seleccione **propiedades**.
+-   En la ventana **propiedades** , establezca la propiedad **Nullable** en **false**.
+-   Haga clic con el botón secundario en la propiedad **EnrollmentDate** de la entidad **Person** . Seleccione **cortar** (o use la tecla Ctrl-X).
+-   Haga clic con el botón secundario en la entidad **Student** y seleccione **pegar (o use la tecla Ctrl-V).**
+-   Seleccione la propiedad **EnrollmentDate** y establezca la propiedad **Nullable** en **false**.
+-   Seleccione la **persona** tipo de entidad. En la ventana **propiedades** , establezca su propiedad **abstract** en **true**.
+-   Elimine la propiedad **Discriminator** de **Person**. La razón por la que se debe eliminar se explica en la sección siguiente.
 
-### <a name="map-the-entities"></a>Asigne las entidades
+### <a name="map-the-entities"></a>Asignación de las entidades
 
--   Haga clic en el **Instructor** y seleccione **asignación de tabla.**
-    La entidad Instructor está seleccionada en la ventana Detalles de la asignación.
--   Haga clic en **&lt;agregar una tabla o vista&gt;** en el **detalles de Mapping** ventana.
-    El **&lt;agregar una tabla o vista&gt;** campo se convierte en una lista desplegable de tablas o vistas a que se puede asignar la entidad seleccionada.
--   Seleccione **persona** en la lista desplegable.
--   El **detalles de Mapping** ventana se actualiza con las asignaciones de columna predeterminadas y una opción para agregar una condición.
--   Haga clic en  **&lt;agregar una condición&gt;**.
-    El **&lt;agregar una condición&gt;** campo se convierte en una lista desplegable de columnas para el que se pueden establecer condiciones.
--   Seleccione **discriminador** en la lista desplegable.
--   En el **operador** columna de la **detalles de Mapping** ventana, seleccione = de la lista desplegable.
--   En el **valor/propiedad** columna, escriba **Instructor**. El resultado final debe tener este aspecto:
+-   Haga clic con el botón secundario en el **instructor** y seleccione **asignación de tabla.**
+    La entidad instructor está seleccionada en la ventana detalles de la asignación.
+-   Haga clic en **&lt;agregar una tabla o vista&gt;**  en la ventana detalles de la **asignación** .
+    El **&lt;agregar una tabla o vista&gt;** campo se convierte en una lista desplegable de tablas o vistas a las que se puede asignar la entidad seleccionada.
+-   Seleccione **Person** en la lista desplegable.
+-   La ventana detalles de la **asignación** se actualiza con las asignaciones de columnas predeterminadas y una opción para agregar una condición.
+-   Haga clic en **&lt;agregar una condición&gt;** .
+    El **&lt;agregar una condición&gt;** campo se convierte en una lista desplegable de columnas para las que se pueden establecer condiciones.
+-   Seleccione **discriminator** en la lista desplegable.
+-   En la columna **operador** de la ventana detalles de la **asignación** , seleccione = en la lista desplegable.
+-   En la columna **valor/propiedad** , escriba **instructor**. El resultado final debería ser similar al siguiente:
 
     ![Detalles de la asignación](~/ef6/media/mappingdetails2.png)
 
--   Repita estos pasos para la **estudiante** tipo de entidad, pero asegúrese de la condición igual a **estudiante** valor.  
-    *La razón por la que desea quitar el **discriminador** propiedad, es porque no se puede asignar una columna de tabla de más de una vez. Esta columna se utilizará para la asignación condicional, por lo que no se puede usar para la asignación de propiedad así. La única manera que puede usarse en ambos casos, si utiliza una condición de un **Is Null** o **Is Not Null** comparación.*
+-   Repita estos pasos para el tipo de entidad **student** , pero haga que la condición sea igual que el valor **Student** .  
+    *La razón por la que queríamos quitar la propiedad **Discriminator** , es que no se puede asignar más de una vez una columna de tabla. Esta columna se utilizará para la asignación condicional, por lo que no se puede usar también para la asignación de propiedades. La única manera en que se puede usar para ambos, si una condición usa **es null** o **no es null** comparación.*
 
 Ahora se implementa la herencia de tabla por jerarquía.
 
@@ -105,7 +105,7 @@ Ahora se implementa la herencia de tabla por jerarquía.
 
 ## <a name="use-the-model"></a>Usar el modelo
 
-Abra el **Program.cs** donde el **Main** se define el método. Pegue el código siguiente en el **Main** función. El código ejecuta tres consultas. La primera consulta devuelve todos los **persona** objetos. La segunda consulta utiliza la **OfType** método devuelva **Instructor** objetos. La tercera consulta utiliza la **OfType** método devuelva **estudiante** objetos.
+Abra el archivo **Program.CS** en el que se define el método **Main** . Pegue el código siguiente en la función **Main** . El código ejecuta tres consultas. La primera consulta devuelve todos los objetos **Person** . La segunda consulta utiliza el método **Intype** para devolver los objetos **instructor** . La tercera consulta utiliza el método **Intype** para devolver objetos **Student** .
 
 ``` csharp
     using (var context = new SchoolEntities())

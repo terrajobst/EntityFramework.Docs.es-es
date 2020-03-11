@@ -6,11 +6,11 @@ ms.date: 11/01/2018
 ms.assetid: 2BDE29FC-4161-41A0-841E-69F51CCD9341
 uid: core/modeling/spatial
 ms.openlocfilehash: 5b45f83ca7f02665f52ccfe16b5af506a6046a62
-ms.sourcegitcommit: f2a38c086291699422d8b28a72d9611d1b24ad0d
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 01/16/2020
-ms.locfileid: "76124436"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78414708"
 ---
 # <a name="spatial-data"></a>Datos espaciales
 
@@ -19,7 +19,7 @@ ms.locfileid: "76124436"
 
 Los datos espaciales representan la ubicación física y la forma de los objetos. Muchas bases de datos proporcionan compatibilidad con este tipo de datos, por lo que se puede indizar y consultar junto con otros datos. Entre los escenarios comunes se incluyen las consultas de objetos dentro de una distancia determinada desde una ubicación o la selección del objeto cuyo borde contiene una ubicación determinada. EF Core admite la asignación a tipos de datos espaciales mediante la biblioteca espacial [NetTopologySuite](https://github.com/NetTopologySuite/NetTopologySuite) .
 
-## <a name="installing"></a>Instalar
+## <a name="installing"></a>Instalación
 
 Para usar los datos espaciales con EF Core, debe instalar el paquete NuGet de soporte adecuado. El paquete que necesita instalar depende del proveedor que esté usando.
 
@@ -51,7 +51,7 @@ Hay varios tipos de datos espaciales. El tipo que use dependerá de los tipos de
 * Geometría
   * Punto
   * LineString
-  * Polígono
+  * Polygon
   * GeometryCollection
     * MultiPoint
     * MultiLineString

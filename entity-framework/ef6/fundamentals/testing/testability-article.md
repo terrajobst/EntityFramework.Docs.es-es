@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 9430e2ab-261c-4e8e-8545-2ebc52d7a247
 ms.openlocfilehash: 28ec5446ce9faf98fb8fff141832236d70b29daf
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72181588"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78413982"
 ---
 # <a name="testability-and-entity-framework-40"></a>Capacidad de prueba y Entity Framework 4,0
 Scott Allen
@@ -196,7 +196,7 @@ Con los POCO en vigor, podemos crear un Entity Data Model (EDM) en Visual Studio
 
 ![test_01 EF](~/ef6/media/eftest-01.jpg)
 
-**Figura 1**
+**Ilustración 1**
 
 Nota: Si desea desarrollar el modelo EDM en primer lugar, es posible generar código limpio y POCO a partir del EDM. Puede hacerlo con una extensión de Visual Studio 2010 proporcionada por el equipo de programación de datos. Para descargar la extensión, inicie el administrador de extensiones desde el menú herramientas de Visual Studio y busque "POCO" en la galería en línea de plantillas (consulte la figura 2). Hay varias plantillas POCO disponibles para EF. Para obtener más información sobre el uso de la plantilla, vea " [Tutorial: poco plantilla para el Entity Framework](https://blogs.msdn.com/adonet/pages/walkthrough-poco-template-for-the-entity-framework.aspx)".
 
@@ -417,13 +417,13 @@ Podemos usar EmployeeControllerTestBase como la clase base para una serie de acc
 
 ![test_03 EF](~/ef6/media/eftest-03.png)
 
-**Figura 3**
+**Ilustración 3**
 
 La Convención de nomenclatura y el estilo de prueba presentados aquí no son necesarios para el código comprobable, sino solo un enfoque. En la figura 4 se muestran las pruebas que se ejecutan en el complemento del Ejecutor de pruebas de jet cerebro ReSharper para Visual Studio 2010.
 
 ![test_04 EF](~/ef6/media/eftest-04.png)
 
-**Figura 4**
+**Ilustración 4**
 
 Con una clase base para controlar el código compartido de la instalación, las pruebas unitarias para cada acción de controlador son pequeñas y fáciles de escribir. Las pruebas se ejecutarán rápidamente (dado que se están realizando operaciones en memoria) y no se debería producir un error debido a la infraestructura no relacionada o a problemas ambientales (porque hemos aislado la unidad en pruebas).
 

@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 06baa6e1-d680-4a95-845b-81305c87a962
 ms.openlocfilehash: a9c54fbc14dd02ce5d4d91449a0d5f9e72f7f0f7
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182500"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78415332"
 ---
 # <a name="spatial---ef-designer"></a>Diseñador espacial-EF
 > [!NOTE]
@@ -24,7 +24,7 @@ Para usar los tipos de datos espaciales, también debe usar un proveedor de Enti
 
 Hay dos tipos de datos espaciales principales: Geography y Geometry. El tipo de datos Geography almacena los datos de datos elipsoidales (por ejemplo, las coordenadas de latitud y longitud de GPS). El tipo de datos Geometry representa el sistema de coordenadas euclidiana (plano).
 
-## <a name="watch-the-video"></a>Ver el vídeo
+## <a name="watch-the-video"></a>Visualización del vídeo
 Este vídeo muestra cómo asignar tipos espaciales con el Entity Framework Designer. También se muestra cómo usar una consulta LINQ para buscar una distancia entre dos ubicaciones.
 
 **Presentada por**: Julia Kornich
@@ -48,7 +48,7 @@ Deberá tener instalado Visual Studio 2012, Ultimate, Premium, Professional o We
 2.  Seleccione **datos** en el menú de la izquierda y, a continuación, seleccione **ADO.NET Entity Data Model** en el panel Plantillas.
 3.  Escriba **UniversityModel. edmx** como nombre de archivo y, a continuación, haga clic en **Agregar** .
 4.  En la página del Asistente para Entity Data Model, seleccione **modelo vacío** en el cuadro de diálogo elegir contenido del modelo.
-5.  Haga clic en **Finalizar**
+5.  Haga clic en **Finish** (Finalizar).
 
 Se muestra el diseñador de entidades, que proporciona una superficie de diseño para editar el modelo.
 
@@ -62,7 +62,7 @@ El asistente realiza las siguientes acciones:
 
 1.  Haga clic con el botón secundario en un área vacía de la superficie de diseño, seleccione **agregar&gt; entidad**, aparecerá el cuadro de diálogo nueva entidad.
 2.  Especifique **Universidad** como nombre de tipo y especifique **UniversityID** para el nombre de la propiedad de clave y deje el tipo como **Int32** .
-3.  Haga clic en **Aceptar**.
+3.  Haga clic en **Aceptar**
 4.  Haga clic con el botón derecho en la entidad y seleccione **Agregar nueva&gt; propiedad escalar** .
 5.  Cambiar el nombre de la nueva propiedad a **nombre**
 6.  Agregue otra propiedad escalar y cámbiela a **Ubicación** . abra el ventana Propiedades y cambie el tipo de la nueva propiedad a **geografía** .

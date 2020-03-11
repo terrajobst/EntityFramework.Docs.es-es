@@ -4,16 +4,16 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 2df6cb0a-7d8b-4e28-9d05-e2b9a90125af
 ms.openlocfilehash: d540fc6e84049f345ae22998f94c309e0be73fc3
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182568"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78415548"
 ---
 # <a name="code-first-to-a-new-database"></a>Code First a una nueva base de datos
 Este vídeo y el tutorial paso a paso proporcionan una introducción al desarrollo de Code First que tiene como destino una nueva base de datos. Este escenario incluye establecer como destino una base de datos que no existe y Code First creará, o una base de datos vacía a la que Code First agregará nuevas tablas. Code First permite definir el modelo mediante clases de C\# o VB.Net. Opcionalmente, se puede realizar una configuración adicional mediante atributos en las clases y propiedades o mediante una API fluida.
 
-## <a name="watch-the-video"></a>Ver el vídeo
+## <a name="watch-the-video"></a>Visualización del vídeo
 Este vídeo proporciona una introducción al desarrollo de Code First orientado a una nueva base de datos. Este escenario incluye establecer como destino una base de datos que no existe y Code First creará, o una base de datos vacía a la que Code First agregará nuevas tablas. Code First permite definir el modelo mediante C# las clases o VB.net. Opcionalmente, se puede realizar una configuración adicional mediante atributos en las clases y propiedades o mediante una API fluida.
 
 **Presentado por**: [Rowan Miller](https://romiller.com/)
@@ -30,7 +30,7 @@ Si usa Visual Studio 2010, también debe tener instalado [NuGet](https://visuals
 
 Para simplificar las cosas, vamos a crear una aplicación de consola básica que use Code First para realizar el acceso a los datos.
 
--   Abra Visual Studio
+-   Abra Visual Studio.
 -   **Archivo-&gt; nuevo proyecto de&gt;...**
 -   Seleccionar **ventanas** en el menú izquierdo y en la **aplicación de consola**
 -   Escriba **CodeFirstNewDatabaseSample** como nombre
@@ -74,7 +74,7 @@ Ahora estamos empezando a usar los tipos del Entity Framework por lo que necesit
     Nota: Si no tiene la **Administración de paquetes de NuGet..** . opción debe instalar la [versión más reciente de NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)
 -   Seleccione la pestaña **en línea**
 -   Seleccione el paquete **EntityFramework**
--   Haga clic en **instalar**
+-   Haga clic en **Instalar**.
 
 Agregue una instrucción using para System. Data. Entity en la parte superior de Program.cs.
 

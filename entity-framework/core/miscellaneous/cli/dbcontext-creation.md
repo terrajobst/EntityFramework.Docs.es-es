@@ -5,11 +5,11 @@ ms.author: bricelam
 ms.date: 09/16/2019
 uid: core/miscellaneous/cli/dbcontext-creation
 ms.openlocfilehash: f44f0648678af5a70e5171d69692bde1c1d5e0eb
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73655524"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78414222"
 ---
 # <a name="design-time-dbcontext-creation"></a>Creación de DbContext en tiempo de diseño
 
@@ -36,7 +36,7 @@ Si DbContext no se puede obtener del proveedor de servicios de aplicación, las 
 
 ## <a name="from-a-design-time-factory"></a>Desde un generador en tiempo de diseño
 
-También puede indicar a las herramientas cómo crear su DbContext implementando la interfaz de `IDesignTimeDbContextFactory<TContext>`: Si una clase que implementa esta interfaz se encuentra en el mismo proyecto que el `DbContext` derivado o en el proyecto de inicio de la aplicación, las herramientas omiten el otro. formas de crear DbContext y usar el generador en tiempo de diseño en su lugar.
+También puede indicar a las herramientas cómo crear su DbContext implementando la interfaz `IDesignTimeDbContextFactory<TContext>`: Si una clase que implementa esta interfaz se encuentra en el mismo proyecto que el `DbContext` derivado o en el proyecto de inicio de la aplicación, las herramientas omiten las otras formas de crear el DbContext y usar en su lugar el generador en tiempo de diseño.
 
 [!code-csharp[Main](../../../../samples/core/Miscellaneous/CommandLine/BloggingContextFactory.cs)]
 

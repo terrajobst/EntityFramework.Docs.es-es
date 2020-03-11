@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 452f17c3-9f26-4de4-9894-8bc036e23b0f
 ms.openlocfilehash: f5e7532e6c0b473d8ce77cbd11e3e673b0af6cbe
-ms.sourcegitcommit: b2b9468de2cf930687f8b85c3ce54ff8c449f644
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/12/2019
-ms.locfileid: "70921777"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78415014"
 ---
 # <a name="designer-table-splitting"></a>División de tablas del diseñador
 En este tutorial se muestra cómo asignar varios tipos de entidad a una sola tabla modificando un modelo con el Entity Framework Designer (EF Designer).
@@ -19,7 +19,7 @@ En la imagen siguiente se muestran las ventanas principales que se usan al traba
 
 ![EF Designer](~/ef6/media/efdesigner.png)
 
-## <a name="prerequisites"></a>Requisitos previos
+## <a name="prerequisites"></a>Prerequisites
 
 Para completar este tutorial, necesitará:
 
@@ -31,7 +31,7 @@ Para completar este tutorial, necesitará:
 En este tutorial se usa Visual Studio 2012.
 
 -   Abra Visual Studio 2012.
--   En el menú **Archivo** , elija **Nuevo**y haga clic en **Proyecto**.
+-   En el menú **Archivo** , seleccione **Nuevo**y haga clic en **Proyecto**.
 -   En el panel izquierdo, haga clic en Visual C\#y, a continuación, seleccione la plantilla aplicación de consola.
 -   Escriba **TableSplittingSample** como nombre del proyecto y haga clic en **Aceptar**.
 
@@ -58,14 +58,14 @@ En esta sección dividirá la entidad **Person** en dos entidades y, a continuac
 -   Haga clic con el botón secundario en un área vacía de la superficie de diseño, seleccione **Agregar nuevo**y haga clic en **entidad**.
     Aparecerá el cuadro de diálogo nuevo de **entidades** .
 -   Escriba **HireInfo** para el **nombre de entidad** y **PersonID** para el nombre de la **propiedad de clave** .
--   Haga clic en **Aceptar**.
+-   Haga clic en  **Aceptar**.
 -   Se crea y se muestra un nuevo tipo de entidad en la superficie de diseño.
 -   Seleccione la propiedad **HireDate** del tipo de entidad **Person** y presione las teclas **Ctrl + X** .
 -   Seleccione la entidad **HireInfo** y presione las teclas **Ctrl + V** .
 -   Cree una asociación entre **Person** y **HireInfo**. Para ello, haga clic con el botón secundario en un área vacía de la superficie de diseño, seleccione **Agregar nuevo**y haga clic en **Asociación**.
 -   Aparece el cuadro de diálogo Agregar de **Asociación** . El nombre de **PersonHireInfo** se proporciona de forma predeterminada.
 -   Especifique Multiplicity **1 (uno)** en ambos extremos de la relación.
--   Haga clic en **Aceptar**.
+-   Presione **Aceptar**.
 
 El paso siguiente requiere la ventana detalles de la **asignación** . Si no puede ver esta ventana, haga clic con el botón secundario en la superficie de diseño y seleccione detalles de la **asignación**.
 
@@ -79,7 +79,7 @@ El paso siguiente requiere la ventana detalles de la **asignación** . Si no p
 -   Haga clic con el botón secundario en la asociación en la superficie de diseño y seleccione **propiedades**.
 -   En la ventana **propiedades** , seleccione la propiedad **restricciones referenciales** y haga clic en el botón de puntos suspensivos.
 -   Seleccione **persona** en la lista desplegable **principal** .
--   Haga clic en **Aceptar**.
+-   Presione **Aceptar**.
 
  
 

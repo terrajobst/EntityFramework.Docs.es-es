@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 80fc5062-2f1c-4dbd-ab6e-b99496784b36
 ms.openlocfilehash: 4b3eee20ff238864b94ef4edfb97c1bae0713300
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72181788"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78416208"
 ---
 # <a name="databinding-with-winforms"></a>DataBinding con WinForms
 En este tutorial paso a paso se muestra cómo enlazar tipos POCO a controles de formularios Windows Forms (WinForms) en un formulario "principal-detalle". La aplicación utiliza Entity Framework para rellenar los objetos con datos de la base de datos, realizar un seguimiento de los cambios y conservar los datos en la base de datos.
@@ -25,7 +25,7 @@ Si usa Visual Studio 2010, también tiene que instalar NuGet. Para obtener más 
 
 ## <a name="create-the-application"></a>Crear la aplicación
 
--   Abra Visual Studio
+-   Abra Visual Studio.
 -   **Archivo-&gt; nuevo proyecto de&gt;....**
 -   Seleccione **Windows** en el panel izquierdo y **Windows FormsApplication** en el panel derecho.
 -   Escriba **WinFormswithEFSample** como nombre
@@ -36,7 +36,7 @@ Si usa Visual Studio 2010, también tiene que instalar NuGet. Para obtener más 
 -   En Explorador de soluciones, haga clic con el botón derecho en el proyecto **WinFormswithEFSample**
 -   Seleccione **administrar paquetes NuGet.** .
 -   En el cuadro de diálogo administrar paquetes NuGet, seleccione la pestaña **en línea** y elija el paquete **EntityFramework**
--   Haga clic en **instalar**  
+-   Haga clic en **Instalar**.  
     > [!NOTE]
     > Además del ensamblado EntityFramework, también se agrega una referencia a System. ComponentModel. DataAnnotations. Si el proyecto tiene una referencia a System. Data. Entity, se quitará cuando se instale el paquete EntityFramework. El ensamblado System. Data. Entity ya no se utiliza para las aplicaciones de Entity Framework 6.
 
@@ -189,7 +189,7 @@ Vamos a generar la base de datos.
 
 -   Seleccione **Aceptar** y se le preguntará si desea crear una nueva base de datos, seleccione **sí** .
 
-    ![Crear base de datos](~/ef6/media/createdatabase.png)
+    ![Creación de una base de datos](~/ef6/media/createdatabase.png)
 
 -   La nueva base de datos aparecerá ahora en Explorador de servidores, haga clic con el botón derecho en ella y seleccione **nueva consulta** .
 -   Copie el siguiente código SQL en la nueva consulta, haga clic con el botón derecho en la consulta y seleccione **Ejecutar** .
@@ -280,7 +280,7 @@ Agregue las clases que se definen en el modelo como orígenes de datos para esta
 
     ![Origen de datos](~/ef6/media/datasource.png)
 
--   Haga clic en **Finalizar**.
+-   Haga clic en **Finish** (Finalizar).
     Si la ventana orígenes de datos no aparece, seleccione **Ver-&gt; otros orígenes de datos de&gt; Windows** .
 -   Presione el icono de anclaje para que la ventana orígenes de datos no se oculte automáticamente. Es posible que tenga que presionar el botón actualizar si la ventana ya estaba visible.
 
@@ -297,7 +297,7 @@ Agregue las clases que se definen en el modelo como orígenes de datos para esta
     -   Haga clic con el botón secundario en el control DataGridView y seleccione **Editar columnas.** ...
     -   Seleccione la columna **ProductID** y establezca **ReadOnly** en **true**.
     -   Seleccione la columna **CategoryID** y presione el botón **quitar** . Haga lo mismo con la columna **categoría** .
-    -   Haga clic en **Aceptar**.
+    -   Presione **Aceptar**.
 
     Hasta ahora, asociamos nuestros controles DataGridView a componentes BindingSource en el diseñador. En la siguiente sección, agregaremos código al código subyacente para establecer categoryBindingSource. DataSource en la colección de entidades cuyo seguimiento realiza actualmente DbContext. Cuando hemos arrastrado y colocado productos desde la categoría, el WinForms se encarga de configurar la propiedad productsBindingSource. DataSource en categoryBindingSource y la propiedad productsBindingSource. DataMember en Products. Debido a este enlace, solo se mostrarán en el productDataGridView los productos que pertenecen a la categoría seleccionada actualmente.
 -   Habilite el botón **Guardar** en la barra de herramientas de navegación; para ello, haga clic con el botón secundario del mouse y seleccione **habilitado**.

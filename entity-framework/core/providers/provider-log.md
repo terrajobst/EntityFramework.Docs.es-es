@@ -7,11 +7,11 @@ ms.assetid: 7CEF496E-A5B0-4F5F-B68E-529609B23EF9
 ms.technology: entity-framework-core
 uid: core/providers/provider-log
 ms.openlocfilehash: b911a2da493e20c4e4ce6f1e25024bd0efd38b44
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73656129"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78414774"
 ---
 # <a name="provider-impacting-changes"></a>Cambios que afectan al proveedor
 
@@ -19,7 +19,7 @@ Esta página contiene vínculos a las solicitudes de incorporación de cambios r
 
 Estamos iniciando este registro con los cambios de 2,1 a 2,2. Antes de 2,1 usamos las etiquetas [`providers-beware`](https://github.com/aspnet/EntityFrameworkCore/labels/providers-beware) y [`providers-fyi`](https://github.com/aspnet/EntityFrameworkCore/labels/providers-fyi) en nuestros problemas y solicitudes de incorporación de cambios.
 
-## <a name="22-----30"></a>2,2---> 3,0
+## <a name="22-----30"></a>2.2 ---> 3.0
 
 Tenga en cuenta que muchos de los [cambios importantes en el nivel](../what-is-new/ef-core-3.0/breaking-changes.md) de la aplicación también afectarán a los proveedores.
 
@@ -65,7 +65,7 @@ Tenga en cuenta que muchos de los [cambios importantes en el nivel](../what-is-n
 * <https://github.com/aspnet/EntityFrameworkCore/pull/15288>
   * La propagación de datos se ha refactorizado en una API pública para evitar la necesidad de usar tipos internos. Esto solo debe afectar a los proveedores no relacionales, puesto que la propagación se controla mediante la clase relacional base para todos los proveedores relacionales.
 
-## <a name="21-----22"></a>2,1---> 2,2
+## <a name="21-----22"></a>2.1 ---> 2.2
 
 ### <a name="test-only-changes"></a>Cambios de solo prueba
 

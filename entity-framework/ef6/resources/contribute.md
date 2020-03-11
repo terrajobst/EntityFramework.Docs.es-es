@@ -1,18 +1,18 @@
 ---
-title: Contribuir a Entity Framework - EF6
+title: Contribuir a Entity Framework-EF6
 author: divega
 ms.date: 07/05/2018
 ms.assetid: EFA3C3F5-79A4-4A0A-BB37-035C31FC7372
-ms.openlocfilehash: fef724c33d5a21d71f266986c0b15ff370b63382
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.openlocfilehash: 81159c2e1807122be90ef861805f94794f91493f
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45488964"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78414450"
 ---
 # <a name="contribute-to-entity-framework-6"></a>Contribuir a Entity Framework 6
-Entity Framework 6 se desarrolla mediante un modelo de código abierto en GitHub. Aunque es el enfoque principal del equipo de Entity Framework de Microsoft sobre cómo agregar nuevas características a Entity Framework Core y no se espera que las características principales que se agregarán a Entity Framework 6, todavía se aceptan las contribuciones.
+Entity Framework 6 se desarrolla con un modelo de código abierto en GitHub. Aunque el enfoque principal del equipo de Entity Framework en Microsoft es agregar nuevas características a Entity Framework Core y no esperamos que se agreguen características principales a Entity Framework 6, seguimos aceptando contribuciones.
 
-Para las contribuciones de producto, inicie en el [página wiki de contribución en nuestro repositorio de GitHub](https://github.com/aspnet/EntityFramework6/wiki/Contributing).
+En el caso de las contribuciones del producto, comience en la [página wiki de colaboración en nuestro repositorio de github](https://github.com/aspnet/EntityFramework6/wiki/Contributing).
 
-Para las contribuciones de la documentación, por favor, comenzar, lea el [Guía de contribución](https://github.com/aspnet/EntityFramework.Docs/blob/master/CONTRIBUTING.md) en nuestro repositorio de documentación.
+Para obtener información sobre las contribuciones de documentación, empiece a leer la [Guía de contribución](https://github.com/dotnet/EntityFramework.Docs/blob/master/CONTRIBUTING.md) en nuestro repositorio de documentación.

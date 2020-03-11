@@ -4,26 +4,26 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 2318e4d3-f561-4720-bbc3-921556806476
 ms.openlocfilehash: 81ae186201fdfac331b1d4e7836b222545fe78b5
-ms.sourcegitcommit: 2b787009fd5be5627f1189ee396e708cd130e07b
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45489159"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78416250"
 ---
 # <a name="handling-concurrency-conflicts"></a>Administrar los conflictos de simultaneidad
-Optimista de forma optimista implica la simultaneidad al intentar guardar la entidad en la base de datos con la esperanza de que los datos no ha cambiado desde la entidad se cargó. Si resulta los datos han cambiado, a continuación, se produce una excepción y se debe resolver el conflicto antes de intentar volver a guardar. En este tema se explica cómo controlar dichas excepciones en Entity Framework. Las técnicas que se muestran en este tema se aplican igualmente a los modelos creados con Code First y EF Designer.  
+La simultaneidad optimista implica un intento optimista de guardar la entidad en la base de datos, con la esperanza de que los datos no hayan cambiado desde que se cargó la entidad. Si se da cuenta de que los datos han cambiado, se produce una excepción y debe resolver el conflicto antes de intentar volver a guardar. En este tema se explica cómo controlar dichas excepciones en Entity Framework. Las técnicas que se muestran en este tema se aplican igualmente a los modelos creados con Code First y EF Designer.  
 
-Esta entrada no es el lugar adecuado para obtener una explicación completa de la simultaneidad optimista. Las siguientes secciones presupone algunos conocimientos de resolución de simultaneidad y mostrar patrones para tareas comunes.  
+Esta publicación no es el lugar adecuado para una descripción completa de la simultaneidad optimista. En las secciones siguientes se presupone cierto conocimiento de la resolución de simultaneidad y se muestran patrones para tareas comunes.  
 
-Muchos de estos patrones hacen uso de los temas tratados en [trabajar con valores de propiedad](~/ef6/saving/change-tracking/property-values.md).  
+Muchos de estos patrones hacen uso de los temas que se describen en [trabajar con valores de propiedad](~/ef6/saving/change-tracking/property-values.md).  
 
-Resolver problemas de simultaneidad cuando se usa asociaciones independientes (donde la clave externa no está asignada a una propiedad de la entidad) es mucho más difícil que al usar asociaciones de clave externa. Por lo tanto, si va a realizar una resolución de simultaneidad en la aplicación se aconseja que siempre asigne las claves externas en las entidades. Todos los ejemplos siguientes se suponen que usa asociaciones de clave externa.  
+La resolución de problemas de simultaneidad cuando se usan asociaciones independientes (donde la clave externa no está asignada a una propiedad de la entidad) es mucho más difícil que cuando se usan asociaciones de clave externa. Por lo tanto, si va a realizar la resolución de simultaneidad en la aplicación, se recomienda que asigne siempre las claves externas a las entidades. Todos los ejemplos siguientes suponen que está usando asociaciones de clave externa.  
 
-SaveChanges produce un DbUpdateConcurrencyException cuando se detecta una excepción de simultaneidad optimista al intentar guardar una entidad que utiliza las asociaciones de clave externa.  
+SaveChanges genera una DbUpdateConcurrencyException cuando se detecta una excepción de simultaneidad optimista al intentar guardar una entidad que utiliza asociaciones de clave externa.  
 
-## <a name="resolving-optimistic-concurrency-exceptions-with-reload-database-wins"></a>Resolver las excepciones de simultaneidad optimista con volver a cargar (wins de la base de datos)  
+## <a name="resolving-optimistic-concurrency-exceptions-with-reload-database-wins"></a>Resolver excepciones de simultaneidad optimista con Reload (base de datos gana)  
 
-El método Reload puede usarse para sobrescribir los valores actuales de la entidad con los valores de ahora en la base de datos. La entidad se luego normalmente le envía al usuario en algún tipo y debe intentar realizar de nuevo sus cambios y volver a guardar. Por ejemplo:  
+El método Reload se puede usar para sobrescribir los valores actuales de la entidad con los valores ahora en la base de datos. La entidad se suele devolver al usuario de alguna forma y debe intentar realizar de nuevo los cambios y volver a guardar. Por ejemplo:  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -52,18 +52,18 @@ using (var context = new BloggingContext())
 }
 ```  
 
-Es una buena forma de simular una excepción de simultaneidad establecer un punto de interrupción en la llamada a SaveChanges y, a continuación, modificar una entidad que se va a guardar en la base de datos con otra herramienta como SQL Management Studio. También podría insertar una línea antes de SaveChanges para actualizar la base de datos directamente mediante SqlCommand. Por ejemplo:  
+Una buena forma de simular una excepción de simultaneidad es establecer un punto de interrupción en la llamada a SaveChanges y, a continuación, modificar una entidad que se guarda en la base de datos mediante otra herramienta como SQL Management Studio. También puede insertar una línea antes de SaveChanges para actualizar la base de datos directamente mediante SqlCommand. Por ejemplo:  
 
 ``` csharp
 context.Database.SqlCommand(
     "UPDATE dbo.Blogs SET Name = 'Another Name' WHERE BlogId = 1");
 ```  
 
-El método de entradas en DbUpdateConcurrencyException devuelve las instancias de DbEntityEntry para las entidades que no se pudieron actualizar. (Esta propiedad actualmente siempre devuelve un valor único para problemas de simultaneidad. Pueden devolver varios valores para las excepciones de actualización general.) Podría ser una alternativa para algunas situaciones obtener las entradas de todas las entidades que es posible que deba volver a cargarse desde la base de datos y volver a cargar llamadas para cada uno de ellos.  
+El método de entradas de DbUpdateConcurrencyException devuelve las instancias de DbEntityEntry para las entidades que no se pudieron actualizar. (Actualmente, esta propiedad siempre devuelve un valor único para los problemas de simultaneidad. Puede devolver varios valores para las excepciones de actualización generales). Una alternativa para algunas situaciones podría ser obtener entradas para todas las entidades que pueden tener que volver a cargarse desde la base de datos y llamar a recargar para cada una de ellas.  
 
-## <a name="resolving-optimistic-concurrency-exceptions-as-client-wins"></a>Resolver las excepciones de simultaneidad optimista como prevalece el cliente  
+## <a name="resolving-optimistic-concurrency-exceptions-as-client-wins"></a>Resolver excepciones de simultaneidad optimista como cliente WINS  
 
-El ejemplo anterior que usa la recarga a veces se denomina wins de la base de datos o porque los valores de la entidad se sobrescriben con los valores de la base de datos prevalece el almacén. A veces puede desear hacer lo contrario y sobrescribir los valores de la base de datos con los valores actuales de la entidad. Esto se denomina prevalece el cliente y puede hacerse mediante la obtención de los valores actuales de la base de datos y establece como los valores originales de la entidad. (Consulte [trabajar con valores de propiedad](~/ef6/saving/change-tracking/property-values.md) para obtener información sobre los valores actuales y originales.) Por ejemplo:  
+El ejemplo anterior que usa la recarga se denomina a veces Database WINS o Store WINS porque los valores de la entidad se sobrescriben con los valores de la base de datos. En ocasiones, es posible que desee hacer lo contrario y sobrescribir los valores de la base de datos con los valores actualmente en la entidad. Esto se denomina a veces cliente WINS y se puede hacer obteniendo los valores de la base de datos actual y estableciéndolo como valores originales de la entidad. (Vea [trabajar con valores de propiedad](~/ef6/saving/change-tracking/property-values.md) para obtener información sobre los valores actuales y originales). Por ejemplo:  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -92,9 +92,9 @@ using (var context = new BloggingContext())
 }
 ```  
 
-## <a name="custom-resolution-of-optimistic-concurrency-exceptions"></a>Resolución personalizada de las excepciones de simultaneidad optimista  
+## <a name="custom-resolution-of-optimistic-concurrency-exceptions"></a>Resolución personalizada de excepciones de simultaneidad optimista  
 
-A veces desea combinar los valores actuales de la base de datos con los valores actuales de la entidad. Normalmente esto requiere alguna interacción lógica o de usuario personalizado. Por ejemplo, podría presentar un formulario al usuario que contiene los valores actuales, los valores de la base de datos y establece un valor predeterminado de valores resueltos. El usuario modificara los valores resueltos según sea necesario y estos valores resueltos son los que se guardan en la base de datos. Esto puede hacerse mediante los objetos DbPropertyValues devuelto desde CurrentValues y GetDatabaseValues en la entrada de la entidad. Por ejemplo:  
+En ocasiones, es posible que desee combinar los valores que hay actualmente en la base de datos con los valores de la entidad. Normalmente, esto requiere una lógica personalizada o una interacción del usuario. Por ejemplo, puede presentar un formulario al usuario que contiene los valores actuales, los valores de la base de datos y un conjunto predeterminado de valores resueltos. El usuario modificara los valores resueltos según sea necesario y estos valores resueltos son los que se guardan en la base de datos. Esto se puede hacer mediante los objetos DbPropertyValues devueltos desde CurrentValues y GetDatabaseValues en la entrada de la entidad. Por ejemplo:  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -143,9 +143,9 @@ public void HaveUserResolveConcurrency(DbPropertyValues currentValues,
 }
 ```  
 
-## <a name="custom-resolution-of-optimistic-concurrency-exceptions-using-objects"></a>Resolución personalizada de excepciones de simultaneidad optimista con objetos  
+## <a name="custom-resolution-of-optimistic-concurrency-exceptions-using-objects"></a>Resolución personalizada de excepciones de simultaneidad optimista mediante objetos  
 
-El código anterior usa DbPropertyValues instancias para el tráfico actual, base de datos y valores resueltos. A veces puede ser más fácil de usar las instancias de su tipo de entidad para esta. Esto puede hacerse mediante los métodos ToObject y SetValues de DbPropertyValues. Por ejemplo:  
+El código anterior usa instancias de DbPropertyValues para pasar los valores actuales, de base de datos y resueltos. A veces puede ser más fácil usar instancias de su tipo de entidad para esto. Esto se puede hacer mediante los métodos ToObject y SetValues de DbPropertyValues. Por ejemplo:  
 
 ``` csharp
 using (var context = new BloggingContext())

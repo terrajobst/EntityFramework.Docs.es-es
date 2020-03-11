@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 000044c6-1d32-4cf7-ae1f-ea21d86ebf8f
 ms.openlocfilehash: 86389e4a3a3bac46e2a4cf2da648a4b19e29f3c3
-ms.sourcegitcommit: 299011fc4bd576eed58a4274f967639fa13fec53
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/21/2019
-ms.locfileid: "69886551"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78414858"
 ---
 # <a name="configuration-file-settings"></a>Configuración del archivo de configuración
 Entity Framework permite especificar una serie de valores desde el archivo de configuración. En general, EF sigue un comportamiento de "Convención sobre configuración": todos los valores de configuración descritos en esta publicación tienen un comportamiento predeterminado, solo tiene que preocuparse por cambiar el valor cuando el valor predeterminado ya no satisface sus requisitos.  
@@ -110,7 +110,7 @@ Como ejemplo, aquí se muestra la entrada que se crea para registrar el proveedo
 
 A partir de EF 6.1, puede registrar los interceptores en el archivo de configuración. Los interceptores permiten ejecutar lógica adicional cuando EF realiza ciertas operaciones, como la ejecución de consultas de base de datos, la apertura de conexiones, etc.  
 
-Los interceptores se registran mediante la inclusión de un elemento **interceptor** en la sección de interceptores secundaria de la sección **entityFramework** . Por ejemplo, la configuración siguiente registra el interceptor de **DatabaseLogger** integrado que registrará todas las operaciones de base de datos en la consola.  
+Los interceptores se registran mediante la inclusión de un elemento **interceptor** en la sección de **interceptores** secundaria de la sección **entityFramework** . Por ejemplo, la configuración siguiente registra el interceptor de **DatabaseLogger** integrado que registrará todas las operaciones de base de datos en la consola.  
 
 ``` xml  
 <interceptors>
@@ -145,7 +145,7 @@ De forma predeterminada, esto hará que el archivo de registro se sobrescriba co
 </interceptors>
 ```  
 
-Para obtener información adicional sobre **DatabaseLogger** y el registro de interceptores, consulte [la entrada de blog EF 6,1: Activar el registro sin volver a](https://blog.oneunicorn.com/2014/02/09/ef-6-1-turning-on-logging-without-recompiling/)compilar.  
+Para obtener información adicional sobre **DatabaseLogger** y el registro de interceptores, consulte la entrada de blog [EF 6,1: activar el registro sin volver a compilar](https://blog.oneunicorn.com/2014/02/09/ef-6-1-turning-on-logging-without-recompiling/).  
 
 ## <a name="code-first-default-connection-factory"></a>Code First factoría de conexión predeterminada  
 
@@ -166,7 +166,7 @@ A continuación se muestra un ejemplo de configuración de su propio generador d
 </entityFramework>
 ```  
 
-En el ejemplo anterior se requiere que el generador personalizado tenga un constructor sin parámetros. Si es necesario, puede especificar parámetros de constructor mediante el elemento Parameters.  
+En el ejemplo anterior se requiere que el generador personalizado tenga un constructor sin parámetros. Si es necesario, puede especificar parámetros de constructor mediante el elemento **Parameters** .  
 
 Por ejemplo, SqlCeConnectionFactory, que se incluye en Entity Framework, requiere que proporcione un nombre invariable de proveedor al constructor. El nombre invariable del proveedor identifica la versión de SQL Compact que quiere usar. La configuración siguiente hará que los contextos usen SQL Compact versión 4,0 de forma predeterminada.  
 
@@ -180,7 +180,7 @@ Por ejemplo, SqlCeConnectionFactory, que se incluye en Entity Framework, requier
 </entityFramework>
 ```  
 
-Si no establece un generador de conexiones predeterminado, Code First usa SqlConnectionFactory, que apunta a `.\SQLEXPRESS`. SqlConnectionFactory también tiene un constructor que permite invalidar partes de la cadena de conexión. Si desea utilizar una instancia de SQL Server distinta de `.\SQLEXPRESS` , puede usar este constructor para establecer el servidor.  
+Si no establece un generador de conexiones predeterminado, Code First usa SqlConnectionFactory, que apunta a `.\SQLEXPRESS`. SqlConnectionFactory también tiene un constructor que permite invalidar partes de la cadena de conexión. Si desea utilizar una instancia de SQL Server distinta de `.\SQLEXPRESS` puede usar este constructor para establecer el servidor.  
 
 La configuración siguiente hará que Code First use **MyDatabaseServer** para los contextos que no tienen un conjunto de cadenas de conexión explícitas.  
 
@@ -240,7 +240,7 @@ Los parámetros de constructor utilizan la misma sintaxis que los generadores de
 
 Puede configurar uno de los inicializadores de base de datos genéricos que se incluyen en Entity Framework. El atributo **Type** utiliza el formato de .NET Framework para los tipos genéricos.  
 
-Por ejemplo, si usa migraciones de Code First, puede configurar la base de datos que se va a migrar automáticamente mediante `MigrateDatabaseToLatestVersion<TContext, TMigrationsConfiguration>` el inicializador.  
+Por ejemplo, si usa Migraciones de Code First, puede configurar la base de datos que se va a migrar automáticamente mediante el inicializador de `MigrateDatabaseToLatestVersion<TContext, TMigrationsConfiguration>`.  
 
 ``` xml
 <contexts>

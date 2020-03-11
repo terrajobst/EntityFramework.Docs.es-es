@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: f019c97b-87b0-4e93-98f4-2c539f77b2dc
 ms.openlocfilehash: 35684196dcd7b708a8feeb1eca3096e8d4e555ec
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182534"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78415452"
 ---
 # <a name="table-valued-functions-tvfs"></a>Funciones con valores de tabla (TVF)
 > [!NOTE]
@@ -22,7 +22,7 @@ La compatibilidad con TVF se presentó en Entity Framework versión 5. Tenga en 
 
 TVF son muy similares a los procedimientos almacenados con una diferencia clave: el resultado de una TVF es ajustable. Esto significa que los resultados de una TVF se pueden usar en una consulta LINQ mientras que los resultados de un procedimiento almacenado no pueden.
 
-## <a name="watch-the-video"></a>Ver el vídeo
+## <a name="watch-the-video"></a>Visualización del vídeo
 
 **Presentada por**: Julia Kornich
 
@@ -38,7 +38,7 @@ Para completar este tutorial, necesitará:
 
 ## <a name="set-up-the-project"></a>Configurar el proyecto
 
-1.  Abra Visual Studio
+1.  Abra Visual Studio.
 2.  En el menú **archivo** , seleccione **nuevo**y, a continuación, haga clic en **proyecto** .
 3.  En el panel izquierdo, haga clic en **Visual C\#** y, a continuación, seleccione la plantilla de **consola** .
 4.  Escriba **TVF** como el nombre del proyecto y haga clic en **Aceptar** .
@@ -72,7 +72,7 @@ RETURN
 
  
 
-## <a name="create-a-model"></a>Crear un modelo
+## <a name="create-a-model"></a>Creación de un modelo
 
 1.  Haga clic con el botón secundario en el nombre del proyecto en Explorador de soluciones, seleccione **Agregar**y, a continuación, haga clic en **nuevo elemento** .
 2.  Seleccione **datos** en el menú de la izquierda y, a continuación, seleccione **ADO.NET Entity Data Model** en el panel **plantillas** .

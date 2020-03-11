@@ -3,19 +3,20 @@ title: 'Relaciones, propiedades de navegación y claves externas: EF6'
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 8a21ae73-6d9b-4b50-838a-ec1fddffcf37
-ms.openlocfilehash: cc7160f2d0ab7ac0c6009f820441c88590cacfaf
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.openlocfilehash: 892e872e3cb11ea95084cf6d9ab43c8d500bc0de
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73655865"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78416004"
 ---
 # <a name="relationships-navigation-properties-and-foreign-keys"></a>Relaciones, propiedades de navegación y claves externas
-En este tema se proporciona información general sobre cómo Entity Framework administra las relaciones entre entidades. También proporciona instrucciones sobre cómo asignar y manipular relaciones.
+
+En este artículo se proporciona información general sobre cómo Entity Framework administra las relaciones entre entidades. También proporciona instrucciones sobre cómo asignar y manipular relaciones.
 
 ## <a name="relationships-in-ef"></a>Relaciones en EF
 
-En las bases de datos relacionales, las relaciones (también denominadas asociaciones) entre las tablas se definen mediante claves externas. Una clave externa (FK) es una columna o combinación de columnas que se usa para establecer y aplicar un vínculo entre los datos de dos tablas. Por lo general, hay tres tipos de relaciones: uno a uno, uno a varios y varios a varios. En una relación de uno a varios, la clave externa se define en la tabla que representa el extremo de la relación. La relación de varios a varios implica definir una tercera tabla (denominada tabla de unión o de combinación), cuya clave principal se compone de las claves externas de ambas tablas relacionadas. En una relación uno a uno, la clave principal actúa además como clave externa y no hay ninguna columna de clave externa independiente para cualquiera de las tablas.
+En las bases de datos relacionales, las relaciones (también denominadas asociaciones) entre las tablas se definen mediante claves externas. Una clave externa (FK) es una columna o combinación de columnas que se utiliza para establecer y exigir un vínculo entre los datos de dos tablas. Por lo general, hay tres tipos de relaciones: uno a uno, uno a varios y varios a varios. En una relación de uno a varios, la clave externa se define en la tabla que representa el extremo de la relación. La relación de varios a varios implica definir una tercera tabla (denominada tabla de unión o de combinación), cuya clave principal se compone de las claves externas de ambas tablas relacionadas. En una relación uno a uno, la clave principal actúa además como clave externa y no hay ninguna columna de clave externa independiente para cualquiera de las tablas.
 
 En la imagen siguiente se muestran dos tablas que participan en una relación de uno a varios. La tabla **Course** es la tabla dependiente porque contiene la columna **departmentId** que la vincula a la tabla **Department** .
 

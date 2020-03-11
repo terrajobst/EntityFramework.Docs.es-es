@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 13ae7bc1-74b4-4ee4-8d73-c337be841467
 ms.openlocfilehash: 8990d1373ea2121ce11337a43dbcdf3b9e1532bd
-ms.sourcegitcommit: 708b18520321c587b2046ad2ea9fa7c48aeebfe5
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72182552"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78415482"
 ---
 # <a name="msl-specification"></a>Especificación MSL
 El lenguaje de especificación de asignaciones (MSL) es un lenguaje basado en XML que describe la asignación entre el modelo conceptual y el modelo de almacenamiento de una aplicación Entity Framework.
@@ -37,9 +37,9 @@ El elemento **alias** no puede tener elementos secundarios.
 
 En la tabla siguiente se describen los atributos que se pueden aplicar al elemento **alias** .
 
-| Nombre de atributo | Es necesario | Valor                                                                     |
+| Nombre del atributo | Es obligatorio | Value                                                                     |
 |:---------------|:------------|:--------------------------------------------------------------------------|
-| **Key**        | Sí         | El alias para el espacio de nombres especificado por el atributo de **valor** . |
+| **Clave**        | Sí         | El alias para el espacio de nombres especificado por el atributo de **valor** . |
 | **Valor**      | Sí         | Espacio de nombres para el que el valor del elemento **key** es un alias.     |
 
 ### <a name="example"></a>Ejemplo
@@ -91,11 +91,11 @@ El elemento **AssociationEnd** puede tener los siguientes elementos secundarios:
 
 En la tabla siguiente se describen los atributos que se pueden aplicar al elemento **AssociationEnd** .
 
-| Nombre de atributo     | Es necesario | Valor                                                                                                                                                                             |
+| Nombre del atributo     | Es obligatorio | Value                                                                                                                                                                             |
 |:-------------------|:------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **AssociationSet** | Sí         | El nombre de la asociación que se está asignando.                                                                                                                                 |
 | **From**           | Sí         | Valor del atributo **FromRole** de la propiedad de navegación que corresponde a la asociación que se está asignando. Para obtener más información, vea elemento NavigationProperty (CSDL). |
-| **En**             | Sí         | Valor del atributo **ToRole** de la propiedad de navegación que corresponde a la asociación que se está asignando. Para obtener más información, vea elemento NavigationProperty (CSDL).   |
+| **To**             | Sí         | Valor del atributo **ToRole** de la propiedad de navegación que corresponde a la asociación que se está asignando. Para obtener más información, vea elemento NavigationProperty (CSDL).   |
 
 ### <a name="example"></a>Ejemplo
 
@@ -198,10 +198,10 @@ El elemento **AssociationSetMapping** puede tener los siguientes elementos secun
 
 En la tabla siguiente se describen los atributos que se pueden aplicar al elemento **AssociationSetMapping** .
 
-| Nombre de atributo     | Es necesario | Valor                                                                                       |
+| Nombre del atributo     | Es obligatorio | Value                                                                                       |
 |:-------------------|:------------|:--------------------------------------------------------------------------------------------|
 | **Nombre**           | Sí         | El nombre del conjunto de asociaciones del modelo conceptual que se está asignando.                      |
-| **TypeName**       | No          | El nombre completo, calificado con el espacio de nombres, del tipo de asociación del modelo conceptual que se está asignando. |
+| **NombreDeTipo**       | No          | El nombre completo, calificado con el espacio de nombres, del tipo de asociación del modelo conceptual que se está asignando. |
 | **StoreEntitySet** | No          | El nombre de la tabla que se está asignando.                                                 |
 
 ### <a name="example"></a>Ejemplo
@@ -236,10 +236,10 @@ El elemento de propiedad **complexType** puede tener los siguientes elementos se
 
 En la tabla siguiente se describen los atributos aplicables al elemento **ComplexProperty** :
 
-| Nombre de atributo | Es necesario | Valor                                                                                            |
+| Nombre del atributo | Es obligatorio | Value                                                                                            |
 |:---------------|:------------|:-------------------------------------------------------------------------------------------------|
 | **Nombre**       | Sí         | El nombre de la propiedad compleja de un tipo de entidad del modelo conceptual que se está asignando. |
-| **TypeName**   | No          | El nombre completo, calificado con el espacio de nombres, del tipo de propiedad del modelo conceptual.                              |
+| **NombreDeTipo**   | No          | El nombre completo, calificado con el espacio de nombres, del tipo de propiedad del modelo conceptual.                              |
 
 ### <a name="example"></a>Ejemplo
 
@@ -306,13 +306,13 @@ El elemento **ComplexTypeMapping** puede tener los siguientes elementos secundar
 
 En la tabla siguiente se describen los atributos aplicables al elemento **ComplexTypeMapping** .
 
-| Nombre de atributo | Es necesario | Valor                                                                  |
+| Nombre del atributo | Es obligatorio | Value                                                                  |
 |:---------------|:------------|:-----------------------------------------------------------------------|
-| **TypeName**   | Sí         | El nombre completo, incluido el espacio de nombres, del tipo complejo que se está asignando. |
+| **NombreDeTipo**   | Sí         | El nombre completo, incluido el espacio de nombres, del tipo complejo que se está asignando. |
 
 ### <a name="example"></a>Ejemplo
 
-Considere el siguiente procedimiento almacenado:
+Observe el siguiente procedimiento almacenado:
 
 ``` SQL
  CREATE PROCEDURE [dbo].[GetGrades]
@@ -377,10 +377,10 @@ El elemento **Condition** no puede tener elementos secundarios.
 
 En la tabla siguiente se describen los atributos aplicables al elemento **Condition** :
 
-| Nombre de atributo | Es necesario | Valor                                                                                                                                                                                                                                                                                         |
+| Nombre del atributo | Es obligatorio | Value                                                                                                                                                                                                                                                                                         |
 |:---------------|:------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **ColumnName** | No          | El nombre de la columna de la tabla cuyo valor se utiliza para evaluar la condición.                                                                                                                                                                                                                   |
-| **IsNull**     | No          | **True** o **false**. Si el valor es **true** y el valor de la columna es **null**, o si el valor es **false** y el valor de la columna no es **null**, la condición es true. De lo contrario, la condición es falsa. <br/> Los atributos **IsNull** y **Value** no se pueden usar al mismo tiempo. |
+| **IsNull**     | No          | **True** o **False**. Si el valor es **true** y el valor de la columna es **null**, o si el valor es **false** y el valor de la columna no es **null**, la condición es true. De lo contrario, la condición es falsa. <br/> Los atributos **IsNull** y **Value** no se pueden usar al mismo tiempo. |
 | **Valor**      | No          | El valor con el que se compara el valor de la columna. Si los valores son los mismos, la condición es verdadera. De lo contrario, la condición es falsa. <br/> Los atributos **IsNull** y **Value** no se pueden usar al mismo tiempo.                                                                       |
 | **Nombre**       | No          | El nombre de la propiedad de entidad del modelo conceptual cuyo valor se utiliza para evaluar la condición. <br/> Este atributo no es aplicable si el elemento **Condition** se usa dentro de un elemento FunctionImportMapping.                                                                           |
 
@@ -438,7 +438,7 @@ El elemento **DeleteFunction** puede tener los elementos secundarios siguientes 
 
 En la tabla siguiente se describen los atributos que se pueden aplicar al elemento **DeleteFunction** cuando se aplica a un elemento **EntityTypeMapping** .
 
-| Nombre de atributo            | Es necesario | Valor                                                                                                                                                    |
+| Nombre del atributo            | Es obligatorio | Value                                                                                                                                                    |
 |:--------------------------|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Nombrefunción**          | Sí         | El nombre completo, calificado con el espacio de nombres, del procedimiento almacenado al que la función de eliminación está asignada. El procedimiento almacenado se debe declarar en el modelo de almacenamiento. |
 | **RowsAffectedParameter** | No          | El nombre del parámetro de salida que devuelve el número de filas afectadas.                                                                               |
@@ -502,7 +502,7 @@ El elemento **DeleteFunction** puede tener los elementos secundarios siguientes 
 
 En la tabla siguiente se describen los atributos que se pueden aplicar al elemento **DeleteFunction** cuando se aplica al elemento **AssociationSetMapping** .
 
-| Nombre de atributo            | Es necesario | Valor                                                                                                                                                    |
+| Nombre del atributo            | Es obligatorio | Value                                                                                                                                                    |
 |:--------------------------|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Nombrefunción**          | Sí         | El nombre completo, calificado con el espacio de nombres, del procedimiento almacenado al que la función de eliminación está asignada. El procedimiento almacenado se debe declarar en el modelo de almacenamiento. |
 | **RowsAffectedParameter** | No          | El nombre del parámetro de salida que devuelve el número de filas afectadas.                                                                               |
@@ -556,9 +556,9 @@ El elemento **EndProperty** puede tener los siguientes elementos secundarios:
 
 En la tabla siguiente se describen los atributos aplicables al elemento **EndProperty** :
 
-| Nombre de atributo | Es necesario | Valor                                                 |
+| Nombre del atributo | Es obligatorio | Value                                                 |
 |:---------------|:------------|:------------------------------------------------------|
-| Name           | Sí         | El nombre del extremo de la asociación que se está asignando. |
+| Nombre           | Sí         | El nombre del extremo de la asociación que se está asignando. |
 
 ### <a name="example"></a>Ejemplo
 
@@ -626,11 +626,11 @@ El elemento **EntityContainerMapping** puede tener los elementos secundarios sig
 
 En la tabla siguiente se describen los atributos que se pueden aplicar al elemento **EntityContainerMapping** .
 
-| Nombre de atributo            | Es necesario | Valor                                                                                                                                                                                                                                                    |
+| Nombre del atributo            | Es obligatorio | Value                                                                                                                                                                                                                                                    |
 |:--------------------------|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **StorageModelContainer** | Sí         | El nombre del contenedor de entidades del modelo de almacenamiento que se está asignando.                                                                                                                                                                                     |
 | **CdmEntityContainer**    | Sí         | El nombre del contenedor de entidades del modelo conceptual que se está asignando.                                                                                                                                                                                  |
-| **GenerateUpdateViews**   | No          | **True** o **false**. Si **es false**, no se genera ninguna vista de actualización. Este atributo debe establecerse en **false** si tiene una asignación de solo lectura que no sería válida porque los datos no pueden realizar una operación de ida y vuelta correctamente. <br/> El valor predeterminado es **True**. |
+| **GenerateUpdateViews**   | No          | **True** o **False**. Si **es false**, no se genera ninguna vista de actualización. Este atributo debe establecerse en **false** si tiene una asignación de solo lectura que no sería válida porque los datos no pueden realizar una operación de ida y vuelta correctamente. <br/> El valor predeterminado es **True**. |
 
 ### <a name="example"></a>Ejemplo
 
@@ -677,7 +677,7 @@ El elemento **EntitySetMapping** puede tener los siguientes elementos secundario
 
 En la tabla siguiente se describen los atributos que se pueden aplicar al elemento **EntitySetMapping** .
 
-| Nombre de atributo           | Es necesario | Valor                                                                                                                                                                                                                         |
+| Nombre del atributo           | Es obligatorio | Value                                                                                                                                                                                                                         |
 |:-------------------------|:------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Nombre**                 | Sí         | El nombre del conjunto de entidades del modelo conceptual que se está asignando.                                                                                                                                                             |
 | **TypeName** **1**       | No          | El nombre del tipo de entidad del modelo conceptual que se está asignando.                                                                                                                                                            |
@@ -743,9 +743,9 @@ El elemento **EntityTypeMapping** puede tener los siguientes elementos secundari
 
 En la tabla siguiente se describen los atributos que se pueden aplicar al elemento **EntityTypeMapping** .
 
-| Nombre de atributo | Es necesario | Valor                                                                                                                                                                                                |
+| Nombre del atributo | Es obligatorio | Value                                                                                                                                                                                                |
 |:---------------|:------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **TypeName**   | Sí         | El nombre completo, calificado con el espacio de nombres, del tipo de entidad del modelo conceptual que se está asignando. <br/> Si el tipo es abstracto o un tipo derivado, el valor debe ser `IsOfType(Namespace-qualified_type_name)`. |
+| **NombreDeTipo**   | Sí         | El nombre completo, calificado con el espacio de nombres, del tipo de entidad del modelo conceptual que se está asignando. <br/> Si el tipo es abstracto o un tipo derivado, el valor debe ser `IsOfType(Namespace-qualified_type_name)`. |
 
 ### <a name="example"></a>Ejemplo
 
@@ -829,7 +829,7 @@ El elemento **FunctionImportMapping** puede tener los siguientes elementos secun
 
 En la tabla siguiente se describen los atributos aplicables al elemento **FunctionImportMapping** :
 
-| Nombre de atributo         | Es necesario | Valor                                                                                   |
+| Nombre del atributo         | Es obligatorio | Value                                                                                   |
 |:-----------------------|:------------|:----------------------------------------------------------------------------------------|
 | **FunctionImportName** | Sí         | El nombre de la importación de función del modelo conceptual que se está asignando.           |
 | **Nombrefunción**       | Sí         | El nombre, calificado con el espacio de nombres, de la función del modelo de almacenamiento que se está asignando. |
@@ -887,7 +887,7 @@ El elemento **InsertFunction** puede tener los elementos secundarios siguientes 
 
 En la tabla siguiente se describen los atributos que se pueden aplicar al elemento **InsertFunction** cuando se aplican a un elemento **EntityTypeMapping** .
 
-| Nombre de atributo            | Es necesario | Valor                                                                                                                                                    |
+| Nombre del atributo            | Es obligatorio | Value                                                                                                                                                    |
 |:--------------------------|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Nombrefunción**          | Sí         | El nombre completo, calificado con el espacio de nombres, del procedimiento almacenado al que la función de inserción está asignada. El procedimiento almacenado se debe declarar en el modelo de almacenamiento. |
 | **RowsAffectedParameter** | No          | El nombre del parámetro de salida que devuelve el número de filas afectadas.                                                                               |
@@ -938,7 +938,7 @@ El elemento **InsertFunction** puede tener los elementos secundarios siguientes 
 
 En la tabla siguiente se describen los atributos que se pueden aplicar al elemento **InsertFunction** cuando se aplica al elemento **AssociationSetMapping** .
 
-| Nombre de atributo            | Es necesario | Valor                                                                                                                                                    |
+| Nombre del atributo            | Es obligatorio | Value                                                                                                                                                    |
 |:--------------------------|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Nombrefunción**          | Sí         | El nombre completo, calificado con el espacio de nombres, del procedimiento almacenado al que la función de inserción está asignada. El procedimiento almacenado se debe declarar en el modelo de almacenamiento. |
 | **RowsAffectedParameter** | No          | El nombre del parámetro de salida que devuelve el número de filas afectadas.                                                                               |
@@ -995,7 +995,7 @@ Los nombres de los tipos de modelos conceptuales y de almacenamiento a los que s
 
 En la tabla siguiente se describen los atributos que se pueden aplicar al elemento de **asignación** .
 
-| Nombre de atributo | Es necesario | Valor                                                 |
+| Nombre del atributo | Es obligatorio | Value                                                 |
 |:---------------|:------------|:------------------------------------------------------|
 | **Espacio**      | Sí         | **C-S**. Este es un valor fijo y no se puede cambiar. |
 
@@ -1048,7 +1048,7 @@ El elemento **MappingFragment** puede tener los siguientes elementos secundarios
 
 En la tabla siguiente se describen los atributos que se pueden aplicar al elemento **MappingFragment** .
 
-| Nombre de atributo          | Es necesario | Valor                                                                                                                                                                                                                         |
+| Nombre del atributo          | Es obligatorio | Value                                                                                                                                                                                                                         |
 |:------------------------|:------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **StoreEntitySet**      | Sí         | El nombre de la tabla o vista que se está asociando.                                                                                                                                                                           |
 | **MakeColumnsDistinct** | No          | **True** o **false** , dependiendo de si solo se devuelven filas distintas. <br/> Si este atributo se establece en **true**, el atributo **GenerateUpdateViews** del elemento EntityContainerMapping debe establecerse en **false**. |
@@ -1211,9 +1211,9 @@ El elemento **QueryView** no puede tener elementos secundarios.
 
 En la tabla siguiente se describen los atributos que se pueden aplicar al elemento **QueryView** .
 
-| Nombre de atributo | Es necesario | Valor                                                                         |
+| Nombre del atributo | Es obligatorio | Value                                                                         |
 |:---------------|:------------|:------------------------------------------------------------------------------|
-| **TypeName**   | No          | El nombre del tipo de modelo conceptual que se está asignando mediante la vista de consulta. |
+| **NombreDeTipo**   | No          | El nombre del tipo de modelo conceptual que se está asignando mediante la vista de consulta. |
 
 ### <a name="example"></a>Ejemplo
 
@@ -1325,7 +1325,7 @@ El elemento **ResultBinding** no puede tener elementos secundarios.
 
 En la tabla siguiente se describen los atributos aplicables al elemento **ResultBinding** :
 
-| Nombre de atributo | Es necesario | Valor                                                                         |
+| Nombre del atributo | Es obligatorio | Value                                                                         |
 |:---------------|:------------|:------------------------------------------------------------------------------|
 | **Nombre**       | Sí         | El nombre de la propiedad de entidad del modelo conceptual que se está asignando. |
 | **ColumnName** | Sí         | El nombre de la columna que se está asignando.                                          |
@@ -1405,7 +1405,7 @@ No hay atributos aplicables al elemento **ResultMapping** .
 
 ### <a name="example"></a>Ejemplo
 
-Considere el siguiente procedimiento almacenado:
+Observe el siguiente procedimiento almacenado:
 
 ``` SQL
  CREATE PROCEDURE [dbo].[GetGrades]
@@ -1477,18 +1477,18 @@ Los atributos que se aplican al elemento **ScalarProperty** difieren en función
 
 En la tabla siguiente se describen los atributos que se pueden aplicar cuando el elemento **ScalarProperty** se utiliza para asignar una propiedad del modelo conceptual a una columna de la base de datos:
 
-| Nombre de atributo | Es necesario | Valor                                                           |
+| Nombre del atributo | Es obligatorio | Value                                                           |
 |:---------------|:------------|:----------------------------------------------------------------|
 | **Nombre**       | Sí         | El nombre de la propiedad del modelo conceptual que se está asignando. |
 | **ColumnName** | Sí         | El nombre de la columna de tabla que se está asociando.              |
 
 En la tabla siguiente se describen los atributos aplicables al elemento **ScalarProperty** cuando se utiliza para asignar una propiedad del modelo conceptual a un parámetro de procedimiento almacenado:
 
-| Nombre de atributo    | Es necesario | Valor                                                                                                                                           |
+| Nombre del atributo    | Es obligatorio | Value                                                                                                                                           |
 |:------------------|:------------|:------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Nombre**          | Sí         | El nombre de la propiedad del modelo conceptual que se está asignando.                                                                                 |
 | **ParameterName** | Sí         | El nombre del parámetro que se está asignando.                                                                                                 |
-| **Version**       | No          | **Actual** o **original** , dependiendo de si el valor actual o el valor original de la propiedad se deben usar para las comprobaciones de simultaneidad. |
+| **Versión**       | No          | **Actual** o **original** , dependiendo de si el valor actual o el valor original de la propiedad se deben usar para las comprobaciones de simultaneidad. |
 
 ### <a name="example"></a>Ejemplo
 
@@ -1595,7 +1595,7 @@ El elemento **UpdateFunction** puede tener los siguientes elementos secundarios:
 
 En la tabla siguiente se describen los atributos que se pueden aplicar al elemento **UpdateFunction** .
 
-| Nombre de atributo            | Es necesario | Valor                                                                                                                                                    |
+| Nombre del atributo            | Es obligatorio | Value                                                                                                                                                    |
 |:--------------------------|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Nombrefunción**          | Sí         | El nombre completo, calificado con el espacio de nombres, del procedimiento almacenado al que la función de actualización está asignada. El procedimiento almacenado se debe declarar en el modelo de almacenamiento. |
 | **RowsAffectedParameter** | No          | El nombre del parámetro de salida que devuelve el número de filas afectadas.                                                                               |

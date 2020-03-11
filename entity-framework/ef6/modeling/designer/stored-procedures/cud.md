@@ -4,11 +4,11 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 1e773972-2da5-45e0-85a2-3cf3fbcfa5cf
 ms.openlocfilehash: bdb0df969c33d5ad3f103bfa9af6002c9c2bb9b3
-ms.sourcegitcommit: 6c28926a1e35e392b198a8729fc13c1c1968a27b
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/02/2019
-ms.locfileid: "71813563"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78415146"
 ---
 # <a name="designer-cud-stored-procedures"></a>Procedimientos almacenados CUD del diseñador
 
@@ -29,7 +29,7 @@ Al asignar las operaciones CUD a los procedimientos almacenados, se aplican las 
 - Si el servidor genera el valor de clave principal para la fila insertada, debe volver a asignar este valor a la propiedad clave de la entidad. En el ejemplo siguiente, el procedimiento almacenado **InsertPerson** devuelve la clave principal recién creada como parte del conjunto de resultados del procedimiento almacenado. La clave principal se asigna a la clave de entidad (**PersonID**) mediante el **&lt;agregar enlaces de resultados&gt;** característica del diseñador de EF.
 - Las llamadas a procedimientos almacenados se asignan 1:1 con las entidades del modelo conceptual. Por ejemplo, si implementa una jerarquía de herencia en el modelo conceptual y, a continuación, asigna los procedimientos almacenados CUD para las entidades **primaria** (base) y **secundaria** (derivada), al guardar los cambios **secundarios** solo se llamará a los procedimientos almacenados del **elemento secundario**, no se desencadenarán las llamadas a procedimientos almacenados del **elemento primario**.
 
-## <a name="prerequisites"></a>Requisitos previos
+## <a name="prerequisites"></a>Prerequisites
 
 Para completar este tutorial, necesitará:
 
@@ -42,9 +42,9 @@ Para completar este tutorial, necesitará:
 - Seleccionar **archivo-&gt; nuevo-&gt; proyecto**
 - En el panel izquierdo, haga clic en **Visual C\#** y, a continuación, seleccione la plantilla de **consola** .
 - Escriba **CUDSProcsSample** como nombre.
-- Seleccione **Aceptar**.
+- Seleccione  **Aceptar**.
 
-## <a name="create-a-model"></a>Crear un modelo
+## <a name="create-a-model"></a>Creación de un modelo
 
 - Haga clic con el botón derecho en el nombre del proyecto en Explorador de soluciones y seleccione **agregar&gt; nuevo elemento**.
 - Seleccione **datos** en el menú de la izquierda y, a continuación, seleccione **ADO.NET Entity Data Model** en el panel Plantillas.
