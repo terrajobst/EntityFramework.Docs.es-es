@@ -3,12 +3,12 @@ title: 'Filtros de consulta global: EF Core'
 author: anpete
 ms.date: 11/03/2017
 uid: core/querying/filters
-ms.openlocfilehash: f4ee9b77411290249e763f9cb8492eea61803e91
-ms.sourcegitcommit: f2a38c086291699422d8b28a72d9611d1b24ad0d
+ms.openlocfilehash: 9262ff7970b0502945480c673315071cbc3f44b9
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 01/16/2020
-ms.locfileid: "76124397"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78413766"
 ---
 # <a name="global-query-filters"></a>Filtros de consulta global
 
@@ -25,7 +25,7 @@ Los filtros de consulta global son predicados de consulta LINQ (una expresión b
 En el ejemplo siguiente se muestra cómo usar los filtros de consulta global para implementar los comportamientos de consulta de multiinquilino y de eliminación temporal en un simple modelo de creación de blogs.
 
 > [!TIP]
-> Puede ver un [ejemplo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/QueryFilters) de este artículo en GitHub.
+> Puede ver un [ejemplo](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/QueryFilters) de este artículo en GitHub.
 
 En primer lugar, defina las entidades:
 

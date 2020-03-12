@@ -5,12 +5,12 @@ ms.author: avickers
 ms.date: 10/27/2016
 ms.assetid: 2533b195-d357-4056-b0e0-8698971bc3b0
 uid: core/saving/disconnected-entities
-ms.openlocfilehash: 88c3fa8ea5b8246a932f5cf21e674bc7cc71c0ea
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.openlocfilehash: 421531e68ac98c0553938f1c24892701f22fef3c
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73656270"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78413658"
 ---
 # <a name="disconnected-entities"></a>Entidades desconectadas
 
@@ -20,7 +20,7 @@ Sin embargo, en algunas ocasiones las entidades se consultan mediante el uso de 
 
 <!-- markdownlint-disable MD028 -->
 > [!TIP]
-> Puede ver un [ejemplo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Disconnected/) de este artículo en GitHub.
+> Puede ver un [ejemplo](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/Disconnected/) de este artículo en GitHub.
 
 > [!TIP]
 > EF Core solo puede hacer seguimiento de una instancia de una entidad con un valor de clave principal determinado. La mejor manera de evitar que esto se convierta en un problema es usar un contexto de corta duración para cada unidad de trabajo de manera que el contexto empiece vacío, tenga entidades asociadas, guarde esas entidades y, luego, se elimine y descarte el contexto.

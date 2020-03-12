@@ -4,12 +4,12 @@ author: smitpatel
 ms.date: 10/10/2019
 ms.assetid: e17e060c-929f-4180-8883-40c438fbcc01
 uid: core/querying/tracking
-ms.openlocfilehash: 66988f936ab75e17620398c8f21e4a32bbc950bd
-ms.sourcegitcommit: 37d0e0fd1703467918665a64837dc54ad2ec7484
+ms.openlocfilehash: a6c71c12f429f1324abe91d1b2cef96312bec051
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/16/2019
-ms.locfileid: "72445956"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78413700"
 ---
 # <a name="tracking-vs-no-tracking-queries"></a>Consultas de seguimiento frente a consultas de no seguimiento
 
@@ -19,7 +19,7 @@ El comportamiento de seguimiento controla si Entity Framework Core mantendrá in
 > No se realiza el seguimiento de los [tipos de entidad sin clave](xref:core/modeling/keyless-entity-types). Siempre que en este artículo se mencionen los tipos de entidad, se refiere a aquellos con una clave definida.
 
 > [!TIP]  
-> Puede ver un [ejemplo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying) de este artículo en GitHub.
+> Puede ver un [ejemplo](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying) de este artículo en GitHub.
 
 ## <a name="tracking-queries"></a>Consultas de seguimiento
 

@@ -4,19 +4,19 @@ author: smitpatel
 ms.date: 10/08/2019
 ms.assetid: 70aae9b5-8743-4557-9c5d-239f688bf418
 uid: core/querying/raw-sql
-ms.openlocfilehash: b7087771f1a9e8ee5e044cfea367d74a0b1c1d35
-ms.sourcegitcommit: 37d0e0fd1703467918665a64837dc54ad2ec7484
+ms.openlocfilehash: a54bb67c0fce9d621382f6372e70fe4cdca48a20
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/16/2019
-ms.locfileid: "72445927"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78413718"
 ---
 # <a name="raw-sql-queries"></a>Consultas SQL sin formato
 
 Entity Framework Core le permite descender hasta las consultas SQL sin formato cuando trabaja con una base de datos relacional. Las consultas SQL sin formato son útiles si la consulta que quiere no se puede expresar mediante LINQ. Las consultas SQL sin formato también se utilizan si el uso de una consulta LINQ genera una consulta SQL ineficaz. Las consultas SQL sin formato pueden devolver tipos de entidad normales o [tipos de entidad sin clave](xref:core/modeling/keyless-entity-types) que forman parte del modelo.
 
 > [!TIP]  
-> Puede ver un [ejemplo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying/) de este artículo en GitHub.
+> Puede ver un [ejemplo](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying/) de este artículo en GitHub.
 
 ## <a name="basic-raw-sql-queries"></a>Consultas SQL básicas sin formato
 

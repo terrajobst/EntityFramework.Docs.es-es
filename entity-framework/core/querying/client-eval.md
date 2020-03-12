@@ -4,12 +4,12 @@ author: smitpatel
 ms.date: 10/03/2019
 ms.assetid: 8b6697cc-7067-4dc2-8007-85d80503d123
 uid: core/querying/client-eval
-ms.openlocfilehash: 5cfb05041f04246712fb699f58b407f70a75ce92
-ms.sourcegitcommit: 37d0e0fd1703467918665a64837dc54ad2ec7484
+ms.openlocfilehash: e01bd146c4dfe7a8d36b641cb52ae366fddd8239
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/16/2019
-ms.locfileid: "72445966"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78413790"
 ---
 # <a name="client-vs-server-evaluation"></a>Evaluación de cliente frente a servidor
 
@@ -19,7 +19,7 @@ Como norma general, Entity Framework Core intenta evaluar una consulta en el ser
 > Antes de la versión 3.0, Entity Framework Core admitía la evaluación de cliente en cualquier parte de la consulta. Para obtener más información, vea la [sección sobre versiones anteriores](#previous-versions).
 
 > [!TIP]
-> Puede ver un [ejemplo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Querying) de este artículo en GitHub.
+> Puede ver un [ejemplo](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying) de este artículo en GitHub.
 
 ## <a name="client-evaluation-in-the-top-level-projection"></a>Evaluación de cliente en la proyección de nivel superior
 

@@ -4,19 +4,19 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 850d842e-3fad-4ef2-be17-053768e97b9e
 uid: core/saving/basic
-ms.openlocfilehash: 6f72458504a9dbe99038af7cfd23b6991258f6b8
-ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.openlocfilehash: 066d67d6104316832a33f5a3648f1f2fa6cc9c50
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71197762"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78413688"
 ---
 # <a name="basic-save"></a>Guardado básico
 
 Obtenga información sobre cómo agregar, modificar y quitar datos mediante las clases de entidad y contexto.
 
 > [!TIP]  
-> Puede ver un [ejemplo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/Basics/) de este artículo en GitHub.
+> Puede ver un [ejemplo](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/Basics/) de este artículo en GitHub.
 
 ## <a name="adding-data"></a>Agregar datos
 

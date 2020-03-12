@@ -4,19 +4,19 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 07b6680f-ffcf-412c-9857-f997486b386c
 uid: core/saving/related-data
-ms.openlocfilehash: 45c7b8e4bfa4ce7967ad76ef4a7d4818b0d3aebf
-ms.sourcegitcommit: ec196918691f50cd0b21693515b0549f06d9f39c
+ms.openlocfilehash: 86d32b6172ee21c12a15e9ed4bb0142afc99c8bd
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71197880"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78413616"
 ---
 # <a name="saving-related-data"></a>Guardado de datos relacionados
 
 Además de las entidades aisladas, también puede usar las relaciones definidas en el modelo.
 
 > [!TIP]  
-> Puede ver un [ejemplo](https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/Saving/RelatedData/) de este artículo en GitHub.
+> Puede ver un [ejemplo](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/RelatedData/) de este artículo en GitHub.
 
 ## <a name="adding-a-graph-of-new-entities"></a>Incorporación de un grafo de entidades nuevas
 
