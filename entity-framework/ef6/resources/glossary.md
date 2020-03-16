@@ -5,17 +5,17 @@ ms.date: 10/23/2016
 ms.assetid: 3f05ffdd-49bc-499c-9732-4a368bf5d2d7
 uid: ef6/resources/glossary
 ms.openlocfilehash: df0da4a68b3d2c882d9673417ee5fe335eccae2b
-ms.sourcegitcommit: 18ab4c349473d94b15b4ca977df12147db07b77f
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73656156"
+ms.lasthandoff: 03/15/2020
+ms.locfileid: "79402148"
 ---
 # <a name="entity-framework-glossary"></a>Entity Framework Glosario
 ## <a name="code-first"></a>Code First
 Crear un modelo de Entity Framework mediante código. El modelo puede tener como destino una base de datos existente o una nueva.
 
-## <a name="context"></a>Contexto
+## <a name="context"></a>Context
 Una clase que representa una sesión con la base de datos, lo que permite consultar y guardar datos. Un contexto se deriva de la clase DbContext o ObjectContext.
 
 ## <a name="convention-code-first"></a>Convención (Code First)
@@ -30,7 +30,7 @@ Patrón de carga de datos relacionados donde una consulta para un tipo de entida
 ## <a name="ef-designer"></a>EF Designer
 Diseñador visual de Visual Studio que permite crear un modelo de Entity Framework mediante cuadros y líneas.
 
-## <a name="entity"></a>Entity
+## <a name="entity"></a>Entidad
 Clase u objeto que representa datos de aplicación como clientes, productos y pedidos.
 
 ## <a name="entity-data-model"></a>Entity Data Model
@@ -46,7 +46,7 @@ Una API que se puede usar para configurar un modelo de Code First.
 Asociación entre entidades donde una propiedad que representa la clave externa se incluye en la clase de la entidad dependiente. Por ejemplo, Product contiene una propiedad CategoryId.
 
 ## <a name="identifying-relationship"></a>Relación de identificación
-Relación donde la clave principal de la entidad de seguridad también forma parte de la clave principal de la entidad dependiente. En este tipo de relación, la entidad dependiente no puede existir sin la entidad de seguridad.
+Relación donde la clave principal de la entidad principal también forma parte de la clave principal de la entidad dependiente. En este tipo de relación, la entidad dependiente no puede existir sin la entidad principal.
 
 ## <a name="independent-association"></a>Asociación independiente
 Asociación entre entidades en las que no hay ninguna propiedad que represente la clave externa en la clase de la entidad dependiente. Por ejemplo, una clase de producto contiene una relación con la categoría pero no tiene la propiedad CategoryId. Entity Framework realiza un seguimiento del estado de la Asociación independientemente del estado de las entidades en los dos extremos de la asociación.
