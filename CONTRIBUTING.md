@@ -1,11 +1,3 @@
----
-ms.openlocfilehash: 79a2a10cae9f8a5541bca132e407d4abbe95e093
-ms.sourcegitcommit: 87fcaba46535aa351db4bdb1231bd14b40e459b9
-ms.translationtype: HT
-ms.contentlocale: es-ES
-ms.lasthandoff: 04/22/2019
-ms.locfileid: "59929891"
----
 # <a name="contributing-to-the-entity-framework-documentation"></a>Contribución a la documentación de Entity Framework
 
 A continuación se explica el proceso de contribución a los artículos y ejemplos de código de la documentación de Entity Framework. Las contribuciones pueden ser tan simples como corregir errores ortográficos o tan complejos como redactar artículos nuevos.
@@ -18,8 +10,8 @@ Los artículos se almacenan como archivos Markdown en este repositorio. Para rea
 
 Necesita tener conocimientos básicos de [Git y GitHub.com](https://guides.github.com/activities/hello-world/).
 
-* Abra un [asunto](https://github.com/aspnet/EntityFramework.Docs/issues/new) que describa qué quiere hacer, como cambiar un artículo existente o crear uno nuevo. Espere la aprobación del equipo de EF antes de dedicar mucho tiempo.
-* Bifurque el repositorio [aspnet/EntityFramework.Docs](https://github.com/aspnet/EntityFramework.Docs/) y cree una rama para los cambios.
+* Abra un [asunto](https://github.com/dotnet/EntityFramework.Docs/issues/new) que describa qué quiere hacer, como cambiar un artículo existente o crear uno nuevo. Espere la aprobación del equipo de EF antes de dedicar mucho tiempo.
+* Bifurque el repositorio [dotnet/EntityFramework.Docs](https://github.com/dotnet/EntityFramework.Docs/) y cree una rama para los cambios.
 * Envíe una solicitud de incorporación de cambios (PR) al administrador con los cambios.
 * Responder a los comentarios de la PR.
 

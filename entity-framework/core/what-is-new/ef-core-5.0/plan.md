@@ -3,12 +3,12 @@ title: Plan para Entity Framework Core 5.0
 author: ajcvickers
 ms.date: 01/14/2020
 uid: core/what-is-new/ef-core-5.0/plan.md
-ms.openlocfilehash: 0472841fdcd105ec8ea38db062c6768510b8735d
-ms.sourcegitcommit: f2a38c086291699422d8b28a72d9611d1b24ad0d
+ms.openlocfilehash: c5b7300c61c2f668b6f9393ae51bf9ebddf330a7
+ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 01/16/2020
-ms.locfileid: "76125359"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78413826"
 ---
 # <a name="plan-for-entity-framework-core-50"></a>Plan para Entity Framework Core 5.0
 
@@ -47,11 +47,13 @@ Talla de camiseta: L
 
 Estado: En curso
 
-Varios a varios es la característica más solicitada (407 votos aproximadamente) en el trabajo pendiente de GitHub. La compatibilidad con las relaciones varios a varios se puede dividir en tres áreas principales:
+Varios a varios es la [característica más solicitada](https://github.com/aspnet/EntityFrameworkCore/issues/1368) (407 votos aproximadamente) en el trabajo pendiente de GitHub.
 
-* Omitir propiedades de navegación. Permiten usar el modelo para las consultas, etc., sin hacer referencia a la entidad de la tabla de combinación subyacente.
-* Tipos de entidad de contenedor de propiedades. Permiten usar un tipo CLR estándar (por ejemplo, `Dictionary`) para las instancias de entidad, de modo que no se necesite un tipo CLR explícito para cada tipo de entidad.
-* Facilitar la configuración de relaciones varios a varios.
+Se realiza un seguimiento de la compatibilidad con las relaciones de varios a varios en su totalidad como [#10508](https://github.com/aspnet/EntityFrameworkCore/issues/10508). Puede dividirse en tres áreas principales:
+
+* Omitir propiedades de navegación. Permiten usar el modelo para las consultas, etc., sin hacer referencia a la entidad de la tabla de combinación subyacente. ([#19003](https://github.com/aspnet/EntityFrameworkCore/issues/19003))
+* Tipos de entidad de contenedor de propiedades. Permiten usar un tipo CLR estándar (por ejemplo, `Dictionary`) para las instancias de entidad, de modo que no se necesite un tipo CLR explícito para cada tipo de entidad. (Stretch para la versión 5.0: [#9914](https://github.com/aspnet/EntityFrameworkCore/issues/9914)).
+* Facilitar la configuración de relaciones varios a varios. (Stretch para la versión 5.0).
 
 Creemos que el principal obstáculo para los que quieren que se admitan las relaciones varios a varios es la imposibilidad de usar relaciones "naturales", sin hacer referencia a la tabla de combinación, en la lógica de negocios, como las consultas. Es posible que el tipo de entidad de tabla de combinación siga existiendo, pero no debería interferir con la lógica de negocios. Por este motivo hemos optado por abordar la omisión de propiedades de navegación en la versión 5.0.
 
@@ -144,7 +146,7 @@ Talla de camiseta: L
 
 Estado: Sin iniciar
 
-Disponemos de instrucciones de calidad para usar EF Core en aplicaciones web tradicionales similares a MVC. Las instrucciones para otras plataformas y modelos de aplicación no existen o no están actualizadas. Para EF Core 5.0 el objetivo es investigar, mejorar y documentar la experiencia de uso de EF Core con:
+Disponemos de instrucciones de calidad para usar EF Core en aplicaciones web tradicionales similares a MVC. Las instrucciones para otras plataformas y modelos de aplicación no existen o no están actualizadas. Para EF Core 5.0, el objetivo es investigar, mejorar y documentar la experiencia de uso de EF Core con:
 
 * Blazor
 * Xamarin, incluido el uso del artículo de AOT o vinculador
@@ -178,7 +180,7 @@ Como parte de este trabajo, también está previsto agregar contadores de rendim
 
 Jefe de documentación: @ajcvickers
 
-Seguimiento realizado por [#1920](https://github.com/aspnet/EntityFramework.Docs/issues/1920)
+Seguimiento realizado por [#1920](https://github.com/dotnet/EntityFramework.Docs/issues/1920)
 
 Talla de camiseta: L
 
@@ -194,7 +196,7 @@ La idea es facilitar la comprensión de lo que sucede dentro de EF Core. Esto pu
 
 Jefe de documentación: @bricelam
 
-Seguimiento realizado por [#1675](https://github.com/aspnet/EntityFramework.Docs/issues/1675)
+Seguimiento realizado por [#1675](https://github.com/dotnet/EntityFramework.Docs/issues/1675)
 
 Talla de camiseta: M
 
@@ -206,7 +208,7 @@ El equipo de EF también posee el proveedor de ADO.NET Microsoft.Data.Sqlite. Te
 
 Jefe de documentación: @ajcvickers
 
-Seguimiento mediante [problemas en el repositorio de documentación del hito 5.0](https://github.com/aspnet/EntityFramework.Docs/issues?utf8=%E2%9C%93&q=is%3Aissue+milestone%3A5.0.0+)
+Seguimiento mediante [problemas en el repositorio de documentación del hito 5.0](https://github.com/dotnet/EntityFramework.Docs/issues?utf8=%E2%9C%93&q=is%3Aissue+milestone%3A5.0.0+)
 
 Talla de camiseta: L
 
