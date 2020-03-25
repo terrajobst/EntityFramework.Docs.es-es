@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: d7a22b5a-4c5b-4e3b-9897-4d7320fcd13f
 uid: core/miscellaneous/configuring-dbcontext
-ms.openlocfilehash: 3ab90d46b7a4476044e5ea38eaf04f995708e7bf
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 53b38f288cd45e66d68ebcc3b6066646d59b0262
+ms.sourcegitcommit: c3b8386071d64953ee68788ef9d951144881a6ab
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78414162"
+ms.lasthandoff: 03/24/2020
+ms.locfileid: "80136190"
 ---
 # <a name="configuring-a-dbcontext"></a>Configuración de un DbContext
 
@@ -186,9 +186,9 @@ Esperar siempre EF Core métodos asincrónicos inmediatamente.
 
 El método de extensión [`AddDbContext`](https://docs.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkservicecollectionextensions.adddbcontext) registra los tipos de `DbContext` con una [duración de ámbito](https://docs.microsoft.com/aspnet/core/fundamentals/dependency-injection#service-lifetimes) de forma predeterminada.
 
-Esto es seguro contra problemas de acceso simultáneos en ASP.NET Core aplicaciones porque solo hay un subproceso que ejecuta cada solicitud de cliente en un momento dado, y dado que cada solicitud obtiene un ámbito de inyección de dependencia independiente (y, por tanto, una instancia de `DbContext` independiente).
+Esto es seguro frente a problemas de acceso simultáneos en la mayoría de las aplicaciones ASP.NET Core porque solo hay un subproceso que ejecuta cada solicitud de cliente en un momento dado, y dado que cada solicitud obtiene un ámbito de inyección de dependencia independiente (y, por tanto, una instancia de `DbContext` independiente). Para el modelo de hospedaje de servidor increíble, se usa una solicitud lógica para mantener el circuito de usuario increíble y, por lo tanto, solo hay una instancia de DbContext con ámbito disponible por circuito de usuario si se usa el ámbito de inyección predeterminado.
 
-Sin embargo, cualquier código que ejecute explícitamente varios subprocesos en paralelo debe asegurarse de que no se tenga acceso a las instancias de `DbContext` simultáneamente.
+Cualquier código que ejecute explícitamente varios subprocesos en paralelo debe asegurarse de que no se tiene acceso a las instancias de `DbContext` simultáneamente.
 
 Mediante la inserción de dependencias, esto se puede lograr registrando el contexto como ámbito y creando ámbitos (mediante `IServiceScopeFactory`) para cada subproceso, o registrando el `DbContext` como transitorio (mediante la sobrecarga de `AddDbContext` que toma un parámetro `ServiceLifetime`).
 
