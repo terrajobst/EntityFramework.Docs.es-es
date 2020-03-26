@@ -3,12 +3,12 @@ title: Plan para Entity Framework Core 5.0
 author: ajcvickers
 ms.date: 01/14/2020
 uid: core/what-is-new/ef-core-5.0/plan.md
-ms.openlocfilehash: c5b7300c61c2f668b6f9393ae51bf9ebddf330a7
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 8b4ca32524869019c04d5a4d4d55967f68181cd7
+ms.sourcegitcommit: c3b8386071d64953ee68788ef9d951144881a6ab
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78413826"
+ms.lasthandoff: 03/24/2020
+ms.locfileid: "80136218"
 ---
 # <a name="plan-for-entity-framework-core-50"></a>Plan para Entity Framework Core 5.0
 
@@ -27,7 +27,7 @@ Está previsto que EF Core 5.0 se ejecute en cualquier plataforma .NET 5.0 en 
 
 EF Core 5.0 no se ejecutará en .NET Framework.
 
-### <a name="breaking-changes"></a>Cambios importantes
+### <a name="breaking-changes"></a>Últimos cambios
 
 EF Core 5.0 contendrá algunos cambios importantes, pero serán mucho menos graves que en el caso de EF Core 3.0. El objetivo es permitir que la gran mayoría de las aplicaciones se actualicen sin interrupciones.
 
@@ -67,7 +67,7 @@ Seguimiento realizado por [#2266](https://github.com/aspnet/EntityFrameworkCore/
 
 Talla de camiseta: XL
 
-Estado: Sin iniciar
+Estado: En curso
 
 TPT se va a incluir porque se trata de una característica muy solicitada (aproximadamente 254 votos; en tercera posición) y porque requiere algunos cambios de bajo nivel que consideramos adecuados para la naturaleza fundamental del plan general de .NET 5. Esperamos que esto genere cambios importantes para los proveedores de bases de datos, aunque deberían ser mucho menos graves que los necesarios para la versión 3.0.
 
@@ -79,7 +79,7 @@ Seguimiento realizado por [#1833](https://github.com/aspnet/EntityFrameworkCore/
 
 Talla de camiseta: M
 
-Estado: Sin iniciar
+Estado: En curso
 
 La inclusión filtrada es una característica muy solicitada (aproximadamente 317 votos; en segunda posición) que no requiere demasiado trabajo y que creemos que desbloqueará o facilitará escenarios que actualmente requieren filtros de nivel de modelo o consultas más complejas.
 
@@ -91,7 +91,7 @@ Seguimiento realizado por [#17270](https://github.com/aspnet/EntityFrameworkCore
 
 Talla de camiseta: L
 
-Estado: Sin iniciar
+Estado: En curso
 
 Se han realizado avances en versiones anteriores hacia la compatibilidad con SQL sin procesar, tipos sin clave y áreas relacionadas. Pero hay brechas e incoherencias en el funcionamiento en conjunto de todos los elementos. El objetivo para la versión 5.0 es corregirlos y crear una buena experiencia para definir, migrar y usar otros tipos de entidades y sus consultas y artefactos de base de datos asociados. Esto también puede implicar actualizaciones de la API de consulta compilada.
 
@@ -184,7 +184,7 @@ Seguimiento realizado por [#1920](https://github.com/dotnet/EntityFramework.Docs
 
 Talla de camiseta: L
 
-Estado: Sin iniciar
+Estado: En curso
 
 La idea es facilitar la comprensión de lo que sucede dentro de EF Core. Esto puede ser útil para cualquiera que utilice EF Core, pero la motivación principal es facilitarlo para los usuarios externos:
 

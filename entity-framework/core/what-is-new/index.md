@@ -4,12 +4,12 @@ author: ajcvickers
 ms.date: 03/03/2020
 ms.assetid: C21F89EE-FB08-4ED9-A2A0-76CB7656E6E4
 uid: core/what-is-new/index
-ms.openlocfilehash: 2c41f65d1fead8430a39c6230a0f22506686504e
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 7b58b4de0eb8d9575f77e0b147da017eabad1867
+ms.sourcegitcommit: c3b8386071d64953ee68788ef9d951144881a6ab
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78413210"
+ms.lasthandoff: 03/24/2020
+ms.locfileid: "80136225"
 ---
 # <a name="ef-core-releases-and-planning"></a>Versiones y planeamiento de EF Core
 
@@ -57,10 +57,12 @@ Estos datos se introducen en el proceso de planeación de la próxima versión.
 
 ### <a name="get-it-now"></a>¡Obténgalo ahora!
 
-Los paquetes de EF Core 5.0 están **disponibles ahora** como [compilaciones diarias](https://github.com/aspnet/AspNetCore/blob/master/docs/DailyBuilds.md). 
+Los paquetes de EF Core 5.0 están **disponibles ahora** como
 
-Usar las compilaciones diarias es una excelente manera de encontrar problemas y proporcionar comentarios lo antes posible.
+* [Compilaciones diarias](https://github.com/dotnet/aspnetcore/blob/master/docs/DailyBuilds.md)
+  * Todas las características y correcciones de errores más recientes. Normalmente muy estable; se ejecutan más de 57 000 pruebas en cada compilación.
+* [Versiones preliminares en NuGet](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore)
+  * Van a la zaga de las compilaciones diarias, pero están probadas para trabajar con las versiones preliminares de ASP.NET Core y .NET Core correspondientes.
+
+Usar las versiones preliminares o las compilaciones diarias es una excelente manera de detectar problemas y proporcionar comentarios cuanto antes.
 Cuanto antes recibamos esos comentarios, más probable será que puedan procesarse antes de la siguiente versión oficial.
-Dedicamos grandes esfuerzos a cuidar el estado de las compilaciones diarias, como demuestran las más de 56 000 pruebas por plataforma que llevamos a cabo para cada compilación.
-
-Los paquetes de versión preliminar se enviarán a NuGet a lo largo del año.
