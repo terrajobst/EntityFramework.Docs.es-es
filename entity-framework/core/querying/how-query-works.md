@@ -1,15 +1,15 @@
 ---
 title: 'Funcionamiento de las consultas: EF Core'
-author: rowanmiller
-ms.date: 09/26/2018
+author: ajcvickers
+ms.date: 03/17/2020
 ms.assetid: de2e34cd-659b-4cab-b5ed-7a979c6bf120
 uid: core/querying/how-query-works
-ms.openlocfilehash: ba0d68469530e6272ffbb51946d7856122a261c7
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: e8a50efe31468ea8df211602636dd474550bc0ef
+ms.sourcegitcommit: c3b8386071d64953ee68788ef9d951144881a6ab
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78413742"
+ms.lasthandoff: 03/24/2020
+ms.locfileid: "80136240"
 ---
 # <a name="how-queries-work"></a>Funcionamiento de las consultas
 
@@ -24,16 +24,12 @@ A continuación se muestra información general de alto nivel del proceso por el
 2. El resultado se pasa al proveedor de base de datos.
    1. El proveedor de base de datos identifica qué partes de la consulta se pueden evaluar en la base de datos.
    2. Estas partes de la consulta se traducen al lenguaje de la consulta específico para la base de datos (por ejemplo, SQL para una base de datos relacional).
-   3. Una o varias consultas se envían a la base de datos y se devuelve el conjunto de resultados (los resultados son valores de la base de datos y no instancias de entidad).
+   3. Se envía una consulta a la base de datos y se devuelve el conjunto de resultados (los resultados son valores de la base de datos y no instancias de entidad).
 3. Para cada elemento del conjunto de resultados
    1. Si se trata de una consulta con seguimiento, EF comprueba si los datos representan una entidad que ya existe en la herramienta de seguimiento de cambios para la instancia de contexto.
       * Si es así, se devuelve la entidad existente.
       * En caso contrario, se crea una entidad nueva, se configura el seguimiento de cambios y se devuelve la entidad nueva.
-   2. Si se trata de una consulta sin seguimiento, EF comprueba si los datos representan una entidad que ya existe en el conjunto de resultados de esta consulta.
-      * Si es así, se devuelve la entidad existente <sup>(1)</sup>.
-      * En caso contrario, se crea y devuelve una entidad nueva.
-
-<sup>(1)</sup> Las consultas sin seguimiento usan referencias parciales para realizar el seguimiento de las entidades que ya se han devuelto. Si un resultado anterior con la misma identidad queda fuera del ámbito y se ejecuta la recolección de elementos no utilizados, puede obtener una instancia de entidad nueva.
+   2. Si se trata de una consulta que no es de seguimiento, siempre se crea y devuelve una entidad nueva.
 
 ## <a name="when-queries-are-executed"></a>Cuándo se ejecutan las consultas
 
@@ -42,8 +38,7 @@ Cuando llama a los operadores LINQ, simplemente crea una representación de la c
 Las operaciones más comunes que generan que la consulta se envíe a la base de datos son:
 
 * La iteración de los resultados en un bucle `for`
-* El uso de un operador como `ToList`, `ToArray`, `Single`, `Count`
-* El enlace de datos de los resultados de una consulta a una interfaz de usuario
+* El uso de operadores como `ToList`, `ToArray`, `Single` y `Count` o las sobrecargas asincrónicas equivalentes
 
 > [!WARNING]  
-> **Valide siempre la entrada del usuario:** aunque EF Core protege contra los ataques por inyección de código SQL con el uso de parámetros y el escape de cadenas literales en consultas, no valida las entradas. Se debe realizar una validación apropiada, según los requisitos de la aplicación, antes de que los valores de los orígenes que no son de confianza se usen en consultas LINQ, se asignen a las propiedades de una entidad o se pasen a otras API de EF Core. Esto incluye cualquier intervención del usuario que se use para construir consultas de manera dinámica. Incluso al usar LINQ, si acepta la intervención del usuario para crear expresiones, necesita garantizar que solo se pueden construir las expresiones previstas.
+> **Valide siempre la entrada del usuario:** aunque EF Core protege contra los ataques por inyección de código SQL con el uso de parámetros y el escape de cadenas literales en consultas, no valida las entradas. Se debe realizar una validación apropiada, según los requisitos de la aplicación, antes de que los valores de los orígenes que no son de confianza se usen en consultas LINQ, se asignen a las propiedades de una entidad o se pasen a otras API de EF Core. Esto incluye cualquier intervención del usuario que se use para construir consultas de manera dinámica. Incluso al usar LINQ, si acepta la intervención del usuario para crear expresiones, necesita garantizar que solo se pueden construir las expresiones previstas.

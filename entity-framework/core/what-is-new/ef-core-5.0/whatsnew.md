@@ -1,27 +1,26 @@
 ---
 title: Novedades en EF Core 5.0
 author: ajcvickers
-ms.date: 01/29/2020
+ms.date: 03/15/2020
 uid: core/what-is-new/ef-core-5.0/whatsnew.md
-ms.openlocfilehash: 65d7bd43e8a00c77fd6091a74c677635710d03e3
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 08a93555fd76d8a9f6d3011f59d9a34f76d0b22f
+ms.sourcegitcommit: c3b8386071d64953ee68788ef9d951144881a6ab
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78413850"
+ms.lasthandoff: 03/24/2020
+ms.locfileid: "80136256"
 ---
 # <a name="whats-new-in-ef-core-50"></a>Novedades en EF Core 5.0
 
 EF Core 5.0 está actualmente en desarrollo.
 Esta página contendrá información general sobre los cambios interesantes introducidos en cada versión preliminar.
-La primera versión preliminar de EF Core 5.0 se espera provisionalmente para el primer trimestre de 2020.
 
 Esta página no duplica el [plan para EF Core 5.0](plan.md).
 En el plan se describen los temas generales relativos a EF Core 5.0, incluido todo lo que estamos planeando incluir antes de publicar la versión final.
 
 A medida que se publique el contenido, se agregarán vínculos que redirigirán de esta página a la documentación oficial.
 
-## <a name="preview-1-not-yet-shipped"></a>Versión preliminar 1 (no publicada todavía)
+## <a name="preview-1"></a>Versión preliminar 1
 
 ### <a name="simple-logging"></a>Registro sencillo
 
@@ -40,15 +39,22 @@ La documentación preliminar se incluye en el [estado semanal de EF del 9 de ene
 
 En el problema [n.º 1331](https://github.com/dotnet/EntityFramework.Docs/issues/1331) se realiza el seguimiento de la documentación adicional.
 
-### <a name="enhanced-debug-views"></a>Vistas de depuración mejoradas
+### <a name="use-a-c-attribute-to-indicate-that-an-entity-has-no-key"></a>Uso de un atributo de C# para indicar que una entidad no tiene clave
 
-Las vistas de depuración son una forma fácil de consultar los aspectos internos de EF Core al depurar problemas.
-Hace algún tiempo ya se implementó una vista de depuración para el modelo.
-En el caso de EF Core 5.0, hemos facilitado la lectura de la vista de modelo y hemos agregado una nueva vista de depuración para las entidades de las que se ha realizado un seguimiento en el administrador de estado.
+Ahora se pueden configurar los tipos de entidad para indicar que no tienen clave mediante el nuevo valor `KeylessAttribute`.
+Por ejemplo:
 
-La documentación preliminar se incluye en el [estado semanal de EF del 12 de diciembre de 2019](https://github.com/dotnet/efcore/issues/15403#issuecomment-565196206).
+```CSharp
+[Keyless]
+public class Address
+{
+    public string Street { get; set; }
+    public string City { get; set; }
+    public int Zip { get; set; }
+}
+```
 
-En el problema [n.º 2086](https://github.com/dotnet/EntityFramework.Docs/issues/2086) se realiza el seguimiento de la documentación adicional.
+En el problema [n.º 2186](https://github.com/dotnet/EntityFramework.Docs/issues/2186) se realiza el seguimiento de la documentación.
 
 ### <a name="connection-or-connection-string-can-be-changed-on-initialized-dbcontext"></a>Posibilidad de cambiar la conexión o la cadena de conexión en una instancia inicializada de DbContext
 
@@ -65,6 +71,16 @@ A continuación, los cambios de valor en las propiedades de las entidades se not
 Sin embargo, los proxies vienen con su propio conjunto de limitaciones, por lo que no son para todo el mundo.
 
 En el problema [n.º 2076](https://github.com/dotnet/EntityFramework.Docs/issues/2076) se realiza el seguimiento de la documentación.
+
+### <a name="enhanced-debug-views"></a>Vistas de depuración mejoradas
+
+Las vistas de depuración son una forma fácil de consultar los aspectos internos de EF Core al depurar problemas.
+Hace algún tiempo ya se implementó una vista de depuración para el modelo.
+En el caso de EF Core 5.0, hemos facilitado la lectura de la vista de modelo y hemos agregado una nueva vista de depuración para las entidades de las que se ha realizado un seguimiento en el administrador de estado.
+
+La documentación preliminar se incluye en el [estado semanal de EF del 12 de diciembre de 2019](https://github.com/dotnet/efcore/issues/15403#issuecomment-565196206).
+
+En el problema [n.º 2086](https://github.com/dotnet/EntityFramework.Docs/issues/2086) se realiza el seguimiento de la documentación adicional.
 
 ### <a name="improved-handling-of-database-null-semantics"></a>Control mejorado de la semántica de valores NULL de base de datos
 
@@ -93,10 +109,52 @@ MyEnumColumn VARCHAR(10) NOT NULL CHECK (MyEnumColumn IN('Useful', 'Useless', 'U
 
 En el problema [n.º 2082](https://github.com/dotnet/EntityFramework.Docs/issues/2082) se realiza el seguimiento de la documentación.
 
+### <a name="isrelational"></a>IsRelational
+
+Se ha agregado un nuevo método `IsRelational`, además de los existentes, que son `IsSqlServer`, `IsSqlite` y `IsInMemory`.
+Se puede usar para comprobar si DbContext está usando algún proveedor de bases de datos relacionales.
+Por ejemplo:
+
+```CSharp
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    if (Database.IsRelational())
+    {
+        // Do relational-specific model configuration.
+    }
+}
+```
+
+En el problema [n.º 2185](https://github.com/dotnet/EntityFramework.Docs/issues/2185) se realiza el seguimiento de la documentación.
+
+### <a name="cosmos-optimistic-concurrency-with-etags"></a>Simultaneidad optimista de Cosmos con mecanismos ETag
+
+El proveedor de bases de datos de Azure Cosmos DB ya es compatible con la simultaneidad optimista mediante mecanismos ETag.
+Utilice el generador de modelos de OnModelCreating para confirmar un mecanismo ETag:
+
+```CSharp
+builder.Entity<Customer>().Property(c => c.ETag).IsEtagConcurrency();
+```
+
+Después, SaveChanges generará una excepción `DbUpdateConcurrencyException` en un conflicto de simultaneidad, que [se podrá manipular](https://docs.microsoft.com/ef/core/saving/concurrency), por ejemplo, para implementar reintentos.
+
+
+En el problema [n.º 2099](https://github.com/dotnet/EntityFramework.Docs/issues/2099) realiza se el seguimiento de la documentación.
+
 ### <a name="query-translations-for-more-datetime-constructs"></a>Traducciones de consultas para más construcciones DateTime
 
-Ahora las consultas que contienen la nueva construcción DataTime se traducen.
-Además, la función de SQL Server DateDiffWeek ahora se puede asignar.
+Ahora las consultas que contienen la nueva construcción DateTime se traducen.
+
+Además, ahora se asignan las funciones de SQL Server que hay a continuación:
+* DateDiffWeek
+* DateFromParts
+
+Por ejemplo:
+
+```CSharp
+var count = context.Orders.Count(c => date > EF.Functions.DateFromParts(DateTime.Now.Year, 12, 25));
+
+```
 
 En el problema [n.º 2079](https://github.com/dotnet/EntityFramework.Docs/issues/2079) realiza se el seguimiento de la documentación.
 
