@@ -4,10 +4,10 @@ author: divega
 ms.date: 10/23/2016
 ms.assetid: 5e60f5be-7bbb-4bf8-835e-0ac808d6c84a
 ms.openlocfilehash: 3bb9759d89fbd0c10b911625aa7d0afd7747de14
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/07/2020
 ms.locfileid: "78413360"
 ---
 # <a name="self-tracking-entities"></a>Entidades de autoseguimiento
@@ -24,7 +24,7 @@ Este elemento de plantilla genera dos archivos .tt (plantilla de texto):
 - El archivo **\<nombreDelModelo\>.tt** genera los tipos de entidad y una clase del asistente que contiene la lógica de seguimiento de cambios que usan las entidades de autoseguimiento y los métodos de extensión que permiten establecer el estado en las entidades de autoseguimiento.  
 - El archivo **\<nombreDelModelo\>.Context.tt** genera un contexto derivado y una clase de extensión que contiene métodos **ApplyChanges** para las clases **ObjectContext** y **ObjectSet**. Estos métodos examinan la información del seguimiento de cambios contenida en el grafo de entidades con seguimiento propio para deducir el conjunto de operaciones que se deben realizar con el fin de guardar los cambios en la base de datos.  
 
-## <a name="get-started"></a>Primeros pasos  
+## <a name="get-started"></a>Introducción  
 
 Para comenzar, visite la página [Self-Tracking Entities Walkthrough](walkthrough.md) (Tutorial sobre entidades de autoseguimiento).  
 
@@ -39,14 +39,14 @@ Tenga en cuenta lo siguiente al trabajar con entidades de seguimiento propio:
 - Si envía el gráfico modificado en el cliente al servicio y luego planea seguir trabajando con el mismo gráfico en el cliente, debe iterar manualmente el gráfico y llamar al método **AcceptChanges** en cada objeto para restablecer la herramienta de seguimiento de cambios.  
 
     > Si los objetos del gráfico contienen propiedades con valores generados por la base de datos (por ejemplo, valores de identidad o simultaneidad), Entity Framework reemplaza los valores de estas propiedades por los valores generados por la base de datos después de llamar al método **SaveChanges**. Puede implementar la operación del servicio para que devuelva objetos guardados o una lista de los valores de propiedad generados de los objetos devueltos al cliente. El cliente debe reemplazar las instancias del objeto o los valores de propiedad del objeto con los objetos o los valores de propiedad devueltos desde la operación de servicio.  
-- Si se combinan gráficos de varias solicitudes de servicio, se pueden presentar objetos con valores de clave duplicada en el gráfico resultante. Entity Framework no quita los objetos con claves duplicadas cuando llama al método **ApplyChanges**, sino que produce una excepción. Para evitar tener gráficos con valores de clave duplicados, siga uno de los modelos descritos en el siguiente blog: [Entidades de seguimiento propio: ApplyChanges y entidades duplicadas](https://go.microsoft.com/fwlink/?LinkID=205119&clcid=0x409).  
+- Si se combinan gráficos de varias solicitudes de servicio, se pueden presentar objetos con valores de clave duplicada en el gráfico resultante. Entity Framework no quita los objetos con claves duplicadas cuando llama al método **ApplyChanges**, sino que produce una excepción. Para evitar tener gráficos con valores de clave duplicados, siga uno de los modelos descritos en el siguiente blog: [Self-Tracking Entities: ApplyChanges and duplicate entities](https://go.microsoft.com/fwlink/?LinkID=205119&clcid=0x409) (Entidades de autoseguimiento: ApplyChanges y entidades duplicadas).  
 - Cuando se cambia la relación entre objetos mediante el establecimiento de la propiedad de clave externa, la propiedad de navegación de referencia se establece en NULL y no se sincroniza con la entidad de seguridad adecuada en el cliente. Después de adjuntar el gráfico al contexto del objeto (por ejemplo, después de llamar al método **ApplyChanges**), se sincronizan las propiedades de clave externa y de navegación.  
 
     > No disponer de ninguna propiedad de navegación de referencia sincronizada con el objeto principal adecuado podría representar un problema si ha especificado la eliminación en cascada en la relación de clave externa. Si elimina la entidad de seguridad, la eliminación no se propagará a los objetos dependientes. Si ha especificado eliminaciones en cascada, use las propiedades de navegación para cambiar las relaciones en vez de establecer la propiedad de clave externa.  
 - Las entidades con seguimiento propio no están habilitadas para realizar una carga diferida.  
 - La serialización binaria y la serialización a los objetos de administración de estado de ASP.NET no se admiten en las entidades de autoseguimiento. Sin embargo, puede personalizar la plantilla para agregar la compatibilidad de serialización binaria. Para obtener más información, vea [Using Binary Serialization and ViewState with Self-Tracking Entities](https://go.microsoft.com/fwlink/?LinkId=199208) (Uso de la serialización binaria y ViewState con entidades de autoseguimiento).  
 
-## <a name="security-considerations"></a>Consideraciones de seguridad  
+## <a name="security-considerations"></a>Consideraciones sobre la seguridad  
 
 Al trabajar con entidades de autoseguimiento, deben contemplarse las siguientes consideraciones de seguridad:  
 

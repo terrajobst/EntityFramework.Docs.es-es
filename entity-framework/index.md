@@ -6,10 +6,10 @@ ms.date: 10/27/2016
 ms.assetid: 6bb12583-c39a-454c-8d83-d2a2793ca9ef
 uid: index
 ms.openlocfilehash: 1643e3c9d1b8565155ebc1c04713a40883d03a07
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/07/2020
 ms.locfileid: "78412920"
 ---
 <div id="main" class="v2">
@@ -24,7 +24,7 @@ ms.locfileid: "78412920"
                         <ul id="entityfmwk1" class="cardsC">
                             <li>
                                 <div class="container intro">
-                                    <p>Entity Framework es un asignador relacional de objetos (O/RM) que permite a los desarrolladores de .NET trabajar con una base de datos mediante objetos .NET. Elimina la necesidad de la mayor parte del código de acceso a datos que los desarrolladores normalmente deben escribir.</p>
+                                    <p>Entity Framework es un asignador relacional de objetos (O/RM) que permite a los desarrolladores de .NET trabajar con una base de datos mediante objetos .NET. Elimina la necesidad de usar la mayoría del código de acceso a datos que los programadores suelen tener que escribir.</p>
                                 </div>
                             </li>
                             <li>
@@ -111,7 +111,7 @@ ms.locfileid: "78412920"
                 <a href="#efcore">EF Core</a>
                 <ul id="efcore">
                     <li>
-                        <a href="#efcore-all">Todo</a>
+                        <a href="#efcore-all">todo</a>
                         <ul id="efcore-all" class="cardsF">
                             <li>
                                 <div class="container intro">
@@ -258,7 +258,7 @@ ms.locfileid: "78412920"
                                                     </div>
                                                 </div>
                                                 <div class="cardText">
-                                                    <h3>Primeros pasos</h3>
+                                                    <h3>Introducción</h3>
                                                     <p>Aprenda a acceder a los datos con Entity Framework 6.</p>
                                                 </div>
                                             </div>

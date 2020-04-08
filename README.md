@@ -18,7 +18,7 @@ Considere la posibilidad de enviar una solicitud de incorporación de cambios en
 
 ![imagen](https://user-images.githubusercontent.com/1430078/64454321-85856480-d09f-11e9-85a6-1c93bc6611e2.png)
 
-* Cuando termine, agregue un título y una descripción y, después, use la opción "Crear una rama e iniciar una solicitud de incorporación de cambios" .
+* Cuando termine, agregue un título y una descripción y, después, use la opción "Crear una rama e iniciar una solicitud de incorporación de cambios" de la oferta.
 
 ![imagen](https://user-images.githubusercontent.com/1430078/64454455-dac17600-d09f-11e9-922b-0346117011f5.png)
 
@@ -30,6 +30,6 @@ También se recomiendan las solicitudes de incorporación de cambios más import
 
 ## <a name="microsoft-open-source-code-of-conduct"></a>Código de conducta del código abierto de Microsoft
 
-Este proyecto ha adoptado el [código de conducta del código abierto de Microsoft](https://opensource.microsoft.com/codeofconduct/).
-Para obtener más información, vea las [preguntas más frecuentes del código de conducta](https://opensource.microsoft.com/codeofconduct/faq/) o póngase en contacto con [opencode@microsoft.com](mailto:opencode@microsoft.com) si tiene otras preguntas o comentarios.
+El proyecto ha adoptado el [Código de conducta de código abierto de Microsoft](https://opensource.microsoft.com/codeofconduct/).
+Para más información, consulte las [preguntas más frecuentes sobre el código de conducta](https://opensource.microsoft.com/codeofconduct/faq/) o póngase en contacto con [opencode@microsoft.com](mailto:opencode@microsoft.com) si tiene preguntas o comentarios adicionales.
 

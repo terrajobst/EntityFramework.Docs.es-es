@@ -5,10 +5,10 @@ ms.date: 10/08/2019
 ms.assetid: 70aae9b5-8743-4557-9c5d-239f688bf418
 uid: core/querying/raw-sql
 ms.openlocfilehash: a54bb67c0fce9d621382f6372e70fe4cdca48a20
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/07/2020
 ms.locfileid: "78413718"
 ---
 # <a name="raw-sql-queries"></a>Consultas SQL sin formato
@@ -28,14 +28,14 @@ Las consultas SQL sin formato se pueden usar para ejecutar un procedimiento alma
 
 [!code-csharp[Main](../../../samples/core/Querying/RawSQL/Sample.cs#FromSqlRawStoredProcedure)]
 
-## <a name="passing-parameters"></a>Pasar parámetros
+## <a name="passing-parameters"></a>Paso de parámetros
 
 > [!WARNING]
 > **Use siempre la parametrización para las consultas SQL sin formato**
 >
 > Al indicar cualquier valor proporcionado por el usuario en una consulta SQL sin formato, debe tener cuidado para evitar ataques por inyección de código SQL. Además de validar que dichos valores no contienen caracteres no válidos, use siempre la parametrización que envía los valores separados del texto SQL.
 >
-> En concreto, no pase nunca a `FromSqlRaw` o `ExecuteSqlRaw` una cadena concatenada o interpolada (`$""`) con valores proporcionados por el usuario sin validar. Los métodos `FromSqlInterpolated` y `ExecuteSqlInterpolated` permiten usar la sintaxis de interpolación de cadenas de manera que se protege frente a los ataques por inyección de código SQL.
+> En concreto, no pase nunca a `$""` o `FromSqlRaw` una cadena concatenada o interpolada (`ExecuteSqlRaw`) con valores proporcionados por el usuario sin validar. Los métodos `FromSqlInterpolated` y `ExecuteSqlInterpolated` permiten usar la sintaxis de interpolación de cadenas de manera que se protege frente a los ataques por inyección de código SQL.
 
 En el ejemplo siguiente se pasa un parámetro único a un procedimiento almacenado; para ello, se incluye un marcador de posición de parámetro en la cadena de consulta SQL y se proporciona un argumento adicional. Aunque esta sintaxis se pueda parecer a la de `String.Format`, el valor suministrado se encapsula en un elemento `DbParameter` y el nombre del parámetro generado se inserta donde se haya especificado el marcador de posición `{0}`.
 

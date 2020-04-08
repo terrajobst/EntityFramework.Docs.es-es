@@ -5,10 +5,10 @@ ms.date: 10/27/2016
 ms.assetid: 20A25111-AEBE-4BC2-83A5-3F651952DF72
 uid: core/what-is-new/ef-core-1.0
 ms.openlocfilehash: 2cd2a54d75ed3f0caa8b674dfb56babcfcc13592
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/07/2020
 ms.locfileid: "78413598"
 ---
 # <a name="features-included-in-ef-core-10"></a>Características incluidas en EF Core 1.0
@@ -61,7 +61,7 @@ Permite que la base de datos genere los valores en la inserción (valores predet
 
 Permite definir los objetos de secuencia en el modelo.
 
-### <a name="unique-constraints"></a>Restricciones UNIQUE
+### <a name="unique-constraints"></a>Restricciones únicas
 
 Permite la definición de las claves alternativas y la capacidad de definir las relaciones que se dirigen a esa clave.
 
@@ -81,7 +81,7 @@ Permite que las entidades de una jerarquía de herencia se guarde en una sola ta
 
 Detecta los patrones no válidos del modelo y proporciona mensajes de error útiles.
 
-## <a name="change-tracking"></a>Seguimiento de cambios
+## <a name="change-tracking"></a>seguimiento de cambios
 
 ### <a name="snapshot-change-tracking"></a>Seguimiento de cambios de instantánea
 
@@ -99,7 +99,7 @@ A través de `DbContext.Entry` y `DbContext.ChangeTracker`.
 
 La nueva API `DbContext.AttachGraph` ayuda a volver a adjuntar entidades a un contexto para guardar las entidades nuevas o modificadas.
 
-## <a name="saving-data"></a>Guardado de datos
+## <a name="saving-data"></a>Guardar datos
 
 ### <a name="basic-save-functionality"></a>Funcionalidad básica de guardado
 
@@ -117,11 +117,11 @@ Puede liberar el subproceso actual para que procese otras solicitudes mientras l
 
 Es decir, `SaveChanges` siempre es atómica (lo que significa que siempre se completa correctamente o que no se realiza ningún cambio en la base de datos). También hay API relacionadas con transacciones que permiten compartir las transacciones entre las instancias de contexto, etc.
 
-### <a name="relational-batching-of-statements"></a>Relacional: Procesamiento de instrucciones por lotes
+### <a name="relational-batching-of-statements"></a>Relacional: procesamiento de instrucciones por lotes
 
 Proporciona un mejor rendimiento mediante el procesamiento por lotes de varios comandos INSERT/UPDATE/DELETE en un solo ciclo de ida y vuelta a la base de datos.
 
-## <a name="query"></a>Consulta
+## <a name="query"></a>Consultar
 
 ### <a name="basic-linq-support"></a>Compatibilidad básica con LINQ
 
@@ -171,7 +171,7 @@ Se conecta a Microsoft SQL Server 2008 y versiones posteriores.
 
 Se conecta a una base de datos SQLite 3.
 
-### <a name="in-memory"></a>In-Memory
+### <a name="in-memory"></a>En memoria
 
 Diseñado para habilitar fácilmente la realización de pruebas sin conectarse a una base de datos real.
 

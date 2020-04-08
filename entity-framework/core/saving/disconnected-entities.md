@@ -6,10 +6,10 @@ ms.date: 10/27/2016
 ms.assetid: 2533b195-d357-4056-b0e0-8698971bc3b0
 uid: core/saving/disconnected-entities
 ms.openlocfilehash: 421531e68ac98c0553938f1c24892701f22fef3c
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/07/2020
 ms.locfileid: "78413658"
 ---
 # <a name="disconnected-entities"></a>Entidades desconectadas
@@ -77,7 +77,7 @@ Habitualmente, el método Update marca la entidad para actualización y no para 
 > [!TIP]  
 > Este comportamiento se introdujo en EF Core 2.0. En las versiones anteriores siempre es necesario elegir explícitamente si agregar o actualizar.
 
-Si la entidad no usa claves generadas automáticamente, la aplicación debe decidir si la entidad se debe insertar o actualizar: Por ejemplo:
+Si la entidad no usa claves generadas automáticamente, la aplicación debe decidir si la entidad se debe inserta ro actualizar. Por ejemplo:
 
 [!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#InsertOrUpdateSingleEntityWithFind)]
 

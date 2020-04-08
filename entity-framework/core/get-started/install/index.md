@@ -5,15 +5,15 @@ ms.date: 08/06/2017
 ms.assetid: 608cc774-c570-4809-8a3e-cd2c8446b8b2
 uid: core/get-started/install/index
 ms.openlocfilehash: 6575b1ac028f8b67b49ca7f4e49d6f19500be98f
-ms.sourcegitcommit: c3b8386071d64953ee68788ef9d951144881a6ab
+ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/24/2020
+ms.lasthandoff: 04/07/2020
 ms.locfileid: "80136172"
 ---
 # <a name="installing-entity-framework-core"></a>Instalación de Entity Framework Core
 
-## <a name="prerequisites"></a>Requisitos previos
+## <a name="prerequisites"></a>Prerequisites
 
 * EF Core es una biblioteca de [.NET Standard 2.0](/dotnet/standard/net-standard). Por este motivo, EF Core requiere una implementación de .NET que admita .NET Standard 2.0 para poder ejecutarse. Otras bibliotecas de .NET Standard 2.0 también pueden hacer referencia a EF Core.
 

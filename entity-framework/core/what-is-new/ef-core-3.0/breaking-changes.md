@@ -4,10 +4,10 @@ author: ajcvickers
 ms.date: 12/03/2019
 uid: core/what-is-new/ef-core-3.0/breaking-changes
 ms.openlocfilehash: 6e0c17a22b56b206f18e47f678e3e237d5c42375
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/07/2020
 ms.locfileid: "78413562"
 ---
 # <a name="breaking-changes-included-in-ef-core-30"></a>Cambios importantes incluidos en EF Core 3.0
@@ -25,17 +25,17 @@ Los cambios que esperamos que solo afecten a proveedores de base de datos se doc
 | [DetectChanges respeta los valores de clave generados por el almacén](#dc) | Alto      |
 | [FromSql, ExecuteSql y ExecuteSqlAsync han cambiado de nombre](#fromsql) | Alto      |
 | [Los tipos de consulta se consolidan con tipos de entidad](#qt) | Alto      |
-| [Entity Framework Core ya no forma parte del marco compartido ASP.NET Core](#no-longer) | Medium      |
-| [Las eliminaciones en cascada ahora se realizan inmediatamente de forma predeterminada](#cascade) | Medium      |
-| [La carga diligente de entidades relacionadas ahora se realiza en una sola consulta](#eager-loading-single-query) | Medium      |
-| [DeleteBehavior.Restrict tiene una semántica más limpia](#deletebehavior) | Medium      |
-| [La API de configuración para las relaciones de tipo de propiedad ha cambiado](#config) | Medium      |
-| [Cada propiedad usa la generación de claves enteras en memoria independiente](#each) | Medium      |
-| [Las consultas sin seguimiento ya no realizan la resolución de la identidad](#notrackingresolution) | Medium      |
-| [Cambios en la API de metadatos](#metadata-api-changes) | Medium      |
-| [Cambios en la API de metadatos específicos del proveedor](#provider) | Medium      |
-| [Se ha quitado el elemento UseRowNumberForPaging](#urn) | Medium      |
-| [Cuando el método FromSql se usa con un procedimiento almacenado no se puede redactar](#fromsqlsproc) | Medium      |
+| [Entity Framework Core ya no forma parte del marco compartido ASP.NET Core](#no-longer) | Media      |
+| [Las eliminaciones en cascada ahora se realizan inmediatamente de forma predeterminada](#cascade) | Media      |
+| [La carga diligente de entidades relacionadas ahora se realiza en una sola consulta](#eager-loading-single-query) | Media      |
+| [DeleteBehavior.Restrict tiene una semántica más limpia](#deletebehavior) | Media      |
+| [La API de configuración para las relaciones de tipo de propiedad ha cambiado](#config) | Media      |
+| [Cada propiedad usa la generación de claves enteras en memoria independiente](#each) | Media      |
+| [Las consultas sin seguimiento ya no realizan la resolución de la identidad](#notrackingresolution) | Media      |
+| [Cambios en la API de metadatos](#metadata-api-changes) | Media      |
+| [Cambios en la API de metadatos específicos del proveedor](#provider) | Media      |
+| [Se ha quitado el elemento UseRowNumberForPaging](#urn) | Media      |
+| [Cuando el método FromSql se usa con un procedimiento almacenado no se puede redactar](#fromsqlsproc) | Media      |
 | [Solo se pueden especificar métodos de FromSql en raíces de consulta](#fromsql) | Bajo      |
 | [~~La ejecución de consultas se registra en el nivel de depuración~~ Revertido](#qe) | Bajo      |
 | [Los valores de clave temporal ya no se establecen en instancias de entidad](#tkv) | Bajo      |
@@ -276,7 +276,7 @@ Las invocaciones de `FromSql` se deben mover para que estén directamente en el 
 
 **Comportamiento anterior**
 
-Antes de EF Core 3.0, se usaba la misma instancia de la entidad para cada aparición de una entidad con un tipo e identificador determinados. Este comportamiento coincide con el de las consultas de seguimiento. Ejemplo
+Antes de EF Core 3.0, se usaba la misma instancia de la entidad para cada aparición de una entidad con un tipo e identificador determinados. Este comportamiento coincide con el de las consultas de seguimiento. Por ejemplo, esta consulta:
 
 ```csharp
 var results = context.Products.Include(e => e.Category).AsNoTracking().ToList();
@@ -345,7 +345,7 @@ Por ejemplo, `context.Entry(blog).Property(e => e.Id).CurrentValue` devolverá e
 
 **Comportamiento anterior**
 
-Antes de EF Core 3.0, se realizaba el seguimiento en el estado `Added` de las entidades sin seguimiento detectadas por `DetectChanges` y se insertaban como una fila nueva cuando se llamaba a `SaveChanges`.
+Antes de EF Core 3.0, se realizaba el seguimiento en el estado `DetectChanges` de las entidades sin seguimiento detectadas por `Added` y se insertaban como una fila nueva cuando se llamaba a `SaveChanges`.
 
 **Comportamiento nuevo**
 
@@ -1272,7 +1272,7 @@ Antes de EF Core 3.0, `ForSqlServerHasIndex().ForSqlServerInclude()` proporciona
 **Comportamiento nuevo**
 
 A partir de EF Core 3.0, ya se admite el uso de `Include` en un índice en el nivel relacional.
-Use `HasIndex().ForSqlServerInclude()`.
+Mediante `HasIndex().ForSqlServerInclude()`.
 
 **Por qué**
 

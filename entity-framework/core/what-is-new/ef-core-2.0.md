@@ -5,10 +5,10 @@ ms.date: 02/20/2018
 ms.assetid: 2CB5809E-0EFB-44F6-AF14-9D5BFFFBFF9D
 uid: core/what-is-new/ef-core-2.0
 ms.openlocfilehash: 83f6b819409d502dba17a678d44a0746a4a77f4b
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/07/2020
 ms.locfileid: "78413580"
 ---
 # <a name="new-features-in-ef-core-20"></a>Nuevas características de EF Core 2.0
@@ -133,7 +133,7 @@ var query =
     select p;
 ```
 
-Algunas observaciones:
+Puntos a tener en cuenta:
 
 - Por convención, el nombre del método se usa como nombre de una función (en este caso una función definida por el usuario) al generar el código SQL, pero puede invalidar el nombre y el esquema durante el registro del método.
 - Actualmente solo se admiten las funciones escalares.
@@ -211,7 +211,7 @@ using (var db = new CustomerContext())
 
 EF Core admite la generación automática de valores de clave a través de una serie de mecanismos. Al usar esta característica, se genera un valor si la propiedad de clave es el valor predeterminado de CLR, normalmente cero o null. Esto significa que se puede pasar un gráfico de entidades a `DbContext.Attach` o `DbSet.Attach` y que EF Core marca aquellas entidades que tienen una clave ya establecida como `Unchanged`, mientras que las que no tienen establecida una clave se marcan como `Added`. Esto facilita la tarea de asociar un gráfico de entidades mixtas nuevas y existentes al usar claves generadas. `DbContext.Update` y `DbSet.Update` funcionan de la misma manera, salvo que las entidades con una clave establecida se marcan como `Modified` en lugar de `Unchanged`.
 
-## <a name="query"></a>Consulta
+## <a name="query"></a>Consultar
 
 ### <a name="improved-linq-translation"></a>Traducción de LINQ mejorada
 
@@ -225,7 +225,7 @@ Este trabajo mejora el SQL que se genera para las combinaciones agrupadas. Las c
 
 C# 6 presentó la interpolación de cadenas, una característica que permite insertar expresiones de C# directamente en literales de cadena, lo que proporciona una forma útil de compilar cadenas en tiempo de ejecución. En EF Core 2.0 se ha agregado compatibilidad especial con las cadenas interpoladas a las dos API principales que aceptan cadenas SQL sin formato: `FromSql` y `ExecuteSqlCommand`. Esta nueva compatibilidad permite que la interpolación de cadenas de C# se use de forma "segura". Es decir, de una forma que protege frente a errores de inserción de SQL comunes que pueden producirse al crear SQL de forma dinámica en tiempo de ejecución.
 
-A continuación se muestra un ejemplo:
+Este es un ejemplo:
 
 ``` csharp
 var city = "London";

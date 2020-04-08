@@ -5,10 +5,10 @@ ms.date: 10/27/2016
 ms.assetid: C7FE8C85-445A-4F0C-97EC-CC3F7F1D6F5E
 uid: core/what-is-new/ef-core-1.1
 ms.openlocfilehash: d582712ed62443318f4b9e209511fb2a557d667e
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/07/2020
 ms.locfileid: "78413592"
 ---
 # <a name="new-features-in-ef-core-11"></a>Características nuevas en EF Core 1.1
@@ -23,13 +23,13 @@ Permite configurar un campo de respaldo para una propiedad. Puede resultar útil
 
 Puede especificar que la tabla a la que está asignada una entidad está optimizada para memoria. Cuando use EF Core para crear y mantener una base de datos basada en el modelo (ya sea con migraciones o `Database.EnsureCreated()`), se creará una tabla optimizada para memoria para estas entidades.
 
-## <a name="change-tracking"></a>Seguimiento de cambios
+## <a name="change-tracking"></a>seguimiento de cambios
 
 ### <a name="additional-change-tracking-apis-from-ef6"></a>API adicionales de seguimiento de cambios de EF6
 
 Como `Reload`, `GetModifiedProperties`, `GetDatabaseValues` etc.
 
-## <a name="query"></a>Consulta
+## <a name="query"></a>Consultar
 
 ### <a name="explicit-loading"></a>Carga explícita
 
@@ -41,7 +41,7 @@ Proporciona una manera sencilla de capturar una entidad en función de su valor 
 
 ## <a name="other"></a>Otros
 
-### <a name="connection-resiliency"></a>Resistencia de conexión
+### <a name="connection-resiliency"></a>Resistencia de la conexión
 
 Reintenta automáticamente los comandos de base de datos erróneos. Esto resulta especialmente útil cuando se realizan conexiones a SQL Azure, donde los errores transitorios son comunes.
 

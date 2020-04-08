@@ -33,9 +33,9 @@
                   href: core/what-is-new/ef-core-5.0/whatsnew.md
             - name: EF Core 3.0
               items:
-                - name: Características nuevas
+                - name: Nuevas características
                   href: core/what-is-new/ef-core-3.0/index.md
-                - name: Cambios importantes
+                - name: Últimos cambios
                   href: core/what-is-new/ef-core-3.0/breaking-changes.md
             - name: EF Core 2.2
               href: core/what-is-new/ef-core-2.2.md
@@ -55,7 +55,7 @@
                   href: core/miscellaneous/rc2-rtm-upgrade.md
                 - name: De 1.x a 2.0
                   href: core/miscellaneous/1x-2x-upgrade.md
-        - name: Primeros pasos
+        - name: Introducción
           items:
             - name: Tutorial de EF Core
               href: core/get-started/index.md
@@ -69,9 +69,9 @@
               href: core/miscellaneous/connection-strings.md
             - name: Registro
               href: core/miscellaneous/logging.md
-            - name: Resistencia de conexión
+            - name: Resistencia de la conexión
               href: core/miscellaneous/connection-resiliency.md
-            - name: Pruebas
+            - name: Prueba
               items:
                 - name: Información general
                   href: core/miscellaneous/testing/index.md
@@ -83,15 +83,15 @@
               href: core/miscellaneous/configuring-dbcontext.md
             - name: Tipos de referencia que aceptan valores NULL
               href: core/miscellaneous/nullable-reference-types.md
-        - name: Creación de un modelo
+        - name: Crear un modelo
           items:
             - name: Información general
               href: core/modeling/index.md
-            - name: Tipos de entidad
+            - name: Tipos de entidades
               href: core/modeling/entity-types.md
             - name: Propiedades de entidad
               href: core/modeling/entity-properties.md
-            - name: Teclas
+            - name: Claves
               href: core/modeling/keys.md
             - name: Valores generados
               href: core/modeling/generated-properties.md
@@ -254,7 +254,7 @@
               href: ef6/what-is-new/upgrading-to-ef6.md
             - name: "Versiones de Visual\_Studio"
               href: ef6/what-is-new/visual-studio.md
-        - name: Primeros pasos
+        - name: Introducción
           href: ef6/get-started.md
         - name: Aspectos básicos
           items:
@@ -278,7 +278,7 @@
                   href: ef6/fundamentals/configuring/dependency-resolution.md
             - name: Administración de conexiones
               href: ef6/fundamentals/connection-management.md
-            - name: Resistencia de conexión
+            - name: Resistencia de la conexión
               items:
                 - name: Lógica de reintento
                   href: ef6/fundamentals/connection-resiliency/retry-logic.md
@@ -328,13 +328,13 @@
                   href: ef6/fundamentals/testing/writing-test-doubles.md
                 - name: Capacidad de prueba con EF4 (artículo)
                   href: ef6/fundamentals/testing/testability-article.md
-        - name: Creación de un modelo
+        - name: Crear un modelo
           items:
             - name: Información general
               href: ef6/modeling/index.md
             - name: Uso de Code First
               items:
-                - name: Flujos de trabajo
+                - name: Workflows
                   items:
                     - name: Con una base de datos nueva
                       href: ef6/modeling/code-first/workflows/new-database.md
@@ -384,7 +384,7 @@
                       href: ef6/modeling/code-first/migrations/teams.md
             - name: Uso de EF Designer
               items:
-                - name: Flujos de trabajo
+                - name: Workflows
                   items:
                     - name: Model-First
                       href: ef6/modeling/designer/workflows/model-first.md
@@ -412,7 +412,7 @@
                       href: ef6/modeling/designer/inheritance/tpt.md
                 - name: Asignación de procedimientos almacenados
                   items:
-                    - name: Consulta
+                    - name: Consultar
                       href: ef6/modeling/designer/stored-procedures/query.md
                     - name: Actualizar
                       href: ef6/modeling/designer/stored-procedures/cud.md
@@ -428,7 +428,7 @@
                       href: ef6/modeling/designer/codegen/index.md
                     - name: ObjectContext heredado
                       href: ef6/modeling/designer/codegen/legacy-objectcontext.md
-                - name: Avanzadas
+                - name: Avanzado
                   items:
                     - name: Formato de archivo EDMX
                       items:
@@ -444,7 +444,7 @@
                       href: ef6/modeling/designer/advanced/multiple-result-sets.md
                     - name: Funciones con valores de tabla
                       href: ef6/modeling/designer/advanced/tvfs.md
-                - name: Métodos abreviados de teclado
+                - name: Accesos directos del teclado
                   href: ef6/modeling/designer/keyboard-shortcuts.md
         - name: Consultar datos
           items:
@@ -464,13 +464,13 @@
           items:
             - name: Información general
               href: ef6/saving/index.md
-            - name: Seguimiento de cambios
+            - name: seguimiento de cambios
               items:
                 - name: Detección de cambios automática
                   href: ef6/saving/change-tracking/auto-detect-changes.md
                 - name: Estado de la entidad
                   href: ef6/saving/change-tracking/entity-state.md
-                - name: Valores de propiedades
+                - name: Valores de propiedad
                   href: ef6/saving/change-tracking/property-values.md
             - name: Control de conflictos de simultaneidad
               href: ef6/saving/concurrency.md
@@ -484,7 +484,7 @@
               href: ef6/resources/blogs.md
             - name: Casos prácticos
               href: ef6/resources/case-studies.md
-            - name: Contribuir
+            - name: Contribuciones
               href: ef6/resources/contribute.md
             - name: Obtener ayuda
               href: ef6/resources/get-help.md

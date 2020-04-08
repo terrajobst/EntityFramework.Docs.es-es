@@ -5,10 +5,10 @@ ms.date: 10/03/2019
 ms.assetid: 2e187a2a-4072-4198-9040-aaad68e424fd
 uid: core/querying/complex-query-operators
 ms.openlocfilehash: 44c2695ea003da043925740a52596fd27da638f8
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/07/2020
 ms.locfileid: "78413778"
 ---
 # <a name="complex-query-operators"></a>Operadores de consulta complejos
@@ -86,7 +86,7 @@ FROM [Blogs] AS [b]
 OUTER APPLY [Posts] AS [p]
 ```
 
-## <a name="groupby"></a>GroupBy
+## <a name="groupby"></a>GROUP BY
 
 Los operadores GroupBy de LINQ crean un resultado de tipo `IGrouping<TKey, TElement>`, donde `TKey` y `TElement` podrían ser cualquier tipo arbitrario. Además, `IGrouping` implementa `IEnumerable<TElement>`, lo que significa que se puede redactar sobre este elemento con cualquier operador de LINQ después de la agrupación. Como ninguna estructura de base de datos puede representar una instancia de `IGrouping`, en la mayoría de los casos los operadores GroupBy no tienen ninguna traducción. Cuando se aplica un operador de agregado a cada grupo, lo que devuelve un valor escalar, se puede traducir a `GROUP BY` de SQL en las bases de datos relacionales. `GROUP BY` de SQL también es restrictivo. Requiere que se agrupe solo por valores escalares. La proyección solo puede contener columnas de clave de agrupación o cualquier agregado aplicado en una columna. EF Core identifica este patrón y lo traduce al servidor, como en el ejemplo siguiente:
 
@@ -113,10 +113,10 @@ ORDER BY [p].[AuthorId]
 Los operadores de agregado que admite EF Core son los siguientes
 
 - Average
-- Recuento
+- Count
 - LongCount
-- Máx.
-- Mín.
+- Max
+- Min
 - Sum
 
 ## <a name="left-join"></a>Left Join
